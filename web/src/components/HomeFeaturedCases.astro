@@ -9,17 +9,14 @@ const { featured, secondary, quote, contact, allProjectsHref } = homeFeaturedCas
     class="home-cases-header max-w-container-max-width w-full mx-auto px-6 md:px-8 pb-4 md:pb-6 flex flex-col md:flex-row justify-between items-start md:items-end gap-4 md:gap-6"
   >
     <div class="max-w-2xl">
-      <span class="text-xs font-bold uppercase tracking-[0.2em] text-accent-teal mb-3 block"
-        >Case study</span
-      >
-      <h2 class="text-3xl md:text-5xl font-bold tracking-tight mb-3">Dự Án Tiêu Biểu</h2>
+      <h2 class="heading-responsive md:text-5xl font-bold tracking-tight mb-3">Dự Án Tiêu Biểu</h2>
       <p class="text-white/60 text-base md:text-lg">
         Chứng thực năng lực qua các dự án quy mô lớn cho tập đoàn đa quốc gia.
       </p>
     </div>
     <a
       href={allProjectsHref}
-      class="liquid-glass px-7 py-3 rounded-full font-bold text-sm hover:scale-105 transition-all flex items-center gap-2 whitespace-nowrap shrink-0 no-underline text-white"
+      class="liquid-glass px-7 py-3 rounded-full font-bold text-sm hover:scale-105 transition-all flex items-center gap-2 shrink-0 no-underline text-white"
     >
       Tất cả dự án →
     </a>
@@ -123,16 +120,21 @@ const { featured, secondary, quote, contact, allProjectsHref } = homeFeaturedCas
 
   <div class="home-cases-contact max-w-container-max-width mx-auto px-6 md:px-8 mt-4 md:mt-5">
     <span class="home-cases-contact-label">Liên hệ tư vấn</span>
-    <a class="home-cases-contact-link" href={`mailto:${contact.email}`}>
-      {contact.email}
-    </a>
-    <span class="home-cases-contact-sep" aria-hidden="true">·</span>
-    <a class="home-cases-contact-link home-cases-contact-phone" href={contact.phoneHref}>
-      {contact.phone}
-    </a>
-    <span class="home-cases-contact-sep" aria-hidden="true">·</span>
-    <a class="home-cases-contact-cta" href={contact.ctaHref}>
-      {contact.ctaLabel}
-    </a>
+    <div class="home-cases-contact-details">
+      <a class="home-cases-contact-link home-cases-contact-email" href={`mailto:${contact.email}`}>
+        {contact.email}
+      </a>
+      <span class="home-cases-contact-sep" aria-hidden="true">·</span>
+      <a class="home-cases-contact-link home-cases-contact-phone" href={contact.phoneHref}>
+        {contact.phone}
+      </a>
+      <span class="home-cases-contact-sep" aria-hidden="true">·</span>
+      <a
+        class="home-cases-contact-cta inline-flex items-center justify-center bg-accent-gold text-ink-dark px-4 py-2 rounded-full font-bold text-xs hover:shadow-gold hover:scale-105 transition-all shadow-soft whitespace-nowrap no-underline"
+        href={contact.ctaHref}
+      >
+        {contact.ctaLabel}
+      </a>
+    </div>
   </div>
 </section>

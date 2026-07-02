@@ -1,8 +1,11 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteNav from '../components/SiteNav.astro';
 import HomeFeaturedCases from '../components/HomeFeaturedCases.astro';
 import HomeNewsSection from '../components/HomeNewsSection.astro';
 import HomeClientLogos from '../components/HomeClientLogos.astro';
+import SiteCtaSection from '../components/SiteCtaSection.astro';
+import SiteFooter from '../components/SiteFooter.astro';
 import {
   seo,
   navigation,
@@ -10,100 +13,69 @@ import {
   whyChoose,
   solutions,
   certificates,
+  heroMedia,
 } from '../data/site';
 ---
 
 <BaseLayout title={seo.title} description={seo.description}>
-  <!-- Section 1: Navigation -->
-  <nav
-    id="site-nav"
-    class="fixed top-0 w-full z-50 bg-white/10 backdrop-blur-lg border-b border-white/15 transition-all duration-300"
-  >
-    <div
-      class="flex justify-between items-center px-6 md:px-8 py-3.5 max-w-container-max-width mx-auto"
-    >
-      <a class="flex items-center gap-3" href="#">
-        <div
-          class="w-10 h-10 bg-accent-gold rounded-xl flex items-center justify-center shadow-gold"
-        >
-          <span class="material-symbols-outlined text-ink-dark text-2xl">apparel</span>
-        </div>
-        <div class="flex flex-col leading-tight">
-          <span
-            class="nav-brand-text text-white font-display-lg text-xl font-bold tracking-tight"
-            >Tân Phạm Gia</span
-          >
-          <span
-            class="nav-brand-text text-white/60 text-[10px] uppercase tracking-[0.2em] font-semibold hidden sm:block"
-            >Đồng phục doanh nghiệp</span
-          >
-        </div>
-      </a>
-      <div class="hidden lg:flex gap-7 items-center">
-        {
-          navigation.map((item) => (
-            <a
-              class="nav-link text-sm font-medium text-white/90 hover:text-accent-gold transition-colors"
-              href={item.href}
-            >
-              {item.label}
-            </a>
-          ))
-        }
-      </div>
-      <a
-        href="#tai-lieu"
-        class="bg-accent-gold text-ink-dark px-6 py-2.5 rounded-full text-sm font-bold hover:shadow-gold hover:scale-105 transition-all active:scale-95 shadow-soft"
-      >
-        Nhận Báo Giá
-      </a>
-    </div>
-  </nav>
+  <SiteNav items={navigation} currentPath="/" ctaHref="/tai-lieu" />
 
   <!-- Section 2: Hero -->
   <header
-    class="relative flex items-center justify-center overflow-hidden pt-24 pb-14 md:pt-28 md:pb-16 min-h-[420px] sm:min-h-[480px] md:min-h-[520px] lg:min-h-[560px]"
+    class="relative flex items-center justify-center overflow-hidden pt-24 pb-8 md:pt-28 md:pb-16 min-h-0 sm:min-h-[480px] md:min-h-[520px] lg:min-h-[560px]"
   >
     <div class="absolute inset-0 z-0">
       <div class="absolute inset-0 hero-gradient z-10"></div>
-      <img
-        alt="Nhà máy may đồng phục Tân Phạm Gia"
-        class="w-full h-full object-cover object-center"
-        id="hero-image"
-        src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7szr7Elx-oAqCEnir2uiBqNE-4WpmIm10Kj1YsgXyu1XMFvP0qvIXYrsMpRh9sztusxsq8_7_MFPstpomb4RaDeTg9J3ldf2CSKwYUq91qGdHVM6Dm9YkfE3Rdfay_snBPthtK7WWCq_NFHZ3j3Kua1MgJAT-qQPXwlpAIQIDLIpk4Njn_msEnsXh9DyyRtwkvdNU5u10NXpGyYseM_HBo6gwnr6IFqeZ9gHXI1CrvRQnXAxx3UyIT7UIbTDEMKjd1gdxbZwWKrKl"
-      />
+      {
+        heroMedia.video ? (
+          <video
+            class="w-full h-full object-cover object-center"
+            id="hero-video"
+            autoplay
+            loop
+            muted
+            playsinline
+            poster={heroMedia.image}
+          >
+            <source src={heroMedia.video} type="video/mp4" />
+          </video>
+        ) : (
+          <img
+            alt="Nhà máy may đồng phục Tân Phạm Gia"
+            class="w-full h-full object-cover object-center"
+            id="hero-image"
+            src={heroMedia.image}
+          />
+        )
+      }
     </div>
     <div
-      class="relative z-20 max-w-container-max-width mx-auto px-6 md:px-8 text-center text-white py-6 md:py-8"
+      class="relative z-20 max-w-container-max-width mx-auto px-6 md:px-8 text-center text-white pt-2 pb-0 md:py-8"
     >
-      <span
-        class="inline-block font-eyebrow text-xs uppercase mb-4 px-4 py-1.5 rounded-full border border-accent-gold/40 bg-accent-gold/10 text-accent-gold tracking-[0.25em]"
-        >Chuyên sản xuất đồng phục B2B</span
-      >
       <h1
-        class="font-display-lg text-2xl sm:text-3xl md:text-4xl lg:text-[2.75rem] font-extrabold leading-[1.12] mb-5 mx-auto tracking-tight"
+        class="font-display-lg text-2xl sm:text-3xl md:text-4xl lg:text-[2.75rem] font-extrabold mb-5 mx-auto flex flex-col gap-2 md:gap-1 leading-[1.35] md:leading-[1.12] tracking-normal md:tracking-tight"
       >
         <span class="block md:whitespace-nowrap">Đồng Phục Chuẩn Thương Hiệu.</span>
-        <span class="block text-accent-gold md:whitespace-nowrap"
-          >Chuẩn Tiến Độ. Chuẩn Từng Chiếc.</span
-        >
+        <span class="block text-accent-gold text-[1.125rem] sm:text-3xl md:text-4xl lg:text-[2.75rem] whitespace-nowrap">
+          Chuẩn Tiến Độ. Chuẩn Từng Chiếc.
+        </span>
       </h1>
       <p
-        class="font-body-lg text-base md:text-lg mb-8 max-w-2xl mx-auto text-white/85 leading-relaxed"
+        class="font-body-lg text-base md:text-lg mb-5 md:mb-8 max-w-2xl mx-auto text-white/85 leading-relaxed"
       >
         23 năm đồng hành cùng doanh nghiệp xây dựng hình ảnh chuyên nghiệp với giải pháp đồng phục
         toàn diện.
       </p>
-      <div class="flex flex-col sm:flex-row gap-3 justify-center">
+      <div class="flex flex-row gap-2 sm:gap-3 justify-center items-stretch w-full max-w-md sm:max-w-none mx-auto">
         <a
-          href="#tai-lieu"
-          class="bg-accent-gold text-ink-dark px-8 py-4 rounded-full font-bold text-base hover:shadow-gold hover:scale-105 transition-all shadow-soft text-center"
+          href="/lien-he"
+          class="flex-1 min-w-0 bg-accent-gold text-ink-dark px-3 py-2.5 sm:px-8 sm:py-4 rounded-full font-bold text-xs sm:text-base leading-tight hover:shadow-gold hover:scale-105 transition-all shadow-soft text-center"
         >
           Nhận tư vấn giải pháp
         </a>
         <a
-          href="#tai-lieu"
-          class="border border-white/50 bg-white/10 backdrop-blur-sm text-white px-8 py-4 rounded-full font-bold text-base hover:bg-white hover:text-ink-dark transition-all text-center"
+          href="/tai-lieu"
+          class="flex-1 min-w-0 border border-white/50 bg-white/10 backdrop-blur-sm text-white px-3 py-2.5 sm:px-8 sm:py-4 rounded-full font-bold text-xs sm:text-base leading-tight hover:bg-white hover:text-ink-dark transition-all text-center"
         >
           Tải hồ sơ năng lực
         </a>
@@ -115,12 +87,13 @@ import {
   <section class="py-10 md:py-20 bg-white border-b border-border-subtle" id="gioi-thieu">
     <div class="max-w-container-max-width mx-auto px-6 md:px-8">
       <div class="max-w-3xl mx-auto text-center mb-8 md:mb-14">
-        <span class="text-xs font-bold uppercase tracking-[0.2em] text-accent-teal mb-3 block"
-          >Giới thiệu</span
-        >
         <h2 class="gioi-thieu-title font-headline-md font-bold text-ink-dark mb-5">
-          Đối tác phát triển giải pháp đồng phục <br class="md:hidden" />
-          cho doanh nghiệp vừa và&nbsp;lớn
+          <span class="gioi-thieu-title-line md:hidden">Tân Phạm Gia – Chuyên sản xuất</span>
+          <span class="gioi-thieu-title-line md:hidden">đồng{'\u00a0'}phục &amp; phát triển sản phẩm</span>
+          <span class="gioi-thieu-title-line md:hidden">may{'\u00a0'}mặc dành cho{'\u00a0'}B2B</span>
+          <span class="hidden md:inline">
+            Tân Phạm Gia – Chuyên sản xuất đồng phục & phát triển sản phẩm may mặc dành cho B2B
+          </span>
         </h2>
         <p class="gioi-thieu-text text-text-muted text-base md:text-lg leading-relaxed mb-4">
           Với hơn 23 năm kinh nghiệm trong ngành thời trang và may mặc, Tân Phạm Gia phát triển
@@ -148,9 +121,6 @@ import {
   <section class="py-10 md:py-24 bg-white border-b border-border-subtle" id="tai-sao">
     <div class="max-w-container-max-width mx-auto px-6 md:px-8">
       <div class="text-center mb-8 md:mb-14 max-w-2xl mx-auto">
-        <span class="text-xs font-bold uppercase tracking-[0.2em] text-accent-teal mb-3 block"
-          >Tại sao chọn chúng tôi</span
-        >
         <h2 class="tai-sao-title font-headline-md font-bold text-ink-dark">
           Tiên phong "Thời trang hóa"<br class="md:hidden" />
           đồng phục doanh nghiệp
@@ -179,13 +149,10 @@ import {
   >
     <div class="max-w-container-max-width mx-auto px-6 md:px-8">
       <div class="text-center mb-8 md:mb-16 max-w-3xl mx-auto">
-        <span class="text-xs font-bold uppercase tracking-[0.2em] text-accent-teal mb-3 block"
-          >Dịch vụ của Tân Phạm Gia</span
-        >
         <h2 class="giai-phap-heading font-headline-md font-bold mb-4 text-ink-dark">
           Giải pháp đồng phục toàn&nbsp;diện
         </h2>
-        <p class="giai-phap-text hidden md:block text-text-muted text-base">
+        <p class="giai-phap-text text-text-muted text-sm md:text-base max-w-3xl mx-auto leading-relaxed">
           Lắng nghe và thấu hiểu để đưa ra giải pháp phù hợp nhất cho từng mô hình doanh&nbsp;nghiệp.
         </p>
       </div>
@@ -215,105 +182,16 @@ import {
     </div>
   </section>
 
-  <!-- Section 7: Năng lực sản xuất -->
-  <section class="py-16 md:py-24 bg-white border-b border-border-subtle" id="nang-luc">
-    <div class="max-w-container-max-width mx-auto px-6 md:px-8 space-y-12 md:space-y-16">
-      <div class="flex flex-col-reverse md:flex-row items-center gap-8 md:gap-12">
-        <figure class="home-capacity-media flex-1 w-full min-w-0 m-0">
-          <img
-            alt="Factory Overview"
-            class="home-capacity-img w-full object-cover rounded-lg"
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7szr7Elx-oAqCEnir2uiBqNE-4WpmIm10Kj1YsgXyu1XMFvP0qvIXYrsMpRh9sztusxsq8_7_MFPstpomb4RaDeTg9J3ldf2CSKwYUq91qGdHVM6Dm9YkfE3Rdfay_snBPthtK7WWCq_NFHZ3j3Kua1MgJAT-qQPXwlpAIQIDLIpk4Njn_msEnsXh9DyyRtwkvdNU5u10NXpGyYseM_HBo6gwnr6IFqeZ9gHXI1CrvRQnXAxx3UyIT7UIbTDEMKjd1gdxbZwWKrKl"
-          />
-        </figure>
-        <div class="flex-1 w-full min-w-0">
-          <span class="font-eyebrow text-eyebrow text-accent-gold mb-3 md:mb-4 block"
-            >QUY MÔ SẢN XUẤT</span
-          >
-          <h2 class="font-headline-md text-2xl md:text-3xl font-bold mb-4 text-ink-dark">
-            Xưởng may 2.000m² đạt chuẩn quốc tế
-          </h2>
-          <p class="text-text-muted leading-relaxed">
-            Với hệ thống máy móc hiện đại nhập khẩu từ Nhật Bản và Đức, Tân Phạm Gia sở hữu năng
-            lực đáp ứng những đơn hàng khắt khe nhất về kỹ thuật và mỹ thuật.
-          </p>
-        </div>
-      </div>
-      <div class="flex flex-col-reverse md:flex-row-reverse items-center gap-8 md:gap-12">
-        <figure class="home-capacity-media flex-1 w-full min-w-0 m-0">
-          <img
-            alt="QC Process"
-            class="home-capacity-img w-full object-cover rounded-lg"
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZF2amQyazt-GlhQH0DeUYXVZBkumEl5R6CgjdG-dn0i5IrhMtCB2ZMm9VUkZRwiIQIWIztfTbQsGMzRLvuaT2VHY6uWPPQHTjMlgpApeytXq5twxbrE7JaH5DBMM3Wq0I6G3KUtyoE2pR9jZvWUthhvBo7IZAZV3S32L0TVLkejbhD6tP9cSh8EF0MwW4eWy5qOXNzFXEsmwc7o-jKSwr2uoIeviT4x3KWtNwCtrU8SJWzNs3WVp6UPimb_JxHku0lc8G80XNvUiu"
-          />
-        </figure>
-        <div class="flex-1 w-full min-w-0">
-          <span class="font-eyebrow text-eyebrow text-accent-gold mb-3 md:mb-4 block"
-            >CHẤT LƯỢNG LÀM GỐC</span
-          >
-          <h2 class="font-headline-md text-2xl md:text-3xl font-bold mb-4 text-ink-dark">
-            Kiểm soát chất lượng 5 tầng
-          </h2>
-          <p class="text-text-muted mb-6 leading-relaxed">
-            Chúng tôi áp dụng quy trình kiểm tra nghiêm ngặt từ: Sợi vải đầu vào, Cắt vải, May bán
-            thành phẩm, Hoàn thiện và Kiểm định đóng gói cuối cùng.
-          </p>
-          <ul class="grid grid-cols-2 gap-x-4 gap-y-3">
-            <li class="flex items-center gap-2 font-semibold text-sm text-ink-dark">
-              <span class="w-1.5 h-1.5 rounded-full bg-accent-gold shrink-0"></span> ISO 9001:2015
-            </li>
-            <li class="flex items-center gap-2 font-semibold text-sm text-ink-dark">
-              <span class="w-1.5 h-1.5 rounded-full bg-accent-gold shrink-0"></span> Tiêu chuẩn Oeko-Tex
-            </li>
-            <li class="flex items-center gap-2 font-semibold text-sm text-ink-dark">
-              <span class="w-1.5 h-1.5 rounded-full bg-accent-gold shrink-0"></span> Kim may Groz-Beckert
-            </li>
-            <li class="flex items-center gap-2 font-semibold text-sm text-ink-dark">
-              <span class="w-1.5 h-1.5 rounded-full bg-accent-gold shrink-0"></span> Chỉ may Coats
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div class="flex flex-col-reverse md:flex-row items-center gap-8 md:gap-12">
-        <figure class="home-capacity-media flex-1 w-full min-w-0 m-0">
-          <img
-            alt="Kho vận hành và giao hàng"
-            class="home-capacity-img w-full object-cover rounded-lg"
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBu8HpjmXphN1gwJce-Ox_5d9i_zbtoQaTdy84ejBZ8BZ2bWKuJdOOs4RJzlfYDV56v3ww17AfeGqGADxfImOWAipgUx4ac3LlLtUJH_gUQMorU6St9axuwZeOFDjoWiF4HI-BFxMfM4TWUu5jE4Oy2IJqtTxVWLjcA0wBxpbxRku1_OUhaFAipVDxdtm5rolzQ4tTFY5YZcp6-6w0A15XqGB3_7lsZExIlNmVUKGqjcU9u4O6ZA5nGJHgaiZB5Bupur1ij_zsjKI"
-          />
-        </figure>
-        <div class="flex-1 w-full min-w-0">
-          <span class="font-eyebrow text-eyebrow text-accent-gold mb-3 md:mb-4 block"
-            >TIẾN ĐỘ THẦN TỐC</span
-          >
-          <h2 class="font-headline-md text-2xl md:text-3xl font-bold mb-4 text-ink-dark">
-            Đơn lớn — giao đúng hạn
-          </h2>
-          <p class="text-text-muted mb-6 leading-relaxed">
-            Cung ứng tới 100.000 sp/tháng. Cam kết tiến độ theo hợp đồng.
-          </p>
-          <button
-            class="bg-ink-dark text-white px-6 py-3 rounded-full font-bold text-sm hover:bg-accent-gold hover:text-ink-dark transition-all shadow-soft"
-            >Xem quy trình</button
-          >
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- Thương hiệu đồng hành (Sitemap 1.6 — layout Aristino) -->
   <section class="pt-8 pb-10 md:py-20 bg-white border-b border-border-subtle" id="doi-tac">
     <div
       class="max-w-container-max-width mx-auto px-6 md:px-8 grid lg:grid-cols-5 gap-6 lg:gap-14 items-center"
     >
       <div class="lg:col-span-2">
-        <span class="text-xs font-bold uppercase tracking-[0.2em] text-accent-teal mb-3 block"
-          >Khách hàng tin cậy</span
-        >
         <h2 class="text-2xl md:text-3xl font-bold text-ink-dark mb-4 leading-snug">
           Thương hiệu đồng hành cùng Tân Phạm Gia
         </h2>
-        <p class="hidden md:block text-text-muted text-sm md:text-base leading-relaxed">
+        <p class="text-text-muted text-sm md:text-base leading-relaxed">
           Chúng tôi tạo dựng niềm tin bằng chất lượng nhất quán, sự chỉn chu trong từng sản phẩm
           và tinh thần đồng hành lâu dài — giúp doanh nghiệp an tâm về hình ảnh và giá trị thương
           hiệu.
@@ -325,73 +203,7 @@ import {
 
   <HomeFeaturedCases />
 
-  <!-- Section 9: Feedback khách hàng (Sitemap 1.6) -->
-  <section class="py-10 md:py-24 bg-white border-b border-border-subtle" id="feedback">
-    <div class="max-w-container-max-width mx-auto px-6 md:px-8">
-      <span class="text-xs font-bold uppercase tracking-[0.2em] text-accent-teal mb-4 block"
-        >Feedback khách hàng</span
-      >
-      <blockquote class="about-quote max-w-3xl m-0">
-        <div class="flex gap-2 mb-6 text-accent-gold">
-          {
-            Array.from({ length: 5 }).map(() => (
-              <span
-                class="material-symbols-outlined"
-                style='font-variation-settings: "FILL" 1'>star</span
-              >
-            ))
-          }
-        </div>
-        <p class="text-xl md:text-2xl font-medium text-ink-dark leading-relaxed mb-8">
-          "Chúng tôi đã hợp tác với Tân Phạm Gia trong 5 năm qua. Điều làm tôi ấn tượng nhất không
-          chỉ là chất lượng sản phẩm chuẩn xác đến từng đường kim mũi chỉ, mà là sự cam kết tuyệt đối
-          về tiến độ. Họ là một đối tác chiến lược đúng nghĩa."
-        </p>
-        <footer class="flex items-center gap-6 not-italic">
-          <div class="w-14 h-14 rounded-full bg-surface-muted overflow-hidden shrink-0">
-            <img
-              alt="CEO Avatar"
-              class="w-full h-full object-cover"
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuCsHW1aJpVFWnpH39FYgPE9nxKt20ID9T5ETgBsaKcCdGdmjIlA586VOv3j7sz0esr4rBKfIDJVL-kIi699r7OURxCTSkj-oMtppe8zPTzWpgeB9YH8fpCxXQ2KCtPtHDZYkQp3KB-sIXKciugPRKO1KFY1qybuCq7qTF1IkWjNalDYL5LzF4e778S4xOmD8OYzhZe9Am8zuf0AEusCD2icavaTQsNpaaWU9bPB8HoRKnOUoU8z1ekiu1il9KhuEWYnIJymxRa2W50D"
-            />
-          </div>
-          <div>
-            <cite class="font-bold text-lg text-ink-dark not-italic">Nguyễn Văn Anh</cite>
-            <p class="text-text-muted text-sm">Giám đốc Vận hành, Coca-Cola Vietnam</p>
-          </div>
-        </footer>
-      </blockquote>
-    </div>
-  </section>
-
-  <!-- Giấy khen & chứng nhận (Sitemap 1.7) -->
-  <section class="py-10 md:py-20 bg-white border-b border-border-subtle" id="chung-nhan">
-    <div class="max-w-container-max-width mx-auto px-6 md:px-8">
-      <div class="text-center mb-8 md:mb-12">
-        <span class="text-xs font-bold uppercase tracking-[0.2em] text-accent-teal mb-3 block"
-          >Uy tín & Chứng nhận</span
-        >
-        <h2 class="font-headline-md text-2xl md:text-3xl font-bold text-ink-dark">
-          Giấy khen & Chứng nhận
-        </h2>
-      </div>
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-5 md:gap-10">
-        {
-          certificates.map((cert) => (
-            <div class="text-center">
-              <span class="material-symbols-outlined text-accent-gold text-4xl mb-3 block">
-                {cert.icon}
-              </span>
-              <h3 class="font-bold text-sm md:text-base text-ink-dark mb-1">{cert.title}</h3>
-              <p class="text-text-muted text-xs">{cert.desc}</p>
-            </div>
-          ))
-        }
-      </div>
-    </div>
-  </section>
-
-  <!-- Section 10: Tải tài liệu (Sitemap 1.8) -->
+  <!-- Tải tài liệu (Sitemap 1.8) — trước chứng nhận theo sheet -->
   <section
     id="tai-lieu"
     class="py-10 md:py-24 bg-white border-b border-border-subtle text-ink-dark"
@@ -400,11 +212,8 @@ import {
       class="max-w-container-max-width mx-auto px-6 md:px-8 grid md:grid-cols-2 gap-8 md:gap-16 items-center"
     >
       <div>
-        <span class="text-xs font-bold uppercase tracking-[0.2em] text-accent-teal mb-3 block"
-          >Tài liệu</span
-        >
         <h2
-          class="font-display-lg text-[clamp(1.15rem,4.8vw,2.75rem)] md:text-5xl font-bold mb-6 leading-tight text-ink-dark whitespace-nowrap"
+          class="font-display-lg text-[clamp(1.15rem,4.8vw,2.75rem)] md:text-5xl font-bold mb-6 leading-tight text-ink-dark"
         >
           Tải trọn bộ tài liệu mới nhất
         </h2>
@@ -412,7 +221,7 @@ import {
           Company Profile, Catalogue Đồng Phục 2026 và kiến thức hữu ích về triển khai đồng phục
           doanh nghiệp.
         </p>
-        <ul class="space-y-3 text-sm md:text-base">
+        <ul class="space-y-3 text-sm md:text-base mb-8">
           <li class="flex items-center gap-2">
             <span class="material-symbols-outlined text-accent-gold text-lg">check_circle</span>
             Company Profile Tân Phạm Gia
@@ -426,17 +235,29 @@ import {
             Kiến thức chọn vải & triển khai đồng phục
           </li>
         </ul>
+        <a
+          href="/tai-lieu"
+          class="inline-flex items-center gap-2 text-sm font-bold text-accent-teal hover:text-ink-dark transition-colors"
+        >
+          Xem toàn bộ thư viện tài liệu
+          <span class="material-symbols-outlined text-base">arrow_forward</span>
+        </a>
       </div>
       <div class="bg-white rounded-2xl shadow-card p-8 md:p-10">
-        <form class="space-y-6">
+        <p class="text-sm text-text-muted mb-6">
+          Điền form để nhận link tải qua email — hoặc truy cập
+          <a class="text-accent-teal font-semibold" href="/tai-lieu">trang Tài liệu</a> để chọn file cụ thể.
+        </p>
+        <form class="space-y-6" action="/tai-lieu#tai-lieu-form">
           <div>
             <label class="font-eyebrow text-xs text-ink-dark mb-2 block uppercase tracking-wider"
               >Họ và tên</label
             >
             <input
-              class="w-full border-b border-border-subtle focus:border-accent-gold focus:ring-0 px-0 py-3 text-ink-dark transition-all outline-none"
+              class="form-input border-b px-0"
               placeholder="Nguyễn Văn A"
               type="text"
+              name="name"
             />
           </div>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -445,165 +266,65 @@ import {
                 >Tên công ty</label
               >
               <input
-                class="w-full border-b border-border-subtle focus:border-accent-gold focus:ring-0 px-0 py-3 text-ink-dark transition-all outline-none"
+                class="form-input border-b px-0"
                 placeholder="Công ty CP ABC"
                 type="text"
+                name="company"
               />
             </div>
             <div>
               <label class="font-eyebrow text-xs text-ink-dark mb-2 block uppercase tracking-wider"
-                >Số điện thoại</label
+                >Email</label
               >
               <input
-                class="w-full border-b border-border-subtle focus:border-accent-gold focus:ring-0 px-0 py-3 text-ink-dark transition-all outline-none"
-                placeholder="090x xxx xxx"
-                type="tel"
+                class="form-input border-b px-0"
+                placeholder="email@congty.vn"
+                type="email"
+                name="email"
               />
             </div>
           </div>
-          <div>
-            <label class="font-eyebrow text-xs text-ink-dark mb-2 block uppercase tracking-wider"
-              >Sản phẩm quan tâm</label
-            >
-            <select
-              class="w-full border-b border-border-subtle focus:border-accent-gold focus:ring-0 px-0 py-3 text-ink-dark transition-all outline-none bg-transparent"
-            >
-              <option>Đồng phục Polo/Áo thun</option>
-              <option>Đồng phục Sơ mi/Veston</option>
-              <option>Đồng phục Y tế/Bảo hộ</option>
-              <option>Yêu cầu khác</option>
-            </select>
-          </div>
           <button
+            type="submit"
             class="w-full bg-accent-gold text-ink-dark py-4 rounded-full font-bold text-base hover:shadow-gold transition-all active:scale-95"
             >Tải trọn bộ tài liệu mới nhất</button
           >
         </form>
-        <p class="text-[10px] text-text-muted mt-6 text-center italic">
-          Chúng tôi cam kết bảo mật thông tin doanh nghiệp theo quy định.
-        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Giấy khen & chứng nhận (Sitemap 1.7) -->
+  <section class="py-10 md:py-20 bg-white border-b border-border-subtle" id="chung-nhan">
+    <div class="max-w-container-max-width mx-auto px-6 md:px-8">
+      <div class="text-center mb-8 md:mb-12">
+        <h2 class="font-headline-md text-2xl md:text-3xl font-bold text-ink-dark">
+          Giấy khen & Chứng nhận
+        </h2>
+      </div>
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+        {
+          certificates.map((cert) => (
+            <figure class="about-cert-figure m-0">
+              <img
+                alt={cert.title}
+                class="w-full aspect-[4/3] object-cover rounded-lg"
+                loading="lazy"
+                src={cert.image}
+              />
+              <figcaption class="mt-3 text-sm font-semibold text-ink-dark text-center md:text-left">
+                {cert.title}
+              </figcaption>
+            </figure>
+          ))
+        }
       </div>
     </div>
   </section>
 
   <HomeNewsSection />
 
-  <!-- Section 12: CTA cuối (Sitemap 1.9) -->
-  <section class="py-10 md:py-20 bg-white border-b border-border-subtle text-ink-dark">
-    <div class="max-w-container-max-width mx-auto px-6 md:px-8 text-center">
-      <h2 class="font-display-lg text-3xl md:text-5xl font-bold mb-4 leading-tight">
-        Sẵn sàng cho dự án đồng phục của bạn?
-      </h2>
-      <p class="text-ink-dark/75 mb-8 max-w-xl mx-auto">
-        Liên hệ ngay để nhận tư vấn miễn phí và báo giá chi tiết.
-      </p>
-      <div class="flex flex-col md:flex-row gap-3 justify-center items-center">
-        <a
-          href="#tai-lieu"
-          class="bg-ink-dark text-white px-5 py-2.5 text-xs md:px-8 md:py-3 md:text-sm rounded-full font-bold hover:scale-105 transition-all shadow-card text-center w-fit"
-          >Nhận tư vấn giải pháp</a
-        >
-        <a
-          href="#tai-lieu"
-          class="border-2 border-ink-dark text-ink-dark px-5 py-2.5 text-xs md:px-8 md:py-3 md:text-sm rounded-full font-bold hover:bg-ink-dark hover:text-white transition-all text-center w-fit"
-          >Tải hồ sơ năng lực</a
-        >
-      </div>
-    </div>
-  </section>
+  <SiteCtaSection />
 
-  <!-- Section 13: Footer -->
-  <footer class="bg-ink-dark text-white py-10 md:py-16 border-t border-white/10" id="lien-he">
-    <div
-      class="max-w-container-max-width mx-auto px-6 md:px-8 grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-10"
-    >
-      <div class="space-y-5">
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 bg-accent-gold rounded-xl flex items-center justify-center">
-            <span class="material-symbols-outlined text-ink-dark">apparel</span>
-          </div>
-          <div>
-            <h3 class="font-bold text-lg text-white">Tân Phạm Gia</h3>
-            <p class="text-white/50 text-xs uppercase tracking-wider">Đồng phục doanh nghiệp</p>
-          </div>
-        </div>
-        <p class="text-white/60 text-sm leading-relaxed">
-          Kiến tạo giá trị thương hiệu qua từng đường kim mũi chỉ.
-        </p>
-        <div class="flex gap-3">
-          <a
-            class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-accent-gold hover:text-ink-dark transition-all"
-            href="#"
-            ><span class="material-symbols-outlined text-sm">language</span></a
-          >
-          <a
-            class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-accent-gold hover:text-ink-dark transition-all"
-            href="#"
-            ><span class="material-symbols-outlined text-sm">mail</span></a
-          >
-        </div>
-      </div>
-      <div>
-        <h4 class="font-bold text-sm mb-5 text-accent-gold uppercase tracking-wider">
-          Liên kết nhanh
-        </h4>
-        <ul class="space-y-3 text-sm">
-          {
-            navigation.map((item) => (
-              <li>
-                <a class="text-white/70 hover:text-accent-gold transition-colors" href={item.href}>
-                  {item.label}
-                </a>
-              </li>
-            ))
-          }
-          <li>
-            <a class="text-white/70 hover:text-accent-gold transition-colors" href="#nang-luc"
-              >Năng lực sản xuất</a
-            >
-          </li>
-        </ul>
-      </div>
-      <div>
-        <h4 class="font-bold text-sm mb-5 text-accent-gold uppercase tracking-wider">Hỗ trợ</h4>
-        <ul class="space-y-3 text-sm">
-          <li>
-            <a class="text-white/70 hover:text-accent-gold transition-colors" href="#"
-              >Chính sách bảo mật</a
-            >
-          </li>
-          <li>
-            <a class="text-white/70 hover:text-accent-gold transition-colors" href="#"
-              >Hướng dẫn chọn size</a
-            >
-          </li>
-          <li>
-            <a class="text-white/70 hover:text-accent-gold transition-colors" href="#"
-              >Quy trình đổi trả</a
-            >
-          </li>
-          <li>
-            <a class="text-white/70 hover:text-accent-gold transition-colors" href="#lien-he"
-              >Liên hệ</a
-            >
-          </li>
-        </ul>
-      </div>
-      <div>
-        <h4 class="font-bold text-sm mb-5 text-accent-gold uppercase tracking-wider">Văn phòng</h4>
-        <p class="text-white/70 text-sm mb-3">
-          20A Thới An 15, Phường Thới An, TP. Hồ Chí Minh
-        </p>
-        <p class="text-white/90 text-sm mb-1 font-semibold">Hotline: 084 3406 406</p>
-        <p class="text-white/70 text-sm">dongphuc@tanphamgia.com.vn</p>
-      </div>
-    </div>
-    <div
-      class="max-w-container-max-width mx-auto px-6 md:px-8 mt-8 md:mt-12 pt-6 border-t border-white/10 text-center"
-    >
-      <p class="text-white/40 text-xs">
-        © 2026 Tân Phạm Gia. All rights reserved. ISO 9001:2015 Certified.
-      </p>
-    </div>
-  </footer>
+  <SiteFooter />
 </BaseLayout>

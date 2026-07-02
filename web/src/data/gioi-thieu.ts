@@ -1,13 +1,18 @@
 /** Nội dung trang Giới thiệu — Sitemap 2.1 → 2.9 */
+import { pageSeo, testimonialsAbout } from './site';
 
-export const gioiThieuSeo = {
-  title: 'Công Ty May Đồng Phục Doanh Nghiệp Hơn 23 Năm Kinh Nghiệm | Tân Phạm Gia',
-  description:
-    'Tìm hiểu năng lực sản xuất, quy trình QC đa tầng, đội ngũ chuyên môn và kinh nghiệm hơn 23 năm trong lĩnh vực đồng phục doanh nghiệp.',
-};
+export const gioiThieuSeo = pageSeo.gioiThieu;
+
+/** @deprecated dùng testimonialsAbout từ site.ts */
+export const testimonials = testimonialsAbout;
 
 export const brandStory = {
   title: '23 Năm Theo Đuổi Giá Trị Của Một Sản Phẩm May Mặc Chất Lượng',
+  /** Ngắt dòng mobile — tránh chữ rớt hàng lẻ */
+  titleLines: [
+    '23 Năm Theo Đuổi Giá Trị Của',
+    'Một Sản Phẩm May Mặc Chất Lượng',
+  ],
   paragraphs: [
     'Năm 2003, Tân Phạm Gia bắt đầu hành trình của mình trong lĩnh vực may mặc với khát vọng tạo ra những sản phẩm chất lượng và mang giá trị bền vững cho người sử dụng.',
     'Trong suốt hơn hai thập kỷ phát triển, Tân Phạm Gia không ngừng mở rộng năng lực sản xuất, đầu tư công nghệ, hoàn thiện quy trình quản lý chất lượng và tích lũy kinh nghiệm từ các thương hiệu thời trang riêng. Chính nền tảng đó đã tạo nên lợi thế khác biệt trong lĩnh vực đồng phục doanh nghiệp ngày nay.',
@@ -132,48 +137,5 @@ export const teamDepartments = [
     desc: 'Theo sát quá trình triển khai và hỗ trợ doanh nghiệp trong suốt quá trình sử dụng.',
   },
 ];
-
-export const testimonials = [
-  {
-    quote:
-      'Đội ngũ tư vấn rất kỹ từ thiết kế đến chất liệu nên chúng tôi khá yên tâm trong suốt quá trình triển khai. Đồng phục hoàn thiện đẹp, nhân viên mặc thoải mái và tạo được hình ảnh chuyên nghiệp.',
-    name: 'Ông Trương Hoàng Nam',
-    role: 'CEO, Hoàng Thiên Scale',
-  },
-  {
-    quote:
-      'Chúng tôi muốn một bộ đồng phục vừa chuyên nghiệp vừa tạo cảm giác thoải mái cho nhân viên khi mặc hằng ngày. Tân Phạm Gia đã tư vấn khá kỹ về chất liệu, form dáng và hỗ trợ điều chỉnh cho đến khi ra được mẫu phù hợp.',
-    name: 'Ông Đồng Minh Hồng',
-    role: 'CEO, Dịch vụ Kế toán Thuế DVL',
-  },
-  {
-    quote:
-      'Điều tôi đánh giá cao là khả năng kiểm soát chất lượng của Tân Phạm Gia. Từ mẫu duyệt đến thành phẩm đều được thực hiện nhất quán, quy trình phối hợp rõ ràng và đội ngũ luôn chủ động xử lý khi có phát sinh.',
-    name: 'Lê Văn Tùng',
-    role: 'Factory Ops Manager, Coca-Cola Philippines',
-  },
-];
-
-/** 2.7 — Ảnh giấy khen & chứng nhận (thay bằng file thật trong public/chung-nhan/) */
-export const certificateImages = [
-  {
-    title: 'ISO 9001:2015',
-    image:
-      'https://lh3.googleusercontent.com/aida-public/AB6AXuCZF2amQyazt-GlhQH0DeUYXVZBkumEl5R6CgjdG-dn0i5IrhMtCB2ZMm9VUkZRwiIQIWIztfTbQsGMzRLvuaT2VHY6uWPPQHTjMlgpApeytXq5twxbrE7JaH5DBMM3Wq0I6G3KUtyoE2pR9jZvWUthhvBo7IZAZV3S32L0TVLkejbhD6tP9cSh8EF0MwW4eWy5qOXNzFXEsmwc7o-jKSwr2uoIeviT4x3KWtNwCtrU8SJWzNs3WVp6UPimb_JxHku0lc8G80XNvUiu',
-  },
-  {
-    title: 'Hàng Việt Nam Chất Lượng Cao',
-    image:
-      'https://lh3.googleusercontent.com/aida-public/AB6AXuD7szr7Elx-oAqCEnir2uiBqNE-4WpmIm10Kj1YsgXyu1XMFvP0qvIXYrsMpRh9sztusxsq8_7_MFPstpomb4RaDeTg9J3ldf2CSKwYUq91qGdHVM6Dm9YkfE3Rdfay_snBPthtK7WWCq_NFHZ3j3Kua1MgJAT-qQPXwlpAIQIDLIpk4Njn_msEnsXh9DyyRtwkvdNU5u10NXpGyYseM_HBo6gwnr6IFqeZ9gHXI1CrvRQnXAxx3UyIT7UIbTDEMKjd1gdxbZwWKrKl',
-  },
-  {
-    title: 'Giấy khen & Bằng khen',
-    image:
-      'https://lh3.googleusercontent.com/aida-public/AB6AXuDDcz4grX0Tjw51FTdB5HZbTmcrYakXnp7WFjK-2VEfZcR45qJg81c0tcljJFjAwIJTFzyhkp3cYgFg-pBIktGRpQoqXaQKlYSVtvmMkicnivUhEnczXAOlUWn7p3aZX0U1qcowjy_97kPA_r3-PivXNSaDbFOOOX_6jiBJmo4A0j0D9e3qRVIUh7laSY54Gct149JLW1vsGGGj8J52tBRRd7ZXIWlIfTCG2X92nrw60rSTjemYH3_FC4-qYNw2ligyY7SaiNTBUHs',
-  },
-  {
-    title: 'Chứng nhận UNIDO',
-    image:
-      'https://lh3.googleusercontent.com/aida-public/AB6AXuDxP6CFZlp3ggmwGEczcGuTImTcqVax4g1QmQUxHl1DEUyVAHj0mdNbxUD-EqS0F3NQNzNfbQN0ax9SIZ62ID0h1-x0UQyRqMxIcqji0Cu5nzwa_SLGBitLXLnORAxIjqlduZZUPE6upya0xjD-YldIjtwbptXZof83YaJpRItUxQzd9vn77CMyaTSd27VeqXiC6LQ61cE-PDK4tWlWjVlq7PuD1BVQYDnywiA_dC08kRpIMCQiDZhZG7GEehac2rkhi_CnAmr-JWA',
-  },
-];
+/** 2.7 — Ảnh giấy khen & chứng nhận (nguồn chung site.ts) */
+export { certificates as certificateImages } from './site';

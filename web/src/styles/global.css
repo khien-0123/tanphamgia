@@ -2,6 +2,126 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Màu link accent — navy #102C4D (ghi đè đảm bảo không còn teal cũ) */
+@layer utilities {
+  .text-accent-teal {
+    color: #102c4d;
+  }
+
+  .bg-accent-teal {
+    background-color: #102c4d;
+  }
+
+  .hover\:text-accent-teal:hover {
+    color: #102c4d;
+  }
+}
+
+/* Utility chống tràn chữ trên mobile */
+.text-safe-wrap {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.heading-responsive {
+  font-size: clamp(1.5rem, 5vw, 3rem);
+  line-height: 1.2;
+  text-wrap: balance;
+}
+
+.page-hero-desc {
+  text-wrap: pretty;
+}
+
+/* Footer — mobile: Liên kết nhanh | Hỗ trợ 2 cột */
+.site-footer-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 1.25rem;
+  row-gap: 2rem;
+}
+
+.site-footer-brand,
+.site-footer-office {
+  grid-column: 1 / -1;
+}
+
+.site-footer-links {
+  grid-column: 1;
+}
+
+.site-footer-support {
+  grid-column: 2;
+}
+
+@media (min-width: 768px) {
+  .site-footer-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    column-gap: 2.5rem;
+    row-gap: 2.5rem;
+  }
+
+  .site-footer-brand,
+  .site-footer-links,
+  .site-footer-support,
+  .site-footer-office {
+    grid-column: auto;
+  }
+}
+
+/* Mô tả hero 2 dòng cố định trên mobile */
+@media (max-width: 767px) {
+  .page-hero-desc--lines {
+    font-size: 0.8125rem;
+    line-height: 1.45;
+    letter-spacing: -0.01em;
+  }
+
+  .page-hero-desc-line {
+    display: block;
+  }
+}
+
+/* CTA cuối trang chủ — nền kiểu hero, tách biệt footer */
+.home-cta-section {
+  min-height: 16rem;
+}
+
+.home-cta-section h2 {
+  text-shadow: 0 2px 24px rgba(14, 38, 64, 0.45);
+}
+
+.home-cta-section-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.home-cta-section-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.home-cta-gradient {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    135deg,
+    rgba(14, 38, 64, 0.62) 0%,
+    rgba(14, 38, 64, 0.38) 50%,
+    rgba(14, 38, 64, 0.52) 100%
+  );
+}
+
+@media (min-width: 768px) {
+  .home-cta-section {
+    min-height: 20rem;
+  }
+}
+
 .material-symbols-outlined {
   font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
 }
@@ -19,7 +139,7 @@
     135deg,
     rgba(14, 38, 64, 0.88) 0%,
     rgba(14, 38, 64, 0.55) 45%,
-    rgba(45, 181, 164, 0.25) 100%
+    rgba(16, 44, 77, 0.25) 100%
   );
 }
 
@@ -53,16 +173,463 @@
   color: #ffc933;
 }
 
-#site-nav.nav-scrolled .nav-brand-text {
+#site-nav.nav-scrolled .nav-link-active {
+  color: #ffc933;
+}
+
+/* Logo thương hiệu — 1 file PNG tách nền, filter vàng khi header/footer nền tối */
+.site-brand-logo-link {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  line-height: 0;
+}
+
+.site-brand-logo {
+  height: 2rem;
+  width: auto;
+  max-width: min(44vw, 11.5rem);
+  object-fit: contain;
+  transition: filter 0.2s ease;
+  --site-brand-logo-filter-gold: brightness(0) saturate(100%) invert(84%) sepia(28%) saturate(2476%)
+    hue-rotate(359deg) brightness(103%) contrast(101%);
+}
+
+#site-nav:not(.nav-scrolled) .site-brand-logo,
+.site-brand-logo-link--on-dark .site-brand-logo {
+  filter: var(--site-brand-logo-filter-gold);
+}
+
+.site-footer-brand-logo .site-brand-logo {
+  height: 2.25rem;
+  max-width: 13.5rem;
+}
+
+@media (min-width: 768px) {
+  .site-brand-logo {
+    height: 2.25rem;
+    max-width: 13rem;
+  }
+
+  .site-footer-brand-logo .site-brand-logo {
+    height: 2.5rem;
+    max-width: 14.5rem;
+  }
+}
+
+/* Hamburger + menu mobile */
+.site-nav-menu-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    border-color 0.2s,
+    color 0.2s;
+}
+
+.site-nav-menu-toggle:hover {
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.site-nav-menu-toggle .material-symbols-outlined {
+  font-size: 1.5rem;
+}
+
+#site-nav.nav-scrolled .site-nav-menu-toggle {
+  border-color: #dce5e2;
+  background: #fff;
   color: #0e2640;
 }
 
-#site-nav.nav-scrolled .nav-brand-text.text-white\/60 {
+#site-nav.nav-scrolled .site-nav-menu-toggle:hover {
+  background: #f4f7f6;
+}
+
+/* Header mobile hẹp — tránh tràn ngang 360px */
+@media (max-width: 399px) {
+  #site-nav > div {
+    padding-inline: 1rem;
+    min-width: 0;
+  }
+
+  #site-nav .site-nav-actions {
+    gap: 0.375rem;
+  }
+
+  #site-nav .site-nav-cta {
+    padding-inline: 0.625rem;
+    font-size: 0.6875rem;
+  }
+
+  .site-brand-logo {
+    height: 1.75rem;
+    max-width: min(40vw, 9.5rem);
+  }
+}
+
+.site-nav-mobile {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100vh;
+  height: 100dvh;
+  z-index: 60;
+  pointer-events: none;
+  visibility: hidden;
+  overflow: hidden;
+}
+
+.site-nav-mobile.is-open {
+  pointer-events: auto;
+  visibility: visible;
+}
+
+.site-nav-mobile-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(14, 38, 64, 0.45);
+  opacity: 0;
+  transition: opacity 0.28s ease;
+}
+
+.site-nav-mobile.is-open .site-nav-mobile-backdrop {
+  opacity: 1;
+}
+
+.site-nav-mobile-panel {
+  position: absolute;
+  top: 0;
+  right: calc(-1 * min(20rem, calc(100vw - 1.25rem)));
+  width: min(20rem, calc(100vw - 1.25rem));
+  /* Panel co theo nội dung: footer nằm ngay sau menu, chỉ cuộn khi vượt 100dvh */
+  max-height: 100vh;
+  max-height: 100dvh;
+  padding-right: env(safe-area-inset-right, 0);
+  background: #f8faf9;
+  box-shadow: -12px 0 40px rgba(14, 38, 64, 0.16);
+  transform: none;
+  transition: right 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+  touch-action: pan-y;
+}
+
+.site-nav-mobile.is-open .site-nav-mobile-panel {
+  right: 0;
+}
+
+.site-nav-mobile-hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  padding: calc(0.75rem + env(safe-area-inset-top, 0)) 1rem 1rem;
+  background: linear-gradient(155deg, #0e2640 0%, #163a5c 58%, #1a4569 100%);
+}
+
+.site-nav-mobile-brand-text-only {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+  text-decoration: none;
+  color: inherit;
+}
+
+.site-nav-mobile-hero::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #ffc933 0%, #ffe08a 50%, #ffc933 100%);
+}
+
+.site-nav-mobile-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 0;
+  color: inherit;
+}
+
+.site-nav-mobile-brand-mark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 0.875rem;
+  background: #ffc933;
+  color: #0e2640;
+  flex-shrink: 0;
+  box-shadow: 0 4px 16px rgba(255, 201, 51, 0.35);
+}
+
+.site-nav-mobile-brand-mark .material-symbols-outlined {
+  font-size: 1.5rem;
+}
+
+.site-nav-mobile-brand-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.site-nav-mobile-brand-name {
+  font-size: 1.0625rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.01em;
+}
+
+.site-nav-mobile-brand-tag {
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.site-nav-menu-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 0.625rem;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.2s;
+}
+
+.site-nav-menu-close:hover {
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.site-nav-mobile-footer {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+  margin-top: 0;
+  padding: 0.625rem 0.875rem calc(0.875rem + env(safe-area-inset-bottom, 0));
+  border-top: 1px solid #e7eeeb;
+  background: #f8faf9;
+}
+
+.site-nav-mobile-cta {
+  display: block;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s,
+    background 0.2s;
+}
+
+.site-nav-mobile-cta:active {
+  transform: scale(0.98);
+}
+
+.site-nav-mobile-cta--primary {
+  background: #ffc933;
+  color: #0e2640;
+  box-shadow: 0 4px 14px rgba(255, 201, 51, 0.35);
+}
+
+.site-nav-mobile-cta--secondary {
+  border: 1px solid #dce5e2;
+  background: #fff;
+  color: #0e2640;
+}
+
+.site-nav-mobile-eyebrow {
+  margin: 0 0 0.75rem 0.5rem;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
   color: #5f6f78;
 }
 
-#site-nav.nav-scrolled .nav-link-active {
-  color: #ffc933;
+.site-nav-mobile-list {
+  list-style: none;
+  margin: 0;
+  padding: 1rem 0.875rem 0.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.site-nav-mobile-item {
+  opacity: 0;
+  transform: translateX(0.75rem);
+}
+
+.site-nav-mobile.is-open .site-nav-mobile-item {
+  animation: site-nav-item-in 0.38s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: calc(0.04s * var(--nav-i) + 0.08s);
+}
+
+@keyframes site-nav-item-in {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.site-nav-mobile-link {
+  display: block;
+  padding: 0.75rem 0.625rem;
+  border-radius: 0.75rem;
+  text-decoration: none;
+  color: #0e2640;
+  transition:
+    background 0.2s,
+    transform 0.2s;
+}
+
+.site-nav-mobile-link:hover {
+  background: #fff;
+}
+
+.site-nav-mobile-link-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 0;
+}
+
+.site-nav-mobile-link-label {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.site-nav-mobile-link-desc {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #5f6f78;
+  line-height: 1.4;
+}
+
+.site-nav-mobile-link-active {
+  background: #fff;
+  box-shadow: 0 2px 12px rgba(14, 38, 64, 0.06);
+}
+
+.site-nav-mobile-link-active .site-nav-mobile-link-label {
+  color: #0e2640;
+}
+
+/* Màn hình thấp — thu nhỏ mô tả menu */
+@media (max-height: 700px) {
+  .site-nav-mobile-link-desc {
+    font-size: 0.6875rem;
+  }
+}
+
+body.nav-menu-open {
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
+/* Form nội bộ */
+.form-label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #0e2640;
+  margin-bottom: 0.5rem;
+}
+
+.form-input {
+  display: block;
+  width: 100%;
+  padding: 0.75rem 0;
+  border: none;
+  border-bottom: 1px solid #dce5e2;
+  background: transparent;
+  color: #0e2640;
+  font-size: 0.9375rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.form-input:focus {
+  border-color: #ffc933;
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 6rem;
+}
+
+.doc-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.doc-download-btn {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  padding: 1rem 1.25rem;
+  border: none;
+  border-radius: 0.75rem;
+  background: #f8faf9;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.doc-download-btn:hover {
+  background: #eef2f0;
+}
+
+.doc-download-btn strong {
+  display: block;
+  color: #0e2640;
+  font-size: 0.9375rem;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.doc-download-arrow {
+  margin-left: auto;
+  color: #5f6f78;
 }
 
 .stat-card {
@@ -128,7 +695,7 @@
   width: 2px;
   transform: translateX(-50%);
   border-radius: 9999px;
-  background: linear-gradient(180deg, #2db5a4 0%, #7fd4c8 55%, #dce5e2 100%);
+  background: linear-gradient(180deg, #102c4d 0%, #4a6a8a 55%, #dce5e2 100%);
 }
 
 .timeline-rail {
@@ -188,7 +755,7 @@
   height: 1.125rem;
   border-radius: 9999px;
   background: #f7faf9;
-  box-shadow: 0 0 0 2px #2db5a4;
+  box-shadow: 0 0 0 2px #102c4d;
   flex-shrink: 0;
 }
 
@@ -196,7 +763,7 @@
   width: 0.4rem;
   height: 0.4rem;
   border-radius: 9999px;
-  background: #2db5a4;
+  background: #102c4d;
 }
 
 .timeline-connector {
@@ -205,7 +772,7 @@
   height: 2px;
   width: calc(50% + 0.75rem);
   transform: translateY(-50%);
-  background: #b8e8e1;
+  background: #c5d0dc;
   border-radius: 9999px;
 }
 
@@ -238,7 +805,7 @@
 }
 
 .timeline-entry:hover .timeline-title {
-  color: #2db5a4;
+  color: #102C4D;
 }
 
 /* Đối xứng: năm + tiêu đề hướng về trục giữa */
@@ -252,7 +819,7 @@
 
 .timeline-year {
   display: block;
-  color: #2db5a4;
+  color: #102C4D;
   font-weight: 700;
   font-size: 0.8125rem;
   line-height: 1.25;
@@ -418,8 +985,121 @@
 }
 
 .about-quote {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   border-left: 3px solid #ffc933;
   padding-left: 1.25rem;
+}
+
+.about-quote > p {
+  flex: 1;
+}
+
+.about-testimonials-slider-wrap {
+  min-width: 0;
+  overflow-anchor: none;
+}
+
+.about-testimonials-slider {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding-bottom: 0.25rem;
+}
+
+.about-testimonials-slider::-webkit-scrollbar {
+  display: none;
+}
+
+.about-testimonials-slide {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+  min-width: 0;
+  box-sizing: border-box;
+  padding-inline: 0.25rem;
+  align-self: stretch;
+}
+
+/* Slide = blockquote — flex column để footer (tên/chức danh) thẳng hàng giữa các cột */
+.about-testimonials-slide.about-quote {
+  height: auto;
+}
+
+.about-testimonials-slide.about-quote > footer {
+  margin-top: auto;
+  flex-shrink: 0;
+}
+
+@media (min-width: 768px) {
+  .about-testimonials-slider {
+    gap: 3rem;
+  }
+
+  .about-testimonials-slide {
+    flex: 0 0 calc((100% - 6rem) / 3);
+    padding-inline: 0;
+  }
+}
+
+/* Slider testimonial trang Khách hàng */
+.clients-testimonials-slider-wrap {
+  min-width: 0;
+  overflow-anchor: none;
+}
+
+.clients-testimonials-slider {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding-bottom: 0.25rem;
+}
+
+.clients-testimonials-slider::-webkit-scrollbar {
+  display: none;
+}
+
+.clients-testimonials-slide {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+  min-width: 0;
+  box-sizing: border-box;
+  padding-inline: 0.25rem;
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+}
+
+.clients-testimonials-slide > p {
+  flex: 1 1 auto;
+}
+
+.clients-testimonials-slide > footer {
+  margin-top: auto;
+  flex-shrink: 0;
+}
+
+@media (min-width: 768px) {
+  .clients-testimonials-slider {
+    gap: 3rem;
+  }
+
+  .clients-testimonials-slide {
+    flex: 0 0 calc((100% - 6rem) / 3);
+    padding-inline: 0;
+  }
 }
 
 @media (min-width: 768px) {
@@ -534,12 +1214,21 @@
   }
 }
 
-/* Trang chủ — giới thiệu: tránh chữ rớt hàng lẻ */
+/* Tiêu đề dài — tránh chữ rớt hàng lẻ (dùng chung trang chủ + Giới thiệu) */
+.gioi-thieu-title {
+  text-wrap: pretty;
+}
+
+/* Trang chủ — giới thiệu */
 #gioi-thieu .gioi-thieu-title {
   font-size: 1.25rem;
-  line-height: 1.35;
-  letter-spacing: -0.01em;
+  line-height: 1.38;
+  letter-spacing: 0;
   text-wrap: pretty;
+}
+
+#gioi-thieu .gioi-thieu-title-line {
+  display: block;
 }
 
 #gioi-thieu .gioi-thieu-text {
@@ -559,7 +1248,8 @@
   font-size: 1.25rem;
   line-height: 1.3;
   letter-spacing: -0.03em;
-  white-space: nowrap;
+  white-space: normal;
+  text-wrap: balance;
 }
 
 @media (min-width: 390px) {
@@ -581,27 +1271,48 @@
   }
 }
 
-/* —— Trang chủ: năng lực sản xuất — giới hạn kích thước ảnh —— */
-#nang-luc .home-capacity-img {
-  aspect-ratio: 16 / 10;
-  max-height: 11rem;
+/* —— Layout ảnh + text — thẳng hàng container —— */
+.media-text-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  align-items: stretch;
 }
 
 @media (min-width: 768px) {
-  #nang-luc .home-capacity-media {
-    flex: 0 1 38%;
-    max-width: 20rem;
+  .media-text-row {
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+    align-items: center;
   }
 
-  #nang-luc .home-capacity-img {
-    max-height: 13rem;
+  .media-text-row--reverse {
+    direction: rtl;
+  }
+
+  .media-text-row--reverse > * {
+    direction: ltr;
   }
 }
 
 @media (min-width: 1024px) {
-  #nang-luc .home-capacity-img {
-    max-height: 14rem;
+  .media-text-row {
+    gap: 5rem;
   }
+}
+
+.media-text-row-media,
+.media-text-row-body {
+  min-width: 0;
+  width: 100%;
+}
+
+.media-text-row-img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 0.5rem;
 }
 
 /* —— Trang chủ: catalog giải pháp (tham chiếu Ricoh) —— */
@@ -664,7 +1375,7 @@
   width: fit-content;
   font-size: 0.75rem;
   font-weight: 700;
-  color: #2db5a4;
+  color: #102C4D;
   letter-spacing: 0.08em;
 }
 
@@ -687,7 +1398,7 @@
   display: inline-block;
   width: fit-content;
   font-size: 0.75rem;
-  color: #2db5a4;
+  color: #102C4D;
   font-weight: 600;
 }
 
@@ -720,7 +1431,7 @@
   width: 0.35rem;
   height: 0.35rem;
   border-radius: 9999px;
-  background: #2db5a4;
+  background: #102c4d;
 }
 
 .solution-box-link {
@@ -731,7 +1442,7 @@
 }
 
 .solution-box-link:hover {
-  color: #2db5a4;
+  color: #102C4D;
 }
 
 /* Trang chủ: 2 cột trên mobile, desktop giữ nguyên (4 cột từ xl) */
@@ -774,7 +1485,7 @@
   line-height: 1.4;
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 2;
   overflow: hidden;
   flex: 1 1 auto;
   min-height: 0;
@@ -787,18 +1498,32 @@
   padding-top: 0.2rem;
 }
 
-/* Mobile & tablet 2 cột: tiêu đề một dòng, không rớt hàng */
+/* Mobile & tablet 2 cột: tiêu đề tối đa 2 dòng, không cắt một dòng */
 @media (max-width: 1279px) {
   .solution-box-grid--home .solution-box-title {
-    white-space: nowrap;
+    white-space: normal;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
     overflow: hidden;
-    text-overflow: ellipsis;
+    text-overflow: unset;
   }
 }
 
 @media (max-width: 639px) {
   .solution-box-grid--home .solution-box-title {
-    font-size: 0.72rem;
+    font-size: 0.8125rem;
+    line-height: 1.35;
+  }
+
+  .solution-box-grid--home .solution-box-desc {
+    font-size: 0.75rem;
+    line-height: 1.45;
+    -webkit-line-clamp: 2;
+  }
+
+  .solution-box-grid--home .solution-box-link {
+    font-size: 0.75rem;
   }
 }
 
@@ -829,7 +1554,7 @@
     font-size: 0.78rem;
     line-height: 1.45;
     display: -webkit-box;
-    -webkit-line-clamp: 3;
+    -webkit-line-clamp: 2;
     overflow: hidden;
   }
 
@@ -957,9 +1682,19 @@
 }
 
 .solution-detail-section {
-  padding: 3.25rem 0;
+  padding: 2rem 0;
   border-bottom: 1px solid #e7e7e2;
   background: #ffffff;
+}
+
+@media (min-width: 768px) {
+  .solution-detail-section {
+    padding: 3.25rem 0;
+  }
+}
+
+.solution-detail-page .solution-detail-section h2 {
+  text-wrap: balance;
 }
 
 /* Trang giải pháp: tông vàng-trắng-đen, không dùng nền mint của section-fresh */
@@ -1736,7 +2471,8 @@
   display: flex;
   gap: 0.85rem;
   overflow-x: auto;
-  scroll-snap-type: x mandatory;
+  scroll-snap-type: x proximity;
+  overscroll-behavior-x: contain;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
   padding-bottom: 0.25rem;
@@ -1826,11 +2562,42 @@
 
 .home-cases-contact {
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.5rem 0.85rem;
+  flex-direction: column;
+  gap: 0.65rem;
   padding-top: 0.875rem;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.home-cases-contact-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    'email email'
+    'phone cta';
+  gap: 0.65rem 1rem;
+  align-items: center;
+}
+
+.home-cases-contact-email {
+  grid-area: email;
+  word-break: break-word;
+}
+
+.home-cases-contact-phone {
+  grid-area: phone;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.home-cases-contact-cta {
+  grid-area: cta;
+  justify-self: end;
+}
+
+.home-cases-contact-sep {
+  display: none;
+  color: rgba(255, 255, 255, 0.25);
+  user-select: none;
 }
 
 .home-cases-contact-label {
@@ -1838,7 +2605,7 @@
   font-weight: 700;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: #2dd4bf;
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .home-cases-contact-link {
@@ -1853,25 +2620,37 @@
   color: #f2c300;
 }
 
-.home-cases-contact-phone {
-  font-size: 1.125rem;
-}
+@media (min-width: 768px) {
+  .home-cases-contact {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 0.85rem;
+  }
 
-.home-cases-contact-sep {
-  color: rgba(255, 255, 255, 0.25);
-  user-select: none;
-}
+  .home-cases-contact-details {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 0.85rem;
+    flex: 1;
+  }
 
-.home-cases-contact-cta {
-  font-size: 0.8125rem;
-  font-weight: 700;
-  color: #f2c300;
-  text-decoration: none;
-  transition: opacity 0.2s ease;
-}
+  .home-cases-contact-email,
+  .home-cases-contact-phone,
+  .home-cases-contact-cta {
+    grid-area: unset;
+    justify-self: unset;
+    text-align: unset;
+  }
 
-.home-cases-contact-cta:hover {
-  opacity: 0.85;
+  .home-cases-contact-phone {
+    font-size: 1.125rem;
+  }
+
+  .home-cases-contact-sep {
+    display: inline;
+  }
 }
 
 @media (min-width: 640px) {
@@ -1926,18 +2705,35 @@
 }
 
 /* Trang chủ — Tin tức slider mobile (#tin-tuc) */
+#tin-tuc .home-news-header h2 {
+  font-size: clamp(1.375rem, 5.5vw, 1.5rem);
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  text-wrap: pretty;
+}
+
+@media (min-width: 768px) {
+  #tin-tuc .home-news-header h2 {
+    font-size: 3rem;
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+  }
+}
+
 .home-news-slider-wrap {
-  margin-inline: -0.25rem;
+  min-width: 0;
+  overflow-anchor: none;
 }
 
 .home-news-slider {
   display: flex;
-  gap: 0.85rem;
+  gap: 0;
   overflow-x: auto;
-  scroll-snap-type: x mandatory;
+  overflow-y: hidden;
+  scroll-snap-type: x proximity;
+  overscroll-behavior-x: contain;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
-  padding-inline: 0.25rem;
   padding-bottom: 0.25rem;
 }
 
@@ -1946,9 +2742,15 @@
 }
 
 .home-news-slide {
-  flex: 0 0 88vw;
+  flex: 0 0 100%;
   scroll-snap-align: start;
   min-width: 0;
+  padding-inline: 0.25rem;
+  box-sizing: border-box;
+}
+
+.home-news-slide-body {
+  min-height: 7.5rem;
 }
 
 .home-news-slide-media {
@@ -1988,11 +2790,13 @@
 
 .home-news-slide-title {
   margin: 0 0 0.5rem;
-  font-size: 1.125rem;
+  font-size: clamp(1.0625rem, 4.2vw, 1.125rem);
   font-weight: 700;
-  line-height: 1.35;
+  line-height: 1.4;
+  letter-spacing: -0.015em;
+  text-wrap: pretty;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -2001,9 +2805,11 @@
   margin: 0 0 0.65rem;
   font-size: 0.875rem;
   line-height: 1.55;
+  letter-spacing: -0.005em;
+  text-wrap: pretty;
   color: rgba(17, 17, 17, 0.65);
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -2011,7 +2817,7 @@
 .home-news-slide-category {
   font-size: 0.8125rem;
   font-weight: 700;
-  color: #0d9488;
+  color: #102C4D;
 }
 
 /* Trang chủ — Logo khách hàng slider mobile (#doi-tac) */
@@ -2023,7 +2829,9 @@
   display: flex;
   gap: 0.75rem;
   overflow-x: auto;
-  scroll-snap-type: x mandatory;
+  overflow-y: hidden;
+  scroll-snap-type: x proximity;
+  overscroll-behavior-x: contain;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
   padding-bottom: 0.25rem;
@@ -2041,12 +2849,15 @@
   gap: 0.5rem 0.35rem;
 }
 
-.home-clients-slider-hint {
-  margin: 0.65rem 0 0;
-  font-size: 0.6875rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  text-align: center;
-  color: rgba(17, 17, 17, 0.45);
+/* Chặn tràn ngang toàn site — đặt sau Tailwind để không bị ghi đè */
+html {
+  overflow-x: clip;
+  width: 100%;
+}
+
+body {
+  overflow-x: clip;
+  width: 100%;
+  max-width: 100vw;
 }
 

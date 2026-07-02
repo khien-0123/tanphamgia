@@ -1,11 +1,15 @@
 ---
 import { blogPosts, blogSectionMeta } from '../data/site';
+import BlogPostTitle from './BlogPostTitle.astro';
 
 const featured = blogPosts[0];
 const gridPosts = blogPosts.slice(1);
 const { allPostsHref } = blogSectionMeta;
-const sliderSets = 3;
-const sliderPosts = Array.from({ length: sliderSets }, () => blogPosts).flat();
+
+/** Mobile: 3 bộ slide để vòng lặp vô hạn */
+const SLIDER_SETS = 3;
+const sliderPosts = Array.from({ length: SLIDER_SETS }, () => blogPosts).flat();
+const postsPerSet = blogPosts.length;
 ---
 
 <section class="home-news py-8 md:py-24 bg-white border-b border-border-subtle" id="tin-tuc">
@@ -14,16 +18,12 @@ const sliderPosts = Array.from({ length: sliderSets }, () => blogPosts).flat();
       class="home-news-header flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 md:gap-4 mb-6 md:mb-12"
     >
       <div class="max-w-2xl">
-        <span
-          class="inline-block px-3 py-1 bg-accent-teal-light text-accent-teal rounded-full text-xs font-bold uppercase tracking-wider mb-3 md:mb-4"
-          >Blog</span
-        >
         <h2
-          class="font-display-lg text-2xl md:text-5xl font-bold tracking-tight text-ink-dark mb-2 md:mb-4"
+          class="home-news-heading font-display-lg font-bold tracking-tight text-ink-dark mb-2 md:mb-4"
         >
           Tin Tức & Kiến Thức Ngành
         </h2>
-        <p class="hidden md:block text-text-muted text-base max-w-lg">
+        <p class="text-text-muted text-sm md:text-base max-w-lg leading-relaxed">
           Những chia sẻ từ hành trình sản xuất đồng phục và các dự án gần đây của chúng tôi.
         </p>
       </div>
@@ -35,19 +35,18 @@ const sliderPosts = Array.from({ length: sliderSets }, () => blogPosts).flat();
       </a>
     </header>
 
-    <!-- Mobile: slider vuốt ngang vòng lặp -->
+    <!-- Mobile: slider scroll vòng lặp + tự chạy -->
     <div class="home-news-slider-wrap md:hidden" data-news-slider>
-      <div class="home-news-slider" role="list">
+      <div class="home-news-slider" aria-label="Tin tức nổi bật">
         {
-          sliderPosts.map((post, index) => {
-            const setIndex = Math.floor(index / blogPosts.length);
+          sliderPosts.map((post, postIndex) => {
+            const setIndex = Math.floor(postIndex / postsPerSet);
             const isClone = setIndex !== 1;
 
             return (
               <a
                 href={post.href ?? allPostsHref}
                 class="home-news-slide group no-underline text-ink-dark"
-                role="listitem"
                 aria-hidden={isClone ? 'true' : undefined}
                 tabindex={isClone ? -1 : undefined}
               >
@@ -55,8 +54,7 @@ const sliderPosts = Array.from({ length: sliderSets }, () => blogPosts).flat();
                   <img src={post.image} alt={post.alt} loading="lazy" />
                 </figure>
                 <div class="home-news-slide-body">
-                  {post.badge && <span class="home-news-slide-badge">{post.badge}</span>}
-                  <h3 class="home-news-slide-title">{post.title}</h3>
+                  <BlogPostTitle post={post} as="h3" class="home-news-slide-title" />
                   <p class="home-news-slide-excerpt">{post.excerpt}</p>
                   <span
                     class="home-news-slide-category"
@@ -87,11 +85,6 @@ const sliderPosts = Array.from({ length: sliderSets }, () => blogPosts).flat();
                 />
               </figure>
               <div class="flex flex-col justify-center">
-                {featured.badge && (
-                  <span class="inline-block w-fit px-4 py-1 bg-ink-dark text-white rounded-full text-xs font-bold uppercase tracking-widest mb-5">
-                    {featured.badge}
-                  </span>
-                )}
                 <h3 class="font-display-lg text-2xl md:text-4xl leading-tight text-ink-dark mb-5">
                   {featured.title}
                 </h3>
@@ -125,9 +118,11 @@ const sliderPosts = Array.from({ length: sliderSets }, () => blogPosts).flat();
               >
                 {post.category}
               </span>
-              <h4 class="text-xl font-bold text-ink-dark mb-4 group-hover:text-accent-gold transition-colors">
-                {post.title}
-              </h4>
+              <BlogPostTitle
+                post={post}
+                as="h4"
+                class="text-xl font-bold text-ink-dark mb-4 group-hover:text-accent-gold transition-colors"
+              />
             </a>
           ))
         }

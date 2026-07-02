@@ -1,0 +1,28 @@
+---
+import { siteBrand } from '../data/site';
+
+interface Props {
+  /** Dùng filter sáng cho nền tối (hero header / menu mobile) */
+  onDark?: boolean;
+  class?: string;
+  navClose?: boolean;
+}
+
+const { onDark = false, class: className, navClose = false } = Astro.props;
+---
+
+<a
+  href={siteBrand.homeHref}
+  class:list={['site-brand-logo-link', onDark && 'site-brand-logo-link--on-dark', className]}
+  {...(navClose ? { 'data-nav-close': true } : {})}
+>
+  <img
+    class="site-brand-logo"
+    src={siteBrand.logo}
+    alt={siteBrand.name}
+    width="200"
+    height="40"
+    loading="eager"
+    decoding="async"
+  />
+</a>

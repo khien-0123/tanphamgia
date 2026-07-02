@@ -1,0 +1,64 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+  /** Ngắt dòng mô tả trên mobile — tránh chữ rớt hàng lẻ */
+  descriptionLines?: readonly [string, string];
+  breadcrumb?: { label: string; href?: string }[];
+}
+
+const { title, description, descriptionLines, breadcrumb = [{ label: 'Trang chủ', href: '/' }] } =
+  Astro.props;
+---
+
+<header class="relative pt-28 pb-10 md:pt-36 md:pb-20 bg-ink-dark text-white overflow-hidden">
+  <div class="absolute inset-0 opacity-25">
+    <img
+      alt=""
+      class="w-full h-full object-cover"
+      src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7szr7Elx-oAqCEnir2uiBqNE-4WpmIm10Kj1YsgXyu1XMFvP0qvIXYrsMpRh9sztusxsq8_7_MFPstpomb4RaDeTg9J3ldf2CSKwYUq91qGdHVM6Dm9YkfE3Rdfay_snBPthtK7WWCq_NFHZ3j3Kua1MgJAT-qQPXwlpAIQIDLIpk4Njn_msEnsXh9DyyRtwkvdNU5u10NXpGyYseM_HBo6gwnr6IFqeZ9gHXI1CrvRQnXAxx3UyIT7UIbTDEMKjd1gdxbZwWKrKl"
+    />
+    <div class="absolute inset-0 hero-gradient"></div>
+  </div>
+  <div class="relative z-10 max-w-container-max-width mx-auto px-6 md:px-8">
+    {
+      breadcrumb.length > 0 && (
+        <nav aria-label="Breadcrumb" class="text-sm text-white/60 mb-6">
+          {breadcrumb.map((item, i) => (
+            <>
+              {i > 0 && <span class="mx-2">/</span>}
+              {item.href ? (
+                <a class="hover:text-accent-gold transition-colors" href={item.href}>
+                  {item.label}
+                </a>
+              ) : (
+                <span class="text-white">{item.label}</span>
+              )}
+            </>
+          ))}
+        </nav>
+      )
+    }
+    <h1 class="font-display-lg heading-responsive md:text-5xl font-extrabold tracking-tight mb-5">{title}</h1>
+    {description && (
+      <p
+        class:list={[
+          'page-hero-desc text-white/80 max-w-2xl leading-relaxed',
+          descriptionLines ? 'page-hero-desc--lines' : 'text-base md:text-lg',
+        ]}
+      >
+        {
+          descriptionLines ? (
+            <>
+              <span class="page-hero-desc-line md:hidden">{descriptionLines[0]}</span>
+              <span class="page-hero-desc-line md:hidden">{descriptionLines[1]}</span>
+              <span class="hidden md:inline">{description}</span>
+            </>
+          ) : (
+            description
+          )
+        }
+      </p>
+    )}
+  </div>
+</header>

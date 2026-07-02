@@ -1,0 +1,37 @@
+---
+import { homeCtaMedia, siteCta } from '../data/site';
+---
+
+<section class="home-cta-section relative overflow-hidden py-12 md:py-20 text-white">
+  <div class="home-cta-section-bg" aria-hidden="true">
+    <img
+      alt=""
+      class="home-cta-section-img"
+      src={homeCtaMedia.image}
+      loading="lazy"
+    />
+    <div class="home-cta-gradient"></div>
+  </div>
+  <div class="relative z-10 max-w-container-max-width mx-auto px-6 md:px-8 text-center">
+    <h2 class="font-display-lg heading-responsive md:text-5xl font-bold mb-4 leading-tight">
+      {siteCta.title}
+    </h2>
+    <p class="text-white/85 mb-8 max-w-xl mx-auto text-base md:text-lg leading-relaxed">
+      {siteCta.description}
+    </p>
+    <div class="flex flex-row gap-2 sm:gap-3 justify-center items-stretch w-full max-w-md sm:max-w-none mx-auto">
+      <a
+        href={siteCta.primaryHref}
+        class="flex-1 min-w-0 bg-accent-gold text-ink-dark px-3 py-2.5 md:px-8 md:py-4 rounded-full font-bold text-xs md:text-base leading-tight hover:shadow-gold hover:scale-105 transition-all shadow-soft text-center"
+      >
+        {siteCta.primaryLabel}
+      </a>
+      <a
+        href={siteCta.secondaryHref}
+        class="flex-1 min-w-0 border border-white/50 bg-white/10 backdrop-blur-sm text-white px-3 py-2.5 md:px-8 md:py-4 rounded-full font-bold text-xs md:text-base leading-tight hover:bg-white hover:text-ink-dark transition-all text-center"
+      >
+        {siteCta.secondaryLabel}
+      </a>
+    </div>
+  </div>
+</section>
