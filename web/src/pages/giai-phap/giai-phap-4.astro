@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import SiteNav from '../../components/SiteNav.astro';
 import SiteFooter from '../../components/SiteFooter.astro';
+import SiteCtaSection from '../../components/SiteCtaSection.astro';
 import { solutions } from '../../data/site';
 import SolutionPlanSplit from '../../components/SolutionPlanSplit.astro';
 import { duAnGiaiPhap4 } from '../../data/giai-phap-4-du-an';
@@ -61,16 +62,15 @@ const processSteps = [
   title="Giải pháp 4 | Y tế, Spa & Dịch vụ"
   description="Giải pháp đồng phục y tế, spa và dịch vụ."
 >
-  <SiteNav solid currentPath="/#giai-phap" />
+  <SiteNav solid currentPath="/giai-phap" />
   <main class="solution-detail-page solution-style-industrial">
     <section class="pt-28 md:pt-32 pb-14 md:pb-20 border-b border-border-subtle">
       <div class="max-w-container-max-width mx-auto px-6 md:px-8">
-        <a href="/#giai-phap" class="text-sm font-semibold text-accent-teal hover:text-ink-dark transition-colors">
+        <a href="/giai-phap" class="text-sm font-semibold text-accent-teal hover:text-ink-dark transition-colors">
           ← Quay lại
         </a>
-        <div class="solution-hero-grid grid lg:grid-cols-2 gap-10 items-start mt-5">
+        <div class="solution-hero-grid grid lg:grid-cols-2 gap-6 md:gap-10 items-start mt-5">
           <div>
-            <span class="text-xs font-bold uppercase tracking-[0.2em] text-accent-teal mb-3 block">Giải pháp 4</span>
             <h1 class="text-3xl md:text-5xl font-bold leading-tight mb-5">Đồng phục Y tế, Spa & Dịch vụ</h1>
             <p class="text-text-muted text-base md:text-lg leading-relaxed mb-6">
               Giải pháp đồng phục chuyên nghiệp giúp nâng cao hình ảnh thương hiệu, gia tăng trải nghiệm khách hàng
@@ -240,24 +240,7 @@ const processSteps = [
       </div>
     </section>
 
-    <section class="py-14 md:py-16">
-      <div class="max-w-container-max-width mx-auto px-6 md:px-8">
-        <div class="solution-cta-banner bg-[#f2c300] px-6 py-10 md:px-10 text-center">
-          <h2 class="text-2xl md:text-3xl font-bold text-black mb-3">Đồng phục dịch vụ chỉn chu từ điểm chạm đầu tiên</h2>
-          <p class="text-black/75 mb-6">
-            Giải pháp chuyên biệt cho Y tế, Spa và dịch vụ giúp nâng trải nghiệm khách hàng và đội ngũ vận hành.
-          </p>
-          <div class="flex flex-col sm:flex-row gap-3 justify-center">
-            <a href="/#tai-lieu" class="px-6 py-3 bg-black text-white text-sm font-semibold rounded-full">
-              Nhận tư vấn ngay
-            </a>
-            <a href="/#tai-lieu" class="px-6 py-3 border border-black text-black text-sm font-semibold rounded-full">
-              Tải hồ sơ năng lực
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
   </main>
+  <SiteCtaSection />
   <SiteFooter />
 </BaseLayout>

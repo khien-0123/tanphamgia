@@ -1,40 +1,138 @@
 /** Dữ liệu thương hiệu & điều hướng — đồng bộ Sitemap + Google Sheets */
 
 export const seo = {
-  title: 'Tân Phạm Gia | Thiết Kế & Sản Xuất áo thun polo đồng phục trọn gói',
+  title: 'May Đồng Phục Doanh Nghiệp | Tân Phạm Gia',
   description:
     'Tư vấn, thiết kế và sản xuất đồng phục doanh nghiệp theo yêu cầu. Xưởng may trực tiếp, 23 năm kinh nghiệm, đáp ứng đơn hàng số lượng lớn trên toàn quốc.',
 };
 
+/** SEO metadata theo slug — đồng bộ tab SEO & Meta Data */
+export const pageSeo = {
+  gioiThieu: {
+    title: 'Công Ty May Đồng Phục 23 Năm | Tân Phạm Gia',
+    description:
+      'Tìm hiểu năng lực sản xuất, quy trình QC đa tầng, đội ngũ chuyên môn và kinh nghiệm hơn 23 năm trong lĩnh vực đồng phục doanh nghiệp.',
+  },
+  giaiPhap: {
+    title: 'Giải Pháp Đồng Phục B2B | Tân Phạm Gia',
+    description:
+      'Giải pháp đồng phục cho doanh nghiệp sản xuất, FDI, FMCG, ngân hàng và tập đoàn. Tư vấn chiến lược, thiết kế riêng và sản xuất quy mô lớn.',
+  },
+  khachHang: {
+    title: 'Dự Án Đồng Phục & Case Study | Tân Phạm Gia',
+    description:
+      'Khám phá các dự án đồng phục thực tế, kinh nghiệm triển khai cho doanh nghiệp sản xuất, FDI, ngân hàng và chuỗi hệ thống trên toàn quốc.',
+  },
+  tinTuc: {
+    title: 'Kiến Thức Đồng Phục Doanh Nghiệp | Tân Phạm Gia',
+    description:
+      'Chia sẻ kiến thức quản lý đồng phục, lựa chọn chất liệu, kinh nghiệm triển khai và xu hướng đồng phục doanh nghiệp mới nhất.',
+  },
+  taiLieu: {
+    title: 'Catalogue & Hồ Sơ Năng Lực | Tân Phạm Gia',
+    description:
+      'Tải miễn phí catalogue đồng phục, hồ sơ năng lực, tài liệu hướng dẫn lựa chọn và triển khai đồng phục cho doanh nghiệp.',
+  },
+  lienHe: {
+    title: 'Tư Vấn May Đồng Phục | Báo Giá Nhanh',
+    description:
+      'Liên hệ đội ngũ tư vấn để nhận giải pháp đồng phục phù hợp với doanh nghiệp. Hỗ trợ khảo sát, tư vấn và báo giá nhanh chóng.',
+  },
+} as const;
+
+/** Liên hệ chung — dùng footer, menu mobile, trang Liên hệ */
+export const siteContact = {
+  email: 'dongphuc@tanphamgia.com.vn',
+  emailHref: 'mailto:dongphuc@tanphamgia.com.vn',
+  phone: '0843 406 406',
+  phoneHref: 'tel:0843406406',
+  phoneDisplay: '084 3406 406',
+  address: '20A Thới An 15, Khu Phố 6, Phường Thới An, TP. Hồ Chí Minh',
+  hours: 'T2–T7: 8:00–18:00 | CN: theo hẹn',
+  tagline: 'Kiến tạo giá trị thương hiệu qua từng đường kim mũi chỉ.',
+  responseCommitment:
+    'Phản hồi trong 24 giờ làm việc. Gọi hotline 084 3406 406 cho đơn cấp bách. Tư vấn hoàn toàn miễn phí!',
+};
+
+/** Thương hiệu — logo & đường dẫn trang chủ (root-relative) */
+export const siteBrand = {
+  name: 'Tân Phạm Gia',
+  tagline: 'Đồng phục doanh nghiệp',
+  homeHref: '/',
+  logo: '/images/brand/tan-pham-gia-logo.png',
+} as const;
+
 /** Điều hướng anchor trên trang chủ */
 export const navigation = [
-  { label: 'Giới thiệu', href: '#gioi-thieu' },
-  { label: 'Giải pháp', href: '#giai-phap' },
-  { label: 'Khách hàng', href: '#doi-tac' },
-  { label: 'Tin tức', href: '#tin-tuc' },
-  { label: 'Tài liệu', href: '#tai-lieu' },
-  { label: 'Liên hệ', href: '#lien-he' },
+  { label: 'Trang chủ', href: '/', icon: 'home', desc: 'Tổng quan & giải pháp nổi bật' },
+  { label: 'Giới thiệu', href: '/gioi-thieu', icon: 'apartment', desc: 'Lịch sử & năng lực xưởng may' },
+  { label: 'Giải pháp', href: '#giai-phap', icon: 'category', desc: 'Nhóm giải pháp đồng phục' },
+  { label: 'Khách hàng', href: '/khach-hang', icon: 'groups', desc: 'Thương hiệu đã đồng hành' },
+  { label: 'Tin tức', href: '/tin-tuc', icon: 'newspaper', desc: 'Kiến thức ngành & dự án' },
+  { label: 'Tài liệu', href: '/tai-lieu', icon: 'folder_open', desc: 'Hồ sơ năng lực & catalog' },
+  { label: 'Liên hệ', href: '/lien-he', icon: 'call', desc: 'Tư vấn & báo giá nhanh' },
 ];
 
 /** Điều hướng trang con — đồng bộ URL slug SEO sheet */
 export const mainNavigation = [
-  { label: 'Giới thiệu', href: '/gioi-thieu' },
-  { label: 'Giải pháp', href: '/#giai-phap' },
-  { label: 'Khách hàng', href: '/khach-hang' },
-  { label: 'Tin tức', href: '/tin-tuc' },
-  { label: 'Tài liệu', href: '/tai-lieu' },
-  { label: 'Liên hệ', href: '/lien-he' },
+  { label: 'Trang chủ', href: '/', icon: 'home', desc: 'Tổng quan & giải pháp nổi bật' },
+  { label: 'Giới thiệu', href: '/gioi-thieu', icon: 'apartment', desc: 'Lịch sử & năng lực xưởng may' },
+  { label: 'Giải pháp', href: '/giai-phap', icon: 'category', desc: 'Nhóm giải pháp đồng phục' },
+  { label: 'Khách hàng', href: '/khach-hang', icon: 'groups', desc: 'Thương hiệu đã đồng hành' },
+  { label: 'Tin tức', href: '/tin-tuc', icon: 'newspaper', desc: 'Kiến thức ngành & dự án' },
+  { label: 'Tài liệu', href: '/tai-lieu', icon: 'folder_open', desc: 'Hồ sơ năng lực & catalog' },
+  { label: 'Liên hệ', href: '/lien-he', icon: 'call', desc: 'Tư vấn & báo giá nhanh' },
 ];
 
 export const brandQuote =
   'Tân Phạm Gia luôn lắng nghe và thấu hiểu để đưa ra giải pháp phù hợp nhất cho doanh nghiệp.';
 
-/** Sitemap 1.7 — Giấy khen & chứng nhận */
+/** Media hero trang chủ — bổ sung video khi có asset */
+export const heroMedia = {
+  image:
+    'https://lh3.googleusercontent.com/aida-public/AB6AXuD7szr7Elx-oAqCEnir2uiBqNE-4WpmIm10Kj1YsgXyu1XMFvP0qvIXYrsMpRh9sztusxsq8_7_MFPstpomb4RaDeTg9J3ldf2CSKwYUq91qGdHVM6Dm9YkfE3Rdfay_snBPthtK7WWCq_NFHZ3j3Kua1MgJAT-qQPXwlpAIQIDLIpk4Njn_msEnsXh9DyyRtwkvdNU5u10NXpGyYseM_HBo6gwnr6IFqeZ9gHXI1CrvRQnXAxx3UyIT7UIbTDEMKjd1gdxbZwWKrKl',
+  video: undefined as string | undefined,
+};
+
+/** Ảnh nền CTA cuối trang — dùng chung toàn site (tạm — thay URL khi có asset chính thức) */
+export const homeCtaMedia = {
+  image:
+    'https://images.unsplash.com/photo-1497366216548-37526070297c?w=1600&auto=format&fit=crop&q=80',
+  alt: 'Không gian văn phòng hiện đại',
+};
+
+/** Nội dung CTA cuối trang — đồng bộ mọi trang */
+export const siteCta = {
+  title: 'Sẵn sàng cho dự án đồng phục của bạn?',
+  description: 'Liên hệ ngay để nhận tư vấn miễn phí và báo giá chi tiết.',
+  primaryLabel: 'Nhận tư vấn giải pháp',
+  primaryHref: '/lien-he',
+  secondaryLabel: 'Tải hồ sơ năng lực',
+  secondaryHref: '/tai-lieu',
+};
+
+/** Sitemap 1.7 — Giấy khen & chứng nhận (ảnh — đồng bộ trang Giới thiệu) */
 export const certificates = [
-  { icon: 'verified', title: 'ISO 9001:2015', desc: 'Hệ thống quản lý chất lượng' },
-  { icon: 'workspace_premium', title: 'Hàng Việt Nam CLC', desc: 'Chất lượng cao' },
-  { icon: 'eco', title: 'Tiêu chuẩn Oeko-Tex', desc: 'An toàn vải & môi trường' },
-  { icon: 'military_tech', title: 'Giấy khen & Bằng khen', desc: 'Đối tác uy tín ngành may' },
+  {
+    title: 'ISO 9001:2015',
+    image:
+      'https://lh3.googleusercontent.com/aida-public/AB6AXuCZF2amQyazt-GlhQH0DeUYXVZBkumEl5R6CgjdG-dn0i5IrhMtCB2ZMm9VUkZRwiIQIWIztfTbQsGMzRLvuaT2VHY6uWPPQHTjMlgpApeytXq5twxbrE7JaH5DBMM3Wq0I6G3KUtyoE2pR9jZvWUthhvBo7IZAZV3S32L0TVLkejbhD6tP9cSh8EF0MwW4eWy5qOXNzFXEsmwc7o-jKSwr2uoIeviT4x3KWtNwCtrU8SJWzNs3WVp6UPimb_JxHku0lc8G80XNvUiu',
+  },
+  {
+    title: 'Hàng Việt Nam Chất Lượng Cao',
+    image:
+      'https://lh3.googleusercontent.com/aida-public/AB6AXuD7szr7Elx-oAqCEnir2uiBqNE-4WpmIm10Kj1YsgXyu1XMFvP0qvIXYrsMpRh9sztusxsq8_7_MFPstpomb4RaDeTg9J3ldf2CSKwYUq91qGdHVM6Dm9YkfE3Rdfay_snBPthtK7WWCq_NFHZ3j3Kua1MgJAT-qQPXwlpAIQIDLIpk4Njn_msEnsXh9DyyRtwkvdNU5u10NXpGyYseM_HBo6gwnr6IFqeZ9gHXI1CrvRQnXAxx3UyIT7UIbTDEMKjd1gdxbZwWKrKl',
+  },
+  {
+    title: 'Giấy khen & Bằng khen',
+    image:
+      'https://lh3.googleusercontent.com/aida-public/AB6AXuDDcz4grX0Tjw51FTdB5HZbTmcrYakXnp7WFjK-2VEfZcR45qJg81c0tcljJFjAwIJTFzyhkp3cYgFg-pBIktGRpQoqXaQKlYSVtvmMkicnivUhEnczXAOlUWn7p3aZX0U1qcowjy_97kPA_r3-PivXNSaDbFOOOX_6jiBJmo4A0j0D9e3qRVIUh7laSY54Gct149JLW1vsGGGj8J52tBRRd7ZXIWlIfTCG2X92nrw60rSTjemYH3_FC4-qYNw2ligyY7SaiNTBUHs',
+  },
+  {
+    title: 'Chứng nhận UNIDO',
+    image:
+      'https://lh3.googleusercontent.com/aida-public/AB6AXuDxP6CFZlp3ggmwGEczcGuTImTcqVax4g1QmQUxHl1DEUyVAHj0mdNbxUD-EqS0F3NQNzNfbQN0ax9SIZ62ID0h1-x0UQyRqMxIcqji0Cu5nzwa_SLGBitLXLnORAxIjqlduZZUPE6upya0xjD-YldIjtwbptXZof83YaJpRItUxQzd9vn77CMyaTSd27VeqXiC6LQ61cE-PDK4tWlWjVlq7PuD1BVQYDnywiA_dC08kRpIMCQiDZhZG7GEehac2rkhi_CnAmr-JWA',
+  },
 ];
 
 export const stats = [
@@ -192,6 +290,8 @@ export const homeFeaturedCases = {
 export interface BlogPost {
   slug: string;
   title: string;
+  /** Ngắt dòng tiêu đề trên mobile — tránh chữ rớt hàng lẻ */
+  titleLines?: readonly [string, string];
   excerpt: string;
   category: string;
   categoryColor?: string;
@@ -207,23 +307,24 @@ export const blogPosts: BlogPost[] = [
     title: 'Cách chọn vải Polo phù hợp với khí hậu Việt Nam',
     excerpt: 'Phân tích ưu nhược điểm của 5 dòng vải sợi tự nhiên thịnh hành nhất 2024...',
     category: 'Kiến Thức Vải',
-    categoryColor: '#0d9488',
+    categoryColor: '#102C4D',
     badge: 'Must Read',
     image:
       'https://lh3.googleusercontent.com/aida-public/AB6AXuCUCALWa0oFU7OKFjiBXUFunl-EAmIMgQCyigWDHw0ygrHQQHgLkJPPxiKsIfefwZ45gu7Vp7KGaMW46IG1NWeOfI_8JJ-hfx1ifvzN4Q12UllmDyRQH03tO-IqkNP5n2xhuWrRVHfcxeQDAccVK1NKO6NKr0zBEEIwe_td6ed5jtF0KNYrs0816DjsRDtXA8t7uikeixstCSpLUdcH5tneawAIDnGVr5yRawVu7HH5_o_Y93p4LoykxfU0f3CLSA6s3dINtL6hoTQ',
     alt: 'Cách chọn vải Polo',
-    href: '/tin-tuc',
+    href: '/tin-tuc/chon-vai-polo-khi-hau-viet-nam',
   },
   {
     slug: 'dong-phuc-toi-gian-branding-2024',
     title: 'Đồng phục tối giản - Xu hướng Branding 2024',
+    titleLines: ['Đồng phục tối giản - Xu hướng', 'Branding 2024'],
     excerpt: 'Xu hướng thiết kế đồng phục tối giản giúp thương hiệu B2B trông sang trọng và dễ nhận diện.',
     category: 'Xu Hướng Thiết Kế',
     categoryColor: '#2c4c34',
     image:
       'https://lh3.googleusercontent.com/aida-public/AB6AXuBKPVm-OoeutVpI2lVrIrcYoQZwNjiFHMp2-HEEFDN80wVhsLz2J3HcN0Bg0vPzN3dM5PsZEVUI5dSye-0LFkTQOz1E9tVsIezKLdiPM_T7gUAslwE4_wgmPEy5pzB0blOq7Ci6aySM0xf7tJtv1PtIRj3WvXHoGsYhU_t2eYjsHoM1CNyUKJa6rhVxqF8iED2hZhc6zDB4eoMotEFVlejj_u-1w3AugOuuR3uexBrEA85hZ_8w8ZNue9QTnanVU0pcICjbE-pkDp4',
     alt: 'Xu hướng Branding',
-    href: '/tin-tuc',
+    href: '/tin-tuc/dong-phuc-toi-gian-branding-2024',
   },
   {
     slug: 'san-xuat-10000-ao-thun-7-ngay',
@@ -234,7 +335,7 @@ export const blogPosts: BlogPost[] = [
     image:
       'https://lh3.googleusercontent.com/aida-public/AB6AXuB7MtgWlPwqJ9fCKjAbRcpSMKTzgwt49dLfkGwY9jBUgseZq3SrGrCzNBF7Ul8JUFqFCYA9P70DpqmqWrwgf80wJLgCGJWcba6ml0h4qzm0-zCauGXrjedvvGUzxJTjnIG9bwGiyhQZpAr4X1h1PMrhalr9ri0IxE2rARA7Cu2k2VGkD6i9ZXXnchF28EFp0kjv8QokunH25xAuEse-gjY3iSXowiHX519-Qr7q_XPMv26Vg8UKnBdcrjzcZJ77m7eRq0BxAkODQgA',
     alt: 'Vận Hành',
-    href: '/tin-tuc',
+    href: '/tin-tuc/san-xuat-10000-ao-thun-7-ngay',
   },
   {
     slug: 'medical-uniform-2025',
@@ -245,7 +346,7 @@ export const blogPosts: BlogPost[] = [
     image:
       'https://lh3.googleusercontent.com/aida-public/AB6AXuAOXcJjYusFwlUjGTmmTS_HHhtnC_vi6jPYSS9yLHlekPfnszOwTSUO1NCB_oUSrCZI2_-AYTuZuEhrgYSg14nDUOw8a9isE3OefB1Hs0shHZgAQRU14UI7M-CRsnFqFjNjVbOIR1uc5ulgWqAWn20a6HzqwJ5DLmOAdI9GdFSOWEiTh8DNYtmR_sRsGhX0v2JQQatAopWgHNAUCGjXHfQlQWbPjuaeGX9RXfwbc0Wpm_Gk9UOy0qyi3qIsHr5Li0WV0BjVcq-a2Ok',
     alt: 'Catalog',
-    href: '/tin-tuc',
+    href: '/tin-tuc/medical-uniform-2025',
   },
 ];
 
@@ -278,3 +379,97 @@ export const clientLogos = [
   { name: 'Zero Waste', domain: 'zerowaste.vn', logo: '/images/logos/zero-waste.svg' },
   { name: 'VFM', domain: 'vfm.com.vn', logo: '/images/logos/vfm.svg' },
 ];
+
+export interface Testimonial {
+  quote: string;
+  name: string;
+  role: string;
+}
+
+/** Testimonial trang Giới thiệu — Sitemap 2.8 */
+export const testimonialsAbout: Testimonial[] = [
+  {
+    quote:
+      'Đội ngũ tư vấn rất kỹ từ thiết kế đến chất liệu nên chúng tôi khá yên tâm trong suốt quá trình triển khai. Đồng phục hoàn thiện đẹp, nhân viên mặc thoải mái và tạo được hình ảnh chuyên nghiệp.',
+    name: 'Ông Trương Hoàng Nam',
+    role: 'CEO, Hoàng Thiên Scale',
+  },
+  {
+    quote:
+      'Chúng tôi muốn một bộ đồng phục vừa chuyên nghiệp vừa tạo cảm giác thoải mái cho nhân viên khi mặc hằng ngày. Tân Phạm Gia đã tư vấn khá kỹ về chất liệu, form dáng và hỗ trợ điều chỉnh cho đến khi ra được mẫu phù hợp.',
+    name: 'Ông Đồng Minh Hồng',
+    role: 'CEO, Dịch vụ Kế toán Thuế DVL',
+  },
+  {
+    quote:
+      'Điều tôi đánh giá cao là khả năng kiểm soát chất lượng của Tân Phạm Gia. Từ mẫu duyệt đến thành phẩm đều được thực hiện nhất quán, quy trình phối hợp rõ ràng và đội ngũ luôn chủ động xử lý khi có phát sinh.',
+    name: 'Lê Văn Tùng',
+    role: 'Factory Ops Manager, Coca-Cola Philippines',
+  },
+];
+
+/** Testimonial trang Khách hàng — khác trang Giới thiệu, Sitemap 4.7 */
+export const testimonialsClients: Testimonial[] = [
+  {
+    quote:
+      'Chúng tôi đã hợp tác với Tân Phạm Gia trong 5 năm qua. Chất lượng sản phẩm chuẩn xác đến từng đường kim mũi chỉ, kèm cam kết tuyệt đối về tiến độ — họ là đối tác chiến lược đúng nghĩa.',
+    name: 'Nguyễn Văn Anh',
+    role: 'Giám đốc Vận hành, Coca-Cola Vietnam',
+  },
+  {
+    quote:
+      'Chuẩn hóa màu–form–logo. Sản phẩm vượt kỳ vọng về thẩm mỹ và tiện dụng cho toàn hệ thống chi nhánh.',
+    name: 'BIDV Team',
+    role: 'Ngân hàng TMCP Đầu tư và Phát triển Việt Nam',
+  },
+  {
+    quote:
+      'Triển khai hơn 3.000 áo trong thời gian ngắn mà vẫn giữ đồng nhất chất lượng — điều ít đơn vị may có thể đảm bảo ở quy mô này.',
+    name: 'Đại diện King Group',
+    role: 'Doanh nghiệp sản xuất & FDI',
+  },
+];
+
+/** Case study blog — trang Khách hàng 4.4–4.6 */
+export interface ClientCaseStudy {
+  slug: string;
+  title: string;
+  excerpt: string;
+  client: string;
+  image: string;
+  alt: string;
+  href?: string;
+}
+
+export const clientCaseStudies: ClientCaseStudy[] = [
+  {
+    slug: 'coca-cola-philippines',
+    title: 'Coca-Cola Philippines — Đồng bộ chất lượng xuyên suốt chuỗi sản xuất',
+    excerpt: 'Case study triển khai đồng phục quy mô lớn với QC đa tầng và quy trình phối hợp rõ ràng.',
+    client: 'Coca-Cola Philippines',
+    image:
+      'https://lh3.googleusercontent.com/aida-public/AB6AXuCsHW1aJpVFWnpH39FYgPE9nxKt20ID9T5ETgBsaKcCdGdmjIlA586VOv3j7sz0esr4rBKfIDJVL-kIi699r7OURxCTSkj-oMtppe8zPTzWpgeB9YH8fpCxXQ2KCtPtHDZYkQp3KB-sIXKciugPRKO1KFY1qybuCq7qTF1IkWjNalDYL5LzF4e778S4xOmD8OYzhZe9Am8zuf0AEusCD2icavaTQsNpaaWU9bPB8HoRKnOUoU8z1ekiu1il9KhuEWYnIJymxRa2W50D',
+    alt: 'Dự án Coca-Cola Philippines',
+  },
+  {
+    slug: 'bidv-dong-phuc',
+    title: 'BIDV — Chuẩn hóa hình ảnh thương hiệu trên toàn hệ thống',
+    excerpt: 'Hơn 15.000 sản phẩm bàn giao trong 21 ngày, đồng bộ màu sắc và form dáng.',
+    client: 'BIDV',
+    image:
+      'https://lh3.googleusercontent.com/aida-public/AB6AXuDDcz4grX0Tjw51FTdB5HZbTmcrYakXnp7WFjK-2VEfZcR45qJg81c0tcljJFjAwIJTFzyhkp3cYgFg-pBIktGRpQoqXaQKlYSVtvmMkicnivUhEnczXAOlUWn7p3aZX0U1qcowjy_97kPA_r3-PivXNSaDbFOOOX_6jiBJmo4A0j0D9e3qRVIUh7laSY54Gct149JLW1vsGGGj8J52tBRRd7ZXIWlIfTCG2X92nrw60rSTjemYH3_FC4-qYNw2ligyY7SaiNTBUHs',
+    alt: 'Dự án BIDV',
+  },
+  {
+    slug: 'king-group',
+    title: 'King Group — Đáp ứng đơn hàng 3.000+ áo đồng phục công nghiệp',
+    excerpt: 'Giải pháp đồng phục cho môi trường sản xuất với chất liệu bền và tiêu chuẩn an toàn lao động.',
+    client: 'King Group',
+    image:
+      'https://lh3.googleusercontent.com/aida-public/AB6AXuD7szr7Elx-oAqCEnir2uiBqNE-4WpmIm10Kj1YsgXyu1XMFvP0qvIXYrsMpRh9sztusxsq8_7_MFPstpomb4RaDeTg9J3ldf2CSKwYUq91qGdHVM6Dm9YkfE3Rdfay_snBPthtK7WWCq_NFHZ3j3Kua1MgJAT-qQPXwlpAIQIDLIpk4Njn_msEnsXh9DyyRtwkvdNU5u10NXpGyYseM_HBo6gwnr6IFqeZ9gHXI1CrvRQnXAxx3UyIT7UIbTDEMKjd1gdxbZwWKrKl',
+    alt: 'Dự án King Group',
+  },
+];
+
+/** Phân trang tin tức */
+export const BLOG_POSTS_PER_PAGE = 3;

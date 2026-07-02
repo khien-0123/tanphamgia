@@ -1,0 +1,200 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteNav from '../components/SiteNav.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import SiteCtaSection from '../components/SiteCtaSection.astro';
+import PageHero from '../components/PageHero.astro';
+import { pageSeo } from '../data/site';
+import {
+  brandDocuments,
+  catalogueDocuments,
+  guideDocuments,
+  downloadFormCommitments,
+  industryOptions,
+} from '../data/tai-lieu';
+
+const allDocuments = [...brandDocuments, ...catalogueDocuments, ...guideDocuments];
+---
+
+<BaseLayout title={pageSeo.taiLieu.title} description={pageSeo.taiLieu.description}>
+  <SiteNav solid currentPath="/tai-lieu" />
+
+  <PageHero
+    title="Thư viện tài liệu"
+    description="Tải miễn phí catalogue, hồ sơ năng lực và tài liệu hướng dẫn triển khai đồng phục doanh nghiệp."
+    descriptionLines={[
+      'Tải miễn phí catalogue, hồ sơ năng lực và tài liệu',
+      'hướng dẫn triển khai đồng\u00a0phục doanh\u00a0nghiệp.',
+    ]}
+    breadcrumb={[
+      { label: 'Trang chủ', href: '/' },
+      { label: 'Tài liệu' },
+    ]}
+  />
+
+  <section class="py-12 md:py-16 bg-white border-b border-border-subtle">
+    <div class="max-w-container-max-width mx-auto px-6 md:px-8 space-y-10 md:space-y-14">
+      <section>
+        <h2 class="font-headline-md text-xl md:text-2xl font-bold text-ink-dark mb-6">
+          Tài liệu thương hiệu
+        </h2>
+        <ul class="doc-list">
+          {
+            brandDocuments.map((doc) => (
+              <li>
+                <button type="button" class="doc-download-btn" data-doc-id={doc.id}>
+                  <span class="material-symbols-outlined text-accent-gold">description</span>
+                  <span>
+                    <strong class="text-safe-wrap">{doc.title}</strong>
+                    <span class="block text-sm text-text-muted">{doc.meta}</span>
+                  </span>
+                  <span class="material-symbols-outlined doc-download-arrow">download</span>
+                </button>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="font-headline-md text-xl md:text-2xl font-bold text-ink-dark mb-6">
+          Catalogue sản phẩm
+        </h2>
+        <ul class="doc-list">
+          {
+            catalogueDocuments.map((doc) => (
+              <li>
+                <button type="button" class="doc-download-btn" data-doc-id={doc.id}>
+                  <span class="material-symbols-outlined text-accent-gold">menu_book</span>
+                  <span>
+                    <strong class="text-safe-wrap">{doc.title}</strong>
+                    <span class="block text-sm text-text-muted">{doc.meta}</span>
+                  </span>
+                  <span class="material-symbols-outlined doc-download-arrow">download</span>
+                </button>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="font-headline-md text-xl md:text-2xl font-bold text-ink-dark mb-6">
+          Tài liệu hữu ích
+        </h2>
+        <ul class="doc-list">
+          {
+            guideDocuments.map((doc) => (
+              <li>
+                <button type="button" class="doc-download-btn" data-doc-id={doc.id}>
+                  <span class="material-symbols-outlined text-accent-gold">lightbulb</span>
+                  <span>
+                    <strong class="text-safe-wrap">{doc.title}</strong>
+                    <span class="block text-sm text-text-muted">{doc.meta}</span>
+                  </span>
+                  <span class="material-symbols-outlined doc-download-arrow">download</span>
+                </button>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+    </div>
+  </section>
+
+  <section class="py-12 md:py-20 bg-surface-muted border-b border-border-subtle" id="tai-lieu-form">
+    <div class="max-w-container-max-width mx-auto px-6 md:px-8 grid lg:grid-cols-2 gap-8 md:gap-12 items-start">
+      <div>
+        <h2 class="font-headline-md text-2xl font-bold text-ink-dark mb-4">
+          Tải tài liệu miễn phí
+        </h2>
+        <p class="text-text-muted mb-8 leading-relaxed">
+          Điền thông tin để nhận link tải qua email. Chúng tôi cam kết bảo mật dữ liệu doanh nghiệp.
+        </p>
+        <ul class="space-y-3">
+          {
+            downloadFormCommitments.map((item) => (
+              <li class="flex items-start gap-2 text-sm text-text-muted">
+                <span class="material-symbols-outlined text-accent-gold text-lg shrink-0">
+                  check_circle
+                </span>
+                {item}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <form class="doc-download-form bg-white rounded-2xl p-8 shadow-soft space-y-5" id="doc-form">
+        <input type="hidden" name="documentId" id="doc-selected-id" value="" />
+        <p class="text-sm text-accent-teal font-semibold hidden" id="doc-selected-label"></p>
+        <div>
+          <label class="form-label" for="doc-name">Họ và tên *</label>
+          <input class="form-input" id="doc-name" name="name" type="text" required />
+        </div>
+        <div>
+          <label class="form-label" for="doc-company">Tên công ty *</label>
+          <input class="form-input" id="doc-company" name="company" type="text" required />
+        </div>
+        <div class="grid sm:grid-cols-2 gap-5">
+          <div>
+            <label class="form-label" for="doc-email">Email *</label>
+            <input class="form-input" id="doc-email" name="email" type="email" required />
+          </div>
+          <div>
+            <label class="form-label" for="doc-phone">Số điện thoại *</label>
+            <input class="form-input" id="doc-phone" name="phone" type="tel" required />
+          </div>
+        </div>
+        <div>
+          <label class="form-label" for="doc-industry">Ngành nghề</label>
+          <select class="form-input" id="doc-industry" name="industry">
+            <option value="">Chọn ngành</option>
+            {industryOptions.map((opt) => <option value={opt}>{opt}</option>)}
+          </select>
+        </div>
+        <button
+          class="w-full bg-accent-gold text-ink-dark py-4 rounded-full font-bold hover:shadow-gold transition-all"
+          type="submit"
+        >
+          Nhận link tải qua email
+        </button>
+        <p class="text-xs text-text-muted text-center italic" id="doc-success" hidden role="status">
+          Đã ghi nhận! Link tài liệu sẽ được gửi đến email của bạn trong vài phút.
+        </p>
+      </form>
+    </div>
+  </section>
+
+  <SiteCtaSection />
+
+  <SiteFooter />
+</BaseLayout>
+
+<script define:vars={{ allDocuments }}>
+  const form = document.getElementById('doc-form');
+  const selectedId = document.getElementById('doc-selected-id');
+  const selectedLabel = document.getElementById('doc-selected-label');
+  const successMsg = document.getElementById('doc-success');
+
+  document.querySelectorAll('.doc-download-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const id = btn.getAttribute('data-doc-id');
+      const doc = allDocuments.find((d) => d.id === id);
+      if (!doc || !selectedId || !selectedLabel) return;
+
+      selectedId.value = id;
+      selectedLabel.textContent = `Đang tải: ${doc.title}`;
+      selectedLabel.classList.remove('hidden');
+      document.getElementById('tai-lieu-form')?.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (successMsg) {
+      successMsg.hidden = false;
+      form.querySelector('button[type="submit"]')?.setAttribute('disabled', 'true');
+    }
+  });
+</script>

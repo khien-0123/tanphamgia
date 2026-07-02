@@ -1,0 +1,91 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import SiteNav from '../../../components/SiteNav.astro';
+import SiteFooter from '../../../components/SiteFooter.astro';
+import SiteCtaSection from '../../../components/SiteCtaSection.astro';
+import PageHero from '../../../components/PageHero.astro';
+import BlogPostTitle from '../../../components/BlogPostTitle.astro';
+import { pageSeo, blogPosts, BLOG_POSTS_PER_PAGE } from '../../../data/site';
+import { paginate, blogPageHref } from '../../../utils/pagination';
+
+export function getStaticPaths() {
+  const totalPages = Math.ceil(blogPosts.length / BLOG_POSTS_PER_PAGE);
+  return Array.from({ length: Math.max(0, totalPages - 1) }, (_, i) => ({
+    params: { page: String(i + 2) },
+  }));
+}
+
+const pageNum = Number(Astro.params.page);
+const { items, currentPage, totalPages } = paginate(blogPosts, pageNum, BLOG_POSTS_PER_PAGE);
+const seoTitle = `${pageSeo.tinTuc.title} — Trang ${currentPage}`;
+---
+
+<BaseLayout title={seoTitle} description={pageSeo.tinTuc.description}>
+  <SiteNav solid currentPath="/tin-tuc" />
+
+  <PageHero
+    title="Tin tức & Kiến thức chuyên ngành"
+    description={`Trang ${currentPage} / ${totalPages}`}
+    breadcrumb={[
+      { label: 'Trang chủ', href: '/' },
+      { label: 'Tin tức', href: '/tin-tuc' },
+      { label: `Trang ${currentPage}` },
+    ]}
+  />
+
+  <section class="py-12 md:py-20 bg-white border-b border-border-subtle">
+    <div class="max-w-container-max-width mx-auto px-6 md:px-8">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
+        {
+          items.map((post) => (
+            <article class="group">
+              <a href={`/tin-tuc/${post.slug}`} class="block no-underline text-inherit">
+                <figure class="relative aspect-video overflow-hidden rounded-lg mb-5 m-0">
+                  <img
+                    alt={post.alt}
+                    class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.05]"
+                    src={post.image}
+                    loading="lazy"
+                  />
+                </figure>
+                <span
+                  class="font-bold text-xs uppercase tracking-widest mb-3 block"
+                  style={post.categoryColor ? `color: ${post.categoryColor}` : undefined}
+                >
+                  {post.category}
+                </span>
+                <BlogPostTitle
+                  post={post}
+                  as="h2"
+                  class="text-lg font-bold text-ink-dark mb-3 group-hover:text-accent-gold transition-colors leading-snug"
+                />
+                <p class="text-text-muted text-sm leading-relaxed line-clamp-3">{post.excerpt}</p>
+              </a>
+            </article>
+          ))
+        }
+      </div>
+
+      <nav aria-label="Phân trang tin tức" class="flex justify-center gap-2 mt-12">
+        {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+          <a
+            href={blogPageHref(page)}
+            class:list={[
+              'w-10 h-10 flex items-center justify-center rounded-full text-sm font-bold transition-colors no-underline',
+              page === currentPage
+                ? 'bg-ink-dark text-white'
+                : 'bg-surface-muted text-ink-dark hover:bg-accent-gold',
+            ]}
+            aria-current={page === currentPage ? 'page' : undefined}
+          >
+            {page}
+          </a>
+        ))}
+      </nav>
+    </div>
+  </section>
+
+  <SiteCtaSection />
+
+  <SiteFooter />
+</BaseLayout>

@@ -2,6 +2,8 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SiteNav from '../components/SiteNav.astro';
 import SiteFooter from '../components/SiteFooter.astro';
+import SiteCtaSection from '../components/SiteCtaSection.astro';
+import AboutTestimonialsSlider from '../components/AboutTestimonialsSlider.astro';
 import {
   gioiThieuSeo,
   brandStory,
@@ -35,9 +37,6 @@ import {
         <span class="mx-2">/</span>
         <span class="text-white">Giới thiệu</span>
       </nav>
-      <span class="text-xs font-bold uppercase tracking-[0.2em] text-accent-teal mb-4 block"
-        >Về Tân Phạm Gia</span
-      >
       <h1 class="font-display-lg text-3xl md:text-5xl font-extrabold tracking-tight mb-5">
         Giới thiệu
       </h1>
@@ -49,26 +48,29 @@ import {
   </header>
 
   <!-- 2.2 Câu chuyện thương hiệu — zig-zag, không card -->
-  <section class="py-16 md:py-24 bg-white border-b border-border-subtle">
-    <div
-      class="max-w-container-max-width mx-auto px-6 md:px-8 grid lg:grid-cols-2 gap-12 lg:gap-20 items-center"
-    >
-      <figure class="order-2 lg:order-1 m-0 flex justify-center lg:block">
-        <img
-          alt="Câu chuyện thương hiệu Tân Phạm Gia"
-          class="w-full max-w-[280px] max-h-[200px] sm:max-w-sm sm:max-h-[240px] lg:max-w-none lg:max-h-none aspect-[4/3] object-cover rounded-lg"
-          src={brandStory.image}
-        />
-      </figure>
-      <div class="order-1 lg:order-2">
-        <span class="text-xs font-bold uppercase tracking-[0.2em] text-accent-teal mb-3 block"
-          >Câu chuyện thương hiệu</span
-        >
-        <h2 class="font-headline-md text-2xl md:text-3xl font-bold text-ink-dark mb-6 leading-snug">
-          {brandStory.title}
-        </h2>
-        <div class="space-y-4 text-text-muted leading-relaxed">
-          {brandStory.paragraphs.map((p) => <p>{p}</p>)}
+  <section class="py-10 md:py-24 bg-white border-b border-border-subtle">
+    <div class="max-w-container-max-width mx-auto px-6 md:px-8">
+      <div class="media-text-row">
+        <figure class="media-text-row-media order-2 md:order-1 m-0">
+          <img
+            alt="Câu chuyện thương hiệu Tân Phạm Gia"
+            class="media-text-row-img"
+            src={brandStory.image}
+            loading="lazy"
+          />
+        </figure>
+        <div class="media-text-row-body order-1 md:order-2">
+          <h2 class="gioi-thieu-title font-headline-md text-2xl md:text-3xl font-bold text-ink-dark mb-6">
+            <span class="md:hidden">
+              {brandStory.titleLines[0]}
+              <br />
+              Một Sản Phẩm May Mặc Chất{'\u00a0'}Lượng
+            </span>
+            <span class="hidden md:inline">{brandStory.title}</span>
+          </h2>
+          <div class="space-y-4 text-text-muted leading-relaxed">
+            {brandStory.paragraphs.map((p) => <p>{p}</p>)}
+          </div>
         </div>
       </div>
     </div>
@@ -77,9 +79,6 @@ import {
   <!-- 2.3 Hành trình 23 năm — timeline mở, không khung card -->
   <section class="py-12 md:py-16 timeline-section border-b border-border-subtle">
     <div class="max-w-container-max-width mx-auto px-6 md:px-8 mb-10 md:mb-12">
-      <span class="text-xs font-bold uppercase tracking-[0.2em] text-accent-teal mb-2 block"
-        >{timelineSection.eyebrow}</span
-      >
       <h2 class="font-headline-md text-xl md:text-2xl lg:text-3xl font-bold text-ink-dark leading-snug max-w-3xl">
         {timelineSection.title}
       </h2>
@@ -122,16 +121,13 @@ import {
   </section>
 
   <!-- 2.4 Định vị thương hiệu — open layout -->
-  <section class="py-16 md:py-24 bg-white border-b border-border-subtle">
+  <section class="py-10 md:py-24 bg-white border-b border-border-subtle">
     <div class="max-w-container-max-width mx-auto px-6 md:px-8">
-      <span class="text-xs font-bold uppercase tracking-[0.2em] text-accent-teal mb-3 block"
-        >Định vị thương hiệu</span
-      >
-      <h2 class="font-headline-md text-2xl md:text-4xl font-bold text-ink-dark mb-12 md:mb-16">
-        Sứ mệnh, Tầm nhìn & Giá trị cốt lõi
+      <h2 class="gioi-thieu-title font-headline-md text-xl md:text-4xl font-bold text-ink-dark mb-12 md:mb-16 leading-snug tracking-tight">
+        Sứ mệnh, Tầm nhìn & Giá trị cốt{'\u00a0'}lõi
       </h2>
 
-      <div class="grid md:grid-cols-2 gap-12 md:gap-16 mb-16 md:mb-20 pb-16 md:pb-20 border-b border-border-subtle">
+      <div class="grid md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 mb-10 pb-10 md:mb-20 md:pb-20 border-b border-border-subtle">
         <div class="about-mission-block">
           <span class="material-symbols-outlined text-accent-gold text-3xl mb-4">flag</span>
           <h3 class="text-accent-gold font-bold uppercase tracking-wider text-sm mb-3">Sứ mệnh</h3>
@@ -162,17 +158,14 @@ import {
   </section>
 
   <!-- 2.5 Năng lực sản xuất + QC — zig-zag, stats dạng bảng -->
-  <section class="py-16 md:py-24 bg-white border-b border-border-subtle" id="nang-luc">
+  <section class="py-10 md:py-24 bg-white border-b border-border-subtle" id="nang-luc">
     <div class="max-w-container-max-width mx-auto px-6 md:px-8">
-      <span class="text-xs font-bold uppercase tracking-[0.2em] text-accent-teal mb-3 block"
-        >Năng lực sản xuất</span
-      >
       <h2 class="font-headline-md text-2xl md:text-4xl font-bold text-ink-dark mb-4">
         Quy mô & Kiểm soát chất lượng
       </h2>
       <p class="text-text-muted max-w-3xl leading-relaxed mb-10 md:mb-12">{productionCapacity.intro}</p>
 
-      <dl class="about-stats-strip mb-16 md:mb-20 pb-16 md:pb-20 border-b border-border-subtle">
+      <dl class="about-stats-strip mb-10 pb-10 md:mb-20 md:pb-20 border-b border-border-subtle">
         {
           productionCapacity.stats.map((stat, i) => (
             <div
@@ -188,16 +181,16 @@ import {
         }
       </dl>
 
-      <div class="flex flex-col md:flex-row items-center gap-10 md:gap-20 mb-16 md:mb-20">
-        <figure class="flex-1 w-full m-0">
+      <div class="media-text-row mb-10 md:mb-20">
+        <figure class="media-text-row-media m-0">
           <img
             alt="Nhà xưởng Tân Phạm Gia"
-            class="w-full aspect-[4/3] object-cover rounded-lg"
+            class="media-text-row-img"
             src={productionCapacity.factoryImage}
+            loading="lazy"
           />
         </figure>
-        <div class="flex-1 w-full">
-          <span class="font-eyebrow text-eyebrow text-accent-gold mb-4 block">QUY MÔ SẢN XUẤT</span>
+        <div class="media-text-row-body">
           <h3 class="font-headline-md text-2xl md:text-3xl font-bold mb-4 text-ink-dark">
             Xưởng may 2.000m² đạt chuẩn quốc tế
           </h3>
@@ -208,23 +201,21 @@ import {
         </div>
       </div>
 
-      <div class="flex flex-col md:flex-row-reverse items-center gap-10 md:gap-20">
-        <figure class="flex-1 w-full m-0">
+      <div class="media-text-row media-text-row--reverse">
+        <figure class="media-text-row-media m-0">
           <img
             alt="Quy trình QC"
-            class="w-full aspect-[4/3] object-cover rounded-lg"
+            class="media-text-row-img"
             src={productionCapacity.qcImage}
+            loading="lazy"
           />
         </figure>
-        <div class="flex-1 w-full">
-          <span class="font-eyebrow text-eyebrow text-accent-gold mb-4 block"
-            >CHẤT LƯỢNG LÀM GỐC</span
-          >
+        <div class="media-text-row-body">
           <h3 class="font-headline-md text-2xl md:text-3xl font-bold mb-4 text-ink-dark">
             {productionCapacity.qcTitle}
           </h3>
           <p class="text-text-muted mb-6 leading-relaxed">{productionCapacity.qcDesc}</p>
-          <ul class="grid grid-cols-2 gap-x-4 gap-y-3">
+          <ul class="grid grid-cols-2 gap-x-4 gap-y-3 max-w-[28rem]">
             {
               productionCapacity.qcStandards.map((std) => (
                 <li class="flex items-center gap-2 font-semibold text-sm text-ink-dark">
@@ -240,11 +231,8 @@ import {
   </section>
 
   <!-- 2.6 Đội ngũ nhân sự — grid icon, không card -->
-  <section class="py-16 md:py-24 bg-white border-b border-border-subtle">
+  <section class="py-10 md:py-24 bg-white border-b border-border-subtle">
     <div class="max-w-container-max-width mx-auto px-6 md:px-8">
-      <span class="text-xs font-bold uppercase tracking-[0.2em] text-accent-teal mb-3 block"
-        >Con người Tân Phạm Gia</span
-      >
       <h2 class="font-headline-md text-2xl md:text-4xl font-bold text-ink-dark mb-12 md:mb-14">
         Đội ngũ nhân sự
       </h2>
@@ -266,11 +254,8 @@ import {
   </section>
 
   <!-- 2.7 Giấy khen & chứng nhận — figure gallery -->
-  <section class="py-16 md:py-24 bg-white border-b border-border-subtle" id="chung-nhan">
+  <section class="py-10 md:py-24 bg-white border-b border-border-subtle" id="chung-nhan">
     <div class="max-w-container-max-width mx-auto px-6 md:px-8">
-      <span class="text-xs font-bold uppercase tracking-[0.2em] text-accent-teal mb-3 block"
-        >Uy tín & Chứng nhận</span
-      >
       <h2 class="font-headline-md text-2xl md:text-3xl font-bold text-ink-dark mb-10 md:mb-12">
         Giấy khen & Chứng nhận
       </h2>
@@ -292,59 +277,9 @@ import {
     </div>
   </section>
 
-  <!-- 2.8 Testimonial — quote mở, không khung card -->
-  <section class="py-16 md:py-24 bg-ink-dark text-white">
-    <div class="max-w-container-max-width mx-auto px-6 md:px-8">
-      <span class="text-xs font-bold uppercase tracking-[0.2em] text-accent-teal mb-3 block"
-        >Phản hồi khách hàng</span
-      >
-      <h2 class="font-headline-md text-2xl md:text-4xl font-bold mb-12 md:mb-14">
-        Khách hàng nói gì về chúng tôi
-      </h2>
-      <div class="grid md:grid-cols-3 gap-10 md:gap-12">
-        {
-          testimonials.map((t, i) => (
-            <blockquote
-              class:list={[
-                'about-quote m-0',
-                i > 0 && 'md:border-l md:border-white/15 md:pl-10',
-              ]}
-            >
-              <p class="text-white/90 leading-relaxed mb-6">"{t.quote}"</p>
-              <footer>
-                <cite class="not-italic font-bold text-accent-gold block">{t.name}</cite>
-                <span class="text-white/60 text-sm mt-1 block">{t.role}</span>
-              </footer>
-            </blockquote>
-          ))
-        }
-      </div>
-    </div>
-  </section>
+  <AboutTestimonialsSlider items={testimonials} />
 
-  <!-- 2.9 CTA — được phép dùng vùng nhấn theo .cursorrules -->
-  <section class="py-16 md:py-24 bg-accent-gold-light">
-    <div class="max-w-container-max-width mx-auto px-6 md:px-8 text-center">
-      <h2 class="font-display-lg text-3xl md:text-5xl font-bold mb-4 leading-tight text-ink-dark">
-        Sẵn sàng cho dự án đồng phục của bạn?
-      </h2>
-      <p class="text-ink-dark/75 mb-8 max-w-xl mx-auto">
-        Liên hệ ngay để nhận tư vấn miễn phí và báo giá chi tiết cho doanh nghiệp của bạn.
-      </p>
-      <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a
-          href="/lien-he"
-          class="bg-ink-dark text-white px-6 py-3 text-sm md:px-10 md:py-4 md:text-base rounded-full font-bold hover:scale-105 transition-all text-center"
-          >Nhận tư vấn giải pháp</a
-        >
-        <a
-          href="/tai-lieu"
-          class="border-2 border-ink-dark text-ink-dark px-6 py-3 text-sm md:px-10 md:py-4 md:text-base rounded-full font-bold hover:bg-ink-dark hover:text-white transition-all text-center"
-          >Tải hồ sơ năng lực</a
-        >
-      </div>
-    </div>
-  </section>
+  <SiteCtaSection />
 
   <SiteFooter />
 </BaseLayout>

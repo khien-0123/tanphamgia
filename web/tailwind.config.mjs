@@ -7,8 +7,8 @@ export default {
       colors: {
         'accent-gold': '#FFC933',
         'accent-gold-light': '#FFF6DC',
-        'accent-teal': '#2DB5A4',
-        'accent-teal-light': '#E6F7F4',
+        'accent-teal': '#102C4D',
+        'accent-teal-light': '#E8EDF3',
         'ink-dark': '#0E2640',
         'ink-mid': '#1A3A5C',
         background: '#F7FAF9',

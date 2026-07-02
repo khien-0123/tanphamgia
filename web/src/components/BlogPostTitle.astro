@@ -1,0 +1,25 @@
+---
+import type { BlogPost } from '../data/site';
+
+interface Props {
+  post: Pick<BlogPost, 'title' | 'titleLines'>;
+  as?: 'h1' | 'h2' | 'h3' | 'h4' | 'span';
+  class?: string;
+}
+
+const { post, as: Tag = 'span', class: className } = Astro.props;
+---
+
+<Tag class={className}>
+  {
+    post.titleLines ? (
+      <>
+        {post.titleLines[0]}
+        <br />
+        {post.titleLines[1]}
+      </>
+    ) : (
+      post.title
+    )
+  }
+</Tag>

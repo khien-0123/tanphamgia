@@ -1,11 +1,15 @@
-/** Slider logo khách hàng mobile — vòng lặp vô hạn + tự chạy */
-function initClientsSlider(root: HTMLElement) {
-  const track = root.querySelector<HTMLElement>('.home-clients-slider');
+/** Slider testimonial trang Giới thiệu — tự chạy, dừng khi hover hoặc bấm */
+function initTestimonialsSlider(root: HTMLElement) {
+  const track = root.querySelector<HTMLElement>(
+    '.about-testimonials-slider, .clients-testimonials-slider',
+  );
   if (!track) return;
 
-  const pages = track.querySelectorAll<HTMLElement>('.home-clients-page');
+  const slides = track.querySelectorAll<HTMLElement>(
+    '.about-testimonials-slide, .clients-testimonials-slide',
+  );
   const totalSets = 3;
-  const count = pages.length / totalSets;
+  const count = slides.length / totalSets;
 
   if (!Number.isInteger(count) || count < 2) return;
 
@@ -14,6 +18,7 @@ function initClientsSlider(root: HTMLElement) {
   let isJumping = false;
   let isAutoScrolling = false;
   let isUserInteracting = false;
+  let isHovered = false;
   let isInView = false;
   let isPageScrolling = false;
   let scrollTimer: ReturnType<typeof setTimeout> | undefined;
@@ -23,9 +28,9 @@ function initClientsSlider(root: HTMLElement) {
   let pageScrollTimer: ReturnType<typeof setTimeout> | undefined;
   let autoScrollFallback: ReturnType<typeof setTimeout> | undefined;
 
-  const getPageStep = () => {
-    const first = pages[0];
-    const second = pages[1];
+  const getStep = () => {
+    const first = slides[0];
+    const second = slides[1];
     if (!first) return 0;
     if (second) return second.offsetLeft - first.offsetLeft;
     const gap = parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap) || 0;
@@ -43,7 +48,7 @@ function initClientsSlider(root: HTMLElement) {
   };
 
   const alignToMiddleSet = () => {
-    const step = getPageStep();
+    const step = getStep();
     if (step <= 0) return;
     jumpTo(step * count);
   };
@@ -51,7 +56,7 @@ function initClientsSlider(root: HTMLElement) {
   const handleScrollEnd = () => {
     if (isJumping) return;
 
-    const step = getPageStep();
+    const step = getStep();
     if (step <= 0) return;
 
     const index = Math.round(track.scrollLeft / step);
@@ -93,12 +98,17 @@ function initClientsSlider(root: HTMLElement) {
   };
 
   const canAutoPlay = () =>
-    isInView && !isPageScrolling && !isUserInteracting && !document.hidden && !isJumping;
+    isInView &&
+    !isPageScrolling &&
+    !isUserInteracting &&
+    !isHovered &&
+    !document.hidden &&
+    !isJumping;
 
   const advanceNext = () => {
     if (isJumping || isAutoScrolling || !canAutoPlay()) return;
 
-    const step = getPageStep();
+    const step = getStep();
     if (step <= 0) return;
 
     isAutoScrolling = true;
@@ -132,18 +142,18 @@ function initClientsSlider(root: HTMLElement) {
     firstTimer = setTimeout(() => {
       if (!canAutoPlay()) return;
       advanceNext();
-      autoTimer = setInterval(advanceNext, 4500);
-    }, 1800);
+      autoTimer = setInterval(advanceNext, 5000);
+    }, 1500);
   };
 
-  const pauseAuto = () => {
+  const pauseInteraction = () => {
     isUserInteracting = true;
     stopAuto();
     clearTimeout(resumeTimer);
     resumeTimer = setTimeout(() => {
       isUserInteracting = false;
       startAuto();
-    }, 5000);
+    }, 6000);
   };
 
   const onPageScroll = () => {
@@ -162,7 +172,28 @@ function initClientsSlider(root: HTMLElement) {
   track.addEventListener('scrollend', () => {
     if (!isAutoScrolling) handleScrollEnd();
   });
-  track.addEventListener('touchstart', pauseAuto, { passive: true });
+
+  root.addEventListener('mouseenter', () => {
+    isHovered = true;
+    stopAuto();
+  });
+
+  root.addEventListener('mouseleave', () => {
+    isHovered = false;
+    startAuto();
+  });
+
+  root.addEventListener('pointerdown', pauseInteraction);
+  track.addEventListener('touchstart', pauseInteraction, { passive: true });
+  track.addEventListener('focusin', pauseInteraction);
+  track.addEventListener('focusout', () => {
+    clearTimeout(resumeTimer);
+    resumeTimer = setTimeout(() => {
+      isUserInteracting = false;
+      startAuto();
+    }, 400);
+  });
+
   window.addEventListener('resize', alignToMiddleSet);
   window.addEventListener('pageshow', alignToMiddleSet);
   window.addEventListener('scroll', onPageScroll, { passive: true });
@@ -189,4 +220,4 @@ function initClientsSlider(root: HTMLElement) {
   }
 }
 
-document.querySelectorAll<HTMLElement>('[data-clients-slider]').forEach(initClientsSlider);
+document.querySelectorAll<HTMLElement>('[data-testimonials-slider]').forEach(initTestimonialsSlider);
