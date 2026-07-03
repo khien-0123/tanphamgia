@@ -1,0 +1,30 @@
+---
+/** Ảnh bài viết — tỷ lệ 16:9 thống nhất toàn site tin tức */
+interface Props {
+  src: string;
+  alt: string;
+  class?: string;
+  imgClass?: string;
+  loading?: 'lazy' | 'eager';
+}
+
+const { src, alt, class: className = '', imgClass = '', loading = 'lazy' } = Astro.props;
+
+const figureClass = [
+  'relative m-0 overflow-hidden rounded-lg aspect-video bg-surface-muted',
+  className,
+]
+  .filter(Boolean)
+  .join(' ');
+
+const imageClass = [
+  'absolute inset-0 w-full h-full object-cover object-center',
+  imgClass,
+]
+  .filter(Boolean)
+  .join(' ');
+---
+
+<figure class={figureClass}>
+  <img src={src} alt={alt} class={imageClass} loading={loading} decoding="async" />
+</figure>

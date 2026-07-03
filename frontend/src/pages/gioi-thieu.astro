@@ -3,330 +3,37 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import SiteNav from '../components/SiteNav.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import SiteCtaSection from '../components/SiteCtaSection.astro';
-import AboutTestimonialsSlider from '../components/AboutTestimonialsSlider.astro';
-import {
-  gioiThieuSeo,
-  brandStory,
-  timeline,
-  timelineSection,
-  missionVision,
-  coreValues,
-  productionCapacity,
-  teamDepartments,
-  testimonials,
-  certificateImages,
-} from '../data/gioi-thieu';
-
-const mediaTextRowClass =
-  'grid grid-cols-1 gap-6 items-stretch md:grid-cols-2 md:gap-10 md:items-center lg:gap-20';
-const mediaTextCellClass = 'min-w-0 w-full';
-const mediaTextImgClass = 'block w-full aspect-[4/3] object-cover rounded-lg';
-const timelineItemBaseClass =
-  'relative grid w-full max-w-container-max-width mx-auto items-center pb-[0.85rem] last:pb-0 grid-cols-[minmax(0,1fr)_2rem_minmax(0,1fr)] gap-x-4 md:grid-cols-[minmax(0,1fr)_2.5rem_minmax(0,1fr)] md:gap-x-6 md:pb-4 lg:gap-x-10 max-md:grid-cols-[1.75rem_minmax(0,1fr)] max-md:gap-x-[0.65rem] max-md:pb-3';
+import PageHero from '../components/PageHero.astro';
+import AboutBrandStory from '../components/about/AboutBrandStory.astro';
+import AboutTimeline from '../components/about/AboutTimeline.astro';
+import AboutMissionVision from '../components/about/AboutMissionVision.astro';
+import AboutProductionCapacity from '../components/about/AboutProductionCapacity.astro';
+import AboutTeamGrid from '../components/about/AboutTeamGrid.astro';
+import CertificateGallery from '../components/CertificateGallery.astro';
+import TestimonialsSlider from '../components/TestimonialsSlider.astro';
+import { gioiThieuSeo, testimonials, certificateImages } from '../data/gioi-thieu';
 ---
 
 <BaseLayout title={gioiThieuSeo.title} description={gioiThieuSeo.description}>
   <SiteNav currentPath="/gioi-thieu" solid />
 
-  <!-- 2.1 Page Header -->
-  <header class="relative pt-28 pb-14 md:pt-36 md:pb-20 bg-ink-dark text-white overflow-hidden">
-    <div class="absolute inset-0 opacity-30">
-      <img
-        alt=""
-        class="w-full h-full object-cover"
-        src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7szr7Elx-oAqCEnir2uiBqNE-4WpmIm10Kj1YsgXyu1XMFvP0qvIXYrsMpRh9sztusxsq8_7_MFPstpomb4RaDeTg9J3ldf2CSKwYUq91qGdHVM6Dm9YkfE3Rdfay_snBPthtK7WWCq_NFHZ3j3Kua1MgJAT-qQPXwlpAIQIDLIpk4Njn_msEnsXh9DyyRtwkvdNU5u10NXpGyYseM_HBo6gwnr6IFqeZ9gHXI1CrvRQnXAxx3UyIT7UIbTDEMKjd1gdxbZwWKrKl"
-      />
-      <div
-        class="absolute inset-0 bg-gradient-to-br from-[rgba(14,38,64,0.88)] via-[rgba(14,38,64,0.55)] to-[rgba(16,44,77,0.25)]"
-      >
-      </div>
-    </div>
-    <div class="relative z-10 max-w-container-max-width mx-auto px-6 md:px-8">
-      <nav aria-label="Breadcrumb" class="text-sm text-white/60 mb-6">
-        <a class="hover:text-accent-gold transition-colors" href="/">Trang chủ</a>
-        <span class="mx-2">/</span>
-        <span class="text-white">Giới thiệu</span>
-      </nav>
-      <h1 class="font-display-lg text-3xl md:text-5xl font-extrabold tracking-tight mb-5">
-        Giới thiệu
-      </h1>
-      <p class="text-white/80 text-base md:text-lg max-w-2xl leading-relaxed">
-        Hơn 23 năm kinh nghiệm trong ngành may mặc — từ thời trang cao cấp đến giải pháp đồng phục
-        doanh nghiệp toàn diện.
-      </p>
-    </div>
-  </header>
+  <PageHero
+    title="Giới thiệu"
+    description="Hơn 23 năm kinh nghiệm trong ngành may mặc — từ thời trang cao cấp đến giải pháp đồng phục doanh nghiệp toàn diện."
+    breadcrumb={[
+      { label: 'Trang chủ', href: '/' },
+      { label: 'Giới thiệu' },
+    ]}
+  />
 
-  <!-- 2.2 Câu chuyện thương hiệu — zig-zag, không card -->
-  <section class="py-10 md:py-24 bg-white border-b border-border-subtle">
-    <div class="max-w-container-max-width mx-auto px-6 md:px-8">
-      <div class={mediaTextRowClass}>
-        <figure class={`${mediaTextCellClass} order-2 md:order-1 m-0`}>
-          <img
-            alt="Câu chuyện thương hiệu Tân Phạm Gia"
-            class={mediaTextImgClass}
-            src={brandStory.image}
-            loading="lazy"
-          />
-        </figure>
-        <div class={`${mediaTextCellClass} order-1 md:order-2`}>
-          <h2
-            class="text-pretty font-headline-md text-2xl md:text-3xl font-bold text-ink-dark mb-6"
-          >
-            <span class="md:hidden">
-              {brandStory.titleLines[0]}
-              <br />
-              Một Sản Phẩm May Mặc Chất{'\u00a0'}Lượng
-            </span>
-            <span class="hidden md:inline">{brandStory.title}</span>
-          </h2>
-          <div class="space-y-4 text-text-muted leading-relaxed">
-            {brandStory.paragraphs.map((p) => <p>{p}</p>)}
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 2.3 Hành trình 23 năm — timeline mở, không khung card -->
-  <section class="py-12 md:py-16 bg-white border-b border-border-subtle">
-    <div class="max-w-container-max-width mx-auto px-6 md:px-8 mb-10 md:mb-12">
-      <h2
-        class="font-headline-md text-xl md:text-2xl lg:text-3xl font-bold text-ink-dark leading-snug max-w-3xl"
-      >
-        {timelineSection.title}
-      </h2>
-    </div>
-
-    <div
-      class="relative w-full max-w-none mx-0 pt-0 pb-2 px-[clamp(1rem,3vw,2.5rem)] md:px-[clamp(1.5rem,5vw,4rem)] max-md:px-[0.65rem] max-md:pb-1"
-    >
-      <div
-        aria-hidden="true"
-        class="absolute top-2 bottom-2 left-1/2 -translate-x-1/2 w-0.5 rounded-full bg-gradient-to-b from-accent-teal via-[#4a6a8a] to-border-subtle max-md:left-[1.125rem] max-md:translate-x-0 max-md:bottom-3"
-      >
-      </div>
-      {
-        timeline.map((item, i) => {
-          const side = i % 2 === 0 ? 'left' : 'right';
-          return (
-            <div class={timelineItemBaseClass}>
-              {side === 'right' && (
-                <div class="min-h-px max-md:hidden" aria-hidden="true" />
-              )}
-
-              <div class="relative flex justify-center items-center h-full z-[2] col-start-2 row-start-1 max-md:col-start-1">
-                <span
-                  class="relative flex items-center justify-center w-[1.125rem] h-[1.125rem] rounded-full bg-background shadow-[0_0_0_2px_#102c4d] shrink-0"
-                  aria-hidden="true"
-                >
-                  <span class="w-[0.4rem] h-[0.4rem] rounded-full bg-accent-teal" />
-                </span>
-                <span
-                  class:list={[
-                    'absolute top-1/2 -translate-y-1/2 h-0.5 w-[calc(50%+0.75rem)] lg:w-[calc(50%+1.25rem)] rounded-full bg-[#c5d0dc] max-md:hidden',
-                    side === 'left' ? 'right-1/2' : 'left-1/2',
-                  ]}
-                  aria-hidden="true"
-                />
-              </div>
-
-              <article
-                class:list={[
-                  'py-1 group',
-                  side === 'left'
-                    ? 'col-start-1 row-start-1 justify-self-end w-full max-w-[34rem] text-right md:max-w-none max-md:col-start-2 max-md:justify-self-auto max-md:max-w-none max-md:text-left'
-                    : 'col-start-3 row-start-1 justify-self-start w-full max-w-[34rem] text-left md:max-w-none max-md:col-start-2 max-md:max-w-none',
-                ]}
-              >
-                <span
-                  class="block text-accent-teal font-bold text-[0.8125rem] leading-[1.25] mb-[0.2rem] tracking-[0.02em]"
-                >
-                  {item.year}
-                </span>
-                <h3
-                  class="block text-ink-dark font-bold text-[0.9375rem] md:text-base lg:text-[1.0625rem] leading-[1.35] mb-[0.35rem] transition-colors duration-200 group-hover:text-accent-teal"
-                >
-                  {item.title}
-                </h3>
-                <p class="text-text-muted text-[0.8125rem] md:text-sm leading-relaxed">
-                  {item.desc}
-                </p>
-              </article>
-
-              {side === 'left' && <div class="min-h-px max-md:hidden" aria-hidden="true" />}
-            </div>
-          );
-        })
-      }
-    </div>
-  </section>
-
-  <!-- 2.4 Định vị thương hiệu — open layout -->
-  <section class="py-10 md:py-24 bg-white border-b border-border-subtle">
-    <div class="max-w-container-max-width mx-auto px-6 md:px-8">
-      <h2
-        class="text-pretty font-headline-md text-xl md:text-4xl font-bold text-ink-dark mb-12 md:mb-16 leading-snug tracking-tight"
-      >
-        Sứ mệnh, Tầm nhìn & Giá trị cốt{'\u00a0'}lõi
-      </h2>
-
-      <div
-        class="grid md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 mb-10 pb-10 md:mb-20 md:pb-20 border-b border-border-subtle"
-      >
-        <div>
-          <span class="material-symbols-outlined text-accent-gold text-3xl mb-4">flag</span>
-          <h3 class="text-accent-gold font-bold uppercase tracking-wider text-sm mb-3">Sứ mệnh</h3>
-          <p class="text-ink-dark/85 text-base md:text-lg leading-relaxed">{missionVision.mission}</p>
-        </div>
-        <div class="md:border-l md:border-border-subtle md:pl-16">
-          <span class="material-symbols-outlined text-accent-teal text-3xl mb-4">visibility</span>
-          <h3 class="text-accent-teal font-bold uppercase tracking-wider text-sm mb-3">Tầm nhìn</h3>
-          <p class="text-ink-dark/85 text-base md:text-lg leading-relaxed">{missionVision.vision}</p>
-        </div>
-      </div>
-
-      <h3 class="font-bold text-lg text-ink-dark mb-8 md:mb-10">5 giá trị cốt lõi</h3>
-      <div class="grid gap-y-8 gap-x-12 max-sm:gap-y-5 max-sm:gap-x-6 sm:grid-cols-2 lg:grid-cols-3">
-        {
-          coreValues.map((value) => (
-            <div class="flex gap-4 items-start">
-              <span class="shrink-0 font-extrabold text-sm text-accent-gold leading-[1.4]">
-                {value.num}
-              </span>
-              <div>
-                <h4 class="font-bold text-ink-dark mb-2">{value.title}</h4>
-                <p class="text-text-muted text-sm leading-relaxed">{value.desc}</p>
-              </div>
-            </div>
-          ))
-        }
-      </div>
-    </div>
-  </section>
-
-  <!-- 2.5 Năng lực sản xuất + QC — zig-zag, stats dạng bảng -->
-  <section class="py-10 md:py-24 bg-white border-b border-border-subtle" id="nang-luc">
-    <div class="max-w-container-max-width mx-auto px-6 md:px-8">
-      <h2 class="font-headline-md text-2xl md:text-4xl font-bold text-ink-dark mb-4">
-        Quy mô & Kiểm soát chất lượng
-      </h2>
-      <p class="text-text-muted max-w-3xl leading-relaxed mb-10 md:mb-12">
-        {productionCapacity.intro}
-      </p>
-
-      <dl
-        class="grid grid-cols-2 gap-y-6 gap-x-4 md:grid-cols-3 lg:grid-cols-6 lg:gap-0 mb-10 pb-10 md:mb-20 md:pb-20 border-b border-border-subtle"
-      >
-        {
-          productionCapacity.stats.map((stat, i) => (
-            <div class:list={[i > 0 && 'lg:border-l lg:border-border-subtle lg:pl-5']}>
-              <dt class="font-extrabold text-base text-ink-dark mb-1">{stat.value}</dt>
-              <dd class="text-xs text-text-muted leading-[1.45] m-0">{stat.label}</dd>
-            </div>
-          ))
-        }
-      </dl>
-
-      <div class={`${mediaTextRowClass} mb-10 md:mb-20`}>
-        <figure class={`${mediaTextCellClass} m-0`}>
-          <img
-            alt="Nhà xưởng Tân Phạm Gia"
-            class={mediaTextImgClass}
-            src={productionCapacity.factoryImage}
-            loading="lazy"
-          />
-        </figure>
-        <div class={mediaTextCellClass}>
-          <h3 class="font-headline-md text-2xl md:text-3xl font-bold mb-4 text-ink-dark">
-            Xưởng may 2.000m² đạt chuẩn quốc tế
-          </h3>
-          <p class="text-text-muted leading-relaxed">
-            Với hệ thống máy móc hiện đại nhập khẩu từ Nhật Bản và Đức, Tân Phạm Gia sở hữu năng lực
-            đáp ứng những đơn hàng khắt khe nhất về kỹ thuật và mỹ thuật.
-          </p>
-        </div>
-      </div>
-
-      <div class={`${mediaTextRowClass} md:[direction:rtl] [&>*]:md:[direction:ltr]`}>
-        <figure class={`${mediaTextCellClass} m-0`}>
-          <img
-            alt="Quy trình QC"
-            class={mediaTextImgClass}
-            src={productionCapacity.qcImage}
-            loading="lazy"
-          />
-        </figure>
-        <div class={mediaTextCellClass}>
-          <h3 class="font-headline-md text-2xl md:text-3xl font-bold mb-4 text-ink-dark">
-            {productionCapacity.qcTitle}
-          </h3>
-          <p class="text-text-muted mb-6 leading-relaxed">{productionCapacity.qcDesc}</p>
-          <ul class="grid grid-cols-2 gap-x-4 gap-y-3 max-w-[28rem]">
-            {
-              productionCapacity.qcStandards.map((std) => (
-                <li class="flex items-center gap-2 font-semibold text-sm text-ink-dark">
-                  <span class="w-1.5 h-1.5 rounded-full bg-accent-gold shrink-0" />
-                  {std}
-                </li>
-              ))
-            }
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 2.6 Đội ngũ nhân sự — grid icon, không card -->
-  <section class="py-10 md:py-24 bg-white border-b border-border-subtle">
-    <div class="max-w-container-max-width mx-auto px-6 md:px-8">
-      <h2 class="font-headline-md text-2xl md:text-4xl font-bold text-ink-dark mb-12 md:mb-14">
-        Đội ngũ nhân sự
-      </h2>
-      <div class="grid gap-y-10 gap-x-12 sm:grid-cols-2 lg:grid-cols-4">
-        {
-          teamDepartments.map((dept) => (
-            <div>
-              <div class="flex items-center gap-3 mb-3">
-                <span class="text-accent-gold font-bold text-sm">{dept.num}</span>
-                <span class="material-symbols-outlined text-accent-teal text-2xl">{dept.icon}</span>
-              </div>
-              <h3 class="font-bold text-ink-dark mb-2">{dept.title}</h3>
-              <p class="text-text-muted text-sm leading-relaxed">{dept.desc}</p>
-            </div>
-          ))
-        }
-      </div>
-    </div>
-  </section>
-
-  <!-- 2.7 Giấy khen & chứng nhận — figure gallery -->
-  <section class="py-10 md:py-24 bg-white border-b border-border-subtle" id="chung-nhan">
-    <div class="max-w-container-max-width mx-auto px-6 md:px-8">
-      <h2 class="font-headline-md text-2xl md:text-3xl font-bold text-ink-dark mb-10 md:mb-12">
-        Giấy khen & Chứng nhận
-      </h2>
-      <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
-        {
-          certificateImages.map((cert) => (
-            <figure class="m-0 [&_img]:transition-opacity [&_img]:duration-200 hover:[&_img]:opacity-[0.92]">
-              <img
-                alt={cert.title}
-                class="w-full aspect-[4/3] object-cover rounded-lg"
-                loading="lazy"
-                src={cert.image}
-              />
-              <figcaption class="mt-3 text-sm font-semibold text-ink-dark">{cert.title}</figcaption>
-            </figure>
-          ))
-        }
-      </div>
-    </div>
-  </section>
-
-  <AboutTestimonialsSlider items={testimonials} />
+  <AboutBrandStory />
+  <AboutTimeline />
+  <AboutMissionVision />
+  <AboutProductionCapacity />
+  <AboutTeamGrid />
+  <CertificateGallery items={certificateImages} />
+  <TestimonialsSlider items={testimonials} variant="dark" />
 
   <SiteCtaSection />
-
   <SiteFooter />
 </BaseLayout>

@@ -1,0 +1,74 @@
+---
+import { homeIntro } from '../../data/site';
+---
+
+<section class="pt-10 pb-10 md:pt-16 md:pb-12 bg-surface-fresh border-b border-border-subtle" id="gioi-thieu">
+  <div data-reveal class="max-w-container-max-width mx-auto px-6 md:px-8">
+    <div
+      class="grid gap-5 lg:grid-cols-2 lg:gap-x-16 xl:gap-x-20 lg:gap-y-4 lg:items-start [grid-template-areas:'title'_'image'_'body'] lg:[grid-template-areas:'title_image'_'body_image']"
+    >
+      <h2
+        class="[grid-area:title] text-pretty font-headline-md font-bold text-ink-dark m-0 text-[1.25rem] leading-snug md:text-[1.75rem] md:leading-tight lg:text-[2rem]"
+      >
+        {homeIntro.title}
+      </h2>
+
+      <figure class="relative m-0 [grid-area:image] lg:self-center">
+        <span
+          class="absolute -left-3 top-8 hidden h-20 w-1 bg-accent-gold lg:block"
+          aria-hidden="true"
+        >
+        </span>
+        <img
+          src={homeIntro.image}
+          alt={homeIntro.imageAlt}
+          loading="lazy"
+          class="block w-full aspect-[4/3] object-cover rounded-lg"
+        />
+      </figure>
+
+      <div class="min-w-0 [grid-area:body]">
+        <p class="text-pretty text-ink-dark/80 text-base md:text-lg leading-relaxed mb-4">
+          {homeIntro.paragraphs[0]}
+        </p>
+        <p class="text-pretty text-text-muted text-base md:text-lg leading-relaxed">
+          {homeIntro.paragraphs[1]}
+        </p>
+
+        <div
+          class="mt-8 pt-8 border-t border-border-subtle flex flex-row items-center gap-4 sm:gap-6 md:gap-10"
+        >
+          <div class="shrink-0 text-left min-w-[4.75rem] sm:min-w-[7.5rem]">
+            <p class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-ink-dark leading-none mb-1">
+              {homeIntro.featuredStat.value}
+            </p>
+            <p class="text-xs sm:text-sm text-text-muted m-0 leading-snug">{homeIntro.featuredStat.label}</p>
+          </div>
+          <ul class="grid grid-cols-1 gap-2 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-2.5 flex-1 min-w-0 m-0 p-0 list-none">
+            {
+              homeIntro.bullets.map((item) => (
+                <li class="flex items-start gap-1.5 sm:gap-2 text-xs sm:text-sm text-ink-dark/85 leading-snug m-0">
+                  <span class="shrink-0 font-bold text-accent-gold" aria-hidden="true">✓</span>
+                  <span>{item}</span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+
+        <a
+          href={homeIntro.cta.href}
+          class="inline-flex items-center gap-2 mt-6 md:mt-8 text-sm font-bold text-ink-dark no-underline transition-colors hover:text-accent-gold group"
+        >
+          {homeIntro.cta.label}
+          <span
+            class="material-symbols-outlined text-lg transition-transform group-hover:translate-x-0.5"
+            aria-hidden="true"
+          >
+            arrow_forward
+          </span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

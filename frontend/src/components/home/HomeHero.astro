@@ -1,0 +1,91 @@
+---
+import { stats, heroMedia } from '../../data/site';
+---
+
+<header
+  class="relative flex flex-col overflow-hidden pt-24 min-h-0 sm:min-h-[480px] md:min-h-[520px] lg:min-h-screen"
+>
+  <div class="absolute inset-0 z-0">
+    <div
+      class="absolute inset-0 z-10 bg-gradient-to-br from-ink-dark/88 via-ink-dark/55 to-[rgba(16,44,77,0.25)]"
+    >
+    </div>
+    {
+      heroMedia.video ? (
+        <video
+          class="w-full h-full object-cover object-center"
+          id="hero-video"
+          autoplay
+          loop
+          muted
+          playsinline
+          poster={heroMedia.image}
+        >
+          <source src={heroMedia.video} type="video/mp4" />
+        </video>
+      ) : (
+        <img
+          alt="Nhà máy may đồng phục Tân Phạm Gia"
+          class="w-full h-full object-cover object-center"
+          id="hero-image"
+          src={heroMedia.image}
+        />
+      )
+    }
+  </div>
+
+  <div
+    class="relative z-20 flex flex-1 flex-col max-w-container-max-width mx-auto px-6 md:px-8 w-full text-center text-white py-8 md:py-12"
+  >
+    <div class="flex flex-1 flex-col items-center justify-center w-full">
+      <div class="w-full flex flex-col items-center md:inline-grid md:w-max md:max-w-full md:mx-auto md:[grid-template-columns:minmax(0,max-content)] md:justify-items-stretch">
+        <h1
+          class="font-display-lg text-2xl sm:text-3xl md:text-4xl lg:text-[2.75rem] font-extrabold mb-5 flex flex-col gap-2 md:gap-1 leading-[1.35] md:leading-[1.12] tracking-normal md:tracking-tight md:[grid-row:1]"
+        >
+          <span class="block md:whitespace-nowrap">Đồng Phục Chuẩn Thương Hiệu.</span>
+          <span class="block text-accent-gold text-[1.125rem] sm:text-3xl md:text-4xl lg:text-[2.75rem] md:whitespace-nowrap">
+            Chuẩn Tiến Độ. Chuẩn Từng Chiếc.
+          </span>
+        </h1>
+        <p
+          class="font-body-lg text-base md:text-lg mb-5 md:mb-8 max-w-2xl mx-auto md:mx-0 md:w-full md:max-w-none text-white/85 leading-relaxed text-center md:[grid-row:2]"
+        >
+          23 năm đồng hành cùng doanh nghiệp xây dựng hình ảnh chuyên nghiệp với giải pháp đồng phục
+          toàn diện.
+        </p>
+        <div class="flex flex-row gap-2 sm:gap-3 items-stretch w-full max-w-md mx-auto md:max-w-none md:mx-0 md:[grid-row:3]">
+          <a
+            href="/lien-he"
+            class="flex-1 min-w-0 bg-accent-gold text-ink-dark px-3 py-2.5 md:px-7 md:py-3.5 rounded-full font-bold text-xs md:text-base leading-tight hover:shadow-gold hover:scale-105 transition-all shadow-soft text-center"
+          >
+            Nhận tư vấn giải pháp
+          </a>
+          <a
+            href="/tai-lieu"
+            class="flex-1 min-w-0 border border-white/50 bg-white/10 backdrop-blur-sm text-white px-3 py-2.5 md:px-7 md:py-3.5 rounded-full font-bold text-xs md:text-base leading-tight hover:bg-white hover:text-ink-dark transition-all text-center"
+          >
+            Tải hồ sơ năng lực
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <dl
+      class="mt-10 md:mt-14 lg:mt-auto lg:pt-10 w-full max-w-4xl mx-auto grid grid-cols-4 gap-x-2 md:gap-x-8 pb-2 md:pb-4"
+    >
+      {
+        stats.map((item, i) => (
+          <div
+            class:list={[
+              'text-center m-0 min-w-0',
+              i > 0 && 'border-l border-white/20 pl-2 md:pl-5',
+            ]}
+          >
+            <dt class="text-xl sm:text-2xl md:text-4xl font-extrabold text-white mb-0.5 md:mb-1 leading-none">{item.value}</dt>
+            <dd class="text-[0.625rem] sm:text-[0.6875rem] md:text-xs text-white/70 leading-snug m-0">{item.label}</dd>
+          </div>
+        ))
+      }
+    </dl>
+  </div>
+</header>

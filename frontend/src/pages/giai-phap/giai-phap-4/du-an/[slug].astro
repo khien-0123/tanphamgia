@@ -1,11 +1,6 @@
 ---
-import BaseLayout from '../../../../layouts/BaseLayout.astro';
-import SiteNav from '../../../../components/SiteNav.astro';
-import SiteFooter from '../../../../components/SiteFooter.astro';
-import SiteCtaSection from '../../../../components/SiteCtaSection.astro';
-import CaseStudyStory from '../../../../components/CaseStudyStory.astro';
+import CaseStudyDetailPage from '../../../../components/solution/CaseStudyDetailPage.astro';
 import { duAnGiaiPhap4 } from '../../../../data/giai-phap-4-du-an';
-import { getSolutionTheme, solutionBoxCompact } from '../../../../lib/solution-theme';
 
 export function getStaticPaths() {
   return duAnGiaiPhap4.map((project) => ({
@@ -15,85 +10,11 @@ export function getStaticPaths() {
 }
 
 const { project } = Astro.props;
-const otherProjects = duAnGiaiPhap4.filter((item) => item.slug !== project.slug);
-const solutionTheme = getSolutionTheme(4);
 ---
 
-<BaseLayout
-  title={`${project.name} | Dự án tiêu biểu — Giải pháp 4`}
-  description={`Case study ${project.name} — đồng phục y tế, spa & dịch vụ.`}
->
-  <SiteNav solid currentPath="/giai-phap/giai-phap-4" />
-  <main class={solutionTheme.page}>
-    <section class:list={[solutionTheme.section, 'pt-28 md:pt-32']}>
-      <div class="max-w-container-max-width mx-auto px-6 md:px-8">
-        <a
-          href="/giai-phap/giai-phap-4#du-an"
-          class="text-sm font-semibold text-accent-teal hover:text-ink-dark transition-colors"
-        >
-          ← Quay lại Giải pháp 4
-        </a>
-        <div class={solutionTheme.heroGrid}>
-          <div>
-            <h1 class="text-3xl md:text-5xl font-bold leading-tight mb-4">{project.name}</h1>
-            <p class="text-text-muted text-sm md:text-base mb-2">{project.stats}</p>
-            {project.field && (
-              <p class="text-sm text-ink-dark/75 mb-4">Lĩnh vực: {project.field}</p>
-            )}
-            <p class="text-text-muted text-base md:text-lg leading-relaxed">{project.intro}</p>
-          </div>
-          <figure class="m-0">
-            <img
-              src={project.image}
-              alt={project.name}
-              class={solutionTheme.heroImageDetail}
-            />
-          </figure>
-        </div>
-      </div>
-    </section>
-
-    <section class={solutionTheme.section}>
-      <div class="max-w-container-max-width mx-auto px-6 md:px-8">
-        <CaseStudyStory
-          challenges={project.challenges}
-          solutions={project.solutions}
-          results={project.results}
-        />
-      </div>
-    </section>
-
-    <section class={solutionTheme.section}>
-      <div class="max-w-container-max-width mx-auto px-6 md:px-8">
-        <h2 class="text-2xl md:text-3xl font-bold mb-6">Dự án khác</h2>
-        <div class={solutionBoxCompact.grid}>
-          {
-            otherProjects.map((item) => (
-              <article class={solutionBoxCompact.item}>
-                <a
-                  class={solutionBoxCompact.summary}
-                  href={`/giai-phap/giai-phap-4/du-an/${item.slug}`}
-                >
-                  <figure class={solutionBoxCompact.media}>
-                    <img
-                      class="w-full h-full object-cover"
-                      src={item.image}
-                      alt={item.name}
-                      loading="lazy"
-                    />
-                  </figure>
-                  <h3 class={solutionBoxCompact.title}>{item.name}</h3>
-                  <p class={solutionBoxCompact.desc}>{item.stats}</p>
-                  <span class={solutionBoxCompact.link}>Xem chi tiết</span>
-                </a>
-              </article>
-            ))
-          }
-        </div>
-      </div>
-    </section>
-
-  </main>
-  <SiteCtaSection />
-  <SiteFooter />
-</BaseLayout>
+<CaseStudyDetailPage
+  solutionId={4}
+  solutionSlug="giai-phap-4"
+  project={project}
+  allProjects={duAnGiaiPhap4}
+/>

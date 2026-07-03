@@ -88,11 +88,11 @@ const menuToggle =
   >
   </div>
   <nav
-    class="absolute top-0 w-[min(20rem,calc(100vw-1.25rem))] max-h-dvh pr-[env(safe-area-inset-right,0)] bg-[#f8faf9] shadow-[-12px_0_40px_rgba(14,38,64,0.16)] overflow-x-hidden overflow-y-auto overscroll-y-contain touch-pan-y [-webkit-overflow-scrolling:touch] transition-[right] duration-[320ms] ease-nav-panel -right-[min(20rem,calc(100vw-1.25rem))] group-[.is-open]/mobile:right-0"
+    class="absolute top-0 bottom-0 flex h-dvh w-[min(20rem,calc(100vw-1.25rem))] flex-col pr-[env(safe-area-inset-right,0)] bg-[#f8faf9] shadow-[-12px_0_40px_rgba(14,38,64,0.16)] overflow-x-hidden transition-[right] duration-[320ms] ease-nav-panel -right-[min(20rem,calc(100vw-1.25rem))] group-[.is-open]/mobile:right-0"
     aria-label="Menu điều hướng"
   >
     <header
-      class="sticky top-0 z-[2] flex items-center justify-between gap-3 px-4 pt-[calc(0.75rem+env(safe-area-inset-top,0))] pb-4 bg-gradient-to-br from-ink-dark from-0% via-[#163a5c] via-[58%] to-[#1a4569] to-100% after:absolute after:left-0 after:right-0 after:bottom-0 after:h-[3px] after:bg-gradient-to-r after:from-accent-gold after:via-[#ffe08a] after:to-accent-gold"
+      class="relative z-[2] flex shrink-0 items-center justify-between gap-3 px-4 pt-[calc(0.75rem+env(safe-area-inset-top,0))] pb-4 bg-gradient-to-br from-ink-dark from-0% via-[#163a5c] via-[58%] to-[#1a4569] to-100% after:absolute after:left-0 after:right-0 after:bottom-0 after:h-[3px] after:bg-gradient-to-r after:from-accent-gold after:via-[#ffe08a] after:to-accent-gold"
     >
       <SiteBrandLogo onDark navClose />
       <button
@@ -105,7 +105,7 @@ const menuToggle =
       </button>
     </header>
 
-    <ul class="list-none m-0 px-3.5 pt-4 pb-1 flex flex-col gap-1">
+    <ul class="list-none m-0 flex min-h-0 flex-1 flex-col gap-[2rem] overflow-y-auto overscroll-y-contain touch-pan-y [-webkit-overflow-scrolling:touch] px-3.5 pt-[2.5rem] pb-1">
       {
         items.map((item, index) => (
           <li

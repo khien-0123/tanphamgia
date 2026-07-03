@@ -1,0 +1,86 @@
+---
+import type { Testimonial } from '../../data/site';
+
+interface Props {
+  items: Testimonial[];
+  title?: string;
+  variant?: 'light' | 'dark';
+}
+
+const { items, title = 'Khách hàng nói gì về chúng tôi', variant = 'light' } = Astro.props;
+
+const isDark = variant === 'dark';
+
+/** 3 bộ slide để vòng lặp vô hạn */
+const SLIDER_SETS = 3;
+const sliderItems = Array.from({ length: SLIDER_SETS }, () => items).flat();
+const itemsPerSet = items.length;
+
+const sectionClass = isDark
+  ? 'py-10 md:py-24 bg-ink-dark text-white'
+  : 'py-12 md:py-20 bg-white border-b border-border-subtle';
+
+const titleClass = isDark
+  ? 'font-headline-md text-2xl md:text-4xl font-bold mb-12 md:mb-14'
+  : 'font-headline-md text-2xl md:text-3xl font-bold text-ink-dark mb-10 md:mb-14';
+
+const blockquoteClass = isDark
+  ? 'flex-[0_0_100%] md:flex-[0_0_calc((100%-6rem)/3)] snap-start min-w-0 box-border px-1 md:px-0 self-stretch m-0 flex flex-col h-auto md:h-full border-l-[3px] border-accent-gold pl-5 md:border-l-0 md:pl-0 [&>p]:flex-1 [&>footer]:mt-auto [&>footer]:shrink-0'
+  : 'flex-[0_0_100%] md:flex-[0_0_calc((100%-6rem)/3)] snap-start min-w-0 box-border px-1 md:px-0 flex flex-col self-stretch m-0 [&>p]:flex-1 [&>p]:flex-auto [&>footer]:mt-auto [&>footer]:shrink-0';
+---
+
+<section class={sectionClass}>
+  <div class="max-w-container-max-width mx-auto px-6 md:px-8">
+    <h2 data-reveal={!isDark || undefined} class={titleClass}>
+      {title}
+    </h2>
+    <div class="min-w-0 [overflow-anchor:none]" data-testimonials-slider>
+      <div
+        class="flex items-stretch gap-0 md:gap-12 overflow-x-auto overflow-y-hidden snap-x snap-mandatory overscroll-x-contain [-webkit-overflow-scrolling:touch] [scrollbar-width:none] pb-1 [&::-webkit-scrollbar]:hidden"
+        data-slider-track
+        aria-label={title}
+        role="region"
+      >
+        {
+          sliderItems.map((item, index) => {
+            const setIndex = Math.floor(index / itemsPerSet);
+            const isClone = setIndex !== 1;
+
+            return (
+              <blockquote
+                class={blockquoteClass}
+                data-slider-slide
+                aria-hidden={isClone ? 'true' : undefined}
+                tabindex={isClone ? -1 : undefined}
+              >
+                <p
+                  class:list={[
+                    'leading-relaxed mb-6',
+                    isDark ? 'text-white/90' : 'text-text-muted italic',
+                  ]}
+                >
+                  "{item.quote}"
+                </p>
+                <footer class:list={[!isDark && 'not-italic']}>
+                  <cite
+                    class:list={[
+                      'font-bold not-italic block',
+                      isDark ? 'text-accent-gold' : 'text-ink-dark',
+                    ]}
+                  >
+                    {item.name}
+                  </cite>
+                  <span class:list={['text-sm', isDark ? 'text-white/60 mt-1 block' : 'text-text-muted']}>
+                    {item.role}
+                  </span>
+                </footer>
+              </blockquote>
+            );
+          })
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="../scripts/about-testimonials-slider.ts"></script>

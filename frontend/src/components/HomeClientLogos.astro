@@ -2,6 +2,13 @@
 import ClientLogo from './ClientLogo.astro';
 import { clientLogos } from '../data/site';
 
+interface Props {
+  /** embedded: cột phải trang chủ | standalone: full width trong container */
+  variant?: 'embedded' | 'standalone';
+}
+
+const { variant = 'embedded' } = Astro.props;
+
 /** Mobile: 3 cột × 3 hàng mỗi trang slider */
 const LOGOS_PER_PAGE = 9;
 const SLIDER_SETS = 3;
@@ -13,9 +20,15 @@ const basePages = [
 
 const sliderPages = Array.from({ length: SLIDER_SETS }, () => basePages).flat();
 const pagesPerSet = basePages.length;
+
+const rootClass = variant === 'embedded' ? 'min-w-0 lg:col-span-3' : 'w-full';
+const desktopGridClass =
+  variant === 'embedded'
+    ? 'hidden md:grid w-full grid-cols-5 gap-x-2 gap-y-3 justify-items-center'
+    : 'hidden md:grid w-full grid-cols-6 gap-x-3 gap-y-5 justify-items-center';
 ---
 
-<div class="lg:col-span-3">
+<div class={rootClass}>
   <!-- Mobile: 3 hàng/trang, vuốt vòng lặp vô hạn -->
   <div class="min-w-0 md:hidden" data-clients-slider>
     <div
@@ -46,8 +59,8 @@ const pagesPerSet = basePages.length;
     </div>
   </div>
 
-  <!-- Desktop: lưới đầy đủ -->
-  <div class="hidden md:grid grid-cols-4 lg:grid-cols-5 gap-2.5 md:gap-3">
+  <!-- Desktop: lưới full width — không còn khoảng trống hai bên -->
+  <div class={desktopGridClass}>
     {clientLogos.map((client) => <ClientLogo name={client.name} logo={client.logo} />)}
   </div>
 </div>

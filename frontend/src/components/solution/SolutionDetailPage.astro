@@ -1,0 +1,208 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SiteNav from '../../components/SiteNav.astro';
+import SiteFooter from '../../components/SiteFooter.astro';
+import SiteCtaSection from '../../components/SiteCtaSection.astro';
+import SolutionPlanSplit from '../../components/SolutionPlanSplit.astro';
+import { solutions } from '../../data/site';
+import type { SolutionPageContent } from '../../data/solution-page';
+import { duAnGiaiPhap1 } from '../../data/giai-phap-1-du-an';
+import { duAnGiaiPhap2 } from '../../data/giai-phap-2-du-an';
+import { duAnGiaiPhap3 } from '../../data/giai-phap-3-du-an';
+import { duAnGiaiPhap4 } from '../../data/giai-phap-4-du-an';
+import {
+  getSolutionTheme,
+  solutionBoxCompact,
+  solutionCase,
+  solutionIndustryList,
+  solutionStep,
+} from '../../lib/solution-theme';
+
+interface Props {
+  content: SolutionPageContent;
+}
+
+const { content } = Astro.props;
+
+const solutionTheme = getSolutionTheme(content.solutionId);
+const solution = solutions.find((item) => item.slug === content.slug);
+const relatedSolutions = solutions.filter((item) => item.slug !== content.slug);
+
+const projectsBySolution = {
+  1: duAnGiaiPhap1,
+  2: duAnGiaiPhap2,
+  3: duAnGiaiPhap3,
+  4: duAnGiaiPhap4,
+} as const;
+
+const projects = projectsBySolution[content.solutionId];
+---
+
+<BaseLayout title={content.seo.title} description={content.seo.description}>
+  <SiteNav solid currentPath="/giai-phap" />
+  <main class={solutionTheme.page}>
+    <section class="pt-28 md:pt-32 pb-14 md:pb-20 border-b border-border-subtle">
+      <div class="max-w-container-max-width mx-auto px-6 md:px-8">
+        <a href="/giai-phap" class="text-sm font-semibold text-accent-teal hover:text-ink-dark transition-colors">
+          ← Quay lại
+        </a>
+        <div class={solutionTheme.heroGrid}>
+          <div>
+            <h1 class="text-3xl md:text-5xl font-bold leading-tight mb-5">{content.hero.title}</h1>
+            <p class="text-text-muted text-base md:text-lg leading-relaxed mb-6">
+              {content.hero.description}
+            </p>
+            <ul class={solutionIndustryList}>
+              {
+                content.hero.industries.map((item) => (
+                  <li class="flex items-center gap-2">
+                    <span class="w-1.5 h-1.5 rounded-full bg-accent-teal shrink-0" />
+                    {item}
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+          <figure class="m-0">
+            <img
+              src={solution?.image}
+              alt={content.hero.imageAlt}
+              class={solutionTheme.heroImage}
+            />
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section data-reveal class={solutionTheme.section}>
+      <div class="max-w-container-max-width mx-auto px-6 md:px-8 max-w-4xl">
+        <h2 class="text-2xl md:text-3xl font-bold mb-8">{content.sections.issuesTitle}</h2>
+        <div class={solutionTheme.issueGrid}>
+          {
+            content.issues.map((issue, idx) => (
+              <article class={solutionTheme.issueCard}>
+                <span class={solutionTheme.issueNum}>{idx + 1}</span>
+                <p class="text-sm text-ink-dark/85 leading-relaxed">{issue}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section data-reveal class={solutionTheme.section}>
+      <div class="max-w-container-max-width mx-auto px-6 md:px-8">
+        <h2 class="text-2xl md:text-3xl font-bold mb-8">02. Giải pháp từ Tân Phạm Gia</h2>
+        <SolutionPlanSplit
+          image={solution?.image ?? ''}
+          imageAlt={content.hero.imageAlt}
+          items={content.plans}
+        />
+      </div>
+    </section>
+
+    <section data-reveal class={solutionTheme.section}>
+      <div class="max-w-container-max-width mx-auto px-6 md:px-8">
+        <h2 class="text-2xl md:text-3xl font-bold mb-8">{content.sections.productsTitle}</h2>
+        <ul class="grid sm:grid-cols-3 gap-4 mb-8 text-sm md:text-base">
+          {
+            content.products.map((product) => (
+              <li class="py-3 border-b border-border-subtle">{product}</li>
+            ))
+          }
+        </ul>
+        <div class="overflow-x-auto border border-border-subtle">
+          <table class="w-full min-w-[860px] text-sm">
+            <thead class="bg-surface-muted">
+              <tr class="text-left">
+                <th class="px-4 py-3 font-semibold">Chất liệu</th>
+                <th class="px-4 py-3 font-semibold">Thành phần</th>
+                <th class="px-4 py-3 font-semibold">Đặc tính nổi bật</th>
+                <th class="px-4 py-3 font-semibold">Môi trường phù hợp</th>
+              </tr>
+            </thead>
+            <tbody>
+              {
+                content.fabricTable.map((row) => (
+                  <tr class="border-t border-border-subtle">
+                    <td class="px-4 py-3">{row.material}</td>
+                    <td class="px-4 py-3 text-text-muted">{row.composition}</td>
+                    <td class="px-4 py-3 text-text-muted">{row.features}</td>
+                    <td class="px-4 py-3 text-text-muted">{row.environment}</td>
+                  </tr>
+                ))
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section data-reveal class:list={[solutionTheme.section, 'scroll-mt-24']} id="du-an">
+      <div class="max-w-container-max-width mx-auto px-6 md:px-8">
+        <h2 class="text-2xl md:text-3xl font-bold mb-8">04. Dự án tiêu biểu</h2>
+        <div class={solutionCase.grid}>
+          {
+            projects.map((project) => (
+              <a
+                href={`/giai-phap/${content.slug}/du-an/${project.slug}`}
+                class:list={[solutionTheme.caseCard, solutionCase.link]}
+              >
+                <img src={project.image} alt={project.name} class={solutionCase.img} />
+                <div class={solutionCase.body}>
+                  <h3 class="font-bold">{project.name}</h3>
+                  <p class="text-xs text-white/80 mt-1">
+                    {project.stats.split(' | ').slice(0, 2).join(' | ')}
+                  </p>
+                  <span class={solutionCase.more}>Xem chi tiết</span>
+                </div>
+              </a>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section data-reveal class={solutionTheme.section}>
+      <div class="max-w-container-max-width mx-auto px-6 md:px-8">
+        <h2 class="text-2xl md:text-3xl font-bold mb-8">
+          05. Quy trình làm việc - giảm rủi ro cho doanh nghiệp
+        </h2>
+        <div class={solutionStep.grid}>
+          {
+            content.processSteps.map((step, index) => (
+              <article class={solutionTheme.stepItem}>
+                <span class={solutionTheme.stepNum}>{index + 1}</span>
+                <h3 class="font-bold mb-1">Bước {index + 1}: {step}</h3>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section data-reveal class={solutionTheme.section}>
+      <div class="max-w-container-max-width mx-auto px-6 md:px-8">
+        <h2 class="text-2xl md:text-3xl font-bold mb-6">06. Tìm hiểu thêm</h2>
+        <div class={solutionBoxCompact.grid}>
+          {
+            relatedSolutions.map((item) => (
+              <article class={solutionBoxCompact.item}>
+                <a class={solutionBoxCompact.summary} href={`/giai-phap/${item.slug}`}>
+                  <figure class={solutionBoxCompact.media}>
+                    <img class="w-full h-full object-cover" src={item.image} alt={item.title} loading="lazy" />
+                  </figure>
+                  <h3 class={solutionBoxCompact.title}>{item.title}</h3>
+                  <p class={solutionBoxCompact.desc}>{item.desc}</p>
+                  <span class={solutionBoxCompact.link}>Xem chi tiết</span>
+                </a>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+  </main>
+  <SiteCtaSection />
+  <SiteFooter />
+</BaseLayout>

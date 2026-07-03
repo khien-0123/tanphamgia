@@ -1,0 +1,99 @@
+---
+import { timeline, timelineSection } from '../../data/gioi-thieu';
+import { timelineItemBaseClass } from '../../lib/about-layout';
+---
+
+<section class="py-14 md:py-20 bg-[linear-gradient(180deg,#ffffff_0%,#f7faf9_45%,#ffffff_100%)] border-b border-border-subtle">
+  <div class="max-w-container-max-width mx-auto px-6 md:px-8 mb-12 md:mb-16">
+    <p data-reveal class="font-eyebrow text-xs uppercase tracking-[0.18em] text-accent-teal mb-3">
+      {timelineSection.eyebrow}
+    </p>
+    <h2
+      data-reveal
+      class="font-headline-md text-xl md:text-2xl lg:text-[2rem] font-bold text-ink-dark leading-snug max-w-3xl text-balance"
+    >
+      {timelineSection.title}
+    </h2>
+  </div>
+
+  <div
+    class="relative w-full max-w-none mx-0 pt-2 pb-4 px-6 md:px-[clamp(1.5rem,5vw,4rem)] max-md:pb-2"
+  >
+    <div
+      aria-hidden="true"
+      class="pointer-events-none absolute top-3 bottom-4 left-1/2 hidden w-px -translate-x-1/2 bg-gradient-to-b from-accent-gold/70 via-accent-teal/35 to-border-subtle md:block"
+    >
+    </div>
+
+    <div class="relative mx-auto w-full max-w-container-max-width" data-reveal-stagger>
+      <div
+        aria-hidden="true"
+        class="pointer-events-none absolute top-3 bottom-6 left-4 w-px -translate-x-1/2 bg-gradient-to-b from-accent-gold/70 via-accent-teal/35 to-border-subtle md:hidden"
+      >
+      </div>
+      {
+        timeline.map((item, i) => {
+          const side = i % 2 === 0 ? 'left' : 'right';
+          return (
+            <div class:list={[timelineItemBaseClass, 'group']} data-reveal>
+              {side === 'right' && (
+                <div class="min-h-px max-md:hidden" aria-hidden="true" />
+              )}
+
+              <div class="relative flex justify-center items-start pt-1.5 h-full z-[2] col-start-2 row-start-1 max-md:col-start-1 max-md:pt-2">
+                <span
+                  class="relative flex items-center justify-center w-5 h-5 md:w-[1.375rem] md:h-[1.375rem] rounded-full bg-white shadow-[0_0_0_2px_#102c4d,0_4px_14px_rgba(14,38,64,0.12)] shrink-0"
+                  aria-hidden="true"
+                >
+                  <span class="w-[0.45rem] h-[0.45rem] md:w-2 md:h-2 rounded-full bg-accent-gold" />
+                </span>
+                <span
+                  class:list={[
+                    'absolute top-[1.125rem] md:top-[1.25rem] -translate-y-1/2 h-px w-[calc(50%+0.875rem)] lg:w-[calc(50%+1.5rem)] bg-gradient-to-r max-md:hidden',
+                    side === 'left'
+                      ? 'right-1/2 from-border-subtle to-accent-gold/45'
+                      : 'left-1/2 from-accent-gold/45 to-border-subtle',
+                  ]}
+                  aria-hidden="true"
+                />
+              </div>
+
+              <article
+                class:list={[
+                  'py-1',
+                  side === 'left'
+                    ? 'col-start-1 row-start-1 justify-self-end w-full max-w-[36rem] text-right md:max-w-none max-md:col-start-2 max-md:justify-self-auto max-md:max-w-none max-md:text-left pr-0 md:pr-8 lg:pr-12'
+                    : 'col-start-3 row-start-1 justify-self-start w-full max-w-[36rem] text-left md:max-w-none max-md:col-start-2 max-md:max-w-none pl-0 md:pl-8 lg:pl-12',
+                ]}
+              >
+                <span
+                  class:list={[
+                    'block font-bold text-[0.8125rem] md:text-sm uppercase tracking-[0.06em] text-accent-teal tabular-nums mb-1.5',
+                    side === 'left' && 'max-md:text-left',
+                  ]}
+                >
+                  {item.year}
+                </span>
+                <h3
+                  class="font-headline-md text-[1.0625rem] md:text-lg lg:text-xl font-bold text-ink-dark leading-snug mb-2 md:mb-2.5"
+                >
+                  {item.title}
+                </h3>
+                <p
+                  class:list={[
+                    'text-text-muted text-sm md:text-[0.9375rem] leading-[1.7] max-w-[32rem] max-md:max-w-none',
+                    side === 'left' && 'md:ml-auto',
+                  ]}
+                >
+                  {item.desc}
+                </p>
+              </article>
+
+              {side === 'left' && <div class="min-h-px max-md:hidden" aria-hidden="true" />}
+            </div>
+          );
+        })
+      }
+    </div>
+  </div>
+</section>

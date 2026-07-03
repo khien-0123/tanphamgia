@@ -26,14 +26,14 @@ const accentBeforeBg: Record<SolutionTheme, string> = {
   1: 'before:bg-accent-gold',
   2: 'before:bg-accent-gold',
   3: 'before:bg-accent-gold',
-  4: 'before:bg-[#d4a900]',
+  4: 'before:bg-accent-gold',
 };
 
 const numBadge: Record<SolutionTheme, string> = {
   1: 'bg-accent-gold text-[#111]',
   2: 'bg-accent-gold text-[#111]',
   3: 'bg-accent-gold text-[#111]',
-  4: 'bg-[#d4a900] text-white',
+  4: 'bg-accent-gold text-[#111]',
 };
 
 const heroGrid: Record<SolutionTheme, string> = {
@@ -72,8 +72,8 @@ export function getSolutionTheme(theme: SolutionTheme) {
     heroImage: 'w-full aspect-[4/3] object-cover rounded-lg',
     heroImageDetail: heroImageDetail[theme],
     issueGrid: issueGrid[theme],
-    issueCard: `bg-white border rounded-xl p-4 ${issueCardBorder[theme]}`,
-    issueNum: `inline-flex items-center justify-center w-6 h-6 rounded-full text-xs font-bold mb-2 ${numBadge[theme]}`,
+    issueCard: `bg-white border rounded-xl p-4 overflow-hidden text-sm leading-relaxed ${issueCardBorder[theme]} [&_p]:m-0`,
+    issueNum: `float-left mr-3 mt-[1em] inline-flex items-center justify-center w-6 h-6 rounded-full text-xs font-bold md:float-none md:mr-0 md:mt-0 md:mb-2 ${numBadge[theme]}`,
     stepItem: `relative bg-white border rounded-xl py-[0.9rem] pl-[1.05rem] pr-[0.9rem] overflow-hidden before:content-[''] before:absolute before:left-0 before:top-0 before:bottom-0 ${accentBeforeWidth[theme]} ${accentBeforeBg[theme]} ${stepItemBorder[theme]}`,
     stepNum: `inline-flex w-[1.4rem] h-[1.4rem] items-center justify-center rounded-full text-[0.72rem] font-bold mb-[0.4rem] ${numBadge[theme]}`,
     caseCard: caseCard[theme],
@@ -114,7 +114,8 @@ export const solutionBoxHome = {
     'flex flex-col flex-1 h-full min-h-0 gap-1.5 p-2 px-1.5 pb-2.5 sm:gap-[0.45rem] sm:p-3 sm:pb-3.5 no-underline',
   media:
     'aspect-[16/10] overflow-hidden border border-surface-muted rounded-md sm:rounded-lg shrink-0 m-0',
-  number: 'inline-block w-fit text-xs font-bold text-accent-teal tracking-wider',
+  number:
+    'inline-block w-fit font-extrabold text-2xl sm:text-3xl xl:text-4xl text-accent-gold leading-none tabular-nums',
   title:
     'font-bold text-[0.8rem] leading-tight sm:text-[0.95rem] sm:leading-snug text-ink-dark m-0 shrink-0 max-xl:line-clamp-2 max-sm:text-[0.8125rem]',
   desc: 'text-[0.68rem] sm:text-[0.78rem] leading-snug text-text-muted m-0 flex-1 min-h-0 line-clamp-2 xl:line-clamp-none xl:flex-none max-sm:text-xs',

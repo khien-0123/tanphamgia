@@ -1,0 +1,47 @@
+---
+import { siteContact } from '../../data/site';
+---
+
+<aside data-reveal class="lg:pt-14">
+  <h2 class="font-headline-md text-xl font-bold text-ink-dark mb-6">Thông tin liên hệ</h2>
+  <ul class="space-y-5 text-sm md:text-base">
+    <li class="flex gap-3">
+      <span class="material-symbols-outlined text-accent-gold shrink-0">location_on</span>
+      <span class="text-text-muted break-words [overflow-wrap:anywhere]">
+        <strong class="text-ink-dark block mb-1">Showroom</strong>
+        {siteContact.address}
+      </span>
+    </li>
+    <li class="flex gap-3">
+      <span class="material-symbols-outlined text-accent-gold shrink-0">call</span>
+      <span class="text-text-muted">
+        <strong class="text-ink-dark block mb-1">Hotline</strong>
+        <a class="text-accent-teal font-semibold hover:underline" href={siteContact.phoneHref}>
+          {siteContact.phoneDisplay}
+        </a>
+        <span class="block text-sm mt-1">8:00–18:00, T2–T7</span>
+      </span>
+    </li>
+    <li class="flex gap-3">
+      <span class="material-symbols-outlined text-accent-gold shrink-0">mail</span>
+      <span class="text-text-muted">
+        <strong class="text-ink-dark block mb-1">Email</strong>
+        <a class="text-accent-teal hover:underline break-words [overflow-wrap:anywhere]" href={siteContact.emailHref}>
+          {siteContact.email}
+        </a>
+      </span>
+    </li>
+    <li class="flex gap-3">
+      <span class="material-symbols-outlined text-accent-gold shrink-0">schedule</span>
+      <span class="text-text-muted">
+        <strong class="text-ink-dark block mb-1">Giờ làm việc</strong>
+        {siteContact.hours}
+      </span>
+    </li>
+  </ul>
+
+  <div class="mt-10 p-6 rounded-xl bg-surface-muted border border-border-subtle">
+    <h3 class="font-bold text-ink-dark mb-2">Cam kết phản hồi</h3>
+    <p class="text-text-muted text-sm leading-relaxed">{siteContact.responseCommitment}</p>
+  </div>
+</aside>

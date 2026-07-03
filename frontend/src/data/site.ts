@@ -142,6 +142,27 @@ export const stats = [
   { value: '30K+', label: 'Sản phẩm / tháng' },
 ];
 
+/** Giới thiệu ngắn trang chủ — Sitemap 1.3 */
+export const homeIntro = {
+  title: 'Tân Phạm Gia – Đối tác phát triển giải pháp đồng phục cho doanh nghiệp vừa và lớn',
+  paragraphs: [
+    'Hơn 23 năm kinh nghiệm may mặc — giải pháp đồng phục giúp doanh nghiệp xây dựng hình ảnh chuyên nghiệp, đồng bộ và khác biệt.',
+    'Ứng dụng tiêu chuẩn "Tỷ lệ vàng", Rập 3D và May trên Mannequin — sản phẩm tôn dáng, thoải mái, phù hợp nhiều vóc dáng.',
+  ],
+  featuredStat: { value: '23+', label: 'Năm kinh nghiệm' },
+  bullets: [
+    '500+ Doanh nghiệp đồng hành',
+    '1.000.000+ Sản phẩm đã sản xuất',
+    '30.000+ Sản phẩm mỗi tháng',
+    'Hệ thống sản xuất & QC bài bản',
+    'Đồng hành từ tư vấn đến bàn giao',
+  ],
+  cta: { label: 'Khám phá năng lực Tân Phạm Gia', href: '/gioi-thieu' },
+  image:
+    'https://lh3.googleusercontent.com/aida-public/AB6AXuD7szr7Elx-oAqCEnir2uiBqNE-4WpmIm10Kj1YsgXyu1XMFvP0qvIXYrsMpRh9sztusxsq8_7_MFPstpomb4RaDeTg9J3ldf2CSKwYUq91qGdHVM6Dm9YkfE3Rdfay_snBPthtK7WWCq_NFHZ3j3Kua1MgJAT-qQPXwlpAIQIDLIpk4Njn_msEnsXh9DyyRtwkvdNU5u10NXpGyYseM_HBo6gwnr6IFqeZ9gHXI1CrvRQnXAxx3UyIT7UIbTDEMKjd1gdxbZwWKrKl',
+  imageAlt: 'Xưởng may và đội ngũ Tân Phạm Gia',
+};
+
 export const whyChoose = [
   {
     num: '01',
@@ -243,47 +264,47 @@ export interface HomeFeaturedCase {
 
 export const homeFeaturedCases = {
   featured: {
-    name: 'Ngân hàng BIDV',
+    name: 'VFM',
     image:
-      'https://lh3.googleusercontent.com/aida-public/AB6AXuDDcz4grX0Tjw51FTdB5HZbTmcrYakXnp7WFjK-2VEfZcR45qJg81c0tcljJFjAwIJTFzyhkp3cYgFg-pBIktGRpQoqXaQKlYSVtvmMkicnivUhEnczXAOlUWn7p3aZX0U1qcowjy_97kPA_r3-PivXNSaDbFOOOX_6jiBJmo4A0j0D9e3qRVIUh7laSY54Gct149JLW1vsGGGj8J52tBRRd7ZXIWlIfTCG2X92nrw60rSTjemYH3_FC4-qYNw2ligyY7SaiNTBUHs',
-    alt: 'Dự án BIDV',
-    tag: 'Hợp tác chiến lược',
-    href: '/giai-phap/giai-phap-2#du-an',
+      'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=900&auto=format&fit=crop&q=80',
+    alt: 'Dự án VFM',
+    tag: 'Đối tác 3 năm',
+    href: '/giai-phap/giai-phap-2/du-an/vfm',
     stats: [
-      { value: '15.000', label: 'sản phẩm' },
-      { value: '21 ngày', label: 'bàn giao' },
+      { value: '1.100', label: 'sản phẩm' },
+      { value: '35 ngày', label: 'triển khai' },
     ],
   } satisfies HomeFeaturedCase,
   secondary: [
     {
-      name: 'Bệnh viện Vinmec',
+      name: 'BV Răng Hàm Mặt Sài Gòn',
       image:
-        'https://lh3.googleusercontent.com/aida-public/AB6AXuDxP6CFZlp3ggmwGEczcGuTImTcqVax4g1QmQUxHl1DEUyVAHj0mdNbxUD-EqS0F3NQNzNfbQN0ax9SIZ62ID0h1-x0UQyRqMxIcqji0Cu5nzwa_SLGBitLXLnORAxIjqlduZZUPE6upya0xjD-YldIjtwbptXZof83YaJpRItUxQzd9vn77CMyaTSd27VeqXiC6LQ61cE-PDK4tWlWjVlq7PuD1BVQYDnywiA_dC08kRpIMCQiDZhZG7GEehac2rkhi_CnAmr-JWA',
-      alt: 'Dự án Vinmec',
-      href: '/giai-phap/giai-phap-4#du-an',
-      statHighlight: { value: '2.500+', suffix: 'sp kháng khuẩn', valueClass: 'gold' },
+        'https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=900&auto=format&fit=crop&q=80',
+      alt: 'Dự án BV Răng Hàm Mặt Sài Gòn',
+      href: '/giai-phap/giai-phap-4/du-an/bv-rang-ham-mat-sai-gon',
+      statHighlight: { value: '650', suffix: 'sp Scrub & Blouse', valueClass: 'gold' },
     },
     {
-      name: 'Highland Coffee',
+      name: 'SAVISCO',
       image:
-        'https://lh3.googleusercontent.com/aida-public/AB6AXuCWOKUFLheAUb34f4xZiQpBUrQkm8680rBXAVAzao8_wuHeyIyWND-1cnAQbOA80ZWqijWzCjrT8gQCg3KjzFmJBymeebvX3xAyN1bsI0U7rmrmGsrCXdZem8Gvt-DNISTMBEE0l3VQmRo_xJBZp5yZs4uww3eEz7DQr_tCWj9bUtE2NbhImbI_LOorZXgpwuA9vWl8aOidIp9nNAcBCCDzqHtly-0yVY4MutTrPKvDAl_j0ErFC1I8gCoeb9QJJAMslPyO1ylQAMk',
-      alt: 'Dự án Highland Coffee',
-      href: '/giai-phap/giai-phap-3#du-an',
-      statHighlight: { value: '8.000+', suffix: 'đồng phục', valueClass: 'white' },
+        'https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?w=900&auto=format&fit=crop&q=80',
+      alt: 'Dự án SAVISCO',
+      href: '/giai-phap/giai-phap-3/du-an/savisco',
+      statHighlight: { value: '2.800', suffix: 'sản phẩm', valueClass: 'white' },
     },
   ] satisfies HomeFeaturedCase[],
   quote: {
-    text: 'Chuẩn hóa màu–form–logo. Sản phẩm vượt kỳ vọng về thẩm mỹ và tiện dụng.',
-    author: 'BIDV Team',
+    text: 'Xây dựng hình ảnh đội ngũ chuyên nghiệp và đồng bộ — chất lượng ổn định qua nhiều đợt triển khai.',
+    author: 'VFM Team',
   },
   contact: {
     email: 'dongphuc@tanphamgia.com.vn',
     phone: '0843 406 406',
     phoneHref: 'tel:0843406406',
     ctaLabel: 'Nhận tư vấn',
-    ctaHref: '/#lien-he',
+    ctaHref: '/lien-he',
   },
-  allProjectsHref: '/giai-phap/giai-phap-2#du-an',
+  allProjectsHref: '/khach-hang',
 };
 
 /** Bài viết tin tức — section #tin-tuc (sẽ đồng bộ WordPress sau) */
@@ -445,20 +466,23 @@ export const clientCaseStudies: ClientCaseStudy[] = [
   {
     slug: 'coca-cola-philippines',
     title: 'Coca-Cola Philippines — Đồng bộ chất lượng xuyên suốt chuỗi sản xuất',
-    excerpt: 'Case study triển khai đồng phục quy mô lớn với QC đa tầng và quy trình phối hợp rõ ràng.',
+    excerpt:
+      'Case study triển khai đồng phục quy mô lớn với QC đa tầng và quy trình phối hợp rõ ràng.',
     client: 'Coca-Cola Philippines',
     image:
-      'https://lh3.googleusercontent.com/aida-public/AB6AXuCsHW1aJpVFWnpH39FYgPE9nxKt20ID9T5ETgBsaKcCdGdmjIlA586VOv3j7sz0esr4rBKfIDJVL-kIi699r7OURxCTSkj-oMtppe8zPTzWpgeB9YH8fpCxXQ2KCtPtHDZYkQp3KB-sIXKciugPRKO1KFY1qybuCq7qTF1IkWjNalDYL5LzF4e778S4xOmD8OYzhZe9Am8zuf0AEusCD2icavaTQsNpaaWU9bPB8HoRKnOUoU8z1ekiu1il9KhuEWYnIJymxRa2W50D',
+      'https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=900&auto=format&fit=crop&q=80',
     alt: 'Dự án Coca-Cola Philippines',
+    href: '/giai-phap/giai-phap-2/du-an/coca-cola-philippines',
   },
   {
-    slug: 'bidv-dong-phuc',
-    title: 'BIDV — Chuẩn hóa hình ảnh thương hiệu trên toàn hệ thống',
-    excerpt: 'Hơn 15.000 sản phẩm bàn giao trong 21 ngày, đồng bộ màu sắc và form dáng.',
-    client: 'BIDV',
+    slug: 'vfm',
+    title: 'VFM — Chuẩn hóa hình ảnh đội ngũ văn phòng tài chính',
+    excerpt: '1.100 sản phẩm triển khai trong 35 ngày, duy trì chất lượng qua nhiều đợt bổ sung.',
+    client: 'VFM',
     image:
-      'https://lh3.googleusercontent.com/aida-public/AB6AXuDDcz4grX0Tjw51FTdB5HZbTmcrYakXnp7WFjK-2VEfZcR45qJg81c0tcljJFjAwIJTFzyhkp3cYgFg-pBIktGRpQoqXaQKlYSVtvmMkicnivUhEnczXAOlUWn7p3aZX0U1qcowjy_97kPA_r3-PivXNSaDbFOOOX_6jiBJmo4A0j0D9e3qRVIUh7laSY54Gct149JLW1vsGGGj8J52tBRRd7ZXIWlIfTCG2X92nrw60rSTjemYH3_FC4-qYNw2ligyY7SaiNTBUHs',
-    alt: 'Dự án BIDV',
+      'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=900&auto=format&fit=crop&q=80',
+    alt: 'Dự án VFM',
+    href: '/giai-phap/giai-phap-2/du-an/vfm',
   },
   {
     slug: 'king-group',
@@ -466,8 +490,9 @@ export const clientCaseStudies: ClientCaseStudy[] = [
     excerpt: 'Giải pháp đồng phục cho môi trường sản xuất với chất liệu bền và tiêu chuẩn an toàn lao động.',
     client: 'King Group',
     image:
-      'https://lh3.googleusercontent.com/aida-public/AB6AXuD7szr7Elx-oAqCEnir2uiBqNE-4WpmIm10Kj1YsgXyu1XMFvP0qvIXYrsMpRh9sztusxsq8_7_MFPstpomb4RaDeTg9J3ldf2CSKwYUq91qGdHVM6Dm9YkfE3Rdfay_snBPthtK7WWCq_NFHZ3j3Kua1MgJAT-qQPXwlpAIQIDLIpk4Njn_msEnsXh9DyyRtwkvdNU5u10NXpGyYseM_HBo6gwnr6IFqeZ9gHXI1CrvRQnXAxx3UyIT7UIbTDEMKjd1gdxbZwWKrKl',
+      'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=900&auto=format&fit=crop&q=80',
     alt: 'Dự án King Group',
+    href: '/giai-phap/giai-phap-1/du-an/king-group',
   },
 ];
 

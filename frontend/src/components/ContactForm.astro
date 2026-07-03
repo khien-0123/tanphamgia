@@ -1,5 +1,6 @@
 ---
 import { siteContact } from '../data/site';
+import { formInputClass, formLabelClass } from '../lib/form-classes';
 
 const quantityOptions = [
   'Dưới 100 sản phẩm',
@@ -23,10 +24,6 @@ const industryOptions = [
   'Khác',
 ];
 
-const formLabelClass =
-  'block text-xs font-bold tracking-[0.08em] uppercase text-ink-dark mb-2';
-const formInputClass =
-  'block w-full py-3 px-0 border-0 border-b border-border-subtle bg-transparent text-ink-dark text-[0.9375rem] outline-none transition-[border-color] duration-200 focus:border-accent-gold';
 ---
 
 <form class="contact-form space-y-5" id="contact-form" method="post" action="#">

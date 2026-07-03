@@ -1,0 +1,75 @@
+---
+import { productionCapacity } from '../../data/gioi-thieu';
+import { mediaTextRowClass, mediaTextCellClass, mediaTextImgClass } from '../../lib/about-layout';
+---
+
+<section class="py-10 md:py-24 bg-white border-b border-border-subtle" id="nang-luc">
+  <div class="max-w-container-max-width mx-auto px-6 md:px-8">
+    <h2 data-reveal class="font-headline-md text-2xl md:text-4xl font-bold text-ink-dark mb-4">
+      Quy mô & Kiểm soát chất lượng
+    </h2>
+    <p data-reveal class="text-text-muted max-w-3xl leading-relaxed mb-10 md:mb-12">
+      {productionCapacity.intro}
+    </p>
+
+    <dl
+      class="grid grid-cols-2 gap-y-6 gap-x-4 md:grid-cols-3 lg:grid-cols-6 lg:gap-0 mb-10 pb-10 md:mb-20 md:pb-20 border-b border-border-subtle"
+    >
+      {
+        productionCapacity.stats.map((stat, i) => (
+          <div class:list={[i > 0 && 'lg:border-l lg:border-border-subtle lg:pl-5']}>
+            <dt class="font-extrabold text-base text-ink-dark mb-1">{stat.value}</dt>
+            <dd class="text-xs text-text-muted leading-[1.45] m-0">{stat.label}</dd>
+          </div>
+        ))
+      }
+    </dl>
+
+    <div data-reveal class={`${mediaTextRowClass} mb-10 md:mb-20`}>
+      <figure class={`${mediaTextCellClass} m-0`}>
+        <img
+          alt="Nhà xưởng Tân Phạm Gia"
+          class={mediaTextImgClass}
+          src={productionCapacity.factoryImage}
+          loading="lazy"
+        />
+      </figure>
+      <div class={mediaTextCellClass}>
+        <h3 class="font-headline-md text-2xl md:text-3xl font-bold mb-4 text-ink-dark">
+          Xưởng may 2.000m² đạt chuẩn quốc tế
+        </h3>
+        <p class="text-text-muted leading-relaxed">
+          Với hệ thống máy móc hiện đại nhập khẩu từ Nhật Bản và Đức, Tân Phạm Gia sở hữu năng lực
+          đáp ứng những đơn hàng khắt khe nhất về kỹ thuật và mỹ thuật.
+        </p>
+      </div>
+    </div>
+
+    <div data-reveal class={`${mediaTextRowClass} md:[direction:rtl] [&>*]:md:[direction:ltr]`}>
+      <figure class={`${mediaTextCellClass} m-0`}>
+        <img
+          alt="Quy trình QC"
+          class={mediaTextImgClass}
+          src={productionCapacity.qcImage}
+          loading="lazy"
+        />
+      </figure>
+      <div class={mediaTextCellClass}>
+        <h3 class="font-headline-md text-2xl md:text-3xl font-bold mb-4 text-ink-dark">
+          {productionCapacity.qcTitle}
+        </h3>
+        <p class="text-text-muted mb-6 leading-relaxed">{productionCapacity.qcDesc}</p>
+        <ul class="grid grid-cols-2 gap-x-4 gap-y-3 max-w-[28rem]">
+          {
+            productionCapacity.qcStandards.map((std) => (
+              <li class="flex items-center gap-2 font-semibold text-sm text-ink-dark">
+                <span class="w-1.5 h-1.5 rounded-full bg-accent-gold shrink-0" />
+                {std}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

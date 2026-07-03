@@ -1,0 +1,34 @@
+---
+import { brandStory } from '../../data/gioi-thieu';
+import { mediaTextRowClass, mediaTextCellClass, mediaTextImgClass } from '../../lib/about-layout';
+---
+
+<section class="py-10 md:py-24 bg-white border-b border-border-subtle">
+  <div data-reveal class="max-w-container-max-width mx-auto px-6 md:px-8">
+    <div class={mediaTextRowClass}>
+      <figure class={`${mediaTextCellClass} order-2 md:order-1 m-0`}>
+        <img
+          alt="Câu chuyện thương hiệu Tân Phạm Gia"
+          class={mediaTextImgClass}
+          src={brandStory.image}
+          loading="lazy"
+        />
+      </figure>
+      <div class={`${mediaTextCellClass} order-1 md:order-2`}>
+        <h2
+          class="text-pretty font-headline-md text-2xl md:text-3xl font-bold text-ink-dark mb-6"
+        >
+          <span class="md:hidden">
+            {brandStory.titleLines[0]}
+            <br />
+            Một Sản Phẩm May Mặc Chất{'\u00a0'}Lượng
+          </span>
+          <span class="hidden md:inline">{brandStory.title}</span>
+        </h2>
+        <div class="space-y-4 text-text-muted leading-relaxed">
+          {brandStory.paragraphs.map((p) => <p>{p}</p>)}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
