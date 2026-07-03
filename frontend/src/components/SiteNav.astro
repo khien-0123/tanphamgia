@@ -22,20 +22,24 @@ const {
   items = mainNavigation,
   ctaHref = '/tai-lieu',
 } = Astro.props;
+
+const navShell = [
+  'group fixed top-0 w-full z-50 border-b transition-all duration-300 backdrop-blur-lg',
+  solid
+    ? 'nav-scrolled bg-white/95 border-border-subtle shadow-soft'
+    : 'bg-white/10 border-white/15 [&.nav-scrolled]:bg-white/95 [&.nav-scrolled]:border-border-subtle [&.nav-scrolled]:shadow-soft',
+];
+
+const navLinkBase =
+  'text-sm font-medium transition-colors hover:text-accent-gold text-white/90 group-[.nav-scrolled]:text-on-surface';
+
+const menuToggle =
+  'lg:hidden flex items-center justify-center w-10 h-10 rounded-xl border border-white/30 bg-white/[0.08] text-white cursor-pointer transition-colors hover:bg-white/[0.16] group-[.nav-scrolled]:border-border-subtle group-[.nav-scrolled]:bg-white group-[.nav-scrolled]:text-ink-dark group-[.nav-scrolled]:hover:bg-[#f4f7f6] [&_.material-symbols-outlined]:text-2xl';
 ---
 
-<nav
-  id="site-nav"
-  class:list={[
-    'fixed top-0 w-full z-50 border-b transition-all duration-300',
-    solid
-      ? 'nav-scrolled bg-white/95 backdrop-blur-lg border-border-subtle shadow-soft'
-      : 'bg-white/10 backdrop-blur-lg border-white/15',
-  ]}
-  data-nav-solid={solid ? 'true' : undefined}
->
+<nav id="site-nav" class:list={navShell} data-nav-solid={solid ? 'true' : undefined}>
   <div
-    class="flex justify-between items-center px-6 md:px-8 py-3.5 max-w-container-max-width mx-auto min-w-0"
+    class="flex justify-between items-center px-4 min-[400px]:px-6 md:px-8 py-3.5 max-w-container-max-width mx-auto min-w-0"
   >
     <SiteBrandLogo class="shrink-0" />
 
@@ -43,11 +47,7 @@ const {
       {
         items.map((item) => (
           <a
-            class:list={[
-              'nav-link text-sm font-medium transition-colors',
-              solid ? 'text-on-surface hover:text-accent-gold' : 'text-white/90 hover:text-accent-gold',
-              currentPath === item.href && 'nav-link-active text-accent-gold',
-            ]}
+            class:list={[navLinkBase, currentPath === item.href && 'text-accent-gold']}
             href={item.href}
           >
             {item.label}
@@ -56,16 +56,16 @@ const {
       }
     </div>
 
-    <div class="site-nav-actions flex items-center gap-2 shrink-0">
+    <div class="flex items-center gap-1.5 min-[400px]:gap-2 shrink-0">
       <a
         href={ctaHref}
-        class="site-nav-cta bg-accent-gold text-ink-dark px-4 py-2 sm:px-6 sm:py-2.5 rounded-full text-xs sm:text-sm font-bold hover:shadow-gold hover:scale-105 transition-all active:scale-95 shadow-soft whitespace-nowrap"
+        class="bg-accent-gold text-ink-dark px-2.5 min-[400px]:px-4 py-2 sm:px-6 sm:py-2.5 rounded-full text-[0.6875rem] min-[400px]:text-xs sm:text-sm font-bold hover:shadow-gold hover:scale-105 transition-all active:scale-95 shadow-soft whitespace-nowrap"
       >
         Nhận Báo Giá
       </a>
       <button
         type="button"
-        class="site-nav-menu-toggle lg:hidden"
+        class={menuToggle}
         aria-expanded="false"
         aria-controls="site-nav-mobile"
         aria-label="Mở menu điều hướng"
@@ -76,15 +76,28 @@ const {
   </div>
 </nav>
 
-<!-- Menu mobile — panel trượt từ phải -->
-<div id="site-nav-mobile" class="site-nav-mobile lg:hidden" aria-hidden="true">
-  <div class="site-nav-mobile-backdrop" data-nav-close tabindex="-1"></div>
-  <nav class="site-nav-mobile-panel" aria-label="Menu điều hướng">
-    <header class="site-nav-mobile-hero">
+<div
+  id="site-nav-mobile"
+  class="group/mobile lg:hidden fixed inset-0 z-[60] h-dvh pointer-events-none invisible overflow-hidden [&.is-open]:pointer-events-auto [&.is-open]:visible"
+  aria-hidden="true"
+>
+  <div
+    class="absolute inset-0 bg-ink-dark/45 opacity-0 transition-opacity duration-[280ms] ease-out group-[.is-open]/mobile:opacity-100"
+    data-nav-close
+    tabindex="-1"
+  >
+  </div>
+  <nav
+    class="absolute top-0 w-[min(20rem,calc(100vw-1.25rem))] max-h-dvh pr-[env(safe-area-inset-right,0)] bg-[#f8faf9] shadow-[-12px_0_40px_rgba(14,38,64,0.16)] overflow-x-hidden overflow-y-auto overscroll-y-contain touch-pan-y [-webkit-overflow-scrolling:touch] transition-[right] duration-[320ms] ease-nav-panel -right-[min(20rem,calc(100vw-1.25rem))] group-[.is-open]/mobile:right-0"
+    aria-label="Menu điều hướng"
+  >
+    <header
+      class="sticky top-0 z-[2] flex items-center justify-between gap-3 px-4 pt-[calc(0.75rem+env(safe-area-inset-top,0))] pb-4 bg-gradient-to-br from-ink-dark from-0% via-[#163a5c] via-[58%] to-[#1a4569] to-100% after:absolute after:left-0 after:right-0 after:bottom-0 after:h-[3px] after:bg-gradient-to-r after:from-accent-gold after:via-[#ffe08a] after:to-accent-gold"
+    >
       <SiteBrandLogo onDark navClose />
       <button
         type="button"
-        class="site-nav-menu-close"
+        class="flex shrink-0 items-center justify-center w-9 h-9 border border-white/[0.18] rounded-[0.625rem] bg-white/[0.08] text-white cursor-pointer transition-colors hover:bg-white/[0.16]"
         aria-label="Đóng menu"
         data-nav-close
       >
@@ -92,20 +105,27 @@ const {
       </button>
     </header>
 
-    <ul class="site-nav-mobile-list">
+    <ul class="list-none m-0 px-3.5 pt-4 pb-1 flex flex-col gap-1">
       {
         items.map((item, index) => (
-          <li class="site-nav-mobile-item" style={`--nav-i: ${index}`}>
+          <li
+            class="opacity-0 translate-x-3 group-[.is-open]/mobile:animate-navItemIn"
+            style={`animation-delay: calc(0.04s * ${index} + 0.08s)`}
+          >
             <a
               class:list={[
-                'site-nav-mobile-link',
-                currentPath === item.href && 'site-nav-mobile-link-active',
+                'block px-2.5 py-3 rounded-xl no-underline text-ink-dark transition-[background,transform] hover:bg-white',
+                currentPath === item.href && 'bg-white shadow-[0_2px_12px_rgba(14,38,64,0.06)]',
               ]}
               href={item.href}
             >
-              <span class="site-nav-mobile-link-text">
-                <span class="site-nav-mobile-link-label">{item.label}</span>
-                {item.desc && <span class="site-nav-mobile-link-desc">{item.desc}</span>}
+              <span class="flex flex-col gap-0.5 min-w-0">
+                <span class="text-[0.9375rem] font-bold leading-snug">{item.label}</span>
+                {item.desc && (
+                  <span class="text-xs font-medium text-text-muted leading-snug max-h-[700px]:text-[0.6875rem]">
+                    {item.desc}
+                  </span>
+                )}
               </span>
             </a>
           </li>
@@ -113,11 +133,21 @@ const {
       }
     </ul>
 
-    <footer class="site-nav-mobile-footer">
-      <a href={siteCta.primaryHref} class="site-nav-mobile-cta site-nav-mobile-cta--primary" data-nav-close>
+    <footer
+      class="shrink-0 flex flex-col gap-2.5 mt-0 px-3.5 pt-2.5 pb-[calc(0.875rem+env(safe-area-inset-bottom,0))] border-t border-[#e7eeeb] bg-[#f8faf9]"
+    >
+      <a
+        href={siteCta.primaryHref}
+        class="block w-full py-3 px-4 rounded-full text-sm font-bold text-center no-underline bg-accent-gold text-ink-dark shadow-[0_4px_14px_rgba(255,201,51,0.35)] transition-[transform,box-shadow,background] active:scale-[0.98]"
+        data-nav-close
+      >
         {siteCta.primaryLabel}
       </a>
-      <a href={siteCta.secondaryHref} class="site-nav-mobile-cta site-nav-mobile-cta--secondary" data-nav-close>
+      <a
+        href={siteCta.secondaryHref}
+        class="block w-full py-3 px-4 rounded-full text-sm font-bold text-center no-underline border border-border-subtle bg-white text-ink-dark transition-[transform,box-shadow,background] active:scale-[0.98]"
+        data-nav-close
+      >
         {siteCta.secondaryLabel}
       </a>
     </footer>

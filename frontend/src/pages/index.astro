@@ -6,6 +6,7 @@ import HomeNewsSection from '../components/HomeNewsSection.astro';
 import HomeClientLogos from '../components/HomeClientLogos.astro';
 import SiteCtaSection from '../components/SiteCtaSection.astro';
 import SiteFooter from '../components/SiteFooter.astro';
+import { solutionBoxHome } from '../lib/solution-theme';
 import {
   seo,
   navigation,
@@ -15,6 +16,9 @@ import {
   certificates,
   heroMedia,
 } from '../data/site';
+
+const formInputClass =
+  'block w-full py-3 px-0 border-0 border-b border-border-subtle bg-transparent text-ink-dark text-[0.9375rem] outline-none transition-[border-color] duration-200 focus:border-accent-gold';
 ---
 
 <BaseLayout title={seo.title} description={seo.description}>
@@ -25,7 +29,10 @@ import {
     class="relative flex items-center justify-center overflow-hidden pt-24 pb-8 md:pt-28 md:pb-16 min-h-0 sm:min-h-[480px] md:min-h-[520px] lg:min-h-[560px]"
   >
     <div class="absolute inset-0 z-0">
-      <div class="absolute inset-0 hero-gradient z-10"></div>
+      <div
+        class="absolute inset-0 z-10 bg-gradient-to-br from-ink-dark/88 via-ink-dark/55 to-[rgba(16,44,77,0.25)]"
+      >
+      </div>
       {
         heroMedia.video ? (
           <video
@@ -87,29 +94,36 @@ import {
   <section class="py-10 md:py-20 bg-white border-b border-border-subtle" id="gioi-thieu">
     <div class="max-w-container-max-width mx-auto px-6 md:px-8">
       <div class="max-w-3xl mx-auto text-center mb-8 md:mb-14">
-        <h2 class="gioi-thieu-title font-headline-md font-bold text-ink-dark mb-5">
-          <span class="gioi-thieu-title-line md:hidden">Tân Phạm Gia – Chuyên sản xuất</span>
-          <span class="gioi-thieu-title-line md:hidden">đồng{'\u00a0'}phục &amp; phát triển sản phẩm</span>
-          <span class="gioi-thieu-title-line md:hidden">may{'\u00a0'}mặc dành cho{'\u00a0'}B2B</span>
+        <h2
+          class="text-pretty font-headline-md font-bold text-ink-dark mb-5 text-xl leading-snug md:text-4xl md:leading-tight"
+        >
+          <span class="block md:hidden">Tân Phạm Gia – Chuyên sản xuất</span>
+          <span class="block md:hidden">đồng{'\u00a0'}phục &amp; phát triển sản phẩm</span>
+          <span class="block md:hidden">may{'\u00a0'}mặc dành cho{'\u00a0'}B2B</span>
           <span class="hidden md:inline">
             Tân Phạm Gia – Chuyên sản xuất đồng phục & phát triển sản phẩm may mặc dành cho B2B
           </span>
         </h2>
-        <p class="gioi-thieu-text text-text-muted text-base md:text-lg leading-relaxed mb-4">
+        <p class="text-pretty text-text-muted text-base md:text-lg leading-relaxed mb-4">
           Với hơn 23 năm kinh nghiệm trong ngành thời trang và may mặc, Tân Phạm Gia phát triển
           những giải pháp đồng phục giúp doanh nghiệp xây dựng hình ảnh chuyên nghiệp, đồng bộ và&nbsp;khác biệt.
         </p>
-        <p class="gioi-thieu-text text-text-muted text-base md:text-lg leading-relaxed">
+        <p class="text-pretty text-text-muted text-base md:text-lg leading-relaxed">
           Chúng tôi ứng dụng tiêu chuẩn tỷ lệ vàng, Rập 3D và may trên mannequin — tạo sản phẩm
           tôn dáng, thoải mái và phù hợp nhiều vóc&nbsp;dáng.
         </p>
       </div>
-      <dl class="about-stats-strip about-stats-strip--4 max-w-4xl mx-auto">
+      <dl class="grid grid-cols-2 gap-x-4 gap-y-6 md:grid-cols-4 md:gap-x-8 max-w-4xl mx-auto">
         {
           stats.map((item, i) => (
-            <div class:list={['about-stat text-center', i > 0 && 'about-stat--divided']}>
-              <dt class="about-stat-value text-3xl md:text-4xl font-extrabold">{item.value}</dt>
-              <dd class="about-stat-label">{item.label}</dd>
+            <div
+              class:list={[
+                'text-center m-0',
+                i > 0 && 'lg:border-l lg:border-border-subtle lg:pl-5',
+              ]}
+            >
+              <dt class="text-3xl md:text-4xl font-extrabold text-ink-dark mb-1">{item.value}</dt>
+              <dd class="text-xs text-text-muted leading-snug m-0">{item.label}</dd>
             </div>
           ))
         }
@@ -121,18 +135,24 @@ import {
   <section class="py-10 md:py-24 bg-white border-b border-border-subtle" id="tai-sao">
     <div class="max-w-container-max-width mx-auto px-6 md:px-8">
       <div class="text-center mb-8 md:mb-14 max-w-2xl mx-auto">
-        <h2 class="tai-sao-title font-headline-md font-bold text-ink-dark">
+        <h2
+          class="font-headline-md font-bold text-ink-dark text-xl leading-snug md:text-4xl md:leading-tight"
+        >
           Tiên phong "Thời trang hóa"<br class="md:hidden" />
           đồng phục doanh nghiệp
         </h2>
       </div>
-      <div class="about-value-grid about-value-grid--4">
+      <div class="grid gap-5 sm:grid-cols-2 sm:gap-x-12 sm:gap-y-8 lg:grid-cols-4 lg:gap-x-4">
         {
           whyChoose.map((item) => (
-            <div class="about-value-item">
-              <span class="about-value-num">{item.num}</span>
+            <div class="flex gap-4 items-start lg:flex-col lg:gap-3 lg:min-w-0">
+              <span class="shrink-0 font-extrabold text-sm text-accent-gold leading-snug">
+                {item.num}
+              </span>
               <div>
-                <h3 class="about-value-title font-bold text-base md:text-lg text-ink-dark mb-2">{item.title}</h3>
+                <h3 class="font-bold text-base md:text-lg text-ink-dark mb-2 lg:text-sm lg:whitespace-nowrap">
+                  {item.title}
+                </h3>
                 <p class="text-text-muted text-sm leading-relaxed">{item.desc}</p>
               </div>
             </div>
@@ -149,19 +169,21 @@ import {
   >
     <div class="max-w-container-max-width mx-auto px-6 md:px-8">
       <div class="text-center mb-8 md:mb-16 max-w-3xl mx-auto">
-        <h2 class="giai-phap-heading font-headline-md font-bold mb-4 text-ink-dark">
+        <h2
+          class="font-headline-md font-bold mb-4 text-ink-dark text-xl leading-snug tracking-tight min-[390px]:text-[1.3125rem] text-balance md:text-4xl md:leading-tight md:tracking-normal"
+        >
           Giải pháp đồng phục toàn&nbsp;diện
         </h2>
-        <p class="giai-phap-text text-text-muted text-sm md:text-base max-w-3xl mx-auto leading-relaxed">
+        <p class="text-pretty text-text-muted text-sm md:text-base max-w-3xl mx-auto leading-relaxed">
           Lắng nghe và thấu hiểu để đưa ra giải pháp phù hợp nhất cho từng mô hình doanh&nbsp;nghiệp.
         </p>
       </div>
-      <div class="solution-box-grid solution-box-grid--compact solution-box-grid--home">
+      <div class={solutionBoxHome.grid}>
         {
           solutions.map((item, index) => (
-            <article class="solution-box-item group">
-              <a class="solution-box-summary no-underline" href={`/giai-phap/${item.slug}`}>
-                <figure class="solution-box-media m-0">
+            <article class:list={[solutionBoxHome.item, 'group']}>
+              <a class={solutionBoxHome.summary} href={`/giai-phap/${item.slug}`}>
+                <figure class={solutionBoxHome.media}>
                   <img
                     alt={item.title}
                     class="w-full h-full object-cover"
@@ -170,10 +192,10 @@ import {
                     onerror="this.onerror=null;this.src='https://lh3.googleusercontent.com/aida-public/AB6AXuD7szr7Elx-oAqCEnir2uiBqNE-4WpmIm10Kj1YsgXyu1XMFvP0qvIXYrsMpRh9sztusxsq8_7_MFPstpomb4RaDeTg9J3ldf2CSKwYUq91qGdHVM6Dm9YkfE3Rdfay_snBPthtK7WWCq_NFHZ3j3Kua1MgJAT-qQPXwlpAIQIDLIpk4Njn_msEnsXh9DyyRtwkvdNU5u10NXpGyYseM_HBo6gwnr6IFqeZ9gHXI1CrvRQnXAxx3UyIT7UIbTDEMKjd1gdxbZwWKrKl'"
                   />
                 </figure>
-                <span class="solution-box-number">0{index + 1}</span>
-                <h3 class="solution-box-title">{item.title}</h3>
-                <p class="solution-box-desc">{item.desc}</p>
-                <span class="solution-box-link">Xem chi tiết</span>
+                <span class={solutionBoxHome.number}>0{index + 1}</span>
+                <h3 class={solutionBoxHome.title}>{item.title}</h3>
+                <p class={solutionBoxHome.desc}>{item.desc}</p>
+                <span class={solutionBoxHome.link}>Xem chi tiết</span>
               </a>
             </article>
           ))
@@ -253,35 +275,20 @@ import {
             <label class="font-eyebrow text-xs text-ink-dark mb-2 block uppercase tracking-wider"
               >Họ và tên</label
             >
-            <input
-              class="form-input border-b px-0"
-              placeholder="Nguyễn Văn A"
-              type="text"
-              name="name"
-            />
+            <input class={formInputClass} placeholder="Nguyễn Văn A" type="text" name="name" />
           </div>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div>
               <label class="font-eyebrow text-xs text-ink-dark mb-2 block uppercase tracking-wider"
                 >Tên công ty</label
               >
-              <input
-                class="form-input border-b px-0"
-                placeholder="Công ty CP ABC"
-                type="text"
-                name="company"
-              />
+              <input class={formInputClass} placeholder="Công ty CP ABC" type="text" name="company" />
             </div>
             <div>
               <label class="font-eyebrow text-xs text-ink-dark mb-2 block uppercase tracking-wider"
                 >Email</label
               >
-              <input
-                class="form-input border-b px-0"
-                placeholder="email@congty.vn"
-                type="email"
-                name="email"
-              />
+              <input class={formInputClass} placeholder="email@congty.vn" type="email" name="email" />
             </div>
           </div>
           <button
@@ -305,10 +312,10 @@ import {
       <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
         {
           certificates.map((cert) => (
-            <figure class="about-cert-figure m-0">
+            <figure class="m-0 group">
               <img
                 alt={cert.title}
-                class="w-full aspect-[4/3] object-cover rounded-lg"
+                class="w-full aspect-[4/3] object-cover rounded-lg transition-opacity duration-200 group-hover:opacity-90"
                 loading="lazy"
                 src={cert.image}
               />

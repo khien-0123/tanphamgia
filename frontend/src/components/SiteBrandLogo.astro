@@ -2,22 +2,35 @@
 import { siteBrand } from '../data/site';
 
 interface Props {
-  /** Dùng filter sáng cho nền tối (hero header / menu mobile) */
   onDark?: boolean;
+  footer?: boolean;
   class?: string;
   navClose?: boolean;
 }
 
-const { onDark = false, class: className, navClose = false } = Astro.props;
+const { onDark = false, footer = false, class: className, navClose = false } = Astro.props;
+
+const logoImgBase =
+  'h-7 w-auto object-contain transition-[filter] duration-200 max-[399px]:h-7 max-[399px]:max-w-[min(40vw,9.5rem)]';
+const logoImgHeader = 'max-w-[min(44vw,11.5rem)] md:h-9 md:max-w-[13rem]';
+const logoImgFooter = 'h-9 max-w-[13.5rem] md:h-10 md:max-w-[14.5rem]';
+const logoGoldFilter =
+  '[filter:brightness(0)_saturate(100%)_invert(84%)_sepia(28%)_saturate(2476%)_hue-rotate(359deg)_brightness(103%)_contrast(101%)]';
+const logoGoldOnScroll =
+  'group-[:not(.nav-scrolled)_&]:[filter:brightness(0)_saturate(100%)_invert(84%)_sepia(28%)_saturate(2476%)_hue-rotate(359deg)_brightness(103%)_contrast(101%)]';
 ---
 
 <a
   href={siteBrand.homeHref}
-  class:list={['site-brand-logo-link', onDark && 'site-brand-logo-link--on-dark', className]}
+  class:list={['inline-flex items-center no-underline leading-none', className]}
   {...(navClose ? { 'data-nav-close': true } : {})}
 >
   <img
-    class="site-brand-logo"
+    class:list={[
+      logoImgBase,
+      footer ? logoImgFooter : logoImgHeader,
+      onDark || footer ? logoGoldFilter : logoGoldOnScroll,
+    ]}
     src={siteBrand.logo}
     alt={siteBrand.name}
     width="200"

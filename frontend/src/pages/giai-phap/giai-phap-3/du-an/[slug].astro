@@ -5,6 +5,7 @@ import SiteFooter from '../../../../components/SiteFooter.astro';
 import SiteCtaSection from '../../../../components/SiteCtaSection.astro';
 import CaseStudyStory from '../../../../components/CaseStudyStory.astro';
 import { duAnGiaiPhap3 } from '../../../../data/giai-phap-3-du-an';
+import { getSolutionTheme, solutionBoxCompact } from '../../../../lib/solution-theme';
 
 export function getStaticPaths() {
   return duAnGiaiPhap3.map((project) => ({
@@ -15,6 +16,7 @@ export function getStaticPaths() {
 
 const { project } = Astro.props;
 const otherProjects = duAnGiaiPhap3.filter((item) => item.slug !== project.slug);
+const solutionTheme = getSolutionTheme(3);
 ---
 
 <BaseLayout
@@ -22,8 +24,8 @@ const otherProjects = duAnGiaiPhap3.filter((item) => item.slug !== project.slug)
   description={`Case study ${project.name} — đồng phục FMCG & chuỗi phân phối.`}
 >
   <SiteNav solid currentPath="/giai-phap/giai-phap-3" />
-  <main class="solution-detail-page solution-style-industrial">
-    <section class="solution-detail-section pt-28 md:pt-32">
+  <main class={solutionTheme.page}>
+    <section class:list={[solutionTheme.section, 'pt-28 md:pt-32']}>
       <div class="max-w-container-max-width mx-auto px-6 md:px-8">
         <a
           href="/giai-phap/giai-phap-3#du-an"
@@ -31,7 +33,7 @@ const otherProjects = duAnGiaiPhap3.filter((item) => item.slug !== project.slug)
         >
           ← Quay lại Giải pháp 3
         </a>
-        <div class="solution-hero-grid grid lg:grid-cols-2 gap-6 md:gap-10 items-start mt-5">
+        <div class={solutionTheme.heroGrid}>
           <div>
             <h1 class="text-3xl md:text-5xl font-bold leading-tight mb-4">{project.name}</h1>
             <p class="text-text-muted text-sm md:text-base mb-2">{project.stats}</p>
@@ -44,14 +46,14 @@ const otherProjects = duAnGiaiPhap3.filter((item) => item.slug !== project.slug)
             <img
               src={project.image}
               alt={project.name}
-              class="w-full aspect-[4/3] object-cover rounded-lg border-2 border-[#f2c300]"
+              class={solutionTheme.heroImageDetail}
             />
           </figure>
         </div>
       </div>
     </section>
 
-    <section class="solution-detail-section">
+    <section class={solutionTheme.section}>
       <div class="max-w-container-max-width mx-auto px-6 md:px-8">
         <CaseStudyStory
           challenges={project.challenges}
@@ -61,18 +63,18 @@ const otherProjects = duAnGiaiPhap3.filter((item) => item.slug !== project.slug)
       </div>
     </section>
 
-    <section class="solution-detail-section">
+    <section class={solutionTheme.section}>
       <div class="max-w-container-max-width mx-auto px-6 md:px-8">
         <h2 class="text-2xl md:text-3xl font-bold mb-6">Dự án khác</h2>
-        <div class="solution-box-grid solution-box-grid--compact">
+        <div class={solutionBoxCompact.grid}>
           {
             otherProjects.map((item) => (
-              <article class="solution-box-item">
+              <article class={solutionBoxCompact.item}>
                 <a
-                  class="solution-box-summary no-underline"
+                  class={solutionBoxCompact.summary}
                   href={`/giai-phap/giai-phap-3/du-an/${item.slug}`}
                 >
-                  <figure class="solution-box-media m-0">
+                  <figure class={solutionBoxCompact.media}>
                     <img
                       class="w-full h-full object-cover"
                       src={item.image}
@@ -80,9 +82,9 @@ const otherProjects = duAnGiaiPhap3.filter((item) => item.slug !== project.slug)
                       loading="lazy"
                     />
                   </figure>
-                  <h3 class="solution-box-title">{item.name}</h3>
-                  <p class="solution-box-desc">{item.stats}</p>
-                  <span class="solution-box-link">Xem chi tiết</span>
+                  <h3 class={solutionBoxCompact.title}>{item.name}</h3>
+                  <p class={solutionBoxCompact.desc}>{item.stats}</p>
+                  <span class={solutionBoxCompact.link}>Xem chi tiết</span>
                 </a>
               </article>
             ))

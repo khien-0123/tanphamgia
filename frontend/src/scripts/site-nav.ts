@@ -39,12 +39,14 @@ updateNav();
 
 /** Menu hamburger mobile */
 function initMobileNav() {
-  const toggle = document.querySelector<HTMLButtonElement>('.site-nav-menu-toggle');
+  const toggle = document.querySelector<HTMLButtonElement>(
+    '#site-nav button[aria-controls="site-nav-mobile"]',
+  );
   const menu = document.getElementById('site-nav-mobile');
   if (!toggle || !menu) return;
 
   const icon = toggle.querySelector<HTMLElement>('.material-symbols-outlined');
-  const panel = menu.querySelector<HTMLElement>('.site-nav-mobile-panel');
+  const panel = menu.querySelector<HTMLElement>('nav');
 
   let menuScrollY = 0;
 
@@ -92,9 +94,7 @@ function initMobileNav() {
     el.addEventListener('click', () => setOpen(false));
   });
 
-  menu.querySelectorAll<HTMLAnchorElement>(
-    '.site-nav-mobile-link, .site-nav-mobile-brand, .site-brand-logo-link, .site-nav-mobile-cta',
-  ).forEach((link) => {
+  menu.querySelectorAll<HTMLAnchorElement>('ul a[href], [data-nav-close]').forEach((link) => {
     link.addEventListener('click', () => setOpen(false));
   });
 

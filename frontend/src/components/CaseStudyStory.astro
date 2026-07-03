@@ -12,20 +12,28 @@ const blocks = [
   { num: '02', title: 'Giải pháp', items: solutions },
   { num: '03', title: 'Kết quả', items: results, isResult: true },
 ];
+
+const listItemBase =
+  'relative pl-[0.9rem] text-sm leading-relaxed text-[#111]/85 before:content-[""] before:absolute before:left-0 before:top-[0.58rem] before:w-[0.3rem] before:h-[0.3rem] before:rounded-full before:bg-accent-gold';
+
+const listItemResult =
+  'relative pl-[1.35rem] text-sm leading-relaxed text-[#111]/85 before:content-["✓"] before:absolute before:left-0 before:top-[0.05rem] before:w-auto before:h-auto before:bg-transparent before:text-[#c9a000] before:text-xs before:font-bold';
 ---
 
-<section class="case-story" aria-label="Chi tiết dự án">
-  <div class="case-story-grid">
+<section aria-label="Chi tiết dự án">
+  <div class="grid gap-8 lg:grid-cols-3 lg:gap-0">
     {
       blocks.map((block) => (
-        <article class="case-story-col">
-          <h2 class="case-story-label">
-            <span class="case-story-num">{block.num}</span>
+        <article class="border-l-[3px] border-accent-gold pl-[1.15rem] lg:border-l-0 lg:pl-0 [&+&]:lg:border-l [&+&]:lg:border-[#ecece7] [&+&]:lg:pl-8 [&+&]:lg:ml-8">
+          <h2 class="flex items-center gap-2 m-0 mb-4 text-[0.8125rem] font-bold tracking-[0.1em] uppercase text-[#111]">
+            <span class="inline-flex items-center justify-center min-w-7 h-7 px-1.5 rounded-full bg-accent-gold text-[#111] text-[0.65rem] font-extrabold tracking-wide">
+              {block.num}
+            </span>
             {block.title}
           </h2>
-          <ul class:list={['case-story-list', block.isResult && 'case-story-list--result']}>
+          <ul class="m-0 p-0 list-none grid gap-3">
             {block.items.map((item) => (
-              <li>{item}</li>
+              <li class={block.isResult ? listItemResult : listItemBase}>{item}</li>
             ))}
           </ul>
         </article>

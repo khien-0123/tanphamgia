@@ -6,6 +6,15 @@ import SiteCtaSection from '../../components/SiteCtaSection.astro';
 import { solutions } from '../../data/site';
 import SolutionPlanSplit from '../../components/SolutionPlanSplit.astro';
 import { duAnGiaiPhap3 } from '../../data/giai-phap-3-du-an';
+import {
+  getSolutionTheme,
+  solutionBoxCompact,
+  solutionCase,
+  solutionIndustryList,
+  solutionStep,
+} from '../../lib/solution-theme';
+
+const solutionTheme = getSolutionTheme(3);
 
 const solution = solutions.find((item) => item.slug === 'giai-phap-3');
 const relatedSolutions = solutions.filter((item) => item.slug !== 'giai-phap-3');
@@ -62,13 +71,13 @@ const processSteps = [
   description="Giải pháp đồng phục FMCG và chuỗi phân phối."
 >
   <SiteNav solid currentPath="/giai-phap" />
-  <main class="solution-detail-page solution-style-industrial">
+  <main class={solutionTheme.page}>
     <section class="pt-28 md:pt-32 pb-14 md:pb-20 border-b border-border-subtle">
       <div class="max-w-container-max-width mx-auto px-6 md:px-8">
         <a href="/giai-phap" class="text-sm font-semibold text-accent-teal hover:text-ink-dark transition-colors">
           ← Quay lại
         </a>
-        <div class="solution-hero-grid grid lg:grid-cols-2 gap-6 md:gap-10 items-start mt-5">
+        <div class={solutionTheme.heroGrid}>
           <div>
             <h1 class="text-3xl md:text-5xl font-bold leading-tight mb-5">Đồng phục FMCG & Chuỗi phân phối</h1>
             <p class="text-text-muted text-base md:text-lg leading-relaxed mb-6">
@@ -76,7 +85,7 @@ const processSteps = [
               ảnh thương hiệu, nâng cao độ nhận diện tại điểm bán và quản lý hiệu quả đội ngũ trải dài trên nhiều
               tỉnh thành.
             </p>
-            <ul class="solution-industry-list text-sm md:text-base">
+            <ul class={solutionIndustryList}>
               {
                 industries.map((item) => (
                   <li class="flex items-center gap-2">
@@ -91,21 +100,21 @@ const processSteps = [
             <img
               src={solution?.image}
               alt="Giải pháp FMCG và chuỗi phân phối"
-              class="w-full aspect-[4/3] object-cover rounded-lg"
+              class={solutionTheme.heroImage}
             />
           </figure>
         </div>
       </div>
     </section>
 
-    <section class="solution-detail-section">
+    <section class={solutionTheme.section}>
       <div class="max-w-container-max-width mx-auto px-6 md:px-8 max-w-4xl">
         <h2 class="text-2xl md:text-3xl font-bold mb-8">01. Những vấn đề doanh nghiệp FMCG thường gặp</h2>
-        <div class="solution-issue-grid">
+        <div class={solutionTheme.issueGrid}>
           {
             issues.map((issue, idx) => (
-              <article class="solution-issue-card">
-                <span class="num">{idx + 1}</span>
+              <article class={solutionTheme.issueCard}>
+                <span class={solutionTheme.issueNum}>{idx + 1}</span>
                 <p class="text-sm text-ink-dark/85 leading-relaxed">{issue}</p>
               </article>
             ))
@@ -114,7 +123,7 @@ const processSteps = [
       </div>
     </section>
 
-    <section class="solution-detail-section">
+    <section class={solutionTheme.section}>
       <div class="max-w-container-max-width mx-auto px-6 md:px-8">
         <h2 class="text-2xl md:text-3xl font-bold mb-8">02. Giải pháp từ Tân Phạm Gia</h2>
         <SolutionPlanSplit
@@ -125,7 +134,7 @@ const processSteps = [
       </div>
     </section>
 
-    <section class="solution-detail-section">
+    <section class={solutionTheme.section}>
       <div class="max-w-container-max-width mx-auto px-6 md:px-8">
         <h2 class="text-2xl md:text-3xl font-bold mb-8">03. Giải pháp sản phẩm & chất liệu</h2>
         <ul class="grid sm:grid-cols-3 gap-4 mb-8 text-sm md:text-base">
@@ -176,21 +185,21 @@ const processSteps = [
       </div>
     </section>
 
-    <section class="solution-detail-section" id="du-an">
+    <section class:list={[solutionTheme.section, 'scroll-mt-24']} id="du-an">
       <div class="max-w-container-max-width mx-auto px-6 md:px-8">
         <h2 class="text-2xl md:text-3xl font-bold mb-8">04. Dự án tiêu biểu</h2>
-        <div class="solution-case-grid">
+        <div class={solutionCase.grid}>
           {
             duAnGiaiPhap3.map((project) => (
               <a
                 href={`/giai-phap/giai-phap-3/du-an/${project.slug}`}
-                class="solution-case-card solution-case-link group"
+                class:list={[solutionTheme.caseCard, solutionCase.link]}
               >
-                <img src={project.image} alt={project.name} />
-                <div class="solution-case-body">
+                <img src={project.image} alt={project.name} class={solutionCase.img} />
+                <div class={solutionCase.body}>
                   <h3 class="font-bold">{project.name}</h3>
                   <p class="text-xs text-white/80 mt-1">{project.stats.split(' | ').slice(0, 2).join(' | ')}</p>
-                  <span class="solution-case-more">Xem chi tiết</span>
+                  <span class={solutionCase.more}>Xem chi tiết</span>
                 </div>
               </a>
             ))
@@ -199,14 +208,14 @@ const processSteps = [
       </div>
     </section>
 
-    <section class="solution-detail-section">
+    <section class={solutionTheme.section}>
       <div class="max-w-container-max-width mx-auto px-6 md:px-8">
         <h2 class="text-2xl md:text-3xl font-bold mb-8">05. Quy trình làm việc - giảm rủi ro cho doanh nghiệp</h2>
-        <div class="solution-step-grid">
+        <div class={solutionStep.grid}>
           {
             processSteps.map((step, index) => (
-              <article class="solution-step-item">
-                <span class="num">{index + 1}</span>
+              <article class={solutionTheme.stepItem}>
+                <span class={solutionTheme.stepNum}>{index + 1}</span>
                 <h3 class="font-bold mb-1">Bước {index + 1}: {step}</h3>
               </article>
             ))
@@ -215,21 +224,21 @@ const processSteps = [
       </div>
     </section>
 
-    <section class="solution-detail-section">
+    <section class={solutionTheme.section}>
       <div class="max-w-container-max-width mx-auto px-6 md:px-8">
         <h2 class="text-2xl md:text-3xl font-bold mb-6">06. Tìm hiểu thêm</h2>
-        <div class="solution-box-grid solution-box-grid--compact">
+        <div class={solutionBoxCompact.grid}>
           {
             relatedSolutions.map((item) => (
-              <article class="solution-box-item">
-                <a class="solution-box-summary no-underline" href={`/giai-phap/${item.slug}`}>
-                  <figure class="solution-box-media m-0">
+              <article class={solutionBoxCompact.item}>
+                <a class={solutionBoxCompact.summary} href={`/giai-phap/${item.slug}`}>
+                  <figure class={solutionBoxCompact.media}>
                     <img class="w-full h-full object-cover" src={item.image} alt={item.title} loading="lazy" />
                   </figure>
-                  <span class="solution-box-number">{item.slug.replace('giai-phap-', '0')}</span>
-                  <h3 class="solution-box-title">{item.title}</h3>
-                  <p class="solution-box-desc">{item.desc}</p>
-                  <span class="solution-box-link">Xem chi tiết</span>
+                  <span class={solutionBoxCompact.number}>{item.slug.replace('giai-phap-', '0')}</span>
+                  <h3 class={solutionBoxCompact.title}>{item.title}</h3>
+                  <p class={solutionBoxCompact.desc}>{item.desc}</p>
+                  <span class={solutionBoxCompact.link}>Xem chi tiết</span>
                 </a>
               </article>
             ))

@@ -16,6 +16,13 @@ import {
   testimonials,
   certificateImages,
 } from '../data/gioi-thieu';
+
+const mediaTextRowClass =
+  'grid grid-cols-1 gap-6 items-stretch md:grid-cols-2 md:gap-10 md:items-center lg:gap-20';
+const mediaTextCellClass = 'min-w-0 w-full';
+const mediaTextImgClass = 'block w-full aspect-[4/3] object-cover rounded-lg';
+const timelineItemBaseClass =
+  'relative grid w-full max-w-container-max-width mx-auto items-center pb-[0.85rem] last:pb-0 grid-cols-[minmax(0,1fr)_2rem_minmax(0,1fr)] gap-x-4 md:grid-cols-[minmax(0,1fr)_2.5rem_minmax(0,1fr)] md:gap-x-6 md:pb-4 lg:gap-x-10 max-md:grid-cols-[1.75rem_minmax(0,1fr)] max-md:gap-x-[0.65rem] max-md:pb-3';
 ---
 
 <BaseLayout title={gioiThieuSeo.title} description={gioiThieuSeo.description}>
@@ -29,7 +36,10 @@ import {
         class="w-full h-full object-cover"
         src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7szr7Elx-oAqCEnir2uiBqNE-4WpmIm10Kj1YsgXyu1XMFvP0qvIXYrsMpRh9sztusxsq8_7_MFPstpomb4RaDeTg9J3ldf2CSKwYUq91qGdHVM6Dm9YkfE3Rdfay_snBPthtK7WWCq_NFHZ3j3Kua1MgJAT-qQPXwlpAIQIDLIpk4Njn_msEnsXh9DyyRtwkvdNU5u10NXpGyYseM_HBo6gwnr6IFqeZ9gHXI1CrvRQnXAxx3UyIT7UIbTDEMKjd1gdxbZwWKrKl"
       />
-      <div class="absolute inset-0 hero-gradient"></div>
+      <div
+        class="absolute inset-0 bg-gradient-to-br from-[rgba(14,38,64,0.88)] via-[rgba(14,38,64,0.55)] to-[rgba(16,44,77,0.25)]"
+      >
+      </div>
     </div>
     <div class="relative z-10 max-w-container-max-width mx-auto px-6 md:px-8">
       <nav aria-label="Breadcrumb" class="text-sm text-white/60 mb-6">
@@ -50,17 +60,19 @@ import {
   <!-- 2.2 Câu chuyện thương hiệu — zig-zag, không card -->
   <section class="py-10 md:py-24 bg-white border-b border-border-subtle">
     <div class="max-w-container-max-width mx-auto px-6 md:px-8">
-      <div class="media-text-row">
-        <figure class="media-text-row-media order-2 md:order-1 m-0">
+      <div class={mediaTextRowClass}>
+        <figure class={`${mediaTextCellClass} order-2 md:order-1 m-0`}>
           <img
             alt="Câu chuyện thương hiệu Tân Phạm Gia"
-            class="media-text-row-img"
+            class={mediaTextImgClass}
             src={brandStory.image}
             loading="lazy"
           />
         </figure>
-        <div class="media-text-row-body order-1 md:order-2">
-          <h2 class="gioi-thieu-title font-headline-md text-2xl md:text-3xl font-bold text-ink-dark mb-6">
+        <div class={`${mediaTextCellClass} order-1 md:order-2`}>
+          <h2
+            class="text-pretty font-headline-md text-2xl md:text-3xl font-bold text-ink-dark mb-6"
+          >
             <span class="md:hidden">
               {brandStory.titleLines[0]}
               <br />
@@ -77,42 +89,72 @@ import {
   </section>
 
   <!-- 2.3 Hành trình 23 năm — timeline mở, không khung card -->
-  <section class="py-12 md:py-16 timeline-section border-b border-border-subtle">
+  <section class="py-12 md:py-16 bg-white border-b border-border-subtle">
     <div class="max-w-container-max-width mx-auto px-6 md:px-8 mb-10 md:mb-12">
-      <h2 class="font-headline-md text-xl md:text-2xl lg:text-3xl font-bold text-ink-dark leading-snug max-w-3xl">
+      <h2
+        class="font-headline-md text-xl md:text-2xl lg:text-3xl font-bold text-ink-dark leading-snug max-w-3xl"
+      >
         {timelineSection.title}
       </h2>
     </div>
 
-    <div class="timeline-rail">
-      <div aria-hidden="true" class="timeline-line"></div>
+    <div
+      class="relative w-full max-w-none mx-0 pt-0 pb-2 px-[clamp(1rem,3vw,2.5rem)] md:px-[clamp(1.5rem,5vw,4rem)] max-md:px-[0.65rem] max-md:pb-1"
+    >
+      <div
+        aria-hidden="true"
+        class="absolute top-2 bottom-2 left-1/2 -translate-x-1/2 w-0.5 rounded-full bg-gradient-to-b from-accent-teal via-[#4a6a8a] to-border-subtle max-md:left-[1.125rem] max-md:translate-x-0 max-md:bottom-3"
+      >
+      </div>
       {
         timeline.map((item, i) => {
           const side = i % 2 === 0 ? 'left' : 'right';
           return (
-            <div class:list={['timeline-item', `timeline-item--${side}`]}>
-              {side === 'right' && <div class="timeline-gap" aria-hidden="true"></div>}
+            <div class={timelineItemBaseClass}>
+              {side === 'right' && (
+                <div class="min-h-px max-md:hidden" aria-hidden="true" />
+              )}
 
-              <div class="timeline-axis">
-                <span class="timeline-dot" aria-hidden="true">
-                  <span class="timeline-dot-core"></span>
+              <div class="relative flex justify-center items-center h-full z-[2] col-start-2 row-start-1 max-md:col-start-1">
+                <span
+                  class="relative flex items-center justify-center w-[1.125rem] h-[1.125rem] rounded-full bg-background shadow-[0_0_0_2px_#102c4d] shrink-0"
+                  aria-hidden="true"
+                >
+                  <span class="w-[0.4rem] h-[0.4rem] rounded-full bg-accent-teal" />
                 </span>
                 <span
                   class:list={[
-                    'timeline-connector',
-                    side === 'left' ? 'timeline-connector--left' : 'timeline-connector--right',
+                    'absolute top-1/2 -translate-y-1/2 h-0.5 w-[calc(50%+0.75rem)] lg:w-[calc(50%+1.25rem)] rounded-full bg-[#c5d0dc] max-md:hidden',
+                    side === 'left' ? 'right-1/2' : 'left-1/2',
                   ]}
                   aria-hidden="true"
                 />
               </div>
 
-              <article class="timeline-entry">
-                <span class="timeline-year">{item.year}</span>
-                <h3 class="timeline-title">{item.title}</h3>
-                <p class="timeline-desc">{item.desc}</p>
+              <article
+                class:list={[
+                  'py-1 group',
+                  side === 'left'
+                    ? 'col-start-1 row-start-1 justify-self-end w-full max-w-[34rem] text-right md:max-w-none max-md:col-start-2 max-md:justify-self-auto max-md:max-w-none max-md:text-left'
+                    : 'col-start-3 row-start-1 justify-self-start w-full max-w-[34rem] text-left md:max-w-none max-md:col-start-2 max-md:max-w-none',
+                ]}
+              >
+                <span
+                  class="block text-accent-teal font-bold text-[0.8125rem] leading-[1.25] mb-[0.2rem] tracking-[0.02em]"
+                >
+                  {item.year}
+                </span>
+                <h3
+                  class="block text-ink-dark font-bold text-[0.9375rem] md:text-base lg:text-[1.0625rem] leading-[1.35] mb-[0.35rem] transition-colors duration-200 group-hover:text-accent-teal"
+                >
+                  {item.title}
+                </h3>
+                <p class="text-text-muted text-[0.8125rem] md:text-sm leading-relaxed">
+                  {item.desc}
+                </p>
               </article>
 
-              {side === 'left' && <div class="timeline-gap" aria-hidden="true"></div>}
+              {side === 'left' && <div class="min-h-px max-md:hidden" aria-hidden="true" />}
             </div>
           );
         })
@@ -123,17 +165,21 @@ import {
   <!-- 2.4 Định vị thương hiệu — open layout -->
   <section class="py-10 md:py-24 bg-white border-b border-border-subtle">
     <div class="max-w-container-max-width mx-auto px-6 md:px-8">
-      <h2 class="gioi-thieu-title font-headline-md text-xl md:text-4xl font-bold text-ink-dark mb-12 md:mb-16 leading-snug tracking-tight">
+      <h2
+        class="text-pretty font-headline-md text-xl md:text-4xl font-bold text-ink-dark mb-12 md:mb-16 leading-snug tracking-tight"
+      >
         Sứ mệnh, Tầm nhìn & Giá trị cốt{'\u00a0'}lõi
       </h2>
 
-      <div class="grid md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 mb-10 pb-10 md:mb-20 md:pb-20 border-b border-border-subtle">
-        <div class="about-mission-block">
+      <div
+        class="grid md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 mb-10 pb-10 md:mb-20 md:pb-20 border-b border-border-subtle"
+      >
+        <div>
           <span class="material-symbols-outlined text-accent-gold text-3xl mb-4">flag</span>
           <h3 class="text-accent-gold font-bold uppercase tracking-wider text-sm mb-3">Sứ mệnh</h3>
           <p class="text-ink-dark/85 text-base md:text-lg leading-relaxed">{missionVision.mission}</p>
         </div>
-        <div class="about-mission-block md:border-l md:border-border-subtle md:pl-16">
+        <div class="md:border-l md:border-border-subtle md:pl-16">
           <span class="material-symbols-outlined text-accent-teal text-3xl mb-4">visibility</span>
           <h3 class="text-accent-teal font-bold uppercase tracking-wider text-sm mb-3">Tầm nhìn</h3>
           <p class="text-ink-dark/85 text-base md:text-lg leading-relaxed">{missionVision.vision}</p>
@@ -141,11 +187,13 @@ import {
       </div>
 
       <h3 class="font-bold text-lg text-ink-dark mb-8 md:mb-10">5 giá trị cốt lõi</h3>
-      <div class="about-value-grid">
+      <div class="grid gap-y-8 gap-x-12 max-sm:gap-y-5 max-sm:gap-x-6 sm:grid-cols-2 lg:grid-cols-3">
         {
           coreValues.map((value) => (
-            <div class="about-value-item">
-              <span class="about-value-num">{value.num}</span>
+            <div class="flex gap-4 items-start">
+              <span class="shrink-0 font-extrabold text-sm text-accent-gold leading-[1.4]">
+                {value.num}
+              </span>
               <div>
                 <h4 class="font-bold text-ink-dark mb-2">{value.title}</h4>
                 <p class="text-text-muted text-sm leading-relaxed">{value.desc}</p>
@@ -163,34 +211,33 @@ import {
       <h2 class="font-headline-md text-2xl md:text-4xl font-bold text-ink-dark mb-4">
         Quy mô & Kiểm soát chất lượng
       </h2>
-      <p class="text-text-muted max-w-3xl leading-relaxed mb-10 md:mb-12">{productionCapacity.intro}</p>
+      <p class="text-text-muted max-w-3xl leading-relaxed mb-10 md:mb-12">
+        {productionCapacity.intro}
+      </p>
 
-      <dl class="about-stats-strip mb-10 pb-10 md:mb-20 md:pb-20 border-b border-border-subtle">
+      <dl
+        class="grid grid-cols-2 gap-y-6 gap-x-4 md:grid-cols-3 lg:grid-cols-6 lg:gap-0 mb-10 pb-10 md:mb-20 md:pb-20 border-b border-border-subtle"
+      >
         {
           productionCapacity.stats.map((stat, i) => (
-            <div
-              class:list={[
-                'about-stat',
-                i > 0 && 'about-stat--divided',
-              ]}
-            >
-              <dt class="about-stat-value">{stat.value}</dt>
-              <dd class="about-stat-label">{stat.label}</dd>
+            <div class:list={[i > 0 && 'lg:border-l lg:border-border-subtle lg:pl-5']}>
+              <dt class="font-extrabold text-base text-ink-dark mb-1">{stat.value}</dt>
+              <dd class="text-xs text-text-muted leading-[1.45] m-0">{stat.label}</dd>
             </div>
           ))
         }
       </dl>
 
-      <div class="media-text-row mb-10 md:mb-20">
-        <figure class="media-text-row-media m-0">
+      <div class={`${mediaTextRowClass} mb-10 md:mb-20`}>
+        <figure class={`${mediaTextCellClass} m-0`}>
           <img
             alt="Nhà xưởng Tân Phạm Gia"
-            class="media-text-row-img"
+            class={mediaTextImgClass}
             src={productionCapacity.factoryImage}
             loading="lazy"
           />
         </figure>
-        <div class="media-text-row-body">
+        <div class={mediaTextCellClass}>
           <h3 class="font-headline-md text-2xl md:text-3xl font-bold mb-4 text-ink-dark">
             Xưởng may 2.000m² đạt chuẩn quốc tế
           </h3>
@@ -201,16 +248,16 @@ import {
         </div>
       </div>
 
-      <div class="media-text-row media-text-row--reverse">
-        <figure class="media-text-row-media m-0">
+      <div class={`${mediaTextRowClass} md:[direction:rtl] [&>*]:md:[direction:ltr]`}>
+        <figure class={`${mediaTextCellClass} m-0`}>
           <img
             alt="Quy trình QC"
-            class="media-text-row-img"
+            class={mediaTextImgClass}
             src={productionCapacity.qcImage}
             loading="lazy"
           />
         </figure>
-        <div class="media-text-row-body">
+        <div class={mediaTextCellClass}>
           <h3 class="font-headline-md text-2xl md:text-3xl font-bold mb-4 text-ink-dark">
             {productionCapacity.qcTitle}
           </h3>
@@ -219,7 +266,7 @@ import {
             {
               productionCapacity.qcStandards.map((std) => (
                 <li class="flex items-center gap-2 font-semibold text-sm text-ink-dark">
-                  <span class="w-1.5 h-1.5 rounded-full bg-accent-gold shrink-0"></span>
+                  <span class="w-1.5 h-1.5 rounded-full bg-accent-gold shrink-0" />
                   {std}
                 </li>
               ))
@@ -236,11 +283,11 @@ import {
       <h2 class="font-headline-md text-2xl md:text-4xl font-bold text-ink-dark mb-12 md:mb-14">
         Đội ngũ nhân sự
       </h2>
-      <div class="about-team-grid">
+      <div class="grid gap-y-10 gap-x-12 sm:grid-cols-2 lg:grid-cols-4">
         {
           teamDepartments.map((dept) => (
-            <div class="about-team-item">
-              <div class="about-team-head">
+            <div>
+              <div class="flex items-center gap-3 mb-3">
                 <span class="text-accent-gold font-bold text-sm">{dept.num}</span>
                 <span class="material-symbols-outlined text-accent-teal text-2xl">{dept.icon}</span>
               </div>
@@ -262,7 +309,7 @@ import {
       <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
         {
           certificateImages.map((cert) => (
-            <figure class="about-cert-figure m-0">
+            <figure class="m-0 [&_img]:transition-opacity [&_img]:duration-200 hover:[&_img]:opacity-[0.92]">
               <img
                 alt={cert.title}
                 class="w-full aspect-[4/3] object-cover rounded-lg"

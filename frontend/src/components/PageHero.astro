@@ -18,7 +18,10 @@ const { title, description, descriptionLines, breadcrumb = [{ label: 'Trang chá»
       class="w-full h-full object-cover"
       src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7szr7Elx-oAqCEnir2uiBqNE-4WpmIm10Kj1YsgXyu1XMFvP0qvIXYrsMpRh9sztusxsq8_7_MFPstpomb4RaDeTg9J3ldf2CSKwYUq91qGdHVM6Dm9YkfE3Rdfay_snBPthtK7WWCq_NFHZ3j3Kua1MgJAT-qQPXwlpAIQIDLIpk4Njn_msEnsXh9DyyRtwkvdNU5u10NXpGyYseM_HBo6gwnr6IFqeZ9gHXI1CrvRQnXAxx3UyIT7UIbTDEMKjd1gdxbZwWKrKl"
     />
-    <div class="absolute inset-0 hero-gradient"></div>
+    <div
+      class="absolute inset-0 bg-gradient-to-br from-[rgba(14,38,64,0.88)] via-[rgba(14,38,64,0.55)] to-[rgba(16,44,77,0.25)]"
+    >
+    </div>
   </div>
   <div class="relative z-10 max-w-container-max-width mx-auto px-6 md:px-8">
     {
@@ -39,19 +42,25 @@ const { title, description, descriptionLines, breadcrumb = [{ label: 'Trang chá»
         </nav>
       )
     }
-    <h1 class="font-display-lg heading-responsive md:text-5xl font-extrabold tracking-tight mb-5">{title}</h1>
+    <h1
+      class="font-display-lg text-[clamp(1.5rem,5vw,3rem)] leading-[1.2] text-balance md:text-5xl font-extrabold tracking-tight mb-5"
+    >
+      {title}
+    </h1>
     {description && (
       <p
         class:list={[
-          'page-hero-desc text-white/80 max-w-2xl leading-relaxed',
-          descriptionLines ? 'page-hero-desc--lines' : 'text-base md:text-lg',
+          'text-pretty text-white/80 max-w-2xl leading-relaxed',
+          descriptionLines
+            ? 'max-md:text-[0.8125rem] max-md:leading-[1.45] max-md:tracking-[-0.01em]'
+            : 'text-base md:text-lg',
         ]}
       >
         {
           descriptionLines ? (
             <>
-              <span class="page-hero-desc-line md:hidden">{descriptionLines[0]}</span>
-              <span class="page-hero-desc-line md:hidden">{descriptionLines[1]}</span>
+              <span class="block md:hidden">{descriptionLines[0]}</span>
+              <span class="block md:hidden">{descriptionLines[1]}</span>
               <span class="hidden md:inline">{description}</span>
             </>
           ) : (

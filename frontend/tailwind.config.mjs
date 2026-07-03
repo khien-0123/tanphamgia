@@ -65,6 +65,17 @@ export default {
       maxWidth: {
         'container-max-width': '1280px',
       },
+      keyframes: {
+        navItemIn: {
+          to: { opacity: '1', transform: 'translateX(0)' },
+        },
+      },
+      animation: {
+        navItemIn: 'navItemIn 0.38s cubic-bezier(0.22, 1, 0.36, 1) forwards',
+      },
+      transitionTimingFunction: {
+        'nav-panel': 'cubic-bezier(0.22, 1, 0.36, 1)',
+      },
     },
   },
   plugins: [],

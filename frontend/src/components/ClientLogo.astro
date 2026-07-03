@@ -7,13 +7,18 @@ interface Props {
 const { name, logo } = Astro.props;
 ---
 
-<div class="client-logo-cell" title={name}>
+<div
+  class="group flex items-center justify-center py-3 px-2 min-h-14 bg-transparent transition-opacity duration-200"
+  title={name}
+>
   <img
     alt={name}
-    class="client-logo-img"
+    class="client-logo-img h-9 w-auto max-w-full object-contain object-center opacity-[0.92] transition-opacity duration-200 group-hover:opacity-100"
     loading="lazy"
     src={logo}
     onerror="this.style.display='none';this.nextElementSibling.style.display='block'"
   />
-  <span class="client-logo-fallback">{name}</span>
+  <span class="client-logo-fallback hidden text-[0.65rem] font-bold text-text-muted text-center leading-[1.2] tracking-[0.02em] px-1"
+    >{name}</span
+  >
 </div>

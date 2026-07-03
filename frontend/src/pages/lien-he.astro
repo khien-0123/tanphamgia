@@ -36,7 +36,7 @@ import { pageSeo, siteContact } from '../data/site';
         <ul class="space-y-5 text-sm md:text-base">
           <li class="flex gap-3">
             <span class="material-symbols-outlined text-accent-gold shrink-0">location_on</span>
-            <span class="text-text-muted text-safe-wrap">
+            <span class="text-text-muted break-words [overflow-wrap:anywhere]">
               <strong class="text-ink-dark block mb-1">Showroom</strong>
               {siteContact.address}
             </span>
@@ -55,7 +55,7 @@ import { pageSeo, siteContact } from '../data/site';
             <span class="material-symbols-outlined text-accent-gold shrink-0">mail</span>
             <span class="text-text-muted">
               <strong class="text-ink-dark block mb-1">Email</strong>
-              <a class="text-accent-teal hover:underline text-safe-wrap" href={siteContact.emailHref}>
+              <a class="text-accent-teal hover:underline break-words [overflow-wrap:anywhere]" href={siteContact.emailHref}>
                 {siteContact.email}
               </a>
             </span>

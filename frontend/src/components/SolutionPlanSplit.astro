@@ -17,17 +17,32 @@ function formatNum(index: number) {
 }
 ---
 
-<section class="solution-plan-split" aria-label="Giải pháp từ Tân Phạm Gia">
-  <figure class="solution-plan-split-visual m-0">
-    <img src={image} alt={imageAlt} class="solution-plan-split-img" loading="lazy" />
+<section
+  class="grid grid-cols-1 gap-6 items-start lg:grid-cols-[minmax(0,0.38fr)_minmax(0,0.62fr)] lg:gap-10"
+  aria-label="Giải pháp từ Tân Phạm Gia"
+>
+  <figure class="m-0 overflow-hidden rounded-xl lg:sticky lg:top-[5.5rem] lg:self-start">
+    <img
+      src={image}
+      alt={imageAlt}
+      class="block w-full aspect-[4/3] object-cover"
+      loading="lazy"
+    />
   </figure>
-  <div class="solution-plan-split-list" role="list">
+  <div class="flex flex-col" role="list">
     {
       items.map((item, index) => (
-        <article class="solution-plan-split-item" role="listitem">
-          <span class="solution-plan-item-num">{formatNum(index)}</span>
-          <h3 class="solution-plan-item-title">{item.title}</h3>
-          <p class="solution-plan-item-desc">{item.desc}</p>
+        <article
+          class="py-5 border-b border-[#e7e7e2] first:pt-0 last:border-b-0 last:pb-0"
+          role="listitem"
+        >
+          <span
+            class="inline-block text-[0.6875rem] font-bold tracking-[0.12em] text-[#111] bg-accent-gold px-2.5 py-1 rounded-full mb-3"
+          >
+            {formatNum(index)}
+          </span>
+          <h3 class="text-lg md:text-xl font-bold leading-snug text-[#111] mb-2 m-0">{item.title}</h3>
+          <p class="text-sm md:text-[0.9375rem] leading-relaxed text-text-muted m-0">{item.desc}</p>
         </article>
       ))
     }

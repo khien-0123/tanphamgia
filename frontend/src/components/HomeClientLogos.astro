@@ -17,8 +17,12 @@ const pagesPerSet = basePages.length;
 
 <div class="lg:col-span-3">
   <!-- Mobile: 3 hàng/trang, vuốt vòng lặp vô hạn -->
-  <div class="home-clients-slider-wrap md:hidden" data-clients-slider>
-    <div class="home-clients-slider" role="list" aria-label="Thương hiệu đồng hành">
+  <div class="min-w-0 md:hidden" data-clients-slider>
+    <div
+      class="home-clients-slider flex gap-3 overflow-x-auto overflow-y-hidden snap-x snap-proximity overscroll-x-contain [-webkit-overflow-scrolling:touch] [scrollbar-width:none] pb-1 [&::-webkit-scrollbar]:hidden"
+      role="list"
+      aria-label="Thương hiệu đồng hành"
+    >
       {
         sliderPages.map((page, pageIndex) => {
           const setIndex = Math.floor(pageIndex / pagesPerSet);
@@ -26,7 +30,7 @@ const pagesPerSet = basePages.length;
 
           return (
             <div
-              class="home-clients-page"
+              class="home-clients-page shrink-0 snap-start basis-full grid grid-cols-3 gap-y-2 gap-x-1.5"
               role="listitem"
               aria-hidden={isClone ? 'true' : undefined}
             >

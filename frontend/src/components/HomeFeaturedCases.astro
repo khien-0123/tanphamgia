@@ -2,47 +2,66 @@
 import { homeFeaturedCases } from '../data/site';
 
 const { featured, secondary, quote, contact, allProjectsHref } = homeFeaturedCases;
+
+const featuredCard =
+  'relative block overflow-hidden rounded-2xl bg-[#1a1a1a] min-h-[280px] lg:min-h-[380px] order-1 lg:order-none';
+const featuredImg =
+  'absolute inset-0 w-full h-full object-cover opacity-75 transition-[transform,opacity] duration-700 group-hover:scale-[1.04] group-hover:opacity-[0.88]';
+const featuredOverlay =
+  'absolute inset-0 flex flex-col justify-end gap-3.5 p-6 bg-gradient-to-t from-black/88 via-black/25 from-0% via-55% to-transparent';
+const secondaryCard =
+  'relative shrink-0 snap-start overflow-hidden rounded-2xl bg-[#1a1a1a] min-h-[200px] basis-[85vw] sm:basis-[calc(50%-0.425rem)] transition-transform duration-250 hover:-translate-y-0.5 lg:shrink lg:min-h-0 lg:h-full';
 ---
 
-<section class="home-cases py-8 md:py-14 text-white bg-ink-dark overflow-hidden" id="du-an">
+<section class="py-8 md:py-14 text-white bg-ink-dark overflow-hidden" id="du-an">
   <header
-    class="home-cases-header max-w-container-max-width w-full mx-auto px-6 md:px-8 pb-4 md:pb-6 flex flex-col md:flex-row justify-between items-start md:items-end gap-4 md:gap-6"
+    class="max-w-container-max-width w-full mx-auto px-6 md:px-8 pb-4 md:pb-6 flex flex-col md:flex-row justify-between items-start md:items-end gap-4 md:gap-6"
   >
     <div class="max-w-2xl">
-      <h2 class="heading-responsive md:text-5xl font-bold tracking-tight mb-3">Dự Án Tiêu Biểu</h2>
+      <h2 class="text-[clamp(1.5rem,5vw,3rem)] leading-tight md:text-5xl font-bold tracking-tight mb-3 text-balance">
+        Dự Án Tiêu Biểu
+      </h2>
       <p class="text-white/60 text-base md:text-lg">
         Chứng thực năng lực qua các dự án quy mô lớn cho tập đoàn đa quốc gia.
       </p>
     </div>
     <a
       href={allProjectsHref}
-      class="liquid-glass px-7 py-3 rounded-full font-bold text-sm hover:scale-105 transition-all flex items-center gap-2 shrink-0 no-underline text-white"
+      class="bg-white/12 backdrop-blur-lg border border-white/18 shadow-[0_8px_32px_rgba(14,38,64,0.15)] px-7 py-3 rounded-full font-bold text-sm hover:scale-105 transition-all flex items-center gap-2 shrink-0 no-underline text-white"
     >
       Tất cả dự án →
     </a>
   </header>
 
-  <div class="home-cases-layout max-w-container-max-width mx-auto px-6 md:px-8">
+  <div
+    class="grid gap-4 max-w-container-max-width mx-auto px-6 md:px-8 lg:grid-cols-[5fr_7fr] lg:[grid-template-areas:'featured_aside'] lg:items-stretch"
+  >
     {
       featured.href ? (
-        <a href={featured.href} class="home-cases-featured group no-underline text-white">
-          <img
-            src={featured.image}
-            alt={featured.alt}
-            class="home-cases-featured-img"
-            loading="lazy"
-          />
-          <div class="home-cases-featured-overlay">
-            {featured.tag && <span class="home-cases-badge">{featured.tag}</span>}
-            <h3 class="home-cases-featured-title">{featured.name}</h3>
+        <a
+          href={featured.href}
+          class:list={[featuredCard, 'group no-underline text-white lg:[grid-area:featured]']}
+        >
+          <img src={featured.image} alt={featured.alt} class={featuredImg} loading="lazy" />
+          <div class={featuredOverlay}>
+            {featured.tag && (
+              <span class="inline-block w-fit px-3 py-1 rounded-full bg-[#f2c300] text-[#111] text-[0.625rem] font-bold tracking-widest uppercase">
+                {featured.tag}
+              </span>
+            )}
+            <h3 class="m-0 text-[clamp(1.5rem,3vw,1.875rem)] font-bold leading-tight">
+              {featured.name}
+            </h3>
             {featured.stats && (
-              <dl class="home-cases-stats">
+              <dl class="flex flex-wrap gap-x-8 gap-y-5 m-0">
                 {featured.stats.map((stat) => (
-                  <div class="home-cases-stat">
+                  <div class="m-0">
                     <dt class="sr-only">{stat.label}</dt>
-                    <dd>
-                      <span class="home-cases-stat-value">{stat.value}</span>
-                      <span class="home-cases-stat-label">{stat.label}</span>
+                    <dd class="flex flex-col gap-0.5 m-0">
+                      <span class="text-[clamp(1.35rem,2.5vw,1.75rem)] font-bold text-[#f2c300] leading-none">
+                        {stat.value}
+                      </span>
+                      <span class="text-[0.8125rem] text-white/65">{stat.label}</span>
                     </dd>
                   </div>
                 ))}
@@ -51,24 +70,27 @@ const { featured, secondary, quote, contact, allProjectsHref } = homeFeaturedCas
           </div>
         </a>
       ) : (
-        <article class="home-cases-featured group">
-          <img
-            src={featured.image}
-            alt={featured.alt}
-            class="home-cases-featured-img"
-            loading="lazy"
-          />
-          <div class="home-cases-featured-overlay">
-            {featured.tag && <span class="home-cases-badge">{featured.tag}</span>}
-            <h3 class="home-cases-featured-title">{featured.name}</h3>
+        <article class:list={[featuredCard, 'group lg:[grid-area:featured]']}>
+          <img src={featured.image} alt={featured.alt} class={featuredImg} loading="lazy" />
+          <div class={featuredOverlay}>
+            {featured.tag && (
+              <span class="inline-block w-fit px-3 py-1 rounded-full bg-[#f2c300] text-[#111] text-[0.625rem] font-bold tracking-widest uppercase">
+                {featured.tag}
+              </span>
+            )}
+            <h3 class="m-0 text-[clamp(1.5rem,3vw,1.875rem)] font-bold leading-tight">
+              {featured.name}
+            </h3>
             {featured.stats && (
-              <dl class="home-cases-stats">
+              <dl class="flex flex-wrap gap-x-8 gap-y-5 m-0">
                 {featured.stats.map((stat) => (
-                  <div class="home-cases-stat">
+                  <div class="m-0">
                     <dt class="sr-only">{stat.label}</dt>
-                    <dd>
-                      <span class="home-cases-stat-value">{stat.value}</span>
-                      <span class="home-cases-stat-label">{stat.label}</span>
+                    <dd class="flex flex-col gap-0.5 m-0">
+                      <span class="text-[clamp(1.35rem,2.5vw,1.75rem)] font-bold text-[#f2c300] leading-none">
+                        {stat.value}
+                      </span>
+                      <span class="text-[0.8125rem] text-white/65">{stat.label}</span>
                     </dd>
                   </div>
                 ))}
@@ -79,37 +101,51 @@ const { featured, secondary, quote, contact, allProjectsHref } = homeFeaturedCas
       )
     }
 
-    <div class="home-cases-aside">
-      <blockquote class="home-cases-quote">
-        <p>"{quote.text}"</p>
-        <footer class="home-cases-quote-author">— {quote.author}</footer>
+    <div class="contents lg:flex lg:flex-col lg:gap-4 lg:[grid-area:aside] lg:min-h-[380px]">
+      <blockquote class="m-0 pl-5 border-l-4 border-[#f2c300] order-3 lg:order-none lg:shrink-0 lg:pt-1">
+        <p class="m-0 text-[clamp(1rem,2vw,1.125rem)] leading-relaxed text-white/92">
+          "{quote.text}"
+        </p>
+        <footer class="mt-3.5 text-sm font-semibold text-[#f2c300]">— {quote.author}</footer>
       </blockquote>
 
-      <div class="home-cases-secondary" role="list">
+      <div
+        class="flex gap-3.5 overflow-x-auto snap-x snap-proximity overscroll-x-contain [-webkit-overflow-scrolling:touch] [scrollbar-width:none] pb-1 order-2 min-w-0 lg:order-none lg:flex-1 lg:grid lg:grid-cols-2 lg:auto-rows-fr lg:overflow-visible lg:min-h-0 [&::-webkit-scrollbar]:hidden"
+        role="list"
+      >
         {
           secondary.map((project) => (
             <a
               href={project.href}
-              class="home-cases-secondary-card group no-underline text-white"
+              class:list={[secondaryCard, 'group no-underline text-white']}
               role="listitem"
             >
-              <img src={project.image} alt={project.alt} loading="lazy" />
-              <div class="home-cases-secondary-body">
-                <h3>{project.name}</h3>
+              <img
+                src={project.image}
+                alt={project.alt}
+                loading="lazy"
+                class="absolute inset-0 w-full h-full object-cover opacity-70 transition-opacity duration-350 group-hover:opacity-[0.82]"
+              />
+              <div class="absolute inset-0 z-[1] flex flex-col justify-end p-4.5 bg-gradient-to-t from-black/85 to-transparent from-0% to-70%">
+                <h3 class="m-0 mb-1.5 text-[1.0625rem] font-bold">{project.name}</h3>
                 {project.statHighlight && (
-                  <p class="home-cases-secondary-stat">
+                  <p class="m-0 text-[1.35rem] font-bold leading-snug">
                     <span
                       class:list={[
-                        'home-cases-secondary-value',
+                        'text-white',
                         project.statHighlight.valueClass === 'gold' && 'text-accent-gold',
                       ]}
                     >
                       {project.statHighlight.value}
                     </span>
-                    <span class="home-cases-secondary-suffix">{project.statHighlight.suffix}</span>
+                    <span class="ml-1.5 text-[0.8125rem] font-medium text-white/70">
+                      {project.statHighlight.suffix}
+                    </span>
                   </p>
                 )}
-                <span class="home-cases-more">Xem chi tiết →</span>
+                <span class="mt-2.5 text-xs font-semibold text-white/55 transition-colors group-hover:text-[#f2c300]">
+                  Xem chi tiết →
+                </span>
               </div>
             </a>
           ))
@@ -118,19 +154,29 @@ const { featured, secondary, quote, contact, allProjectsHref } = homeFeaturedCas
     </div>
   </div>
 
-  <div class="home-cases-contact max-w-container-max-width mx-auto px-6 md:px-8 mt-4 md:mt-5">
-    <span class="home-cases-contact-label">Liên hệ tư vấn</span>
-    <div class="home-cases-contact-details">
-      <a class="home-cases-contact-link home-cases-contact-email" href={`mailto:${contact.email}`}>
+  <div
+    class="max-w-container-max-width mx-auto px-6 md:px-8 mt-4 md:mt-5 flex flex-col gap-2.5 pt-3.5 border-t border-white/10 md:flex-row md:flex-wrap md:items-center md:gap-x-3.5 md:gap-y-2"
+  >
+    <span class="text-[0.625rem] font-bold tracking-widest uppercase text-white/50">Liên hệ tư vấn</span>
+    <div
+      class="grid grid-cols-2 gap-x-4 gap-y-2.5 items-center [grid-template-areas:'email_email'_'phone_cta'] md:flex md:flex-wrap md:flex-1 md:gap-x-3.5 md:gap-y-2"
+    >
+      <a
+        class="[grid-area:email] text-sm font-semibold text-white no-underline transition-colors hover:text-[#f2c300] break-words md:[grid-area:unset]"
+        href={`mailto:${contact.email}`}
+      >
         {contact.email}
       </a>
-      <span class="home-cases-contact-sep" aria-hidden="true">·</span>
-      <a class="home-cases-contact-link home-cases-contact-phone" href={contact.phoneHref}>
+      <span class="hidden md:inline text-white/25 select-none" aria-hidden="true">·</span>
+      <a
+        class="[grid-area:phone] text-base md:text-lg font-bold text-white no-underline transition-colors hover:text-[#f2c300] md:[grid-area:unset]"
+        href={contact.phoneHref}
+      >
         {contact.phone}
       </a>
-      <span class="home-cases-contact-sep" aria-hidden="true">·</span>
+      <span class="hidden md:inline text-white/25 select-none" aria-hidden="true">·</span>
       <a
-        class="home-cases-contact-cta inline-flex items-center justify-center bg-accent-gold text-ink-dark px-4 py-2 rounded-full font-bold text-xs hover:shadow-gold hover:scale-105 transition-all shadow-soft whitespace-nowrap no-underline"
+        class="[grid-area:cta] justify-self-end inline-flex items-center justify-center bg-accent-gold text-ink-dark px-4 py-2 rounded-full font-bold text-xs hover:shadow-gold hover:scale-105 transition-all shadow-soft whitespace-nowrap no-underline md:[grid-area:unset] md:justify-self-auto"
         href={contact.ctaHref}
       >
         {contact.ctaLabel}

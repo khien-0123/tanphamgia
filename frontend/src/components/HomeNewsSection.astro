@@ -12,14 +12,14 @@ const sliderPosts = Array.from({ length: SLIDER_SETS }, () => blogPosts).flat();
 const postsPerSet = blogPosts.length;
 ---
 
-<section class="home-news py-8 md:py-24 bg-white border-b border-border-subtle" id="tin-tuc">
+<section class="py-8 md:py-24 bg-white border-b border-border-subtle" id="tin-tuc">
   <div class="max-w-container-max-width mx-auto px-6 md:px-8">
     <header
-      class="home-news-header flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 md:gap-4 mb-6 md:mb-12"
+      class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 md:gap-4 mb-6 md:mb-12"
     >
       <div class="max-w-2xl">
         <h2
-          class="home-news-heading font-display-lg font-bold tracking-tight text-ink-dark mb-2 md:mb-4"
+          class="font-display-lg font-bold tracking-tight text-ink-dark mb-2 md:mb-4 text-[clamp(1.375rem,5.5vw,1.5rem)] leading-snug md:text-5xl md:leading-tight md:tracking-tighter text-pretty"
         >
           Tin Tức & Kiến Thức Ngành
         </h2>
@@ -29,15 +29,18 @@ const postsPerSet = blogPosts.length;
       </div>
       <a
         href={allPostsHref}
-        class="home-news-all-link bg-ink-dark text-white px-5 py-2.5 md:px-6 md:py-3 rounded-full text-xs md:text-sm font-bold hover:bg-accent-gold hover:text-ink-dark transition-all shadow-soft shrink-0 self-start sm:self-auto no-underline"
+        class="bg-ink-dark text-white px-5 py-2.5 md:px-6 md:py-3 rounded-full text-xs md:text-sm font-bold hover:bg-accent-gold hover:text-ink-dark transition-all shadow-soft shrink-0 self-start sm:self-auto no-underline"
       >
         Xem tất cả bài viết
       </a>
     </header>
 
     <!-- Mobile: slider scroll vòng lặp + tự chạy -->
-    <div class="home-news-slider-wrap md:hidden" data-news-slider>
-      <div class="home-news-slider" aria-label="Tin tức nổi bật">
+    <div class="min-w-0 overflow-anchor-none md:hidden" data-news-slider>
+      <div
+        class="home-news-slider flex overflow-x-auto overflow-y-hidden snap-x snap-proximity overscroll-x-contain [-webkit-overflow-scrolling:touch] [scrollbar-width:none] pb-1 [&::-webkit-scrollbar]:hidden"
+        aria-label="Tin tức nổi bật"
+      >
         {
           sliderPosts.map((post, postIndex) => {
             const setIndex = Math.floor(postIndex / postsPerSet);
@@ -46,18 +49,29 @@ const postsPerSet = blogPosts.length;
             return (
               <a
                 href={post.href ?? allPostsHref}
-                class="home-news-slide group no-underline text-ink-dark"
+                class="home-news-slide group shrink-0 snap-start basis-full min-w-0 px-1 box-border no-underline text-ink-dark"
                 aria-hidden={isClone ? 'true' : undefined}
                 tabindex={isClone ? -1 : undefined}
               >
-                <figure class="home-news-slide-media m-0">
-                  <img src={post.image} alt={post.alt} loading="lazy" />
+                <figure class="relative aspect-[16/10] overflow-hidden rounded-lg mb-3.5 m-0">
+                  <img
+                    src={post.image}
+                    alt={post.alt}
+                    loading="lazy"
+                    class="absolute inset-0 w-full h-full object-cover transition-transform duration-400 group-active:scale-[1.02]"
+                  />
                 </figure>
-                <div class="home-news-slide-body">
-                  <BlogPostTitle post={post} as="h3" class="home-news-slide-title" />
-                  <p class="home-news-slide-excerpt">{post.excerpt}</p>
+                <div class="min-h-[7.5rem]">
+                  <BlogPostTitle
+                    post={post}
+                    as="h3"
+                    class="m-0 mb-2 text-[clamp(1.0625rem,4.2vw,1.125rem)] font-bold leading-snug tracking-tight text-pretty line-clamp-3"
+                  />
+                  <p class="m-0 mb-2.5 text-sm leading-relaxed text-pretty text-[#111]/65 line-clamp-3">
+                    {post.excerpt}
+                  </p>
                   <span
-                    class="home-news-slide-category"
+                    class="text-[0.8125rem] font-bold text-accent-teal"
                     style={post.categoryColor ? `color: ${post.categoryColor}` : undefined}
                   >
                     {post.category}
