@@ -1,9 +1,26 @@
 ---
-import { formInputClass } from '../../lib/form-classes';
+/** Bìa catalogue Tân Phạm Gia — nguồn dongphucvn.vn */
+const catalogCovers = [
+  {
+    src: '/images/documents/catalog-y-te.webp',
+    alt: 'Catalogue đồng phục y tế Tân Phạm Gia',
+    class: 'left-[4%] top-[10%] w-[58%] -rotate-6 shadow-[0_18px_40px_-20px_rgba(16,44,77,0.45)]',
+  },
+  {
+    src: '/images/documents/catalog-the-thao.webp',
+    alt: 'Catalogue đồng phục thể thao Tân Phạm Gia',
+    class: 'left-[22%] top-[6%] w-[58%] rotate-2 shadow-[0_22px_48px_-18px_rgba(16,44,77,0.5)]',
+  },
+  {
+    src: '/images/documents/catalog-teaser.webp',
+    alt: 'Catalogue polo doanh nghiệp Tân Phạm Gia',
+    class: 'left-[38%] top-[2%] w-[58%] rotate-[9deg] shadow-[0_28px_56px_-16px_rgba(16,44,77,0.55)] z-10',
+  },
+];
 ---
 <section
   id="tai-lieu"
-  class="py-10 md:py-24 bg-white border-b border-border-subtle text-ink-dark"
+  class="py-8 md:py-12 bg-white text-ink-dark"
 >
   <div
     class="max-w-container-max-width mx-auto px-6 md:px-8 grid md:grid-cols-2 gap-8 md:gap-16 items-center"
@@ -40,38 +57,27 @@ import { formInputClass } from '../../lib/form-classes';
         <span class="material-symbols-outlined text-base">arrow_forward</span>
       </a>
     </div>
-    <div class="bg-white rounded-2xl shadow-card p-8 md:p-10">
-      <p class="text-sm text-text-muted mb-6">
-        Điền form để nhận link tải qua email — hoặc truy cập
-        <a class="text-accent-teal font-semibold" href="/tai-lieu">trang Tài liệu</a> để chọn file cụ thể.
-      </p>
-      <form class="space-y-6" action="/tai-lieu#tai-lieu-form">
-        <div>
-          <label class="font-eyebrow text-xs text-ink-dark mb-2 block uppercase tracking-wider"
-            >Họ và tên</label
-          >
-          <input class={formInputClass} placeholder="Nguyễn Văn A" type="text" name="name" />
-        </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          <div>
-            <label class="font-eyebrow text-xs text-ink-dark mb-2 block uppercase tracking-wider"
-              >Tên công ty</label
-            >
-            <input class={formInputClass} placeholder="Công ty CP ABC" type="text" name="company" />
-          </div>
-          <div>
-            <label class="font-eyebrow text-xs text-ink-dark mb-2 block uppercase tracking-wider"
-              >Email</label
-            >
-            <input class={formInputClass} placeholder="email@congty.vn" type="email" name="email" />
-          </div>
-        </div>
-        <button
-          type="submit"
-          class="w-full bg-accent-gold text-ink-dark py-4 rounded-full font-bold text-base hover:shadow-gold transition-all active:scale-95"
-          >Tải trọn bộ tài liệu mới nhất</button
-        >
-      </form>
-    </div>
+
+    <a
+      href="/tai-lieu"
+      class="group block w-full max-w-md md:max-w-lg md:justify-self-end focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-teal"
+      data-reveal
+      aria-label="Xem và tải catalogue, hồ sơ năng lực Tân Phạm Gia"
+    >
+      <figure
+        class="relative mx-auto aspect-[4/3] w-full transition-transform duration-500 group-hover:scale-[1.02]"
+      >
+        {
+          catalogCovers.map((cover) => (
+            <img
+              src={cover.src}
+              alt={cover.alt}
+              class:list={['absolute rounded-lg object-cover', cover.class]}
+              loading="lazy"
+            />
+          ))
+        }
+      </figure>
+    </a>
   </div>
 </section>

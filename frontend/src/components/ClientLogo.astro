@@ -2,18 +2,21 @@
 interface Props {
   name: string;
   logo: string;
+  scale?: number;
 }
 
-const { name, logo } = Astro.props;
+const { name, logo, scale = 1 } = Astro.props;
+const imgStyle = scale !== 1 ? `transform: scale(${scale}); transform-origin: center` : undefined;
 ---
 
 <div
-  class="group flex h-[4.25rem] w-[6.75rem] sm:w-[7.5rem] shrink-0 items-center justify-center bg-transparent transition-opacity duration-200"
+  class="group flex h-14 w-28 sm:h-16 sm:w-32 md:h-16 md:w-36 shrink-0 items-center justify-center bg-transparent transition-opacity duration-200"
   title={name}
 >
   <img
     alt={name}
-    class="h-9 max-h-9 w-full max-w-[5.5rem] object-contain object-center opacity-[0.92] transition-opacity duration-200 group-hover:opacity-100"
+    class="max-h-11 sm:max-h-12 md:max-h-14 max-w-full object-contain object-center opacity-[0.92] transition-opacity duration-200 group-hover:opacity-100"
+    style={imgStyle}
     loading="lazy"
     src={logo}
     onerror="this.style.display='none';this.nextElementSibling.style.display='block'"

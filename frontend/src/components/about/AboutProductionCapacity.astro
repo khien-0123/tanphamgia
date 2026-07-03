@@ -3,7 +3,7 @@ import { productionCapacity } from '../../data/gioi-thieu';
 import { mediaTextRowClass, mediaTextCellClass, mediaTextImgClass } from '../../lib/about-layout';
 ---
 
-<section class="py-10 md:py-24 bg-white border-b border-border-subtle" id="nang-luc">
+<section class="py-8 md:py-12 bg-white" id="nang-luc">
   <div class="max-w-container-max-width mx-auto px-6 md:px-8">
     <h2 data-reveal class="font-headline-md text-2xl md:text-4xl font-bold text-ink-dark mb-4">
       Quy mô & Kiểm soát chất lượng
@@ -13,11 +13,11 @@ import { mediaTextRowClass, mediaTextCellClass, mediaTextImgClass } from '../../
     </p>
 
     <dl
-      class="grid grid-cols-2 gap-y-6 gap-x-4 md:grid-cols-3 lg:grid-cols-6 lg:gap-0 mb-10 pb-10 md:mb-20 md:pb-20 border-b border-border-subtle"
+      class="grid grid-cols-2 gap-y-6 gap-x-4 md:grid-cols-3 lg:grid-cols-6 lg:gap-0 mb-8 pb-8 md:mb-10 md:pb-10"
     >
       {
         productionCapacity.stats.map((stat, i) => (
-          <div class:list={[i > 0 && 'lg:border-l lg:border-border-subtle lg:pl-5']}>
+          <div class:list={[i > 0 && 'lg:pl-5']}>
             <dt class="font-extrabold text-base text-ink-dark mb-1">{stat.value}</dt>
             <dd class="text-xs text-text-muted leading-[1.45] m-0">{stat.label}</dd>
           </div>
@@ -25,7 +25,7 @@ import { mediaTextRowClass, mediaTextCellClass, mediaTextImgClass } from '../../
       }
     </dl>
 
-    <div data-reveal class={`${mediaTextRowClass} mb-10 md:mb-20`}>
+    <div data-reveal class={`${mediaTextRowClass} mb-8 md:mb-12`}>
       <figure class={`${mediaTextCellClass} m-0`}>
         <img
           alt="Nhà xưởng Tân Phạm Gia"

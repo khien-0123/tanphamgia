@@ -41,7 +41,7 @@ const projects = projectsBySolution[content.solutionId];
 <BaseLayout title={content.seo.title} description={content.seo.description}>
   <SiteNav solid currentPath="/giai-phap" />
   <main class={solutionTheme.page}>
-    <section class="pt-28 md:pt-32 pb-14 md:pb-20 border-b border-border-subtle">
+    <section class="pt-28 md:pt-32 pb-10 md:pb-12">
       <div class="max-w-container-max-width mx-auto px-6 md:px-8">
         <a href="/giai-phap" class="text-sm font-semibold text-accent-teal hover:text-ink-dark transition-colors">
           ← Quay lại
@@ -107,7 +107,7 @@ const projects = projectsBySolution[content.solutionId];
         <ul class="grid sm:grid-cols-3 gap-4 mb-8 text-sm md:text-base">
           {
             content.products.map((product) => (
-              <li class="py-3 border-b border-border-subtle">{product}</li>
+              <li class="py-3">{product}</li>
             ))
           }
         </ul>

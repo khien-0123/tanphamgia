@@ -13,11 +13,11 @@ const sliderPosts = Array.from({ length: SLIDER_SETS }, () => blogPosts).flat();
 const postsPerSet = blogPosts.length;
 ---
 
-<section class="py-8 md:py-24 bg-white border-b border-border-subtle" id="tin-tuc">
+<section class="py-8 md:py-12 bg-white" id="tin-tuc">
   <div class="max-w-container-max-width mx-auto px-6 md:px-8">
     <header
       data-reveal
-      class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 md:gap-4 mb-6 md:mb-12"
+      class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 md:gap-4 mb-6 md:mb-8"
     >
       <div class="max-w-2xl">
         <h2
@@ -90,7 +90,7 @@ const postsPerSet = blogPosts.length;
     <div class="hidden md:block">
       {
         featured && (
-          <article data-reveal class="grid md:grid-cols-2 gap-6 md:gap-12 items-start mb-8 md:mb-16 pb-8 md:pb-16 border-b border-border-subtle group">
+          <article data-reveal class="grid md:grid-cols-2 gap-6 md:gap-10 items-start mb-6 md:mb-10 pb-6 md:pb-10 group">
             <a href={featured.href ?? allPostsHref} class="contents no-underline text-inherit">
               <BlogPostFigure
                 src={featured.image}
@@ -102,7 +102,7 @@ const postsPerSet = blogPosts.length;
                   {featured.title}
                 </h3>
                 <p class="text-body-lg text-text-muted mb-6">{featured.excerpt}</p>
-                <div class="mt-auto pt-6 border-t border-border-subtle">
+                <div class="mt-auto pt-4">
                   <span class="font-bold text-accent-teal">{featured.category}</span>
                 </div>
               </div>

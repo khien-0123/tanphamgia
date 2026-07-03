@@ -67,7 +67,7 @@ const caseCard: Record<SolutionTheme, string> = {
 export function getSolutionTheme(theme: SolutionTheme) {
   return {
     page: 'bg-white text-[#111]',
-    section: 'py-8 md:py-[3.25rem] border-b border-[#e7e7e2] bg-white [&_h2]:text-balance',
+    section: 'py-8 md:py-12 bg-white [&_h2]:text-balance',
     heroGrid: heroGrid[theme],
     heroImage: 'w-full aspect-[4/3] object-cover rounded-lg',
     heroImageDetail: heroImageDetail[theme],
@@ -119,5 +119,5 @@ export const solutionBoxHome = {
   title:
     'font-bold text-[0.8rem] leading-tight sm:text-[0.95rem] sm:leading-snug text-ink-dark m-0 shrink-0 max-xl:line-clamp-2 max-sm:text-[0.8125rem]',
   desc: 'text-[0.68rem] sm:text-[0.78rem] leading-snug text-text-muted m-0 flex-1 min-h-0 line-clamp-2 xl:line-clamp-none xl:flex-none max-sm:text-xs',
-  link: 'text-[0.68rem] sm:text-xs font-bold text-ink-dark no-underline hover:text-accent-teal mt-auto shrink-0 pt-0.5 max-sm:text-xs',
+  link: 'text-[0.625rem] sm:text-[0.6875rem] font-semibold text-ink-dark no-underline hover:text-accent-teal mt-auto shrink-0 pt-0.5',
 };
