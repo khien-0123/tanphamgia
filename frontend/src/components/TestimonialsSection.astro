@@ -19,9 +19,10 @@ const itemsPerSet = items.length;
     <h2 class="font-headline-md text-2xl md:text-3xl font-bold text-ink-dark mb-10 md:mb-14">
       {title}
     </h2>
-    <div class="clients-testimonials-slider-wrap min-w-0 [overflow-anchor:none]" data-testimonials-slider>
+    <div class="min-w-0 [overflow-anchor:none]" data-testimonials-slider>
       <div
-        class="clients-testimonials-slider flex items-stretch gap-0 md:gap-12 overflow-x-auto overflow-y-hidden snap-x snap-mandatory overscroll-x-contain [-webkit-overflow-scrolling:touch] [scrollbar-width:none] pb-1 [&::-webkit-scrollbar]:hidden"
+        class="flex items-stretch gap-0 md:gap-12 overflow-x-auto overflow-y-hidden snap-x snap-mandatory overscroll-x-contain [-webkit-overflow-scrolling:touch] [scrollbar-width:none] pb-1 [&::-webkit-scrollbar]:hidden"
+        data-slider-track
         aria-label={title}
         role="region"
       >
@@ -32,7 +33,8 @@ const itemsPerSet = items.length;
 
             return (
               <blockquote
-                class="clients-testimonials-slide flex-[0_0_100%] md:flex-[0_0_calc((100%-6rem)/3)] snap-start min-w-0 box-border px-1 md:px-0 flex flex-col self-stretch m-0 [&>p]:flex-1 [&>p]:flex-auto [&>footer]:mt-auto [&>footer]:shrink-0"
+                class="flex-[0_0_100%] md:flex-[0_0_calc((100%-6rem)/3)] snap-start min-w-0 box-border px-1 md:px-0 flex flex-col self-stretch m-0 [&>p]:flex-1 [&>p]:flex-auto [&>footer]:mt-auto [&>footer]:shrink-0"
+                data-slider-slide
                 aria-hidden={isClone ? 'true' : undefined}
                 tabindex={isClone ? -1 : undefined}
               >

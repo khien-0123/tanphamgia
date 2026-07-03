@@ -38,7 +38,8 @@ const postsPerSet = blogPosts.length;
     <!-- Mobile: slider scroll vòng lặp + tự chạy -->
     <div class="min-w-0 overflow-anchor-none md:hidden" data-news-slider>
       <div
-        class="home-news-slider flex overflow-x-auto overflow-y-hidden snap-x snap-proximity overscroll-x-contain [-webkit-overflow-scrolling:touch] [scrollbar-width:none] pb-1 [&::-webkit-scrollbar]:hidden"
+        class="flex overflow-x-auto overflow-y-hidden snap-x snap-proximity overscroll-x-contain [-webkit-overflow-scrolling:touch] [scrollbar-width:none] pb-1 [&::-webkit-scrollbar]:hidden"
+        data-slider-track
         aria-label="Tin tức nổi bật"
       >
         {
@@ -49,7 +50,8 @@ const postsPerSet = blogPosts.length;
             return (
               <a
                 href={post.href ?? allPostsHref}
-                class="home-news-slide group shrink-0 snap-start basis-full min-w-0 px-1 box-border no-underline text-ink-dark"
+                class="group shrink-0 snap-start basis-full min-w-0 px-1 box-border no-underline text-ink-dark"
+                data-slider-slide
                 aria-hidden={isClone ? 'true' : undefined}
                 tabindex={isClone ? -1 : undefined}
               >

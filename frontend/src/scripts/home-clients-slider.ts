@@ -1,9 +1,9 @@
 /** Slider logo khách hàng mobile — vòng lặp vô hạn + tự chạy */
 function initClientsSlider(root: HTMLElement) {
-  const track = root.querySelector<HTMLElement>('.home-clients-slider');
+  const track = root.querySelector<HTMLElement>('[data-slider-track]');
   if (!track) return;
 
-  const pages = track.querySelectorAll<HTMLElement>('.home-clients-page');
+  const pages = track.querySelectorAll<HTMLElement>('[data-slider-slide]');
   const totalSets = 3;
   const count = pages.length / totalSets;
 

@@ -1,13 +1,9 @@
 /** Slider testimonial trang Giới thiệu — tự chạy, dừng khi hover hoặc bấm */
 function initTestimonialsSlider(root: HTMLElement) {
-  const track = root.querySelector<HTMLElement>(
-    '.about-testimonials-slider, .clients-testimonials-slider',
-  );
+  const track = root.querySelector<HTMLElement>('[data-slider-track]');
   if (!track) return;
 
-  const slides = track.querySelectorAll<HTMLElement>(
-    '.about-testimonials-slide, .clients-testimonials-slide',
-  );
+  const slides = track.querySelectorAll<HTMLElement>('[data-slider-slide]');
   const totalSets = 3;
   const count = slides.length / totalSets;
 

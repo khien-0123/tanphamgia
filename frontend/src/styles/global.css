@@ -2,21 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Màu link accent — navy #102C4D (ghi đè đảm bảo không còn teal cũ) */
-@layer utilities {
-  .text-accent-teal {
-    color: #102c4d;
-  }
-
-  .bg-accent-teal {
-    background-color: #102c4d;
-  }
-
-  .hover\:text-accent-teal:hover {
-    color: #102c4d;
-  }
-}
-
 /* Material Symbols — font-variation bắt buộc */
 .material-symbols-outlined {
   font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;

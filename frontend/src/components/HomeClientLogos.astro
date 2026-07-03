@@ -19,7 +19,8 @@ const pagesPerSet = basePages.length;
   <!-- Mobile: 3 hàng/trang, vuốt vòng lặp vô hạn -->
   <div class="min-w-0 md:hidden" data-clients-slider>
     <div
-      class="home-clients-slider flex gap-3 overflow-x-auto overflow-y-hidden snap-x snap-proximity overscroll-x-contain [-webkit-overflow-scrolling:touch] [scrollbar-width:none] pb-1 [&::-webkit-scrollbar]:hidden"
+      class="flex gap-3 overflow-x-auto overflow-y-hidden snap-x snap-proximity overscroll-x-contain [-webkit-overflow-scrolling:touch] [scrollbar-width:none] pb-1 [&::-webkit-scrollbar]:hidden"
+      data-slider-track
       role="list"
       aria-label="Thương hiệu đồng hành"
     >
@@ -30,7 +31,8 @@ const pagesPerSet = basePages.length;
 
           return (
             <div
-              class="home-clients-page shrink-0 snap-start basis-full grid grid-cols-3 gap-y-2 gap-x-1.5"
+              class="shrink-0 snap-start basis-full grid grid-cols-3 gap-y-2 gap-x-1.5"
+              data-slider-slide
               role="listitem"
               aria-hidden={isClone ? 'true' : undefined}
             >

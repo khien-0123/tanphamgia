@@ -20,7 +20,7 @@ const formLabelClass =
 const formInputClass =
   'block w-full py-3 px-0 border-0 border-b border-border-subtle bg-transparent text-ink-dark text-[0.9375rem] outline-none transition-[border-color] duration-200 focus:border-accent-gold';
 const docDownloadBtnClass =
-  'doc-download-btn flex items-center gap-4 w-full p-4 px-5 border-0 rounded-lg bg-[#f8faf9] text-left cursor-pointer transition-colors duration-200 hover:bg-[#eef2f0]';
+  'flex items-center gap-4 w-full p-4 px-5 border-0 rounded-lg bg-[#f8faf9] text-left cursor-pointer transition-colors duration-200 hover:bg-[#eef2f0]';
 ---
 
 <BaseLayout title={pageSeo.taiLieu.title} description={pageSeo.taiLieu.description}>
@@ -49,7 +49,7 @@ const docDownloadBtnClass =
           {
             brandDocuments.map((doc) => (
               <li>
-                <button type="button" class={docDownloadBtnClass} data-doc-id={doc.id}>
+                <button type="button" class={docDownloadBtnClass} data-doc-download data-doc-id={doc.id}>
                   <span class="material-symbols-outlined text-accent-gold">description</span>
                   <span>
                     <strong class="block text-ink-dark text-[0.9375rem] break-words [overflow-wrap:anywhere]"
@@ -73,7 +73,7 @@ const docDownloadBtnClass =
           {
             catalogueDocuments.map((doc) => (
               <li>
-                <button type="button" class={docDownloadBtnClass} data-doc-id={doc.id}>
+                <button type="button" class={docDownloadBtnClass} data-doc-download data-doc-id={doc.id}>
                   <span class="material-symbols-outlined text-accent-gold">menu_book</span>
                   <span>
                     <strong class="block text-ink-dark text-[0.9375rem] break-words [overflow-wrap:anywhere]"
@@ -97,7 +97,7 @@ const docDownloadBtnClass =
           {
             guideDocuments.map((doc) => (
               <li>
-                <button type="button" class={docDownloadBtnClass} data-doc-id={doc.id}>
+                <button type="button" class={docDownloadBtnClass} data-doc-download data-doc-id={doc.id}>
                   <span class="material-symbols-outlined text-accent-gold">lightbulb</span>
                   <span>
                     <strong class="block text-ink-dark text-[0.9375rem] break-words [overflow-wrap:anywhere]"
@@ -190,7 +190,7 @@ const docDownloadBtnClass =
   const selectedLabel = document.getElementById('doc-selected-label');
   const successMsg = document.getElementById('doc-success');
 
-  document.querySelectorAll('.doc-download-btn').forEach((btn) => {
+  document.querySelectorAll('[data-doc-download]').forEach((btn) => {
     btn.addEventListener('click', () => {
       const id = btn.getAttribute('data-doc-id');
       const doc = allDocuments.find((d) => d.id === id);

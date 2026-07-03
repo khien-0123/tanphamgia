@@ -1,9 +1,9 @@
 /** Slider tin tức mobile — vòng lặp vô hạn + tự chạy */
 function initNewsSlider(root: HTMLElement) {
-  const track = root.querySelector<HTMLElement>('.home-news-slider');
+  const track = root.querySelector<HTMLElement>('[data-slider-track]');
   if (!track) return;
 
-  const slides = track.querySelectorAll<HTMLElement>('.home-news-slide');
+  const slides = track.querySelectorAll<HTMLElement>('[data-slider-slide]');
   const totalSets = 3;
   const count = slides.length / totalSets;
 
