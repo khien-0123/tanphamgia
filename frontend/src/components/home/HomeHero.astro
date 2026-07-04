@@ -1,35 +1,31 @@
 ---
 import { stats, heroMedia } from '../../data/site';
+
+/** Lớp phủ hero — mờ nhẹ để video vẫn thấy chuyển động nhưng không lấn chữ */
+const heroOverlay = heroMedia.video
+  ? 'absolute inset-0 z-10 bg-gradient-to-br from-ink-dark/68 via-ink-dark/52 to-ink-dark/38'
+  : 'absolute inset-0 z-10 bg-gradient-to-br from-ink-dark/88 via-ink-dark/55 to-[rgba(16,44,77,0.25)]';
 ---
 
 <header
   class="relative flex flex-col overflow-hidden pt-24 min-h-0 sm:min-h-[480px] md:min-h-[520px] lg:min-h-screen"
 >
   <div class="absolute inset-0 z-0">
-    <div
-      class="absolute inset-0 z-10 bg-gradient-to-br from-ink-dark/88 via-ink-dark/55 to-[rgba(16,44,77,0.25)]"
-    >
-    </div>
+    <div class={heroOverlay}></div>
     {
       heroMedia.video ? (
         <video
-          class="w-full h-full object-cover object-center"
+          class="w-full h-full object-cover object-center opacity-75"
           id="hero-video"
           autoplay
           loop
           muted
           playsinline
-          poster={heroMedia.image}
         >
           <source src={heroMedia.video} type="video/mp4" />
         </video>
       ) : (
-        <img
-          alt="Nhà máy may đồng phục Tân Phạm Gia"
-          class="w-full h-full object-cover object-center"
-          id="hero-image"
-          src={heroMedia.image}
-        />
+        <div class="w-full h-full bg-ink-dark" id="hero-image" aria-hidden="true"></div>
       )
     }
   </div>
@@ -62,7 +58,7 @@ import { stats, heroMedia } from '../../data/site';
           </a>
           <a
             href="/tai-lieu"
-            class="flex-1 min-w-0 border border-white/50 bg-white/10 backdrop-blur-sm text-white px-3 py-2.5 md:px-7 md:py-3.5 rounded-full font-bold text-xs md:text-base leading-tight hover:bg-white hover:text-ink-dark transition-all text-center"
+            class="flex-1 min-w-0 bg-white text-ink-dark border border-white px-3 py-2.5 md:px-7 md:py-3.5 rounded-full font-bold text-xs md:text-base leading-tight hover:shadow-soft hover:scale-105 transition-all text-center"
           >
             Tải hồ sơ năng lực
           </a>

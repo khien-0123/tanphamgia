@@ -164,6 +164,18 @@ function initTestimonialsSlider(root: HTMLElement) {
 
   alignToMiddleSet();
 
+  const goTo = (direction: 1 | -1) => {
+    const step = getStep();
+    if (step <= 0 || isJumping || isAutoScrolling) return;
+    pauseInteraction();
+    track.scrollBy({ left: step * direction, behavior: 'smooth' });
+  };
+
+  const prevBtn = root.querySelector<HTMLElement>('[data-slider-prev]');
+  const nextBtn = root.querySelector<HTMLElement>('[data-slider-next]');
+  prevBtn?.addEventListener('click', () => goTo(-1));
+  nextBtn?.addEventListener('click', () => goTo(1));
+
   track.addEventListener('scroll', scheduleScrollEnd, { passive: true });
   track.addEventListener('scrollend', () => {
     if (!isAutoScrolling) handleScrollEnd();

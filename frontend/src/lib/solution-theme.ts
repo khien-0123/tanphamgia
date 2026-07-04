@@ -67,7 +67,7 @@ const caseCard: Record<SolutionTheme, string> = {
 export function getSolutionTheme(theme: SolutionTheme) {
   return {
     page: 'bg-white text-[#111]',
-    section: 'py-8 md:py-[3.25rem] border-b border-[#e7e7e2] bg-white [&_h2]:text-balance',
+    section: 'py-8 md:py-12 bg-white [&_h2]:text-balance',
     heroGrid: heroGrid[theme],
     heroImage: 'w-full aspect-[4/3] object-cover rounded-lg',
     heroImageDetail: heroImageDetail[theme],
@@ -108,16 +108,16 @@ export const solutionBoxCompact = {
 
 /** Catalog giải pháp trên trang chủ — 2 cột mobile, 4 cột desktop */
 export const solutionBoxHome = {
-  grid: 'grid grid-cols-2 gap-2.5 sm:gap-4 xl:grid-cols-4',
-  item: 'border border-border-subtle bg-white transition-[border-color] duration-200 hover:border-accent-gold rounded-[10px] sm:rounded-xl overflow-hidden flex flex-col min-h-0',
+  grid: 'grid grid-cols-2 gap-4 sm:gap-6 xl:grid-cols-4',
+  item: 'bg-white flex flex-col min-h-0 group',
   summary:
-    'flex flex-col flex-1 h-full min-h-0 gap-1.5 p-2 px-1.5 pb-2.5 sm:gap-[0.45rem] sm:p-3 sm:pb-3.5 no-underline',
+    'flex flex-col flex-1 h-full min-h-0 gap-2 sm:gap-2.5 no-underline',
   media:
-    'aspect-[16/10] overflow-hidden border border-surface-muted rounded-md sm:rounded-lg shrink-0 m-0',
+    'aspect-square overflow-hidden rounded-md shrink-0 m-0',
   number:
     'inline-block w-fit font-extrabold text-2xl sm:text-3xl xl:text-4xl text-accent-gold leading-none tabular-nums',
   title:
-    'font-bold text-[0.8rem] leading-tight sm:text-[0.95rem] sm:leading-snug text-ink-dark m-0 shrink-0 max-xl:line-clamp-2 max-sm:text-[0.8125rem]',
-  desc: 'text-[0.68rem] sm:text-[0.78rem] leading-snug text-text-muted m-0 flex-1 min-h-0 line-clamp-2 xl:line-clamp-none xl:flex-none max-sm:text-xs',
-  link: 'text-[0.68rem] sm:text-xs font-bold text-ink-dark no-underline hover:text-accent-teal mt-auto shrink-0 pt-0.5 max-sm:text-xs',
+    'font-bold text-base leading-tight sm:text-xl sm:leading-snug text-ink-dark m-0 shrink-0',
+  desc: 'text-xs sm:text-sm leading-relaxed text-text-muted m-0 line-clamp-2',
+  link: 'text-[0.625rem] sm:text-[0.6875rem] font-semibold text-ink-dark no-underline hover:text-accent-teal mt-auto shrink-0 pt-0.5',
 };

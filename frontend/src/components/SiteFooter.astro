@@ -1,92 +1,190 @@
 ---
-import { mainNavigation, siteContact } from '../data/site';
+import { siteContact, siteFooter } from '../data/site';
 import SiteBrandLogo from './SiteBrandLogo.astro';
+
+const footerLink =
+  'text-sm text-white/65 no-underline transition-colors hover:text-accent-gold';
+const footerHeading =
+  'm-0 mb-4 text-xs font-bold uppercase tracking-[0.12em] text-white';
+const socialBox =
+  'inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-white/25 text-white/80 transition-colors hover:border-accent-gold hover:bg-accent-gold/10 hover:text-accent-gold';
 ---
 
-<footer class="bg-ink-dark text-white py-10 md:py-16 border-t border-white/10" id="lien-he">
+<footer class="bg-ink-dark text-white pt-12 pb-6 md:pt-16 md:pb-8" id="lien-he">
   <div
-    class="grid grid-cols-2 md:grid-cols-4 gap-y-8 gap-x-5 md:gap-x-10 md:gap-y-10 max-w-container-max-width mx-auto px-6 md:px-8"
+    class="max-w-container-max-width mx-auto px-6 md:px-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-8 xl:gap-10"
   >
-    <div class="col-span-2 md:col-span-1 space-y-5">
+    <!-- Cột thương hiệu -->
+    <div class="sm:col-span-2 lg:col-span-1 space-y-5">
       <SiteBrandLogo onDark footer />
-      <p class="text-white/60 text-sm leading-relaxed">
-        {siteContact.tagline}
+      <p class="m-0 text-sm leading-relaxed text-white/60">
+        {siteFooter.tagline}
       </p>
-      <div class="flex gap-3">
-        <a
-          class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-accent-gold hover:text-ink-dark transition-all"
-          href="#"
-          ><span class="material-symbols-outlined text-sm">language</span></a
-        >
-        <a
-          class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-accent-gold hover:text-ink-dark transition-all"
-          href="mailto:dongphuc@tanphamgia.com.vn"
-          ><span class="material-symbols-outlined text-sm">mail</span></a
-        >
-      </div>
-    </div>
-    <div class="col-start-1">
-      <h4 class="font-bold text-sm mb-5 text-accent-gold uppercase tracking-wider">
-        Liên kết nhanh
-      </h4>
-      <ul class="space-y-3 text-sm">
+      <nav class="flex flex-nowrap items-center gap-2" aria-label="Mạng xã hội Tân Phạm Gia">
         {
-          mainNavigation.map((item) => (
+          siteFooter.social.map((item) => (
+            <a
+              class={socialBox}
+              href={item.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={item.label}
+            >
+              {item.icon === 'facebook' && (
+                <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" aria-hidden="true">
+                  <path
+                    fill="currentColor"
+                    d="M12 2.04c-5.5 0-10 4.49-10 10.02 0 5 3.66 9.15 8.44 9.9v-7h-2.54v-2.9h2.54V9.82c0-2.51 1.49-3.89 3.78-3.89 1.09 0 2.23.19 2.23.19v2.47h-1.26c-1.24 0-1.63.77-1.63 1.56v1.88h2.78l-.45 2.9h-2.33v7a10 10 0 0 0 8.44-9.9c0-5.53-4.5-10.02-10-10.02Z"
+                  />
+                </svg>
+              )}
+              {item.icon === 'linkedin' && (
+                <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" aria-hidden="true">
+                  <path
+                    fill="currentColor"
+                    d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77Z"
+                  />
+                </svg>
+              )}
+              {item.icon === 'youtube' && (
+                <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" aria-hidden="true">
+                  <path
+                    fill="currentColor"
+                    d="M10 15l5.19-3L10 9v6m11.56-7.83c.13.47.22 1.1.28 1.9.07.8.1 1.49.1 2.09L22 12c0 2.19-.16 3.8-.44 4.83-.25.9-.83 1.48-1.73 1.73-.47.13-1.33.22-2.58.28-1.25.07-2.39.1-3.41.1L12 19c-4.19 0-6.8-.16-7.83-.44-.9-.25-1.48-.83-1.73-1.73-.13-.47-.22-1.1-.28-1.9-.07-.8-.1-1.49-.1-2.09L2 12c0-2.19.16-3.8.44-4.83.25-.9.83-1.48 1.73-1.73.47-.13 1.33-.22 2.58-.28 1.25-.07 2.39-.1 3.41-.1L12 5c4.19 0 6.8.16 7.83.44.9.25 1.48.83 1.73 1.73Z"
+                  />
+                </svg>
+              )}
+              {item.icon === 'pinterest' && (
+                <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" aria-hidden="true">
+                  <path
+                    fill="currentColor"
+                    d="M13 2a10 10 0 0 0-3.87 19.22c-.14-1.23-.27-3.11.05-4.46.3-.1.1.24 1.83-2.14 2.15 4.1 6.2 3.8 11.2 0 4.14-3.5 6.4-8.8 5.6-13.88C15.86 1.5 10.15 1.4 7.6 4.7 4.9 8.1 5.3 12.8 7.3 14.5c.3.2.6.2.7 0 .1-.1.3-.8.4-1 .1-.1.1-.3 0-.4-.7-.9-1.1-2.1-1.1-3.4 0-4.4 3.3-8.3 8.3-8.3 4.5 0 7 2.8 7 6.5 0 4.8-2.1 8.9-5.3 8.9-1.8 0-3.1-1.5-2.6-3.3.5-2.1 1.6-4.4 1.6-5.9 0-1.4-.7-2.5-2.2-2.5-1.8 0-3.2 1.8-3.2 4.3 0 1.5.5 2.6.5 2.6l-2.1 8.9c-.6 2.6-.1 5.8 0 5.9Z"
+                  />
+                </svg>
+              )}
+              {item.icon === 'tiktok' && (
+                <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" aria-hidden="true">
+                  <path
+                    fill="currentColor"
+                    d="M12.53.02C13.84 0 15.14.01 16.44 0c.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.06-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.03 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.28-2.26.74-4.63 2.58-6.1 1.64-1.3 3.84-1.84 5.98-1.39.04.1.07.21.11.31.29 1.03.35 2.11.33 3.18-1.22-.32-2.58-.17-3.71.52-1.04.62-1.74 1.73-1.81 2.91-.01.76.21 1.53.64 2.15.57.84 1.52 1.37 2.52 1.48.9.14 1.84-.07 2.61-.57.83-.58 1.37-1.46 1.48-2.45.02-.61.01-1.22.01-1.83V.02Z"
+                  />
+                </svg>
+              )}
+            </a>
+          ))
+        }
+      </nav>
+    </div>
+
+    <!-- Chính sách -->
+    <div>
+      <h4 class={footerHeading}>Chính sách</h4>
+      <ul class="m-0 list-none space-y-3 p-0">
+        {
+          siteFooter.policies.map((item) => (
             <li>
-              <a class="text-white/70 hover:text-accent-gold transition-colors" href={item.href}>
+              <span class="text-sm text-white/65">{item.label}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <!-- Dịch vụ & giải pháp -->
+    <div>
+      <h4 class={footerHeading}>Dịch vụ & Giải pháp</h4>
+      <ul class="m-0 list-none space-y-3 p-0">
+        {
+          siteFooter.services.map((item) => (
+            <li>
+              <a class={footerLink} href={item.href}>
                 {item.label}
               </a>
             </li>
           ))
         }
-        <li>
-          <a class="text-white/70 hover:text-accent-gold transition-colors" href="/gioi-thieu#nang-luc"
-            >Năng lực sản xuất</a
+      </ul>
+      <a
+        class="mt-6 inline-block"
+        href={siteFooter.ministryCert.href}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <img
+          class="h-14 w-auto"
+          src={siteFooter.ministryCert.image}
+          alt={siteFooter.ministryCert.alt}
+          loading="lazy"
+          width="150"
+          height="56"
+        />
+      </a>
+    </div>
+
+    <!-- Tin tức & tải tài liệu -->
+    <div>
+      <h4 class={footerHeading}>Tin tức</h4>
+      <ul class="m-0 list-none space-y-3 p-0">
+        {
+          siteFooter.news.map((item) => (
+            <li>
+              <a class={footerLink} href={item.href}>
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <h4 class:list={[footerHeading, 'mt-6']}>Tải tài liệu</h4>
+      <a
+        class="inline-flex items-center gap-2 rounded-full bg-accent-gold px-5 py-2.5 text-xs font-bold uppercase tracking-wide text-ink-dark no-underline transition-all hover:scale-105 hover:shadow-gold"
+        href={siteFooter.download.href}
+      >
+        <span>{siteFooter.download.label}</span>
+        <span
+          class="inline-flex h-6 w-6 items-center justify-center rounded-full bg-ink-dark/10"
+          aria-hidden="true"
+        >
+          <span class="material-symbols-outlined text-base leading-none">download</span>
+        </span>
+      </a>
+    </div>
+
+    <!-- Liên hệ -->
+    <div class="sm:col-span-2 lg:col-span-1">
+      <h4 class={footerHeading}>Liên hệ</h4>
+      <ul class="m-0 list-none space-y-4 p-0 text-sm text-white/70">
+        <li class="flex gap-3">
+          <span class="material-symbols-outlined shrink-0 text-lg text-[#e85d6a]" aria-hidden="true"
+            >location_on</span
           >
+          <span class="leading-relaxed">{siteContact.address}</span>
+        </li>
+        <li class="flex gap-3 items-center">
+          <span class="material-symbols-outlined shrink-0 text-lg text-accent-gold" aria-hidden="true"
+            >call</span
+          >
+          <a class={footerLink} href={siteContact.phoneHref}>{siteContact.phone}</a>
+        </li>
+        <li class="flex gap-3 items-center">
+          <span class="material-symbols-outlined shrink-0 text-lg text-[#5b9fd4]" aria-hidden="true"
+            >mail</span
+          >
+          <a class={footerLink} href={siteContact.emailHref}>{siteContact.email}</a>
         </li>
       </ul>
-    </div>
-    <div class="col-start-2">
-      <h4 class="font-bold text-sm mb-5 text-accent-gold uppercase tracking-wider">Hỗ trợ</h4>
-      <ul class="space-y-3 text-sm">
-        <li>
-          <a class="text-white/70 hover:text-accent-gold transition-colors" href="#"
-            >Chính sách bảo mật</a
-          >
-        </li>
-        <li>
-          <a class="text-white/70 hover:text-accent-gold transition-colors" href="#"
-            >Hướng dẫn chọn size</a
-          >
-        </li>
-        <li>
-          <a class="text-white/70 hover:text-accent-gold transition-colors" href="#"
-            >Quy trình đổi trả</a
-          >
-        </li>
-        <li>
-          <a class="text-white/70 hover:text-accent-gold transition-colors" href="/lien-he"
-            >Liên hệ</a
-          >
-        </li>
-      </ul>
-    </div>
-    <div class="col-span-2 md:col-span-1">
-      <h4 class="font-bold text-sm mb-5 text-accent-gold uppercase tracking-wider">Văn phòng</h4>
-      <p class="text-white/70 text-sm mb-3 break-words [overflow-wrap:anywhere]">{siteContact.address}</p>
-      <p class="text-white/90 text-sm mb-1 font-semibold">
-        Hotline: <a class="hover:text-accent-gold break-words [overflow-wrap:anywhere]" href={siteContact.phoneHref}>{siteContact.phoneDisplay}</a>
-      </p>
-      <p class="text-white/70 text-sm">
-        <a class="hover:text-accent-gold break-words [overflow-wrap:anywhere]" href={siteContact.emailHref}>{siteContact.email}</a>
-      </p>
     </div>
   </div>
-  <div
-    class="max-w-container-max-width mx-auto px-6 md:px-8 mt-12 pt-6 border-t border-white/10 text-center"
+
+  <div class="max-w-container-max-width mx-auto px-6 md:px-8 mt-10 md:mt-12 pt-6 border-t border-white/10">
+    <p class="m-0 text-center text-xs text-white/40">{siteFooter.copyright}</p>
+  </div>
+
+  <a
+    class="fixed bottom-6 right-6 z-40 inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-ink-dark/90 text-white shadow-soft backdrop-blur-sm transition-all hover:border-accent-gold hover:text-accent-gold"
+    href="#top"
+    aria-label="Lên đầu trang"
   >
-    <p class="text-white/40 text-xs">
-      © 2026 Tân Phạm Gia. All rights reserved. ISO 9001:2015 Certified.
-    </p>
-  </div>
+    <span class="material-symbols-outlined text-xl" aria-hidden="true">keyboard_arrow_up</span>
+  </a>
 </footer>

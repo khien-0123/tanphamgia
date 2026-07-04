@@ -10,3 +10,11 @@ Thumbs.db
 
 # WordPress — không đẩy credential lên GitHub
 **/wp-config.php
+.vercel
+
+# Skill files & AI config
+.agents/
+.claude/
+AGENTS.md
+CLAUDE.md
+skills-lock.json

@@ -17,8 +17,8 @@ const sliderItems = Array.from({ length: SLIDER_SETS }, () => items).flat();
 const itemsPerSet = items.length;
 
 const sectionClass = isDark
-  ? 'py-10 md:py-24 bg-ink-dark text-white'
-  : 'py-12 md:py-20 bg-white border-b border-border-subtle';
+  ? 'py-8 md:py-14 bg-ink-dark text-white'
+  : 'py-8 md:py-12 bg-white';
 
 const titleClass = isDark
   ? 'font-headline-md text-2xl md:text-4xl font-bold mb-12 md:mb-14'
@@ -34,7 +34,7 @@ const blockquoteClass = isDark
     <h2 data-reveal={!isDark || undefined} class={titleClass}>
       {title}
     </h2>
-    <div class="min-w-0 [overflow-anchor:none]" data-testimonials-slider>
+    <div class="min-w-0 [overflow-anchor:none] relative group/slider" data-testimonials-slider>
       <div
         class="flex items-stretch gap-0 md:gap-12 overflow-x-auto overflow-y-hidden snap-x snap-mandatory overscroll-x-contain [-webkit-overflow-scrolling:touch] [scrollbar-width:none] pb-1 [&::-webkit-scrollbar]:hidden"
         data-slider-track
@@ -79,6 +79,8 @@ const blockquoteClass = isDark
           })
         }
       </div>
+      <button data-slider-prev class="slider-arrow slider-arrow--prev" aria-label="Trước"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><polyline points="15 18 9 12 15 6"/></svg></button>
+      <button data-slider-next class="slider-arrow slider-arrow--next" aria-label="Sau"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><polyline points="9 6 15 12 9 18"/></svg></button>
     </div>
   </div>
 </section>

@@ -1,6 +1,7 @@
 ---
 import ClientLogo from './ClientLogo.astro';
 import { clientLogos } from '../data/site';
+import { getClientLogoScale } from '../lib/client-logo-scale';
 
 interface Props {
   /** embedded: cột phải trang chủ | standalone: full width trong container */
@@ -9,60 +10,137 @@ interface Props {
 
 const { variant = 'embedded' } = Astro.props;
 
-/** Mobile: 3 cột × 3 hàng mỗi trang slider */
-const LOGOS_PER_PAGE = 9;
 const SLIDER_SETS = 3;
 
-const basePages = [
-  clientLogos.slice(0, LOGOS_PER_PAGE),
-  clientLogos.slice(LOGOS_PER_PAGE),
-].filter((page) => page.length > 0);
+/** Chia logo thành từng trang slider — luôn 3 hàng */
+function chunkLogos(perPage: number) {
+  const pages: (typeof clientLogos)[] = [];
+  for (let i = 0; i < clientLogos.length; i += perPage) {
+    pages.push(clientLogos.slice(i, i + perPage));
+  }
+  return pages;
+}
 
-const sliderPages = Array.from({ length: SLIDER_SETS }, () => basePages).flat();
-const pagesPerSet = basePages.length;
+function buildSliderPages(perPage: number) {
+  const basePages = chunkLogos(perPage);
+  return {
+    pages: Array.from({ length: SLIDER_SETS }, () => basePages).flat(),
+    pagesPerSet: basePages.length,
+  };
+}
+
+/** Mobile: 3 cột × 3 hàng */
+const mobile = buildSliderPages(9);
+
+/** Desktop embedded: 4 cột × 3 hàng */
+const desktopEmbedded = buildSliderPages(12);
+
+/** Desktop standalone: 5 cột × 3 hàng */
+const desktopStandalone = buildSliderPages(15);
 
 const rootClass = variant === 'embedded' ? 'min-w-0 lg:col-span-3' : 'w-full';
-const desktopGridClass =
-  variant === 'embedded'
-    ? 'hidden md:grid w-full grid-cols-5 gap-x-2 gap-y-3 justify-items-center'
-    : 'hidden md:grid w-full grid-cols-6 gap-x-3 gap-y-5 justify-items-center';
+
+const slideGridMobile = 'grid grid-cols-3 grid-rows-3 place-items-center gap-y-2 gap-x-1';
+const slideGridEmbedded = 'grid grid-cols-4 grid-rows-3 place-items-center gap-y-3 gap-x-2';
+const slideGridStandalone = 'grid grid-cols-5 grid-rows-3 place-items-center gap-y-4 gap-x-3';
 ---
 
 <div class={rootClass}>
-  <!-- Mobile: 3 hàng/trang, vuốt vòng lặp vô hạn -->
-  <div class="min-w-0 md:hidden" data-clients-slider>
+  <!-- Mobile: 3×3, slider tự chạy -->
+  <div class="min-w-0 md:hidden relative group/slider" data-clients-slider>
     <div
       class="flex gap-3 overflow-x-auto overflow-y-hidden snap-x snap-proximity overscroll-x-contain [-webkit-overflow-scrolling:touch] [scrollbar-width:none] pb-1 [&::-webkit-scrollbar]:hidden"
       data-slider-track
       role="list"
-      aria-label="Thương hiệu đồng hành"
+      aria-label="Tân Phạm Gia được tin tưởng lựa chọn bởi"
     >
       {
-        sliderPages.map((page, pageIndex) => {
-          const setIndex = Math.floor(pageIndex / pagesPerSet);
+        mobile.pages.map((page, pageIndex) => {
+          const setIndex = Math.floor(pageIndex / mobile.pagesPerSet);
           const isClone = setIndex !== 1;
 
           return (
             <div
-              class="shrink-0 snap-start basis-full grid grid-cols-3 gap-y-2 gap-x-1.5"
+              class:list={['shrink-0 snap-start basis-full', slideGridMobile]}
               data-slider-slide
               role="listitem"
               aria-hidden={isClone ? 'true' : undefined}
             >
               {page.map((client) => (
-                <ClientLogo name={client.name} logo={client.logo} />
+                <ClientLogo name={client.name} logo={client.logo} scale={getClientLogoScale(client.logo)} />
               ))}
             </div>
           );
         })
       }
     </div>
+    <button data-slider-prev class="slider-arrow slider-arrow--prev" aria-label="Trước"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><polyline points="15 18 9 12 15 6"/></svg></button>
+    <button data-slider-next class="slider-arrow slider-arrow--next" aria-label="Sau"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><polyline points="9 6 15 12 9 18"/></svg></button>
   </div>
 
-  <!-- Desktop: lưới full width — không còn khoảng trống hai bên -->
-  <div class={desktopGridClass}>
-    {clientLogos.map((client) => <ClientLogo name={client.name} logo={client.logo} />)}
-  </div>
+  {
+    variant === 'embedded' ? (
+      <!-- Desktop trang chủ: 4×3, slider tự chạy -->
+      <div class="hidden md:block min-w-0 relative group/slider" data-clients-slider>
+        <div
+          class="flex gap-4 overflow-x-auto overflow-y-hidden snap-x snap-proximity overscroll-x-contain [scrollbar-width:none] pb-1 [&::-webkit-scrollbar]:hidden"
+          data-slider-track
+          role="list"
+          aria-label="Tân Phạm Gia được tin tưởng lựa chọn bởi"
+        >
+          {desktopEmbedded.pages.map((page, pageIndex) => {
+            const setIndex = Math.floor(pageIndex / desktopEmbedded.pagesPerSet);
+            const isClone = setIndex !== 1;
+
+            return (
+              <div
+                class:list={['shrink-0 snap-start basis-full', slideGridEmbedded]}
+                data-slider-slide
+                role="listitem"
+                aria-hidden={isClone ? 'true' : undefined}
+              >
+                {page.map((client) => (
+                  <ClientLogo name={client.name} logo={client.logo} scale={getClientLogoScale(client.logo)} />
+                ))}
+              </div>
+            );
+          })}
+        </div>
+        <button data-slider-prev class="slider-arrow slider-arrow--prev" aria-label="Trước"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><polyline points="15 18 9 12 15 6"/></svg></button>
+        <button data-slider-next class="slider-arrow slider-arrow--next" aria-label="Sau"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><polyline points="9 6 15 12 9 18"/></svg></button>
+      </div>
+    ) : (
+      <!-- Desktop trang khách hàng: 5–6×3, slider tự chạy -->
+      <div class="hidden md:block min-w-0 relative group/slider" data-clients-slider>
+        <div
+          class="flex gap-4 overflow-x-auto overflow-y-hidden snap-x snap-proximity overscroll-x-contain [scrollbar-width:none] pb-1 [&::-webkit-scrollbar]:hidden"
+          data-slider-track
+          role="list"
+          aria-label="Tân Phạm Gia được tin tưởng lựa chọn bởi"
+        >
+          {desktopStandalone.pages.map((page, pageIndex) => {
+            const setIndex = Math.floor(pageIndex / desktopStandalone.pagesPerSet);
+            const isClone = setIndex !== 1;
+
+            return (
+              <div
+                class:list={['shrink-0 snap-start basis-full', slideGridStandalone]}
+                data-slider-slide
+                role="listitem"
+                aria-hidden={isClone ? 'true' : undefined}
+              >
+                {page.map((client) => (
+                  <ClientLogo name={client.name} logo={client.logo} scale={getClientLogoScale(client.logo)} />
+                ))}
+              </div>
+            );
+          })}
+        </div>
+        <button data-slider-prev class="slider-arrow slider-arrow--prev" aria-label="Trước"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><polyline points="15 18 9 12 15 6"/></svg></button>
+        <button data-slider-next class="slider-arrow slider-arrow--next" aria-label="Sau"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><polyline points="9 6 15 12 9 18"/></svg></button>
+      </div>
+    )
+  }
 </div>
 
 <script src="../scripts/home-clients-slider.ts"></script>

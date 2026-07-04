@@ -63,12 +63,84 @@ export const siteContact = {
   phone: '0843 406 406',
   phoneHref: 'tel:0843406406',
   phoneDisplay: '084 3406 406',
-  address: '20A Thới An 15, Khu Phố 6, Phường Thới An, TP. Hồ Chí Minh',
+  address: '20A đường TA15, Phường Thới An, Thành phố Hồ Chí Minh',
   hours: 'T2–T7: 8:00–18:00 | CN: theo hẹn',
   tagline: 'Kiến tạo giá trị thương hiệu qua từng đường kim mũi chỉ.',
   responseCommitment:
     'Phản hồi trong 24 giờ làm việc. Gọi hotline 084 3406 406 cho đơn cấp bách. Tư vấn hoàn toàn miễn phí!',
 };
+
+/** Footer — bố cục & link đồng bộ dongphucvn.vn */
+export const siteFooter = {
+  tagline: 'Giải pháp đồng phục doanh nghiệp chuẩn thời trang với 22 năm kinh nghiệm.',
+  social: [
+    {
+      label: 'Facebook',
+      href: 'https://www.facebook.com/dongphuctpg/',
+      icon: 'facebook',
+    },
+    {
+      label: 'LinkedIn',
+      href: 'https://www.linkedin.com/company/t%C3%A2n-ph%E1%BA%A1m-gia/',
+      icon: 'linkedin',
+    },
+    {
+      label: 'YouTube',
+      href: 'https://www.youtube.com/@dongphuctanphamgia',
+      icon: 'youtube',
+    },
+    {
+      label: 'Pinterest',
+      href: 'https://www.pinterest.com/dongphuctpg/',
+      icon: 'pinterest',
+    },
+    {
+      label: 'TikTok',
+      href: 'https://www.tiktok.com/@dongphuctanphamgia',
+      icon: 'tiktok',
+    },
+  ],
+  policies: [
+    {
+      label: 'Chính sách bảo mật',
+      href: 'https://dongphucvn.vn/chinh-sach-bao-mat/',
+    },
+    {
+      label: 'Chính sách đổi/trả hoặc chỉnh sửa mẫu',
+      href: 'https://dongphucvn.vn/chinh-sach-doi-tra-hoac-chinh-sua-mau/',
+    },
+    {
+      label: 'Điều khoản sử dụng',
+      href: 'https://dongphucvn.vn/dieu-khoan-su-dung/',
+    },
+    {
+      label: 'Quy trình tiếp nhận & xử lý khiếu nại',
+      href: 'https://dongphucvn.vn/quy-trinh-tiep-nhan-xu-ly-khieu-nai/',
+    },
+  ],
+  services: [
+    { label: 'Giải pháp đồng phục doanh nghiệp', href: '/giai-phap' },
+    { label: 'Giải pháp OEM & ODM', href: '/giai-phap/giai-phap-1' },
+    { label: 'Cung cấp nguồn vải', href: '/giai-phap/giai-phap-1' },
+  ],
+  ministryCert: {
+    href: 'https://online.gov.vn/',
+    image:
+      'https://dongphucvn.vn/wp-content/uploads/2026/05/logo-da-thong-bao-bo-cong-thuong.webp',
+    alt: 'Đã thông báo Bộ Công Thương',
+  },
+  news: [
+    { label: 'Kiến thức đồng phục', href: '/tin-tuc' },
+    { label: 'Xu hướng thời trang', href: '/tin-tuc' },
+    { label: 'Hoạt động Tân Phạm Gia', href: '/tin-tuc' },
+  ],
+  download: {
+    label: 'Tải xuống',
+    href: '/tai-lieu',
+  },
+  copyright:
+    '© 2026 Tân Phạm Gia | All rights reserved. | MST: 0302963984 | Chứng nhận ISO 9001:2015',
+} as const;
 
 /** Thương hiệu — logo & đường dẫn trang chủ (root-relative) */
 export const siteBrand = {
@@ -82,7 +154,7 @@ export const siteBrand = {
 export const navigation = [
   { label: 'Trang chủ', href: '/', icon: 'home', desc: 'Tổng quan & giải pháp nổi bật' },
   { label: 'Giới thiệu', href: '/gioi-thieu', icon: 'apartment', desc: 'Lịch sử & năng lực xưởng may' },
-  { label: 'Giải pháp', href: '#giai-phap', icon: 'category', desc: 'Nhóm giải pháp đồng phục' },
+  { label: 'Giải pháp', href: '/giai-phap', icon: 'category', desc: 'Nhóm giải pháp đồng phục' },
   { label: 'Khách hàng', href: '/khach-hang', icon: 'groups', desc: 'Thương hiệu đã đồng hành' },
   { label: 'Tin tức', href: '/tin-tuc', icon: 'newspaper', desc: 'Kiến thức ngành & dự án' },
   { label: 'Tài liệu', href: '/tai-lieu', icon: 'folder_open', desc: 'Hồ sơ năng lực & catalog' },
@@ -103,18 +175,9 @@ export const mainNavigation = [
 export const brandQuote =
   'Tân Phạm Gia luôn lắng nghe và thấu hiểu để đưa ra giải pháp phù hợp nhất cho doanh nghiệp.';
 
-/** Media hero trang chủ — bổ sung video khi có asset */
+/** Media hero trang chủ — chỉ video, không dùng ảnh nền */
 export const heroMedia = {
-  image:
-    'https://lh3.googleusercontent.com/aida-public/AB6AXuD7szr7Elx-oAqCEnir2uiBqNE-4WpmIm10Kj1YsgXyu1XMFvP0qvIXYrsMpRh9sztusxsq8_7_MFPstpomb4RaDeTg9J3ldf2CSKwYUq91qGdHVM6Dm9YkfE3Rdfay_snBPthtK7WWCq_NFHZ3j3Kua1MgJAT-qQPXwlpAIQIDLIpk4Njn_msEnsXh9DyyRtwkvdNU5u10NXpGyYseM_HBo6gwnr6IFqeZ9gHXI1CrvRQnXAxx3UyIT7UIbTDEMKjd1gdxbZwWKrKl',
-  video: undefined as string | undefined,
-};
-
-/** Ảnh nền CTA cuối trang — dùng chung toàn site (tạm — thay URL khi có asset chính thức) */
-export const homeCtaMedia = {
-  image:
-    'https://images.unsplash.com/photo-1497366216548-37526070297c?w=1600&auto=format&fit=crop&q=80',
-  alt: 'Không gian văn phòng hiện đại',
+  video: '/videos/header-dong-phuc.mp4',
 };
 
 /** Nội dung CTA cuối trang — đồng bộ mọi trang */
@@ -125,6 +188,9 @@ export const siteCta = {
   primaryHref: '/lien-he',
   secondaryLabel: 'Tải hồ sơ năng lực',
   secondaryHref: '/tai-lieu',
+  /** Ảnh nền CTA — opacity ~40% trên component */
+  backgroundImage:
+    'https://images.unsplash.com/photo-1497366216548-37526070297c?w=1600&auto=format&fit=crop&q=80',
 };
 
 /** Sitemap 1.7 — Giấy khen & chứng nhận (ảnh — đồng bộ trang Giới thiệu) */
@@ -285,7 +351,7 @@ export const homeFeaturedCases = {
       'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=900&auto=format&fit=crop&q=80',
     alt: 'Dự án VFM',
     tag: 'Đối tác 3 năm',
-    href: '/giai-phap/giai-phap-2/du-an/vfm',
+    href: '/tin-tuc',
     stats: [
       { value: '1.100', label: 'sản phẩm' },
       { value: '35 ngày', label: 'triển khai' },
@@ -297,7 +363,7 @@ export const homeFeaturedCases = {
       image:
         'https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=900&auto=format&fit=crop&q=80',
       alt: 'Dự án BV Răng Hàm Mặt Sài Gòn',
-      href: '/giai-phap/giai-phap-4/du-an/bv-rang-ham-mat-sai-gon',
+      href: '/tin-tuc',
       statHighlight: { value: '650', suffix: 'sp Scrub & Blouse', valueClass: 'gold' },
     },
     {
@@ -305,7 +371,7 @@ export const homeFeaturedCases = {
       image:
         'https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?w=900&auto=format&fit=crop&q=80',
       alt: 'Dự án SAVISCO',
-      href: '/giai-phap/giai-phap-3/du-an/savisco',
+      href: '/tin-tuc',
       statHighlight: { value: '2.800', suffix: 'sản phẩm', valueClass: 'white' },
     },
   ] satisfies HomeFeaturedCase[],
@@ -320,7 +386,7 @@ export const homeFeaturedCases = {
     ctaLabel: 'Nhận tư vấn',
     ctaHref: '/lien-he',
   },
-  allProjectsHref: '/khach-hang',
+  allProjectsHref: '/tin-tuc',
 };
 
 /** Bài viết tin tức — section #tin-tuc (sẽ đồng bộ WordPress sau) */
@@ -393,28 +459,28 @@ export const blogSectionMeta = {
 
 /** Logo khách hàng — Sitemap 1.6 (18 thương hiệu) */
 export const clientLogos = [
-  { name: 'Vincom', domain: 'vincom.com.vn', logo: '/images/logos/vincom.svg' },
+  { name: 'Vincom', domain: 'vincom.com.vn', logo: '/images/logos/vincom.webp' },
   { name: 'Sense City', domain: 'sensecity.vn', logo: '/images/logos/sense-city.png' },
-  { name: 'Lotte Mart', domain: 'lotte.vn', logo: '/images/logos/lotte-mart.svg' },
-  { name: 'Vạn Hạnh Mall', domain: 'vanhanhmall.com', logo: '/images/logos/van-hanh-mall.svg' },
-  { name: 'Coca-Cola', domain: 'coca-cola.com', logo: '/images/logos/coca-cola.svg' },
-  { name: 'Bia Sài Gòn', domain: 'sabeco.com.vn', logo: '/images/logos/bia-sai-gon.png' },
-  { name: 'Vivant', domain: 'vivant.com.vn', logo: '/images/logos/vivant.svg' },
-  { name: 'Bosch', domain: 'bosch.com', logo: '/images/logos/bosch.png' },
-  { name: 'DAT', domain: 'datgroup.com', logo: '/images/logos/dat.png' },
-  { name: 'Vinamilk', domain: 'vinamilk.com.vn', logo: '/images/logos/vinamilk.svg' },
+  { name: 'Lotte Mart', domain: 'lotte.vn', logo: '/images/logos/lotte-mart.webp' },
+  { name: 'Vạn Hạnh Mall', domain: 'vanhanhmall.com', logo: '/images/logos/van-hanh-mall.webp' },
+  { name: 'Coca-Cola', domain: 'coca-cola.com', logo: '/images/logos/coca-cola.webp' },
+  { name: 'Bia Sài Gòn', domain: 'sabeco.com.vn', logo: '/images/logos/bia-sai-gon.webp' },
+  { name: 'Vivant', domain: 'vivant.com.vn', logo: '/images/logos/vivant.webp' },
+  { name: 'Bosch', domain: 'bosch.com', logo: '/images/logos/bosch.webp' },
+  { name: 'DAT', domain: 'datgroup.com', logo: '/images/logos/dat.webp' },
+  { name: 'Vinamilk', domain: 'vinamilk.com.vn', logo: '/images/logos/vinamilk.png' },
   { name: 'Techcombank', domain: 'techcombank.com.vn', logo: '/images/logos/techcombank.svg' },
-  { name: 'BIDV', domain: 'bidv.com.vn', logo: '/images/logos/bidv.png' },
+  { name: 'BIDV', domain: 'bidv.com.vn', logo: '/images/logos/bidv.webp' },
   { name: 'Sacombank', domain: 'sacombank.com.vn', logo: '/images/logos/sacombank.png' },
-  { name: 'VietBank', domain: 'vietbank.com.vn', logo: '/images/logos/vietbank.png' },
+  { name: 'VietBank', domain: 'vietbank.com.vn', logo: '/images/logos/vietbank.jpg' },
   {
     name: 'BV Răng Hàm Mặt SG',
-    domain: 'nhakhoaranghammatsg.com',
-    logo: '/images/logos/bv-rang-ham-mat-sg.svg',
+    domain: 'benhvienranghammatsg.vn',
+    logo: '/images/logos/bv-rang-ham-mat-sg.webp',
   },
-  { name: 'Hanwha Life', domain: 'hanwhalife.com.vn', logo: '/images/logos/hanwha-life.svg' },
-  { name: 'Zero Waste', domain: 'zerowaste.vn', logo: '/images/logos/zero-waste.svg' },
-  { name: 'VFM', domain: 'vfm.com.vn', logo: '/images/logos/vfm.svg' },
+  { name: 'Hanwha Life', domain: 'hanwhalife.com.vn', logo: '/images/logos/hanwha-life.webp' },
+  { name: 'Zero Waste', domain: 'zerowaste.vn', logo: '/images/logos/zero-waste.png' },
+  { name: 'VFM', domain: 'vfm.com.vn', logo: '/images/logos/vfm.webp' },
 ];
 
 export interface Testimonial {
@@ -513,4 +579,4 @@ export const clientCaseStudies: ClientCaseStudy[] = [
 ];
 
 /** Phân trang tin tức */
-export const BLOG_POSTS_PER_PAGE = 3;
+export const BLOG_POSTS_PER_PAGE = 12;

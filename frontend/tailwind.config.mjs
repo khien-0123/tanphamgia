@@ -69,9 +69,16 @@ export default {
         navItemIn: {
           to: { opacity: '1', transform: 'translateX(0)' },
         },
+        certificateColumnScroll: {
+          '0%': { transform: 'translateY(0)' },
+          '100%': { transform: 'translateY(-50%)' },
+        },
       },
       animation: {
         navItemIn: 'navItemIn 0.38s cubic-bezier(0.22, 1, 0.36, 1) forwards',
+        'certificate-scroll-15': 'certificateColumnScroll 15s linear infinite',
+        'certificate-scroll-17': 'certificateColumnScroll 17s linear infinite',
+        'certificate-scroll-19': 'certificateColumnScroll 19s linear infinite',
       },
       transitionTimingFunction: {
         'nav-panel': 'cubic-bezier(0.22, 1, 0.36, 1)',
