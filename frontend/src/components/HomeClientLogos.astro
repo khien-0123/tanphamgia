@@ -47,7 +47,7 @@ const slideGridStandalone = 'grid grid-cols-5 grid-rows-3 place-items-center gap
 
 <div class={rootClass}>
   <!-- Mobile: 3×3, slider tự chạy -->
-  <div class="min-w-0 md:hidden" data-clients-slider>
+  <div class="min-w-0 md:hidden relative group/slider" data-clients-slider>
     <div
       class="flex gap-3 overflow-x-auto overflow-y-hidden snap-x snap-proximity overscroll-x-contain [-webkit-overflow-scrolling:touch] [scrollbar-width:none] pb-1 [&::-webkit-scrollbar]:hidden"
       data-slider-track
@@ -74,12 +74,14 @@ const slideGridStandalone = 'grid grid-cols-5 grid-rows-3 place-items-center gap
         })
       }
     </div>
+    <button data-slider-prev class="slider-arrow slider-arrow--prev" aria-label="Trước"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><polyline points="15 18 9 12 15 6"/></svg></button>
+    <button data-slider-next class="slider-arrow slider-arrow--next" aria-label="Sau"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><polyline points="9 6 15 12 9 18"/></svg></button>
   </div>
 
   {
     variant === 'embedded' ? (
       <!-- Desktop trang chủ: 4×3, slider tự chạy -->
-      <div class="hidden md:block min-w-0" data-clients-slider>
+      <div class="hidden md:block min-w-0 relative group/slider" data-clients-slider>
         <div
           class="flex gap-4 overflow-x-auto overflow-y-hidden snap-x snap-proximity overscroll-x-contain [scrollbar-width:none] pb-1 [&::-webkit-scrollbar]:hidden"
           data-slider-track
@@ -104,10 +106,12 @@ const slideGridStandalone = 'grid grid-cols-5 grid-rows-3 place-items-center gap
             );
           })}
         </div>
+        <button data-slider-prev class="slider-arrow slider-arrow--prev" aria-label="Trước"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><polyline points="15 18 9 12 15 6"/></svg></button>
+        <button data-slider-next class="slider-arrow slider-arrow--next" aria-label="Sau"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><polyline points="9 6 15 12 9 18"/></svg></button>
       </div>
     ) : (
       <!-- Desktop trang khách hàng: 5–6×3, slider tự chạy -->
-      <div class="hidden md:block min-w-0" data-clients-slider>
+      <div class="hidden md:block min-w-0 relative group/slider" data-clients-slider>
         <div
           class="flex gap-4 overflow-x-auto overflow-y-hidden snap-x snap-proximity overscroll-x-contain [scrollbar-width:none] pb-1 [&::-webkit-scrollbar]:hidden"
           data-slider-track
@@ -132,6 +136,8 @@ const slideGridStandalone = 'grid grid-cols-5 grid-rows-3 place-items-center gap
             );
           })}
         </div>
+        <button data-slider-prev class="slider-arrow slider-arrow--prev" aria-label="Trước"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><polyline points="15 18 9 12 15 6"/></svg></button>
+        <button data-slider-next class="slider-arrow slider-arrow--next" aria-label="Sau"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><polyline points="9 6 15 12 9 18"/></svg></button>
       </div>
     )
   }
