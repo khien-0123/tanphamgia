@@ -351,7 +351,7 @@ export const homeFeaturedCases = {
       'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=900&auto=format&fit=crop&q=80',
     alt: 'Dự án VFM',
     tag: 'Đối tác 3 năm',
-    href: '/tin-tuc',
+    href: '/giai-phap/giai-phap-2/du-an/vfm',
     stats: [
       { value: '1.100', label: 'sản phẩm' },
       { value: '35 ngày', label: 'triển khai' },
@@ -363,7 +363,7 @@ export const homeFeaturedCases = {
       image:
         'https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=900&auto=format&fit=crop&q=80',
       alt: 'Dự án BV Răng Hàm Mặt Sài Gòn',
-      href: '/tin-tuc',
+      href: '/giai-phap/giai-phap-4/du-an/bv-rang-ham-mat-sai-gon',
       statHighlight: { value: '650', suffix: 'sp Scrub & Blouse', valueClass: 'gold' },
     },
     {
@@ -371,7 +371,7 @@ export const homeFeaturedCases = {
       image:
         'https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?w=900&auto=format&fit=crop&q=80',
       alt: 'Dự án SAVISCO',
-      href: '/tin-tuc',
+      href: '/giai-phap/giai-phap-2/du-an/savisco',
       statHighlight: { value: '2.800', suffix: 'sản phẩm', valueClass: 'white' },
     },
   ] satisfies HomeFeaturedCase[],

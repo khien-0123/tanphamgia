@@ -44,10 +44,10 @@ const heroGrid: Record<SolutionTheme, string> = {
 };
 
 const heroImageDetail: Record<SolutionTheme, string> = {
-  1: 'w-full aspect-[4/3] object-cover rounded-lg h-full min-h-80 border-2 border-accent-gold',
-  2: 'w-full aspect-[4/3] object-cover rounded-lg',
-  3: 'w-full aspect-[4/3] object-cover rounded-lg',
-  4: 'w-full aspect-[4/3] object-cover rounded-lg',
+  1: 'w-full aspect-[4/3] object-cover rounded h-full min-h-80 border-2 border-accent-gold',
+  2: 'w-full aspect-[4/3] object-cover rounded',
+  3: 'w-full aspect-[4/3] object-cover rounded',
+  4: 'w-full aspect-[4/3] object-cover rounded',
 };
 
 const issueGrid: Record<SolutionTheme, string> = {
@@ -58,10 +58,10 @@ const issueGrid: Record<SolutionTheme, string> = {
 };
 
 const caseCard: Record<SolutionTheme, string> = {
-  1: 'bg-[#111] text-white min-h-[190px] relative overflow-hidden rounded-xl',
-  2: 'bg-[#111] text-white min-h-[190px] relative overflow-hidden rounded-xl',
-  3: 'bg-[#111] text-white min-h-[230px] relative overflow-hidden rounded-xl border border-accent-gold',
-  4: 'bg-[#111] text-white min-h-[190px] relative overflow-hidden rounded-xl',
+  1: 'bg-[#111] text-white min-h-[190px] relative overflow-hidden rounded',
+  2: 'bg-[#111] text-white min-h-[190px] relative overflow-hidden rounded',
+  3: 'bg-[#111] text-white min-h-[230px] relative overflow-hidden rounded border border-accent-gold',
+  4: 'bg-[#111] text-white min-h-[190px] relative overflow-hidden rounded',
 };
 
 export function getSolutionTheme(theme: SolutionTheme) {
@@ -69,7 +69,7 @@ export function getSolutionTheme(theme: SolutionTheme) {
     page: 'bg-white text-[#111]',
     section: 'py-8 md:py-12 bg-white [&_h2]:text-balance',
     heroGrid: heroGrid[theme],
-    heroImage: 'w-full aspect-[4/3] object-cover rounded-lg',
+    heroImage: 'w-full aspect-[4/3] object-cover rounded',
     heroImageDetail: heroImageDetail[theme],
     issueGrid: issueGrid[theme],
     issueCard: `bg-white border rounded-xl p-4 overflow-hidden text-sm leading-relaxed ${issueCardBorder[theme]} [&_p]:m-0`,
@@ -113,7 +113,7 @@ export const solutionBoxHome = {
   summary:
     'flex flex-col flex-1 h-full min-h-0 gap-2 sm:gap-2.5 no-underline',
   media:
-    'aspect-square overflow-hidden rounded-md shrink-0 m-0',
+    'aspect-square overflow-hidden rounded shrink-0 m-0',
   number:
     'inline-block w-fit font-extrabold text-2xl sm:text-3xl xl:text-4xl text-accent-gold leading-none tabular-nums',
   title:
