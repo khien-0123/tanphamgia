@@ -22,7 +22,7 @@ function buildColumns(certs: Certificate[]) {
 const columns = buildColumns(items);
 ---
 
-<section class="py-8 md:py-10 bg-white overflow-hidden" id="chung-nhan">
+<section class="pt-[2.5rem] pb-8 md:pt-[2.8rem] md:pb-10 bg-white overflow-hidden" id="chung-nhan">
   <div class="max-w-container-max-width mx-auto px-6 md:px-8">
     <header
       class:list={[
@@ -101,8 +101,8 @@ const columns = buildColumns(items);
     justify-content: center;
     align-items: stretch;
     gap: 1rem;
-    height: 280px;
-    max-height: 42vh;
+    height: 480px;
+    max-height: 65vh;
     overflow: hidden;
     mask-image: linear-gradient(to bottom, transparent, black 22%, black 78%, transparent);
     -webkit-mask-image: linear-gradient(
@@ -117,15 +117,15 @@ const columns = buildColumns(items);
   @media (min-width: 768px) {
     .certificate-marquee__columns {
       gap: 1.5rem;
-      height: 400px;
-      max-height: 52vh;
+      height: 620px;
+      max-height: 72vh;
     }
   }
 
   @media (min-width: 1024px) {
     .certificate-marquee__columns {
-      height: 440px;
-      max-height: 55vh;
+      height: 720px;
+      max-height: 78vh;
     }
   }
 

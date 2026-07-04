@@ -138,7 +138,7 @@ export const siteBrand = {
 export const navigation = [
   { label: 'Trang chủ', href: '/', icon: 'home', desc: 'Tổng quan & giải pháp nổi bật' },
   { label: 'Giới thiệu', href: '/gioi-thieu', icon: 'apartment', desc: 'Lịch sử & năng lực xưởng may' },
-  { label: 'Giải pháp', href: '#giai-phap', icon: 'category', desc: 'Nhóm giải pháp đồng phục' },
+  { label: 'Giải pháp', href: '/giai-phap', icon: 'category', desc: 'Nhóm giải pháp đồng phục' },
   { label: 'Khách hàng', href: '/khach-hang', icon: 'groups', desc: 'Thương hiệu đã đồng hành' },
   { label: 'Tin tức', href: '/tin-tuc', icon: 'newspaper', desc: 'Kiến thức ngành & dự án' },
   { label: 'Tài liệu', href: '/tai-lieu', icon: 'folder_open', desc: 'Hồ sơ năng lực & catalog' },
@@ -453,7 +453,7 @@ export const clientLogos = [
   { name: 'Bosch', domain: 'bosch.com', logo: '/images/logos/bosch.webp' },
   { name: 'DAT', domain: 'datgroup.com', logo: '/images/logos/dat.webp' },
   { name: 'Vinamilk', domain: 'vinamilk.com.vn', logo: '/images/logos/vinamilk.png' },
-  { name: 'Techcombank', domain: 'techcombank.com.vn', logo: '/images/logos/techcombank.jpg' },
+  { name: 'Techcombank', domain: 'techcombank.com.vn', logo: '/images/logos/techcombank.svg' },
   { name: 'BIDV', domain: 'bidv.com.vn', logo: '/images/logos/bidv.webp' },
   { name: 'Sacombank', domain: 'sacombank.com.vn', logo: '/images/logos/sacombank.png' },
   { name: 'VietBank', domain: 'vietbank.com.vn', logo: '/images/logos/vietbank.jpg' },
@@ -563,4 +563,4 @@ export const clientCaseStudies: ClientCaseStudy[] = [
 ];
 
 /** Phân trang tin tức */
-export const BLOG_POSTS_PER_PAGE = 3;
+export const BLOG_POSTS_PER_PAGE = 12;
