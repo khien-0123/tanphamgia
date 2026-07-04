@@ -30,25 +30,25 @@ const industryOptions = [
   <div class="grid sm:grid-cols-2 gap-5">
     <div>
       <label class={formLabelClass} for="contact-name">Họ tên *</label>
-      <input class={formInputClass} id="contact-name" name="name" type="text" required />
+      <input class={formInputClass} id="contact-name" name="name" type="text" required placeholder="Nhập họ tên" />
     </div>
     <div>
       <label class={formLabelClass} for="contact-role">Chức vụ</label>
-      <input class={formInputClass} id="contact-role" name="role" type="text" />
+      <input class={formInputClass} id="contact-role" name="role" type="text" placeholder="Nhập chức vụ" />
     </div>
   </div>
   <div>
     <label class={formLabelClass} for="contact-company">Tên công ty *</label>
-    <input class={formInputClass} id="contact-company" name="company" type="text" required />
+    <input class={formInputClass} id="contact-company" name="company" type="text" required placeholder="Nhập tên công ty" />
   </div>
   <div class="grid sm:grid-cols-2 gap-5">
     <div>
       <label class={formLabelClass} for="contact-phone">SĐT / Zalo *</label>
-      <input class={formInputClass} id="contact-phone" name="phone" type="tel" required />
+      <input class={formInputClass} id="contact-phone" name="phone" type="tel" required placeholder="Nhập SĐT/Zalo" />
     </div>
     <div>
       <label class={formLabelClass} for="contact-email">Email</label>
-      <input class={formInputClass} id="contact-email" name="email" type="email" />
+      <input class={formInputClass} id="contact-email" name="email" type="email" placeholder="Nhập email" />
     </div>
   </div>
   <div class="grid sm:grid-cols-2 gap-5">
@@ -77,10 +77,11 @@ const industryOptions = [
   <div>
     <label class={formLabelClass} for="contact-message">Yêu cầu cụ thể</label>
     <textarea
-      class:list={[formInputClass, 'resize-y min-h-24']}
+      class:list={[formInputClass, 'resize-y min-h-16']}
       id="contact-message"
       name="message"
-      rows="4"
+      rows="2"
+      placeholder="Mô tả nhu cầu đồng phục, chất liệu, số lượng..."
     ></textarea>
   </div>
   <button
