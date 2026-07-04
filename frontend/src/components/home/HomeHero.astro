@@ -3,8 +3,8 @@ import { stats, heroMedia } from '../../data/site';
 
 /** Lớp phủ hero — mờ nhẹ để video vẫn thấy chuyển động nhưng không lấn chữ */
 const heroOverlay = heroMedia.video
-  ? 'absolute inset-0 z-10 bg-gradient-to-br from-ink-dark/68 via-ink-dark/52 to-ink-dark/38'
-  : 'absolute inset-0 z-10 bg-gradient-to-br from-ink-dark/88 via-ink-dark/55 to-[rgba(16,44,77,0.25)]';
+  ? 'absolute inset-0 z-10 bg-black/50'
+  : 'absolute inset-0 z-10 bg-black/60';
 ---
 
 <header
@@ -15,7 +15,7 @@ const heroOverlay = heroMedia.video
     {
       heroMedia.video ? (
         <video
-          class="w-full h-full object-cover object-center opacity-75"
+          class="w-full h-full object-cover object-center opacity-70"
           id="hero-video"
           autoplay
           loop

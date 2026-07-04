@@ -11,7 +11,7 @@ interface Props {
 const { src, alt, class: className = '', imgClass = '', loading = 'lazy' } = Astro.props;
 
 const figureClass = [
-  'relative m-0 overflow-hidden rounded-lg aspect-video bg-surface-muted',
+  'relative m-0 overflow-hidden rounded aspect-video bg-surface-muted',
   className,
 ]
   .filter(Boolean)

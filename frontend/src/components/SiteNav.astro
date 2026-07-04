@@ -37,7 +37,7 @@ const menuToggle =
   'lg:hidden flex items-center justify-center w-10 h-10 rounded-xl border border-white/30 bg-white/[0.08] text-white cursor-pointer transition-colors hover:bg-white/[0.16] group-[.nav-scrolled]:border-border-subtle group-[.nav-scrolled]:bg-white group-[.nav-scrolled]:text-ink-dark group-[.nav-scrolled]:hover:bg-[#f4f7f6] [&_.material-symbols-outlined]:text-2xl';
 ---
 
-<nav id="site-nav" class:list={navShell} data-nav-solid={solid ? 'true' : undefined}>
+<nav id="site-nav" class:list={[...navShell, 'no-transition']} data-nav-solid={solid ? 'true' : undefined}>
   <div
     class="flex justify-between items-center px-4 min-[400px]:px-6 md:px-8 py-3.5 max-w-container-max-width mx-auto min-w-0"
   >
@@ -47,7 +47,7 @@ const menuToggle =
       {
         items.map((item) => (
           <a
-            class:list={[navLinkBase, currentPath === item.href && 'text-accent-gold']}
+            class:list={[navLinkBase, currentPath === item.href && '!text-accent-gold']}
             href={item.href}
           >
             {item.label}
@@ -75,6 +75,18 @@ const menuToggle =
     </div>
   </div>
 </nav>
+
+<script is:inline>
+(function(){
+  var n=document.getElementById('site-nav');
+  if(!n)return;
+  var solid=n.dataset.navSolid==='true';
+  if(solid||window.pageYOffset>60) n.classList.add('nav-scrolled');
+  requestAnimationFrame(function(){
+    requestAnimationFrame(function(){n.classList.remove('no-transition')});
+  });
+})();
+</script>
 
 <div
   id="site-nav-mobile"

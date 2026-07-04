@@ -34,7 +34,7 @@ const heading = (raw: string) => raw.replace(/^\d{2}\.\s*/, '');
 ---
 
 <BaseLayout title={content.seo.title} description={content.seo.description}>
-  <SiteNav solid currentPath="/giai-phap" />
+  <SiteNav currentPath="/giai-phap" />
 
   {/* Banner đồng bộ toàn site */}
   <PageHero
@@ -102,7 +102,7 @@ const heading = (raw: string) => raw.replace(/^\d{2}\.\s*/, '');
         </header>
 
         <div class="grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:gap-14">
-          <figure class="m-0 self-start overflow-hidden rounded-2xl lg:sticky lg:top-24">
+          <figure class="m-0 self-start overflow-hidden rounded lg:sticky lg:top-24">
             <img
               src={solution?.image}
               alt={content.hero.imageAlt}
@@ -177,7 +177,7 @@ const heading = (raw: string) => raw.replace(/^\d{2}\.\s*/, '');
           }
         </div>
 
-        <div class="hidden overflow-hidden rounded-2xl border border-border-subtle md:block">
+        <div class="hidden overflow-hidden rounded border border-border-subtle md:block">
           <table class="w-full text-left text-sm">
             <thead>
               <tr class="bg-ink-dark text-xs uppercase tracking-wider text-white/90">
@@ -244,7 +244,7 @@ const heading = (raw: string) => raw.replace(/^\d{2}\.\s*/, '');
             projects.map((project) => (
               <a
                 href={`/giai-phap/${content.slug}/du-an/${project.slug}`}
-                class="group flex flex-col overflow-hidden rounded-2xl border border-border-subtle bg-white text-inherit no-underline transition hover:-translate-y-1 hover:border-accent-gold/50 hover:shadow-card"
+                class="group flex flex-col overflow-hidden rounded border border-border-subtle bg-white text-inherit no-underline transition hover:-translate-y-1 hover:border-accent-gold/50 hover:shadow-card"
               >
                 <figure class="m-0 aspect-[4/3] overflow-hidden">
                   <img
@@ -296,7 +296,7 @@ const heading = (raw: string) => raw.replace(/^\d{2}\.\s*/, '');
             relatedSolutions.map((item) => (
               <a
                 href={`/giai-phap/${item.slug}`}
-                class="group flex flex-col overflow-hidden rounded-2xl border border-border-subtle bg-white text-inherit no-underline transition hover:-translate-y-1 hover:border-accent-gold/50 hover:shadow-card"
+                class="group flex flex-col overflow-hidden rounded border border-border-subtle bg-white text-inherit no-underline transition hover:-translate-y-1 hover:border-accent-gold/50 hover:shadow-card"
               >
                 <figure class="m-0 aspect-video overflow-hidden">
                   <img

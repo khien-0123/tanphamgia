@@ -31,11 +31,17 @@ if (nav && navSolid) {
   nav.classList.add('nav-scrolled');
 }
 
-window.addEventListener('scroll', updateNav, { passive: true });
-// Khôi phục đúng màu khi reload/back-forward giữ vị trí scroll
-window.addEventListener('pageshow', updateNav);
-window.addEventListener('load', updateNav);
 updateNav();
+
+// Gỡ no-transition sau khi đã set đúng trạng thái ban đầu
+if (nav) {
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => nav.classList.remove('no-transition'));
+  });
+}
+
+window.addEventListener('scroll', updateNav, { passive: true });
+window.addEventListener('pageshow', updateNav);
 
 /** Menu hamburger mobile */
 function initMobileNav() {

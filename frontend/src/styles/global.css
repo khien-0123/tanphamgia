@@ -7,6 +7,12 @@
   font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
 }
 
+/* Tắt transition khi load trang — tránh header nhảy */
+#site-nav.no-transition,
+#site-nav.no-transition * {
+  transition-duration: 0s !important;
+}
+
 /* Khóa scroll khi menu mobile mở */
 body.nav-menu-open {
   overflow: hidden;
