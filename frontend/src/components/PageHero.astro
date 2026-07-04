@@ -5,19 +5,22 @@ interface Props {
   /** Ngắt dòng mô tả trên mobile — tránh chữ rớt hàng lẻ */
   descriptionLines?: readonly [string, string];
   breadcrumb?: { label: string; href?: string }[];
+  /** Ảnh nền hero — khớp chủ đề từng trang (xem pageHeroBg trong site.ts) */
+  bgImage?: string;
 }
 
-const { title, description, descriptionLines, breadcrumb = [{ label: 'Trang chủ', href: '/' }] } =
-  Astro.props;
+const {
+  title,
+  description,
+  descriptionLines,
+  breadcrumb = [{ label: 'Trang chủ', href: '/' }],
+  bgImage = 'https://lh3.googleusercontent.com/aida-public/AB6AXuD7szr7Elx-oAqCEnir2uiBqNE-4WpmIm10Kj1YsgXyu1XMFvP0qvIXYrsMpRh9sztusxsq8_7_MFPstpomb4RaDeTg9J3ldf2CSKwYUq91qGdHVM6Dm9YkfE3Rdfay_snBPthtK7WWCq_NFHZ3j3Kua1MgJAT-qQPXwlpAIQIDLIpk4Njn_msEnsXh9DyyRtwkvdNU5u10NXpGyYseM_HBo6gwnr6IFqeZ9gHXI1CrvRQnXAxx3UyIT7UIbTDEMKjd1gdxbZwWKrKl',
+} = Astro.props;
 ---
 
 <header class="relative pt-28 pb-8 md:pt-32 md:pb-12 bg-ink-dark text-white overflow-hidden">
   <div class="absolute inset-0 opacity-25">
-    <img
-      alt=""
-      class="w-full h-full object-cover"
-      src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7szr7Elx-oAqCEnir2uiBqNE-4WpmIm10Kj1YsgXyu1XMFvP0qvIXYrsMpRh9sztusxsq8_7_MFPstpomb4RaDeTg9J3ldf2CSKwYUq91qGdHVM6Dm9YkfE3Rdfay_snBPthtK7WWCq_NFHZ3j3Kua1MgJAT-qQPXwlpAIQIDLIpk4Njn_msEnsXh9DyyRtwkvdNU5u10NXpGyYseM_HBo6gwnr6IFqeZ9gHXI1CrvRQnXAxx3UyIT7UIbTDEMKjd1gdxbZwWKrKl"
-    />
+    <img alt="" class="w-full h-full object-cover" src={bgImage} />
     <div
       class="absolute inset-0 bg-gradient-to-br from-[rgba(14,38,64,0.88)] via-[rgba(14,38,64,0.55)] to-[rgba(16,44,77,0.25)]"
     >

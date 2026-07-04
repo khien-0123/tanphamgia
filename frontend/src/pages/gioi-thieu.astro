@@ -12,6 +12,7 @@ import AboutTeamGrid from '../components/about/AboutTeamGrid.astro';
 import CertificateGallery from '../components/CertificateGallery.astro';
 import TestimonialsSlider from '../components/TestimonialsSlider.astro';
 import { gioiThieuSeo, testimonials, certificateImages } from '../data/gioi-thieu';
+import { pageHeroBg } from '../data/site';
 ---
 
 <BaseLayout title={gioiThieuSeo.title} description={gioiThieuSeo.description}>
@@ -19,6 +20,7 @@ import { gioiThieuSeo, testimonials, certificateImages } from '../data/gioi-thie
 
   <PageHero
     title="Giới thiệu"
+    bgImage={pageHeroBg.gioiThieu}
     description="Hơn 23 năm kinh nghiệm trong ngành may mặc — từ thời trang cao cấp đến giải pháp đồng phục doanh nghiệp toàn diện."
     breadcrumb={[
       { label: 'Trang chủ', href: '/' },

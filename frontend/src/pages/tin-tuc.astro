@@ -5,7 +5,7 @@ import SiteFooter from '../components/SiteFooter.astro';
 import SiteCtaSection from '../components/SiteCtaSection.astro';
 import PageHero from '../components/PageHero.astro';
 import BlogListingSection from '../components/blog/BlogListingSection.astro';
-import { pageSeo, blogPosts, BLOG_POSTS_PER_PAGE } from '../data/site';
+import { pageSeo, blogPosts, BLOG_POSTS_PER_PAGE, pageHeroBg } from '../data/site';
 import { paginate } from '../utils/pagination';
 
 const { items, currentPage, totalPages } = paginate(blogPosts, 1, BLOG_POSTS_PER_PAGE);
@@ -16,6 +16,7 @@ const { items, currentPage, totalPages } = paginate(blogPosts, 1, BLOG_POSTS_PER
 
   <PageHero
     title="Tin tức & Kiến thức chuyên ngành"
+    bgImage={pageHeroBg.tinTuc}
     description="Chia sẻ kinh nghiệm quản lý đồng phục, lựa chọn chất liệu và xu hướng mới trong ngành."
     breadcrumb={[
       { label: 'Trang chủ', href: '/' },

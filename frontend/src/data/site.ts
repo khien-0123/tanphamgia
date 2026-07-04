@@ -40,6 +40,22 @@ export const pageSeo = {
   },
 } as const;
 
+/** Ảnh nền PageHero theo trang — khớp chủ đề tiêu đề từng trang (Unsplash) */
+export const pageHeroBg = {
+  gioiThieu:
+    'https://images.unsplash.com/photo-1523381294911-8d3cead13475?w=1600&auto=format&fit=crop&q=80',
+  giaiPhap:
+    'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1600&auto=format&fit=crop&q=80',
+  khachHang:
+    'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1600&auto=format&fit=crop&q=80',
+  tinTuc:
+    'https://images.unsplash.com/photo-1568667256549-094345857637?w=1600&auto=format&fit=crop&q=80',
+  taiLieu:
+    'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1600&auto=format&fit=crop&q=80',
+  lienHe:
+    'https://images.unsplash.com/photo-1531973576160-7125cd663d86?w=1600&auto=format&fit=crop&q=80',
+} as const;
+
 /** Liên hệ chung — dùng footer, menu mobile, trang Liên hệ */
 export const siteContact = {
   email: 'dongphuc@tanphamgia.com.vn',
@@ -536,7 +552,7 @@ export const clientCaseStudies: ClientCaseStudy[] = [
       'Case study triển khai đồng phục quy mô lớn với QC đa tầng và quy trình phối hợp rõ ràng.',
     client: 'Coca-Cola Philippines',
     image:
-      'https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=900&auto=format&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1553413077-190dd305871c?w=900&auto=format&fit=crop&q=80',
     alt: 'Dự án Coca-Cola Philippines',
     href: '/giai-phap/giai-phap-2/du-an/coca-cola-philippines',
   },
@@ -546,7 +562,7 @@ export const clientCaseStudies: ClientCaseStudy[] = [
     excerpt: '1.100 sản phẩm triển khai trong 35 ngày, duy trì chất lượng qua nhiều đợt bổ sung.',
     client: 'VFM',
     image:
-      'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=900&auto=format&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1594938328870-9623159c8c99?w=900&auto=format&fit=crop&q=80',
     alt: 'Dự án VFM',
     href: '/giai-phap/giai-phap-2/du-an/vfm',
   },
@@ -556,7 +572,7 @@ export const clientCaseStudies: ClientCaseStudy[] = [
     excerpt: 'Giải pháp đồng phục cho môi trường sản xuất với chất liệu bền và tiêu chuẩn an toàn lao động.',
     client: 'King Group',
     image:
-      'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=900&auto=format&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=900&auto=format&fit=crop&q=80',
     alt: 'Dự án King Group',
     href: '/giai-phap/giai-phap-1/du-an/king-group',
   },

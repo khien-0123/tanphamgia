@@ -2,46 +2,90 @@
 import { solutions } from '../../data/site';
 ---
 
-<section class="py-8 md:py-12 bg-white">
+<section class="py-10 md:py-24 bg-white border-b border-border-subtle overflow-hidden">
   <div class="max-w-container-max-width mx-auto px-6 md:px-8">
-    <header data-reveal class="max-w-3xl mb-6 md:mb-10">
-      <p class="text-xs font-bold uppercase tracking-widest text-accent-teal mb-2 md:mb-3">4 nhóm giải pháp</p>
-      <h2 class="font-headline-md text-2xl md:text-4xl font-bold text-ink-dark mb-3 md:mb-4">
+    <header data-reveal class="max-w-3xl mb-10 md:mb-20">
+      <p class="text-xs font-bold uppercase tracking-widest text-accent-teal mb-2 md:mb-3">
+        4 nhóm giải pháp
+      </p>
+      <h2 class="font-headline-md text-2xl md:text-4xl font-bold text-ink-dark mb-3 md:mb-4 text-balance">
         Lựa chọn giải pháp phù hợp ngành của bạn
       </h2>
-      <p class="text-text-muted text-sm md:text-base leading-relaxed">
+      <p class="text-text-muted text-sm md:text-base leading-relaxed text-pretty">
         Mỗi phân khúc được xây dựng theo pain points thực tế, case study có số liệu và quy trình
         triển khai 6 bước nhất quán.
       </p>
     </header>
 
-    <div data-reveal-stagger class="grid md:grid-cols-2 gap-5 md:gap-12">
+    <div class="space-y-14 md:space-y-24 lg:space-y-32">
       {
-        solutions.map((item) => (
-          <a
-            data-reveal
-            href={`/giai-phap/${item.slug}`}
-            class="group grid grid-cols-1 sm:grid-cols-[1fr_140px] gap-3 sm:gap-6 items-center no-underline text-inherit py-4 sm:py-5 md:border-0"
-          >
-            <figure class="order-first sm:order-2 m-0 overflow-hidden rounded-lg aspect-[4/3] w-full min-w-0">
-              <img
-                alt={item.title}
-                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                src={item.image}
-                loading="lazy"
-              />
-            </figure>
-            <div class="order-last sm:order-1 min-w-0">
-              <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-ink-dark mb-2 sm:mb-3 group-hover:text-accent-gold transition-colors">
-                {item.title}
-              </h3>
-              <p class="text-text-muted text-sm leading-relaxed mb-3 sm:mb-4">{item.desc}</p>
-              <span class="text-xs font-semibold text-accent-teal group-hover:underline">
-                Xem chi tiết
-              </span>
-            </div>
-          </a>
-        ))
+        solutions.map((item, i) => {
+          const num = String(i + 1).padStart(2, '0');
+          const reverse = i % 2 === 1;
+          return (
+            <a
+              data-reveal
+              href={`/giai-phap/${item.slug}`}
+              class="group grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-10 lg:gap-16 items-center no-underline text-inherit"
+            >
+              <figure
+                class:list={[
+                  'relative m-0 overflow-hidden rounded-xl aspect-[4/3] w-full min-w-0',
+                  reverse && 'lg:order-2',
+                ]}
+              >
+                <img
+                  alt={item.title}
+                  class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                  src={item.image}
+                  loading="lazy"
+                />
+                <span
+                  aria-hidden="true"
+                  class="pointer-events-none absolute -top-6 left-3 font-display-lg text-[6rem] md:text-[8rem] font-extrabold leading-none tabular-nums text-white/85 mix-blend-overlay select-none"
+                >
+                  {num}
+                </span>
+              </figure>
+
+              <div class:list={['min-w-0', reverse && 'lg:order-1']}>
+                <div class="flex items-center gap-3 mb-4">
+                  <span class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-accent-gold-light text-accent-teal">
+                    <span class="material-symbols-outlined text-2xl">{item.icon}</span>
+                  </span>
+                  <span class="text-xs font-bold uppercase tracking-widest text-accent-teal">
+                    Giải pháp {num}
+                  </span>
+                </div>
+
+                <h3 class="text-xl md:text-2xl lg:text-3xl font-bold text-ink-dark mb-3 md:mb-4 text-balance transition-colors group-hover:text-accent-gold">
+                  {item.title}
+                </h3>
+                <p class="text-text-muted text-sm md:text-base leading-relaxed mb-5 max-w-xl text-pretty">
+                  {item.desc}
+                </p>
+
+                <ul class="grid gap-2.5 mb-7">
+                  {item.bullets.map((bullet) => (
+                    <li class="flex items-start gap-2.5 text-sm text-ink-mid leading-snug">
+                      <span class="material-symbols-outlined text-accent-gold text-lg leading-none mt-0.5 shrink-0">
+                        check_circle
+                      </span>
+                      <span class="min-w-0">{bullet}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <span class="inline-flex items-center gap-2 text-sm font-bold text-accent-teal">
+                  <span class="group-hover:underline underline-offset-4">Xem chi tiết giải pháp</span>
+                  <span class="material-symbols-outlined text-lg transition-transform duration-300 group-hover:translate-x-1">
+                    arrow_forward
+                  </span>
+                </span>
+              </div>
+            </a>
+          );
+        })
       }
     </div>
   </div>
