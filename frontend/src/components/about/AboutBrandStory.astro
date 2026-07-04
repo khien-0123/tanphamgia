@@ -6,7 +6,11 @@ import { mediaTextRowClass, mediaTextCellClass, mediaTextImgClass } from '../../
 <section class="py-10 md:py-24 bg-white border-b border-border-subtle">
   <div data-reveal class="max-w-container-max-width mx-auto px-6 md:px-8">
     <div class={mediaTextRowClass}>
-      <figure class={`${mediaTextCellClass} order-2 md:order-1 m-0`}>
+      <figure class={`${mediaTextCellClass} order-2 md:order-1 m-0 relative`}>
+        <span
+          class="absolute -left-3 top-8 hidden h-20 w-1 bg-accent-gold lg:block"
+          aria-hidden="true"
+        ></span>
         <img
           alt="Câu chuyện thương hiệu Tân Phạm Gia"
           class={mediaTextImgClass}
@@ -16,17 +20,23 @@ import { mediaTextRowClass, mediaTextCellClass, mediaTextImgClass } from '../../
       </figure>
       <div class={`${mediaTextCellClass} order-1 md:order-2`}>
         <h2
-          class="text-pretty font-headline-md text-2xl md:text-3xl font-bold text-ink-dark mb-6"
+          class="text-pretty font-headline-md text-xl md:text-[1.75rem] lg:text-[2rem] font-bold text-ink-dark mb-6 leading-snug md:leading-tight"
         >
           <span class="md:hidden">
             {brandStory.titleLines[0]}
             <br />
-            Một Sản Phẩm May Mặc Chất{'\u00a0'}Lượng
+            Một Sản Phẩm May Mặc Chất{' '}Lượng
           </span>
           <span class="hidden md:inline">{brandStory.title}</span>
         </h2>
-        <div class="space-y-4 text-text-muted leading-relaxed">
-          {brandStory.paragraphs.map((p) => <p>{p}</p>)}
+        <div class="space-y-4 leading-relaxed">
+          {
+            brandStory.paragraphs.map((p, i) => (
+              <p class:list={[i === 0 ? 'text-ink-dark/80 text-base md:text-lg' : 'text-text-muted text-base md:text-lg']}>
+                {p}
+              </p>
+            ))
+          }
         </div>
       </div>
     </div>

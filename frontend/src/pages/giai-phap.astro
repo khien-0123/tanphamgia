@@ -5,7 +5,7 @@ import SiteFooter from '../components/SiteFooter.astro';
 import SiteCtaSection from '../components/SiteCtaSection.astro';
 import PageHero from '../components/PageHero.astro';
 import SolutionsListingGrid from '../components/solution/SolutionsListingGrid.astro';
-import { pageSeo } from '../data/site';
+import { pageSeo, pageHeroBg } from '../data/site';
 ---
 
 <BaseLayout title={pageSeo.giaiPhap.title} description={pageSeo.giaiPhap.description}>
@@ -13,6 +13,7 @@ import { pageSeo } from '../data/site';
 
   <PageHero
     title="Giải pháp đồng phục doanh nghiệp"
+    bgImage={pageHeroBg.giaiPhap}
     description="Tư vấn chiến lược, thiết kế riêng và sản xuất quy mô lớn cho 4 phân khúc ngành B2B."
     breadcrumb={[
       { label: 'Trang chủ', href: '/' },

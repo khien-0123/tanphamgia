@@ -5,7 +5,7 @@ import SiteFooter from '../../../components/SiteFooter.astro';
 import SiteCtaSection from '../../../components/SiteCtaSection.astro';
 import PageHero from '../../../components/PageHero.astro';
 import BlogListingSection from '../../../components/blog/BlogListingSection.astro';
-import { pageSeo, blogPosts, BLOG_POSTS_PER_PAGE } from '../../../data/site';
+import { pageSeo, blogPosts, BLOG_POSTS_PER_PAGE, pageHeroBg } from '../../../data/site';
 import { paginate } from '../../../utils/pagination';
 
 export function getStaticPaths() {
@@ -25,6 +25,7 @@ const seoTitle = `${pageSeo.tinTuc.title} — Trang ${currentPage}`;
 
   <PageHero
     title="Tin tức & Kiến thức chuyên ngành"
+    bgImage={pageHeroBg.tinTuc}
     description={`Trang ${currentPage} / ${totalPages}`}
     breadcrumb={[
       { label: 'Trang chủ', href: '/' },

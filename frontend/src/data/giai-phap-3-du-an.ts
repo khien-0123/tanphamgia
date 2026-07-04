@@ -19,7 +19,7 @@ export const duAnGiaiPhap3: DuAnGiaiPhap3[] = [
     stats: '1.250 sản phẩm | Đối tác chiến lược 3 năm',
     field: 'Doanh nghiệp FDI',
     image:
-      'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=900&auto=format&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1578916171728-46686eac8d58?w=900&auto=format&fit=crop&q=80',
     intro:
       'VIVANT là doanh nghiệp FDI với tiêu chuẩn nhận diện thương hiệu được kiểm soát chặt chẽ từ tập đoàn mẹ — đồng phục phải đúng màu Pantone, đúng vị trí logo và đúng chất lượng như mẫu duyệt, trong khi toàn bộ quy trình phê duyệt được thực hiện từ xa.',
     challenges: [
@@ -43,7 +43,7 @@ export const duAnGiaiPhap3: DuAnGiaiPhap3[] = [
     name: 'SAVISCO',
     stats: '2.800 sản phẩm | Sales & Activation',
     image:
-      'https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?w=900&auto=format&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1604719312566-8912e9227c6a?w=900&auto=format&fit=crop&q=80',
     intro:
       'Đội ngũ trải rộng nhiều tỉnh thành, cường độ làm việc cao, tiếp xúc trực tiếp với người tiêu dùng hàng ngày. Đồng phục cần bền — không phai màu qua nhiều lần giặt — và đồng bộ nhận diện thương hiệu nhất quán qua nhiều đợt đặt hàng.',
     challenges: [
@@ -67,7 +67,7 @@ export const duAnGiaiPhap3: DuAnGiaiPhap3[] = [
     name: 'DISCOVERY',
     stats: '950 sản phẩm | Đối tác 4 năm',
     image:
-      'https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=900&auto=format&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1556745757-8d76bdb6984b?w=900&auto=format&fit=crop&q=80',
     intro:
       'Cơ cấu nhân sự đa dạng, nhu cầu bổ sung đồng phục phát sinh liên tục do tuyển dụng và mở rộng. Yêu cầu các đơn hàng về sau vẫn giữ đúng màu sắc, chất liệu và form dáng như lô ban đầu.',
     challenges: [

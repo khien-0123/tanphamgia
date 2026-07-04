@@ -18,7 +18,7 @@ export const duAnGiaiPhap2: DuAnGiaiPhap2[] = [
     name: 'Coca-Cola Philippines',
     stats: '500+ sản phẩm | 60 ngày triển khai | Doanh nghiệp FDI',
     image:
-      'https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=900&auto=format&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=900&auto=format&fit=crop&q=80',
     intro:
       'Coca-Cola Philippines yêu cầu giải pháp đồng phục đảm bảo tính đồng nhất với hệ thống nhận diện thương hiệu toàn cầu, đồng thời đáp ứng các tiêu chuẩn chất lượng trong quá trình triển khai và sản xuất tại Việt Nam.',
     challenges: [
@@ -44,7 +44,7 @@ export const duAnGiaiPhap2: DuAnGiaiPhap2[] = [
     stats: '1.100 sản phẩm | 35 ngày triển khai | Đối tác 3 năm',
     field: 'Quản lý quỹ đầu tư',
     image:
-      'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=900&auto=format&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1594938328870-9623159c8c99?w=900&auto=format&fit=crop&q=80',
     intro:
       'Là doanh nghiệp quản lý quỹ đầu tư hàng đầu Việt Nam, VFM cần giải pháp đồng phục văn phòng chuyên nghiệp, phù hợp với môi trường làm việc tài chính và các hoạt động gặp gỡ nhà đầu tư, đối tác.',
     challenges: [
@@ -69,7 +69,7 @@ export const duAnGiaiPhap2: DuAnGiaiPhap2[] = [
     name: 'SAVISCO',
     stats: '950 sản phẩm | 40 ngày triển khai | Đối tác 2 năm',
     image:
-      'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=900&auto=format&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1531973576160-7125cd663d86?w=900&auto=format&fit=crop&q=80',
     intro:
       'Savisco sở hữu đội ngũ nhân sự đa dạng từ khối văn phòng, kinh doanh đến dịch vụ khách hàng. Doanh nghiệp cần giải pháp đồng phục vừa đảm bảo nhận diện thương hiệu, vừa phù hợp với đặc thù của từng nhóm nhân sự.',
     challenges: [

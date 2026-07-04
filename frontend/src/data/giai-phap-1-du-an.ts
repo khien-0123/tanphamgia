@@ -18,7 +18,7 @@ export const duAnGiaiPhap1: DuAnGiaiPhap1[] = [
     name: 'DAT GROUP',
     stats: '1.086 sản phẩm | 45 ngày triển khai | Đối tác hơn 5 năm',
     image:
-      'https://lh3.googleusercontent.com/aida-public/AB6AXuD7szr7Elx-oAqCEnir2uiBqNE-4WpmIm10Kj1YsgXyu1XMFvP0qvIXYrsMpRh9sztusxsq8_7_MFPstpomb4RaDeTg9J3ldf2CSKwYUq91qGdHVM6Dm9YkfE3Rdfay_snBPthtK7WWCq_NFHZ3j3Kua1MgJAT-qQPXwlpAIQIDLIpk4Njn_msEnsXh9DyyRtwkvdNU5u10NXpGyYseM_HBo6gwnr6IFqeZ9gHXI1CrvRQnXAxx3UyIT7UIbTDEMKjd1gdxbZwWKrKl',
+      'https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=900&auto=format&fit=crop&q=80',
     intro:
       'DAT Group sở hữu đội ngũ nhân sự đa dạng từ khối văn phòng đến kỹ sư hiện trường. Doanh nghiệp cần một giải pháp đồng phục vừa đảm bảo hình ảnh chuyên nghiệp khi làm việc với đối tác, vừa đáp ứng tính linh hoạt cho đội ngũ kỹ thuật thường xuyên di chuyển và làm việc ngoài công trình.',
     challenges: [
@@ -43,7 +43,7 @@ export const duAnGiaiPhap1: DuAnGiaiPhap1[] = [
     name: 'Zero Waste',
     stats: '800 áo polo | Đối tác hơn 3 năm',
     image:
-      'https://images.unsplash.com/photo-1556740749-887f6717d7e4?w=900&auto=format&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=900&auto=format&fit=crop&q=80',
     intro:
       'Đội ngũ nhân sự của Zero Waste làm việc đồng thời tại văn phòng và nhà máy. Doanh nghiệp cần một mẫu đồng phục có thể đáp ứng nhiều môi trường làm việc khác nhau, đồng thời duy trì nhận diện thương hiệu thống nhất giữa các doanh nghiệp trong hệ sinh thái (Kim Phú Long, Phúc Trường Hải, Biển Xanh, Tấn Lộc Tuấn).',
     challenges: [
