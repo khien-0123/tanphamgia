@@ -1,5 +1,6 @@
 ---
 import { solutions } from '../../data/site';
+import { listingZigzagFrame, listingZigzagImg } from '../../lib/image-frame';
 ---
 
 <section class="py-10 md:py-24 bg-white border-b border-border-subtle overflow-hidden">
@@ -25,18 +26,21 @@ import { solutions } from '../../data/site';
           return (
             <a
               data-reveal
-              href={`/giai-phap/${item.slug}`}
+              href={item.href}
               class="group grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-10 lg:gap-16 items-center no-underline text-inherit"
             >
               <figure
                 class:list={[
-                  'relative m-0 overflow-hidden rounded aspect-[4/3] w-full min-w-0',
+                  listingZigzagFrame,
                   reverse && 'lg:order-2',
                 ]}
               >
                 <img
                   alt={item.title}
-                  class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                  class:list={[
+                    listingZigzagImg,
+                    'ease-out group-hover:scale-[1.04] duration-700',
+                  ]}
                   src={item.image}
                   loading="lazy"
                 />

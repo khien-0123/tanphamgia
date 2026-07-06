@@ -6,17 +6,18 @@ import SiteCtaSection from '../components/SiteCtaSection.astro';
 import PageHero from '../components/PageHero.astro';
 import SolutionsListingGrid from '../components/solution/SolutionsListingGrid.astro';
 import { pageSeo, pageHeroBg } from '../data/site';
+import { routes } from '../lib/routes';
 ---
 
 <BaseLayout title={pageSeo.giaiPhap.title} description={pageSeo.giaiPhap.description}>
-  <SiteNav currentPath="/giai-phap" />
+  <SiteNav currentPath={routes.giaiPhap} />
 
   <PageHero
     title="Giải pháp đồng phục doanh nghiệp"
     bgImage={pageHeroBg.giaiPhap}
     description="Tư vấn chiến lược, thiết kế riêng và sản xuất quy mô lớn cho 4 phân khúc ngành B2B."
     breadcrumb={[
-      { label: 'Trang chủ', href: '/' },
+      { label: 'Trang chủ', href: routes.home },
       { label: 'Giải pháp' },
     ]}
   />

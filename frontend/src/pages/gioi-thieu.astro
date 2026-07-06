@@ -13,17 +13,18 @@ import CertificateGallery from '../components/CertificateGallery.astro';
 import TestimonialsSlider from '../components/TestimonialsSlider.astro';
 import { gioiThieuSeo, testimonials, certificateImages } from '../data/gioi-thieu';
 import { pageHeroBg } from '../data/site';
+import { routes } from '../lib/routes';
 ---
 
 <BaseLayout title={gioiThieuSeo.title} description={gioiThieuSeo.description}>
-  <SiteNav currentPath="/gioi-thieu" />
+  <SiteNav currentPath={routes.gioiThieu} />
 
   <PageHero
     title="Giới thiệu"
     bgImage={pageHeroBg.gioiThieu}
     description="Hơn 23 năm kinh nghiệm trong ngành may mặc — từ thời trang cao cấp đến giải pháp đồng phục doanh nghiệp toàn diện."
     breadcrumb={[
-      { label: 'Trang chủ', href: '/' },
+      { label: 'Trang chủ', href: routes.home },
       { label: 'Giới thiệu' },
     ]}
   />

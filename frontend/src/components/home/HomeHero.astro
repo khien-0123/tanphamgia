@@ -1,5 +1,6 @@
 ---
 import { stats, heroMedia } from '../../data/site';
+import { routes } from '../../lib/routes';
 
 /** Lớp phủ hero — mờ nhẹ để video vẫn thấy chuyển động nhưng không lấn chữ */
 const heroOverlay = heroMedia.video
@@ -51,13 +52,13 @@ const heroOverlay = heroMedia.video
         </p>
         <div class="flex flex-row gap-2 sm:gap-3 items-stretch w-full max-w-md mx-auto md:max-w-none md:mx-0 md:[grid-row:3]">
           <a
-            href="/lien-he"
+            href={routes.lienHe}
             class="flex-1 min-w-0 bg-accent-gold text-ink-dark px-3 py-2.5 md:px-7 md:py-3.5 rounded-full font-bold text-xs md:text-base leading-tight hover:shadow-gold hover:scale-105 transition-all shadow-soft text-center"
           >
             Nhận tư vấn giải pháp
           </a>
           <a
-            href="/tai-lieu"
+            href={routes.taiLieu}
             class="flex-1 min-w-0 bg-white text-ink-dark border border-white px-3 py-2.5 md:px-7 md:py-3.5 rounded-full font-bold text-xs md:text-base leading-tight hover:shadow-soft hover:scale-105 transition-all text-center"
           >
             Tải hồ sơ năng lực

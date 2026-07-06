@@ -4,7 +4,9 @@ import SiteNav from '../../components/SiteNav.astro';
 import SiteFooter from '../../components/SiteFooter.astro';
 import SiteCtaSection from '../../components/SiteCtaSection.astro';
 import CaseStudyStory from '../../components/CaseStudyStory.astro';
+import { caseStudyHref, solutionAnchorHref, solutionHref } from '../../lib/routes';
 import { getSolutionTheme, solutionBoxCompact } from '../../lib/solution-theme';
+import { portraitCardImg } from '../../lib/image-frame';
 
 export interface CaseStudyProject {
   slug: string;
@@ -42,12 +44,12 @@ const seoSuffix: Record<Props['solutionId'], string> = {
   title={`${project.name} | Dự án tiêu biểu — Giải pháp ${solutionId}`}
   description={`Case study ${project.name} — ${seoSuffix[solutionId]}.`}
 >
-  <SiteNav currentPath={`/giai-phap/${solutionSlug}`} />
+  <SiteNav currentPath={solutionHref(solutionSlug)} />
   <main class={solutionTheme.page}>
     <section class:list={[solutionTheme.section, 'pt-28 md:pt-32']}>
       <div class="max-w-container-max-width mx-auto px-6 md:px-8">
         <a
-          href={`/giai-phap/${solutionSlug}#du-an`}
+          href={solutionAnchorHref(solutionSlug, 'du-an')}
           class="text-sm font-semibold text-accent-teal hover:text-ink-dark transition-colors"
         >
           ← Quay lại Giải pháp {solutionId}
@@ -89,11 +91,11 @@ const seoSuffix: Record<Props['solutionId'], string> = {
               <article class={solutionBoxCompact.item}>
                 <a
                   class={solutionBoxCompact.summary}
-                  href={`/giai-phap/${solutionSlug}/du-an/${item.slug}`}
+                  href={caseStudyHref(solutionSlug, item.slug)}
                 >
                   <figure class={solutionBoxCompact.media}>
                     <img
-                      class="w-full h-full object-cover"
+                      class={portraitCardImg}
                       src={item.image}
                       alt={item.name}
                       loading="lazy"

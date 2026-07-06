@@ -1,5 +1,7 @@
 /** Dự án tiêu biểu — Giải pháp 1 (Sản xuất & FDI) */
 
+import { siteAssets } from './assets';
+
 export interface DuAnGiaiPhap1 {
   slug: string;
   name: string;
@@ -17,8 +19,7 @@ export const duAnGiaiPhap1: DuAnGiaiPhap1[] = [
     slug: 'dat-group',
     name: 'DAT GROUP',
     stats: '1.086 sản phẩm | 45 ngày triển khai | Đối tác hơn 5 năm',
-    image:
-      'https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=900&auto=format&fit=crop&q=80',
+    image: siteAssets.cases.datGroup,
     intro:
       'DAT Group sở hữu đội ngũ nhân sự đa dạng từ khối văn phòng đến kỹ sư hiện trường. Doanh nghiệp cần một giải pháp đồng phục vừa đảm bảo hình ảnh chuyên nghiệp khi làm việc với đối tác, vừa đáp ứng tính linh hoạt cho đội ngũ kỹ thuật thường xuyên di chuyển và làm việc ngoài công trình.',
     challenges: [
@@ -42,8 +43,7 @@ export const duAnGiaiPhap1: DuAnGiaiPhap1[] = [
     slug: 'zero-waste',
     name: 'Zero Waste',
     stats: '800 áo polo | Đối tác hơn 3 năm',
-    image:
-      'https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=900&auto=format&fit=crop&q=80',
+    image: siteAssets.cases.zeroWaste,
     intro:
       'Đội ngũ nhân sự của Zero Waste làm việc đồng thời tại văn phòng và nhà máy. Doanh nghiệp cần một mẫu đồng phục có thể đáp ứng nhiều môi trường làm việc khác nhau, đồng thời duy trì nhận diện thương hiệu thống nhất giữa các doanh nghiệp trong hệ sinh thái (Kim Phú Long, Phúc Trường Hải, Biển Xanh, Tấn Lộc Tuấn).',
     challenges: [
@@ -68,8 +68,7 @@ export const duAnGiaiPhap1: DuAnGiaiPhap1[] = [
     name: 'King Group',
     stats: '3.000+ áo polo | Hợp tác hơn 4 năm',
     field: 'Sản xuất bao bì công nghiệp',
-    image:
-      'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=900&auto=format&fit=crop&q=80',
+    image: siteAssets.cases.kingGroupAlt,
     intro:
       'Với quy mô lao động lớn, King Group thường xuyên phát sinh nhu cầu đặt mới và bổ sung đồng phục số lượng lớn. Doanh nghiệp cần một đối tác có khả năng duy trì chất lượng ổn định giữa nhiều đợt sản xuất và đảm bảo tiến độ cung ứng phục vụ vận hành nhà máy.',
     challenges: [

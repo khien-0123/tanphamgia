@@ -1,5 +1,6 @@
 ---
 import { homeFeaturedCases } from '../../data/site';
+import { imageRadius } from '../../lib/image-frame';
 
 const { featured, secondary, allProjectsHref } = homeFeaturedCases;
 const allCases = [featured, ...secondary];
@@ -28,7 +29,7 @@ const allCases = [featured, ...secondary];
       {/* Featured — chiếm 2 hàng bên trái */}
       <a
         href={featured.href || allProjectsHref}
-        class="group relative block overflow-hidden rounded lg:row-span-2 min-h-[280px] lg:min-h-0 no-underline"
+        class:list={['group relative block overflow-hidden lg:row-span-2 min-h-[280px] lg:min-h-0 no-underline', imageRadius]}
       >
         <img
           src={featured.image}
@@ -69,7 +70,7 @@ const allCases = [featured, ...secondary];
       {secondary.map((project) => (
         <a
           href={project.href || allProjectsHref}
-          class="group relative block overflow-hidden rounded min-h-[200px] no-underline"
+          class:list={['group relative block overflow-hidden min-h-[200px] no-underline', imageRadius]}
         >
           <img
             src={project.image}

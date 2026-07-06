@@ -12,10 +12,11 @@ import CertificateGallery from '../components/CertificateGallery.astro';
 import SiteCtaSection from '../components/SiteCtaSection.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import { seo, navigation, certificates } from '../data/site';
+import { routes } from '../lib/routes';
 ---
 
 <BaseLayout title={seo.title} description={seo.description}>
-  <SiteNav items={navigation} currentPath="/" ctaHref="/tai-lieu" />
+  <SiteNav items={navigation} currentPath={routes.home} ctaHref={routes.taiLieu} />
 
   <HomeHero />
   <HomeIntroSection />

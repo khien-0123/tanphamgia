@@ -14,7 +14,7 @@ const { items } = Astro.props;
   {
     items.map((post) => (
       <article data-reveal class="group">
-        <a href={`/tin-tuc/${post.slug}`} class="block no-underline text-inherit">
+        <a href={post.href} class="block no-underline text-inherit">
           <BlogPostFigure
             src={post.image}
             alt={post.alt}

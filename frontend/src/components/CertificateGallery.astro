@@ -12,14 +12,26 @@ interface Props {
 
 const { items, centeredTitle = false } = Astro.props;
 
-/** 3 cột — mỗi cột lệch thứ tự để cuộn khác nhau */
-function buildColumns(certs: Certificate[]) {
-  return [0, 1, 2].map((offset) =>
-    certs.map((_, index) => certs[(index + offset) % certs.length]),
-  );
+/** Chia đều N chứng nhận vào N cột */
+function buildColumns(certs: Certificate[], colCount: number) {
+  return Array.from({ length: colCount }, (_, colIndex) => {
+    const column: Certificate[] = [];
+    for (let i = colIndex; i < certs.length; i += colCount) {
+      column.push(certs[i]);
+    }
+    return column;
+  });
 }
 
-const columns = buildColumns(items);
+const mobileColumns = [items];
+const tabletColumns = buildColumns(items, 2);
+const desktopColumns = buildColumns(items, 3);
+
+const speedClasses = [
+  'certificate-marquee__track--14',
+  'certificate-marquee__track--18',
+  'certificate-marquee__track--22',
+] as const;
 ---
 
 <section class="pt-16 pb-8 md:pt-20 md:pb-10 bg-white overflow-hidden" id="chung-nhan">
@@ -44,22 +56,66 @@ const columns = buildColumns(items);
     </header>
 
     <div class="certificate-marquee">
-      <div class="certificate-marquee__columns">
+      {/* Mobile — 1 cột cuộn đủ {items.length} chứng nhận */}
+      <div class="certificate-marquee__columns certificate-marquee__columns--mobile">
         {
-          columns.map((column, columnIndex) => (
-            <div
-              class:list={[
-                'certificate-marquee__column',
-                columnIndex === 1 && 'certificate-marquee__column--second',
-                columnIndex === 2 && 'certificate-marquee__column--third',
-              ]}
-            >
+          mobileColumns.map((column) => (
+            <div class="certificate-marquee__column">
+              <div class="certificate-marquee__track certificate-marquee__track--16">
+                {[...column, ...column].map((cert) => (
+                  <figure class="certificate-marquee__card">
+                    <img
+                      alt={cert.title}
+                      class="certificate-marquee__image"
+                      loading="lazy"
+                      src={cert.image}
+                    />
+                    <figcaption class="certificate-marquee__caption">{cert.title}</figcaption>
+                  </figure>
+                ))}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+
+      {/* Tablet — 2 cột, mỗi cột 3 chứng nhận */}
+      <div class="certificate-marquee__columns certificate-marquee__columns--tablet">
+        {
+          tabletColumns.map((column, columnIndex) => (
+            <div class="certificate-marquee__column">
               <div
                 class:list={[
                   'certificate-marquee__track',
-                  columnIndex === 0 && 'certificate-marquee__track--14',
-                  columnIndex === 1 && 'certificate-marquee__track--18',
-                  columnIndex === 2 && 'certificate-marquee__track--22',
+                  speedClasses[columnIndex % speedClasses.length],
+                ]}
+              >
+                {[...column, ...column].map((cert) => (
+                  <figure class="certificate-marquee__card">
+                    <img
+                      alt={cert.title}
+                      class="certificate-marquee__image"
+                      loading="lazy"
+                      src={cert.image}
+                    />
+                    <figcaption class="certificate-marquee__caption">{cert.title}</figcaption>
+                  </figure>
+                ))}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+
+      {/* Desktop — 3 cột, mỗi cột 2 chứng nhận → thấy đủ 6 cùng lúc */}
+      <div class="certificate-marquee__columns certificate-marquee__columns--desktop">
+        {
+          desktopColumns.map((column, columnIndex) => (
+            <div class="certificate-marquee__column">
+              <div
+                class:list={[
+                  'certificate-marquee__track',
+                  speedClasses[columnIndex % speedClasses.length],
                 ]}
               >
                 {[...column, ...column].map((cert) => (
@@ -104,14 +160,43 @@ const columns = buildColumns(items);
     height: 460px;
     max-height: 58vh;
     overflow: hidden;
-    mask-image: linear-gradient(to bottom, transparent, black 22%, black 78%, transparent);
+    mask-image: linear-gradient(to bottom, transparent, black 12%, black 88%, transparent);
     -webkit-mask-image: linear-gradient(
       to bottom,
       transparent,
-      black 22%,
-      black 78%,
+      black 12%,
+      black 88%,
       transparent
     );
+  }
+
+  .certificate-marquee__columns--mobile {
+    display: flex;
+  }
+
+  .certificate-marquee__columns--tablet,
+  .certificate-marquee__columns--desktop {
+    display: none;
+  }
+
+  @media (min-width: 640px) {
+    .certificate-marquee__columns--mobile {
+      display: none;
+    }
+
+    .certificate-marquee__columns--tablet {
+      display: flex;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .certificate-marquee__columns--tablet {
+      display: none;
+    }
+
+    .certificate-marquee__columns--desktop {
+      display: flex;
+    }
   }
 
   @media (min-width: 768px) {
@@ -151,34 +236,11 @@ const columns = buildColumns(items);
     }
   }
 
-  /* Cột 2 — ẩn trên mobile, hiện từ tablet */
-  .certificate-marquee__column--second {
-    display: none;
-  }
-
-  @media (min-width: 640px) {
-    .certificate-marquee__column--second {
-      display: block;
-    }
-  }
-
-  /* Cột 3 — ẩn trên mobile + tablet nhỏ, hiện từ desktop */
-  .certificate-marquee__column--third {
-    display: none;
-  }
-
-  @media (min-width: 1024px) {
-    .certificate-marquee__column--third {
-      display: block;
-    }
-  }
-
   .certificate-marquee__track {
     display: flex;
     flex-direction: column;
     gap: 0.875rem;
     padding-bottom: 0.875rem;
-    will-change: transform;
   }
 
   @media (min-width: 768px) {
@@ -190,6 +252,10 @@ const columns = buildColumns(items);
 
   .certificate-marquee__track--14 {
     animation: certificate-column-scroll 14s linear infinite;
+  }
+
+  .certificate-marquee__track--16 {
+    animation: certificate-column-scroll 16s linear infinite;
   }
 
   .certificate-marquee__track--18 {
@@ -212,10 +278,17 @@ const columns = buildColumns(items);
   .certificate-marquee__image {
     width: 100%;
     aspect-ratio: 3 / 2;
-    object-fit: cover;
+    object-fit: contain;
+    object-position: center;
+    background: #f4f1eb;
     border-radius: 0.25rem;
     box-shadow: 0 4px 24px -4px rgba(14, 38, 64, 0.08);
     outline: 1px solid rgba(220, 229, 226, 0.8);
+    image-rendering: auto;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+    filter: contrast(1.05) saturate(1.03);
   }
 
   .certificate-marquee__caption {
@@ -234,8 +307,10 @@ const columns = buildColumns(items);
 
     .certificate-marquee__columns {
       height: auto;
-      max-height: min(50vh, 400px);
+      max-height: none;
       flex: none;
+      mask-image: none;
+      -webkit-mask-image: none;
     }
   }
 </style>

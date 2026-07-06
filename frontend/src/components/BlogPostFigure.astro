@@ -1,5 +1,7 @@
 ---
-/** Ảnh bài viết — tỷ lệ 16:9 thống nhất toàn site tin tức */
+/** Ảnh bài viết — khung 4:3, ưu tiên giữ phần trên khi ảnh dọc */
+import { blogThumbFrame, blogThumbImg } from '../lib/image-frame';
+
 interface Props {
   src: string;
   alt: string;
@@ -10,19 +12,9 @@ interface Props {
 
 const { src, alt, class: className = '', imgClass = '', loading = 'lazy' } = Astro.props;
 
-const figureClass = [
-  'relative m-0 overflow-hidden rounded aspect-video bg-surface-muted',
-  className,
-]
-  .filter(Boolean)
-  .join(' ');
+const figureClass = [blogThumbFrame, className].filter(Boolean).join(' ');
 
-const imageClass = [
-  'absolute inset-0 w-full h-full object-cover object-center',
-  imgClass,
-]
-  .filter(Boolean)
-  .join(' ');
+const imageClass = [blogThumbImg, imgClass].filter(Boolean).join(' ');
 ---
 
 <figure class={figureClass}>

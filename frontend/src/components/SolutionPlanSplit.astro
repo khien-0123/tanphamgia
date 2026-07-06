@@ -1,4 +1,6 @@
 ---
+import { imageRadius } from '../lib/image-frame';
+
 export interface PlanItem {
   title: string;
   desc: string;
@@ -21,7 +23,7 @@ function formatNum(index: number) {
   class="grid grid-cols-1 gap-6 items-start lg:grid-cols-[minmax(0,0.38fr)_minmax(0,0.62fr)] lg:gap-10"
   aria-label="Giải pháp từ Tân Phạm Gia"
 >
-  <figure class="m-0 overflow-hidden rounded lg:sticky lg:top-[5.5rem] lg:self-start">
+  <figure class:list={['m-0 overflow-hidden lg:sticky lg:top-[5.5rem] lg:self-start', imageRadius]}>
     <img
       src={image}
       alt={imageAlt}

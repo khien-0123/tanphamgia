@@ -1,4 +1,7 @@
 ---
+import { siteAssets } from '../data/assets';
+import { routes } from '../lib/routes';
+
 interface Props {
   title: string;
   description?: string;
@@ -13,8 +16,8 @@ const {
   title,
   description,
   descriptionLines,
-  breadcrumb = [{ label: 'Trang chủ', href: '/' }],
-  bgImage = 'https://lh3.googleusercontent.com/aida-public/AB6AXuD7szr7Elx-oAqCEnir2uiBqNE-4WpmIm10Kj1YsgXyu1XMFvP0qvIXYrsMpRh9sztusxsq8_7_MFPstpomb4RaDeTg9J3ldf2CSKwYUq91qGdHVM6Dm9YkfE3Rdfay_snBPthtK7WWCq_NFHZ3j3Kua1MgJAT-qQPXwlpAIQIDLIpk4Njn_msEnsXh9DyyRtwkvdNU5u10NXpGyYseM_HBo6gwnr6IFqeZ9gHXI1CrvRQnXAxx3UyIT7UIbTDEMKjd1gdxbZwWKrKl',
+  breadcrumb = [{ label: 'Trang chủ', href: routes.home }],
+  bgImage = siteAssets.hero.fallback,
 } = Astro.props;
 ---
 

@@ -1,6 +1,7 @@
 ---
 import type { BlogPost } from '../../data/site';
 import BlogPostFigure from '../BlogPostFigure.astro';
+import { routes } from '../../lib/routes';
 
 interface Props {
   post: BlogPost;
@@ -12,9 +13,9 @@ const { post } = Astro.props;
 <article class="pt-28 md:pt-32 pb-16 bg-white">
   <div class="max-w-container-max-width mx-auto px-6 md:px-8 max-w-3xl">
     <nav aria-label="Breadcrumb" class="text-sm text-text-muted mb-8">
-      <a class="hover:text-accent-gold transition-colors" href="/">Trang chủ</a>
+      <a class="hover:text-accent-gold transition-colors" href={routes.home}>Trang chủ</a>
       <span class="mx-2">/</span>
-      <a class="hover:text-accent-gold transition-colors" href="/tin-tuc">Tin tức</a>
+      <a class="hover:text-accent-gold transition-colors" href={routes.tinTuc}>Tin tức</a>
       <span class="mx-2">/</span>
       <span class="text-ink-dark line-clamp-2" title={post.title}>{post.title}</span>
     </nav>
@@ -47,7 +48,7 @@ const { post } = Astro.props;
       </p>
     </div>
     <a
-      href="/tin-tuc"
+      href={routes.tinTuc}
       class="inline-block mt-10 text-sm font-bold text-accent-teal hover:text-ink-dark transition-colors"
     >
       ← Quay lại danh sách tin tức

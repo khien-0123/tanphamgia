@@ -1,4 +1,6 @@
 /** Phân trang danh sách — dùng cho tin tức */
+export { blogPageHref } from '../lib/routes';
+
 export function paginate<T>(items: T[], page: number, perPage: number) {
   const totalPages = Math.max(1, Math.ceil(items.length / perPage));
   const currentPage = Math.min(Math.max(1, page), totalPages);
@@ -11,8 +13,4 @@ export function paginate<T>(items: T[], page: number, perPage: number) {
     hasPrev: currentPage > 1,
     hasNext: currentPage < totalPages,
   };
-}
-
-export function blogPageHref(page: number) {
-  return page <= 1 ? '/tin-tuc' : `/tin-tuc/trang/${page}`;
 }

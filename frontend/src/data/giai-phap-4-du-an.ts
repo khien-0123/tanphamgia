@@ -1,5 +1,7 @@
 /** Dự án tiêu biểu — Giải pháp 4 (Y tế, Spa & Dịch vụ) */
 
+import { siteAssets } from './assets';
+
 export interface DuAnGiaiPhap4 {
   slug: string;
   name: string;
@@ -18,8 +20,7 @@ export const duAnGiaiPhap4: DuAnGiaiPhap4[] = [
     name: 'BV Răng Hàm Mặt Sài Gòn',
     stats: '650 sản phẩm | Đồng phục Scrub & áo Blouse',
     field: 'Nha khoa & Y tế',
-    image:
-      'https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=900&auto=format&fit=crop&q=80',
+    image: siteAssets.cases.bvRangHamMatGp4,
     intro:
       'Hệ thống bệnh viện cần đồng phục phù hợp cho đội ngũ bác sĩ và phụ tá, đảm bảo sự thoải mái trong cường độ làm việc cao, đồng thời duy trì hình ảnh chuyên nghiệp và đồng nhất giữa các chi nhánh.',
     challenges: [
@@ -43,8 +44,7 @@ export const duAnGiaiPhap4: DuAnGiaiPhap4[] = [
     name: 'Engadine Clinic',
     stats: '420 sản phẩm | 30 ngày triển khai',
     field: 'Phòng khám & Dịch vụ',
-    image:
-      'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=900&auto=format&fit=crop&q=80',
+    image: siteAssets.cases.engadine,
     intro:
       'Đồng phục cần thể hiện hình ảnh chuyên nghiệp, hiện đại và phù hợp với định vị thương hiệu, đồng thời đảm bảo sự thoải mái cho đội ngũ nhân viên trong quá trình làm việc.',
     challenges: [
@@ -67,8 +67,7 @@ export const duAnGiaiPhap4: DuAnGiaiPhap4[] = [
     slug: 'betrimex',
     name: 'BETRIMEX',
     stats: '850 sản phẩm | Đối tác 3 năm',
-    image:
-      'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=900&auto=format&fit=crop&q=80',
+    image: siteAssets.cases.betrimex,
     intro:
       'Doanh nghiệp cần chuẩn hóa hình ảnh đội ngũ, duy trì chất lượng đồng phục giữa các đợt sản xuất và đơn giản hóa việc quản lý khi thường xuyên phát sinh nhu cầu bổ sung nhân sự.',
     challenges: [

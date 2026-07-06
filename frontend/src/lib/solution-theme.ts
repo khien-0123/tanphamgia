@@ -1,4 +1,6 @@
 /** Biến thể giao diện cho 4 nhóm giải pháp (1–4). */
+import { imageRadius, portraitCardFrame } from './image-frame';
+
 export type SolutionTheme = 1 | 2 | 3 | 4;
 
 const issueCardBorder: Record<SolutionTheme, string> = {
@@ -44,10 +46,10 @@ const heroGrid: Record<SolutionTheme, string> = {
 };
 
 const heroImageDetail: Record<SolutionTheme, string> = {
-  1: 'w-full aspect-[4/3] object-cover rounded h-full min-h-80 border-2 border-accent-gold',
-  2: 'w-full aspect-[4/3] object-cover rounded',
-  3: 'w-full aspect-[4/3] object-cover rounded',
-  4: 'w-full aspect-[4/3] object-cover rounded',
+  1: `w-full aspect-[4/5] object-cover object-top ${imageRadius} h-full min-h-80 border-2 border-accent-gold`,
+  2: `w-full aspect-[4/5] object-cover object-top ${imageRadius}`,
+  3: `w-full aspect-[4/5] object-cover object-top ${imageRadius}`,
+  4: `w-full aspect-[4/5] object-cover object-top ${imageRadius}`,
 };
 
 const issueGrid: Record<SolutionTheme, string> = {
@@ -58,10 +60,10 @@ const issueGrid: Record<SolutionTheme, string> = {
 };
 
 const caseCard: Record<SolutionTheme, string> = {
-  1: 'bg-[#111] text-white min-h-[190px] relative overflow-hidden rounded',
-  2: 'bg-[#111] text-white min-h-[190px] relative overflow-hidden rounded',
-  3: 'bg-[#111] text-white min-h-[230px] relative overflow-hidden rounded border border-accent-gold',
-  4: 'bg-[#111] text-white min-h-[190px] relative overflow-hidden rounded',
+  1: `bg-[#111] text-white min-h-[190px] relative overflow-hidden ${imageRadius}`,
+  2: `bg-[#111] text-white min-h-[190px] relative overflow-hidden ${imageRadius}`,
+  3: `bg-[#111] text-white min-h-[230px] relative overflow-hidden ${imageRadius} border border-accent-gold`,
+  4: `bg-[#111] text-white min-h-[190px] relative overflow-hidden ${imageRadius}`,
 };
 
 export function getSolutionTheme(theme: SolutionTheme) {
@@ -69,7 +71,7 @@ export function getSolutionTheme(theme: SolutionTheme) {
     page: 'bg-white text-[#111]',
     section: 'py-8 md:py-12 bg-white [&_h2]:text-balance',
     heroGrid: heroGrid[theme],
-    heroImage: 'w-full aspect-[4/3] object-cover rounded',
+    heroImage: `w-full aspect-[4/5] object-cover object-top ${imageRadius}`,
     heroImageDetail: heroImageDetail[theme],
     issueGrid: issueGrid[theme],
     issueCard: `bg-white border rounded-xl p-4 overflow-hidden text-sm leading-relaxed ${issueCardBorder[theme]} [&_p]:m-0`,
@@ -97,9 +99,9 @@ export const solutionStep = {
 
 export const solutionBoxCompact = {
   grid: 'grid grid-cols-1 sm:grid-cols-2 gap-4 xl:grid-cols-4',
-  item: 'border border-border-subtle bg-white transition-[border-color,background-color] duration-200 hover:border-accent-gold rounded-xl overflow-hidden',
+  item: `border border-border-subtle bg-white transition-[border-color,background-color] duration-200 hover:border-accent-gold ${imageRadius} overflow-hidden`,
   summary: 'list-none cursor-pointer flex flex-col gap-[0.45rem] p-3 no-underline',
-  media: 'aspect-video overflow-hidden border border-surface-muted m-0',
+  media: `${portraitCardFrame} border border-surface-muted`,
   number: 'inline-block w-fit text-[0.68rem] font-bold text-accent-teal tracking-wider',
   title: 'font-bold text-[0.95rem] leading-snug text-ink-dark m-0',
   desc: 'text-[0.78rem] leading-snug text-text-muted m-0',
@@ -112,8 +114,7 @@ export const solutionBoxHome = {
   item: 'bg-white flex flex-col min-h-0 group',
   summary:
     'flex flex-col flex-1 h-full min-h-0 gap-2 sm:gap-2.5 no-underline',
-  media:
-    'aspect-square overflow-hidden rounded shrink-0 m-0',
+  media: `${portraitCardFrame} shrink-0`,
   number:
     'inline-block w-fit font-extrabold text-2xl sm:text-3xl xl:text-4xl text-accent-gold leading-none tabular-nums',
   title:

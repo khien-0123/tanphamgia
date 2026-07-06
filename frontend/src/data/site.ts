@@ -1,5 +1,14 @@
 /** Dữ liệu thương hiệu & điều hướng — đồng bộ Sitemap + Google Sheets */
 
+import { legacyUrl, siteConfig } from '../lib/site-config';
+import {
+  blogPostHref,
+  caseStudyHref,
+  routes,
+  solutionHref,
+} from '../lib/routes';
+import { siteAssets } from './assets';
+
 export const seo = {
   title: 'May Đồng Phục Doanh Nghiệp | Tân Phạm Gia',
   description:
@@ -40,20 +49,14 @@ export const pageSeo = {
   },
 } as const;
 
-/** Ảnh nền PageHero theo trang — khớp chủ đề tiêu đề từng trang (Unsplash) */
+/** Ảnh nền PageHero theo trang */
 export const pageHeroBg = {
-  gioiThieu:
-    'https://images.unsplash.com/photo-1523381294911-8d3cead13475?w=1600&auto=format&fit=crop&q=80',
-  giaiPhap:
-    'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1600&auto=format&fit=crop&q=80',
-  khachHang:
-    'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1600&auto=format&fit=crop&q=80',
-  tinTuc:
-    'https://images.unsplash.com/photo-1568667256549-094345857637?w=1600&auto=format&fit=crop&q=80',
-  taiLieu:
-    'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1600&auto=format&fit=crop&q=80',
-  lienHe:
-    'https://images.unsplash.com/photo-1531973576160-7125cd663d86?w=1600&auto=format&fit=crop&q=80',
+  gioiThieu: siteAssets.hero.gioiThieu,
+  giaiPhap: siteAssets.hero.giaiPhap,
+  khachHang: siteAssets.hero.khachHang,
+  tinTuc: siteAssets.hero.tinTuc,
+  taiLieu: siteAssets.hero.taiLieu,
+  lienHe: siteAssets.hero.lienHe,
 } as const;
 
 /** Liên hệ chung — dùng footer, menu mobile, trang Liên hệ */
@@ -101,42 +104,35 @@ export const siteFooter = {
     },
   ],
   policies: [
-    {
-      label: 'Chính sách bảo mật',
-      href: 'https://dongphucvn.vn/chinh-sach-bao-mat/',
-    },
+    { label: 'Chính sách bảo mật', href: legacyUrl('/chinh-sach-bao-mat/') },
     {
       label: 'Chính sách đổi/trả hoặc chỉnh sửa mẫu',
-      href: 'https://dongphucvn.vn/chinh-sach-doi-tra-hoac-chinh-sua-mau/',
+      href: legacyUrl('/chinh-sach-doi-tra-hoac-chinh-sua-mau/'),
     },
-    {
-      label: 'Điều khoản sử dụng',
-      href: 'https://dongphucvn.vn/dieu-khoan-su-dung/',
-    },
+    { label: 'Điều khoản sử dụng', href: legacyUrl('/dieu-khoan-su-dung/') },
     {
       label: 'Quy trình tiếp nhận & xử lý khiếu nại',
-      href: 'https://dongphucvn.vn/quy-trinh-tiep-nhan-xu-ly-khieu-nai/',
+      href: legacyUrl('/quy-trinh-tiep-nhan-xu-ly-khieu-nai/'),
     },
   ],
   services: [
-    { label: 'Giải pháp đồng phục doanh nghiệp', href: '/giai-phap' },
-    { label: 'Giải pháp OEM & ODM', href: '/giai-phap/giai-phap-1' },
-    { label: 'Cung cấp nguồn vải', href: '/giai-phap/giai-phap-1' },
+    { label: 'Giải pháp đồng phục doanh nghiệp', href: routes.giaiPhap },
+    { label: 'Giải pháp OEM & ODM', href: solutionHref('giai-phap-1') },
+    { label: 'Cung cấp nguồn vải', href: solutionHref('giai-phap-1') },
   ],
   ministryCert: {
-    href: 'https://online.gov.vn/',
-    image:
-      'https://dongphucvn.vn/wp-content/uploads/2026/05/logo-da-thong-bao-bo-cong-thuong.webp',
+    href: siteConfig.ministryCertUrl,
+    image: siteAssets.brand.ministryCert,
     alt: 'Đã thông báo Bộ Công Thương',
   },
   news: [
-    { label: 'Kiến thức đồng phục', href: '/tin-tuc' },
-    { label: 'Xu hướng thời trang', href: '/tin-tuc' },
-    { label: 'Hoạt động Tân Phạm Gia', href: '/tin-tuc' },
+    { label: 'Kiến thức đồng phục', href: routes.tinTuc },
+    { label: 'Xu hướng thời trang', href: routes.tinTuc },
+    { label: 'Hoạt động Tân Phạm Gia', href: routes.tinTuc },
   ],
   download: {
     label: 'Tải xuống',
-    href: '/tai-lieu',
+    href: routes.taiLieu,
   },
   copyright:
     '© 2026 Tân Phạm Gia | All rights reserved. | MST: 0302963984 | Chứng nhận ISO 9001:2015',
@@ -146,75 +142,54 @@ export const siteFooter = {
 export const siteBrand = {
   name: 'Tân Phạm Gia',
   tagline: 'Đồng phục doanh nghiệp',
-  homeHref: '/',
-  logo: '/images/brand/tan-pham-gia-logo.png',
+  homeHref: routes.home,
+  logo: siteAssets.brand.logo,
 } as const;
 
-/** Điều hướng anchor trên trang chủ */
-export const navigation = [
-  { label: 'Trang chủ', href: '/', icon: 'home', desc: 'Tổng quan & giải pháp nổi bật' },
-  { label: 'Giới thiệu', href: '/gioi-thieu', icon: 'apartment', desc: 'Lịch sử & năng lực xưởng may' },
-  { label: 'Giải pháp', href: '/giai-phap', icon: 'category', desc: 'Nhóm giải pháp đồng phục' },
-  { label: 'Khách hàng', href: '/khach-hang', icon: 'groups', desc: 'Thương hiệu đã đồng hành' },
-  { label: 'Tin tức', href: '/tin-tuc', icon: 'newspaper', desc: 'Kiến thức ngành & dự án' },
-  { label: 'Tài liệu', href: '/tai-lieu', icon: 'folder_open', desc: 'Hồ sơ năng lực & catalog' },
-  { label: 'Liên hệ', href: '/lien-he', icon: 'call', desc: 'Tư vấn & báo giá nhanh' },
+/** Điều hướng chính — dùng cho SiteNav và menu mobile */
+export const mainNavigation = [
+  { label: 'Trang chủ', href: routes.home, icon: 'home', desc: 'Tổng quan & giải pháp nổi bật' },
+  {
+    label: 'Giới thiệu',
+    href: routes.gioiThieu,
+    icon: 'apartment',
+    desc: 'Lịch sử & năng lực xưởng may',
+  },
+  { label: 'Giải pháp', href: routes.giaiPhap, icon: 'category', desc: 'Nhóm giải pháp đồng phục' },
+  { label: 'Khách hàng', href: routes.khachHang, icon: 'groups', desc: 'Thương hiệu đã đồng hành' },
+  { label: 'Tin tức', href: routes.tinTuc, icon: 'newspaper', desc: 'Kiến thức ngành & dự án' },
+  { label: 'Tài liệu', href: routes.taiLieu, icon: 'folder_open', desc: 'Hồ sơ năng lực & catalog' },
+  { label: 'Liên hệ', href: routes.lienHe, icon: 'call', desc: 'Tư vấn & báo giá nhanh' },
 ];
 
-/** Điều hướng trang con — đồng bộ URL slug SEO sheet */
-export const mainNavigation = [
-  { label: 'Trang chủ', href: '/', icon: 'home', desc: 'Tổng quan & giải pháp nổi bật' },
-  { label: 'Giới thiệu', href: '/gioi-thieu', icon: 'apartment', desc: 'Lịch sử & năng lực xưởng may' },
-  { label: 'Giải pháp', href: '/giai-phap', icon: 'category', desc: 'Nhóm giải pháp đồng phục' },
-  { label: 'Khách hàng', href: '/khach-hang', icon: 'groups', desc: 'Thương hiệu đã đồng hành' },
-  { label: 'Tin tức', href: '/tin-tuc', icon: 'newspaper', desc: 'Kiến thức ngành & dự án' },
-  { label: 'Tài liệu', href: '/tai-lieu', icon: 'folder_open', desc: 'Hồ sơ năng lực & catalog' },
-  { label: 'Liên hệ', href: '/lien-he', icon: 'call', desc: 'Tư vấn & báo giá nhanh' },
-];
+/** @deprecated Dùng mainNavigation */
+export const navigation = mainNavigation;
 
 export const brandQuote =
   'Tân Phạm Gia luôn lắng nghe và thấu hiểu để đưa ra giải pháp phù hợp nhất cho doanh nghiệp.';
 
 /** Media hero trang chủ — chỉ video, không dùng ảnh nền */
 export const heroMedia = {
-  video: '/videos/header-dong-phuc.mp4',
+  video: siteAssets.hero.video,
 };
 
-/** Nội dung CTA cuối trang — đồng bộ mọi trang */
 export const siteCta = {
   title: 'Sẵn sàng cho dự án đồng phục của bạn?',
   description: 'Liên hệ ngay để nhận tư vấn miễn phí và báo giá chi tiết.',
   primaryLabel: 'Nhận tư vấn giải pháp',
-  primaryHref: '/lien-he',
+  primaryHref: routes.lienHe,
   secondaryLabel: 'Tải hồ sơ năng lực',
-  secondaryHref: '/tai-lieu',
-  /** Ảnh nền CTA — opacity ~40% trên component */
-  backgroundImage:
-    'https://images.unsplash.com/photo-1497366216548-37526070297c?w=1600&auto=format&fit=crop&q=80',
+  secondaryHref: routes.taiLieu,
+  backgroundImage: siteAssets.cta.background,
 };
 
-/** Sitemap 1.7 — Giấy khen & chứng nhận (ảnh — đồng bộ trang Giới thiệu) */
 export const certificates = [
-  {
-    title: 'ISO 9001:2015',
-    image:
-      'https://lh3.googleusercontent.com/aida-public/AB6AXuCZF2amQyazt-GlhQH0DeUYXVZBkumEl5R6CgjdG-dn0i5IrhMtCB2ZMm9VUkZRwiIQIWIztfTbQsGMzRLvuaT2VHY6uWPPQHTjMlgpApeytXq5twxbrE7JaH5DBMM3Wq0I6G3KUtyoE2pR9jZvWUthhvBo7IZAZV3S32L0TVLkejbhD6tP9cSh8EF0MwW4eWy5qOXNzFXEsmwc7o-jKSwr2uoIeviT4x3KWtNwCtrU8SJWzNs3WVp6UPimb_JxHku0lc8G80XNvUiu',
-  },
-  {
-    title: 'Hàng Việt Nam Chất Lượng Cao',
-    image:
-      'https://lh3.googleusercontent.com/aida-public/AB6AXuD7szr7Elx-oAqCEnir2uiBqNE-4WpmIm10Kj1YsgXyu1XMFvP0qvIXYrsMpRh9sztusxsq8_7_MFPstpomb4RaDeTg9J3ldf2CSKwYUq91qGdHVM6Dm9YkfE3Rdfay_snBPthtK7WWCq_NFHZ3j3Kua1MgJAT-qQPXwlpAIQIDLIpk4Njn_msEnsXh9DyyRtwkvdNU5u10NXpGyYseM_HBo6gwnr6IFqeZ9gHXI1CrvRQnXAxx3UyIT7UIbTDEMKjd1gdxbZwWKrKl',
-  },
-  {
-    title: 'Giấy khen & Bằng khen',
-    image:
-      'https://lh3.googleusercontent.com/aida-public/AB6AXuDDcz4grX0Tjw51FTdB5HZbTmcrYakXnp7WFjK-2VEfZcR45qJg81c0tcljJFjAwIJTFzyhkp3cYgFg-pBIktGRpQoqXaQKlYSVtvmMkicnivUhEnczXAOlUWn7p3aZX0U1qcowjy_97kPA_r3-PivXNSaDbFOOOX_6jiBJmo4A0j0D9e3qRVIUh7laSY54Gct149JLW1vsGGGj8J52tBRRd7ZXIWlIfTCG2X92nrw60rSTjemYH3_FC4-qYNw2ligyY7SaiNTBUHs',
-  },
-  {
-    title: 'Chứng nhận UNIDO',
-    image:
-      'https://lh3.googleusercontent.com/aida-public/AB6AXuDxP6CFZlp3ggmwGEczcGuTImTcqVax4g1QmQUxHl1DEUyVAHj0mdNbxUD-EqS0F3NQNzNfbQN0ax9SIZ62ID0h1-x0UQyRqMxIcqji0Cu5nzwa_SLGBitLXLnORAxIjqlduZZUPE6upya0xjD-YldIjtwbptXZof83YaJpRItUxQzd9vn77CMyaTSd27VeqXiC6LQ61cE-PDK4tWlWjVlq7PuD1BVQYDnywiA_dC08kRpIMCQiDZhZG7GEehac2rkhi_CnAmr-JWA',
-  },
+  { title: 'ISO 9001:2015', image: siteAssets.certificates.iso9001 },
+  { title: 'Hàng Việt Nam Chất Lượng Cao', image: siteAssets.certificates.hangVietNam },
+  { title: 'Giấy khen & Bằng khen', image: siteAssets.certificates.giayKhen },
+  { title: 'Chứng nhận UNIDO', image: siteAssets.certificates.unido },
+  { title: 'Bằng khen doanh nghiệp', image: siteAssets.certificates.bangKhen3 },
+  { title: 'Giải thưởng ngành may', image: siteAssets.certificates.cupGiaiThuong },
 ];
 
 export const stats = [
@@ -239,9 +214,8 @@ export const homeIntro = {
     'Hệ thống sản xuất & QC bài bản',
     'Đồng hành từ tư vấn đến bàn giao',
   ],
-  cta: { label: 'Khám phá năng lực Tân Phạm Gia', href: '/gioi-thieu' },
-  image:
-    'https://lh3.googleusercontent.com/aida-public/AB6AXuD7szr7Elx-oAqCEnir2uiBqNE-4WpmIm10Kj1YsgXyu1XMFvP0qvIXYrsMpRh9sztusxsq8_7_MFPstpomb4RaDeTg9J3ldf2CSKwYUq91qGdHVM6Dm9YkfE3Rdfay_snBPthtK7WWCq_NFHZ3j3Kua1MgJAT-qQPXwlpAIQIDLIpk4Njn_msEnsXh9DyyRtwkvdNU5u10NXpGyYseM_HBo6gwnr6IFqeZ9gHXI1CrvRQnXAxx3UyIT7UIbTDEMKjd1gdxbZwWKrKl',
+  cta: { label: 'Khám phá năng lực Tân Phạm Gia', href: routes.gioiThieu },
+  image: siteAssets.intro.home,
   imageAlt: 'Xưởng may và đội ngũ Tân Phạm Gia',
 };
 
@@ -274,8 +248,8 @@ export const solutions = [
     slug: 'giai-phap-1',
     title: 'Doanh nghiệp Sản xuất & FDI',
     desc: 'Giải pháp đồng phục tuân thủ an toàn lao động, bền bỉ và đồng nhất hình ảnh thương hiệu.',
-    image:
-      'https://lh3.googleusercontent.com/aida-public/AB6AXuD7szr7Elx-oAqCEnir2uiBqNE-4WpmIm10Kj1YsgXyu1XMFvP0qvIXYrsMpRh9sztusxsq8_7_MFPstpomb4RaDeTg9J3ldf2CSKwYUq91qGdHVM6Dm9YkfE3Rdfay_snBPthtK7WWCq_NFHZ3j3Kua1MgJAT-qQPXwlpAIQIDLIpk4Njn_msEnsXh9DyyRtwkvdNU5u10NXpGyYseM_HBo6gwnr6IFqeZ9gHXI1CrvRQnXAxx3UyIT7UIbTDEMKjd1gdxbZwWKrKl',
+    image: siteAssets.solutions.giaiPhap1,
+    href: solutionHref('giai-phap-1'),
     bullets: [
       'Tuân thủ an toàn lao động',
       'Tạo sự thoải mái cho nhân sự làm việc trong môi trường đặc thù',
@@ -289,8 +263,8 @@ export const solutions = [
     slug: 'giai-phap-2',
     title: 'Văn phòng & Tập đoàn',
     desc: 'Giải pháp chuẩn hóa nhận diện thương hiệu và nâng trải nghiệm mặc cho đội ngũ văn phòng.',
-    image:
-      'https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&auto=format&fit=crop&q=80',
+    image: siteAssets.solutions.giaiPhap2,
+    href: solutionHref('giai-phap-2'),
     bullets: [
       'Xây dựng nhận diện thương hiệu',
       'Hình ảnh chuyên nghiệp, nhất quán',
@@ -303,8 +277,8 @@ export const solutions = [
     slug: 'giai-phap-3',
     title: 'FMCG & Chuỗi phân phối',
     desc: 'Giải pháp đồng phục giúp tăng nhận diện tại điểm bán và truyền tải thông điệp chiến dịch.',
-    image:
-      'https://lh3.googleusercontent.com/aida-public/AB6AXuCWOKUFLheAUb34f4xZiQpBUrQkm8680rBXAVAzao8_wuHeyIyWND-1cnAQbOA80ZWqijWzCjrT8gQCg3KjzFmJBymeebvX3xAyN1bsI0U7rmrmGsrCXdZem8Gvt-DNISTMBEE0l3VQmRo_xJBZp5yZs4uww3eEz7DQr_tCWj9bUtE2NbhImbI_LOorZXgpwuA9vWl8aOidIp9nNAcBCCDzqHtly-0yVY4MutTrPKvDAl_j0ErFC1I8gCoeb9QJJAMslPyO1ylQAMk',
+    image: siteAssets.solutions.giaiPhap3,
+    href: solutionHref('giai-phap-3'),
     bullets: [
       'Hỗ trợ xây dựng nhận diện thương hiệu tại điểm bán',
       'Truyền tải thông điệp, tạo ấn tượng trong chiến dịch quảng bá',
@@ -317,8 +291,8 @@ export const solutions = [
     slug: 'giai-phap-4',
     title: 'Y tế, Spa & Dịch vụ',
     desc: 'Giải pháp đồng phục chất lượng cao cho môi trường đặc thù, đề cao thoải mái và thẩm mỹ.',
-    image:
-      'https://lh3.googleusercontent.com/aida-public/AB6AXuDxP6CFZlp3ggmwGEczcGuTImTcqVax4g1QmQUxHl1DEUyVAHj0mdNbxUD-EqS0F3NQNzNfbQN0ax9SIZ62ID0h1-x0UQyRqMxIcqji0Cu5nzwa_SLGBitLXLnORAxIjqlduZZUPE6upya0xjD-YldIjtwbptXZof83YaJpRItUxQzd9vn77CMyaTSd27VeqXiC6LQ61cE-PDK4tWlWjVlq7PuD1BVQYDnywiA_dC08kRpIMCQiDZhZG7GEehac2rkhi_CnAmr-JWA',
+    image: siteAssets.solutions.giaiPhap4,
+    href: solutionHref('giai-phap-4'),
     bullets: [
       'Đồng phục chất lượng cao phù hợp môi trường đặc thù',
       'Thiết kế đề cao sự thoải mái, linh hoạt và tính thẩm mỹ',
@@ -347,11 +321,10 @@ export interface HomeFeaturedCase {
 export const homeFeaturedCases = {
   featured: {
     name: 'VFM',
-    image:
-      'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=900&auto=format&fit=crop&q=80',
+    image: siteAssets.cases.vfm,
     alt: 'Dự án VFM',
     tag: 'Đối tác 3 năm',
-    href: '/giai-phap/giai-phap-2/du-an/vfm',
+    href: caseStudyHref('giai-phap-2', 'vfm'),
     stats: [
       { value: '1.100', label: 'sản phẩm' },
       { value: '35 ngày', label: 'triển khai' },
@@ -360,18 +333,16 @@ export const homeFeaturedCases = {
   secondary: [
     {
       name: 'BV Răng Hàm Mặt Sài Gòn',
-      image:
-        'https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=900&auto=format&fit=crop&q=80',
+      image: siteAssets.cases.bvRangHamMat,
       alt: 'Dự án BV Răng Hàm Mặt Sài Gòn',
-      href: '/giai-phap/giai-phap-4/du-an/bv-rang-ham-mat-sai-gon',
+      href: caseStudyHref('giai-phap-4', 'bv-rang-ham-mat-sai-gon'),
       statHighlight: { value: '650', suffix: 'sp Scrub & Blouse', valueClass: 'gold' },
     },
     {
       name: 'SAVISCO',
-      image:
-        'https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?w=900&auto=format&fit=crop&q=80',
+      image: siteAssets.cases.savisco,
       alt: 'Dự án SAVISCO',
-      href: '/giai-phap/giai-phap-2/du-an/savisco',
+      href: caseStudyHref('giai-phap-2', 'savisco'),
       statHighlight: { value: '2.800', suffix: 'sản phẩm', valueClass: 'white' },
     },
   ] satisfies HomeFeaturedCase[],
@@ -384,9 +355,9 @@ export const homeFeaturedCases = {
     phone: '0843 406 406',
     phoneHref: 'tel:0843406406',
     ctaLabel: 'Nhận tư vấn',
-    ctaHref: '/lien-he',
+    ctaHref: routes.lienHe,
   },
-  allProjectsHref: '/tin-tuc',
+  allProjectsHref: routes.tinTuc,
 };
 
 /** Bài viết tin tức — section #tin-tuc (sẽ đồng bộ WordPress sau) */
@@ -404,7 +375,7 @@ export interface BlogPost {
   href?: string;
 }
 
-export const blogPosts: BlogPost[] = [
+const blogPostsRaw: Omit<BlogPost, 'href'>[] = [
   {
     slug: 'chon-vai-polo-khi-hau-viet-nam',
     title: 'Cách chọn vải Polo phù hợp với khí hậu Việt Nam',
@@ -412,10 +383,8 @@ export const blogPosts: BlogPost[] = [
     category: 'Kiến Thức Vải',
     categoryColor: '#102C4D',
     badge: 'Must Read',
-    image:
-      'https://lh3.googleusercontent.com/aida-public/AB6AXuCUCALWa0oFU7OKFjiBXUFunl-EAmIMgQCyigWDHw0ygrHQQHgLkJPPxiKsIfefwZ45gu7Vp7KGaMW46IG1NWeOfI_8JJ-hfx1ifvzN4Q12UllmDyRQH03tO-IqkNP5n2xhuWrRVHfcxeQDAccVK1NKO6NKr0zBEEIwe_td6ed5jtF0KNYrs0816DjsRDtXA8t7uikeixstCSpLUdcH5tneawAIDnGVr5yRawVu7HH5_o_Y93p4LoykxfU0f3CLSA6s3dINtL6hoTQ',
+    image: siteAssets.blog.chonVaiPolo,
     alt: 'Cách chọn vải Polo',
-    href: '/tin-tuc/chon-vai-polo-khi-hau-viet-nam',
   },
   {
     slug: 'dong-phuc-toi-gian-branding-2024',
@@ -424,10 +393,8 @@ export const blogPosts: BlogPost[] = [
     excerpt: 'Xu hướng thiết kế đồng phục tối giản giúp thương hiệu B2B trông sang trọng và dễ nhận diện.',
     category: 'Xu Hướng Thiết Kế',
     categoryColor: '#2c4c34',
-    image:
-      'https://lh3.googleusercontent.com/aida-public/AB6AXuBKPVm-OoeutVpI2lVrIrcYoQZwNjiFHMp2-HEEFDN80wVhsLz2J3HcN0Bg0vPzN3dM5PsZEVUI5dSye-0LFkTQOz1E9tVsIezKLdiPM_T7gUAslwE4_wgmPEy5pzB0blOq7Ci6aySM0xf7tJtv1PtIRj3WvXHoGsYhU_t2eYjsHoM1CNyUKJa6rhVxqF8iED2hZhc6zDB4eoMotEFVlejj_u-1w3AugOuuR3uexBrEA85hZ_8w8ZNue9QTnanVU0pcICjbE-pkDp4',
+    image: siteAssets.blog.dongPhucToiGian,
     alt: 'Xu hướng Branding',
-    href: '/tin-tuc/dong-phuc-toi-gian-branding-2024',
   },
   {
     slug: 'san-xuat-10000-ao-thun-7-ngay',
@@ -435,10 +402,8 @@ export const blogPosts: BlogPost[] = [
     excerpt: 'Bài học vận hành xưởng may quy mô lớn — từ lập kế hoạch đến QC đa tầng trước khi bàn giao.',
     category: 'Vận Hành',
     categoryColor: '#a63e2d',
-    image:
-      'https://lh3.googleusercontent.com/aida-public/AB6AXuB7MtgWlPwqJ9fCKjAbRcpSMKTzgwt49dLfkGwY9jBUgseZq3SrGrCzNBF7Ul8JUFqFCYA9P70DpqmqWrwgf80wJLgCGJWcba6ml0h4qzm0-zCauGXrjedvvGUzxJTjnIG9bwGiyhQZpAr4X1h1PMrhalr9ri0IxE2rARA7Cu2k2VGkD6i9ZXXnchF28EFp0kjv8QokunH25xAuEse-gjY3iSXowiHX519-Qr7q_XPMv26Vg8UKnBdcrjzcZJ77m7eRq0BxAkODQgA',
+    image: siteAssets.blog.sanXuat10000,
     alt: 'Vận Hành',
-    href: '/tin-tuc/san-xuat-10000-ao-thun-7-ngay',
   },
   {
     slug: 'medical-uniform-2025',
@@ -446,15 +411,18 @@ export const blogPosts: BlogPost[] = [
     excerpt: 'Tổng hợp mẫu đồng phục y tế mới — chất liệu kháng khuẩn, form dáng thoải mái cho môi trường bệnh viện.',
     category: 'Catalog',
     categoryColor: '#1a2b8c',
-    image:
-      'https://lh3.googleusercontent.com/aida-public/AB6AXuAOXcJjYusFwlUjGTmmTS_HHhtnC_vi6jPYSS9yLHlekPfnszOwTSUO1NCB_oUSrCZI2_-AYTuZuEhrgYSg14nDUOw8a9isE3OefB1Hs0shHZgAQRU14UI7M-CRsnFqFjNjVbOIR1uc5ulgWqAWn20a6HzqwJ5DLmOAdI9GdFSOWEiTh8DNYtmR_sRsGhX0v2JQQatAopWgHNAUCGjXHfQlQWbPjuaeGX9RXfwbc0Wpm_Gk9UOy0qyi3qIsHr5Li0WV0BjVcq-a2Ok',
+    image: siteAssets.blog.medicalUniform,
     alt: 'Catalog',
-    href: '/tin-tuc/medical-uniform-2025',
   },
 ];
 
+export const blogPosts: BlogPost[] = blogPostsRaw.map((post) => ({
+  ...post,
+  href: blogPostHref(post.slug),
+}));
+
 export const blogSectionMeta = {
-  allPostsHref: '/tin-tuc',
+  allPostsHref: routes.tinTuc,
 };
 
 /** Logo khách hàng — Sitemap 1.6 (18 thương hiệu) */
@@ -551,30 +519,27 @@ export const clientCaseStudies: ClientCaseStudy[] = [
     excerpt:
       'Case study triển khai đồng phục quy mô lớn với QC đa tầng và quy trình phối hợp rõ ràng.',
     client: 'Coca-Cola Philippines',
-    image:
-      'https://images.unsplash.com/photo-1553413077-190dd305871c?w=900&auto=format&fit=crop&q=80',
+    image: siteAssets.cases.cocaCola,
     alt: 'Dự án Coca-Cola Philippines',
-    href: '/giai-phap/giai-phap-2/du-an/coca-cola-philippines',
+    href: caseStudyHref('giai-phap-2', 'coca-cola-philippines'),
   },
   {
     slug: 'vfm',
     title: 'VFM — Chuẩn hóa hình ảnh đội ngũ văn phòng tài chính',
     excerpt: '1.100 sản phẩm triển khai trong 35 ngày, duy trì chất lượng qua nhiều đợt bổ sung.',
     client: 'VFM',
-    image:
-      'https://images.unsplash.com/photo-1594938328870-9623159c8c99?w=900&auto=format&fit=crop&q=80',
+    image: siteAssets.cases.vfmClient,
     alt: 'Dự án VFM',
-    href: '/giai-phap/giai-phap-2/du-an/vfm',
+    href: caseStudyHref('giai-phap-2', 'vfm'),
   },
   {
     slug: 'king-group',
     title: 'King Group — Đáp ứng đơn hàng 3.000+ áo đồng phục công nghiệp',
     excerpt: 'Giải pháp đồng phục cho môi trường sản xuất với chất liệu bền và tiêu chuẩn an toàn lao động.',
     client: 'King Group',
-    image:
-      'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=900&auto=format&fit=crop&q=80',
+    image: siteAssets.cases.kingGroup,
     alt: 'Dự án King Group',
-    href: '/giai-phap/giai-phap-1/du-an/king-group',
+    href: caseStudyHref('giai-phap-1', 'king-group'),
   },
 ];
 

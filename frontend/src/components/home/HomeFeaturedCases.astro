@@ -1,16 +1,17 @@
 ---
 import { homeFeaturedCases } from '../../data/site';
+import { imageRadius } from '../../lib/image-frame';
 
 const { featured, secondary, quote, contact, allProjectsHref } = homeFeaturedCases;
 
 const featuredCard =
-  'relative block overflow-hidden rounded bg-[#1a1a1a] min-h-[280px] lg:min-h-[380px] order-1 lg:order-none';
+  `relative block overflow-hidden ${imageRadius} bg-[#1a1a1a] min-h-[280px] lg:min-h-[380px] order-1 lg:order-none`;
 const featuredImg =
   'absolute inset-0 w-full h-full object-cover opacity-75 transition-[transform,opacity] duration-700 group-hover:scale-[1.04] group-hover:opacity-[0.88]';
 const featuredOverlay =
   'absolute inset-0 flex flex-col justify-end gap-3.5 p-6 bg-gradient-to-t from-black/88 via-black/25 from-0% via-55% to-transparent';
 const secondaryCard =
-  'relative shrink-0 snap-start overflow-hidden rounded bg-[#1a1a1a] min-h-[220px] basis-[85vw] sm:basis-[calc(50%-0.425rem)] transition-transform duration-250 hover:-translate-y-0.5 lg:shrink lg:min-h-[220px] lg:h-full';
+  `relative shrink-0 snap-start overflow-hidden ${imageRadius} bg-[#1a1a1a] min-h-[220px] basis-[85vw] sm:basis-[calc(50%-0.425rem)] transition-transform duration-250 hover:-translate-y-0.5 lg:shrink lg:min-h-[220px] lg:h-full`;
 ---
 
 <section class="py-8 md:py-14 text-white bg-ink-dark overflow-hidden" id="du-an">
