@@ -6,17 +6,18 @@ import SiteCtaSection from '../components/SiteCtaSection.astro';
 import PageHero from '../components/PageHero.astro';
 import ContactPageSection from '../components/contact/ContactPageSection.astro';
 import { pageSeo, pageHeroBg } from '../data/site';
+import { routes } from '../lib/routes';
 ---
 
 <BaseLayout title={pageSeo.lienHe.title} description={pageSeo.lienHe.description}>
-  <SiteNav currentPath="/lien-he" />
+  <SiteNav currentPath={routes.lienHe} />
 
   <PageHero
     title="Liên hệ tư vấn"
     bgImage={pageHeroBg.lienHe}
     description="Liên hệ đội ngũ tư vấn để nhận giải pháp đồng phục phù hợp với doanh nghiệp của bạn."
     breadcrumb={[
-      { label: 'Trang chủ', href: '/' },
+      { label: 'Trang chủ', href: routes.home },
       { label: 'Liên hệ' },
     ]}
   />

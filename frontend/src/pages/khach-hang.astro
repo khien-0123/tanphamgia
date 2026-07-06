@@ -8,17 +8,18 @@ import ClientLogosSection from '../components/clients/ClientLogosSection.astro';
 import ClientCaseStudyGrid from '../components/clients/ClientCaseStudyGrid.astro';
 import TestimonialsSlider from '../components/TestimonialsSlider.astro';
 import { pageSeo, clientCaseStudies, testimonialsClients, pageHeroBg } from '../data/site';
+import { routes } from '../lib/routes';
 ---
 
 <BaseLayout title={pageSeo.khachHang.title} description={pageSeo.khachHang.description}>
-  <SiteNav currentPath="/khach-hang" />
+  <SiteNav currentPath={routes.khachHang} />
 
   <PageHero
     title="Dự án & Khách hàng tiêu biểu"
     bgImage={pageHeroBg.khachHang}
     description="Khám phá các dự án đồng phục thực tế và thương hiệu đã đồng hành cùng Tân Phạm Gia trong hơn 23 năm."
     breadcrumb={[
-      { label: 'Trang chủ', href: '/' },
+      { label: 'Trang chủ', href: routes.home },
       { label: 'Khách hàng' },
     ]}
   />

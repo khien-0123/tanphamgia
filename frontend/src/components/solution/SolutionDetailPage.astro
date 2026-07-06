@@ -10,6 +10,8 @@ import { duAnGiaiPhap1 } from '../../data/giai-phap-1-du-an';
 import { duAnGiaiPhap2 } from '../../data/giai-phap-2-du-an';
 import { duAnGiaiPhap3 } from '../../data/giai-phap-3-du-an';
 import { duAnGiaiPhap4 } from '../../data/giai-phap-4-du-an';
+import { caseStudyHref } from '../../lib/routes';
+import { listingZigzagFrame, listingZigzagImg, imageRadius } from '../../lib/image-frame';
 
 interface Props {
   content: SolutionPageContent;
@@ -102,12 +104,12 @@ const heading = (raw: string) => raw.replace(/^\d{2}\.\s*/, '');
         </header>
 
         <div class="grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:gap-14">
-          <figure class="m-0 self-start overflow-hidden rounded lg:sticky lg:top-24">
+          <figure class:list={['m-0 self-start overflow-hidden lg:sticky lg:top-24', imageRadius]}>
             <img
               src={solution?.image}
               alt={content.hero.imageAlt}
               loading="lazy"
-              class="block aspect-[4/3] w-full object-cover lg:aspect-[4/5]"
+              class="block aspect-[4/5] w-full object-cover object-top"
             />
           </figure>
 
@@ -243,15 +245,15 @@ const heading = (raw: string) => raw.replace(/^\d{2}\.\s*/, '');
           {
             projects.map((project) => (
               <a
-                href={`/giai-phap/${content.slug}/du-an/${project.slug}`}
-                class="group flex flex-col overflow-hidden rounded border border-border-subtle bg-white text-inherit no-underline transition hover:-translate-y-1 hover:border-accent-gold/50 hover:shadow-card"
+                href={caseStudyHref(content.slug, project.slug)}
+                class:list={['group flex flex-col overflow-hidden border border-border-subtle bg-white text-inherit no-underline transition hover:-translate-y-1 hover:border-accent-gold/50 hover:shadow-card', imageRadius]}
               >
-                <figure class="m-0 aspect-[4/3] overflow-hidden">
+                <figure class:list={[listingZigzagFrame, 'm-0']}>
                   <img
                     src={project.image}
                     alt={project.name}
                     loading="lazy"
-                    class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    class:list={[listingZigzagImg, 'group-hover:scale-105']}
                   />
                 </figure>
                 <div class="flex flex-1 flex-col p-6">
@@ -295,15 +297,15 @@ const heading = (raw: string) => raw.replace(/^\d{2}\.\s*/, '');
           {
             relatedSolutions.map((item) => (
               <a
-                href={`/giai-phap/${item.slug}`}
-                class="group flex flex-col overflow-hidden rounded border border-border-subtle bg-white text-inherit no-underline transition hover:-translate-y-1 hover:border-accent-gold/50 hover:shadow-card"
+                href={item.href}
+                class:list={['group flex flex-col overflow-hidden border border-border-subtle bg-white text-inherit no-underline transition hover:-translate-y-1 hover:border-accent-gold/50 hover:shadow-card', imageRadius]}
               >
-                <figure class="m-0 aspect-video overflow-hidden">
+                <figure class:list={[listingZigzagFrame, 'm-0']}>
                   <img
                     src={item.image}
                     alt={item.title}
                     loading="lazy"
-                    class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    class:list={[listingZigzagImg, 'group-hover:scale-105']}
                   />
                 </figure>
                 <div class="flex flex-1 flex-col p-5">

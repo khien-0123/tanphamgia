@@ -1,5 +1,7 @@
 ---
 import type { ClientCaseStudy } from '../../data/site';
+import { routes } from '../../lib/routes';
+import { landscapeCardFrame, landscapeCardImg } from '../../lib/image-frame';
 
 interface Props {
   items: ClientCaseStudy[];
@@ -17,11 +19,11 @@ const { items } = Astro.props;
       {
         items.map((item) => (
           <article data-reveal class="group">
-            <a href={item.href ?? '/tin-tuc'} class="block no-underline text-inherit">
-              <figure class="relative aspect-video overflow-hidden rounded mb-5 m-0">
+            <a href={item.href ?? routes.tinTuc} class="block no-underline text-inherit">
+              <figure class:list={[landscapeCardFrame, 'relative mb-5']}>
                 <img
                   alt={item.alt}
-                  class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                  class:list={[landscapeCardImg, 'group-hover:scale-[1.04]']}
                   src={item.image}
                   loading="lazy"
                 />

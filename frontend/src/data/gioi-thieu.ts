@@ -1,5 +1,6 @@
 /** Nội dung trang Giới thiệu — Sitemap 2.1 → 2.9 */
 import { pageSeo, testimonialsAbout } from './site';
+import { siteAssets } from './assets';
 
 export const gioiThieuSeo = pageSeo.gioiThieu;
 
@@ -18,8 +19,7 @@ export const brandStory = {
     'Trong suốt hơn hai thập kỷ phát triển, Tân Phạm Gia không ngừng mở rộng năng lực sản xuất, đầu tư công nghệ, hoàn thiện quy trình quản lý chất lượng và tích lũy kinh nghiệm từ các thương hiệu thời trang riêng. Chính nền tảng đó đã tạo nên lợi thế khác biệt trong lĩnh vực đồng phục doanh nghiệp ngày nay.',
     'Chúng tôi tin rằng đồng phục không chỉ là trang phục làm việc. Đồng phục là một phần của văn hóa doanh nghiệp, là hình ảnh thương hiệu và là trải nghiệm của người lao động mỗi ngày.',
   ],
-  image:
-    'https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?w=900&auto=format&fit=crop&q=80',
+  image: siteAssets.about.brandStory,
 };
 
 export const timelineSection = {
@@ -105,10 +105,8 @@ export const productionCapacity = {
   qcDesc:
     'Quy trình kiểm tra nghiêm ngặt từ: Sợi vải đầu vào, Cắt vải, May bán thành phẩm, Hoàn thiện và Kiểm định đóng gói cuối cùng.',
   qcStandards: ['ISO 9001:2015', 'Tiêu chuẩn Oeko-Tex', 'Kim may Groz-Beckert', 'Chỉ may Coats'],
-  factoryImage:
-    'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=900&auto=format&fit=crop&q=80',
-  qcImage:
-    'https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=900&auto=format&fit=crop&q=80',
+  factoryImage: siteAssets.about.production1,
+  qcImage: siteAssets.about.production2,
 };
 
 export const teamDepartments = [

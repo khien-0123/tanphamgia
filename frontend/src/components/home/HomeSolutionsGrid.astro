@@ -1,6 +1,10 @@
 ---
 import { solutions } from '../../data/site';
+import { siteAssets } from '../../data/assets';
 import { solutionBoxHome } from '../../lib/solution-theme';
+import { portraitCardImg } from '../../lib/image-frame';
+
+const imageFallback = siteAssets.hero.fallback;
 ---
 
 <section
@@ -22,14 +26,14 @@ import { solutionBoxHome } from '../../lib/solution-theme';
       {
         solutions.map((item) => (
           <article data-reveal class:list={[solutionBoxHome.item, 'group']}>
-            <a class={solutionBoxHome.summary} href={`/giai-phap/${item.slug}`}>
+            <a class={solutionBoxHome.summary} href={item.href}>
               <figure class={solutionBoxHome.media}>
                 <img
                   alt={item.title}
-                  class="w-full h-full object-cover"
+                  class={portraitCardImg}
                   loading="lazy"
                   src={item.image}
-                  onerror="this.onerror=null;this.src='https://lh3.googleusercontent.com/aida-public/AB6AXuD7szr7Elx-oAqCEnir2uiBqNE-4WpmIm10Kj1YsgXyu1XMFvP0qvIXYrsMpRh9sztusxsq8_7_MFPstpomb4RaDeTg9J3ldf2CSKwYUq91qGdHVM6Dm9YkfE3Rdfay_snBPthtK7WWCq_NFHZ3j3Kua1MgJAT-qQPXwlpAIQIDLIpk4Njn_msEnsXh9DyyRtwkvdNU5u10NXpGyYseM_HBo6gwnr6IFqeZ9gHXI1CrvRQnXAxx3UyIT7UIbTDEMKjd1gdxbZwWKrKl'"
+                  onerror={`this.onerror=null;this.src='${imageFallback}'`}
                 />
               </figure>
               <h3 class={solutionBoxHome.title}>{item.title}</h3>

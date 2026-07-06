@@ -5,8 +5,10 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview"
+    "build": "npm run check:urls && astro build",
+    "preview": "astro preview",
+    "check:urls": "node scripts/check-hardcoded-urls.mjs",
+    "download:assets": "node scripts/download-assets.mjs"
   },
   "dependencies": {
     "@astrojs/tailwind": "^6.0.2",

@@ -1,5 +1,6 @@
 ---
 import { homeIntro } from '../../data/site';
+import { imageRadius } from '../../lib/image-frame';
 ---
 
 <section class="pt-8 pb-8 md:pt-10 md:pb-10 bg-surface-fresh" id="gioi-thieu">
@@ -23,7 +24,7 @@ import { homeIntro } from '../../data/site';
           src={homeIntro.image}
           alt={homeIntro.imageAlt}
           loading="lazy"
-          class="block w-full aspect-[4/3] object-cover rounded"
+          class:list={['block w-full aspect-[4/3] object-cover', imageRadius]}
         />
       </figure>
 

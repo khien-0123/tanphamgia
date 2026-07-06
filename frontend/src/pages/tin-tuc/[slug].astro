@@ -5,6 +5,7 @@ import SiteFooter from '../../components/SiteFooter.astro';
 import SiteCtaSection from '../../components/SiteCtaSection.astro';
 import BlogPostArticle from '../../components/blog/BlogPostArticle.astro';
 import { blogPosts } from '../../data/site';
+import { routes } from '../../lib/routes';
 
 export function getStaticPaths() {
   return blogPosts.map((post) => ({
@@ -18,7 +19,7 @@ const title = `${post.title} | Tân Phạm Gia`;
 ---
 
 <BaseLayout title={title} description={post.excerpt}>
-  <SiteNav currentPath="/tin-tuc" />
+  <SiteNav currentPath={routes.tinTuc} />
   <BlogPostArticle post={post} />
   <SiteCtaSection />
   <SiteFooter />
