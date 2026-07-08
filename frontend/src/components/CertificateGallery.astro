@@ -8,9 +8,11 @@ interface Props {
   items: Certificate[];
   /** Căn giữa tiêu đề trên trang chủ */
   centeredTitle?: boolean;
+  /** Nền xám xen kẽ section trang chủ */
+  alternateSectionBg?: boolean;
 }
 
-const { items, centeredTitle = false } = Astro.props;
+const { items, centeredTitle = false, alternateSectionBg = false } = Astro.props;
 
 /** Chia đều N chứng nhận vào N cột */
 function buildColumns(certs: Certificate[], colCount: number) {
@@ -34,7 +36,13 @@ const speedClasses = [
 ] as const;
 ---
 
-<section class="pt-16 pb-8 md:pt-20 md:pb-10 bg-white overflow-hidden" id="chung-nhan">
+<section
+  class:list={[
+    'pt-16 pb-8 md:pt-20 md:pb-10 overflow-hidden w-full',
+    alternateSectionBg ? 'bg-home-section-muted' : 'bg-white',
+  ]}
+  id="chung-nhan"
+>
   <div class="max-w-container-max-width mx-auto px-6 md:px-8">
     <header
       class:list={[

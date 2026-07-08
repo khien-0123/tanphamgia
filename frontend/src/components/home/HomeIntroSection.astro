@@ -1,65 +1,85 @@
 ---
 import { homeIntro } from '../../data/site';
 import { imageRadius } from '../../lib/image-frame';
+
+const stepsMiddle = homeIntro.steps.slice(0, 3);
+const stepsRight = homeIntro.steps.slice(3);
+const stepCount = homeIntro.steps.length;
+const stepHeight = 100 / stepCount;
 ---
 
-<section class="pt-8 pb-8 md:pt-10 md:pb-10 bg-surface-fresh" id="gioi-thieu">
-  <div data-reveal class="max-w-container-max-width mx-auto px-6 md:px-8">
-    <div
-      class="grid gap-5 lg:grid-cols-2 lg:gap-x-16 xl:gap-x-20 lg:gap-y-4 lg:items-start [grid-template-areas:'title'_'image'_'body'] lg:[grid-template-areas:'title_image'_'body_image']"
-    >
-      <h2
-        class="[grid-area:title] text-pretty font-headline-md font-bold text-ink-dark m-0 text-[1.25rem] leading-snug md:text-[1.75rem] md:leading-tight lg:text-[2rem]"
-      >
-        {homeIntro.title}
-      </h2>
-
-      <figure class="relative m-0 [grid-area:image] lg:self-center">
-        <span
-          class="absolute -left-3 top-8 hidden h-20 w-1 bg-accent-gold lg:block"
-          aria-hidden="true"
+<section class="py-12 md:py-16 lg:py-20 bg-white" id="gioi-thieu" data-intro-journey>
+  <div class="max-w-container-max-width mx-auto px-6 md:px-8">
+    <div class="grid gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-x-16 xl:gap-x-20 lg:items-start">
+      <div data-reveal class="min-w-0 flex flex-col">
+        <h2
+          class="text-pretty font-headline-md font-bold text-ink-dark m-0 text-[1.25rem] leading-snug md:text-[1.75rem] md:leading-tight lg:text-[2rem]"
         >
-        </span>
-        <img
-          src={homeIntro.image}
-          alt={homeIntro.imageAlt}
-          loading="lazy"
-          class:list={['block w-full aspect-[4/3] object-cover', imageRadius]}
-        />
-      </figure>
+          {homeIntro.title}
+        </h2>
 
-      <div class="min-w-0 [grid-area:body]">
-        <p class="text-pretty text-ink-dark/80 text-base md:text-lg leading-relaxed mb-4">
-          {homeIntro.paragraphs[0]}
-        </p>
-        <p class="text-pretty text-text-muted text-base md:text-lg leading-relaxed">
-          {homeIntro.paragraphs[1]}
+        <p class="text-pretty text-ink-dark/85 text-sm sm:text-base leading-snug m-0 mt-4 md:mt-5 max-w-prose">
+          {homeIntro.leadLines[0]}
+          <br />
+          <span class="text-text-muted">{homeIntro.leadLines[1]}</span>
         </p>
 
         <div
-          class="mt-6 pt-2 flex flex-row items-center gap-4 sm:gap-6 md:gap-10"
+          data-reveal-stagger
+          class="mt-8 md:mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-8 md:gap-10 sm:items-start"
         >
-          <div class="shrink-0 text-left min-w-[4.75rem] sm:min-w-[7.5rem]">
-            <p class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-ink-dark leading-none mb-1">
-              {homeIntro.featuredStat.value}
-            </p>
-            <p class="text-xs sm:text-sm text-text-muted m-0 leading-snug">{homeIntro.featuredStat.label}</p>
-          </div>
-          <ul class="grid grid-cols-1 gap-2 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-2.5 flex-1 min-w-0 m-0 p-0 list-none">
+          <ul data-reveal class="m-0 p-0 list-none flex flex-col gap-3">
             {
-              homeIntro.bullets.map((item) => (
-                <li class="flex items-start gap-1.5 sm:gap-2 text-xs sm:text-sm text-ink-dark/85 leading-snug m-0">
-                  <span class="shrink-0 font-bold text-accent-gold" aria-hidden="true">✓</span>
-                  <span>{item}</span>
+              stepsMiddle.map((step, i) => (
+                <li data-journey-step data-step-index={i} class:list={['m-0', i === 0 && 'is-journey-active']}>
+                  <button
+                    type="button"
+                    class="intro-journey-step flex w-full items-start gap-2 text-left text-sm leading-snug m-0 p-0 border-0 bg-transparent cursor-pointer"
+                    aria-current={i === 0 ? 'step' : undefined}
+                  >
+                    <span
+                      data-journey-icon
+                      class="intro-journey-icon shrink-0 flex h-5 w-5 items-center justify-center rounded-full text-[0.65rem] font-bold leading-none"
+                      aria-hidden="true"
+                    >
+                      ✓
+                    </span>
+                    <span data-journey-label>{step.label}</span>
+                  </button>
                 </li>
               ))
+            }
+          </ul>
+          <ul data-reveal class="m-0 p-0 list-none flex flex-col gap-3">
+            {
+              stepsRight.map((step, i) => {
+                const stepIndex = i + 3;
+                return (
+                  <li data-journey-step data-step-index={stepIndex} class="m-0">
+                    <button
+                      type="button"
+                      class="intro-journey-step flex w-full items-start gap-2 text-left text-sm leading-snug m-0 p-0 border-0 bg-transparent cursor-pointer"
+                    >
+                      <span
+                        data-journey-icon
+                        class="intro-journey-icon shrink-0 flex h-5 w-5 items-center justify-center rounded-full text-[0.65rem] font-bold leading-none"
+                        aria-hidden="true"
+                      >
+                        ✓
+                      </span>
+                      <span data-journey-label>{step.label}</span>
+                    </button>
+                  </li>
+                );
+              })
             }
           </ul>
         </div>
 
         <a
+          data-reveal
           href={homeIntro.cta.href}
-          class="inline-flex items-center gap-2 mt-6 md:mt-8 text-sm font-bold text-ink-dark no-underline transition-colors hover:text-accent-gold group"
+          class="inline-flex items-center gap-2 mt-8 md:mt-10 text-sm font-bold text-ink-dark no-underline transition-colors hover:text-accent-gold group w-fit"
         >
           {homeIntro.cta.label}
           <span
@@ -70,6 +90,39 @@ import { imageRadius } from '../../lib/image-frame';
           </span>
         </a>
       </div>
+
+      <figure data-reveal class="relative m-0 lg:self-center">
+        <span
+          class="absolute -left-3 top-8 hidden h-20 w-1 bg-accent-gold lg:block"
+          aria-hidden="true"
+        >
+        </span>
+        <div
+          data-journey-media
+          data-step-count={stepCount}
+          class:list={['relative w-full aspect-[4/3] overflow-hidden isolate', imageRadius]}
+          style={`--journey-steps: ${stepCount}; --journey-step-height: ${stepHeight}%`}
+        >
+          <div data-journey-track class="intro-journey-track">
+            {
+              homeIntro.steps.map((step, i) => (
+                <div class="intro-journey-slide">
+                  <img
+                    src={step.image}
+                    alt={step.imageAlt}
+                    loading={i === 0 ? 'eager' : 'lazy'}
+                    decoding="async"
+                    class="block h-full w-full object-cover"
+                    draggable="false"
+                  />
+                </div>
+              ))
+            }
+          </div>
+        </div>
+      </figure>
     </div>
   </div>
 </section>
+
+<script src="../../scripts/home-intro-journey.ts"></script>

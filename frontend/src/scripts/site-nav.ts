@@ -11,24 +11,19 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
 
 const nav = document.getElementById('site-nav');
 const heroImage = document.getElementById('hero-image');
-const navSolid = nav?.dataset.navSolid === 'true';
 const isCoarsePointer = window.matchMedia('(pointer: coarse)').matches;
 const isMobileViewport = window.matchMedia('(max-width: 1023px)').matches;
 
 /** Đồng bộ trạng thái nav theo vị trí scroll hiện tại */
 function updateNav() {
   const scrolled = window.pageYOffset;
-  if (nav) nav.classList.toggle('nav-scrolled', navSolid || scrolled > 60);
+  if (nav) nav.classList.toggle('nav-scrolled', scrolled > 60);
   // Tắt parallax hero trên mobile / thiết bị cảm ứng — tránh giật và tràn layout
   if (heroImage && !isCoarsePointer && !isMobileViewport) {
     heroImage.style.transform = `translateY(${scrolled * 0.25}px) scale(1.05)`;
   } else if (heroImage) {
     heroImage.style.transform = '';
   }
-}
-
-if (nav && navSolid) {
-  nav.classList.add('nav-scrolled');
 }
 
 updateNav();
