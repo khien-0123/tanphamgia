@@ -14,6 +14,7 @@ export default {
         background: '#F7FAF9',
         'surface-warm': '#FFFFFF',
         'surface-fresh': '#EEF6F3',
+        'surface-neutral': '#DDE3EA',
         'surface-container-low': '#F1F5F4',
         'surface-muted': '#E8EEEC',
         'border-subtle': '#DCE5E2',

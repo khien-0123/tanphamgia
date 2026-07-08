@@ -202,21 +202,38 @@ export const stats = [
 /** Giới thiệu ngắn trang chủ — Sitemap 1.3 */
 export const homeIntro = {
   title: 'Tân Phạm Gia – Đối tác phát triển giải pháp đồng phục cho doanh nghiệp vừa và lớn',
-  paragraphs: [
-    'Hơn 23 năm kinh nghiệm may mặc — giải pháp đồng phục giúp doanh nghiệp xây dựng hình ảnh chuyên nghiệp, đồng bộ và khác biệt.',
-    'Ứng dụng tiêu chuẩn "Tỷ lệ vàng", Rập 3D và May trên Mannequin — sản phẩm tôn dáng, thoải mái, phù hợp nhiều vóc dáng.',
+  leadLines: [
+    'Đồng phục chuẩn form — thương hiệu đồng nhất, chuyên nghiệp.',
+    '23+ năm — Tỷ lệ vàng, Rập 3D, sản xuất lớn & QC bài bản.',
   ],
-  featuredStat: { value: '23+', label: 'Năm kinh nghiệm' },
-  bullets: [
-    '500+ Doanh nghiệp đồng hành',
-    '1.000.000+ Sản phẩm đã sản xuất',
-    '30.000+ Sản phẩm mỗi tháng',
-    'Hệ thống sản xuất & QC bài bản',
-    'Đồng hành từ tư vấn đến bàn giao',
+  steps: [
+    {
+      label: '500+ Doanh nghiệp đồng hành',
+      image: siteAssets.cases.kingGroup,
+      imageAlt: 'Đối tác doanh nghiệp đồng hành cùng Tân Phạm Gia',
+    },
+    {
+      label: '30.000+ Sản phẩm mỗi tháng',
+      image: siteAssets.about.production1,
+      imageAlt: 'Dây chuyền sản xuất đồng phục quy mô lớn',
+    },
+    {
+      label: 'Đồng hành từ tư vấn đến bàn giao',
+      image: siteAssets.about.brandStory,
+      imageAlt: 'Tư vấn thiết kế và bàn giao đồng phục doanh nghiệp',
+    },
+    {
+      label: '1.000.000+ Sản phẩm đã sản xuất',
+      image: siteAssets.about.production2,
+      imageAlt: 'Kho thành phẩm đồng phục Tân Phạm Gia',
+    },
+    {
+      label: 'Hệ thống sản xuất & QC bài bản',
+      image: siteAssets.certificates.iso9001,
+      imageAlt: 'Chứng nhận ISO 9001:2015 — quy trình QC bài bản',
+    },
   ],
   cta: { label: 'Khám phá năng lực Tân Phạm Gia', href: routes.gioiThieu },
-  image: siteAssets.intro.home,
-  imageAlt: 'Xưởng may và đội ngũ Tân Phạm Gia',
 };
 
 export const whyChoose = [

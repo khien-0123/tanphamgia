@@ -1,44 +1,41 @@
 ---
 import { solutions } from '../../data/site';
 import { siteAssets } from '../../data/assets';
-import { solutionBoxHome } from '../../lib/solution-theme';
-import { portraitCardImg } from '../../lib/image-frame';
+import { solutionHomeCarousel } from '../../lib/solution-theme';
 
 const imageFallback = siteAssets.hero.fallback;
+const t = solutionHomeCarousel;
 ---
 
-<section
-  id="giai-phap"
-  class="py-8 md:py-12 bg-white text-ink-dark"
->
+<section id="giai-phap" class={t.section}>
   <div class="max-w-container-max-width mx-auto px-6 md:px-8">
-    <div data-reveal class="text-center mb-6 md:mb-10 max-w-3xl mx-auto">
-      <h2
-        class="font-headline-md font-bold mb-4 text-ink-dark text-xl leading-snug tracking-tight min-[390px]:text-[1.3125rem] text-balance md:text-4xl md:leading-tight md:tracking-normal"
-      >
-        Giải pháp đồng phục toàn&nbsp;diện
-      </h2>
-      <p class="text-pretty text-text-muted text-sm md:text-base max-w-3xl mx-auto leading-relaxed">
-        Lắng nghe và thấu hiểu để đưa ra giải pháp phù hợp nhất cho từng mô hình doanh&nbsp;nghiệp.
-      </p>
-    </div>
-    <div data-reveal-stagger class={solutionBoxHome.grid}>
+    <header data-reveal class={t.headerRow}>
+      <div class={t.headerText}>
+        <h2 class={t.title}>Giải pháp đồng phục toàn&nbsp;diện</h2>
+        <p class={t.lead}>
+          Lắng nghe và thấu hiểu để đưa ra giải pháp phù hợp nhất cho từng mô hình doanh&nbsp;nghiệp.
+        </p>
+      </div>
+    </header>
+
+    <div data-reveal-stagger class={t.grid}>
       {
-        solutions.map((item) => (
-          <article data-reveal class:list={[solutionBoxHome.item, 'group']}>
-            <a class={solutionBoxHome.summary} href={item.href}>
-              <figure class={solutionBoxHome.media}>
-                <img
-                  alt={item.title}
-                  class={portraitCardImg}
-                  loading="lazy"
-                  src={item.image}
-                  onerror={`this.onerror=null;this.src='${imageFallback}'`}
-                />
-              </figure>
-              <h3 class={solutionBoxHome.title}>{item.title}</h3>
-              <p class={solutionBoxHome.desc}>{item.desc}</p>
-              <span class={solutionBoxHome.link}>Xem chi tiết</span>
+        solutions.map((item, index) => (
+          <article id={`giai-phap-${item.slug}`} data-reveal class="min-h-0">
+            <a href={item.href} class={t.card}>
+              <img
+                alt={item.title}
+                class={t.media}
+                loading={index < 2 ? 'eager' : 'lazy'}
+                src={item.image}
+                onerror={`this.onerror=null;this.src='${imageFallback}'`}
+              />
+              <div class={t.scrim} aria-hidden="true"></div>
+              <div class={t.body}>
+                <h3 class={t.heading}>{item.title}</h3>
+                <p class={t.desc}>{item.desc}</p>
+                <span class={t.cta}>Xem chi tiết</span>
+              </div>
             </a>
           </article>
         ))
@@ -46,3 +43,11 @@ const imageFallback = siteAssets.hero.fallback;
     </div>
   </div>
 </section>
+
+<style>
+  @media (prefers-reduced-motion: reduce) {
+    .group:hover img {
+      transform: none;
+    }
+  }
+</style>

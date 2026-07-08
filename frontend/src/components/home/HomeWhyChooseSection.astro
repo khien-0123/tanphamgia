@@ -1,33 +1,99 @@
 ---
 import { whyChoose } from '../../data/site';
+
+const stackCount = whyChoose.length;
 ---
 
-<section class="pt-8 pb-8 md:pt-10 md:pb-10 bg-white" id="tai-sao">
+<section class="bg-home-section-muted py-12 md:py-16 lg:py-20" id="tai-sao">
   <div class="max-w-container-max-width mx-auto px-6 md:px-8">
-    <div data-reveal class="text-center mb-5 md:mb-8 max-w-2xl mx-auto">
-      <h2
-        class="font-headline-md font-bold text-ink-dark text-xl leading-snug md:text-4xl md:leading-tight"
+    <div class="flex flex-col gap-8 md:flex-row md:items-start md:gap-10 xl:gap-16">
+      <header
+        data-reveal
+        class="md:sticky md:top-28 md:w-[42%] lg:w-[38%] md:shrink-0 md:py-6 lg:py-8"
       >
-        Tiên phong "Thời trang hóa"<br class="md:hidden" />
-        đồng phục doanh nghiệp
-      </h2>
-    </div>
-    <div data-reveal-stagger class="grid gap-5 sm:grid-cols-2 sm:gap-x-12 sm:gap-y-8 lg:grid-cols-4 lg:gap-x-4">
-      {
-        whyChoose.map((item) => (
-          <div data-reveal class="flex gap-4 items-start lg:flex-col lg:gap-3 lg:min-w-0">
-            <span class="shrink-0 font-extrabold text-3xl sm:text-4xl text-accent-gold leading-none tabular-nums">
-              {item.num}
-            </span>
-            <div>
-              <h3 class="font-bold text-base md:text-lg text-ink-dark mb-2 lg:text-sm lg:whitespace-nowrap">
-                {item.title}
-              </h3>
-              <p class="text-text-muted text-sm leading-relaxed">{item.desc}</p>
-            </div>
-          </div>
-        ))
-      }
+        <p class="font-eyebrow text-xs uppercase tracking-[0.18em] text-accent-teal mb-3 m-0">
+          Tại sao chọn Tân Phạm Gia
+        </p>
+        <h2
+          class="font-headline-md font-bold text-ink-dark text-xl leading-snug md:text-3xl lg:text-4xl md:leading-tight m-0 text-pretty"
+        >
+          Tiên phong "Thời trang hóa" đồng phục doanh nghiệp
+        </h2>
+        <p class="text-text-muted text-sm md:text-base leading-relaxed mt-4 md:mt-5 m-0 max-w-prose">
+          Từ kinh nghiệm may mặc đến quy trình sản xuất — bốn năng lực cốt lõi giúp doanh nghiệp
+          đồng phục chuẩn form, đúng tiến độ.
+        </p>
+      </header>
+
+      <div
+        data-why-choose-stack
+        class="why-choose-stack relative w-full min-w-0 md:flex-1 py-2 md:py-6"
+        style={`--stack-count: ${stackCount}; --stack-step-vh: 28; --stack-tail-rem: 7rem`}
+      >
+        {
+          whyChoose.map((item, index) => (
+            <article
+              data-reveal
+              class="why-choose-stack__card sticky mb-4 md:mb-5 last:mb-0 rounded-lg border border-border-subtle/80 bg-white p-5 md:p-6 shadow-[0_8px_30px_rgba(14,38,64,0.06)]"
+              style={`--stack-index: ${index}`}
+            >
+              <div class="flex items-start justify-between gap-4 mb-4 md:mb-5">
+                <h3 class="font-bold text-base md:text-lg text-ink-dark m-0 leading-snug text-pretty flex-1">
+                  {item.title}
+                </h3>
+                <span
+                  class="shrink-0 font-extrabold text-2xl md:text-3xl text-accent-gold leading-none tabular-nums"
+                  aria-hidden="true"
+                >
+                  {item.num}
+                </span>
+              </div>
+              <p class="text-text-muted text-sm md:text-base leading-relaxed m-0">{item.desc}</p>
+            </article>
+          ))
+        }
+      </div>
     </div>
   </div>
 </section>
+
+<style>
+  .why-choose-stack {
+    perspective: 1000px;
+    min-height: auto;
+  }
+
+  .why-choose-stack__card {
+    top: calc(5rem + var(--stack-index) * 0.5rem);
+    z-index: calc(var(--stack-index) + 1);
+    backface-visibility: hidden;
+    transition: box-shadow 0.35s ease;
+  }
+
+  @media (min-width: 768px) {
+    .why-choose-stack {
+      /*
+       * (n-1) bước scroll giữa các thẻ + đuôi ngắn cho cụm stack cuối.
+       * Không dùng n * vh — thẻ 04 xong vẫn còn ~1 viewport trống.
+       */
+      min-height: calc(
+        (var(--stack-count) - 1) * var(--stack-step-vh) * 1vh + var(--stack-tail-rem)
+      );
+    }
+
+    .why-choose-stack__card {
+      top: calc(5.5rem + var(--stack-index) * 0.55rem);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .why-choose-stack {
+      min-height: auto !important;
+    }
+
+    .why-choose-stack__card {
+      position: relative;
+      top: auto !important;
+    }
+  }
+</style>
