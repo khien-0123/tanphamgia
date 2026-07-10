@@ -5,12 +5,17 @@ export default {
   theme: {
     extend: {
       colors: {
+        /* Thang VÀNG — cùng hue ~44°, sat 100%, chỉ khác độ sáng: 39 → 60 → 77 → 93 */
+        'accent-gold-dark': '#C9A000',
         'accent-gold': '#FFC933',
+        'accent-gold-mid': '#FFE08A',
         'accent-gold-light': '#FFF6DC',
         'accent-teal': '#102C4D',
         'accent-teal-light': '#E8EDF3',
+        /* Thang MỰC — cùng hue ~211°, độ sáng 15 → 23 → 26 */
         'ink-dark': '#0E2640',
         'ink-mid': '#1A3A5C',
+        'ink-light': '#1A4569',
         background: '#F7FAF9',
         'surface-warm': '#FFFFFF',
         'surface-fresh': '#EEF6F3',

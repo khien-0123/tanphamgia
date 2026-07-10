@@ -8,14 +8,18 @@ description: >-
   Mọi giá trị dưới đây trích trực tiếp từ code trên nhánh main.
 
 colors:
-  # Mực — trục "Manufacture"
+  # Mực — trục "Manufacture". Thang: hue ~211°, sáng dần 15 → 23 → 26.
   primary: '#0E2640'              # ink-dark   · nav, footer, mọi tiêu đề trên nền sáng
   primary-soft: '#1A3A5C'         # ink-mid    · body nhấn
+  primary-light: '#1A4569'        # ink-light  · điểm dừng gradient panel nav
   secondary: '#102C4D'            # accent-teal · nhãn, link phụ, eyebrow
   secondary-container: '#E8EDF3'  # accent-teal-light
 
   # Vàng — trục "Fashion". Điểm nhấn DUY NHẤT.
-  tertiary: '#FFC933'             # accent-gold
+  # Thang: hue ~44°, sat 100%, sáng dần 39 → 60 → 77 → 93.
+  tertiary-dark: '#C9A000'        # accent-gold-dark  · vàng trên nền sáng (dấu ✓)
+  tertiary: '#FFC933'             # accent-gold       · CTA, số liệu
+  tertiary-mid: '#FFE08A'         # accent-gold-mid   · điểm sáng gradient
   tertiary-container: '#FFF6DC'   # accent-gold-light
 
   # Nền
@@ -136,9 +140,40 @@ Nguyên văn yêu cầu khách.
 ### 🔒 Bốn quy tắc
 
 1. **Vàng không bao giờ là nền của một khối lớn.** Nó là đường chỉ, là số, là gạch — không phải mảng.
-2. **Không màu thứ tư.** Không đỏ cảnh báo, không xanh lá "thành công". (Đã thử brutalist hazard red → khách bác.)
+2. **Không màu thứ tư = không HUE thứ tư.** Không đỏ cảnh báo, không xanh lá "thành công". (Đã thử brutalist hazard red → khách bác.) **Sắc độ mới của hue sẵn có thì được** — miễn khai báo thành token, xem thang bên dưới.
 3. **Chữ trên nền tối:** trắng cho tiêu đề, `white/85` body, `white/60` breadcrumb. Không xám đặc.
 4. **Lớp phủ ảnh để chữ đọc được, không phải để làm ảnh tối cho sang.** Có chữ đè lên → giảm `opacity` của **ảnh** (0.25–0.34) rồi phủ gradient nhẹ. Không có chữ đè → không phủ gì. Caption ở góc → gradient **chỉ ở đáy**.
+
+### 🔒 Hai thang màu — sắc độ, không phải hue mới
+
+Đo bằng HSL: mọi token nằm trên **đúng hai thang**, chỉ khác độ sáng.
+
+| Thang | Token | Hue | Sáng | Dùng cho |
+|---|---|---|---|---|
+| **MỰC** | `ink-dark` #0E2640 | 211.2° | 15% | Nền tối, tiêu đề trên nền sáng |
+| | `accent-teal` #102C4D | 212.5° | 18% | Eyebrow, link phụ |
+| | `ink-mid` #1A3A5C | 210.9° | 23% | Body nhấn, panel nổi trên nền tối |
+| | `ink-light` #1A4569 | 207.3° | 26% | Điểm dừng gradient |
+| **VÀNG** | `accent-gold-dark` #C9A000 | 47.8° | 39% | **Vàng đặt trên nền sáng** |
+| | `accent-gold` #FFC933 | 44.1° | 60% | CTA, số liệu, gạch chân |
+| | `accent-gold-mid` #FFE08A | 44.1° | 77% | Điểm sáng gradient |
+| | `accent-gold-light` #FFF6DC | 44.6° | 93% | Nền nhạt |
+
+### ⚠️ Vàng thương hiệu KHÔNG đọc được trên nền trắng
+
+Đo trên `#FFFFFF`:
+
+| Màu | Tương phản | |
+|---|---|---|
+| `accent-gold` #FFC933 | **1.54:1** | ❌ trượt cả ngưỡng 3:1 |
+| `accent-gold-dark` #C9A000 | **2.47:1** | ❌ vẫn trượt 3:1 |
+| `ink-dark` #0E2640 | 15.33:1 | ✅ |
+
+Luật "accent-gold dùng cho **dấu ✓**" ở trên tạo ra một dấu ✓ **gần như vô hình**. Hiện `CaseStudyStory` dùng `accent-gold-dark` — đỡ hơn nhưng vẫn không đạt AA.
+
+**Chấp nhận được vì đó là dấu đầu dòng trang trí** (`before:content-["✓"]`), nghĩa nằm ở chữ bên cạnh, WCAG không áp 4.5:1.
+
+⛔ **Nhưng đừng dùng vàng cho chữ mang nghĩa trên nền sáng.** Cần chữ vàng đọc được → dùng `ink-dark`, hoặc đặt vàng trên nền `ink-dark`.
 
 ### ⚠️ Hai cặp màu đang TRƯỢT WCAG AA
 
@@ -162,7 +197,7 @@ Cách sửa: đổi chữ sang `ink-mid` #1A3A5C, hoặc đổi nền sang `surf
 
 `home/HomeFeaturedCases.astro` dùng **`#f2c300` chín lần**. Đó **không phải** vàng thương hiệu (`#FFC933`). Đừng chép sang chỗ khác.
 
-Đo trên `main` (`75d4239`): site từng có **45 hex thô** / 6 file. **Đã dọn 38** — xem **Phụ lục D7**. Còn **7**, đều cần quyết định (2 file chết chờ xóa, 3 điểm dừng gradient, 1 vàng đậm nghi vấn tương phản).
+Đo trên `main` (`75d4239`): site từng có **45 hex thô** / 6 file. **Đã dọn hết — còn 0.** Cách làm và bằng chứng đo: **Phụ lục D7**.
 
 Mọi màu mới phải đi qua token.
 
@@ -719,11 +754,20 @@ Thay bằng token, build sạch 27 trang:
 
 > **`#1a1a1a` không map sang `ink-dark`** được: hai thẻ case nằm **trên nền `bg-ink-dark`**, map vậy thì thẻ tan vào nền. Dùng `ink-mid` để thẻ nổi lên như panel.
 
-### ⛔ Còn 7 hex — cần quyết, không tự thay
+### ✅ Hex thô: 45 → 0
 
-| File | Hex | Vì sao chưa thay |
-|---|---|---|
-| `SiteNav.astro` | `#163a5c` `#1a4569` `#ffe08a` | **Điểm dừng gradient.** `#163a5c` ≈ `ink-mid`; `#1a4569` và `#ffe08a` **không có token**. Map bừa → gradient bẹt. Cần: thêm token, hay đơn giản hoá gradient? |
-| `CaseStudyStory.astro` | `#c9a000` | Vàng đậm, nhiều khả năng chọn để **đủ tương phản chữ nhỏ**. `accent-gold` #FFC933 sáng hơn → có thể trượt AA. Cần đo trước khi đổi. |
-| `home/HomeNewsSection.astro` | `#111` | File **chết** (0 import) → xóa file là xong |
-| `SolutionPlanSplit.astro` | `#111` ×2 | File **chết** (0 import) → xóa file là xong |
+Ba bước cuối, mỗi bước có bằng chứng đo được:
+
+1. **Xóa 8 file mồ côi** (0 tham chiếu) → trừ 3 hex.
+2. **`#163a5c` → `ink-mid`.** Đo ΔE (CIE76) = **0.79** — dưới ngưỡng mắt phân biệt (1.0). Lệch đúng 4 đơn vị kênh đỏ. Thay là miễn phí.
+3. **Ba hex cuối KHÔNG thay — đặt tên.** Đo HSL cho thấy chúng không phải màu thứ tư mà là **ba nấc còn thiếu trên hai thang** (`#ffe08a` trùng *chính xác* hue 44.1° / sat 100% với `accent-gold`). Nên khai báo thành token với **đúng giá trị cũ**:
+
+   | Hex | Token mới | Nơi dùng |
+   |---|---|---|
+   | `#1a4569` | `ink-light` | điểm dừng gradient nav |
+   | `#ffe08a` | `accent-gold-mid` | điểm sáng gạch vàng |
+   | `#c9a000` | `accent-gold-dark` | dấu ✓ |
+
+> **Không đổi một pixel.** Đã kiểm CSS build: `accent-gold-dark` emit ra `rgb(201 160 0 / 1)` — cùng giá trị `#c9a000`, chỉ khác cách viết. Tailwind emit token dạng `rgb()` nên **không được kiểm bằng cách grep hex**.
+
+> Giả thuyết ban đầu ("`#c9a000` chọn để đạt AA") **sai**: nó chỉ đạt 2.47:1, trượt cả ngưỡng 3:1. Xem §Colors — vàng không đọc được trên nền trắng.
