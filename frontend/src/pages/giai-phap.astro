@@ -7,6 +7,10 @@ import PageHero from '../components/PageHero.astro';
 import SolutionsListingGrid from '../components/solution/SolutionsListingGrid.astro';
 import { pageSeo, pageHeroBg } from '../data/site';
 import { routes } from '../lib/routes';
+import { giaiPhap1Content } from '../data/giai-phap-1';
+
+/** Quy trình 6 bước — nhất quán cho cả 4 nhóm (nguồn: data giải pháp). */
+const processSteps = giaiPhap1Content.processSteps;
 ---
 
 <BaseLayout title={pageSeo.giaiPhap.title} description={pageSeo.giaiPhap.description}>
@@ -23,6 +27,41 @@ import { routes } from '../lib/routes';
   />
 
   <SolutionsListingGrid />
+
+  <!-- S4 · Dải sáng — một quy trình cho bốn ngành (nhịp tương phản sau khối navy) -->
+  <section class="bg-surface-fresh py-20 md:py-32">
+    <div class="max-w-container-max-width mx-auto px-6 md:px-8">
+      <header data-reveal class="max-w-3xl mb-12 md:mb-16">
+        <p class="font-eyebrow text-xs uppercase tracking-widest text-accent-teal mb-3">
+          Một quy trình · bốn ngành
+        </p>
+        <h2 class="text-3xl md:text-5xl font-extrabold text-ink-dark text-balance">
+          Cùng một quy trình 6 bước cho mọi giải pháp
+        </h2>
+        <p class="mt-4 text-text-muted text-base leading-relaxed max-w-[60ch] text-pretty">
+          Dù thuộc ngành nào, mỗi đơn hàng đều đi qua đúng sáu bước kiểm soát — minh bạch tiến độ và
+          đồng bộ chất lượng giữa các đợt sản xuất.
+        </p>
+      </header>
+
+      <ol class="grid gap-px overflow-hidden rounded-[4px] bg-border-subtle sm:grid-cols-2 lg:grid-cols-3">
+        {
+          processSteps.map((step, i) => (
+            <li
+              data-reveal
+              class="bg-surface-fresh p-6 md:p-8"
+              style={`--reveal-delay:${i * 60}ms`}
+            >
+              <span class="font-mono text-xs tabular-nums tracking-[0.1em] text-accent-teal">
+                B{String(i + 1).padStart(2, '0')}
+              </span>
+              <p class="mt-3 font-bold leading-snug text-ink-dark">{step}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
 
   <SiteCtaSection />
   <SiteFooter />
