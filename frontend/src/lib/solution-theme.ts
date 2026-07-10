@@ -123,10 +123,95 @@ export const solutionBoxHome = {
   link: 'text-[0.625rem] sm:text-[0.6875rem] font-semibold text-ink-dark no-underline hover:text-accent-teal mt-auto shrink-0 pt-0.5',
 };
 
-/** Grid 4 cột — trang chủ section Giải pháp (chữ đè ảnh, vừa một section) */
+/** Mosaic 4 khối — section Giải pháp trang chủ */
+export const solutionHomeMosaic = {
+  section: 'relative z-[2] py-10 md:py-12 bg-white text-ink-dark',
+  headerWrap: 'text-left mb-4 md:mb-6 max-w-3xl',
+  title:
+    'font-headline-md font-bold text-ink-dark text-2xl md:text-4xl leading-tight tracking-tight text-balance m-0',
+  lead:
+    'text-pretty text-text-muted text-sm md:text-base leading-relaxed mt-4 m-0',
+  grid:
+    'solutions-mosaic__grid grid grid-cols-1 gap-3 md:grid-cols-3 md:gap-4 lg:gap-5',
+  cardWrap:
+    'relative overflow-hidden rounded-[8px] bg-white isolate shadow-[0_12px_40px_rgba(14,38,64,0.14)]',
+  cardLink:
+    'group relative block h-full min-h-[260px] md:min-h-[280px] lg:min-h-[300px] no-underline text-white overflow-hidden rounded-[8px]',
+  media:
+    'absolute inset-0 h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]',
+  scrim: 'solutions-mosaic-scrim pointer-events-none absolute inset-x-0 bottom-0 z-[1]',
+  body: 'solutions-mosaic-body absolute inset-x-0 bottom-0 z-[2] p-4 md:p-5 lg:p-6 flex flex-col gap-2',
+  bodyCompact: 'solutions-mosaic-body absolute inset-x-0 bottom-0 z-[2] p-4 md:p-5 flex flex-col gap-2',
+  titleInCard:
+    'm-0 font-headline-md font-bold text-white text-xl md:text-2xl leading-tight tracking-tight',
+  titleInCardCompact:
+    'm-0 font-headline-md font-bold text-white text-xl md:text-2xl leading-tight tracking-tight',
+  revealWrap: 'solutions-mosaic-reveal',
+  revealInner: 'solutions-mosaic-reveal__inner flex flex-col gap-2',
+  revealInnerCompact: 'solutions-mosaic-reveal__inner flex flex-col gap-2',
+  desc: 'm-0 text-white/90 text-xs md:text-sm leading-relaxed',
+  descCompact: 'm-0 text-white/90 text-xs md:text-sm leading-relaxed line-clamp-2',
+  bullets: 'm-0 p-0 list-none flex flex-col gap-1.5 text-xs md:text-sm text-white/80',
+  bulletsCompact:
+    'm-0 p-0 list-none flex flex-col gap-1.5 text-xs md:text-sm text-white/85 min-w-0',
+  bulletItem:
+    'flex gap-2 before:content-["—"] before:text-accent-gold before:shrink-0 leading-snug',
+  bulletItemCompact:
+    'flex min-w-0 gap-2 before:content-["—"] before:text-accent-gold before:shrink-0 leading-snug',
+  cta: 'inline-flex w-fit text-xs md:text-sm font-bold text-white mt-0.5',
+  ctaCompact: 'inline-flex w-fit text-xs md:text-sm font-bold text-white mt-0.5',
+  spanLarge:
+    'md:col-span-2 [&_a]:md:min-h-[300px] [&_a]:lg:min-h-[320px]',
+  spanTall:
+    'md:col-span-1 [&_a]:md:min-h-[300px] [&_a]:lg:min-h-[320px]',
+  spanWide:
+    'md:col-span-2 [&_a]:md:min-h-[280px] [&_a]:lg:min-h-[300px]',
+};
+
+/** Layout 1+3 Process — GP1 trái tĩnh, GP2–4 phải sticky stack */
+export const solutionHomeSplit = {
+  section: 'solutions-section py-16 md:py-24 bg-white text-ink-dark',
+  stageWrap: 'solutions-stage',
+  layout: 'solutions-split',
+  headerRow: 'solutions-intro',
+  headerText: 'max-w-2xl',
+  title:
+    'solutions-intro__title font-headline-md text-2xl md:text-4xl font-bold leading-tight tracking-tight text-balance text-ink-dark m-0',
+  lead:
+    'text-base md:text-lg text-text-muted leading-relaxed max-w-[56ch] text-pretty mt-4 m-0',
+  leftColumn: 'solutions-split__left',
+  leftCluster: 'solutions-split__left-cluster',
+  stackWrap: 'solutions-split__stack',
+  stackSlide: 'solutions-stack__slide',
+  cardBase:
+    'solution-card group relative block w-full overflow-hidden rounded-xl bg-ink-dark no-underline text-white transition-[transform,box-shadow] duration-200 ease-nav-panel hover:-translate-y-1 hover:shadow-card focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-gold',
+  featuredCard: 'solutions-split__featured-card w-full',
+  stackCard: 'solutions-split__stack-card w-full',
+  media:
+    'absolute inset-0 h-full w-full object-cover object-top opacity-[0.92] transition-transform duration-200 ease-nav-panel group-hover:scale-[1.03]',
+  scrim:
+    'solution-scrim pointer-events-none absolute inset-x-0 bottom-0 z-[1]',
+  body: 'absolute inset-x-0 bottom-0 z-[2] flex flex-col gap-2',
+  featuredBody: 'p-5 md:p-6 lg:p-7 gap-2.5',
+  stackBody: 'p-4 lg:p-5 gap-2',
+  heading:
+    'font-headline-md m-0 font-bold leading-snug text-white text-balance transition-colors duration-200 group-hover:text-accent-gold',
+  featuredHeading: 'text-lg md:text-xl lg:text-2xl',
+  stackHeading: 'text-base md:text-lg',
+  desc: 'm-0 text-white/85 leading-relaxed text-pretty',
+  featuredDesc: 'text-sm md:text-base line-clamp-2',
+  stackDesc: 'text-sm line-clamp-2',
+  bullets: 'm-0 p-0 list-none flex flex-col gap-1.5 text-sm text-white/80',
+  bulletItem: 'flex gap-2 before:content-["—"] before:text-accent-gold before:shrink-0',
+  cta:
+    'mt-2 inline-flex w-fit text-sm font-bold text-white transition-colors duration-200 group-hover:text-accent-gold',
+};
+
+/** Grid 4 cột — trang chủ section Giải pháp (tuân DESIGN.md) */
 export const solutionHomeCarousel = {
-  section: 'py-12 md:py-16 lg:py-20 bg-white text-ink-dark',
-  headerRow: 'mb-6 md:mb-8 lg:mb-10',
+  section: 'py-16 md:py-24 bg-white text-ink-dark',
+  headerRow: 'mb-8 md:mb-12',
+  eyebrow: 'm-0 mb-3 text-xs font-bold uppercase tracking-widest text-accent-teal',
   headerText: 'max-w-2xl',
   title:
     'font-headline-md font-bold text-ink-dark text-[clamp(1.75rem,4.5vw,3rem)] leading-tight tracking-normal text-balance m-0',
@@ -134,17 +219,16 @@ export const solutionHomeCarousel = {
   grid: 'grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4 lg:gap-5',
   card: 'group relative block aspect-[3/4] overflow-hidden rounded-2xl bg-home-section-muted no-underline text-ink-dark',
   media:
-    'absolute inset-0 h-full w-full object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.03]',
+    'absolute inset-0 h-full w-full object-cover object-top opacity-[0.92] transition-transform duration-200 ease-nav-panel group-hover:scale-[1.03]',
   scrim:
-    'pointer-events-none absolute inset-0 bg-gradient-to-t from-white from-[28%] via-white/88 via-[48%] to-transparent',
-  body:
-    'absolute inset-x-0 bottom-0 z-[1] flex flex-col gap-1.5 p-3.5 sm:gap-2 sm:p-4 lg:p-[1.125rem] xl:p-5 [text-shadow:0_1px_10px_rgba(255,255,255,0.85)]',
+    'pointer-events-none absolute inset-x-0 bottom-0 z-[1] h-[42%] bg-gradient-to-t from-ink-dark from-0% via-ink-dark/65 via-[36%] to-transparent',
+  body: 'absolute inset-x-0 bottom-0 z-[2] flex flex-col gap-2 p-4 lg:p-5',
   heading:
     'font-headline-md m-0 font-bold leading-[1.2] tracking-normal text-ink-dark text-balance line-clamp-2 text-[clamp(0.8125rem,0.55vw+0.7rem,1.0625rem)]',
   desc:
     'm-0 text-[clamp(0.6875rem,0.35vw+0.58rem,0.8125rem)] leading-[1.5] text-ink-dark/72 line-clamp-2',
   cta:
-    'mt-0.5 inline-flex w-fit items-center border-b border-transparent text-[clamp(0.6875rem,0.25vw+0.55rem,0.75rem)] font-semibold leading-none text-ink-dark transition-[border-color,color] duration-200 group-hover:border-accent-gold group-hover:text-accent-teal sm:mt-1',
+    'mt-1 inline-flex w-fit text-sm font-bold text-white transition-colors duration-200 group-hover:text-accent-gold',
 };
 
 /** Index strip — catalog tĩnh (dự phòng / không dùng trên homepage) */

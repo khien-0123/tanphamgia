@@ -1,8 +1,5 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import SiteNav from '../../components/SiteNav.astro';
-import SiteFooter from '../../components/SiteFooter.astro';
-import SiteCtaSection from '../../components/SiteCtaSection.astro';
+import SiteLayout from '../../layouts/SiteLayout.astro';
 import PageHero from '../../components/PageHero.astro';
 import { solutions } from '../../data/site';
 import type { SolutionPageContent } from '../../data/solution-page';
@@ -10,7 +7,8 @@ import { duAnGiaiPhap1 } from '../../data/giai-phap-1-du-an';
 import { duAnGiaiPhap2 } from '../../data/giai-phap-2-du-an';
 import { duAnGiaiPhap3 } from '../../data/giai-phap-3-du-an';
 import { duAnGiaiPhap4 } from '../../data/giai-phap-4-du-an';
-import { caseStudyHref } from '../../lib/routes';
+import ProjectCardsGrid from './ProjectCardsGrid.astro';
+import { caseStudyHref, routes } from '../../lib/routes';
 import { listingZigzagFrame, listingZigzagImg, imageRadius } from '../../lib/image-frame';
 
 interface Props {
@@ -31,12 +29,23 @@ const projectsBySolution = {
 
 const projects = projectsBySolution[content.solutionId];
 
+const projectCards = projects.map((project) => ({
+  name: project.name,
+  stats: project.stats,
+  field: project.field,
+  image: project.image,
+  href: caseStudyHref(content.slug, project.slug),
+}));
+
 /** Bỏ tiền tố "0N. " trong tiêu đề đến từ data */
 const heading = (raw: string) => raw.replace(/^\d{2}\.\s*/, '');
 ---
 
-<BaseLayout title={content.seo.title} description={content.seo.description}>
-  <SiteNav currentPath="/giai-phap" />
+<SiteLayout
+  title={content.seo.title}
+  description={content.seo.description}
+  currentPath={routes.giaiPhap}
+>
 
   {/* Banner đồng bộ toàn site */}
   <PageHero
@@ -231,57 +240,14 @@ const heading = (raw: string) => raw.replace(/^\d{2}\.\s*/, '');
       </div>
     </section>
 
-    {/* 05. Dự án tiêu biểu — card điều hướng */}
-    <section data-reveal id="du-an" class="scroll-mt-24 bg-white py-16 md:py-24">
-      <div class="mx-auto max-w-container-max-width px-6 md:px-8">
-        <header class="mb-10 max-w-2xl md:mb-12">
-          <div class="mb-4 h-1 w-10 rounded-full bg-accent-gold"></div>
-          <h2 class="text-balance text-2xl font-bold leading-tight text-ink-dark md:text-4xl">
-            Dự án tiêu biểu
-          </h2>
-        </header>
-
-        <div class="grid gap-6 md:grid-cols-3">
-          {
-            projects.map((project) => (
-              <a
-                href={caseStudyHref(content.slug, project.slug)}
-                class:list={['group flex flex-col overflow-hidden border border-border-subtle bg-white text-inherit no-underline transition hover:-translate-y-1 hover:border-accent-gold/50 hover:shadow-card', imageRadius]}
-              >
-                <figure class:list={[listingZigzagFrame, 'm-0']}>
-                  <img
-                    src={project.image}
-                    alt={project.name}
-                    loading="lazy"
-                    class:list={[listingZigzagImg, 'group-hover:scale-105']}
-                  />
-                </figure>
-                <div class="flex flex-1 flex-col p-6">
-                  {project.field && (
-                    <span class="mb-1.5 text-xs font-bold uppercase tracking-wider text-accent-teal">
-                      {project.field}
-                    </span>
-                  )}
-                  <h3 class="text-lg font-bold text-ink-dark transition-colors group-hover:text-accent-gold">
-                    {project.name}
-                  </h3>
-                  <p class="mt-2 text-xs font-medium text-text-muted">{project.stats}</p>
-                  <p class="mt-4 line-clamp-3 text-sm leading-relaxed text-text-muted">
-                    {project.intro}
-                  </p>
-                  <span class="mt-auto inline-flex items-center gap-1.5 pt-5 text-sm font-bold text-accent-teal">
-                    Xem chi tiết dự án
-                    <span class="material-symbols-outlined text-base transition-transform duration-300 group-hover:translate-x-1">
-                      arrow_forward
-                    </span>
-                  </span>
-                </div>
-              </a>
-            ))
-          }
-        </div>
-      </div>
-    </section>
+    <ProjectCardsGrid
+      id="du-an"
+      title="Dự án tiêu biểu"
+      items={projectCards}
+      columns={3}
+      headerStyle="solution"
+      sectionClass="scroll-mt-24 bg-surface-fresh py-16 md:py-24"
+    />
 
     {/* Giải pháp khác */}
     <section data-reveal class="bg-surface-fresh py-16 md:py-24">
@@ -327,7 +293,4 @@ const heading = (raw: string) => raw.replace(/^\d{2}\.\s*/, '');
       </div>
     </section>
   </main>
-
-  <SiteCtaSection />
-  <SiteFooter />
-</BaseLayout>
+</SiteLayout>

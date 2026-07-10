@@ -1,12 +1,10 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import SiteNav from '../../components/SiteNav.astro';
-import SiteFooter from '../../components/SiteFooter.astro';
-import SiteCtaSection from '../../components/SiteCtaSection.astro';
+import SiteLayout from '../../layouts/SiteLayout.astro';
 import CaseStudyStory from '../../components/CaseStudyStory.astro';
-import { caseStudyHref, solutionAnchorHref, solutionHref } from '../../lib/routes';
-import { getSolutionTheme, solutionBoxCompact } from '../../lib/solution-theme';
-import { portraitCardImg } from '../../lib/image-frame';
+import ProjectCardsGrid from '../../components/solution/ProjectCardsGrid.astro';
+import { getOtherCaseStudies } from '../../lib/case-study-pool';
+import { caseStudyHref, routes, solutionAnchorHref } from '../../lib/routes';
+import { getSolutionTheme } from '../../lib/solution-theme';
 
 export interface CaseStudyProject {
   slug: string;
@@ -24,13 +22,18 @@ interface Props {
   solutionId: 1 | 2 | 3 | 4;
   solutionSlug: string;
   project: CaseStudyProject;
-  allProjects: CaseStudyProject[];
 }
 
-const { solutionId, solutionSlug, project, allProjects } = Astro.props;
+const { solutionId, solutionSlug, project } = Astro.props;
 
 const solutionTheme = getSolutionTheme(solutionId);
-const otherProjects = allProjects.filter((item) => item.slug !== project.slug);
+const otherProjects = getOtherCaseStudies(solutionSlug, project.slug, 4).map((item) => ({
+  name: item.name,
+  stats: item.stats,
+  field: item.field,
+  image: item.image,
+  href: caseStudyHref(item.solutionSlug, item.slug),
+}));
 
 const seoSuffix: Record<Props['solutionId'], string> = {
   1: 'đồng phục doanh nghiệp sản xuất & FDI',
@@ -40,11 +43,12 @@ const seoSuffix: Record<Props['solutionId'], string> = {
 };
 ---
 
-<BaseLayout
+<SiteLayout
   title={`${project.name} | Dự án tiêu biểu — Giải pháp ${solutionId}`}
   description={`Case study ${project.name} — ${seoSuffix[solutionId]}.`}
+  currentPath={routes.giaiPhap}
+  navOverDark={false}
 >
-  <SiteNav currentPath={solutionHref(solutionSlug)} />
   <main class={solutionTheme.page}>
     <section class:list={[solutionTheme.section, 'pt-28 md:pt-32']}>
       <div class="max-w-container-max-width mx-auto px-6 md:px-8">
@@ -82,36 +86,11 @@ const seoSuffix: Record<Props['solutionId'], string> = {
       </div>
     </section>
 
-    <section data-reveal class={solutionTheme.section}>
-      <div class="max-w-container-max-width mx-auto px-6 md:px-8">
-        <h2 class="text-2xl md:text-3xl font-bold mb-6">Dự án khác</h2>
-        <div class={solutionBoxCompact.grid}>
-          {
-            otherProjects.map((item) => (
-              <article class={solutionBoxCompact.item}>
-                <a
-                  class={solutionBoxCompact.summary}
-                  href={caseStudyHref(solutionSlug, item.slug)}
-                >
-                  <figure class={solutionBoxCompact.media}>
-                    <img
-                      class={portraitCardImg}
-                      src={item.image}
-                      alt={item.name}
-                      loading="lazy"
-                    />
-                  </figure>
-                  <h3 class={solutionBoxCompact.title}>{item.name}</h3>
-                  <p class={solutionBoxCompact.desc}>{item.stats}</p>
-                  <span class={solutionBoxCompact.link}>Xem chi tiết</span>
-                </a>
-              </article>
-            ))
-          }
-        </div>
-      </div>
-    </section>
+    <ProjectCardsGrid
+      title="Dự án khác"
+      description="Khám phá thêm dự án đã triển khai trong và ngoài nhóm giải pháp này."
+      items={otherProjects}
+      columns={4}
+    />
   </main>
-  <SiteCtaSection />
-  <SiteFooter />
-</BaseLayout>
+</SiteLayout>

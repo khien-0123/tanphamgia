@@ -9,7 +9,7 @@ const featuredCard =
 const featuredImg =
   'absolute inset-0 w-full h-full object-cover opacity-75 transition-[transform,opacity] duration-700 group-hover:scale-[1.04] group-hover:opacity-[0.88]';
 const featuredOverlay =
-  'absolute inset-0 flex flex-col justify-end gap-3.5 p-6 bg-gradient-to-t from-black/88 via-black/25 from-0% via-55% to-transparent';
+  'featured-case-copy absolute inset-0 z-[2] flex flex-col justify-end gap-3.5 p-6';
 const secondaryCard =
   `relative shrink-0 snap-start overflow-hidden ${imageRadius} bg-[#1a1a1a] min-h-[220px] basis-[85vw] sm:basis-[calc(50%-0.425rem)] transition-transform duration-250 hover:-translate-y-0.5 lg:shrink lg:min-h-[220px] lg:h-full`;
 ---
@@ -40,15 +40,29 @@ const secondaryCard =
           class:list={[featuredCard, 'group no-underline text-white lg:[grid-area:featured]']}
         >
           <img src={featured.image} alt={featured.alt} class={featuredImg} loading="lazy" />
+          <div class="featured-case-scrim pointer-events-none absolute inset-x-0 bottom-0 z-[1]" aria-hidden="true" />
           <div class={featuredOverlay}>
             {featured.tag && (
               <span class="inline-block w-fit px-3 py-1 rounded-full bg-[#f2c300] text-[#111] text-[0.625rem] font-bold tracking-widest uppercase">
                 {featured.tag}
               </span>
             )}
-            <h3 class="m-0 text-[clamp(1.5rem,3vw,1.875rem)] font-bold leading-tight">
-              {featured.name}
-            </h3>
+            <div class="flex items-center gap-2.5 md:gap-3">
+              {featured.logoMark && (
+                <img
+                  src={featured.logoMark}
+                  alt=""
+                  width={40}
+                  height={40}
+                  class="featured-case-logo-mark h-9 w-9 md:h-10 md:w-10 shrink-0 object-contain"
+                  loading="lazy"
+                  decoding="async"
+                />
+              )}
+              <h3 class="m-0 text-[clamp(1.5rem,3vw,1.875rem)] font-bold leading-tight">
+                {featured.name}
+              </h3>
+            </div>
             {featured.stats && (
               <dl class="flex flex-wrap gap-x-8 gap-y-5 m-0">
                 {featured.stats.map((stat) => (
@@ -69,15 +83,29 @@ const secondaryCard =
       ) : (
         <article class:list={[featuredCard, 'group lg:[grid-area:featured]']}>
           <img src={featured.image} alt={featured.alt} class={featuredImg} loading="lazy" />
+          <div class="featured-case-scrim pointer-events-none absolute inset-x-0 bottom-0 z-[1]" aria-hidden="true" />
           <div class={featuredOverlay}>
             {featured.tag && (
               <span class="inline-block w-fit px-3 py-1 rounded-full bg-[#f2c300] text-[#111] text-[0.625rem] font-bold tracking-widest uppercase">
                 {featured.tag}
               </span>
             )}
-            <h3 class="m-0 text-[clamp(1.5rem,3vw,1.875rem)] font-bold leading-tight">
-              {featured.name}
-            </h3>
+            <div class="flex items-center gap-2.5 md:gap-3">
+              {featured.logoMark && (
+                <img
+                  src={featured.logoMark}
+                  alt=""
+                  width={40}
+                  height={40}
+                  class="featured-case-logo-mark h-9 w-9 md:h-10 md:w-10 shrink-0 object-contain"
+                  loading="lazy"
+                  decoding="async"
+                />
+              )}
+              <h3 class="m-0 text-[clamp(1.5rem,3vw,1.875rem)] font-bold leading-tight">
+                {featured.name}
+              </h3>
+            </div>
             {featured.stats && (
               <dl class="flex flex-wrap gap-x-8 gap-y-5 m-0">
                 {featured.stats.map((stat) => (
@@ -183,3 +211,29 @@ const secondaryCard =
     </div>
   </div>
 </section>
+
+<style>
+  /* Màn đen mờ sát đáy */
+  .featured-case-scrim {
+    height: 55%;
+    background: linear-gradient(
+      to top,
+      rgb(0 0 0 / 0.88) 0%,
+      rgb(0 0 0 / 0.72) 28%,
+      rgb(0 0 0 / 0.4) 55%,
+      transparent 100%
+    );
+  }
+
+  .featured-case-copy,
+  .featured-case-copy *:not(img) {
+    text-shadow:
+      0 1px 2px rgb(0 0 0 / 0.9),
+      0 2px 14px rgb(0 0 0 / 0.7);
+  }
+
+  .featured-case-logo-mark {
+    filter: drop-shadow(0 2px 10px rgb(0 0 0 / 0.75));
+    mix-blend-mode: lighten;
+  }
+</style>

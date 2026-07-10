@@ -1,8 +1,5 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import SiteNav from '../components/SiteNav.astro';
-import SiteFooter from '../components/SiteFooter.astro';
-import SiteCtaSection from '../components/SiteCtaSection.astro';
+import SiteLayout from '../layouts/SiteLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import ClientLogosSection from '../components/clients/ClientLogosSection.astro';
 import ClientCaseStudyGrid from '../components/clients/ClientCaseStudyGrid.astro';
@@ -11,9 +8,11 @@ import { pageSeo, clientCaseStudies, testimonialsClients, pageHeroBg } from '../
 import { routes } from '../lib/routes';
 ---
 
-<BaseLayout title={pageSeo.khachHang.title} description={pageSeo.khachHang.description}>
-  <SiteNav currentPath={routes.khachHang} />
-
+<SiteLayout
+  title={pageSeo.khachHang.title}
+  description={pageSeo.khachHang.description}
+  currentPath={routes.khachHang}
+>
   <PageHero
     title="Dự án & Khách hàng tiêu biểu"
     bgImage={pageHeroBg.khachHang}
@@ -27,7 +26,4 @@ import { routes } from '../lib/routes';
   <ClientLogosSection />
   <ClientCaseStudyGrid items={clientCaseStudies} />
   <TestimonialsSlider items={testimonialsClients} variant="light" />
-
-  <SiteCtaSection />
-  <SiteFooter />
-</BaseLayout>
+</SiteLayout>

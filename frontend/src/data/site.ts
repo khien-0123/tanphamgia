@@ -214,48 +214,68 @@ export const homeIntro = {
     },
     {
       label: '30.000+ Sản phẩm mỗi tháng',
-      image: siteAssets.about.production1,
-      imageAlt: 'Dây chuyền sản xuất đồng phục quy mô lớn',
+      image: siteAssets.about.sanPhamMoiThang,
+      imageAlt: 'Thành phẩm vải may đồng phục xếp chồng — năng lực sản xuất hàng loạt',
     },
     {
       label: 'Đồng hành từ tư vấn đến bàn giao',
-      image: siteAssets.about.brandStory,
-      imageAlt: 'Tư vấn thiết kế và bàn giao đồng phục doanh nghiệp',
+      image: siteAssets.about.dongHanhTuVanBanGiao,
+      imageAlt: 'Bắt tay ký kết — đồng hành từ tư vấn đến bàn giao đồng phục',
     },
     {
       label: '1.000.000+ Sản phẩm đã sản xuất',
-      image: siteAssets.about.production2,
-      imageAlt: 'Kho thành phẩm đồng phục Tân Phạm Gia',
+      image: siteAssets.about.sanPhamDaSanXuat,
+      imageAlt: 'Kho thành phẩm quy mô lớn — hơn một triệu sản phẩm đã sản xuất',
     },
     {
       label: 'Hệ thống sản xuất & QC bài bản',
-      image: siteAssets.certificates.iso9001,
-      imageAlt: 'Chứng nhận ISO 9001:2015 — quy trình QC bài bản',
+      image: siteAssets.about.heThongSanXuat,
+      imageAlt: 'Công nhân vận hành máy may — hệ thống sản xuất đồng phục quy mô lớn',
     },
   ],
   cta: { label: 'Khám phá năng lực Tân Phạm Gia', href: routes.gioiThieu },
 };
+
+/** Section "Tại sao chọn" trang chủ — Sitemap 1.4 */
+export const homeWhyChoose = {
+  eyebrow: 'Tại sao chọn Tân Phạm Gia',
+  title: 'Tiên phong "Thời trang hóa" đồng phục doanh nghiệp',
+  description:
+    'Từ kinh nghiệm may mặc đến quy trình sản xuất — bốn năng lực cốt lõi giúp doanh nghiệp đồng phục chuẩn form, đúng tiến độ.',
+} as const;
 
 export const whyChoose = [
   {
     num: '01',
     title: '23 năm kinh nghiệm may mặc',
     desc: 'Kinh nghiệm tích lũy từ thời trang cao cấp đến đồng phục doanh nghiệp — hiểu sâu chất liệu, form dáng và nhu cầu thực tế.',
+    image: siteAssets.whyChoose.kinhNghiem,
+    imageAlt: 'Kệ áo thời trang cao cấp — kinh nghiệm may mặc đồng phục',
+    imagePosition: 'object-center',
   },
   {
     num: '02',
     title: 'Tiên phong "Thời trang hóa"',
     desc: 'Tỷ lệ vàng, Rập 3D và may trên mannequin — sản phẩm vừa chuyên nghiệp vừa tôn dáng, nâng trải nghiệm người mặc.',
+    image: siteAssets.whyChoose.thoiTrangHoa,
+    imageAlt: 'Thiết kế và may đo đồng phục thời trang',
+    imagePosition: 'object-center',
   },
   {
     num: '03',
     title: 'Năng lực sản xuất quy mô lớn',
     desc: 'Nhà xưởng 2.000m², 30.000 sp/tháng — linh hoạt từ doanh nghiệp vừa đến tập đoàn và chuỗi hệ thống.',
+    image: siteAssets.whyChoose.nangLucSanXuat,
+    imageAlt: 'Công nhân vận hành máy may — năng lực sản xuất quy mô lớn',
+    imagePosition: 'object-center',
   },
   {
     num: '04',
     title: 'QC đa tầng nghiêm ngặt',
     desc: 'Kiểm soát từ nguyên liệu đến thành phẩm — đồng bộ chất lượng qua nhiều đợt sản xuất, chủ động tiến độ.',
+    image: siteAssets.whyChoose.qc,
+    imageAlt: 'Đội ngũ QC kiểm tra thành phẩm đồng phục trước bàn giao',
+    imagePosition: 'object-center',
   },
 ];
 
@@ -266,6 +286,8 @@ export const solutions = [
     title: 'Doanh nghiệp Sản xuất & FDI',
     desc: 'Giải pháp đồng phục tuân thủ an toàn lao động, bền bỉ và đồng nhất hình ảnh thương hiệu.',
     image: siteAssets.solutions.giaiPhap1,
+    /** Căn khung ảnh mosaic trang chủ — flat lay đồng phục ngang */
+    homeImagePosition: 'object-[center_38%]',
     href: solutionHref('giai-phap-1'),
     bullets: [
       'Tuân thủ an toàn lao động',
@@ -281,6 +303,7 @@ export const solutions = [
     title: 'Văn phòng & Tập đoàn',
     desc: 'Giải pháp chuẩn hóa nhận diện thương hiệu và nâng trải nghiệm mặc cho đội ngũ văn phòng.',
     image: siteAssets.solutions.giaiPhap2,
+    homeImagePosition: 'object-[center_18%]',
     href: solutionHref('giai-phap-2'),
     bullets: [
       'Xây dựng nhận diện thương hiệu',
@@ -295,11 +318,18 @@ export const solutions = [
     title: 'FMCG & Chuỗi phân phối',
     desc: 'Giải pháp đồng phục giúp tăng nhận diện tại điểm bán và truyền tải thông điệp chiến dịch.',
     image: siteAssets.solutions.giaiPhap3,
+    homeImagePosition: 'object-top',
     href: solutionHref('giai-phap-3'),
     bullets: [
       'Hỗ trợ xây dựng nhận diện thương hiệu tại điểm bán',
       'Truyền tải thông điệp, tạo ấn tượng trong chiến dịch quảng bá',
       'Chất lượng cao tăng tuổi thọ đồng phục mặc hằng ngày',
+    ],
+    /** Bullet ngắn 1 dòng — mosaic trang chủ (ô hẹp) */
+    homeBullets: [
+      'Nhận diện thương hiệu tại điểm bán',
+      'Truyền tải thông điệp chiến dịch',
+      'Bền bỉ cho mặc hằng ngày',
     ],
     featured: true,
   },
@@ -309,6 +339,7 @@ export const solutions = [
     title: 'Y tế, Spa & Dịch vụ',
     desc: 'Giải pháp đồng phục chất lượng cao cho môi trường đặc thù, đề cao thoải mái và thẩm mỹ.',
     image: siteAssets.solutions.giaiPhap4,
+    homeImagePosition: 'object-[center_15%]',
     href: solutionHref('giai-phap-4'),
     bullets: [
       'Đồng phục chất lượng cao phù hợp môi trường đặc thù',
@@ -331,20 +362,23 @@ export interface HomeFeaturedCase {
   alt: string;
   href?: string;
   tag?: string;
+  /** Biểu tượng logo màu gốc — hiển thị cạnh tên */
+  logoMark?: string;
   stats?: HomeFeaturedCaseStat[];
   statHighlight?: { value: string; suffix: string; valueClass?: 'gold' | 'white' };
 }
 
 export const homeFeaturedCases = {
   featured: {
-    name: 'VFM',
-    image: siteAssets.cases.vfm,
-    alt: 'Dự án VFM',
-    tag: 'Đối tác 3 năm',
-    href: caseStudyHref('giai-phap-2', 'vfm'),
+    name: 'BIDV',
+    image: siteAssets.cases.bidv,
+    alt: 'Dự án Ngân hàng BIDV',
+    tag: 'Ngân hàng & Tài chính',
+    logoMark: '/images/logos/bidv.png',
+    href: caseStudyHref('giai-phap-2', 'bidv'),
     stats: [
-      { value: '1.100', label: 'sản phẩm' },
-      { value: '35 ngày', label: 'triển khai' },
+      { value: '800', label: 'sản phẩm' },
+      { value: '45 ngày', label: 'triển khai' },
     ],
   } satisfies HomeFeaturedCase,
   secondary: [
@@ -365,7 +399,7 @@ export const homeFeaturedCases = {
   ] satisfies HomeFeaturedCase[],
   quote: {
     text: 'Xây dựng hình ảnh đội ngũ chuyên nghiệp và đồng bộ — chất lượng ổn định qua nhiều đợt triển khai.',
-    author: 'VFM Team',
+    author: 'BIDV Team',
   },
   contact: {
     email: 'dongphuc@tanphamgia.com.vn',
@@ -524,6 +558,14 @@ export interface ClientCaseStudy {
   title: string;
   excerpt: string;
   client: string;
+  /** Nhãn phân khúc — hiển thị trên card (vd: VĂN PHÒNG & TẬP ĐOÀN) */
+  tags: string;
+  /** Logo thương hiệu — đường dẫn local trong public/images/logos */
+  logo?: string;
+  /** Biểu tượng logo (màu gốc) — dùng khi tách icon khỏi wordmark */
+  logoMark?: string;
+  /** Chữ thương hiệu ngắn hiển thị màu trắng cạnh logoMark */
+  logoWordmark?: string;
   image: string;
   alt: string;
   href?: string;
@@ -536,27 +578,43 @@ export const clientCaseStudies: ClientCaseStudy[] = [
     excerpt:
       'Case study triển khai đồng phục quy mô lớn với QC đa tầng và quy trình phối hợp rõ ràng.',
     client: 'Coca-Cola Philippines',
+    tags: 'VĂN PHÒNG & TẬP ĐOÀN / FMCG',
+    logo: '/images/logos/coca-cola.webp',
     image: siteAssets.cases.cocaCola,
     alt: 'Dự án Coca-Cola Philippines',
     href: caseStudyHref('giai-phap-2', 'coca-cola-philippines'),
   },
   {
-    slug: 'vfm',
-    title: 'VFM — Chuẩn hóa hình ảnh đội ngũ văn phòng tài chính',
-    excerpt: '1.100 sản phẩm triển khai trong 35 ngày, duy trì chất lượng qua nhiều đợt bổ sung.',
-    client: 'VFM',
-    image: siteAssets.cases.vfmClient,
-    alt: 'Dự án VFM',
-    href: caseStudyHref('giai-phap-2', 'vfm'),
+    slug: 'bidv',
+    title: 'BIDV — Chuẩn hóa hình ảnh đội ngũ giao dịch',
+    excerpt: '800 sản phẩm triển khai trong 45 ngày, đồng nhất màu sắc và hoàn thiện theo tiêu chí nghiệm thu.',
+    client: 'Ngân hàng BIDV',
+    tags: 'VĂN PHÒNG & TẬP ĐOÀN / NGÂN HÀNG',
+    logoMark: '/images/logos/bidv.png',
+    logoWordmark: 'BIDV',
+    image: siteAssets.cases.bidvClient,
+    alt: 'Dự án Ngân hàng BIDV',
+    href: caseStudyHref('giai-phap-2', 'bidv'),
   },
   {
     slug: 'king-group',
     title: 'King Group — Đáp ứng đơn hàng 3.000+ áo đồng phục công nghiệp',
     excerpt: 'Giải pháp đồng phục cho môi trường sản xuất với chất liệu bền và tiêu chuẩn an toàn lao động.',
     client: 'King Group',
+    tags: 'SẢN XUẤT & FDI / CÔNG NGHIỆP',
     image: siteAssets.cases.kingGroup,
     alt: 'Dự án King Group',
     href: caseStudyHref('giai-phap-1', 'king-group'),
+  },
+  {
+    slug: 'savisco',
+    title: 'SAVISCO — Đồng bộ hình ảnh đa phòng ban',
+    excerpt: '950 sản phẩm triển khai trong 40 ngày, chuẩn hóa màu sắc và quy cách cho toàn hệ thống nhân sự.',
+    client: 'SAVISCO',
+    tags: 'VĂN PHÒNG & TẬP ĐOÀN / DỊCH VỤ',
+    image: siteAssets.cases.saviscoGp2,
+    alt: 'Dự án SAVISCO',
+    href: caseStudyHref('giai-phap-2', 'savisco'),
   },
 ];
 

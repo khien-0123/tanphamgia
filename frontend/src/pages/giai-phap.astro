@@ -1,8 +1,5 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import SiteNav from '../components/SiteNav.astro';
-import SiteFooter from '../components/SiteFooter.astro';
-import SiteCtaSection from '../components/SiteCtaSection.astro';
+import SiteLayout from '../layouts/SiteLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import SolutionsListingGrid from '../components/solution/SolutionsListingGrid.astro';
 import { pageSeo, pageHeroBg } from '../data/site';
@@ -13,9 +10,11 @@ import { giaiPhap1Content } from '../data/giai-phap-1';
 const processSteps = giaiPhap1Content.processSteps;
 ---
 
-<BaseLayout title={pageSeo.giaiPhap.title} description={pageSeo.giaiPhap.description}>
-  <SiteNav currentPath={routes.giaiPhap} />
-
+<SiteLayout
+  title={pageSeo.giaiPhap.title}
+  description={pageSeo.giaiPhap.description}
+  currentPath={routes.giaiPhap}
+>
   <PageHero
     title="Giải pháp đồng phục doanh nghiệp"
     bgImage={pageHeroBg.giaiPhap}

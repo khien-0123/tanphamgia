@@ -1,5 +1,6 @@
 ---
 import ClientLogo from './ClientLogo.astro';
+import SliderArrow from './SliderArrow.astro';
 import { clientLogos } from '../data/site';
 import { getClientLogoScale } from '../lib/client-logo-scale';
 
@@ -74,8 +75,8 @@ const slideGridStandalone = 'grid grid-cols-5 grid-rows-3 place-items-center gap
         })
       }
     </div>
-    <button data-slider-prev class="slider-arrow slider-arrow--prev" aria-label="Trước"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><polyline points="15 18 9 12 15 6"/></svg></button>
-    <button data-slider-next class="slider-arrow slider-arrow--next" aria-label="Sau"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><polyline points="9 6 15 12 9 18"/></svg></button>
+    <SliderArrow direction="prev" />
+    <SliderArrow direction="next" />
   </div>
 
   {
@@ -106,8 +107,8 @@ const slideGridStandalone = 'grid grid-cols-5 grid-rows-3 place-items-center gap
             );
           })}
         </div>
-        <button data-slider-prev class="slider-arrow slider-arrow--prev" aria-label="Trước"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><polyline points="15 18 9 12 15 6"/></svg></button>
-        <button data-slider-next class="slider-arrow slider-arrow--next" aria-label="Sau"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><polyline points="9 6 15 12 9 18"/></svg></button>
+        <SliderArrow direction="prev" />
+        <SliderArrow direction="next" />
       </div>
     ) : (
       <!-- Desktop trang khách hàng: 5–6×3, slider tự chạy -->
@@ -136,8 +137,8 @@ const slideGridStandalone = 'grid grid-cols-5 grid-rows-3 place-items-center gap
             );
           })}
         </div>
-        <button data-slider-prev class="slider-arrow slider-arrow--prev" aria-label="Trước"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><polyline points="15 18 9 12 15 6"/></svg></button>
-        <button data-slider-next class="slider-arrow slider-arrow--next" aria-label="Sau"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><polyline points="9 6 15 12 9 18"/></svg></button>
+        <SliderArrow direction="prev" />
+        <SliderArrow direction="next" />
       </div>
     )
   }
