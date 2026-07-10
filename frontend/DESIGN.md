@@ -36,10 +36,13 @@ colors:
 
 typography:
   display:
-    fontFamily: Hanken Grotesk    # 🔒 mọi tiêu đề
+    fontFamily: Archivo           # 🔒 mọi tiêu đề — variable, trục wdth 75..100
   body:
-    fontFamily: Work Sans         # 🔒 mọi văn bản
-  # Không có font thứ ba. Nạp qua Google Fonts trong BaseLayout.
+    fontFamily: Archivo           # 🔒 mọi văn bản — cùng một họ với tiêu đề
+  mono:
+    fontFamily: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace  # 🔒 eyebrow + nhãn spec
+  # MỘT webfont duy nhất (Archivo). Mono lấy từ stack hệ thống — KHÔNG nạp webfont thứ hai.
+  # Phân tầng đến từ weight + width (wdth) + case, không từ họ chữ thứ ba. Xem §Typography.
 
 spacing:
   container-max-width: 1280px     # 🔒
@@ -604,3 +607,77 @@ Khách tự đặt trần 60 ký tự.
 | 8 | `rounded-[0.625rem]` trong `SiteNav` | Bo góc ngoài thang | Đưa về thang |
 
 > Có một script chặn lệch tự động (`scripts/design-lint.mjs` + baseline ratchet: bắt hex thô, cỡ chữ tự chế, font literal, thang bo góc đảo, token chết) nằm ở nhánh `work/design-md`. Nếu nhóm muốn, cherry-pick sang `main` — nó không vào bundle, chỉ chạy khi `npm run check`.
+
+---
+
+# Phụ lục D — Báo cáo đồng bộ theo Trang chủ
+
+> **Đo trực tiếp từ code trên `main` (`75d4239`).**
+>
+> ⚠️ **Kết luận ngược với kỳ vọng:** Trang chủ là chuẩn tốt về **cấu trúc**, nhưng là chuẩn **tệ** về **token**. Toàn bộ **14 mã hex thô** của dự án nằm trên trang chủ; các trang còn lại **sạch tuyệt đối (0 hex thô, 0 tracking âm)**.
+>
+> **Đồng bộ mù theo trang chủ sẽ phát tán lỗi và làm cả site chật hơn** — đúng cái "phẳng, thiếu không khí" khách đã chê. Lấy cấu trúc, đừng lấy giá trị.
+
+## D1. Nhịp nền trang chủ — 🔒 chép công thức này
+
+| # | Section | Nền | Vai trò |
+|---|---|---|---|
+| 1 | `HomeHero` | ảnh/video + phủ tối | Mở màn |
+| 2 | `HomeIntroSection` | `bg-white` | Nội dung |
+| 3 | `HomeWhyChooseSection` | `bg-surface-fresh` (thẻ trong là `bg-ink-dark`) | Nội dung |
+| 4 | `HomeSolutionsGrid` | `bg-white` | Nội dung |
+| 5 | `HomePartnersSection` | `bg-surface-fresh` | Bằng chứng |
+| 6 | **`HomeFeaturedCases`** | **`bg-ink-dark`** | **Dải navy DUY NHẤT** |
+| 7 | `HomeDownloadTeaser` | `bg-white` | Bắt lead |
+| 8 | `CertificateGallery` | `bg-surface-fresh` | Bằng chứng |
+
+**Quy tắc:** `white` ⇄ `surface-fresh` xen kẽ; **đúng một** dải `ink-dark`, đặt ở khối *bằng chứng*, **không** kề hero / `SiteCtaSection` / footer. Mọi trang con áp theo.
+
+## D2. Từ vựng LẤY từ trang chủ 🔒
+
+| Hạng mục | Giá trị chuẩn | Bằng chứng |
+|---|---|---|
+| Khung trang | `max-w-container-max-width mx-auto px-6 md:px-8` | 8 lần (chủ) + 18 lần (khác) — đã thống nhất |
+| Tiêu đề section | `font-headline-md font-bold text-ink-dark text-2xl md:text-4xl leading-tight text-balance` | `lib/solution-theme.ts` |
+| Lead | `text-text-muted text-sm md:text-base leading-relaxed text-pretty` | 〃 |
+| Motion | `data-reveal` | 20 (chủ) + 41 (khác) |
+| Thẻ ảnh | ảnh phủ + scrim đáy + tiêu đề đè + hover `scale-[1.02]` | `solutionHomeMosaic` |
+| Nút chính | `bg-accent-gold text-ink-dark rounded-full font-bold shadow-soft hover:shadow-gold hover:scale-105` | 〃 |
+
+## D3. Lỗi của trang chủ — ⚠️ KHÔNG chép
+
+| Lỗi | Số lần | Nằm ở | Phải thành |
+|---|---|---|---|
+| Hex thô `#f2c300` / `#111` / `#1a1a1a` | **13** | `home/HomeFeaturedCases.astro` | `accent-gold` / `ink-dark` |
+| Hex thô | 1 | `home/HomeNewsSection.astro` *(file chết)* | xóa file |
+| `tracking-tight` chồng lên Archivo vốn đã nén | 4 | `lib/solution-theme.ts` | **bỏ hẳn** |
+| Cỡ chữ tự chế `text-[0.675rem]`, `text-[0.9rem]`… | 21 | rải khắp home | thang §Typography |
+| Shadow thô `shadow-[0_12px_40px…]` | 2 | home + lib | `shadow-card` |
+| `rounded-[8px]` ngoài thang bo góc | — | `solutionHomeMosaic` | thang `rounded` |
+
+> Vì `tracking-tight` nằm trong `lib/solution-theme.ts` (**dùng chung**), lỗi này rò sang cả trang Giải pháp. Sửa 1 chỗ, khỏi 2 trang.
+
+## D4. Đối chiếu & hành động
+
+| Chiều | Trang chủ | Trang khác | Hành động |
+|---|---|---|---|
+| **Nhịp dọc** | `py-8 md:py-12` ×3, `py-8/14`, `py-10/12`, `py-12/16/20`, `pt-8 pb-16` — **5 biến thể** | `py-8/12` ×10, `py-16/24` ×6, `py-24/36`, `py-20/32`, `py-10/16` | ⛔ **Đừng hạ trang khác xuống theo trang chủ.** Chốt 3 bậc — xem D6 |
+| Hex thô | 14 | **0** | Sửa **trang chủ**, không lan ra |
+| Tracking âm | 4 (trong lib dùng chung) | 0 | Gỡ khỏi `solution-theme.ts` |
+| `rounded-2xl` (đang cấm) | 0 | 2 | Sửa `DocumentDownloadForm.astro`, `solution-theme.ts` |
+| Khung trang / motion | ✅ | ✅ | Không phải làm gì |
+| Eyebrow | 3/9 file | 10 file | ⛔ Xem D6 |
+
+## D5. Dọn dẹp phát hiện thêm
+
+1. **`home/HomeNewsSection.astro` là component chết** — không nơi nào import (đúng với Sitemap: trang chủ chỉ có 1.1–1.9, không có block Tin tức). Nó còn chứa 1 hex thô + 1 tracking âm. **Xóa được.**
+2. **Token `section-padding-mobile: 64px` / `section-padding-desktop: 120px`** trong `tailwind.config.mjs` — **0 lần dùng**. Nhịp thực tế đang chạy 32/48px, **chật hơn 2–2.5 lần** so với ý định thiết kế. Đây là nguyên nhân đo được của lời chê "phẳng, thiếu không khí".
+3. **Nợ C7 đã trả**: `:root` + `--font-display` / `--font-body` / `--mono` đã có trong `global.css`; `fontFamily.mono` đã có trong config.
+4. ⚠️ **Doc lệch code**: §Typography ghi heading `font-weight 800`, nhưng `global.css` hiện đặt `700`. Chốt một con số rồi sửa bên còn lại.
+
+## D6. ⛔ Hai điều chờ nhóm quyết — không tự quyết
+
+| # | Câu hỏi | Đề xuất |
+|---|---|---|
+| 1 | **Nhịp dọc mặc định?** | `py-16 md:py-24`. Lý do: hạ xuống `py-8 md:py-12` theo trang chủ sẽ làm toàn site chật hơn, tái tạo đúng lỗi khách chê. Giữ 3 bậc: `sm py-12 md:py-16` · **`md py-16 md:py-24` (mặc định)** · `lg py-20 md:py-32` |
+| 2 | **Eyebrow giữ hay bỏ?** | Trang chủ hầu như bỏ eyebrow, dẫn thẳng bằng tiêu đề đậm; 10 file trang khác vẫn dùng. Nếu giữ → dùng `font-eyebrow` (mono, in hoa) làm giọng thứ ba. Nếu bỏ → gỡ ở cả 10 file. **Không được để hai kiểu song song.** |
