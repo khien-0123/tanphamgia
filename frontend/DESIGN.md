@@ -160,7 +160,9 @@ Cách sửa: đổi chữ sang `ink-mid` #1A3A5C, hoặc đổi nền sang `surf
 
 ### ⚠️ Có một sắc vàng lạc trong production
 
-`home/HomeFeaturedCases.astro` dùng **`#f2c300` chín lần**. Đó **không phải** vàng thương hiệu (`#FFC933`). Đừng chép sang chỗ khác. Tổng cộng site có **29 hex thô** trong class Tailwind (`#111` ×9, `#f8faf9` ×2…) — mọi màu mới phải đi qua token.
+`home/HomeFeaturedCases.astro` dùng **`#f2c300` chín lần**. Đó **không phải** vàng thương hiệu (`#FFC933`). Đừng chép sang chỗ khác.
+
+Đo lại trên `main` (`75d4239`): site có **45 hex thô** trong class Tailwind, nằm ở **6 file** (`#111` ×18, `#f2c300` ×9, `#ecece7` ×6…). Nặng nhất là `lib/solution-theme.ts` (17 lần) — file **dùng chung**. Bảng đầy đủ ở **Phụ lục D4b**. Mọi màu mới phải đi qua token.
 
 ### 🔓 Nhịp nền — đang thiết kế lại
 
@@ -614,7 +616,9 @@ Khách tự đặt trần 60 ký tự.
 
 > **Đo trực tiếp từ code trên `main` (`75d4239`).**
 >
-> ⚠️ **Kết luận ngược với kỳ vọng:** Trang chủ là chuẩn tốt về **cấu trúc**, nhưng là chuẩn **tệ** về **token**. Toàn bộ **14 mã hex thô** của dự án nằm trên trang chủ; các trang còn lại **sạch tuyệt đối (0 hex thô, 0 tracking âm)**.
+> ⚠️ **Kết luận ngược với kỳ vọng:** Trang chủ là chuẩn tốt về **cấu trúc**, nhưng là chuẩn **tệ** về **token**.
+>
+> Site đang có **45 hex thô** trong 6 file. Kẻ phạm lỗi nặng nhất **không phải trang chủ** mà là `lib/solution-theme.ts` (**17 lần**) — một file **dùng chung**, nên lỗi rò sang mọi trang import nó. Trang chủ đứng thứ hai (14).
 >
 > **Đồng bộ mù theo trang chủ sẽ phát tán lỗi và làm cả site chật hơn** — đúng cái "phẳng, thiếu không khí" khách đã chê. Lấy cấu trúc, đừng lấy giá trị.
 
@@ -648,8 +652,8 @@ Khách tự đặt trần 60 ký tự.
 
 | Lỗi | Số lần | Nằm ở | Phải thành |
 |---|---|---|---|
-| Hex thô `#f2c300` / `#111` / `#1a1a1a` | **13** | `home/HomeFeaturedCases.astro` | `accent-gold` / `ink-dark` |
-| Hex thô | 1 | `home/HomeNewsSection.astro` *(file chết)* | xóa file |
+| Hex thô `#f2c300` ×9 / `#1a1a1a` ×2 / `#111` ×2 | **13** | `home/HomeFeaturedCases.astro` | `accent-gold` / `ink-dark` |
+| Hex thô `#111` | 1 | `home/HomeNewsSection.astro` *(file chết)* | xóa file |
 | `tracking-tight` chồng lên Archivo vốn đã nén | 4 | `lib/solution-theme.ts` | **bỏ hẳn** |
 | Cỡ chữ tự chế `text-[0.675rem]`, `text-[0.9rem]`… | 21 | rải khắp home | thang §Typography |
 | Shadow thô `shadow-[0_12px_40px…]` | 2 | home + lib | `shadow-card` |
@@ -662,15 +666,32 @@ Khách tự đặt trần 60 ký tự.
 | Chiều | Trang chủ | Trang khác | Hành động |
 |---|---|---|---|
 | **Nhịp dọc** | `py-8 md:py-12` ×3, `py-8/14`, `py-10/12`, `py-12/16/20`, `pt-8 pb-16` — **5 biến thể** | `py-8/12` ×10, `py-16/24` ×6, `py-24/36`, `py-20/32`, `py-10/16` | ⛔ **Đừng hạ trang khác xuống theo trang chủ.** Chốt 3 bậc — xem D6 |
-| Hex thô | 14 | **0** | Sửa **trang chủ**, không lan ra |
+| Hex thô | 14 | 31 (xem bảng D4b) | Sửa `lib/solution-theme.ts` **trước** — nó dùng chung |
 | Tracking âm | 4 (trong lib dùng chung) | 0 | Gỡ khỏi `solution-theme.ts` |
 | `rounded-2xl` (đang cấm) | 0 | 2 | Sửa `DocumentDownloadForm.astro`, `solution-theme.ts` |
 | Khung trang / motion | ✅ | ✅ | Không phải làm gì |
 | Eyebrow | 3/9 file | 10 file | ⛔ Xem D6 |
 
+## D4b. Hex thô — đo toàn site, theo file (45 lần / 6 file)
+
+| File | Số lần | Giá trị | Loại | Ưu tiên |
+|---|---|---|---|---|
+| **`lib/solution-theme.ts`** | **17** | `#111`×9 `#ecece7`×5 `#d8d7cf`×2 `#e8e1c2` | **dùng chung** | 🔴 **1** — sửa 1 chỗ, khỏi nhiều trang |
+| `home/HomeFeaturedCases.astro` | 13 | `#f2c300`×9 `#1a1a1a`×2 `#111`×2 | trang chủ | 🔴 **2** — vàng sai thương hiệu |
+| `SiteNav.astro` | 6 | `#f8faf9`×2 `#ffe08a` `#e7eeeb` `#1a4569` `#163a5c` | **dùng chung** | 🟠 3 |
+| `CaseStudyStory.astro` | 6 | `#111`×4 `#ecece7` `#c9a000` | trang khác (1 nơi import) | 🟠 4 |
+| `SolutionPlanSplit.astro` | 2 | `#111`×2 | **chết** (0 import) | 🟢 xóa file |
+| `home/HomeNewsSection.astro` | 1 | `#111` | **chết** (0 import) | 🟢 xóa file |
+
+> Xóa 2 file chết là trừ ngay 3 lần. Sửa `solution-theme.ts` + `HomeFeaturedCases` là trừ 30/45.
+
 ## D5. Dọn dẹp phát hiện thêm
 
-1. **`home/HomeNewsSection.astro` là component chết** — không nơi nào import (đúng với Sitemap: trang chủ chỉ có 1.1–1.9, không có block Tin tức). Nó còn chứa 1 hex thô + 1 tracking âm. **Xóa được.**
+1. **Hai component chết, không nơi nào import:**
+   - `home/HomeNewsSection.astro` — đúng với Sitemap (trang chủ chỉ có 1.1–1.9, không có block Tin tức). Chứa 1 hex thô + 1 tracking âm.
+   - `SolutionPlanSplit.astro` — chứa 2 hex thô.
+
+   **Xóa được cả hai.**
 2. **Token `section-padding-mobile: 64px` / `section-padding-desktop: 120px`** trong `tailwind.config.mjs` — **0 lần dùng**. Nhịp thực tế đang chạy 32/48px, **chật hơn 2–2.5 lần** so với ý định thiết kế. Đây là nguyên nhân đo được của lời chê "phẳng, thiếu không khí".
 3. **Nợ C7 đã trả**: `:root` + `--font-display` / `--font-body` / `--mono` đã có trong `global.css`; `fontFamily.mono` đã có trong config.
 4. ⚠️ **Doc lệch code**: §Typography ghi heading `font-weight 800`, nhưng `global.css` hiện đặt `700`. Chốt một con số rồi sửa bên còn lại.
