@@ -362,6 +362,8 @@ export interface HomeFeaturedCase {
   alt: string;
   href?: string;
   tag?: string;
+  /** Biểu tượng logo màu gốc — hiển thị cạnh tên */
+  logoMark?: string;
   stats?: HomeFeaturedCaseStat[];
   statHighlight?: { value: string; suffix: string; valueClass?: 'gold' | 'white' };
 }
@@ -372,6 +374,7 @@ export const homeFeaturedCases = {
     image: siteAssets.cases.bidv,
     alt: 'Dự án Ngân hàng BIDV',
     tag: 'Ngân hàng & Tài chính',
+    logoMark: '/images/logos/bidv.png',
     href: caseStudyHref('giai-phap-2', 'bidv'),
     stats: [
       { value: '800', label: 'sản phẩm' },

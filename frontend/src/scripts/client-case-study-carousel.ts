@@ -41,8 +41,8 @@ function initSecondaryCarousel(root: HTMLElement) {
       dot.classList.toggle('w-6', isActive);
       dot.classList.toggle('w-2', !isActive);
       dot.classList.toggle('bg-accent-teal', isActive);
-      dot.classList.toggle('bg-ink-dark/15', !isActive);
-      dot.classList.toggle('hover:bg-ink-dark/30', !isActive);
+      dot.classList.toggle('bg-white/35', !isActive);
+      dot.classList.toggle('hover:bg-white/55', !isActive);
     });
 
     if (prevBtn) prevBtn.disabled = active <= 0;

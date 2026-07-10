@@ -26,14 +26,15 @@ export const sliderArrowPrevGutter = 'left-1 md:left-1.5';
 
 export const sliderArrowNextGutter = 'right-1 md:right-1.5';
 
-/** Nút đặc — luôn hiện, nền trắng không trong suốt (carousel case study) */
+/** Nút đặc — nền trắng, ẩn mặc định, hiện khi hover carousel */
 export const sliderArrowSolidBase = [
   'absolute top-1/2 -translate-y-1/2 z-10',
   'flex items-center justify-center',
   'w-9 h-9 md:w-10 md:h-10 rounded-full',
   'border border-ink-dark/12 bg-white text-ink-dark',
-  'cursor-pointer shadow-[0_2px_8px_rgba(0,0,0,0.08)]',
-  'transition-[box-shadow] duration-200',
+  'cursor-pointer opacity-0 pointer-events-none shadow-[0_2px_8px_rgba(0,0,0,0.08)]',
+  'transition-[opacity,box-shadow] duration-200',
+  'group-hover/slider:opacity-100 group-hover/slider:pointer-events-auto',
   'hover:shadow-[0_4px_16px_rgba(0,0,0,0.12)]',
   'disabled:opacity-0 disabled:pointer-events-none',
 ];

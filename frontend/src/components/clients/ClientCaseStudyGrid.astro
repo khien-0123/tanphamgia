@@ -5,9 +5,10 @@ import {
   caseStudyCarouselTrack,
   caseStudyCarouselViewport,
   caseStudyCarouselShell,
+  caseStudyCarouselDots,
   caseStudyDotActive,
   caseStudyDotBase,
-  caseStudyDotIdle,
+  caseStudyDotIdleOnImage,
   caseStudyFeaturedCopy,
   caseStudyFeaturedImage,
   caseStudySecondaryGrid,
@@ -45,10 +46,10 @@ const carouselPages = useSecondaryCarousel
             class="group grid md:grid-cols-2 gap-0 no-underline text-inherit"
           >
             <div class:list={caseStudyFeaturedCopy}>
-              <p class="text-[11px] font-bold uppercase tracking-[0.14em] text-accent-gold mb-3">
+              <p class="text-[11px] font-bold uppercase tracking-[0.14em] text-ink-dark mb-3">
                 {featured.tags}
               </p>
-              <h3 class="font-headline-md text-xl md:text-2xl lg:text-[1.75rem] font-bold text-ink-dark leading-snug mb-4 group-hover:text-accent-gold transition-colors">
+              <h3 class="font-headline-md text-xl md:text-2xl lg:text-[1.75rem] font-bold text-ink-dark leading-snug mb-4">
                 {featured.title}
               </h3>
               <p class="text-text-muted text-sm md:text-base leading-relaxed mb-6 max-w-prose">
@@ -99,22 +100,22 @@ const carouselPages = useSecondaryCarousel
                 </div>
                 <SliderArrow direction="prev" inset solid />
                 <SliderArrow direction="next" inset solid />
-              </div>
-              <div
-                class="flex justify-center gap-2 py-6 md:py-8 border-t border-ink-dark/10"
-                role="tablist"
-                aria-label="Chọn nhóm case study phụ"
-              >
-                {Array.from({ length: carouselPages }, (_, index) => (
-                  <button
-                    type="button"
-                    role="tab"
-                    data-carousel-dot={index}
-                    aria-label={`Trang ${index + 1}`}
-                    aria-selected={index === 0 ? 'true' : 'false'}
-                    class:list={[caseStudyDotBase, index === 0 ? caseStudyDotActive : caseStudyDotIdle]}
-                  />
-                ))}
+                <div
+                  class:list={caseStudyCarouselDots}
+                  role="tablist"
+                  aria-label="Chọn nhóm case study phụ"
+                >
+                  {Array.from({ length: carouselPages }, (_, index) => (
+                    <button
+                      type="button"
+                      role="tab"
+                      data-carousel-dot={index}
+                      aria-label={`Trang ${index + 1}`}
+                      aria-selected={index === 0 ? 'true' : 'false'}
+                      class:list={[caseStudyDotBase, index === 0 ? caseStudyDotActive : caseStudyDotIdleOnImage]}
+                    />
+                  ))}
+                </div>
               </div>
             </div>
           ) : (
