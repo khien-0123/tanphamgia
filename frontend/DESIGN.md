@@ -162,7 +162,9 @@ Cách sửa: đổi chữ sang `ink-mid` #1A3A5C, hoặc đổi nền sang `surf
 
 `home/HomeFeaturedCases.astro` dùng **`#f2c300` chín lần**. Đó **không phải** vàng thương hiệu (`#FFC933`). Đừng chép sang chỗ khác.
 
-Đo lại trên `main` (`75d4239`): site có **45 hex thô** trong class Tailwind, nằm ở **6 file** (`#111` ×18, `#f2c300` ×9, `#ecece7` ×6…). Nặng nhất là `lib/solution-theme.ts` (17 lần) — file **dùng chung**. Bảng đầy đủ ở **Phụ lục D4b**. Mọi màu mới phải đi qua token.
+Đo trên `main` (`75d4239`): site từng có **45 hex thô** / 6 file. **Đã dọn 38** — xem **Phụ lục D7**. Còn **7**, đều cần quyết định (2 file chết chờ xóa, 3 điểm dừng gradient, 1 vàng đậm nghi vấn tương phản).
+
+Mọi màu mới phải đi qua token.
 
 ### 🔓 Nhịp nền — đang thiết kế lại
 
@@ -193,7 +195,7 @@ Nạp một request duy nhất trong `BaseLayout.astro`. Tên font sống trong 
 
 | Giọng | Cơ chế | Đọc ra |
 |---|---|---|
-| **HEADING** | Archivo `font-weight 800` + `wdth` nén (85–93%) + leading siết (0.98–1.1) | Nặng, hẹp, dập khuôn — vế *Manufacturing* |
+| **HEADING** | Archivo `font-weight 700` 🔒 + `wdth` nén (85–93%) + leading siết (0.98–1.1) | Nặng, hẹp, dập khuôn — vế *Manufacturing* |
 | **EYEBROW / SUBHEAD** | IBM Plex Mono, IN HOA, `tracking-widest` | Nhãn kỹ thuật, tách hẳn thân — vế *Technical* |
 | **BODY** | Archivo `font-weight 400`, khổ 100%, `leading` 1.7 | Nới, thoáng, dễ đọc dài — vế *Editorial* |
 
@@ -694,11 +696,34 @@ Khách tự đặt trần 60 ký tự.
    **Xóa được cả hai.**
 2. **Token `section-padding-mobile: 64px` / `section-padding-desktop: 120px`** trong `tailwind.config.mjs` — **0 lần dùng**. Nhịp thực tế đang chạy 32/48px, **chật hơn 2–2.5 lần** so với ý định thiết kế. Đây là nguyên nhân đo được của lời chê "phẳng, thiếu không khí".
 3. **Nợ C7 đã trả**: `:root` + `--font-display` / `--font-body` / `--mono` đã có trong `global.css`; `fontFamily.mono` đã có trong config.
-4. ⚠️ **Doc lệch code**: §Typography ghi heading `font-weight 800`, nhưng `global.css` hiện đặt `700`. Chốt một con số rồi sửa bên còn lại.
+4. ✅ **Đã chốt**: heading `font-weight: 700` (không phải 800). Doc và `global.css` đã khớp.
 
-## D6. ⛔ Hai điều chờ nhóm quyết — không tự quyết
+## D6. Quyết định của nhóm
 
-| # | Câu hỏi | Đề xuất |
+| # | Vấn đề | Trạng thái |
 |---|---|---|
-| 1 | **Nhịp dọc mặc định?** | `py-16 md:py-24`. Lý do: hạ xuống `py-8 md:py-12` theo trang chủ sẽ làm toàn site chật hơn, tái tạo đúng lỗi khách chê. Giữ 3 bậc: `sm py-12 md:py-16` · **`md py-16 md:py-24` (mặc định)** · `lg py-20 md:py-32` |
-| 2 | **Eyebrow giữ hay bỏ?** | Trang chủ hầu như bỏ eyebrow, dẫn thẳng bằng tiêu đề đậm; 10 file trang khác vẫn dùng. Nếu giữ → dùng `font-eyebrow` (mono, in hoa) làm giọng thứ ba. Nếu bỏ → gỡ ở cả 10 file. **Không được để hai kiểu song song.** |
+| 1 | Nhịp dọc mặc định | ✅ **CHỐT `py-16 md:py-24`** (bậc `md` ở §Layout). Không hạ xuống `py-8 md:py-12` theo trang chủ. |
+| 2 | Heading font-weight | ✅ **CHỐT `700`**. |
+| 3 | **Eyebrow giữ hay bỏ?** | ⛔ **CHƯA QUYẾT.** Trang chủ hầu như bỏ eyebrow, dẫn thẳng bằng tiêu đề đậm; 10 file trang khác vẫn dùng. Giữ → dùng `font-eyebrow` (mono, in hoa) làm giọng thứ ba. Bỏ → gỡ ở cả 10 file. **Không được để hai kiểu song song.** |
+
+## D7. Dọn hex thô — đã làm 38/45
+
+Thay bằng token, build sạch 27 trang:
+
+| File | Đã sửa | Ánh xạ |
+|---|---|---|
+| `lib/solution-theme.ts` | 17 | `#111` → `ink-dark` · 3 sắc xám ấm → `border-subtle` |
+| `home/HomeFeaturedCases.astro` | 13 | `#f2c300` → `accent-gold` · `#1a1a1a` → **`ink-mid`** · `#111` → `ink-dark` |
+| `CaseStudyStory.astro` | 5 | `#111` → `ink-dark` · `#ecece7` → `border-subtle` |
+| `SiteNav.astro` | 3 | `#f8faf9` → `background` · `#e7eeeb` → `border-subtle` |
+
+> **`#1a1a1a` không map sang `ink-dark`** được: hai thẻ case nằm **trên nền `bg-ink-dark`**, map vậy thì thẻ tan vào nền. Dùng `ink-mid` để thẻ nổi lên như panel.
+
+### ⛔ Còn 7 hex — cần quyết, không tự thay
+
+| File | Hex | Vì sao chưa thay |
+|---|---|---|
+| `SiteNav.astro` | `#163a5c` `#1a4569` `#ffe08a` | **Điểm dừng gradient.** `#163a5c` ≈ `ink-mid`; `#1a4569` và `#ffe08a` **không có token**. Map bừa → gradient bẹt. Cần: thêm token, hay đơn giản hoá gradient? |
+| `CaseStudyStory.astro` | `#c9a000` | Vàng đậm, nhiều khả năng chọn để **đủ tương phản chữ nhỏ**. `accent-gold` #FFC933 sáng hơn → có thể trượt AA. Cần đo trước khi đổi. |
+| `home/HomeNewsSection.astro` | `#111` | File **chết** (0 import) → xóa file là xong |
+| `SolutionPlanSplit.astro` | `#111` ×2 | File **chết** (0 import) → xóa file là xong |
