@@ -1,8 +1,5 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import SiteNav from '../components/SiteNav.astro';
-import SiteFooter from '../components/SiteFooter.astro';
-import SiteCtaSection from '../components/SiteCtaSection.astro';
+import SiteLayout from '../layouts/SiteLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import DocumentLibrary from '../components/documents/DocumentLibrary.astro';
 import DocumentDownloadForm from '../components/documents/DocumentDownloadForm.astro';
@@ -17,9 +14,11 @@ import { routes } from '../lib/routes';
 const allDocuments = [...brandDocuments, ...catalogueDocuments, ...guideDocuments];
 ---
 
-<BaseLayout title={pageSeo.taiLieu.title} description={pageSeo.taiLieu.description}>
-  <SiteNav currentPath={routes.taiLieu} />
-
+<SiteLayout
+  title={pageSeo.taiLieu.title}
+  description={pageSeo.taiLieu.description}
+  currentPath={routes.taiLieu}
+>
   <PageHero
     title="Thư viện tài liệu"
     bgImage={pageHeroBg.taiLieu}
@@ -36,7 +35,4 @@ const allDocuments = [...brandDocuments, ...catalogueDocuments, ...guideDocument
 
   <DocumentLibrary />
   <DocumentDownloadForm allDocuments={allDocuments} />
-
-  <SiteCtaSection />
-  <SiteFooter />
-</BaseLayout>
+</SiteLayout>

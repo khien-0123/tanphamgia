@@ -1,8 +1,5 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import SiteNav from '../components/SiteNav.astro';
-import SiteFooter from '../components/SiteFooter.astro';
-import SiteCtaSection from '../components/SiteCtaSection.astro';
+import SiteLayout from '../layouts/SiteLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import AboutBrandStory from '../components/about/AboutBrandStory.astro';
 import AboutTimeline from '../components/about/AboutTimeline.astro';
@@ -16,9 +13,11 @@ import { pageHeroBg } from '../data/site';
 import { routes } from '../lib/routes';
 ---
 
-<BaseLayout title={gioiThieuSeo.title} description={gioiThieuSeo.description}>
-  <SiteNav currentPath={routes.gioiThieu} />
-
+<SiteLayout
+  title={gioiThieuSeo.title}
+  description={gioiThieuSeo.description}
+  currentPath={routes.gioiThieu}
+>
   <PageHero
     title="Giới thiệu"
     bgImage={pageHeroBg.gioiThieu}
@@ -36,7 +35,4 @@ import { routes } from '../lib/routes';
   <AboutTeamGrid />
   <CertificateGallery items={certificateImages} />
   <TestimonialsSlider items={testimonials} variant="dark" />
-
-  <SiteCtaSection />
-  <SiteFooter />
-</BaseLayout>
+</SiteLayout>

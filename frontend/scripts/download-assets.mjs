@@ -55,14 +55,22 @@ const downloads = [
   [`${BASE}/2023/03/quy-mo-xuong-may-dong-phuc-Tan-Pham-Gia.jpg`, 'images/about/production-1.jpg'],
   [`${BASE}/2025/12/kiem-soat-qc_4-muc.webp`, 'images/about/production-2.webp'],
 
-  // Case study — dự án thật TPG
-  [`${BASE}/2026/01/tan-pham-gia-san-xuat-ao-dong-phuc-coca-cola-philipines.jpg`, 'images/cases/coca-cola-philippines.jpg'],
-  [`${BASE}/2026/01/tan-pham-gia-san-xuat-ao-dong-phuc-coca-cola-philipines.jpg`, 'images/cases/coca-cola-gp2.jpg'],
-  [`${BASE}/2026/03/du-an-ao-thun-dong-phuc-bidv.jpg`, 'images/cases/vfm.jpg'],
-  [`${BASE}/2026/03/du-an-ao-thun-dong-phuc-bidv.jpg`, 'images/cases/vfm-client.jpg'],
-  [`${BASE}/2026/03/du-an-ao-thun-dong-phuc-bidv.jpg`, 'images/cases/vfm-gp2.jpg'],
+  // Section Tại sao chọn — ảnh tối, tương phản chữ trắng (Unsplash)
+  ['https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=1920&q=85', 'images/why-choose/kinh-nghiem.jpg'],
+  ['https://images.unsplash.com/photo-1594938298603-c8148c4dae35?auto=format&fit=crop&w=1920&q=85', 'images/why-choose/thoi-trang-hoa.jpg'],
+  ['https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1920&q=85', 'images/why-choose/nang-luc-san-xuat.jpg'],
+  ['https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1920&q=85', 'images/why-choose/qc.jpg'],
+
+  // Case study — ảnh từ dongphucvn.vn/du-an/ và thư viện khách hàng TPG (tải về public/, không hotlink)
+  [`${BASE}/2025/12/Coca_khach-hang-1402x850.webp`, 'images/cases/coca-cola-philippines.jpg'],
+  [`${BASE}/2025/12/Coca_khach-hang-1402x850.webp`, 'images/cases/coca-cola-gp2.jpg'],
+  // BIDV — dự án trên dongphucvn.vn/du-an/ (không gán nhầm sang VFM)
+  [`${BASE}/2025/12/BIDV_khach-hang-scaled.webp`, 'images/cases/bidv.jpg'],
+  [`${BASE}/2025/12/BIDV_khach-hang-scaled.webp`, 'images/cases/bidv-client.jpg'],
+  [`${BASE}/2025/12/BIDV_khach-hang-scaled.webp`, 'images/cases/bidv-gp2.jpg'],
   [`${BASE}/2025/12/DAT_khach-hang-scaled.webp`, 'images/cases/dat-group.webp'],
   [`${BASE}/2025/12/zero-waste_khach-hang-scaled.webp`, 'images/cases/zero-waste.webp'],
+  // King Group — trang /du-an/ dùng ảnh Unsplash; lấy ảnh thật Jung-Talents từ thư viện TPG
   [`${BASE}/2025/12/Jung-Talents_khach-hang-scaled.webp`, 'images/cases/king-group.webp'],
   [`${BASE}/2026/05/jung-talents8.jpg`, 'images/cases/king-group-alt.jpg'],
   [`${BASE}/2025/12/SMYOU_khach-hang-scaled.webp`, 'images/cases/savisco.webp'],

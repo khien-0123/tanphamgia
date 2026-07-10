@@ -1,11 +1,20 @@
 ---
 import { homeIntro } from '../../data/site';
 import { imageRadius } from '../../lib/image-frame';
+import {
+  introJourneyIconClasses,
+  introJourneySlideClasses,
+  introJourneyStepClasses,
+  introJourneyTrackClasses,
+} from '../../lib/intro-journey-classes';
 
 const stepsMiddle = homeIntro.steps.slice(0, 3);
 const stepsRight = homeIntro.steps.slice(3);
 const stepCount = homeIntro.steps.length;
-const stepHeight = 100 / stepCount;
+const trackSlideCount = stepCount + 2;
+const trackStepHeight = 100 / trackSlideCount;
+const firstStep = homeIntro.steps[0];
+const lastStep = homeIntro.steps[stepCount - 1];
 ---
 
 <section class="py-12 md:py-16 lg:py-20 bg-white" id="gioi-thieu" data-intro-journey>
@@ -31,15 +40,17 @@ const stepHeight = 100 / stepCount;
           <ul data-reveal class="m-0 p-0 list-none flex flex-col gap-3">
             {
               stepsMiddle.map((step, i) => (
-                <li data-journey-step data-step-index={i} class:list={['m-0', i === 0 && 'is-journey-active']}>
+                <li
+                  data-journey-step
+                  data-step-index={i}
+                  class:list={['group/journey m-0', i === 0 && 'is-journey-active']}
+                >
                   <button
                     type="button"
-                    class="intro-journey-step flex w-full items-start gap-2 text-left text-sm leading-snug m-0 p-0 border-0 bg-transparent cursor-pointer"
+                    class:list={introJourneyStepClasses}
                     aria-current={i === 0 ? 'step' : undefined}
                   >
-                    <span
-                      data-journey-icon
-                      class="intro-journey-icon shrink-0 flex h-5 w-5 items-center justify-center rounded-full text-[0.65rem] font-bold leading-none"
+                    <span data-journey-icon class:list={introJourneyIconClasses}
                       aria-hidden="true"
                     >
                       ✓
@@ -55,14 +66,9 @@ const stepHeight = 100 / stepCount;
               stepsRight.map((step, i) => {
                 const stepIndex = i + 3;
                 return (
-                  <li data-journey-step data-step-index={stepIndex} class="m-0">
-                    <button
-                      type="button"
-                      class="intro-journey-step flex w-full items-start gap-2 text-left text-sm leading-snug m-0 p-0 border-0 bg-transparent cursor-pointer"
-                    >
-                      <span
-                        data-journey-icon
-                        class="intro-journey-icon shrink-0 flex h-5 w-5 items-center justify-center rounded-full text-[0.65rem] font-bold leading-none"
+                  <li data-journey-step data-step-index={stepIndex} class="group/journey m-0">
+                    <button type="button" class:list={introJourneyStepClasses}>
+                      <span data-journey-icon class:list={introJourneyIconClasses}
                         aria-hidden="true"
                       >
                         ✓
@@ -100,17 +106,32 @@ const stepHeight = 100 / stepCount;
         <div
           data-journey-media
           data-step-count={stepCount}
-          class:list={['relative w-full aspect-[4/3] overflow-hidden isolate', imageRadius]}
-          style={`--journey-steps: ${stepCount}; --journey-step-height: ${stepHeight}%`}
+          class:list={['relative w-full aspect-[4/3] overflow-hidden isolate [contain:layout_paint]', imageRadius]}
+          style={`--journey-steps: ${trackSlideCount}; --journey-step-height: ${trackStepHeight}%`}
         >
-          <div data-journey-track class="intro-journey-track">
+          <div data-journey-track class:list={introJourneyTrackClasses}>
+            <div
+              class:list={introJourneySlideClasses}
+              data-journey-slide
+              data-journey-clone="head"
+              aria-hidden="true"
+            >
+              <img
+                src={lastStep.image}
+                alt=""
+                loading="eager"
+                decoding="async"
+                class="block h-full w-full object-cover"
+                draggable="false"
+              />
+            </div>
             {
-              homeIntro.steps.map((step, i) => (
-                <div class="intro-journey-slide">
+              homeIntro.steps.map((step) => (
+                <div class:list={introJourneySlideClasses} data-journey-slide>
                   <img
                     src={step.image}
                     alt={step.imageAlt}
-                    loading={i === 0 ? 'eager' : 'lazy'}
+                    loading="eager"
                     decoding="async"
                     class="block h-full w-full object-cover"
                     draggable="false"
@@ -118,6 +139,21 @@ const stepHeight = 100 / stepCount;
                 </div>
               ))
             }
+            <div
+              class:list={introJourneySlideClasses}
+              data-journey-slide
+              data-journey-clone="tail"
+              aria-hidden="true"
+            >
+              <img
+                src={firstStep.image}
+                alt=""
+                loading="eager"
+                decoding="async"
+                class="block h-full w-full object-cover"
+                draggable="false"
+              />
+            </div>
           </div>
         </div>
       </figure>

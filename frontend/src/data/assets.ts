@@ -48,10 +48,10 @@ export const siteAssets = {
     medicalUniform: '/images/blog/medical-uniform-2025.webp',
   },
   cases: {
-    vfm: '/images/cases/vfm.jpg',
-    vfmClient: '/images/cases/vfm-client.jpg',
+    bidv: '/images/cases/bidv.jpg',
+    bidvClient: '/images/cases/bidv-client.jpg',
+    bidvGp2: '/images/cases/bidv-gp2.jpg',
     cocaColaGp2: '/images/cases/coca-cola-gp2.jpg',
-    vfmGp2: '/images/cases/vfm-gp2.jpg',
     saviscoGp2: '/images/cases/savisco-gp2.webp',
     bvRangHamMatGp4: '/images/cases/bv-rang-ham-mat-gp4.webp',
     bvRangHamMat: '/images/cases/bv-rang-ham-mat-sai-gon.webp',
@@ -71,6 +71,16 @@ export const siteAssets = {
     brandStory: '/images/about/brand-story.jpg',
     production1: '/images/about/production-1.jpg',
     production2: '/images/about/production-2.webp',
+    heThongSanXuat: '/images/about/he-thong-san-xuat.png',
+    sanPhamMoiThang: '/images/about/san-pham-moi-thang.png',
+    dongHanhTuVanBanGiao: '/images/about/dong-hanh-tu-van-ban-giao.png',
+    sanPhamDaSanXuat: '/images/about/san-pham-da-san-xuat.png',
+  },
+  whyChoose: {
+    kinhNghiem: '/images/why-choose/kinh-nghiem.png',
+    thoiTrangHoa: '/images/why-choose/thoi-trang-hoa.jpg',
+    nangLucSanXuat: '/images/why-choose/nang-luc-san-xuat.png',
+    qc: '/images/why-choose/qc.png',
   },
 } as const;
 

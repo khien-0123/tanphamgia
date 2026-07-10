@@ -1,8 +1,5 @@
 ---
-import BaseLayout from '../../../layouts/BaseLayout.astro';
-import SiteNav from '../../../components/SiteNav.astro';
-import SiteFooter from '../../../components/SiteFooter.astro';
-import SiteCtaSection from '../../../components/SiteCtaSection.astro';
+import SiteLayout from '../../../layouts/SiteLayout.astro';
 import PageHero from '../../../components/PageHero.astro';
 import BlogListingSection from '../../../components/blog/BlogListingSection.astro';
 import { pageSeo, blogPosts, BLOG_POSTS_PER_PAGE, pageHeroBg } from '../../../data/site';
@@ -21,9 +18,11 @@ const { items, currentPage, totalPages } = paginate(blogPosts, pageNum, BLOG_POS
 const seoTitle = `${pageSeo.tinTuc.title} — Trang ${currentPage}`;
 ---
 
-<BaseLayout title={seoTitle} description={pageSeo.tinTuc.description}>
-  <SiteNav currentPath={routes.tinTuc} />
-
+<SiteLayout
+  title={seoTitle}
+  description={pageSeo.tinTuc.description}
+  currentPath={routes.tinTuc}
+>
   <PageHero
     title="Tin tức & Kiến thức chuyên ngành"
     bgImage={pageHeroBg.tinTuc}
@@ -36,8 +35,4 @@ const seoTitle = `${pageSeo.tinTuc.title} — Trang ${currentPage}`;
   />
 
   <BlogListingSection items={items} currentPage={currentPage} totalPages={totalPages} />
-
-  <SiteCtaSection />
-
-  <SiteFooter />
-</BaseLayout>
+</SiteLayout>

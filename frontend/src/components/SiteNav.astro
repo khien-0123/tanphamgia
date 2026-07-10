@@ -1,5 +1,22 @@
 ---
 import { mainNavigation, siteCta } from '../data/site';
+import { routes } from '../lib/routes';
+import {
+  navCenterClasses,
+  navControlClasses,
+  navCtaClasses,
+  navEndClasses,
+  navInnerClasses,
+  navMenuLinkActiveClasses,
+  navMenuLinkBaseClasses,
+  navMenuLinkInactiveClasses,
+  navMenuLabelClasses,
+  navMenuTrackClasses,
+  navShellClasses,
+  navStartClasses,
+  navToggleClasses,
+  navToggleIconClasses,
+} from '../lib/nav-classes';
 import SiteBrandLogo from './SiteBrandLogo.astro';
 
 interface NavItem {
@@ -13,86 +30,61 @@ interface Props {
   currentPath?: string;
   items?: NavItem[];
   ctaHref?: string;
+  /** false = trang nền sáng, dùng flat nav ngay từ đầu */
+  navOverDark?: boolean;
 }
 
 const {
   currentPath = '',
   items = mainNavigation,
-  ctaHref = '/tai-lieu',
+  ctaHref = routes.taiLieu,
+  navOverDark = true,
 } = Astro.props;
-
-const navShell = [
-  'group fixed top-0 inset-x-0 z-50 w-full transition-all duration-300',
-  'bg-transparent border-b border-transparent shadow-none backdrop-blur-none',
-  '[&.nav-scrolled]:bg-white/80 [&.nav-scrolled]:backdrop-blur-md [&.nav-scrolled]:border-border-subtle',
-  '[&.nav-scrolled]:shadow-soft',
-];
-
-const navPillLink =
-  'px-3.5 py-2 rounded-full text-sm font-medium whitespace-nowrap text-white/85 transition-colors hover:text-white';
-
-const navPillActive = '!bg-white !text-ink-dark shadow-[0_1px_4px_rgba(14,38,64,0.12)]';
-
-const navFlatLink =
-  'text-sm font-medium transition-colors text-on-surface hover:text-accent-gold';
-
-const menuToggle =
-  'lg:hidden flex items-center justify-center w-10 h-10 rounded-full border cursor-pointer transition-colors border-white/20 bg-ink-dark/70 text-white backdrop-blur-md hover:bg-ink-dark/85 group-[.nav-scrolled]:rounded-xl group-[.nav-scrolled]:border-border-subtle group-[.nav-scrolled]:bg-white group-[.nav-scrolled]:text-ink-dark group-[.nav-scrolled]:hover:bg-[#f4f7f6] group-[.nav-scrolled]:backdrop-blur-none [&_.material-symbols-outlined]:text-2xl';
-
-const navInner = [
-  'items-center gap-2 min-[400px]:gap-3 px-4 min-[400px]:px-6 md:px-8 py-3 md:py-3.5 max-w-container-max-width mx-auto min-w-0',
-  'grid grid-cols-[1fr_auto] lg:grid-cols-[1fr_auto_1fr]',
-  'group-[.nav-scrolled]:flex group-[.nav-scrolled]:justify-between',
-];
 ---
 
-<nav id="site-nav" class:list={[...navShell, 'no-transition']}>
-  <div class:list={navInner}>
-    <SiteBrandLogo class="shrink-0 justify-self-start group-[.nav-scrolled]:justify-self-auto" />
-
-    <div
-      class="hidden lg:flex justify-self-center items-center gap-0.5 p-1 rounded-full border border-white/10 bg-ink-dark/75 backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.24)] group-[.nav-scrolled]:hidden"
-    >
-      {
-        items.map((item) => (
-          <a
-            class:list={[navPillLink, currentPath === item.href && navPillActive]}
-            href={item.href}
-          >
-            {item.label}
-          </a>
-        ))
-      }
+<nav
+  id="site-nav"
+  class:list={[...navShellClasses, 'no-transition', !navOverDark && 'nav-scrolled']}
+  data-nav-over-dark={navOverDark ? 'true' : 'false'}
+>
+  <div class:list={navInnerClasses}>
+    <div class={navStartClasses}>
+      <SiteBrandLogo class="leading-none" />
     </div>
 
-    <div class="hidden lg:group-[.nav-scrolled]:flex gap-7 items-center">
-      {
-        items.map((item) => (
-          <a
-            class:list={[navFlatLink, currentPath === item.href && '!text-accent-gold']}
-            href={item.href}
-          >
-            {item.label}
-          </a>
-        ))
-      }
+    <div class={navCenterClasses}>
+      <nav class:list={navMenuTrackClasses} aria-label="Menu chính">
+        {
+          items.map((item) => {
+            const isActive = currentPath === item.href;
+            return (
+              <a
+                class:list={[
+                  navMenuLinkBaseClasses,
+                  isActive ? navMenuLinkActiveClasses : navMenuLinkInactiveClasses,
+                ]}
+                href={item.href}
+              >
+                <span class={navMenuLabelClasses}>{item.label}</span>
+              </a>
+            );
+          })
+        }
+      </nav>
     </div>
 
-    <div class="flex items-center gap-1.5 min-[400px]:gap-2 shrink-0 justify-self-end group-[.nav-scrolled]:justify-self-auto">
-      <a
-        href={ctaHref}
-        class="bg-accent-gold text-ink-dark px-2.5 min-[400px]:px-4 py-2 sm:px-5 sm:py-2.5 rounded-full text-[0.6875rem] min-[400px]:text-xs sm:text-sm font-bold hover:shadow-gold hover:scale-105 transition-all active:scale-95 shadow-soft whitespace-nowrap"
-      >
+    <div class={navEndClasses}>
+      <a href={ctaHref} class:list={[navControlClasses, navCtaClasses]}>
         Nhận Báo Giá
       </a>
       <button
         type="button"
-        class={menuToggle}
+        class:list={[navControlClasses, navToggleClasses]}
         aria-expanded="false"
         aria-controls="site-nav-mobile"
         aria-label="Mở menu điều hướng"
       >
-        <span class="material-symbols-outlined" aria-hidden="true">menu</span>
+        <span class={navToggleIconClasses} aria-hidden="true">menu</span>
       </button>
     </div>
   </div>

@@ -1,8 +1,5 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import SiteNav from '../../components/SiteNav.astro';
-import SiteFooter from '../../components/SiteFooter.astro';
-import SiteCtaSection from '../../components/SiteCtaSection.astro';
+import SiteLayout from '../../layouts/SiteLayout.astro';
 import BlogPostArticle from '../../components/blog/BlogPostArticle.astro';
 import { blogPosts } from '../../data/site';
 import { routes } from '../../lib/routes';
@@ -18,9 +15,11 @@ const { post } = Astro.props;
 const title = `${post.title} | Tân Phạm Gia`;
 ---
 
-<BaseLayout title={title} description={post.excerpt}>
-  <SiteNav currentPath={routes.tinTuc} />
+<SiteLayout
+  title={title}
+  description={post.excerpt}
+  currentPath={routes.tinTuc}
+  navOverDark={false}
+>
   <BlogPostArticle post={post} />
-  <SiteCtaSection />
-  <SiteFooter />
-</BaseLayout>
+</SiteLayout>
