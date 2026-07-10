@@ -18,7 +18,7 @@ export const caseStudyFeaturedImage = [
 export const caseStudySecondaryGrid = 'grid gap-0 md:grid-cols-2';
 
 export const caseStudySecondaryCard = [
-  'group relative isolate flex min-h-[340px] md:min-h-[380px] h-full w-full flex-col overflow-hidden',
+  'group relative isolate flex min-h-[272px] md:min-h-[304px] h-full w-full flex-col overflow-hidden',
   'no-underline text-white',
 ];
 
@@ -43,3 +43,8 @@ export const caseStudyCarouselSlide = [
 export const caseStudyDotBase = 'h-2 rounded-full transition-all duration-300';
 export const caseStudyDotActive = 'w-6 bg-accent-teal';
 export const caseStudyDotIdle = 'w-2 bg-ink-dark/15 hover:bg-ink-dark/30';
+export const caseStudyDotIdleOnImage = 'w-2 bg-white/35 hover:bg-white/55';
+
+/** Dots đè lên đáy ảnh carousel */
+export const caseStudyCarouselDots =
+  'pointer-events-none absolute inset-x-0 bottom-3 z-20 flex justify-center gap-2 md:bottom-4 [&_button]:pointer-events-auto';

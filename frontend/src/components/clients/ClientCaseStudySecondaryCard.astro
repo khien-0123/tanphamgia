@@ -49,24 +49,18 @@ const { item } = Astro.props;
           loading="lazy"
           decoding="async"
         />
-      ) : (
-        <span class="inline-flex h-8 w-8 items-center justify-center text-white">
-          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="M12 2l2.4 7.4H22l-6 4.6 2.3 7L12 16.8 5.7 21l2.3-7-6-4.6h7.6L12 2z" />
-          </svg>
-        </span>
-      )}
+      ) : null}
       {!item.logoWordmark && (
-        <span class="text-sm font-semibold text-white">{item.client}</span>
+        <span class="text-base md:text-lg font-bold text-white">{item.client}</span>
       )}
     </div>
-    <p class="text-[10px] font-bold uppercase tracking-[0.12em] text-white/90">
+    <p class="text-[10px] font-bold uppercase tracking-[0.12em] text-white">
       {item.tags}
     </p>
-    <h4 class="font-headline-md text-base md:text-lg font-bold text-white leading-snug group-hover:text-accent-gold transition-colors">
+    <h4 class="font-headline-md text-base md:text-lg font-bold text-white leading-snug">
       {item.title}
     </h4>
-    <p class="text-sm text-white/90 leading-relaxed line-clamp-2">
+    <p class="text-sm text-white leading-relaxed line-clamp-2">
       {item.excerpt}
     </p>
     <span class="inline-flex items-center gap-2 text-sm font-semibold text-white group-hover:text-accent-gold transition-colors">
@@ -86,15 +80,16 @@ const { item } = Astro.props;
 </a>
 
 <style>
-  /* Đen mờ sát đáy — cùng tông section #giai-phap */
+  /* Đen mờ sát đáy — đậm hơn để chữ không chìm trên ảnh nền sáng */
   .case-study-secondary-scrim {
-    height: 62%;
+    height: 82%;
     background: linear-gradient(
       to top,
-      rgb(0 0 0 / 0.76) 0%,
-      rgb(0 0 0 / 0.52) 36%,
-      rgb(0 0 0 / 0.18) 64%,
-      transparent 90%
+      rgb(0 0 0 / 0.9) 0%,
+      rgb(0 0 0 / 0.74) 32%,
+      rgb(0 0 0 / 0.48) 58%,
+      rgb(0 0 0 / 0.22) 78%,
+      transparent 96%
     );
   }
 
@@ -111,7 +106,8 @@ const { item } = Astro.props;
   .case-study-secondary-copy,
   .case-study-secondary-copy *:not(img) {
     text-shadow:
-      0 1px 3px rgb(0 0 0 / 0.7),
-      0 6px 20px rgb(0 0 0 / 0.4);
+      0 1px 2px rgb(0 0 0 / 0.92),
+      0 2px 12px rgb(0 0 0 / 0.72),
+      0 8px 24px rgb(0 0 0 / 0.45);
   }
 </style>
