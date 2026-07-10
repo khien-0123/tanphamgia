@@ -2,6 +2,60 @@
 @tailwind components;
 @tailwind utilities;
 
+/**
+ * MỘT webfont duy nhất: Archivo. Nhãn kỹ thuật (eyebrow) dùng mono HỆ THỐNG — 0 KB tải thêm.
+ * Phân tầng KHÔNG đến từ họ chữ thứ hai mà từ 3 cơ chế của chính Archivo:
+ *   • WEIGHT — tiêu đề 800 vs thân 400: bước nhảy lớn, mắt nắm thông tin tức thì
+ *   • WIDTH  — trục `wdth` nén tiêu đề khổ lớn (~85%) như chữ dập trên bản vẽ kỹ thuật
+ *   • CASE   — nhãn (eyebrow) dùng mono IN HOA + giãn chữ → giọng "spec" tách hẳn thân
+ * Mono lấy từ stack hệ máy (Consolas/SF Mono/Menlo) — nhãn ngắn nên khác biệt giữa máy không đáng kể.
+ */
+:root {
+  --font-display: 'Archivo', system-ui, sans-serif;
+  --font-body: 'Archivo', system-ui, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', 'Courier New', monospace;
+}
+
+@layer base {
+  body {
+    font-optical-sizing: auto;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* GIỌNG TIÊU ĐỀ — Archivo nén khổ + nặng + siết dòng.
+     wdth giảm dần theo cấp (h1 nén mạnh nhất). Đây là mặc định của base layer nên
+     mọi utility trên từng thẻ (font-bold, leading-*, tracking-*) vẫn ghi đè được. */
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    text-wrap: balance;
+  }
+  h1 { font-stretch: 85%; letter-spacing: -0.03em; line-height: 0.98; }
+  h2 { font-stretch: 89%; letter-spacing: -0.025em; line-height: 1.02; }
+  h3 { font-stretch: 93%; font-weight: 700; letter-spacing: -0.015em; line-height: 1.1; }
+  h4 { font-weight: 700; letter-spacing: -0.01em; line-height: 1.2; }
+
+  /* GIỌNG THÂN — nới rộng, leading thoáng để mỗi khối "có không khí" */
+  p {
+    line-height: 1.7;
+  }
+}
+
+@layer utilities {
+  /* Trục wdth của Archivo cho thẻ KHÔNG phải h1..h4 (div/span đóng vai tiêu đề, số liệu)
+     hoặc khi cần ép mức nén cụ thể. Đồng bộ với thang trong DESIGN.md § Typography. */
+  .stretch-hero   { font-stretch: 85%; }
+  .stretch-tight  { font-stretch: 89%; }
+  .stretch-snug   { font-stretch: 93%; }
+  .stretch-normal { font-stretch: 100%; }
+}
+
 /* Material Symbols — font-variation bắt buộc */
 .material-symbols-outlined {
   font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;

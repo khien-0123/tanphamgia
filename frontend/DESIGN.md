@@ -175,51 +175,57 @@ Thực tế đang đếm được: `bg-white` **39 lần**, `surface-fresh` 5, `
 
 ## Typography
 
-### 🔒 Hai họ chữ, không có cái thứ ba
+### 🔒 Một webfont (Archivo) + mono hệ thống. Không có cái thứ ba.
 
-- **Hanken Grotesk** → mọi tiêu đề. Weight 700/800. Tracking âm khi cỡ lớn.
-- **Work Sans** → body, eyebrow, label. Weight 400/500/600.
+- **Archivo** (variable, trục `wdth`) → **toàn bộ** tiêu đề *và* thân. Đây là webfont **duy nhất** được nạp.
+- **Mono hệ thống** (`ui-monospace, Consolas, SF Mono, Menlo…`) → eyebrow + nhãn "spec" (REF, mã, số kỹ thuật). **Không nạp webfont thứ hai** — nhãn ngắn nên khác biệt giữa máy không đáng kể.
 
-Nạp qua Google Fonts trong `BaseLayout.astro`. Thêm weight = thêm chi phí tải.
+Nạp một request duy nhất trong `BaseLayout.astro`. Tên font sống trong `global.css :root` (`--font-display` / `--font-body` / `--mono`) → đổi font sau này chỉ sửa một chỗ.
+
+### 🔒 Phân tầng đến từ 3 cơ chế của Archivo, không phải 3 họ chữ
+
+Đây là câu trả lời cho feedback "heading và body quá gần nhau, trang trông phẳng". Ba giọng phải **nghe khác hẳn nhau**:
+
+| Giọng | Cơ chế | Đọc ra |
+|---|---|---|
+| **HEADING** | Archivo `font-weight 800` + `wdth` nén (85–93%) + leading siết (0.98–1.1) | Nặng, hẹp, dập khuôn — vế *Manufacturing* |
+| **EYEBROW / SUBHEAD** | IBM Plex Mono, IN HOA, `tracking-widest` | Nhãn kỹ thuật, tách hẳn thân — vế *Technical* |
+| **BODY** | Archivo `font-weight 400`, khổ 100%, `leading` 1.7 | Nới, thoáng, dễ đọc dài — vế *Editorial* |
+
+Mức nén `wdth` **giảm dần theo cấp** và đã cắm sẵn trong `@layer base` của `global.css` cho mọi `h1..h4` ngữ nghĩa (h1 85% → h2 89% → h3 93%). Với thẻ **không phải** `h1..h4` (div/span/số liệu đóng vai tiêu đề), ép bằng utility: `stretch-hero` (85%) · `stretch-tight` (89%) · `stretch-snug` (93%) · `stretch-normal` (100%).
 
 ### 🔒 Bốn quy tắc
 
-1. **Tiêu đề luôn `text-balance`; body luôn `text-pretty`.** Tiếng Việt nhiều từ đơn âm, rất dễ rớt chữ lẻ cuối dòng.
-2. **Đo dòng:** lead ≤ `56ch`, body ≤ `65ch`. Không để dòng chữ dài hết container 1280px.
-3. **Số liệu luôn `tabular-nums`.**
-4. **Phân tầng 3 cấp phải tách bạch rõ về khối lượng thị giác:** `EYEBROW → HEADING → BODY`. Lỗi hiện tại là heading và body quá gần nhau nên trang trông phẳng.
+1. **Tiêu đề luôn `text-balance`; body luôn `text-pretty`.** Tiếng Việt nhiều từ đơn âm, rất dễ rớt chữ lẻ cuối dòng. (`text-balance` đã có sẵn ở base cho h1..h4.)
+2. **Đo dòng:** lead ≤ `60ch`, body ≤ `68ch`. Không để dòng chữ dài hết container 1280px.
+3. **Số liệu luôn `tabular-nums`** và dùng `stretch-tight` để cột số dập gọn.
+4. **Mỗi section mở bằng một EYEBROW mono.** Đó là "điểm nhấn rõ hơn" mà feedback yêu cầu — mắt bắt được ranh giới section tức thì.
 
 ### 🔒 Thang chữ — chép nguyên class, đừng bịa cỡ mới
 
-Site đang có **57 lần dùng `text-[…]` tùy biến, 24 biến thể** (`text-[0.675rem]`, `text-[0.9375rem]`, `text-[0.95rem]`…). Từ nay chỉ dùng bảng này:
+Site đang có **57 lần dùng `text-[…]` tùy biến, 24 biến thể**. Từ nay chỉ dùng bảng này. Cỡ đã tách xa hơn để hierarchy rõ; `wdth`/leading đã nằm ở base nên class gọn lại:
 
 | Bậc | Class |
 |---|---|
-| **eyebrow** | `text-xs font-bold uppercase tracking-widest text-accent-teal` |
-| **display** | `font-display-lg text-[clamp(2.25rem,6vw,4.5rem)] font-extrabold leading-[0.95] tracking-[-0.03em] text-balance` |
-| **h1** | `font-display-lg text-3xl md:text-5xl font-extrabold leading-tight tracking-tight text-balance` |
-| **h2** | `font-headline-md text-2xl md:text-4xl font-bold leading-tight text-balance` |
-| **h3** | `text-xl md:text-2xl font-bold text-ink-dark leading-snug` |
-| **h4** | `text-base md:text-lg font-bold text-ink-dark leading-snug` |
-| **lead** | `text-base md:text-lg text-text-muted leading-relaxed max-w-[56ch] text-pretty` |
-| **body** | `text-sm md:text-base text-ink-mid leading-relaxed max-w-[65ch] text-pretty` |
+| **eyebrow** | `font-eyebrow text-xs uppercase tracking-widest text-accent-teal` |
+| **display** | `font-display-lg text-[clamp(2.5rem,6vw,5rem)] font-extrabold leading-[0.95] text-balance` |
+| **h1** | `font-display-lg text-4xl md:text-6xl font-extrabold text-balance` |
+| **h2** | `font-headline-md text-3xl md:text-5xl font-extrabold text-balance` |
+| **h3** | `text-xl md:text-3xl font-bold text-ink-dark` |
+| **h4** | `text-lg md:text-xl font-bold text-ink-dark` |
+| **lead** | `text-lg md:text-xl text-text-muted leading-relaxed max-w-[60ch] text-pretty` |
+| **body** | `text-base text-ink-mid leading-relaxed max-w-[68ch] text-pretty` |
 | **small** | `text-sm text-text-muted leading-snug` |
-| **stat** | `font-display-lg text-3xl sm:text-4xl md:text-5xl font-extrabold leading-none tabular-nums text-accent-gold` |
+| **stat** | `font-display-lg stretch-tight text-4xl sm:text-5xl md:text-6xl font-extrabold leading-none tabular-nums text-accent-gold` |
 | **statLabel** | `text-xs sm:text-sm text-text-muted leading-snug` |
 
 **Trên nền navy** đổi màu chữ: heading → `text-white` · lead/body → `text-white/85` · small → `text-white/60` · eyebrow → `text-accent-gold`
 
-> Chỉ `display` được phép dùng `clamp()`. Cần một cỡ chưa có trong bảng? **Bàn rồi thêm vào bảng**, đừng gõ thẳng vào component.
+> `wdth`, `letter-spacing`, `line-height` cho `h1..h4` đã cắm ở base — **đừng thêm `tracking-*`/`leading-*`** trừ khi cố ý ghi đè (như hero đa dòng). Cần một cỡ chưa có? **Bàn rồi thêm vào bảng**, đừng gõ thẳng vào component.
 
-### ⚠️ Nợ: `font-mono` chưa được khai báo
+### ✅ Đã trả nợ: mono + `:root`
 
-Không có `fontFamily.mono` trong `tailwind.config.mjs`, cũng không có biến `--mono`. Nếu định dùng nhãn mono kiểu "spec label", phải khai báo trước — và **đừng nạp webfont thứ ba**, dùng stack hệ thống:
-
-```css
-:root { --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace; }
-```
-
-Tương tự, `global.css` hiện **không có `:root` nào cả**. Tên font đang nằm rải trong `tailwind.config.mjs`. Muốn đổi font sau này thì sửa đúng một chỗ đó.
+`--mono` = stack mono **hệ thống** đã khai báo trong `global.css :root` (không webfont); `fontFamily.mono` và `fontFamily.eyebrow` trong `tailwind.config.mjs` đều trỏ `var(--mono)`. Tên font tập trung ở `:root`. Nợ mục 7 (Phụ lục C) đã đóng.
 
 ---
 

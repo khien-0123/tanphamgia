@@ -214,20 +214,19 @@ export const solutionHomeCarousel = {
   eyebrow: 'm-0 mb-3 text-xs font-bold uppercase tracking-widest text-accent-teal',
   headerText: 'max-w-2xl',
   title:
-    'font-headline-md text-2xl md:text-4xl font-bold leading-tight tracking-tight text-balance text-ink-dark m-0',
-  lead:
-    'text-base md:text-lg text-text-muted leading-relaxed max-w-[56ch] text-pretty mt-4 m-0',
-  grid: 'grid grid-cols-2 gap-4 lg:grid-cols-4 lg:gap-6',
-  card:
-    'solution-card group relative block aspect-[3/4] overflow-hidden rounded-xl bg-ink-dark no-underline text-white transition-[transform,box-shadow] duration-200 ease-nav-panel hover:-translate-y-1 hover:shadow-card focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-gold',
+    'font-headline-md font-bold text-ink-dark text-[clamp(1.75rem,4.5vw,3rem)] leading-tight tracking-normal text-balance m-0',
+  lead: 'text-pretty text-text-muted text-base md:text-lg leading-relaxed mt-3 md:mt-4 m-0',
+  grid: 'grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4 lg:gap-5',
+  card: 'group relative block aspect-[3/4] overflow-hidden rounded-2xl bg-home-section-muted no-underline text-ink-dark',
   media:
     'absolute inset-0 h-full w-full object-cover object-top opacity-[0.92] transition-transform duration-200 ease-nav-panel group-hover:scale-[1.03]',
   scrim:
     'pointer-events-none absolute inset-x-0 bottom-0 z-[1] h-[42%] bg-gradient-to-t from-ink-dark from-0% via-ink-dark/65 via-[36%] to-transparent',
   body: 'absolute inset-x-0 bottom-0 z-[2] flex flex-col gap-2 p-4 lg:p-5',
   heading:
-    'font-headline-md m-0 text-base font-bold leading-snug text-white text-balance line-clamp-2 transition-colors duration-200 group-hover:text-accent-gold',
-  desc: 'm-0 text-sm text-white/85 leading-relaxed line-clamp-2 text-pretty',
+    'font-headline-md m-0 font-bold leading-[1.2] tracking-normal text-ink-dark text-balance line-clamp-2 text-[clamp(0.8125rem,0.55vw+0.7rem,1.0625rem)]',
+  desc:
+    'm-0 text-[clamp(0.6875rem,0.35vw+0.58rem,0.8125rem)] leading-[1.5] text-ink-dark/72 line-clamp-2',
   cta:
     'mt-1 inline-flex w-fit text-sm font-bold text-white transition-colors duration-200 group-hover:text-accent-gold',
 };
@@ -236,7 +235,7 @@ export const solutionHomeCarousel = {
 export const solutionHomeIndex = {
   headerWrap: 'text-center mb-8 md:mb-10 lg:mb-12 max-w-3xl mx-auto',
   title:
-    'font-headline-md font-bold text-ink-dark text-xl leading-snug tracking-tight min-[390px]:text-[1.3125rem] text-balance md:text-4xl md:leading-tight md:tracking-normal m-0',
+    'font-headline-md font-bold text-ink-dark text-xl leading-snug tracking-normal min-[390px]:text-[1.3125rem] text-balance md:text-4xl md:leading-tight md:tracking-normal m-0',
   lead:
     'text-pretty text-text-muted text-sm md:text-base max-w-3xl mx-auto leading-relaxed mt-4 m-0',
   grid:

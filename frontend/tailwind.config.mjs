@@ -45,14 +45,18 @@ export default {
         'section-padding-desktop': '120px',
         'grid-gutter': '32px',
       },
+      /** Trỏ về biến trong global.css :root — đổi font chỉ sửa 1 chỗ duy nhất. */
       fontFamily: {
-        'body-lg': ['Work Sans', 'sans-serif'],
-        'body-md': ['Work Sans', 'sans-serif'],
-        'label-sm': ['Work Sans', 'sans-serif'],
-        'display-lg': ['Hanken Grotesk', 'sans-serif'],
-        eyebrow: ['Work Sans', 'sans-serif'],
-        'headline-md': ['Hanken Grotesk', 'sans-serif'],
-        'display-lg-mobile': ['Hanken Grotesk', 'sans-serif'],
+        'body-lg': ['var(--font-body)'],
+        'body-md': ['var(--font-body)'],
+        'label-sm': ['var(--font-body)'],
+        /* Eyebrow = giọng "spec label" → IBM Plex Mono, tách hẳn khỏi thân Archivo.
+           Đổi về var(--font-body) nếu muốn eyebrow trở lại sans. */
+        eyebrow: ['var(--mono)'],
+        'display-lg': ['var(--font-display)'],
+        'headline-md': ['var(--font-display)'],
+        'display-lg-mobile': ['var(--font-display)'],
+        mono: ['var(--mono)'],
       },
       fontSize: {
         'body-lg': ['18px', { lineHeight: '28px', fontWeight: '400' }],
