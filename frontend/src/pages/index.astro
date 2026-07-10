@@ -1,6 +1,5 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import SiteNav from '../components/SiteNav.astro';
+import SiteLayout from '../layouts/SiteLayout.astro';
 import HomeHero from '../components/home/HomeHero.astro';
 import HomeIntroSection from '../components/home/HomeIntroSection.astro';
 import HomeWhyChooseSection from '../components/home/HomeWhyChooseSection.astro';
@@ -9,15 +8,11 @@ import HomePartnersSection from '../components/home/HomePartnersSection.astro';
 import HomeFeaturedCases from '../components/home/HomeFeaturedCases.astro';
 import HomeDownloadTeaser from '../components/home/HomeDownloadTeaser.astro';
 import CertificateGallery from '../components/CertificateGallery.astro';
-import SiteCtaSection from '../components/SiteCtaSection.astro';
-import SiteFooter from '../components/SiteFooter.astro';
-import { seo, navigation, certificates } from '../data/site';
+import { seo, certificates } from '../data/site';
 import { routes } from '../lib/routes';
 ---
 
-<BaseLayout title={seo.title} description={seo.description}>
-  <SiteNav items={navigation} currentPath={routes.home} ctaHref={routes.taiLieu} />
-
+<SiteLayout title={seo.title} description={seo.description} currentPath={routes.home}>
   <HomeHero />
   <HomeIntroSection />
   <HomeWhyChooseSection />
@@ -26,7 +21,4 @@ import { routes } from '../lib/routes';
   <HomeFeaturedCases />
   <HomeDownloadTeaser />
   <CertificateGallery items={certificates} centeredTitle alternateSectionBg />
-
-  <SiteCtaSection />
-  <SiteFooter />
-</BaseLayout>
+</SiteLayout>

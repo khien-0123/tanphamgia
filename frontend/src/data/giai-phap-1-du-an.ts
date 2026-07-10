@@ -68,7 +68,7 @@ export const duAnGiaiPhap1: DuAnGiaiPhap1[] = [
     name: 'King Group',
     stats: '3.000+ áo polo | Hợp tác hơn 4 năm',
     field: 'Sản xuất bao bì công nghiệp',
-    image: siteAssets.cases.kingGroupAlt,
+    image: siteAssets.cases.kingGroup,
     intro:
       'Với quy mô lao động lớn, King Group thường xuyên phát sinh nhu cầu đặt mới và bổ sung đồng phục số lượng lớn. Doanh nghiệp cần một đối tác có khả năng duy trì chất lượng ổn định giữa nhiều đợt sản xuất và đảm bảo tiến độ cung ứng phục vụ vận hành nhà máy.',
     challenges: [

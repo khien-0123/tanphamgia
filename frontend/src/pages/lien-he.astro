@@ -1,17 +1,16 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import SiteNav from '../components/SiteNav.astro';
-import SiteFooter from '../components/SiteFooter.astro';
-import SiteCtaSection from '../components/SiteCtaSection.astro';
+import SiteLayout from '../layouts/SiteLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import ContactPageSection from '../components/contact/ContactPageSection.astro';
 import { pageSeo, pageHeroBg } from '../data/site';
 import { routes } from '../lib/routes';
 ---
 
-<BaseLayout title={pageSeo.lienHe.title} description={pageSeo.lienHe.description}>
-  <SiteNav currentPath={routes.lienHe} />
-
+<SiteLayout
+  title={pageSeo.lienHe.title}
+  description={pageSeo.lienHe.description}
+  currentPath={routes.lienHe}
+>
   <PageHero
     title="Liên hệ tư vấn"
     bgImage={pageHeroBg.lienHe}
@@ -23,7 +22,4 @@ import { routes } from '../lib/routes';
   />
 
   <ContactPageSection />
-
-  <SiteCtaSection />
-  <SiteFooter />
-</BaseLayout>
+</SiteLayout>

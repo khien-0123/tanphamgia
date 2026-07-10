@@ -1,0 +1,36 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import SiteNav from '../components/SiteNav.astro';
+import SiteCtaSection from '../components/SiteCtaSection.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  /** Đường dẫn trang hiện tại — highlight menu */
+  currentPath?: string;
+  /**
+   * true: hero tối phía dưới nav (pill khi chưa cuộn) — trang chủ & PageHero.
+   * false: nền sáng ngay từ đầu — flat nav + nền trắng như đã cuộn.
+   */
+  navOverDark?: boolean;
+  showCta?: boolean;
+  showFooter?: boolean;
+}
+
+const {
+  title,
+  description,
+  currentPath = '',
+  navOverDark = true,
+  showCta = true,
+  showFooter = true,
+} = Astro.props;
+---
+
+<BaseLayout title={title} description={description}>
+  <SiteNav currentPath={currentPath} navOverDark={navOverDark} />
+  <slot />
+  {showCta && <SiteCtaSection />}
+  {showFooter && <SiteFooter />}
+</BaseLayout>

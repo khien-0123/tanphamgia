@@ -1,0 +1,56 @@
+---
+import { solutionHomeSplit } from '../../lib/solution-theme';
+
+interface SolutionItem {
+  slug: string;
+  title: string;
+  desc: string;
+  image: string;
+  href: string;
+  bullets?: string[];
+}
+
+interface Props {
+  item: SolutionItem;
+  variant: 'featured' | 'stack';
+  loading?: 'eager' | 'lazy';
+  imageFallback: string;
+}
+
+const { item, variant, loading = 'lazy', imageFallback } = Astro.props;
+const t = solutionHomeSplit;
+const isFeatured = variant === 'featured';
+const bullets = item.bullets?.slice(0, 4) ?? [];
+---
+
+<a
+  id={`giai-phap-${item.slug}`}
+  href={item.href}
+  class:list={[t.cardBase, isFeatured ? t.featuredCard : t.stackCard]}
+>
+  <img
+    alt={item.title}
+    class:list={t.media}
+    decoding="async"
+    loading={loading}
+    src={item.image}
+    onerror={`this.onerror=null;this.src='${imageFallback}'`}
+  />
+  <div class:list={t.scrim} aria-hidden="true"></div>
+  <div class:list={[t.body, isFeatured ? t.featuredBody : t.stackBody]}>
+    <h3 class:list={[t.heading, isFeatured ? t.featuredHeading : t.stackHeading]}>
+      {item.title}
+    </h3>
+    <p class:list={[t.desc, isFeatured ? t.featuredDesc : t.stackDesc]}>{item.desc}</p>
+    {
+      bullets.length > 0 && (
+        <ul class={t.bullets}>
+          {bullets.map((bullet) => (
+            <li class={t.bulletItem}>{bullet}</li>
+          ))}
+        </ul>
+      )
+    }
+    <span class={t.cta}>Xem chi tiết</span>
+  </div>
+</a>
