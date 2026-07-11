@@ -1,6 +1,7 @@
 ---
 import { brandStory } from '../../data/gioi-thieu';
-import { mediaTextRowClass, mediaTextCellClass, mediaTextImgClass } from '../../lib/about-layout';
+import { mediaTextRowClass, mediaTextCellClass } from '../../lib/about-layout';
+import { imageRadius } from '../../lib/image-frame';
 import { RHYTHM_WHITE } from '../../lib/section-rhythm';
 
 interface Props {
@@ -8,6 +9,8 @@ interface Props {
 }
 
 const { sectionBg = RHYTHM_WHITE } = Astro.props;
+
+const imgClass = `block w-full ${imageRadius} object-cover h-[clamp(24rem,42vw,32rem)]`;
 ---
 
 <section class:list={['py-8 md:py-12', sectionBg]}>
@@ -19,12 +22,11 @@ const { sectionBg = RHYTHM_WHITE } = Astro.props;
           aria-hidden="true"
         ></span>
         <img
-          alt="chất lượng và thiết kế đồng phục — Tân Phạm Gia"x
-          class={mediaTextImgClass}
           src={brandStory.image}
           alt="Câu chuyện thương hiệu Tân Phạm Gia"
+          class={imgClass}
           loading="lazy"
-          class="block w-full rounded-[4px] object-cover h-[clamp(24rem,42vw,32rem)]"
+          decoding="async"
         />
         <div
           class="absolute left-4 bottom-4 max-w-[13rem] rounded-[4px] bg-ink-dark px-7 py-6 text-white md:-left-6 md:-bottom-6"
@@ -35,6 +37,20 @@ const { sectionBg = RHYTHM_WHITE } = Astro.props;
           </span>
         </div>
       </figure>
+
+      <div class={`${mediaTextCellClass} order-1 md:order-2`}>
+        <h2 class="text-pretty font-headline-md text-2xl md:text-3xl font-bold text-ink-dark mb-6">
+          <span class="md:hidden">
+            {brandStory.titleLines[0]}
+            <br />
+            Một Sản Phẩm May Mặc Chất{'\u00a0'}Lượng
+          </span>
+          <span class="hidden md:inline">{brandStory.title}</span>
+        </h2>
+        <div class="space-y-4 text-text-muted leading-relaxed">
+          {brandStory.paragraphs.map((p) => <p>{p}</p>)}
+        </div>
+      </div>
     </div>
   </div>
 </section>
