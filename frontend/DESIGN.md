@@ -8,14 +8,18 @@ description: >-
   Mọi giá trị dưới đây trích trực tiếp từ code trên nhánh main.
 
 colors:
-  # Mực — trục "Manufacture"
+  # Mực — trục "Manufacture". Thang: hue ~211°, sáng dần 15 → 23 → 26.
   primary: '#0E2640'              # ink-dark   · nav, footer, mọi tiêu đề trên nền sáng
   primary-soft: '#1A3A5C'         # ink-mid    · body nhấn
+  primary-light: '#1A4569'        # ink-light  · điểm dừng gradient panel nav
   secondary: '#102C4D'            # accent-teal · nhãn, link phụ, eyebrow
   secondary-container: '#E8EDF3'  # accent-teal-light
 
   # Vàng — trục "Fashion". Điểm nhấn DUY NHẤT.
-  tertiary: '#FFC933'             # accent-gold
+  # Thang: hue ~44°, sat 100%, sáng dần 39 → 60 → 77 → 93.
+  tertiary-dark: '#C9A000'        # accent-gold-dark  · vàng trên nền sáng (dấu ✓)
+  tertiary: '#FFC933'             # accent-gold       · CTA, số liệu
+  tertiary-mid: '#FFE08A'         # accent-gold-mid   · điểm sáng gradient
   tertiary-container: '#FFF6DC'   # accent-gold-light
 
   # Nền
@@ -37,10 +41,13 @@ colors:
 
 typography:
   display:
-    fontFamily: Hanken Grotesk    # 🔒 mọi tiêu đề
+    fontFamily: Archivo           # 🔒 mọi tiêu đề — variable, trục wdth 75..100
   body:
-    fontFamily: Work Sans         # 🔒 mọi văn bản
-  # Không có font thứ ba. Nạp qua Google Fonts trong BaseLayout.
+    fontFamily: Archivo           # 🔒 mọi văn bản — cùng một họ với tiêu đề
+  mono:
+    fontFamily: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace  # 🔒 eyebrow + nhãn spec
+  # MỘT webfont duy nhất (Archivo). Mono lấy từ stack hệ thống — KHÔNG nạp webfont thứ hai.
+  # Phân tầng đến từ weight + width (wdth) + case, không từ họ chữ thứ ba. Xem §Typography.
 
 spacing:
   container-max-width: 1280px     # 🔒
@@ -135,9 +142,40 @@ Nguyên văn yêu cầu khách.
 ### 🔒 Bốn quy tắc
 
 1. **Vàng không bao giờ là nền của một khối lớn.** Nó là đường chỉ, là số, là gạch — không phải mảng.
-2. **Không màu thứ tư.** Không đỏ cảnh báo, không xanh lá "thành công". (Đã thử brutalist hazard red → khách bác.)
+2. **Không màu thứ tư = không HUE thứ tư.** Không đỏ cảnh báo, không xanh lá "thành công". (Đã thử brutalist hazard red → khách bác.) **Sắc độ mới của hue sẵn có thì được** — miễn khai báo thành token, xem thang bên dưới.
 3. **Chữ trên nền tối:** trắng cho tiêu đề, `white/85` body, `white/60` breadcrumb. Không xám đặc.
 4. **Lớp phủ ảnh để chữ đọc được, không phải để làm ảnh tối cho sang.** Có chữ đè lên → giảm `opacity` của **ảnh** (0.25–0.34) rồi phủ gradient nhẹ. Không có chữ đè → không phủ gì. Caption ở góc → gradient **chỉ ở đáy**.
+
+### 🔒 Hai thang màu — sắc độ, không phải hue mới
+
+Đo bằng HSL: mọi token nằm trên **đúng hai thang**, chỉ khác độ sáng.
+
+| Thang | Token | Hue | Sáng | Dùng cho |
+|---|---|---|---|---|
+| **MỰC** | `ink-dark` #0E2640 | 211.2° | 15% | Nền tối, tiêu đề trên nền sáng |
+| | `accent-teal` #102C4D | 212.5° | 18% | Eyebrow, link phụ |
+| | `ink-mid` #1A3A5C | 210.9° | 23% | Body nhấn, panel nổi trên nền tối |
+| | `ink-light` #1A4569 | 207.3° | 26% | Điểm dừng gradient |
+| **VÀNG** | `accent-gold-dark` #C9A000 | 47.8° | 39% | **Vàng đặt trên nền sáng** |
+| | `accent-gold` #FFC933 | 44.1° | 60% | CTA, số liệu, gạch chân |
+| | `accent-gold-mid` #FFE08A | 44.1° | 77% | Điểm sáng gradient |
+| | `accent-gold-light` #FFF6DC | 44.6° | 93% | Nền nhạt |
+
+### ⚠️ Vàng thương hiệu KHÔNG đọc được trên nền trắng
+
+Đo trên `#FFFFFF`:
+
+| Màu | Tương phản | |
+|---|---|---|
+| `accent-gold` #FFC933 | **1.54:1** | ❌ trượt cả ngưỡng 3:1 |
+| `accent-gold-dark` #C9A000 | **2.47:1** | ❌ vẫn trượt 3:1 |
+| `ink-dark` #0E2640 | 15.33:1 | ✅ |
+
+Luật "accent-gold dùng cho **dấu ✓**" ở trên tạo ra một dấu ✓ **gần như vô hình**. Hiện `CaseStudyStory` dùng `accent-gold-dark` — đỡ hơn nhưng vẫn không đạt AA.
+
+**Chấp nhận được vì đó là dấu đầu dòng trang trí** (`before:content-["✓"]`), nghĩa nằm ở chữ bên cạnh, WCAG không áp 4.5:1.
+
+⛔ **Nhưng đừng dùng vàng cho chữ mang nghĩa trên nền sáng.** Cần chữ vàng đọc được → dùng `ink-dark`, hoặc đặt vàng trên nền `ink-dark`.
 
 ### ⚠️ Hai cặp màu đang TRƯỢT WCAG AA
 
@@ -159,7 +197,11 @@ Cách sửa: đổi chữ sang `ink-mid` #1A3A5C, hoặc đổi nền sang `surf
 
 ### ⚠️ Có một sắc vàng lạc trong production
 
-`home/HomeFeaturedCases.astro` dùng **`#f2c300` chín lần**. Đó **không phải** vàng thương hiệu (`#FFC933`). Đừng chép sang chỗ khác. Tổng cộng site có **29 hex thô** trong class Tailwind (`#111` ×9, `#f8faf9` ×2…) — mọi màu mới phải đi qua token.
+`home/HomeFeaturedCases.astro` dùng **`#f2c300` chín lần**. Đó **không phải** vàng thương hiệu (`#FFC933`). Đừng chép sang chỗ khác.
+
+Đo trên `main` (`75d4239`): site từng có **45 hex thô** / 6 file. **Đã dọn hết — còn 0.** Cách làm và bằng chứng đo: **Phụ lục D7**.
+
+Mọi màu mới phải đi qua token.
 
 ### 🔒 Nhịp nền section — xen kẽ xám / trắng
 
@@ -198,7 +240,7 @@ Nạp một request duy nhất trong `BaseLayout.astro`. Tên font sống trong 
 
 | Giọng | Cơ chế | Đọc ra |
 |---|---|---|
-| **HEADING** | Archivo `font-weight 800` + `wdth` nén (85–93%) + leading siết (0.98–1.1) | Nặng, hẹp, dập khuôn — vế *Manufacturing* |
+| **HEADING** | Archivo `font-weight 700` 🔒 + `wdth` nén (85–93%) + leading siết (0.98–1.1) | Nặng, hẹp, dập khuôn — vế *Manufacturing* |
 | **EYEBROW / SUBHEAD** | IBM Plex Mono, IN HOA, `tracking-widest` | Nhãn kỹ thuật, tách hẳn thân — vế *Technical* |
 | **BODY** | Archivo `font-weight 400`, khổ 100%, `leading` 1.7 | Nới, thoáng, dễ đọc dài — vế *Editorial* |
 
@@ -277,6 +319,53 @@ Site đang có **9 biến thể** `py-*` khác nhau. Từ nay:
 ### ⚠️ Nợ: 3 token spacing chết
 
 `section-padding-mobile`, `section-padding-desktop`, `grid-gutter` trong `tailwind.config.mjs` có **0 lần được dùng**. Chúng khiến người đọc config tin vào giá trị sai. Hoặc dùng, hoặc xóa.
+
+### 🔒 KHÔNG có gạch vàng TRÊN ĐẦU tiêu đề / dòng chữ
+
+Cấm vạch vàng đặt **phía trên** một tiêu đề hay dòng chữ như trang trí dẫn đầu — kinh điển là `<div class="h-1 w-10 bg-accent-gold">` ngay trên `<h2>`, hoặc `::before` gạch vàng trên đầu một eyebrow/nhãn. **Không ngoại lệ.**
+
+Lý do đo được, không phải khẩu vị: `accent-gold` `#FFC933` trên nền trắng cho tỉ lệ tương phản **1.54:1**, trên `background` `#F7FAF9` là **1.46:1**. Bão hoà cao nhưng gần như không chênh độ sáng — thành vạch chói, dẫn mắt sai.
+
+**Thay bằng:** để tiêu đề đứng một mình; cần ký hiệu thứ tự thì dùng **số thật** (`01`, `03`).
+
+**Phạm vi hẹp — chỉ cấm cái nằm TRÊN ĐẦU chữ.** Vàng vẫn được dùng thoải mái ở chỗ khác: nền tô nút/badge, chữ vàng trên navy (9.97:1), dấu `+` nhấn, thanh chỉ vị trí, và **gạch vàng trượt DƯỚI số khi hover** (§Quy trình, `.flow-no::after` — hợp lệ, vì nó dưới số chứ không trên đầu tiêu đề).
+
+### 🔒 Đường kẻ dựng bằng lưới, không bằng `border`
+
+Tham chiếu `industrial-brutalist-ui §8.1`. Muốn chia ô dữ liệu thì **không khai báo `border`**:
+
+```html
+<!-- cha giữ màu kẻ, con nền đặc → khe 1px lộ ra thành hairline -->
+<ul class="grid gap-px bg-border-subtle md:grid-cols-2">
+  <li class="bg-white p-6 md:p-8">…</li>
+</ul>
+```
+
+Với `<table>` thì cơ chế tương đương là `border-separate border-spacing-px` + `bg-border-subtle` trên `<table>`, `bg-white` trên `<td>`.
+
+**Bẫy phải kiểm trước khi dùng:** nếu số phần tử **không chia hết cho số cột**, ô cuối hàng bỏ trống sẽ để lộ nguyên mảng `bg-border-subtle` thành khối xám. Đếm dữ liệu trước. (Trang chi tiết giải pháp an toàn: `issues` = 4 trên 2 cột, `processSteps` = 6 trên 2 hoặc 3 cột.)
+
+Hệ quả: `border` gần như biến mất khỏi component. `SolutionDetailPage.astro` hiện có **0 khai báo `border`**.
+
+### 🔒 Tiêu đề section dùng `clamp()`, không nhảy bậc breakpoint
+
+Tham chiếu `industrial-brutalist-ui §8.3`. Chữ macro phải giãn liên tục theo viewport:
+
+```
+text-balance text-[clamp(1.75rem,4.2vw,3.25rem)] font-bold leading-[1.02] text-ink-dark
+```
+
+**Không** thêm `tracking-tight`. Archivo đã tự nén bề ngang (`h2 { font-stretch: 89% }` trong `global.css`); siết thêm là nén hai lần, chữ dính vào nhau.
+
+### 🔒 Icon phải phân biệt được các mục
+
+Icon là thông tin, không phải trang trí. Nếu **mọi mục trong danh sách dùng chung một icon**, nó không mã hoá gì cả — bỏ đi, hoặc thay bằng icon riêng cho từng mục.
+
+Ví dụ đúng: dải "Phù hợp cho" ở trang chi tiết giải pháp — 19 ngành / 4 trang, mỗi ngành một icon (`factory`, `local_hospital`, `account_balance`…), tra qua map `INDUSTRY_ICON` khoá theo đúng chuỗi trong data.
+
+Icon trên nền sáng tô `text-accent-teal` (**13.43:1**), không bao giờ `text-accent-gold`.
+
+> **Ghi chú nguồn:** `.agents/skills/` nằm trong `.gitignore` nên đồng đội **không thấy** nó. Chỉ những luật đã được chốt mới chép vào đây; `.agents/` là thư viện tham khảo cá nhân, không phải hợp đồng. Trong đó có ít nhất 3 skill mâu thuẫn nhau về border và bo góc — đừng theo cả ba.
 
 ---
 
@@ -615,3 +704,128 @@ Khách tự đặt trần 60 ký tự.
 | 8 | `rounded-[0.625rem]` trong `SiteNav` | Bo góc ngoài thang | Đưa về thang |
 
 > Có một script chặn lệch tự động (`scripts/design-lint.mjs` + baseline ratchet: bắt hex thô, cỡ chữ tự chế, font literal, thang bo góc đảo, token chết) nằm ở nhánh `work/design-md`. Nếu nhóm muốn, cherry-pick sang `main` — nó không vào bundle, chỉ chạy khi `npm run check`.
+
+---
+
+# Phụ lục D — Báo cáo đồng bộ theo Trang chủ
+
+> **Đo trực tiếp từ code trên `main` (`75d4239`).**
+>
+> ⚠️ **Kết luận ngược với kỳ vọng:** Trang chủ là chuẩn tốt về **cấu trúc**, nhưng là chuẩn **tệ** về **token**.
+>
+> Site đang có **45 hex thô** trong 6 file. Kẻ phạm lỗi nặng nhất **không phải trang chủ** mà là `lib/solution-theme.ts` (**17 lần**) — một file **dùng chung**, nên lỗi rò sang mọi trang import nó. Trang chủ đứng thứ hai (14).
+>
+> **Đồng bộ mù theo trang chủ sẽ phát tán lỗi và làm cả site chật hơn** — đúng cái "phẳng, thiếu không khí" khách đã chê. Lấy cấu trúc, đừng lấy giá trị.
+
+## D1. Nhịp nền trang chủ — 🔒 chép công thức này
+
+| # | Section | Nền | Vai trò |
+|---|---|---|---|
+| 1 | `HomeHero` | ảnh/video + phủ tối | Mở màn |
+| 2 | `HomeIntroSection` | `bg-white` | Nội dung |
+| 3 | `HomeWhyChooseSection` | `bg-surface-fresh` (thẻ trong là `bg-ink-dark`) | Nội dung |
+| 4 | `HomeSolutionsGrid` | `bg-white` | Nội dung |
+| 5 | `HomePartnersSection` | `bg-surface-fresh` | Bằng chứng |
+| 6 | **`HomeFeaturedCases`** | **`bg-ink-dark`** | **Dải navy DUY NHẤT** |
+| 7 | `HomeDownloadTeaser` | `bg-white` | Bắt lead |
+| 8 | `CertificateGallery` | `bg-surface-fresh` | Bằng chứng |
+
+**Quy tắc:** `white` ⇄ `surface-fresh` xen kẽ; **đúng một** dải `ink-dark`, đặt ở khối *bằng chứng*, **không** kề hero / `SiteCtaSection` / footer. Mọi trang con áp theo.
+
+## D2. Từ vựng LẤY từ trang chủ 🔒
+
+| Hạng mục | Giá trị chuẩn | Bằng chứng |
+|---|---|---|
+| Khung trang | `max-w-container-max-width mx-auto px-6 md:px-8` | 8 lần (chủ) + 18 lần (khác) — đã thống nhất |
+| Tiêu đề section | `font-headline-md font-bold text-ink-dark text-2xl md:text-4xl leading-tight text-balance` | `lib/solution-theme.ts` |
+| Lead | `text-text-muted text-sm md:text-base leading-relaxed text-pretty` | 〃 |
+| Motion | `data-reveal` | 20 (chủ) + 41 (khác) |
+| Thẻ ảnh | ảnh phủ + scrim đáy + tiêu đề đè + hover `scale-[1.02]` | `solutionHomeMosaic` |
+| Nút chính | `bg-accent-gold text-ink-dark rounded-full font-bold shadow-soft hover:shadow-gold hover:scale-105` | 〃 |
+
+## D3. Lỗi của trang chủ — ⚠️ KHÔNG chép
+
+| Lỗi | Số lần | Nằm ở | Phải thành |
+|---|---|---|---|
+| Hex thô `#f2c300` ×9 / `#1a1a1a` ×2 / `#111` ×2 | **13** | `home/HomeFeaturedCases.astro` | `accent-gold` / `ink-dark` |
+| Hex thô `#111` | 1 | `home/HomeNewsSection.astro` *(file chết)* | xóa file |
+| `tracking-tight` chồng lên Archivo vốn đã nén | 4 | `lib/solution-theme.ts` | **bỏ hẳn** |
+| Cỡ chữ tự chế `text-[0.675rem]`, `text-[0.9rem]`… | 21 | rải khắp home | thang §Typography |
+| Shadow thô `shadow-[0_12px_40px…]` | 2 | home + lib | `shadow-card` |
+| `rounded-[8px]` ngoài thang bo góc | — | `solutionHomeMosaic` | thang `rounded` |
+
+> Vì `tracking-tight` nằm trong `lib/solution-theme.ts` (**dùng chung**), lỗi này rò sang cả trang Giải pháp. Sửa 1 chỗ, khỏi 2 trang.
+
+## D4. Đối chiếu & hành động
+
+| Chiều | Trang chủ | Trang khác | Hành động |
+|---|---|---|---|
+| **Nhịp dọc** | `py-8 md:py-12` ×3, `py-8/14`, `py-10/12`, `py-12/16/20`, `pt-8 pb-16` — **5 biến thể** | `py-8/12` ×10, `py-16/24` ×6, `py-24/36`, `py-20/32`, `py-10/16` | ⛔ **Đừng hạ trang khác xuống theo trang chủ.** Chốt 3 bậc — xem D6 |
+| Hex thô | 14 | 31 (xem bảng D4b) | Sửa `lib/solution-theme.ts` **trước** — nó dùng chung |
+| Tracking âm | 4 (trong lib dùng chung) | 0 | Gỡ khỏi `solution-theme.ts` |
+| `rounded-2xl` (đang cấm) | 0 | 2 | Sửa `DocumentDownloadForm.astro`, `solution-theme.ts` |
+| Khung trang / motion | ✅ | ✅ | Không phải làm gì |
+| Eyebrow | 3/9 file | 10 file | ⛔ Xem D6 |
+
+## D4b. Hex thô — đo toàn site, theo file (45 lần / 6 file)
+
+| File | Số lần | Giá trị | Loại | Ưu tiên |
+|---|---|---|---|---|
+| **`lib/solution-theme.ts`** | **17** | `#111`×9 `#ecece7`×5 `#d8d7cf`×2 `#e8e1c2` | **dùng chung** | 🔴 **1** — sửa 1 chỗ, khỏi nhiều trang |
+| `home/HomeFeaturedCases.astro` | 13 | `#f2c300`×9 `#1a1a1a`×2 `#111`×2 | trang chủ | 🔴 **2** — vàng sai thương hiệu |
+| `SiteNav.astro` | 6 | `#f8faf9`×2 `#ffe08a` `#e7eeeb` `#1a4569` `#163a5c` | **dùng chung** | 🟠 3 |
+| `CaseStudyStory.astro` | 6 | `#111`×4 `#ecece7` `#c9a000` | trang khác (1 nơi import) | 🟠 4 |
+| `SolutionPlanSplit.astro` | 2 | `#111`×2 | **chết** (0 import) | 🟢 xóa file |
+| `home/HomeNewsSection.astro` | 1 | `#111` | **chết** (0 import) | 🟢 xóa file |
+
+> Xóa 2 file chết là trừ ngay 3 lần. Sửa `solution-theme.ts` + `HomeFeaturedCases` là trừ 30/45.
+
+## D5. Dọn dẹp phát hiện thêm
+
+1. **Hai component chết, không nơi nào import:**
+   - `home/HomeNewsSection.astro` — đúng với Sitemap (trang chủ chỉ có 1.1–1.9, không có block Tin tức). Chứa 1 hex thô + 1 tracking âm.
+   - `SolutionPlanSplit.astro` — chứa 2 hex thô.
+
+   **Xóa được cả hai.**
+2. **Token `section-padding-mobile: 64px` / `section-padding-desktop: 120px`** trong `tailwind.config.mjs` — **0 lần dùng**. Nhịp thực tế đang chạy 32/48px, **chật hơn 2–2.5 lần** so với ý định thiết kế. Đây là nguyên nhân đo được của lời chê "phẳng, thiếu không khí".
+3. **Nợ C7 đã trả**: `:root` + `--font-display` / `--font-body` / `--mono` đã có trong `global.css`; `fontFamily.mono` đã có trong config.
+4. ✅ **Đã chốt**: heading `font-weight: 700` (không phải 800). Doc và `global.css` đã khớp.
+
+## D6. Quyết định của nhóm
+
+| # | Vấn đề | Trạng thái |
+|---|---|---|
+| 1 | Nhịp dọc mặc định | ✅ **CHỐT `py-16 md:py-24`** (bậc `md` ở §Layout). Không hạ xuống `py-8 md:py-12` theo trang chủ. |
+| 2 | Heading font-weight | ✅ **CHỐT `700`**. |
+| 3 | **Eyebrow giữ hay bỏ?** | ⛔ **CHƯA QUYẾT.** Trang chủ hầu như bỏ eyebrow, dẫn thẳng bằng tiêu đề đậm; 10 file trang khác vẫn dùng. Giữ → dùng `font-eyebrow` (mono, in hoa) làm giọng thứ ba. Bỏ → gỡ ở cả 10 file. **Không được để hai kiểu song song.** |
+
+## D7. Dọn hex thô — đã làm 38/45
+
+Thay bằng token, build sạch 27 trang:
+
+| File | Đã sửa | Ánh xạ |
+|---|---|---|
+| `lib/solution-theme.ts` | 17 | `#111` → `ink-dark` · 3 sắc xám ấm → `border-subtle` |
+| `home/HomeFeaturedCases.astro` | 13 | `#f2c300` → `accent-gold` · `#1a1a1a` → **`ink-mid`** · `#111` → `ink-dark` |
+| `CaseStudyStory.astro` | 5 | `#111` → `ink-dark` · `#ecece7` → `border-subtle` |
+| `SiteNav.astro` | 3 | `#f8faf9` → `background` · `#e7eeeb` → `border-subtle` |
+
+> **`#1a1a1a` không map sang `ink-dark`** được: hai thẻ case nằm **trên nền `bg-ink-dark`**, map vậy thì thẻ tan vào nền. Dùng `ink-mid` để thẻ nổi lên như panel.
+
+### ✅ Hex thô: 45 → 0
+
+Ba bước cuối, mỗi bước có bằng chứng đo được:
+
+1. **Xóa 8 file mồ côi** (0 tham chiếu) → trừ 3 hex.
+2. **`#163a5c` → `ink-mid`.** Đo ΔE (CIE76) = **0.79** — dưới ngưỡng mắt phân biệt (1.0). Lệch đúng 4 đơn vị kênh đỏ. Thay là miễn phí.
+3. **Ba hex cuối KHÔNG thay — đặt tên.** Đo HSL cho thấy chúng không phải màu thứ tư mà là **ba nấc còn thiếu trên hai thang** (`#ffe08a` trùng *chính xác* hue 44.1° / sat 100% với `accent-gold`). Nên khai báo thành token với **đúng giá trị cũ**:
+
+   | Hex | Token mới | Nơi dùng |
+   |---|---|---|
+   | `#1a4569` | `ink-light` | điểm dừng gradient nav |
+   | `#ffe08a` | `accent-gold-mid` | điểm sáng gạch vàng |
+   | `#c9a000` | `accent-gold-dark` | dấu ✓ |
+
+> **Không đổi một pixel.** Đã kiểm CSS build: `accent-gold-dark` emit ra `rgb(201 160 0 / 1)` — cùng giá trị `#c9a000`, chỉ khác cách viết. Tailwind emit token dạng `rgb()` nên **không được kiểm bằng cách grep hex**.
+
+> Giả thuyết ban đầu ("`#c9a000` chọn để đạt AA") **sai**: nó chỉ đạt 2.47:1, trượt cả ngưỡng 3:1. Xem §Colors — vàng không đọc được trên nền trắng.

@@ -4,17 +4,17 @@ import { imageRadius, portraitCardFrame } from './image-frame';
 export type SolutionTheme = 1 | 2 | 3 | 4;
 
 const issueCardBorder: Record<SolutionTheme, string> = {
-  1: 'border-[#d8d7cf]',
-  2: 'border-[#ecece7]',
-  3: 'border-[#ecece7]',
-  4: 'border-[#ecece7]',
+  1: 'border-border-subtle',
+  2: 'border-border-subtle',
+  3: 'border-border-subtle',
+  4: 'border-border-subtle',
 };
 
 const stepItemBorder: Record<SolutionTheme, string> = {
-  1: 'border-[#d8d7cf]',
-  2: 'border-[#ecece7]',
-  3: 'border-[#e8e1c2]',
-  4: 'border-[#ecece7]',
+  1: 'border-border-subtle',
+  2: 'border-border-subtle',
+  3: 'border-border-subtle',
+  4: 'border-border-subtle',
 };
 
 const accentBeforeWidth: Record<SolutionTheme, string> = {
@@ -32,10 +32,10 @@ const accentBeforeBg: Record<SolutionTheme, string> = {
 };
 
 const numBadge: Record<SolutionTheme, string> = {
-  1: 'bg-accent-gold text-[#111]',
-  2: 'bg-accent-gold text-[#111]',
-  3: 'bg-accent-gold text-[#111]',
-  4: 'bg-accent-gold text-[#111]',
+  1: 'bg-accent-gold text-ink-dark',
+  2: 'bg-accent-gold text-ink-dark',
+  3: 'bg-accent-gold text-ink-dark',
+  4: 'bg-accent-gold text-ink-dark',
 };
 
 const heroGrid: Record<SolutionTheme, string> = {
@@ -60,15 +60,15 @@ const issueGrid: Record<SolutionTheme, string> = {
 };
 
 const caseCard: Record<SolutionTheme, string> = {
-  1: `bg-[#111] text-white min-h-[190px] relative overflow-hidden ${imageRadius}`,
-  2: `bg-[#111] text-white min-h-[190px] relative overflow-hidden ${imageRadius}`,
-  3: `bg-[#111] text-white min-h-[230px] relative overflow-hidden ${imageRadius} border border-accent-gold`,
-  4: `bg-[#111] text-white min-h-[190px] relative overflow-hidden ${imageRadius}`,
+  1: `bg-ink-dark text-white min-h-[190px] relative overflow-hidden ${imageRadius}`,
+  2: `bg-ink-dark text-white min-h-[190px] relative overflow-hidden ${imageRadius}`,
+  3: `bg-ink-dark text-white min-h-[230px] relative overflow-hidden ${imageRadius} border border-accent-gold`,
+  4: `bg-ink-dark text-white min-h-[190px] relative overflow-hidden ${imageRadius}`,
 };
 
 export function getSolutionTheme(theme: SolutionTheme) {
   return {
-    page: 'bg-white text-[#111]',
+    page: 'bg-white text-ink-dark',
     section: 'py-8 md:py-12 bg-white [&_h2]:text-balance',
     heroGrid: heroGrid[theme],
     heroImage: `w-full aspect-[4/5] object-cover object-top ${imageRadius}`,
