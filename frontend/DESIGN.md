@@ -310,6 +310,53 @@ Site đang có **9 biến thể** `py-*` khác nhau. Từ nay:
 
 `section-padding-mobile`, `section-padding-desktop`, `grid-gutter` trong `tailwind.config.mjs` có **0 lần được dùng**. Chúng khiến người đọc config tin vào giá trị sai. Hoặc dùng, hoặc xóa.
 
+### 🔒 KHÔNG có gạch vàng TRÊN ĐẦU tiêu đề / dòng chữ
+
+Cấm vạch vàng đặt **phía trên** một tiêu đề hay dòng chữ như trang trí dẫn đầu — kinh điển là `<div class="h-1 w-10 bg-accent-gold">` ngay trên `<h2>`, hoặc `::before` gạch vàng trên đầu một eyebrow/nhãn. **Không ngoại lệ.**
+
+Lý do đo được, không phải khẩu vị: `accent-gold` `#FFC933` trên nền trắng cho tỉ lệ tương phản **1.54:1**, trên `background` `#F7FAF9` là **1.46:1**. Bão hoà cao nhưng gần như không chênh độ sáng — thành vạch chói, dẫn mắt sai.
+
+**Thay bằng:** để tiêu đề đứng một mình; cần ký hiệu thứ tự thì dùng **số thật** (`01`, `03`).
+
+**Phạm vi hẹp — chỉ cấm cái nằm TRÊN ĐẦU chữ.** Vàng vẫn được dùng thoải mái ở chỗ khác: nền tô nút/badge, chữ vàng trên navy (9.97:1), dấu `+` nhấn, thanh chỉ vị trí, và **gạch vàng trượt DƯỚI số khi hover** (§Quy trình, `.flow-no::after` — hợp lệ, vì nó dưới số chứ không trên đầu tiêu đề).
+
+### 🔒 Đường kẻ dựng bằng lưới, không bằng `border`
+
+Tham chiếu `industrial-brutalist-ui §8.1`. Muốn chia ô dữ liệu thì **không khai báo `border`**:
+
+```html
+<!-- cha giữ màu kẻ, con nền đặc → khe 1px lộ ra thành hairline -->
+<ul class="grid gap-px bg-border-subtle md:grid-cols-2">
+  <li class="bg-white p-6 md:p-8">…</li>
+</ul>
+```
+
+Với `<table>` thì cơ chế tương đương là `border-separate border-spacing-px` + `bg-border-subtle` trên `<table>`, `bg-white` trên `<td>`.
+
+**Bẫy phải kiểm trước khi dùng:** nếu số phần tử **không chia hết cho số cột**, ô cuối hàng bỏ trống sẽ để lộ nguyên mảng `bg-border-subtle` thành khối xám. Đếm dữ liệu trước. (Trang chi tiết giải pháp an toàn: `issues` = 4 trên 2 cột, `processSteps` = 6 trên 2 hoặc 3 cột.)
+
+Hệ quả: `border` gần như biến mất khỏi component. `SolutionDetailPage.astro` hiện có **0 khai báo `border`**.
+
+### 🔒 Tiêu đề section dùng `clamp()`, không nhảy bậc breakpoint
+
+Tham chiếu `industrial-brutalist-ui §8.3`. Chữ macro phải giãn liên tục theo viewport:
+
+```
+text-balance text-[clamp(1.75rem,4.2vw,3.25rem)] font-bold leading-[1.02] text-ink-dark
+```
+
+**Không** thêm `tracking-tight`. Archivo đã tự nén bề ngang (`h2 { font-stretch: 89% }` trong `global.css`); siết thêm là nén hai lần, chữ dính vào nhau.
+
+### 🔒 Icon phải phân biệt được các mục
+
+Icon là thông tin, không phải trang trí. Nếu **mọi mục trong danh sách dùng chung một icon**, nó không mã hoá gì cả — bỏ đi, hoặc thay bằng icon riêng cho từng mục.
+
+Ví dụ đúng: dải "Phù hợp cho" ở trang chi tiết giải pháp — 19 ngành / 4 trang, mỗi ngành một icon (`factory`, `local_hospital`, `account_balance`…), tra qua map `INDUSTRY_ICON` khoá theo đúng chuỗi trong data.
+
+Icon trên nền sáng tô `text-accent-teal` (**13.43:1**), không bao giờ `text-accent-gold`.
+
+> **Ghi chú nguồn:** `.agents/skills/` nằm trong `.gitignore` nên đồng đội **không thấy** nó. Chỉ những luật đã được chốt mới chép vào đây; `.agents/` là thư viện tham khảo cá nhân, không phải hợp đồng. Trong đó có ít nhất 3 skill mâu thuẫn nhau về border và bo góc — đừng theo cả ba.
+
 ---
 
 ## Elevation & Depth
