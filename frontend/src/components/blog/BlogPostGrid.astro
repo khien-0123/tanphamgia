@@ -1,6 +1,5 @@
 ---
-import BlogPostTitle from '../BlogPostTitle.astro';
-import BlogPostFigure from '../BlogPostFigure.astro';
+import BlogPostCard from './BlogPostCard.astro';
 import type { BlogPost } from '../../data/site';
 
 interface Props {
@@ -10,31 +9,12 @@ interface Props {
 const { items } = Astro.props;
 ---
 
-<div data-reveal-stagger class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
+<div data-reveal-stagger class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 md:gap-10">
   {
     items.map((post) => (
-      <article data-reveal class="group">
-        <a href={post.href} class="block no-underline text-inherit">
-          <BlogPostFigure
-            src={post.image}
-            alt={post.alt}
-            class="mb-5"
-            imgClass="transition-transform duration-500 group-hover:scale-[1.05]"
-          />
-          <span
-            class="font-bold text-xs uppercase tracking-widest mb-3 block"
-            style={post.categoryColor ? `color: ${post.categoryColor}` : undefined}
-          >
-            {post.category}
-          </span>
-          <BlogPostTitle
-            post={post}
-            as="h2"
-            class="text-lg font-bold text-ink-dark mb-3 group-hover:text-accent-gold transition-colors leading-snug"
-          />
-          <p class="text-text-muted text-sm leading-relaxed line-clamp-3">{post.excerpt}</p>
-        </a>
-      </article>
+      <div data-reveal class="h-full">
+        <BlogPostCard post={post} variant="default" />
+      </div>
     ))
   }
 </div>
