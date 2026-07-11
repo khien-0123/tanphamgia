@@ -1,4 +1,6 @@
 ---
+import { RHYTHM_ALT, RHYTHM_WHITE } from '../lib/section-rhythm';
+
 interface Certificate {
   title: string;
   image: string;
@@ -8,11 +10,20 @@ interface Props {
   items: Certificate[];
   /** Căn giữa tiêu đề trên trang chủ */
   centeredTitle?: boolean;
-  /** Nền xám xen kẽ section trang chủ */
+  /** Nền section — xen kẽ xám/trắng */
+  sectionBg?: string;
+  /** @deprecated Dùng sectionBg */
   alternateSectionBg?: boolean;
 }
 
-const { items, centeredTitle = false, alternateSectionBg = false } = Astro.props;
+const {
+  items,
+  centeredTitle = false,
+  sectionBg,
+  alternateSectionBg = false,
+} = Astro.props;
+
+const resolvedSectionBg = sectionBg ?? (alternateSectionBg ? RHYTHM_ALT : RHYTHM_WHITE);
 
 /** Chia đều N chứng nhận vào N cột */
 function buildColumns(certs: Certificate[], colCount: number) {
@@ -39,7 +50,7 @@ const speedClasses = [
 <section
   class:list={[
     'pt-16 pb-8 md:pt-20 md:pb-10 overflow-hidden w-full',
-    alternateSectionBg ? 'bg-surface-fresh' : 'bg-white',
+    resolvedSectionBg,
   ]}
   id="chung-nhan"
 >

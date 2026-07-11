@@ -68,9 +68,9 @@ export const siteAssets = {
     betrimex: '/images/cases/betrimex.webp',
   },
   about: {
-    brandStory: '/images/about/brand-story.jpg',
+    brandStory: '/images/about/brand-story.png',
     production1: '/images/about/production-1.jpg',
-    production2: '/images/about/production-2.webp',
+    production2: '/images/about/qc-5-tang.png',
     heThongSanXuat: '/images/about/he-thong-san-xuat.png',
     sanPhamMoiThang: '/images/about/san-pham-moi-thang.png',
     dongHanhTuVanBanGiao: '/images/about/dong-hanh-tu-van-ban-giao.png',
@@ -80,7 +80,8 @@ export const siteAssets = {
     kinhNghiem: '/images/why-choose/kinh-nghiem.png',
     thoiTrangHoa: '/images/why-choose/thoi-trang-hoa.jpg',
     nangLucSanXuat: '/images/why-choose/nang-luc-san-xuat.png',
-    qc: '/images/why-choose/qc.png',
+    /** Ảnh thẻ QC — nhà thiết kế thời trang */
+    qc: '/images/why-choose/professional-beautiful-asian-female-fashion-designer-working-with-fabric-sketches.jpg',
   },
 } as const;
 

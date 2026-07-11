@@ -275,7 +275,7 @@ export const whyChoose = [
     desc: 'Kiểm soát từ nguyên liệu đến thành phẩm — đồng bộ chất lượng qua nhiều đợt sản xuất, chủ động tiến độ.',
     image: siteAssets.whyChoose.qc,
     imageAlt: 'Đội ngũ QC kiểm tra thành phẩm đồng phục trước bàn giao',
-    imagePosition: 'object-center',
+    imagePosition: 'object-[center_40%]',
   },
 ];
 
