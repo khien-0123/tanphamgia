@@ -7,7 +7,9 @@ import { paginate } from '../utils/pagination';
 import { routes } from '../lib/routes';
 import { rhythmBg } from '../lib/section-rhythm';
 
-const { items, currentPage, totalPages } = paginate(blogPosts, 1, BLOG_POSTS_PER_PAGE);
+const featuredPost = blogPosts[0];
+const listingPosts = blogPosts.slice(1);
+const { items, currentPage, totalPages } = paginate(listingPosts, 1, BLOG_POSTS_PER_PAGE);
 ---
 
 <SiteLayout
@@ -25,5 +27,11 @@ const { items, currentPage, totalPages } = paginate(blogPosts, 1, BLOG_POSTS_PER
     ]}
   />
 
-  <BlogListingSection items={items} currentPage={currentPage} totalPages={totalPages} sectionBg={rhythmBg(0)} />
+  <BlogListingSection
+    featuredPost={featuredPost}
+    items={items}
+    currentPage={currentPage}
+    totalPages={totalPages}
+    sectionBg={rhythmBg(0)}
+  />
 </SiteLayout>

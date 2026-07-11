@@ -421,6 +421,8 @@ export interface BlogPost {
   category: string;
   categoryColor?: string;
   badge?: string;
+  /** ISO 8601 — hiển thị trên thẻ tin tức */
+  publishedAt: string;
   image: string;
   alt: string;
   href?: string;
@@ -434,6 +436,7 @@ const blogPostsRaw: Omit<BlogPost, 'href'>[] = [
     category: 'Kiến Thức Vải',
     categoryColor: '#102C4D',
     badge: 'Must Read',
+    publishedAt: '2025-07-13',
     image: siteAssets.blog.chonVaiPolo,
     alt: 'Cách chọn vải Polo',
   },
@@ -444,6 +447,7 @@ const blogPostsRaw: Omit<BlogPost, 'href'>[] = [
     excerpt: 'Xu hướng thiết kế đồng phục tối giản giúp thương hiệu B2B trông sang trọng và dễ nhận diện.',
     category: 'Xu Hướng Thiết Kế',
     categoryColor: '#2c4c34',
+    publishedAt: '2025-05-04',
     image: siteAssets.blog.dongPhucToiGian,
     alt: 'Xu hướng Branding',
   },
@@ -453,6 +457,7 @@ const blogPostsRaw: Omit<BlogPost, 'href'>[] = [
     excerpt: 'Bài học vận hành xưởng may quy mô lớn — từ lập kế hoạch đến QC đa tầng trước khi bàn giao.',
     category: 'Vận Hành',
     categoryColor: '#a63e2d',
+    publishedAt: '2025-05-04',
     image: siteAssets.blog.sanXuat10000,
     alt: 'Vận Hành',
   },
@@ -462,6 +467,7 @@ const blogPostsRaw: Omit<BlogPost, 'href'>[] = [
     excerpt: 'Tổng hợp mẫu đồng phục y tế mới — chất liệu kháng khuẩn, form dáng thoải mái cho môi trường bệnh viện.',
     category: 'Catalog',
     categoryColor: '#1a2b8c',
+    publishedAt: '2025-06-17',
     image: siteAssets.blog.medicalUniform,
     alt: 'Catalog',
   },
