@@ -1,5 +1,12 @@
 ---
 import { teamDepartments } from '../../data/gioi-thieu';
+import { RHYTHM_WHITE } from '../../lib/section-rhythm';
+
+interface Props {
+  sectionBg?: string;
+}
+
+const { sectionBg = RHYTHM_WHITE } = Astro.props;
 ---
 
 <section class="bg-white py-[clamp(4.5rem,9vw,8rem)]">

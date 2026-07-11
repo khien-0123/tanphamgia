@@ -13,12 +13,19 @@ import {
   whyChooseParallaxShellClasses,
   whyChooseSlideClasses,
 } from '../../lib/why-choose-classes';
+import { RHYTHM_WHITE } from '../../lib/section-rhythm';
+
+interface Props {
+  sectionBg?: string;
+}
+
+const { sectionBg = RHYTHM_WHITE } = Astro.props;
 
 const imageFallback = siteAssets.hero.fallback;
 const stackCount = whyChoose.length;
 ---
 
-<section class="bg-surface-fresh why-choose-section" id="tai-sao">
+<section class:list={[sectionBg, 'why-choose-section']} id="tai-sao">
   <header data-reveal class:list={whyChooseIntroClasses}>
     <p class="font-eyebrow text-xs uppercase tracking-[0.18em] text-accent-teal mb-3 m-0">
       {homeWhyChoose.eyebrow}
@@ -87,10 +94,27 @@ const stackCount = whyChoose.length;
     height: 48%;
     background: linear-gradient(
       to top,
-      rgb(0 0 0) 0%,
-      rgb(0 0 0 / 0.82) 42%,
+      rgb(14 38 64 / 0.72) 0%,
+      rgb(16 44 77 / 0.38) 45%,
       transparent 100%
     );
+  }
+
+  /* Mobile: gradient xanh nhạt hơn — tránh vùng dưới chữ trông như nền đen */
+  @media (max-width: 767px) {
+    .why-choose-scrim {
+      height: 38%;
+      background: linear-gradient(
+        to top,
+        rgb(14 38 64 / 0.48) 0%,
+        rgb(16 44 77 / 0.22) 55%,
+        transparent 100%
+      );
+    }
+
+    .why-choose-frame {
+      background-color: rgb(16 44 77 / 0.2);
+    }
   }
 
   .why-choose-parallax {

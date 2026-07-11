@@ -68,11 +68,11 @@ const eyebrowClass = 'font-eyebrow text-xs uppercase tracking-[0.2em] font-mediu
     </div>
   </header>
 
-  <AboutBrandStory />
-  <AboutTimeline />
-  <AboutMissionVision />
-  <AboutProductionCapacity />
-  <AboutTeamGrid />
-  <CertificateGallery items={certificateImages} />
+  <AboutBrandStory sectionBg={rhythmBg(0)} />
+  <AboutTimeline sectionBg={rhythmBg(1)} />
+  <AboutMissionVision sectionBg={rhythmBg(2)} />
+  <AboutProductionCapacity sectionBg={rhythmBg(3)} />
+  <AboutTeamGrid sectionBg={rhythmBg(4)} />
+  <CertificateGallery items={certificateImages} sectionBg={rhythmBg(5)} />
   <TestimonialsSlider items={testimonials} variant="dark" />
 </SiteLayout>

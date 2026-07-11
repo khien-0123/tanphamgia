@@ -14,6 +14,8 @@
   --font-display: 'Archivo', system-ui, sans-serif;
   --font-body: 'Archivo', system-ui, sans-serif;
   --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', 'Courier New', monospace;
+  /* Nền section xen kẽ — xám nhạt, trung tính (#EDEDED) */
+  --color-surface-alt: 237 237 237;
 }
 
 @layer base {

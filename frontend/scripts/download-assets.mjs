@@ -50,15 +50,15 @@ const downloads = [
   [`${BASE}/2025/11/1-220.jpg`, 'images/blog/san-xuat-10000-ao-thun-7-ngay.jpg'],
   [`${BASE}/2025/12/RHM_khach-hang-scaled.webp`, 'images/blog/medical-uniform-2025.webp'],
 
-  // Giới thiệu — xưởng may
-  [`${BASE}/2022/12/Gioi-Thieu-Cong-Ty-May-Dong-Phuc-2.jpg`, 'images/about/brand-story.jpg'],
+  // Giới thiệu — xưởng may (brand-story.png: ảnh tùy chỉnh, không tải đè)
   [`${BASE}/2023/03/quy-mo-xuong-may-dong-phuc-Tan-Pham-Gia.jpg`, 'images/about/production-1.jpg'],
-  [`${BASE}/2025/12/kiem-soat-qc_4-muc.webp`, 'images/about/production-2.webp'],
+  // qc-5-tang.png: ảnh tùy chỉnh Kiểm soát chất lượng 5 tầng — không tải đè
 
   // Section Tại sao chọn — ảnh tối, tương phản chữ trắng (Unsplash)
   ['https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=1920&q=85', 'images/why-choose/kinh-nghiem.jpg'],
   ['https://images.unsplash.com/photo-1594938298603-c8148c4dae35?auto=format&fit=crop&w=1920&q=85', 'images/why-choose/thoi-trang-hoa.jpg'],
   ['https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1920&q=85', 'images/why-choose/nang-luc-san-xuat.jpg'],
+  // thiet-ke-thoi-trang.png: ảnh tùy chỉnh thẻ QC — không tải đè
   ['https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1920&q=85', 'images/why-choose/qc.jpg'],
 
   // Case study — ảnh từ dongphucvn.vn/du-an/ và thư viện khách hàng TPG (tải về public/, không hotlink)

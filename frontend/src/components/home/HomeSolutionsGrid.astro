@@ -2,6 +2,13 @@
 import { solutions } from '../../data/site';
 import { siteAssets } from '../../data/assets';
 import { solutionHomeMosaic } from '../../lib/solution-theme';
+import { RHYTHM_WHITE } from '../../lib/section-rhythm';
+
+interface Props {
+  sectionBg?: string;
+}
+
+const { sectionBg = RHYTHM_WHITE } = Astro.props;
 
 const imageFallback = siteAssets.hero.fallback;
 const t = solutionHomeMosaic;
@@ -9,7 +16,7 @@ const t = solutionHomeMosaic;
 
 <section
   id="giai-phap"
-  class={t.section}
+  class:list={['relative z-[2] py-10 md:py-12 text-ink-dark', sectionBg]}
 >
   <div class="max-w-container-max-width mx-auto px-6 md:px-8">
     <div data-reveal class={t.headerWrap}>
@@ -46,7 +53,12 @@ const t = solutionHomeMosaic;
                 isCompactHover && 'solutions-mosaic__card--compact',
               ]}
             >
-              <a class={t.cardLink} href={item.href}>
+              <a
+                class={t.cardLink}
+                href={item.href}
+                data-solutions-mosaic-link
+                aria-expanded="false"
+              >
                 <img
                   alt={item.title}
                   class:list={[t.media, item.homeImagePosition ?? 'object-top']}
@@ -105,6 +117,8 @@ const t = solutionHomeMosaic;
   </div>
 </section>
 
+<script src="../../scripts/solutions-mosaic-mobile.ts"></script>
+
 <style>
   /* Lưới mosaic: hàng trên cao hơn để khung ngang/nhỏ không cắt mất đầu người */
   .solutions-mosaic__grid {
@@ -139,13 +153,6 @@ const t = solutionHomeMosaic;
       0 6px 20px rgb(0 0 0 / 0.4);
   }
 
-  .solutions-mosaic__grid a:is(:hover, :focus-visible) .solutions-mosaic-body,
-  .solutions-mosaic__grid a:is(:hover, :focus-visible) .solutions-mosaic-body * {
-    text-shadow:
-      0 1px 4px rgb(0 0 0 / 0.8),
-      0 8px 22px rgb(0 0 0 / 0.48);
-  }
-
   /* Mặc định chỉ tiêu đề; hover/focus bung nội dung */
   .solutions-mosaic-reveal {
     display: grid;
@@ -162,40 +169,13 @@ const t = solutionHomeMosaic;
     overflow: hidden;
   }
 
-  .solutions-mosaic__grid a:is(:hover, :focus-visible) .solutions-mosaic-scrim {
-    height: 86%;
-    background: linear-gradient(
-      to top,
-      rgb(0 0 0 / 0.8) 0%,
-      rgb(0 0 0 / 0.68) 34%,
-      rgb(0 0 0 / 0.46) 60%,
-      rgb(0 0 0 / 0.18) 80%,
-      transparent 96%
-    );
-  }
-
-  .solutions-mosaic__grid .solutions-mosaic__card--compact a:is(:hover, :focus-visible) .solutions-mosaic-scrim {
-    height: 80%;
-    background: linear-gradient(
-      to top,
-      rgb(0 0 0 / 0.78) 0%,
-      rgb(0 0 0 / 0.64) 32%,
-      rgb(0 0 0 / 0.42) 58%,
-      rgb(0 0 0 / 0.16) 78%,
-      transparent 94%
-    );
-  }
-
-  .solutions-mosaic__grid a:is(:hover, :focus-visible) .solutions-mosaic-reveal {
-    grid-template-rows: 1fr;
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .solutions-mosaic-scrim,
-    .solutions-mosaic-reveal {
-      transition: none;
+  /* Desktop: hover/focus sổ nội dung */
+  @media (min-width: 768px) {
+    .solutions-mosaic__grid a:is(:hover, :focus-visible) .solutions-mosaic-body,
+    .solutions-mosaic__grid a:is(:hover, :focus-visible) .solutions-mosaic-body * {
+      text-shadow:
+        0 1px 4px rgb(0 0 0 / 0.8),
+        0 8px 22px rgb(0 0 0 / 0.48);
     }
 
     .solutions-mosaic__grid a:is(:hover, :focus-visible) .solutions-mosaic-scrim {
@@ -225,7 +205,118 @@ const t = solutionHomeMosaic;
     .solutions-mosaic__grid a:is(:hover, :focus-visible) .solutions-mosaic-reveal {
       grid-template-rows: 1fr;
       opacity: 1;
-      transform: none;
+      transform: translateY(0);
+    }
+  }
+
+  /* Mobile: tap mở — class .is-expanded (JS) */
+  @media (max-width: 767px) {
+    .solutions-mosaic__grid a.is-expanded .solutions-mosaic-body,
+    .solutions-mosaic__grid a.is-expanded .solutions-mosaic-body * {
+      text-shadow:
+        0 1px 4px rgb(0 0 0 / 0.8),
+        0 8px 22px rgb(0 0 0 / 0.48);
+    }
+
+    .solutions-mosaic__grid a.is-expanded .solutions-mosaic-scrim {
+      height: 86%;
+      background: linear-gradient(
+        to top,
+        rgb(0 0 0 / 0.8) 0%,
+        rgb(0 0 0 / 0.68) 34%,
+        rgb(0 0 0 / 0.46) 60%,
+        rgb(0 0 0 / 0.18) 80%,
+        transparent 96%
+      );
+    }
+
+    .solutions-mosaic__grid .solutions-mosaic__card--compact a.is-expanded .solutions-mosaic-scrim {
+      height: 80%;
+      background: linear-gradient(
+        to top,
+        rgb(0 0 0 / 0.78) 0%,
+        rgb(0 0 0 / 0.64) 32%,
+        rgb(0 0 0 / 0.42) 58%,
+        rgb(0 0 0 / 0.16) 78%,
+        transparent 94%
+      );
+    }
+
+    .solutions-mosaic__grid a.is-expanded .solutions-mosaic-reveal {
+      grid-template-rows: 1fr;
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .solutions-mosaic-scrim,
+    .solutions-mosaic-reveal {
+      transition: none;
+    }
+
+    @media (min-width: 768px) {
+      .solutions-mosaic__grid a:is(:hover, :focus-visible) .solutions-mosaic-scrim {
+        height: 86%;
+        background: linear-gradient(
+          to top,
+          rgb(0 0 0 / 0.8) 0%,
+          rgb(0 0 0 / 0.68) 34%,
+          rgb(0 0 0 / 0.46) 60%,
+          rgb(0 0 0 / 0.18) 80%,
+          transparent 96%
+        );
+      }
+
+      .solutions-mosaic__grid .solutions-mosaic__card--compact a:is(:hover, :focus-visible) .solutions-mosaic-scrim {
+        height: 80%;
+        background: linear-gradient(
+          to top,
+          rgb(0 0 0 / 0.78) 0%,
+          rgb(0 0 0 / 0.64) 32%,
+          rgb(0 0 0 / 0.42) 58%,
+          rgb(0 0 0 / 0.16) 78%,
+          transparent 94%
+        );
+      }
+
+      .solutions-mosaic__grid a:is(:hover, :focus-visible) .solutions-mosaic-reveal {
+        grid-template-rows: 1fr;
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    @media (max-width: 767px) {
+      .solutions-mosaic__grid a.is-expanded .solutions-mosaic-scrim {
+        height: 86%;
+        background: linear-gradient(
+          to top,
+          rgb(0 0 0 / 0.8) 0%,
+          rgb(0 0 0 / 0.68) 34%,
+          rgb(0 0 0 / 0.46) 60%,
+          rgb(0 0 0 / 0.18) 80%,
+          transparent 96%
+        );
+      }
+
+      .solutions-mosaic__grid .solutions-mosaic__card--compact a.is-expanded .solutions-mosaic-scrim {
+        height: 80%;
+        background: linear-gradient(
+          to top,
+          rgb(0 0 0 / 0.78) 0%,
+          rgb(0 0 0 / 0.64) 32%,
+          rgb(0 0 0 / 0.42) 58%,
+          rgb(0 0 0 / 0.16) 78%,
+          transparent 94%
+        );
+      }
+
+      .solutions-mosaic__grid a.is-expanded .solutions-mosaic-reveal {
+        grid-template-rows: 1fr;
+        opacity: 1;
+        transform: none;
+      }
     }
   }
 </style>

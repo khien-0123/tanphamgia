@@ -1,9 +1,16 @@
 ---
 import { timeline, timelineSection } from '../../data/gioi-thieu';
 import { timelineItemBaseClass } from '../../lib/about-layout';
+import { RHYTHM_WHITE } from '../../lib/section-rhythm';
+
+interface Props {
+  sectionBg?: string;
+}
+
+const { sectionBg = RHYTHM_WHITE } = Astro.props;
 ---
 
-<section class="py-8 md:py-12 bg-[linear-gradient(180deg,#ffffff_0%,#f7faf9_45%,#ffffff_100%)]">
+<section class:list={['py-8 md:py-12', sectionBg]}>
   <div class="max-w-container-max-width mx-auto px-6 md:px-8 mb-8 md:mb-10">
     <p data-reveal class="font-eyebrow text-xs uppercase tracking-[0.18em] text-accent-teal mb-3">
       {timelineSection.eyebrow}

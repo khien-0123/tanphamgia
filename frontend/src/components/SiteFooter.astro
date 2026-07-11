@@ -12,10 +12,10 @@ const socialBox =
 
 <footer class="bg-ink-dark text-white pt-12 pb-6 md:pt-16 md:pb-8" id="lien-he">
   <div
-    class="max-w-container-max-width mx-auto px-6 md:px-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-8 xl:gap-10"
+    class="max-w-container-max-width mx-auto px-6 md:px-8 grid grid-cols-2 lg:grid-cols-5 gap-x-6 gap-y-8 md:gap-10 lg:gap-8 xl:gap-10"
   >
-    <!-- Cột thương hiệu -->
-    <div class="sm:col-span-2 lg:col-span-1 space-y-5">
+    <!-- Cột thương hiệu — full width mobile -->
+    <div class="col-span-2 lg:col-span-1 space-y-5">
       <SiteBrandLogo onDark footer />
       <p class="m-0 text-sm leading-relaxed text-white/60">
         {siteFooter.tagline}
@@ -105,7 +105,7 @@ const socialBox =
         }
       </ul>
       <a
-        class="mt-6 inline-block"
+        class="mt-6 hidden lg:inline-block"
         href={siteFooter.ministryCert.href}
         target="_blank"
         rel="noopener noreferrer"
@@ -121,7 +121,7 @@ const socialBox =
       </a>
     </div>
 
-    <!-- Tin tức & tải tài liệu -->
+    <!-- Tin tức -->
     <div>
       <h4 class={footerHeading}>Tin tức</h4>
       <ul class="m-0 list-none space-y-3 p-0">
@@ -135,23 +135,26 @@ const socialBox =
           ))
         }
       </ul>
-      <h4 class:list={[footerHeading, 'mt-6']}>Tải tài liệu</h4>
-      <a
-        class="inline-flex items-center gap-2 rounded-full bg-accent-gold px-5 py-2.5 text-xs font-bold uppercase tracking-wide text-ink-dark no-underline transition-all hover:scale-105 hover:shadow-gold"
-        href={siteFooter.download.href}
-      >
-        <span>{siteFooter.download.label}</span>
-        <span
-          class="inline-flex h-6 w-6 items-center justify-center rounded-full bg-ink-dark/10"
-          aria-hidden="true"
+      <!-- Desktop: tải tài liệu nằm cùng cột tin tức -->
+      <div class="mt-6 hidden lg:block">
+        <h4 class={footerHeading}>Tải tài liệu</h4>
+        <a
+          class="inline-flex items-center gap-2 rounded-full bg-accent-gold px-5 py-2.5 text-xs font-bold uppercase tracking-wide text-ink-dark no-underline transition-all hover:scale-105 hover:shadow-gold"
+          href={siteFooter.download.href}
         >
-          <span class="material-symbols-outlined text-base leading-none">download</span>
-        </span>
-      </a>
+          <span>{siteFooter.download.label}</span>
+          <span
+            class="inline-flex h-6 w-6 items-center justify-center rounded-full bg-ink-dark/10"
+            aria-hidden="true"
+          >
+            <span class="material-symbols-outlined text-base leading-none">download</span>
+          </span>
+        </a>
+      </div>
     </div>
 
     <!-- Liên hệ -->
-    <div class="sm:col-span-2 lg:col-span-1">
+    <div>
       <h4 class={footerHeading}>Liên hệ</h4>
       <ul class="m-0 list-none space-y-4 p-0 text-sm text-white/70">
         <li class="flex gap-3">
@@ -173,6 +176,42 @@ const socialBox =
           <a class={footerLink} href={siteContact.emailHref}>{siteContact.email}</a>
         </li>
       </ul>
+    </div>
+
+    <!-- Mobile: tải tài liệu + Bộ Công Thương — hàng cuối -->
+    <div class="col-span-2 grid grid-cols-2 gap-x-6 gap-y-4 lg:hidden">
+      <div>
+        <h4 class={footerHeading}>Tải tài liệu</h4>
+        <a
+          class="inline-flex items-center gap-2 rounded-full bg-accent-gold px-5 py-2.5 text-xs font-bold uppercase tracking-wide text-ink-dark no-underline transition-all hover:scale-105 hover:shadow-gold"
+          href={siteFooter.download.href}
+        >
+          <span>{siteFooter.download.label}</span>
+          <span
+            class="inline-flex h-6 w-6 items-center justify-center rounded-full bg-ink-dark/10"
+            aria-hidden="true"
+          >
+            <span class="material-symbols-outlined text-base leading-none">download</span>
+          </span>
+        </a>
+      </div>
+      <div class="flex items-end">
+        <a
+          class="inline-block"
+          href={siteFooter.ministryCert.href}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            class="h-14 w-auto"
+            src={siteFooter.ministryCert.image}
+            alt={siteFooter.ministryCert.alt}
+            loading="lazy"
+            width="150"
+            height="56"
+          />
+        </a>
+      </div>
     </div>
   </div>
 

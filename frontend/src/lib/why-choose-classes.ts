@@ -26,7 +26,7 @@ export const whyChooseFrameScrimClasses =
   'why-choose-scrim pointer-events-none absolute inset-x-0 bottom-0 z-[1]';
 
 export const whyChooseFrameBodyClasses = [
-  'absolute inset-x-0 bottom-0 z-[2]',
+  'absolute inset-x-0 bottom-[60px] md:bottom-[68px] lg:bottom-[76px] z-[2]',
   'flex flex-col gap-2 md:gap-3',
   'p-6 md:p-8 lg:p-10',
   'text-left',

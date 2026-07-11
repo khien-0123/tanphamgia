@@ -25,6 +25,7 @@ colors:
   # Nền
   background: '#F7FAF9'
   surface: '#FFFFFF'              # surface-warm
+  surface-alt: '#EDEDED'          # xen kẽ section — biến --color-surface-alt trong global.css
   surface-fresh: '#EEF6F3'
   surface-container-low: '#F1F5F4'
   surface-muted: '#E8EEEC'        # ⚠️ xem §Colors — trượt AA với text-muted
@@ -135,6 +136,7 @@ Nguyên văn yêu cầu khách.
 | `accent-teal` #102C4D | Eyebrow, link phụ, số thứ tự. Là *màu chữ*, gần như không bao giờ là màu nền. |
 | `accent-gold` #FFC933 | **Điểm nhấn duy nhất.** CTA chính, số liệu, gạch chân hover, dấu `✓` |
 | `text-muted` #5F6F78 | Body phụ, caption |
+| `surface-alt` #EDEDED | Nền section xen kẽ (xám nhạt). Đổi tại `--color-surface-alt` trong `global.css`. |
 | `error` #E05252 | Chỉ trong validation form |
 
 ### 🔒 Bốn quy tắc
@@ -201,11 +203,19 @@ Cách sửa: đổi chữ sang `ink-mid` #1A3A5C, hoặc đổi nền sang `surf
 
 Mọi màu mới phải đi qua token.
 
-### 🔓 Nhịp nền — đang thiết kế lại
+### 🔒 Nhịp nền section — xen kẽ xám / trắng
 
-Khách yêu cầu *"nhiều nhịp thị giác hơn — xen kẽ trắng / xám / navy / texture / khối màu lớn."*
+Triển khai qua `lib/section-rhythm.ts`:
 
-Thực tế đang đếm được: `bg-white` **39 lần**, `surface-fresh` 5, `surface-muted` 3, `accent-gold-light` 2. Đây chính là cái "phẳng, đều" khách chê.
+```ts
+rhythmBg(0)       → bg-surface-alt   // xám #EDEDED — index chẵn
+rhythmBg(1)       → bg-white         // index lẻ
+rhythmBgWhiteFirst(0) → bg-white     // riêng /khach-hang — trắng trước
+```
+
+- Mỗi section lớn: `sectionBg={rhythmBg(n)}`, đếm `n` từ section **đầu tiên sau** `PageHero` / hero trang chủ.
+- `surface-fresh` chỉ dùng accent nhỏ (pill, badge) — **không** thay `surface-alt` trên section lớn.
+- Ngoại lệ navy: `HomeFeaturedCases`, `TestimonialsSlider variant="dark"` (giữ nguyên quy tắc dưới).
 
 **Section navy giữa nội dung — ĐƯỢC PHÉP, có điều kiện:**
 
@@ -435,6 +445,7 @@ Không copy-paste class giữa các component. Đã có:
 | File | Chứa gì |
 |---|---|
 | `lib/routes.ts` | **Mọi đường dẫn nội bộ.** `routes.giaiPhap`, `solutionHref()`, `caseStudyHref()`, `blogPostHref()`, `blogPageHref()`, `solutionAnchorHref()`. **Không hard-code `/giai-phap/...`** |
+| `lib/section-rhythm.ts` | `rhythmBg()`, `rhythmBgWhiteFirst()` — nền section xen kẽ |
 | `lib/site-config.ts` | Domain qua env: `siteUrl`, `legacyUrl()`, `absoluteUrl()`. **Không hard-code domain** |
 | `lib/image-frame.ts` | Khung + bo góc ảnh (xem §Shapes) |
 | `lib/form-classes.ts` | `formLabelClass`, `formInputClass`, `docDownloadBtnClass` |

@@ -1,4 +1,9 @@
 ---
+/**
+ * @deprecated Dùng CaseStudyNarrative — giữ file để tương thích import cũ.
+ */
+import CaseStudyNarrative from './solution/CaseStudyNarrative.astro';
+
 interface Props {
   challenges: string[];
   solutions: string[];
@@ -6,38 +11,6 @@ interface Props {
 }
 
 const { challenges, solutions, results } = Astro.props;
-
-const blocks = [
-  { num: '01', title: 'Thách thức', items: challenges },
-  { num: '02', title: 'Giải pháp', items: solutions },
-  { num: '03', title: 'Kết quả', items: results, isResult: true },
-];
-
-const listItemBase =
-  'relative pl-[0.9rem] text-sm leading-relaxed text-ink-dark/85 before:content-[""] before:absolute before:left-0 before:top-[0.58rem] before:w-[0.3rem] before:h-[0.3rem] before:rounded-full before:bg-accent-gold';
-
-const listItemResult =
-  'relative pl-[1.35rem] text-sm leading-relaxed text-ink-dark/85 before:content-["✓"] before:absolute before:left-0 before:top-[0.05rem] before:w-auto before:h-auto before:bg-transparent before:text-accent-gold-dark before:text-xs before:font-bold';
 ---
 
-<section aria-label="Chi tiết dự án">
-  <div class="grid gap-8 lg:grid-cols-3 lg:gap-0">
-    {
-      blocks.map((block) => (
-        <article class="border-l-[3px] border-accent-gold pl-[1.15rem] lg:border-l-0 lg:pl-0 [&+&]:lg:border-l [&+&]:lg:border-border-subtle [&+&]:lg:pl-8 [&+&]:lg:ml-8">
-          <h2 class="flex items-center gap-2 m-0 mb-4 text-[0.8125rem] font-bold tracking-[0.1em] uppercase text-ink-dark">
-            <span class="inline-flex items-center justify-center min-w-7 h-7 px-1.5 rounded-full bg-accent-gold text-ink-dark text-[0.65rem] font-extrabold tracking-wide">
-              {block.num}
-            </span>
-            {block.title}
-          </h2>
-          <ul class="m-0 p-0 list-none grid gap-3">
-            {block.items.map((item) => (
-              <li class={block.isResult ? listItemResult : listItemBase}>{item}</li>
-            ))}
-          </ul>
-        </article>
-      ))
-    }
-  </div>
-</section>
+<CaseStudyNarrative challenges={challenges} solutions={solutions} results={results} />

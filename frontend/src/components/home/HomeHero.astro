@@ -37,10 +37,10 @@ const heroOverlay = heroMedia.video
     <div class="flex flex-1 flex-col items-center justify-center w-full">
       <div class="w-full flex flex-col items-center md:inline-grid md:w-max md:max-w-full md:mx-auto md:[grid-template-columns:minmax(0,max-content)] md:justify-items-stretch">
         <h1
-          class="font-display-lg text-2xl sm:text-3xl md:text-4xl lg:text-[2.75rem] font-extrabold mb-5 flex flex-col gap-2 md:gap-1 leading-[1.35] md:leading-[1.12] tracking-normal md:tracking-normal md:[grid-row:1]"
+          class="font-display-lg font-extrabold mb-5 flex flex-col gap-2 md:gap-1 leading-[1.35] md:leading-[1.12] tracking-normal md:tracking-normal md:[grid-row:1]"
         >
-          <span class="block md:whitespace-nowrap">Đồng Phục Chuẩn Thương Hiệu.</span>
-          <span class="block text-accent-gold text-[1.125rem] sm:text-3xl md:text-4xl lg:text-[2.75rem] md:whitespace-nowrap">
+          <span class="block text-[3.5rem] md:whitespace-nowrap">Đồng Phục Chuẩn Thương Hiệu.</span>
+          <span class="block text-[3.5rem] text-accent-gold md:whitespace-nowrap">
             Chuẩn Tiến Độ. Chuẩn Từng Chiếc.
           </span>
         </h1>
@@ -78,7 +78,13 @@ const heroOverlay = heroMedia.video
               i > 0 && 'border-l border-white/20 pl-2 md:pl-5',
             ]}
           >
-            <dt class="text-xl sm:text-2xl md:text-4xl font-extrabold text-white mb-0.5 md:mb-1 leading-none">{item.value}</dt>
+            <dt
+              class="text-xl sm:text-2xl md:text-4xl font-extrabold text-white mb-0.5 md:mb-1 leading-none tabular-nums"
+              data-hero-stat-counter
+              data-hero-stat-target={item.value}
+            >
+              {item.value}
+            </dt>
             <dd class="text-[0.625rem] sm:text-[0.6875rem] md:text-xs text-white/70 leading-snug m-0">{item.label}</dd>
           </div>
         ))
@@ -86,3 +92,5 @@ const heroOverlay = heroMedia.video
     </dl>
   </div>
 </header>
+
+<script src="../../scripts/hero-stats-counter.ts"></script>
