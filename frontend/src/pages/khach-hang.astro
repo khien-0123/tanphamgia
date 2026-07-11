@@ -6,6 +6,7 @@ import ClientCaseStudyGrid from '../components/clients/ClientCaseStudyGrid.astro
 import TestimonialsSlider from '../components/TestimonialsSlider.astro';
 import { pageSeo, clientCaseStudies, testimonialsClients, pageHeroBg } from '../data/site';
 import { routes } from '../lib/routes';
+import { rhythmBgWhiteFirst } from '../lib/section-rhythm';
 ---
 
 <SiteLayout
@@ -23,7 +24,7 @@ import { routes } from '../lib/routes';
     ]}
   />
 
-  <ClientLogosSection />
-  <ClientCaseStudyGrid items={clientCaseStudies} />
-  <TestimonialsSlider items={testimonialsClients} variant="light" />
+  <ClientLogosSection sectionBg={rhythmBgWhiteFirst(0)} />
+  <ClientCaseStudyGrid items={clientCaseStudies} sectionBg={rhythmBgWhiteFirst(1)} />
+  <TestimonialsSlider items={testimonialsClients} variant="light" sectionBg={rhythmBgWhiteFirst(2)} />
 </SiteLayout>

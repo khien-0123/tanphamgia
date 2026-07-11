@@ -2,10 +2,17 @@
 import { homeCatalogCovers } from '../../data/assets';
 import { routes } from '../../lib/routes';
 import { imageRadius } from '../../lib/image-frame';
+import { RHYTHM_WHITE } from '../../lib/section-rhythm';
+
+interface Props {
+  sectionBg?: string;
+}
+
+const { sectionBg = RHYTHM_WHITE } = Astro.props;
 ---
 <section
   id="tai-lieu"
-  class="pt-8 pb-16 md:pt-12 md:pb-20 bg-white text-ink-dark overflow-visible"
+  class:list={['pt-8 pb-16 md:pt-12 md:pb-20 text-ink-dark overflow-visible', sectionBg]}
 >
   <div
     class="max-w-container-max-width mx-auto px-6 md:px-8 grid md:grid-cols-2 gap-8 md:gap-16 items-center overflow-visible"

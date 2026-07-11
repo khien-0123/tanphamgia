@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./src/**/*.{astro,html,js,ts,md}'],
+  safelist: ['bg-surface-alt', 'bg-white'],
   darkMode: 'class',
   theme: {
     extend: {
@@ -14,6 +15,8 @@ export default {
         background: '#F7FAF9',
         'surface-warm': '#FFFFFF',
         'surface-fresh': '#EEF6F3',
+        /** Nền section xen kẽ — xám nhạt (#EDEDED), qua --color-surface-alt */
+        'surface-alt': 'rgb(var(--color-surface-alt) / <alpha-value>)',
         'surface-neutral': '#DDE3EA',
         'surface-container-low': '#F1F5F4',
         'surface-muted': '#E8EEEC',

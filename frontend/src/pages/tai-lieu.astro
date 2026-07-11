@@ -10,6 +10,7 @@ import {
   guideDocuments,
 } from '../data/tai-lieu';
 import { routes } from '../lib/routes';
+import { rhythmBg } from '../lib/section-rhythm';
 
 const allDocuments = [...brandDocuments, ...catalogueDocuments, ...guideDocuments];
 ---
@@ -33,6 +34,6 @@ const allDocuments = [...brandDocuments, ...catalogueDocuments, ...guideDocument
     ]}
   />
 
-  <DocumentLibrary />
-  <DocumentDownloadForm allDocuments={allDocuments} />
+  <DocumentLibrary sectionBg={rhythmBg(0)} />
+  <DocumentDownloadForm allDocuments={allDocuments} sectionBg={rhythmBg(1)} />
 </SiteLayout>

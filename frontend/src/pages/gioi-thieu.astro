@@ -11,6 +11,7 @@ import TestimonialsSlider from '../components/TestimonialsSlider.astro';
 import { gioiThieuSeo, testimonials, certificateImages } from '../data/gioi-thieu';
 import { pageHeroBg } from '../data/site';
 import { routes } from '../lib/routes';
+import { rhythmBg } from '../lib/section-rhythm';
 ---
 
 <SiteLayout
@@ -28,11 +29,11 @@ import { routes } from '../lib/routes';
     ]}
   />
 
-  <AboutBrandStory />
-  <AboutTimeline />
-  <AboutMissionVision />
-  <AboutProductionCapacity />
-  <AboutTeamGrid />
-  <CertificateGallery items={certificateImages} />
+  <AboutBrandStory sectionBg={rhythmBg(0)} />
+  <AboutTimeline sectionBg={rhythmBg(1)} />
+  <AboutMissionVision sectionBg={rhythmBg(2)} />
+  <AboutProductionCapacity sectionBg={rhythmBg(3)} />
+  <AboutTeamGrid sectionBg={rhythmBg(4)} />
+  <CertificateGallery items={certificateImages} sectionBg={rhythmBg(5)} />
   <TestimonialsSlider items={testimonials} variant="dark" />
 </SiteLayout>
