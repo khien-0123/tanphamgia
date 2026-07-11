@@ -1,6 +1,5 @@
 ---
 import SiteLayout from '../layouts/SiteLayout.astro';
-import PageHero from '../components/PageHero.astro';
 import AboutBrandStory from '../components/about/AboutBrandStory.astro';
 import AboutTimeline from '../components/about/AboutTimeline.astro';
 import AboutMissionVision from '../components/about/AboutMissionVision.astro';
@@ -11,6 +10,8 @@ import TestimonialsSlider from '../components/TestimonialsSlider.astro';
 import { gioiThieuSeo, testimonials, certificateImages } from '../data/gioi-thieu';
 import { pageHeroBg } from '../data/site';
 import { routes } from '../lib/routes';
+
+const eyebrowClass = 'font-eyebrow text-xs uppercase tracking-[0.2em] font-medium';
 ---
 
 <SiteLayout
@@ -18,15 +19,54 @@ import { routes } from '../lib/routes';
   description={gioiThieuSeo.description}
   currentPath={routes.gioiThieu}
 >
-  <PageHero
-    title="Giới thiệu"
-    bgImage={pageHeroBg.gioiThieu}
-    description="Hơn 23 năm kinh nghiệm trong ngành may mặc — từ thời trang cao cấp đến giải pháp đồng phục doanh nghiệp toàn diện."
-    breadcrumb={[
-      { label: 'Trang chủ', href: routes.home },
-      { label: 'Giới thiệu' },
-    ]}
-  />
+  {/* Banner — 504px, ảnh nền + overlay, chữ đè, số ở chân */}
+  <header
+    class="relative h-[504px] overflow-hidden bg-[#0B1F35] max-[640px]:h-auto max-[640px]:min-h-[460px]"
+  >
+    <img
+      src={pageHeroBg.gioiThieu}
+      alt=""
+      class="absolute inset-0 h-full w-full object-cover opacity-[0.42]"
+    />
+    <div
+      class="absolute inset-0 bg-[linear-gradient(to_top,rgba(11,31,53,0.95),rgba(11,31,53,0.35)_60%,rgba(11,31,53,0.7))]"
+      aria-hidden="true"
+    >
+    </div>
+
+    <div
+      class="relative z-[2] mx-auto flex h-full max-w-container-max-width flex-col justify-between px-6 pb-10 pt-28 md:px-8 md:pt-32"
+    >
+      <p class:list={[eyebrowClass, 'text-white/65']}>Giới thiệu&nbsp;·&nbsp;Est. 2003</p>
+
+      <div>
+        <h1
+          class="mb-7 max-w-[20ch] text-white text-[clamp(1.875rem,3.9vw,3.25rem)] font-bold leading-none tracking-[-0.035em]"
+        >
+          23 năm theo đuổi giá trị của một sản phẩm may mặc chất lượng
+        </h1>
+
+        <div class="flex flex-wrap items-baseline gap-x-11 gap-y-4">
+          <div class="flex items-baseline gap-3.5">
+            <b class="text-white text-[clamp(1.25rem,2vw,1.75rem)] font-extrabold tabular-nums">23</b>
+            <span class:list={[eyebrowClass, 'text-white/55']}>Năm kinh nghiệm</span>
+          </div>
+          <div class="flex items-baseline gap-3.5">
+            <b class="text-white text-[clamp(1.25rem,2vw,1.75rem)] font-extrabold tabular-nums">
+              2.000m²
+            </b>
+            <span class:list={[eyebrowClass, 'text-white/55']}>Nhà xưởng</span>
+          </div>
+          <div class="flex items-baseline gap-3.5">
+            <b class="text-white text-[clamp(1.25rem,2vw,1.75rem)] font-extrabold tabular-nums">
+              30.000<span class="text-accent-gold">+</span>
+            </b>
+            <span class:list={[eyebrowClass, 'text-white/55']}>Sản phẩm / tháng</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
 
   <AboutBrandStory />
   <AboutTimeline />

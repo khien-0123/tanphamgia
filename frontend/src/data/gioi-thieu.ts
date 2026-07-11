@@ -101,9 +101,16 @@ export const productionCapacity = {
     { value: 'Chủ động', label: 'Tiến độ — không phụ thuộc trung gian' },
     { value: 'Linh hoạt', label: 'Từ 100 đến hàng chục nghìn sản phẩm' },
   ],
-  qcTitle: 'Kiểm soát chất lượng 5 tầng',
+  qcTitle: 'Quy trình kiểm định 5 tầng',
   qcDesc:
-    'Quy trình kiểm tra nghiêm ngặt từ: Sợi vải đầu vào, Cắt vải, May bán thành phẩm, Hoàn thiện và Kiểm định đóng gói cuối cùng.',
+    'Kiểm tra nghiêm ngặt từ sợi vải đầu vào đến đóng gói cuối cùng — không bỏ sót lỗi nào trước khi thành phẩm rời xưởng.',
+  qcSteps: [
+    'Sợi vải đầu vào',
+    'Cắt vải',
+    'May bán thành phẩm',
+    'Hoàn thiện',
+    'Kiểm định & đóng gói',
+  ],
   qcStandards: ['ISO 9001:2015', 'Tiêu chuẩn Oeko-Tex', 'Kim may Groz-Beckert', 'Chỉ may Coats'],
   factoryImage: siteAssets.about.production1,
   qcImage: siteAssets.about.production2,

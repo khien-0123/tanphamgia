@@ -2,18 +2,35 @@
 import { teamDepartments } from '../../data/gioi-thieu';
 ---
 
-<section class="py-8 md:py-12 bg-white">
+<section class="bg-white py-[clamp(4.5rem,9vw,8rem)]">
   <div class="max-w-container-max-width mx-auto px-6 md:px-8">
-    <h2 data-reveal class="font-headline-md text-2xl md:text-4xl font-bold text-ink-dark mb-12 md:mb-14">
-      Đội ngũ nhân sự
-    </h2>
-    <div data-reveal-stagger class="grid gap-y-10 gap-x-12 sm:grid-cols-2 lg:grid-cols-4">
+    <div class="max-w-[44rem] mb-[clamp(2.75rem,5vw,4rem)]">
+      <span class="font-eyebrow text-xs uppercase tracking-[0.2em] text-accent-teal block mb-5">
+        Đội ngũ nhân sự
+      </span>
+      <h2 class="text-ink-dark text-[clamp(1.75rem,3.4vw,3rem)] leading-[1.05] font-bold text-balance">
+        Bốn bộ phận đồng hành cùng doanh nghiệp
+      </h2>
+    </div>
+
+    <div data-reveal-stagger class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
       {
-        teamDepartments.map((dept) => (
-          <div data-reveal>
-            <span class="material-symbols-outlined text-accent-teal text-2xl mb-3 block">{dept.icon}</span>
-            <h3 class="font-bold text-ink-dark mb-2">{dept.title}</h3>
-            <p class="text-text-muted text-sm leading-relaxed">{dept.desc}</p>
+        teamDepartments.map((dept, i) => (
+          <div
+            data-reveal
+            class:list={[
+              'py-[clamp(1.5rem,2vw,2rem)] lg:pr-[clamp(1.5rem,2.2vw,2.25rem)]',
+              i > 0 && 'lg:border-l lg:border-border-subtle lg:pl-[clamp(1.5rem,2.2vw,2.25rem)]',
+            ]}
+          >
+            <span class="w-11 h-11 rounded-full bg-surface-fresh grid place-items-center mb-6">
+              <span class="material-symbols-outlined text-accent-teal text-xl">{dept.icon}</span>
+            </span>
+            <span class="block text-xs uppercase tracking-[0.14em] font-bold text-accent-gold tabular-nums mb-3">
+              {dept.num}
+            </span>
+            <h3 class="text-ink-dark text-[1.0625rem] leading-[1.25] mb-[0.7rem]">{dept.title}</h3>
+            <p class="text-text-muted text-sm leading-[1.6]">{dept.desc}</p>
           </div>
         ))
       }
