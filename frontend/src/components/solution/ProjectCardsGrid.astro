@@ -30,7 +30,7 @@ interface Props {
   columns?: 3 | 4;
   sectionClass?: string;
   id?: string;
-  /** default: tiêu đề đơn giản | solution: gạch vàng như trang giải pháp */
+  /** default: tiêu đề đơn giản | solution: macro-typography clamp() như trang giải pháp */
   headerStyle?: 'default' | 'solution';
   ctaLabel?: string;
 }
@@ -55,9 +55,8 @@ const gridClass = columns === 3 ? projectCardGrid3Classes : projectCardGrid4Clas
       <div class="max-w-container-max-width mx-auto px-6 md:px-8">
         {
           headerStyle === 'solution' ? (
-            <header class="mb-10 max-w-2xl md:mb-12">
-              <div class="mb-4 h-1 w-10 rounded-full bg-accent-gold" />
-              <h2 class="text-balance text-2xl font-bold leading-tight text-ink-dark md:text-4xl">
+            <header class="mb-10 max-w-2xl md:mb-14">
+              <h2 class="text-balance text-[clamp(1.75rem,4.2vw,3.25rem)] font-bold leading-[1.02] text-ink-dark">
                 {title}
               </h2>
               {

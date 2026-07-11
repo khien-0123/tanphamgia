@@ -5,13 +5,13 @@ import { imageRadius } from '../../lib/image-frame';
 const { featured, secondary, quote, contact, allProjectsHref } = homeFeaturedCases;
 
 const featuredCard =
-  `relative block overflow-hidden ${imageRadius} bg-[#1a1a1a] min-h-[280px] lg:min-h-[380px] order-1 lg:order-none`;
+  `relative block overflow-hidden ${imageRadius} bg-ink-mid min-h-[280px] lg:min-h-[380px] order-1 lg:order-none`;
 const featuredImg =
   'absolute inset-0 w-full h-full object-cover opacity-75 transition-[transform,opacity] duration-700 group-hover:scale-[1.04] group-hover:opacity-[0.88]';
 const featuredOverlay =
   'featured-case-copy absolute inset-0 z-[2] flex flex-col justify-end gap-3.5 p-6';
 const secondaryCard =
-  `relative shrink-0 snap-start overflow-hidden ${imageRadius} bg-[#1a1a1a] min-h-[220px] basis-[85vw] sm:basis-[calc(50%-0.425rem)] transition-transform duration-250 hover:-translate-y-0.5 lg:shrink lg:min-h-[220px] lg:h-full`;
+  `relative shrink-0 snap-start overflow-hidden ${imageRadius} bg-ink-mid min-h-[220px] basis-[85vw] sm:basis-[calc(50%-0.425rem)] transition-transform duration-250 hover:-translate-y-0.5 lg:shrink lg:min-h-[220px] lg:h-full`;
 ---
 
 <section class="py-8 md:py-14 text-white bg-ink-dark overflow-hidden" id="du-an">
@@ -43,7 +43,7 @@ const secondaryCard =
           <div class="featured-case-scrim pointer-events-none absolute inset-x-0 bottom-0 z-[1]" aria-hidden="true" />
           <div class={featuredOverlay}>
             {featured.tag && (
-              <span class="inline-block w-fit px-3 py-1 rounded-full bg-[#f2c300] text-[#111] text-[0.625rem] font-bold tracking-widest uppercase">
+              <span class="inline-block w-fit px-3 py-1 rounded-full bg-accent-gold text-ink-dark text-[0.625rem] font-bold tracking-widest uppercase">
                 {featured.tag}
               </span>
             )}
@@ -69,7 +69,7 @@ const secondaryCard =
                   <div class="m-0">
                     <dt class="sr-only">{stat.label}</dt>
                     <dd class="flex flex-col gap-0.5 m-0">
-                      <span class="text-[clamp(1.35rem,2.5vw,1.75rem)] font-bold text-[#f2c300] leading-none">
+                      <span class="text-[clamp(1.35rem,2.5vw,1.75rem)] font-bold text-accent-gold leading-none">
                         {stat.value}
                       </span>
                       <span class="text-[0.8125rem] text-white/65">{stat.label}</span>
@@ -86,7 +86,7 @@ const secondaryCard =
           <div class="featured-case-scrim pointer-events-none absolute inset-x-0 bottom-0 z-[1]" aria-hidden="true" />
           <div class={featuredOverlay}>
             {featured.tag && (
-              <span class="inline-block w-fit px-3 py-1 rounded-full bg-[#f2c300] text-[#111] text-[0.625rem] font-bold tracking-widest uppercase">
+              <span class="inline-block w-fit px-3 py-1 rounded-full bg-accent-gold text-ink-dark text-[0.625rem] font-bold tracking-widest uppercase">
                 {featured.tag}
               </span>
             )}
@@ -112,7 +112,7 @@ const secondaryCard =
                   <div class="m-0">
                     <dt class="sr-only">{stat.label}</dt>
                     <dd class="flex flex-col gap-0.5 m-0">
-                      <span class="text-[clamp(1.35rem,2.5vw,1.75rem)] font-bold text-[#f2c300] leading-none">
+                      <span class="text-[clamp(1.35rem,2.5vw,1.75rem)] font-bold text-accent-gold leading-none">
                         {stat.value}
                       </span>
                       <span class="text-[0.8125rem] text-white/65">{stat.label}</span>
@@ -127,11 +127,11 @@ const secondaryCard =
     }
 
     <div class="contents lg:flex lg:flex-col lg:gap-4 lg:[grid-area:aside] lg:min-h-[380px]">
-      <blockquote class="m-0 pl-5 border-l-4 border-[#f2c300] order-3 lg:order-none lg:shrink-0 lg:pt-1">
+      <blockquote class="m-0 pl-5 border-l-4 border-accent-gold order-3 lg:order-none lg:shrink-0 lg:pt-1">
         <p class="m-0 text-[clamp(1rem,2vw,1.125rem)] leading-relaxed text-white/92">
           "{quote.text}"
         </p>
-        <footer class="mt-3.5 text-sm font-semibold text-[#f2c300]">— {quote.author}</footer>
+        <footer class="mt-3.5 text-sm font-semibold text-accent-gold">— {quote.author}</footer>
       </blockquote>
 
       <div
@@ -169,7 +169,7 @@ const secondaryCard =
                     </span>
                   </p>
                 )}
-                <span class="mt-2.5 pl-1 text-xs font-semibold leading-normal text-white/55 transition-colors group-hover:text-[#f2c300]">
+                <span class="mt-2.5 pl-1 text-xs font-semibold leading-normal text-white/55 transition-colors group-hover:text-accent-gold">
                   Xem chi tiết →
                 </span>
               </div>
@@ -189,14 +189,14 @@ const secondaryCard =
       class="grid grid-cols-2 gap-x-4 gap-y-2.5 items-center [grid-template-areas:'email_email'_'phone_cta'] md:flex md:flex-wrap md:flex-1 md:gap-x-3.5 md:gap-y-2"
     >
       <a
-        class="[grid-area:email] text-sm font-semibold text-white no-underline transition-colors hover:text-[#f2c300] break-words md:[grid-area:unset]"
+        class="[grid-area:email] text-sm font-semibold text-white no-underline transition-colors hover:text-accent-gold break-words md:[grid-area:unset]"
         href={`mailto:${contact.email}`}
       >
         {contact.email}
       </a>
       <span class="hidden md:inline text-white/25 select-none" aria-hidden="true">·</span>
       <a
-        class="[grid-area:phone] text-base md:text-lg font-bold text-white no-underline transition-colors hover:text-[#f2c300] md:[grid-area:unset]"
+        class="[grid-area:phone] text-base md:text-lg font-bold text-white no-underline transition-colors hover:text-accent-gold md:[grid-area:unset]"
         href={contact.phoneHref}
       >
         {contact.phone}

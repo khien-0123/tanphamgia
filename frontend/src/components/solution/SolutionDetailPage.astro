@@ -1,16 +1,13 @@
 ---
 import SiteLayout from '../../layouts/SiteLayout.astro';
-import PageHero from '../../components/PageHero.astro';
 import { solutions } from '../../data/site';
 import type { SolutionPageContent } from '../../data/solution-page';
 import { duAnGiaiPhap1 } from '../../data/giai-phap-1-du-an';
 import { duAnGiaiPhap2 } from '../../data/giai-phap-2-du-an';
 import { duAnGiaiPhap3 } from '../../data/giai-phap-3-du-an';
 import { duAnGiaiPhap4 } from '../../data/giai-phap-4-du-an';
-import ProjectCardsGrid from './ProjectCardsGrid.astro';
 import { caseStudyHref, routes } from '../../lib/routes';
-import { listingZigzagFrame, listingZigzagImg, imageRadius } from '../../lib/image-frame';
-import { rhythmBg } from '../../lib/section-rhythm';
+import { imageRadius } from '../../lib/image-frame';
 
 interface Props {
   content: SolutionPageContent;
@@ -30,16 +27,77 @@ const projectsBySolution = {
 
 const projects = projectsBySolution[content.solutionId];
 
-const projectCards = projects.map((project) => ({
-  name: project.name,
-  stats: project.stats,
-  field: project.field,
-  image: project.image,
-  href: caseStudyHref(content.slug, project.slug),
+/** Data mang sẵn tiền tố "0N. " — số đó chuyển lên eyebrow, tiêu đề để sạch. */
+const heading = (raw: string) => raw.replace(/^\d{2}\.\s*/, '');
+
+const heroId = String(content.solutionId).padStart(2, '0');
+
+/**
+ * Số quy mô ở hero. Rút dải "từ X đến Y" trong mô tả nếu có — đây là con số
+ * mạnh nhất; không có thì bỏ qua, ba số còn lại suy từ data nên luôn đúng.
+ */
+const scaleMatch = content.hero.description.match(/từ\s*([\d.]+)\s*đến\s*([\d.+]+)/i);
+const heroStats = [
+  scaleMatch && { value: `${scaleMatch[1]}–${scaleMatch[2]}`, label: 'Nhân sự / đội ngũ' },
+  { value: String(projects.length).padStart(2, '0'), label: 'Dự án tiêu biểu' },
+  { value: String(content.fabricTable.length).padStart(2, '0'), label: 'Chất liệu kỹ thuật' },
+].filter(Boolean) as { value: string; label: string }[];
+
+/**
+ * Mỗi ngành một icon riêng — icon phải PHÂN BIỆT được các mục; lặp cùng một hình
+ * thì nó chỉ là chấm tròn tốn chỗ. Khoá theo đúng chuỗi trong data (19 ngành / 4 trang).
+ */
+const INDUSTRY_ICON: Record<string, string> = {
+  'Nhà máy sản xuất': 'factory',
+  'Khu công nghiệp': 'location_city',
+  'FDI / Tập đoàn nước ngoài': 'public',
+  'Logistics & Kho vận': 'local_shipping',
+  'Kỹ thuật & Công trình': 'engineering',
+  'Tập đoàn & Tổng công ty': 'corporate_fare',
+  'Doanh nghiệp dịch vụ': 'support_agent',
+  'Ngân hàng & Tài chính': 'account_balance',
+  'Bất động sản': 'apartment',
+  'Logistics & Chuỗi văn phòng': 'local_shipping',
+  'FMCG & Hàng tiêu dùng nhanh': 'shopping_basket',
+  'Hệ thống phân phối': 'hub',
+  'Đội ngũ Sales thị trường': 'storefront',
+  'PG/PB & Activation': 'campaign',
+  'Phòng khám & Trung tâm y tế': 'local_hospital',
+  'Nha khoa': 'dentistry',
+  'Thẩm mỹ viện & Spa': 'spa',
+  'Chuỗi chăm sóc sức khỏe': 'health_and_safety',
+  'Trung tâm đào tạo': 'school',
+};
+
+/**
+ * Ảnh nền cho từng vật liệu trong trình khám phá.
+ * Tạm dùng ảnh giải pháp + 3 ảnh dự án (đủ 4, khác nhau, có sẵn) để crossfade
+ * hoạt động thật. NÂNG CẤP: thay bằng 4 ảnh macro chụp vải + thêm field ảnh vào
+ * fabricTable — lúc đó chỉ cần đổi mảng này.
+ */
+const fabricImages = [solution?.image, ...projects.map((p) => p.image)].filter(Boolean) as string[];
+
+/** Tách chuỗi stats tự do "1.086 sản phẩm | 45 ngày | Đối tác 5 năm" thành số lớn + đơn vị + phụ chú. */
+const parseStat = (raw: string) => {
+  const parts = raw.split('|').map((s) => s.trim()).filter(Boolean);
+  const m = parts[0]?.match(/^([\d.,+]+)\s*(.*)$/);
+  return {
+    big: m ? m[1] : parts[0] ?? '',
+    unit: m ? m[2] : '',
+    meta: parts.slice(1),
+  };
+};
+
+const proofItems = projects.map((p) => ({
+  name: p.name,
+  image: p.image,
+  href: caseStudyHref(content.slug, p.slug),
+  ...parseStat(p.stats),
 }));
 
-/** Bỏ tiền tố "0N. " trong tiêu đề đến từ data */
-const heading = (raw: string) => raw.replace(/^\d{2}\.\s*/, '');
+const chapterEyebrow = 'font-eyebrow text-xs uppercase tracking-[0.2em]';
+const h2Macro =
+  'text-balance text-[clamp(1.75rem,3.6vw,3.25rem)] font-bold leading-[1.03] text-ink-dark';
 ---
 
 <SiteLayout
@@ -47,29 +105,59 @@ const heading = (raw: string) => raw.replace(/^\d{2}\.\s*/, '');
   description={content.seo.description}
   currentPath={routes.giaiPhap}
 >
-
-  {/* Banner đồng bộ toàn site */}
-  <PageHero
-    title={content.hero.title}
-    description={content.hero.description}
-    bgImage={solution?.image}
-    breadcrumb={[
-      { label: 'Trang chủ', href: '/' },
-      { label: 'Giải pháp', href: '/giai-phap' },
-      { label: content.hero.title },
-    ]}
-  />
+  {/* ══ 00 · HERO — 504px, ảnh nền, chữ đè ══ */}
+  <header class="relative h-[504px] max-sm:h-auto max-sm:min-h-[460px] overflow-hidden bg-ink-dark">
+    <img
+      src={solution?.image}
+      alt={content.hero.imageAlt}
+      class="absolute inset-0 h-full w-full object-cover opacity-50"
+    />
+    <div
+      class="absolute inset-0 bg-gradient-to-t from-ink-dark/95 via-ink-dark/45 to-ink-dark/70"
+      aria-hidden="true"
+    >
+    </div>
+    <div
+      class="relative z-10 mx-auto flex h-full max-w-container-max-width flex-col justify-between px-6 pb-10 pt-28 md:px-8 md:pt-32"
+    >
+      <p class:list={[chapterEyebrow, 'text-white/65']}>Giải pháp {heroId}</p>
+      <div>
+        <h1
+          class="max-w-[15ch] text-balance text-[clamp(1.875rem,4.4vw,3.5rem)] font-extrabold leading-[0.98] tracking-tight text-white"
+        >
+          {content.hero.title}
+        </h1>
+        <div class="mt-7 flex flex-wrap items-baseline gap-x-10 gap-y-4">
+          {
+            heroStats.map((s) => (
+              <div class="flex items-baseline gap-3">
+                <b class="text-xl font-extrabold leading-none tabular-nums text-white md:text-2xl">
+                  {s.value}
+                </b>
+                <span class:list={[chapterEyebrow, 'text-white/55']}>{s.label}</span>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </header>
 
   <main class="bg-white text-ink-dark">
-    {/* Ngành phù hợp — thanh mảnh, không phải card */}
-    <section class:list={['border-b border-border-subtle', rhythmBg(0)]}>
+    {/* ══ 01b · NGÀNH — dải mảnh, mỗi ngành một icon ══ */}
+    <section class="bg-surface-fresh">
       <div class="mx-auto max-w-container-max-width px-6 py-5 md:px-8">
-        <p class="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm">
+        <p class="flex flex-wrap items-center gap-x-6 gap-y-3 text-sm">
           <span class="font-bold text-ink-dark">Phù hợp cho</span>
           {
             content.hero.industries.map((item) => (
-              <span class="inline-flex items-center gap-2 text-text-muted">
-                <span class="h-1 w-1 rounded-full bg-accent-gold" />
+              <span class="inline-flex items-center gap-2 text-ink-mid">
+                <span
+                  class="material-symbols-outlined text-[1.125rem] leading-none text-accent-teal"
+                  aria-hidden="true"
+                >
+                  {INDUSTRY_ICON[item] ?? 'business_center'}
+                </span>
                 {item}
               </span>
             ))
@@ -78,64 +166,26 @@ const heading = (raw: string) => raw.replace(/^\d{2}\.\s*/, '');
       </div>
     </section>
 
-    {/* 01. Vấn đề — danh sách phẳng */}
-    <section data-reveal class:list={[rhythmBg(1), 'py-16 md:py-24']}>
+    {/* ══ 01 · VẤN ĐỀ — hai cột đều, tiêu đề dính trái ══ */}
+    <section class="bg-white py-16 md:py-24">
       <div class="mx-auto max-w-container-max-width px-6 md:px-8">
-        <header class="mb-10 max-w-2xl md:mb-12">
-          <div class="mb-4 h-1 w-10 rounded-full bg-accent-gold"></div>
-          <h2 class="text-balance text-2xl font-bold leading-tight text-ink-dark md:text-4xl">
-            {heading(content.sections.issuesTitle)}
-          </h2>
-        </header>
+        <div class="grid items-start gap-x-[clamp(2rem,4vw,4.5rem)] gap-y-10 md:grid-cols-2">
+          <div class="md:sticky md:top-28">
+            <span class:list={[chapterEyebrow, 'mb-5 block text-accent-teal']}>01 — Vấn đề</span>
+            <h2 class={h2Macro}>{heading(content.sections.issuesTitle)}</h2>
+          </div>
 
-        <ul class="grid list-none gap-x-12 gap-y-1 p-0 md:grid-cols-2">
-          {
-            content.issues.map((issue) => (
-              <li class="flex items-start gap-3 border-b border-border-subtle py-5">
-                <span class="material-symbols-outlined mt-0.5 shrink-0 text-xl text-accent-gold">
-                  error
-                </span>
-                <p class="text-[0.95rem] leading-relaxed text-ink-mid">{issue}</p>
-              </li>
-            ))
-          }
-        </ul>
-      </div>
-    </section>
-
-    {/* 02. Giải pháp — ảnh sticky + danh sách phẳng */}
-    <section data-reveal class:list={[rhythmBg(2), 'py-16 md:py-24']}>
-      <div class="mx-auto max-w-container-max-width px-6 md:px-8">
-        <header class="mb-10 max-w-2xl md:mb-12">
-          <div class="mb-4 h-1 w-10 rounded-full bg-accent-gold"></div>
-          <h2 class="text-balance text-2xl font-bold leading-tight text-ink-dark md:text-4xl">
-            Giải pháp từ Tân Phạm Gia
-          </h2>
-        </header>
-
-        <div class="grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:gap-14">
-          <figure class:list={['m-0 self-start overflow-hidden lg:sticky lg:top-24', imageRadius]}>
-            <img
-              src={solution?.image}
-              alt={content.hero.imageAlt}
-              loading="lazy"
-              class="block aspect-[4/5] w-full object-cover object-top"
-            />
-          </figure>
-
-          <ul class="m-0 list-none p-0">
+          <ul class="grid list-none gap-px bg-border-subtle p-0" data-reveal-stagger>
             {
-              content.plans.map((plan) => (
-                <li class="flex gap-4 border-b border-border-subtle/70 py-6 first:pt-0 last:border-0 last:pb-0">
-                  <span class="material-symbols-outlined mt-0.5 shrink-0 text-xl text-accent-gold">
-                    check_circle
+              content.issues.map((issue, i) => (
+                <li
+                  data-reveal
+                  class="grid grid-cols-[2.5rem_1fr] items-start gap-4 bg-white py-6"
+                >
+                  <span class="font-eyebrow text-xs tabular-nums text-text-muted">
+                    {String(i + 1).padStart(2, '0')}
                   </span>
-                  <div class="min-w-0">
-                    <h3 class="mb-1.5 text-lg font-bold text-ink-dark md:text-xl">{plan.title}</h3>
-                    <p class="text-sm leading-relaxed text-text-muted md:text-[0.9375rem]">
-                      {plan.desc}
-                    </p>
-                  </div>
+                  <p class="text-[1.0625rem] leading-relaxed text-ink-mid">{issue}</p>
                 </li>
               ))
             }
@@ -144,96 +194,199 @@ const heading = (raw: string) => raw.replace(/^\d{2}\.\s*/, '');
       </div>
     </section>
 
-    {/* 03. Sản phẩm & chất liệu */}
-    <section data-reveal class:list={[rhythmBg(3), 'py-16 md:py-24']}>
+    {/* ══ 02 · GIẢI PHÁP — ảnh sticky + cột hairline ══ */}
+    <section class="bg-surface-fresh py-16 md:py-24">
       <div class="mx-auto max-w-container-max-width px-6 md:px-8">
-        <header class="mb-10 max-w-2xl md:mb-12">
-          <div class="mb-4 h-1 w-10 rounded-full bg-accent-gold"></div>
-          <h2 class="text-balance text-2xl font-bold leading-tight text-ink-dark md:text-4xl">
+        <div class="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
+          <figure
+            class:list={['m-0 self-start overflow-hidden lg:sticky lg:top-28', imageRadius]}
+          >
+            <img
+              src={solution?.image}
+              alt={content.hero.imageAlt}
+              loading="lazy"
+              class="block aspect-[4/5] w-full object-cover object-top"
+            />
+          </figure>
+
+          <div>
+            <span class:list={[chapterEyebrow, 'mb-5 block text-accent-teal']}>02 — Giải pháp</span>
+            <h2 class:list={[h2Macro, 'mb-10']}>Giải pháp từ Tân Phạm Gia</h2>
+
+            <ul class="grid list-none gap-px bg-border-subtle p-0" data-reveal-stagger>
+              {
+                content.plans.map((plan) => (
+                  <li data-reveal class="flex gap-4 bg-surface-fresh py-6">
+                    <span class="material-symbols-outlined mt-0.5 shrink-0 text-xl text-accent-teal">
+                      check_circle
+                    </span>
+                    <div class="min-w-0">
+                      <h3 class="mb-1.5 text-lg font-bold text-ink-dark md:text-xl">
+                        {plan.title}
+                      </h3>
+                      <p class="text-sm leading-relaxed text-text-muted md:text-[0.9375rem]">
+                        {plan.desc}
+                      </p>
+                    </div>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* ══ 03 · CHẤT LIỆU — dải navy duy nhất, trình khám phá ghim màn ══ */}
+    <section class="exp bg-ink-dark text-white" aria-label="Chất liệu kỹ thuật">
+      <div class="exp__stage">
+        <div class="exp__left">
+          <span class:list={[chapterEyebrow, 'mb-6 block text-accent-gold']}>03 — Chất liệu</span>
+          <h2 class="exp__h2">
             {heading(content.sections.productsTitle)}
           </h2>
-        </header>
 
-        <ul class="mb-10 flex list-none flex-wrap gap-2.5 p-0">
-          {
-            content.products.map((product) => (
-              <li class="inline-flex items-center gap-2 rounded-full border border-border-subtle bg-surface-fresh px-4 py-2 text-sm font-medium text-ink-dark">
-                <span class="material-symbols-outlined text-base text-accent-teal">apparel</span>
-                {product}
-              </li>
-            ))
-          }
-        </ul>
+          <ul class="exp__tags">
+            {content.products.map((product) => <li>{product}</li>)}
+          </ul>
 
-        {/* Mobile: danh sách; Desktop: bảng */}
-        <div class="grid gap-3 md:hidden">
+          <div class="exp__list">
+            <span class="exp__bar" data-bar></span>
+            {
+              content.fabricTable.map((row, i) => (
+                <button
+                  type="button"
+                  class:list={['exp__m', i === 0 && 'on']}
+                  data-m={i}
+                  aria-label={`Xem ${row.material}`}
+                >
+                  <span class="font-eyebrow text-xs tabular-nums">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <span class="exp__mname">{row.material}</span>
+                </button>
+              ))
+            }
+          </div>
+        </div>
+
+        <div class="exp__media">
           {
-            content.fabricTable.map((row) => (
-              <div class="rounded-xl border border-border-subtle bg-white p-4">
-                <div class="mb-3 flex items-baseline justify-between gap-3 border-b border-border-subtle pb-3">
-                  <span class="font-bold text-ink-dark">{row.material}</span>
-                  <span class="shrink-0 text-xs font-medium text-text-muted">{row.composition}</span>
-                </div>
-                <dl class="space-y-1.5 text-sm">
-                  <div class="flex gap-2">
-                    <dt class="shrink-0 text-text-muted">Đặc tính:</dt>
-                    <dd class="text-ink-mid">{row.features}</dd>
+            content.fabricTable.map((row, i) => (
+              <div class:list={['exp__shot', i === 0 && 'on']} data-s={i}>
+                <img
+                  src={fabricImages[i] ?? solution?.image}
+                  alt={row.material}
+                  loading="lazy"
+                  class="exp__img"
+                />
+                <dl class="exp__spec">
+                  <div>
+                    <dt>Thành phần</dt>
+                    <dd class="tabular-nums">{row.composition}</dd>
                   </div>
-                  <div class="flex gap-2">
-                    <dt class="shrink-0 text-text-muted">Môi trường:</dt>
-                    <dd class="text-ink-mid">{row.environment}</dd>
+                  <div>
+                    <dt>Đặc tính</dt>
+                    <dd>{row.features}</dd>
+                  </div>
+                  <div>
+                    <dt>Môi trường</dt>
+                    <dd>{row.environment}</dd>
                   </div>
                 </dl>
               </div>
             ))
           }
         </div>
+      </div>
 
-        <div class="hidden overflow-hidden rounded border border-border-subtle md:block">
-          <table class="w-full text-left text-sm">
-            <thead>
-              <tr class="bg-ink-dark text-xs uppercase tracking-wider text-white/90">
-                <th class="px-6 py-4 font-semibold">Chất liệu</th>
-                <th class="px-6 py-4 font-semibold">Thành phần</th>
-                <th class="px-6 py-4 font-semibold">Đặc tính nổi bật</th>
-                <th class="px-6 py-4 font-semibold">Môi trường phù hợp</th>
-              </tr>
-            </thead>
-            <tbody>
-              {
-                content.fabricTable.map((row) => (
-                  <tr class="border-t border-border-subtle transition-colors odd:bg-surface-fresh/40 hover:bg-accent-gold-light/50">
-                    <td class="px-6 py-4 font-semibold text-ink-dark">{row.material}</td>
-                    <td class="px-6 py-4 text-text-muted">{row.composition}</td>
-                    <td class="px-6 py-4 text-text-muted">{row.features}</td>
-                    <td class="px-6 py-4 text-text-muted">{row.environment}</td>
-                  </tr>
-                ))
-              }
-            </tbody>
-          </table>
+      {/* mốc cuộn — vô hình, đổi vật liệu khi đi qua tâm màn */}
+      <div class="exp__steps" aria-hidden="true">
+        {content.fabricTable.map((_, i) => <div data-step={i}></div>)}
+      </div>
+
+      {/* bản mobile: không ghim, xếp chồng */}
+      <div class="exp__mobile mx-auto max-w-container-max-width px-6 md:px-8">
+        <span class:list={[chapterEyebrow, 'mb-6 block text-accent-gold']}>03 — Chất liệu</span>
+        <h2 class="exp__h2">{heading(content.sections.productsTitle)}</h2>
+        {
+          content.fabricTable.map((row, i) => (
+            <article class="exp__mrow">
+              <figure class="m-0 mb-5 aspect-[4/3] overflow-hidden rounded-[4px]">
+                <img
+                  src={fabricImages[i] ?? solution?.image}
+                  alt={row.material}
+                  loading="lazy"
+                  class="h-full w-full object-cover"
+                />
+              </figure>
+              <h3 class="mb-4 text-2xl font-bold">{row.material}</h3>
+              <dl class="grid gap-2">
+                <dt>Thành phần</dt>
+                <dd class="tabular-nums">{row.composition}</dd>
+                <dt>Đặc tính</dt>
+                <dd>{row.features}</dd>
+                <dt>Môi trường</dt>
+                <dd>{row.environment}</dd>
+              </dl>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    {/* ══ BẰNG CHỨNG — một dải ba cột, số lớn đè ảnh ══ */}
+    <section class="bg-white py-16 md:py-24">
+      <div class="mx-auto max-w-container-max-width px-6 md:px-8">
+        <div class="mb-10 flex flex-wrap items-baseline justify-between gap-3">
+          <span class:list={[chapterEyebrow, 'text-accent-teal']}>Bằng chứng</span>
+          <h2 class:list={[h2Macro, 'max-w-[20ch]']}>Đã giao cho những đội ngũ ở quy mô này</h2>
+        </div>
+
+        <div class="grid list-none gap-px bg-border-subtle sm:grid-cols-3" data-reveal-stagger>
+          {
+            proofItems.map((item) => (
+              <a href={item.href} class="proof-case group" data-reveal>
+                <img src={item.image} alt="" loading="lazy" class="proof-case__img" />
+                <div class="proof-case__in">
+                  <span class:list={[chapterEyebrow, 'mb-4 block text-accent-gold']}>
+                    {item.name}
+                  </span>
+                  <p class="text-[clamp(2.75rem,5vw,4.25rem)] font-extrabold leading-[0.85] tracking-tight tabular-nums text-white">
+                    {item.big}
+                  </p>
+                  {item.unit && <p class="mt-1 text-sm text-white/65">{item.unit}</p>}
+                  {
+                    item.meta.length > 0 && (
+                      <p class="mt-5 flex flex-wrap gap-x-4 gap-y-1 text-xs text-white/55">
+                        {item.meta.map((m) => (
+                          <span>{m}</span>
+                        ))}
+                      </p>
+                    )
+                  }
+                </div>
+              </a>
+            ))
+          }
         </div>
       </div>
     </section>
 
-    {/* 04. Quy trình — timeline phẳng (số bước là chức năng) */}
-    <section data-reveal class:list={[rhythmBg(4), 'py-16 md:py-24']}>
+    {/* ══ 04 · QUY TRÌNH — số thứ tự khổng lồ dẫn dắt ══ */}
+    <section class="bg-surface-fresh py-16 md:py-24">
       <div class="mx-auto max-w-container-max-width px-6 md:px-8">
-        <header class="mb-10 max-w-2xl md:mb-12">
-          <div class="mb-4 h-1 w-10 rounded-full bg-accent-gold"></div>
-          <h2 class="text-balance text-2xl font-bold leading-tight text-ink-dark md:text-4xl">
-            Quy trình làm việc — giảm rủi ro cho doanh nghiệp
-          </h2>
-        </header>
+        <span class:list={[chapterEyebrow, 'mb-5 block text-accent-teal']}>04 — Quy trình</span>
+        <h2 class:list={[h2Macro, 'mb-12 max-w-[22ch] md:mb-16']}>
+          Sáu bước, minh bạch từ yêu cầu đến hậu mãi
+        </h2>
 
-        <ol class="grid list-none gap-x-10 gap-y-7 p-0 sm:grid-cols-2 lg:grid-cols-3">
+        <ol class="flow-rail" data-reveal-stagger>
           {
             content.processSteps.map((step, i) => (
-              <li class="flex items-start gap-4">
-                <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-accent-gold text-sm font-bold tabular-nums text-ink-dark">
-                  {i + 1}
-                </span>
-                <h3 class="pt-1.5 text-[0.95rem] font-bold leading-snug text-ink-dark">{step}</h3>
+              <li class="flow-step" data-reveal>
+                <span class="flow-no tabular-nums">{String(i + 1).padStart(2, '0')}</span>
+                <h3>{step}</h3>
               </li>
             ))
           }
@@ -241,52 +394,26 @@ const heading = (raw: string) => raw.replace(/^\d{2}\.\s*/, '');
       </div>
     </section>
 
-    <ProjectCardsGrid
-      id="du-an"
-      title="Dự án tiêu biểu"
-      items={projectCards}
-      columns={3}
-      headerStyle="solution"
-      sectionClass={`scroll-mt-24 ${rhythmBg(5)} py-16 md:py-24`}
-    />
-
-    {/* Giải pháp khác */}
-    <section data-reveal class:list={[rhythmBg(6), 'py-16 md:py-24']}>
+    {/* ══ GIẢI PHÁP KHÁC — dải điều hướng mảnh ══ */}
+    <section class="bg-white py-16 md:py-24">
       <div class="mx-auto max-w-container-max-width px-6 md:px-8">
-        <header class="mb-10 max-w-2xl md:mb-12">
-          <div class="mb-4 h-1 w-10 rounded-full bg-accent-gold"></div>
-          <h2 class="text-balance text-2xl font-bold leading-tight text-ink-dark md:text-4xl">
-            Các giải pháp đồng phục khác
-          </h2>
-        </header>
-
-        <div class="grid gap-6 sm:grid-cols-3">
+        <span class:list={[chapterEyebrow, 'mb-8 block text-accent-teal']}>Chuyển hướng</span>
+        <div class="grid list-none gap-px bg-border-subtle">
           {
             relatedSolutions.map((item) => (
-              <a
-                href={item.href}
-                class:list={['group flex flex-col overflow-hidden border border-border-subtle bg-white text-inherit no-underline transition hover:-translate-y-1 hover:border-accent-gold/50 hover:shadow-card', imageRadius]}
-              >
-                <figure class:list={[listingZigzagFrame, 'm-0']}>
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    loading="lazy"
-                    class:list={[listingZigzagImg, 'group-hover:scale-105']}
-                  />
-                </figure>
-                <div class="flex flex-1 flex-col p-5">
-                  <h3 class="mb-2 text-base font-bold leading-snug text-ink-dark transition-colors group-hover:text-accent-gold">
-                    {item.title}
-                  </h3>
-                  <p class="mb-4 line-clamp-2 text-sm leading-relaxed text-text-muted">{item.desc}</p>
-                  <span class="mt-auto inline-flex items-center gap-1.5 text-sm font-bold text-accent-teal">
-                    Xem chi tiết
-                    <span class="material-symbols-outlined text-base transition-transform duration-300 group-hover:translate-x-1">
-                      arrow_forward
-                    </span>
-                  </span>
-                </div>
+              <a href={item.href} class="more-row group bg-white">
+                <span class="font-eyebrow text-xs tabular-nums text-text-muted">
+                  {String(item.slug.replace(/\D/g, '')).padStart(2, '0')}
+                </span>
+                <h3 class="text-[clamp(1.25rem,2.4vw,1.875rem)] font-bold text-ink-dark transition-colors group-hover:text-accent-teal">
+                  {item.title}
+                </h3>
+                <span
+                  class="material-symbols-outlined text-accent-teal transition-transform duration-300 group-hover:translate-x-1.5"
+                  aria-hidden="true"
+                >
+                  arrow_forward
+                </span>
               </a>
             ))
           }
@@ -295,3 +422,374 @@ const heading = (raw: string) => raw.replace(/^\d{2}\.\s*/, '');
     </section>
   </main>
 </SiteLayout>
+
+<style>
+  /* ── Trình khám phá vật liệu (03) ── */
+  .exp {
+    position: relative;
+    height: 380vh;
+  }
+  .exp__stage {
+    position: sticky;
+    top: 0;
+    display: grid;
+    height: 100svh;
+    grid-template-columns: 1fr 1.1fr;
+    overflow: hidden;
+  }
+  .exp__left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 4rem clamp(1.5rem, 5vw, 6rem);
+  }
+  .exp__h2 {
+    font-size: clamp(1.5rem, 2.4vw, 2.25rem);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+    max-width: 20ch;
+    margin: 0 0 2.5rem;
+  }
+  .exp__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin: 0 0 3rem;
+    padding: 0;
+    list-style: none;
+  }
+  .exp__tags li {
+    background: rgb(255 255 255 / 0.07);
+    padding: 0.55rem 1.1rem;
+    border-radius: 999px;
+    font-size: 0.8125rem;
+    color: rgb(255 255 255 / 0.9);
+  }
+  .exp__list {
+    position: relative;
+    padding-left: 2.25rem;
+  }
+  .exp__list::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.35rem;
+    bottom: 0.35rem;
+    width: 1px;
+    background: rgb(255 255 255 / 0.14);
+  }
+  .exp__bar {
+    position: absolute;
+    left: 0;
+    top: 0.35rem;
+    width: 2px;
+    height: calc((100% - 0.7rem) / 4);
+    background: #ffc933;
+    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .exp__m {
+    display: flex;
+    align-items: baseline;
+    gap: 1.5rem;
+    width: 100%;
+    padding: 0.7rem 0;
+    background: none;
+    border: 0;
+    text-align: left;
+    cursor: pointer;
+    color: rgb(255 255 255 / 0.25);
+    transition: color 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .exp__mname {
+    font-size: clamp(1.375rem, 2.8vw, 2.5rem);
+    font-weight: 700;
+    font-stretch: 89%;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+  }
+  .exp__m.on {
+    color: #fff;
+  }
+  .exp__media {
+    position: relative;
+    overflow: hidden;
+  }
+  .exp__shot {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 1s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .exp__shot.on {
+    opacity: 1;
+  }
+  .exp__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.08);
+    transition: transform 1.6s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .exp__shot.on .exp__img {
+    transform: scale(1);
+  }
+  .exp__spec {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    margin: 0;
+    padding: 2.5rem clamp(1.5rem, 3vw, 3rem);
+    background: linear-gradient(to top, rgb(11 31 53 / 0.94), rgb(11 31 53 / 0));
+  }
+  .exp__spec div {
+    padding-right: 1.25rem;
+  }
+  .exp__spec dt {
+    margin-bottom: 0.55rem;
+    font-family: var(--mono);
+    font-size: 0.625rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #FFC933;
+  }
+  .exp__spec dd {
+    margin: 0;
+    font-size: 0.9375rem;
+    line-height: 1.5;
+    color: #fff;
+  }
+  .exp__steps {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  .exp__steps > div {
+    height: 95vh;
+  }
+  .exp__mobile {
+    display: none;
+  }
+  @media (max-width: 900px) {
+    .exp {
+      height: auto;
+    }
+    .exp__stage,
+    .exp__steps {
+      display: none;
+    }
+    .exp__mobile {
+      display: block;
+      padding-block: 4.5rem;
+    }
+    .exp__mrow {
+      padding-block: 2.5rem;
+      border-top: 1px solid rgb(255 255 255 / 0.12);
+    }
+    .exp__mrow:first-of-type {
+      border-top: 0;
+    }
+    .exp__mobile dt {
+      font-family: var(--mono);
+      font-size: 0.625rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #FFC933;
+    }
+    .exp__mobile dd {
+      margin: 0 0 0.5rem;
+      font-size: 0.9375rem;
+      color: rgb(255 255 255 / 0.8);
+    }
+  }
+
+  /* ── Bằng chứng: ảnh nền + số đè ── */
+  .proof-case {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    min-height: 20rem;
+    overflow: hidden;
+    background: #0E2640;
+    text-decoration: none;
+    isolation: isolate;
+  }
+  .proof-case__img {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.42;
+    transition:
+      transform 1.2s cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 0.6s;
+  }
+  .proof-case::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(to top, rgb(11 31 53 / 0.94) 10%, rgb(11 31 53 / 0.35) 70%);
+  }
+  .proof-case:hover .proof-case__img {
+    transform: scale(1.06);
+    opacity: 0.5;
+  }
+  .proof-case__in {
+    width: 100%;
+    padding: 2rem;
+  }
+  @media (max-width: 640px) {
+    .proof-case {
+      min-height: 16rem;
+    }
+  }
+
+  /* ── Quy trình: số thứ tự khổng lồ ── */
+  .flow-rail {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 1px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    background: #DCE5E2;
+  }
+  .flow-rail::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: calc(100% / 12);
+    top: 2.6rem;
+    height: 1px;
+    background: #DCE5E2;
+    z-index: 2;
+  }
+  .flow-step {
+    position: relative;
+    background: #EEF6F3;
+    padding: 0 1.25rem;
+  }
+  .flow-no {
+    position: relative;
+    z-index: 3;
+    display: inline-block;
+    font-size: clamp(2.75rem, 4.4vw, 4.25rem);
+    font-weight: 800;
+    font-stretch: 80%;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    color: #DCE5E2;
+    transition: color 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  /* Gạch vàng DƯỚI số (không phải trên đầu tiêu đề) — hợp lệ theo §Colors. */
+  .flow-no::after {
+    content: '';
+    position: absolute;
+    left: 0.06em;
+    bottom: -0.28em;
+    width: 1.6rem;
+    height: 3px;
+    background: #FFC933;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .flow-step h3 {
+    margin-top: 1.75rem;
+    max-width: 15ch;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.45;
+    color: #0E2640;
+  }
+  .flow-step:hover .flow-no {
+    color: #0E2640;
+  }
+  .flow-step:hover .flow-no::after {
+    transform: scaleX(1);
+  }
+  .flow-step:last-child .flow-no {
+    color: #102C4D;
+  }
+  @media (max-width: 1000px) {
+    .flow-rail {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .flow-rail::before {
+      display: none;
+    }
+    .flow-step {
+      padding: 1.75rem 1.25rem;
+    }
+  }
+  @media (max-width: 560px) {
+    .flow-rail {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* ── Giải pháp khác: dòng điều hướng ── */
+  .more-row {
+    display: grid;
+    grid-template-columns: 3.5rem 1fr auto;
+    gap: 1.5rem;
+    align-items: center;
+    padding: 2rem 0;
+    text-decoration: none;
+    transition: padding-left 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .more-row:hover {
+    padding-left: 1.25rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .exp {
+      height: auto;
+    }
+    .exp__stage {
+      position: static;
+      height: auto;
+    }
+  }
+</style>
+
+<script>
+  /* Trình khám phá vật liệu — zero thư viện, một IntersectionObserver.
+     Cuộn qua mốc → đổi vật liệu; bấm tên vải cũng đổi được. */
+  const root = document.querySelector<HTMLElement>('.exp');
+  if (root) {
+    const names = Array.from(root.querySelectorAll<HTMLElement>('.exp__m'));
+    const shots = Array.from(root.querySelectorAll<HTMLElement>('.exp__shot'));
+    const bar = root.querySelector<HTMLElement>('[data-bar]');
+
+    const activate = (i: number) => {
+      names.forEach((n, k) => n.classList.toggle('on', k === i));
+      shots.forEach((s, k) => s.classList.toggle('on', k === i));
+      if (bar) bar.style.transform = `translateY(${i * 100}%)`;
+    };
+
+    names.forEach((n, i) => n.addEventListener('click', () => activate(i)));
+
+    const steps = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            const i = Number((e.target as HTMLElement).dataset.step);
+            if (!Number.isNaN(i)) activate(i);
+          }
+        });
+      },
+      { rootMargin: '-50% 0px -50% 0px' },
+    );
+    root.querySelectorAll<HTMLElement>('[data-step]').forEach((el) => steps.observe(el));
+  }
+</script>

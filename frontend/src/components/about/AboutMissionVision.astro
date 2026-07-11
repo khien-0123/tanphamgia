@@ -1,54 +1,80 @@
 ---
 import { missionVision, coreValues } from '../../data/gioi-thieu';
-import { RHYTHM_WHITE } from '../../lib/section-rhythm';
 
-interface Props {
-  sectionBg?: string;
-}
-
-const { sectionBg = RHYTHM_WHITE } = Astro.props;
+const eyebrowClass = 'font-eyebrow text-xs uppercase tracking-[0.2em] block';
 ---
 
-<section class:list={['py-8 md:py-12', sectionBg]}>
+{/* Định hướng — Sứ mệnh & Tầm nhìn (manifesto, không card) */}
+<section class="bg-white py-[clamp(4.5rem,9vw,8rem)]">
   <div class="max-w-container-max-width mx-auto px-6 md:px-8">
-    <h2
-      data-reveal
-      class="text-pretty font-headline-md text-xl md:text-4xl font-bold text-ink-dark mb-8 md:mb-10 leading-snug tracking-normal"
-    >
-      Sứ mệnh, Tầm nhìn & Giá trị cốt{'\u00a0'}lõi
-    </h2>
-
-    <div
-      data-reveal-stagger
-      class="grid md:grid-cols-2 gap-8 md:gap-10 lg:gap-12 mb-8 pb-8 md:mb-10 md:pb-10"
-    >
-      <div data-reveal>
-        <span class="material-symbols-outlined text-accent-gold text-3xl mb-4">flag</span>
-        <h3 class="text-accent-gold font-bold uppercase tracking-wider text-sm mb-3">Sứ mệnh</h3>
-        <p class="text-ink-dark/85 text-base md:text-lg leading-relaxed">{missionVision.mission}</p>
+    <span class:list={[eyebrowClass, 'text-accent-teal mb-[clamp(2.5rem,5vw,4rem)]']}>
+      Định hướng phát triển
+    </span>
+    <div class="grid grid-cols-1 md:grid-cols-2">
+      <div data-reveal class="md:pr-[clamp(2.5rem,5vw,5rem)]">
+        <span class="block text-[0.8125rem] uppercase tracking-[0.14em] font-bold text-accent-gold mb-6">
+          Sứ mệnh
+        </span>
+        <h2 class="text-ink-dark text-[clamp(1.375rem,2.3vw,2rem)] leading-[1.22] font-bold text-balance">
+          {missionVision.mission}
+        </h2>
       </div>
-      <div data-reveal class="md:pl-16">
-        <span class="material-symbols-outlined text-accent-teal text-3xl mb-4">visibility</span>
-        <h3 class="text-accent-teal font-bold uppercase tracking-wider text-sm mb-3">Tầm nhìn</h3>
-        <p class="text-ink-dark/85 text-base md:text-lg leading-relaxed">{missionVision.vision}</p>
+      <div
+        data-reveal
+        class="mt-11 pt-11 border-t border-border-subtle md:mt-0 md:pt-0 md:border-t-0 md:border-l md:border-border-subtle md:pl-[clamp(2.5rem,5vw,5rem)]"
+      >
+        <span class="block text-[0.8125rem] uppercase tracking-[0.14em] font-bold text-accent-teal mb-6">
+          Tầm nhìn
+        </span>
+        <h2 class="text-ink-dark text-[clamp(1.375rem,2.3vw,2rem)] leading-[1.22] font-bold text-balance">
+          {missionVision.vision}
+        </h2>
       </div>
     </div>
+  </div>
+</section>
 
-    <h3 data-reveal class="text-pretty font-headline-md text-xl md:text-4xl font-bold text-ink-dark mb-8 md:mb-10 leading-snug tracking-normal">5 giá trị cốt lõi</h3>
-    <div data-reveal-stagger class="grid gap-y-8 gap-x-12 max-sm:gap-y-5 max-sm:gap-x-6 sm:grid-cols-2 lg:grid-cols-3">
-      {
-        coreValues.map((value) => (
-          <div data-reveal class="flex gap-4 items-start">
-            <span class="shrink-0 font-extrabold text-sm text-accent-gold leading-[1.4]">
-              {value.num}
-            </span>
-            <div>
-              <h4 class="font-bold text-ink-dark mb-2">{value.title}</h4>
-              <p class="text-text-muted text-sm leading-relaxed">{value.desc}</p>
+{/* 5 giá trị cốt lõi — tiêu đề dính + danh sách kẻ mảnh (không lưới card) */}
+<section class="bg-background py-[clamp(4.5rem,9vw,8rem)]">
+  <div class="max-w-container-max-width mx-auto px-6 md:px-8">
+    <div class="grid grid-cols-1 md:grid-cols-[0.85fr_1.15fr] gap-[clamp(2.5rem,6vw,6rem)] items-start">
+      <div class="md:sticky md:top-10">
+        <span class:list={[eyebrowClass, 'text-accent-teal mb-6']}>Giá trị cốt lõi</span>
+        <h2
+          class="text-ink-dark text-[clamp(1.75rem,3.4vw,3rem)] leading-[1.05] font-bold mb-6 text-balance"
+        >
+          Năm nguyên tắc định hình cách chúng tôi làm việc
+        </h2>
+        <p class="text-text-muted max-w-[34ch] leading-relaxed">
+          Không phải khẩu hiệu — đây là bộ nguyên tắc chi phối mọi quyết định của Tân Phạm Gia.
+        </p>
+      </div>
+
+      <div data-reveal-stagger>
+        {
+          coreValues.map((value, i) => (
+            <div
+              data-reveal
+              class:list={[
+                'grid grid-cols-[auto_1fr] gap-[clamp(1.25rem,2.5vw,2.25rem)] items-baseline py-[clamp(1.5rem,2.6vw,2.1rem)]',
+                i > 0 && 'border-t border-border-subtle',
+              ]}
+            >
+              <span class="text-accent-gold font-extrabold tabular-nums text-[clamp(1.125rem,1.5vw,1.375rem)] leading-none pt-[0.15rem]">
+                {value.num}
+              </span>
+              <div>
+                <h3 class="text-ink-dark text-[clamp(1.125rem,1.7vw,1.375rem)] mb-[0.55rem]">
+                  {value.title}
+                </h3>
+                <p class="text-text-muted text-[0.9375rem] leading-[1.65] max-w-[52ch]">
+                  {value.desc}
+                </p>
+              </div>
             </div>
-          </div>
-        ))
-      }
+          ))
+        }
+      </div>
     </div>
   </div>
 </section>
