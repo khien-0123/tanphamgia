@@ -30,7 +30,9 @@ const {
 
 <BaseLayout title={title} description={description}>
   <SiteNav currentPath={currentPath} navOverDark={navOverDark} />
-  <slot />
+  <main id="page-main">
+    <slot />
+  </main>
   {showCta && <SiteCtaSection />}
   {showFooter && <SiteFooter />}
 </BaseLayout>

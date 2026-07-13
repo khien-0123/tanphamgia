@@ -38,3 +38,15 @@ export const sliderArrowSolidBase = [
   'hover:shadow-[0_4px_16px_rgba(0,0,0,0.12)]',
   'disabled:opacity-0 disabled:pointer-events-none',
 ];
+
+/** Nút trắng đặc — luôn hiển thị (testimonial, nền tối) */
+export const sliderArrowSolidVisibleBase = [
+  'absolute top-1/2 -translate-y-1/2 z-10',
+  'flex items-center justify-center',
+  'w-9 h-9 md:w-10 md:h-10 rounded-full',
+  'border-0 bg-white text-ink-dark',
+  'cursor-pointer opacity-100 pointer-events-auto shadow-[0_2px_12px_rgba(0,0,0,0.2)]',
+  'transition-shadow duration-200',
+  'hover:shadow-[0_4px_16px_rgba(0,0,0,0.28)]',
+  'disabled:opacity-40 disabled:pointer-events-none',
+];

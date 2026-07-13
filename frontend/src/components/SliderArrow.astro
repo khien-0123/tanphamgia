@@ -8,6 +8,7 @@ import {
   sliderArrowPrevGutter,
   sliderArrowPrevInset,
   sliderArrowSolidBase,
+  sliderArrowSolidVisibleBase,
 } from '../lib/slider-classes';
 
 interface Props {
@@ -18,9 +19,11 @@ interface Props {
   gutter?: boolean;
   /** true = nền trắng đặc, ẩn mặc định và hiện khi hover carousel */
   solid?: boolean;
+  /** true = nền trắng đặc, luôn hiển thị */
+  alwaysVisible?: boolean;
 }
 
-const { direction, inset = false, gutter = false, solid = false } = Astro.props;
+const { direction, inset = false, gutter = false, solid = false, alwaysVisible = false } = Astro.props;
 
 const positionClass = gutter
   ? direction === 'prev'
@@ -38,7 +41,10 @@ const label = direction === 'prev' ? 'Trước' : 'Sau';
 
 <button
   {...(direction === 'prev' ? { 'data-slider-prev': true } : { 'data-slider-next': true })}
-  class:list={[solid ? sliderArrowSolidBase : sliderArrowBase, positionClass]}
+  class:list={[
+    alwaysVisible ? sliderArrowSolidVisibleBase : solid ? sliderArrowSolidBase : sliderArrowBase,
+    positionClass,
+  ]}
   aria-label={label}
 >
   <svg

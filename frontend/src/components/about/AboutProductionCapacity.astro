@@ -1,7 +1,15 @@
 ---
 import { productionCapacity } from '../../data/gioi-thieu';
+import { RHYTHM_WHITE } from '../../lib/section-rhythm';
+
+interface Props {
+  sectionBg?: string;
+}
+
+const { sectionBg = RHYTHM_WHITE } = Astro.props;
 
 const eyebrowClass = 'font-eyebrow text-xs uppercase tracking-[0.2em] block';
+const isAltBg = sectionBg.includes('surface-alt');
 ---
 
 {/* Năng lực sản xuất — dải navy nén: chữ + 6 số | ảnh xưởng */}
@@ -68,8 +76,8 @@ const eyebrowClass = 'font-eyebrow text-xs uppercase tracking-[0.2em] block';
   </div>
 </section>
 
-{/* Kiểm soát chất lượng 5 tầng — nền sáng, stepper ngang chấm vàng */}
-<section class="bg-surface-fresh py-[clamp(4.5rem,9vw,8rem)]">
+{/* Kiểm soát chất lượng 5 tầng — nền xen kẽ trắng/xám, stepper ngang chấm vàng */}
+<section class:list={[sectionBg, 'qc-section py-[clamp(4.5rem,9vw,8rem)]', isAltBg && 'qc-section--alt']}>
   <div class="max-w-container-max-width mx-auto px-6 md:px-8">
     <div data-reveal class="max-w-[56ch] mb-[clamp(2.5rem,4vw,3.5rem)]">
       <span class:list={[eyebrowClass, 'text-accent-teal mb-5']}>Kiểm soát chất lượng</span>
@@ -95,7 +103,7 @@ const eyebrowClass = 'font-eyebrow text-xs uppercase tracking-[0.2em] block';
     <ul class="flex flex-wrap gap-[0.6rem] mt-[clamp(2.5rem,4vw,3.5rem)]">
       {
         productionCapacity.qcStandards.map((std) => (
-          <li class="bg-white text-ink-dark font-semibold text-[0.8125rem] px-[1.1rem] py-[0.55rem] rounded-full shadow-[0_1px_0_#DCE5E2]">
+          <li class="bg-white text-ink-dark font-semibold text-[0.8125rem] px-[1.1rem] py-[0.55rem] rounded-full shadow-[0_1px_0_rgba(14,38,64,0.08)]">
             {std}
           </li>
         ))
@@ -117,7 +125,7 @@ const eyebrowClass = 'font-eyebrow text-xs uppercase tracking-[0.2em] block';
       right: 0;
       top: 0.4375rem;
       height: 1px;
-      background: #dce5e2;
+      background: rgba(14, 38, 64, 0.12);
     }
     .qc-step::before {
       content: '';
@@ -129,7 +137,10 @@ const eyebrowClass = 'font-eyebrow text-xs uppercase tracking-[0.2em] block';
       transform: translateY(-50%);
       border-radius: 9999px;
       background: #ffc933;
-      box-shadow: 0 0 0 4px #eef6f3;
+      box-shadow: 0 0 0 4px #fff;
+    }
+    .qc-section--alt .qc-step::before {
+      box-shadow: 0 0 0 4px rgb(var(--color-surface-alt));
     }
   }
 </style>

@@ -1,0 +1,11 @@
+---
+import { textureLayerClasses, type TextureVariant } from '../lib/surface-texture';
+
+interface Props {
+  variant: TextureVariant;
+}
+
+const { variant } = Astro.props;
+---
+
+<div class:list={textureLayerClasses[variant]} aria-hidden="true"></div>
