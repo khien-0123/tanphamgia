@@ -52,14 +52,13 @@ const seoSuffix: Record<Props['solutionId'], string> = {
   title={`${project.name} | Dự án tiêu biểu — Giải pháp ${solutionId}`}
   description={`Case study ${project.name} — ${seoSuffix[solutionId]}.`}
   currentPath={routes.giaiPhap}
-  navOverDark={false}
+  navOverDark={true}
 >
   <main class={solutionTheme.page}>
     <CaseStudyHero
       name={project.name}
       intro={project.intro}
       image={project.image}
-      imageClass={solutionTheme.heroImageDetail}
       eyebrow={project.field}
       backHref={solutionAnchorHref(solutionSlug, 'du-an')}
       backLabel={`← Quay lại Giải pháp ${solutionId}`}

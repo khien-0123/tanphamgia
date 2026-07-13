@@ -55,11 +55,22 @@ export const timeline = [
   },
 ];
 
+export const missionVisionSection = {
+  eyebrow: 'Định hướng phát triển',
+  intro:
+    'Kim chỉ nam định hướng mọi quyết định chiến lược — từ sản phẩm đến quan hệ đối tác dài hạn.',
+};
+
 export const missionVision = {
-  mission:
-    'Mang đến giải pháp đồng phục giúp doanh nghiệp nâng tầm hình ảnh thương hiệu, xây dựng đội ngũ chuyên nghiệp và tạo trải nghiệm mặc tốt hơn cho người lao động mỗi ngày đi làm.',
-  vision:
-    'Trở thành thương hiệu giải pháp đồng phục doanh nghiệp hàng đầu Việt Nam và từng bước trở thành đối tác sản xuất đồng phục tin cậy cho các doanh nghiệp quốc tế.',
+  mission: {
+    lead:
+      'Mang đến giải pháp đồng phục giúp doanh nghiệp nâng tầm hình ảnh thương hiệu,',
+    body: 'xây dựng đội ngũ chuyên nghiệp và tạo trải nghiệm mặc tốt hơn cho người lao động mỗi ngày đi làm.',
+  },
+  vision: {
+    lead: 'Trở thành thương hiệu giải pháp đồng phục doanh nghiệp hàng đầu Việt Nam',
+    body: 'và từng bước trở thành đối tác sản xuất đồng phục tin cậy cho các doanh nghiệp quốc tế.',
+  },
 };
 
 export const coreValues = [

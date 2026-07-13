@@ -11,8 +11,16 @@ import { gioiThieuSeo, testimonials, certificateImages } from '../data/gioi-thie
 import { pageHeroBg } from '../data/site';
 import { routes } from '../lib/routes';
 import { rhythmBg } from '../lib/section-rhythm';
+import {
+  pageHeroEyebrow,
+  pageHeroImage,
+  pageHeroInner,
+  pageHeroScrim,
+  pageHeroShell,
+  pageHeroTitle,
+} from '../lib/page-hero-shell';
 
-const eyebrowClass = 'font-eyebrow text-xs uppercase tracking-[0.2em] font-medium';
+const eyebrowClass = pageHeroEyebrow;
 ---
 
 <SiteLayout
@@ -21,29 +29,21 @@ const eyebrowClass = 'font-eyebrow text-xs uppercase tracking-[0.2em] font-mediu
   currentPath={routes.gioiThieu}
 >
   {/* Banner — 504px, ảnh nền + overlay, chữ đè, số ở chân */}
-  <header
-    class="relative h-[504px] overflow-hidden bg-[#0B1F35] max-[640px]:h-auto max-[640px]:min-h-[460px]"
-  >
+  <header data-page-hero class:list={[pageHeroShell, 'bg-[#0B1F35]']}>
     <img
       src={pageHeroBg.gioiThieu}
       alt=""
-      class="absolute inset-0 h-full w-full object-cover opacity-[0.42]"
+      class={pageHeroImage}
+      loading="eager"
+      decoding="async"
     />
-    <div
-      class="absolute inset-0 bg-[linear-gradient(to_top,rgba(11,31,53,0.95),rgba(11,31,53,0.35)_60%,rgba(11,31,53,0.7))]"
-      aria-hidden="true"
-    >
-    </div>
+    <div class={pageHeroScrim} aria-hidden="true"></div>
 
-    <div
-      class="relative z-[2] mx-auto flex h-full max-w-container-max-width flex-col justify-between px-6 pb-10 pt-28 md:px-8 md:pt-32"
-    >
+    <div class={pageHeroInner}>
       <p class:list={[eyebrowClass, 'text-white/65']}>Giới thiệu&nbsp;·&nbsp;Est. 2003</p>
 
       <div>
-        <h1
-          class="mb-7 max-w-[20ch] text-white text-[clamp(1.875rem,3.9vw,3.25rem)] font-bold leading-none tracking-[-0.035em]"
-        >
+        <h1 class:list={[pageHeroTitle, 'mb-7']}>
           23 năm theo đuổi giá trị của một sản phẩm may mặc chất lượng
         </h1>
 
