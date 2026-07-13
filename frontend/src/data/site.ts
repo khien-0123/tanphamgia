@@ -401,13 +401,6 @@ export const homeFeaturedCases = {
     text: 'Xây dựng hình ảnh đội ngũ chuyên nghiệp và đồng bộ — chất lượng ổn định qua nhiều đợt triển khai.',
     author: 'BIDV Team',
   },
-  contact: {
-    email: 'dongphuc@tanphamgia.com.vn',
-    phone: '0843 406 406',
-    phoneHref: 'tel:0843406406',
-    ctaLabel: 'Nhận tư vấn',
-    ctaHref: routes.lienHe,
-  },
   allProjectsHref: routes.tinTuc,
 };
 

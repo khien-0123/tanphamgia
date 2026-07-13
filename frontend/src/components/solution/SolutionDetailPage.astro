@@ -14,6 +14,7 @@ import {
   pageHeroInner,
   pageHeroScrim,
   pageHeroShell,
+  pageHeroStats,
   pageHeroTitle,
 } from '../../lib/page-hero-shell';
 
@@ -129,11 +130,11 @@ const h2Macro =
         <h1 class:list={[pageHeroTitle, 'max-w-[15ch] md:max-w-[18ch]']}>
           {content.hero.title}
         </h1>
-        <div class="mt-7 flex flex-wrap items-baseline gap-x-10 gap-y-4">
+        <div class:list={[pageHeroStats, 'mt-4 md:mt-7']}>
           {
             heroStats.map((s) => (
               <div class="flex items-baseline gap-3">
-                <b class="text-xl font-extrabold leading-none tabular-nums text-white md:text-2xl">
+                <b class="text-lg font-extrabold leading-none tabular-nums text-white md:text-2xl">
                   {s.value}
                 </b>
                 <span class:list={[pageHeroEyebrow, 'text-white/55']}>{s.label}</span>
@@ -389,7 +390,9 @@ const h2Macro =
           {
             content.processSteps.map((step, i) => (
               <li class="flow-step" data-reveal>
-                <span class="flow-no tabular-nums">{String(i + 1).padStart(2, '0')}</span>
+                <span class="flow-no tabular-nums" aria-hidden="true">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
                 <h3>{step}</h3>
               </li>
             ))
@@ -671,33 +674,50 @@ const h2Macro =
     position: absolute;
     left: 0;
     right: calc(100% / 12);
-    top: 2.6rem;
+    top: 3.25rem;
     height: 1px;
     background: #DCE5E2;
     z-index: 2;
   }
   .flow-step {
-    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    overflow: hidden;
     background: rgb(var(--color-surface-alt));
-    padding: 0 1.25rem;
+    padding: 1.5rem 1.25rem 1.75rem;
+    min-height: 9.5rem;
   }
   .flow-no {
-    position: relative;
-    z-index: 3;
-    display: inline-block;
-    font-size: clamp(2.75rem, 4.4vw, 4.25rem);
-    font-weight: 700;
-    letter-spacing: -0.04em;
+    display: block;
+    flex-shrink: 0;
+    margin: 0;
+    font-size: clamp(2.75rem, 5vw, 4.5rem);
+    font-weight: 800;
+    letter-spacing: -0.05em;
     line-height: 1;
-    color: #DCE5E2;
+    color: rgb(14 38 64 / 0.07);
+    pointer-events: none;
+    user-select: none;
     transition: color 0.4s cubic-bezier(0.22, 1, 0.36, 1);
   }
-  /* Gạch vàng DƯỚI số (không phải trên đầu tiêu đề) — hợp lệ theo §Colors. */
-  .flow-no::after {
+  .flow-step h3 {
+    position: relative;
+    margin: 0;
+    flex: 1;
+    min-width: 0;
+    max-width: 18ch;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.45;
+    color: #0E2640;
+  }
+  .flow-step h3::after {
     content: '';
     position: absolute;
-    left: 0.06em;
-    bottom: -0.28em;
+    left: 0;
+    bottom: -0.55rem;
     width: 1.6rem;
     height: 3px;
     background: #FFC933;
@@ -705,22 +725,11 @@ const h2Macro =
     transform-origin: left;
     transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
   }
-  .flow-step h3 {
-    margin-top: 1.75rem;
-    max-width: 15ch;
-    font-size: 1rem;
-    font-weight: 700;
-    line-height: 1.45;
-    color: #0E2640;
-  }
   .flow-step:hover .flow-no {
-    color: #0E2640;
+    color: rgb(14 38 64 / 0.1);
   }
-  .flow-step:hover .flow-no::after {
+  .flow-step:hover h3::after {
     transform: scaleX(1);
-  }
-  .flow-step:last-child .flow-no {
-    color: #102C4D;
   }
   @media (max-width: 1000px) {
     .flow-rail {

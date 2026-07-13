@@ -126,13 +126,13 @@ export const solutionBoxHome = {
 /** Mosaic 4 khối — section Giải pháp trang chủ */
 export const solutionHomeMosaic = {
   section: 'relative z-[2] py-10 md:py-12 bg-white text-ink-dark',
-  headerWrap: 'text-left mb-4 md:mb-6 max-w-3xl',
+  headerWrap: 'text-left mb-8 md:mb-10 max-w-3xl',
   title:
     'font-headline-md font-bold text-ink-dark text-2xl md:text-4xl leading-tight tracking-tight text-balance m-0',
   lead:
     'text-pretty text-text-muted text-sm md:text-base leading-relaxed mt-4 m-0',
   grid:
-    'solutions-mosaic__grid grid grid-cols-1 gap-3 md:grid-cols-3 md:gap-4 lg:gap-5',
+    'solutions-mosaic__grid grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-6 lg:gap-8',
   cardWrap:
     'relative overflow-hidden rounded-[8px] bg-white isolate shadow-[0_12px_40px_rgba(14,38,64,0.14)]',
   cardLink:

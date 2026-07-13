@@ -15,3 +15,8 @@ export function rhythmBg(index: number): typeof RHYTHM_ALT | typeof RHYTHM_WHITE
 export function rhythmBgWhiteFirst(index: number): typeof RHYTHM_ALT | typeof RHYTHM_WHITE {
   return index % 2 === 0 ? RHYTHM_WHITE : RHYTHM_ALT;
 }
+
+/** Padding dọc section trang chủ — đồng bộ khoảng trắng giữa các khối (theo HomeIntroSection). */
+export const homeSectionPy = 'py-12 md:py-16 lg:py-20';
+export const homeSectionPt = 'pt-12 md:pt-16 lg:pt-20';
+export const homeSectionPb = 'pb-12 md:pb-16 lg:pb-20';

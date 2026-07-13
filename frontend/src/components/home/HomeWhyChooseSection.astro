@@ -75,6 +75,7 @@ const stackCount = whyChoose.length;
 <style>
   .why-choose-section {
     --why-choose-sticky-top: calc(4rem + 10px);
+    --home-section-end-gap: 3rem;
     --why-choose-frame-rest-max: 56rem;
     --why-choose-frame-rest-height: clamp(380px, 68vh, 760px);
     --why-choose-frame-expanded-height: calc(100dvh - var(--why-choose-sticky-top));
@@ -91,29 +92,29 @@ const stackCount = whyChoose.length;
   }
 
   .why-choose-scrim {
-    height: 48%;
+    height: 50%;
     background: linear-gradient(
       to top,
-      rgb(14 38 64 / 0.72) 0%,
-      rgb(16 44 77 / 0.38) 45%,
+      rgb(0 0 0 / 0.82) 0%,
+      rgb(0 0 0 / 0.48) 45%,
       transparent 100%
     );
   }
 
-  /* Mobile: gradient xanh nhạt hơn — tránh vùng dưới chữ trông như nền đen */
+  /* Mobile: gradient đen nhạt hơn desktop */
   @media (max-width: 767px) {
     .why-choose-scrim {
-      height: 38%;
+      height: 42%;
       background: linear-gradient(
         to top,
-        rgb(14 38 64 / 0.48) 0%,
-        rgb(16 44 77 / 0.22) 55%,
+        rgb(0 0 0 / 0.58) 0%,
+        rgb(0 0 0 / 0.32) 55%,
         transparent 100%
       );
     }
 
     .why-choose-frame {
-      background-color: rgb(16 44 77 / 0.2);
+      background-color: rgb(0 0 0 / 0.28);
     }
   }
 
@@ -123,10 +124,22 @@ const stackCount = whyChoose.length;
     padding-bottom: 0;
   }
 
-  /* Desktop: gom khoảng trắng cuối section */
+  /* Desktop: gom khoảng trắng cuối section — đệm cuối bằng HomeIntroSection */
   @media (min-width: 768px) {
+    .why-choose-section {
+      --home-section-end-gap: 4rem;
+    }
+
     .why-choose-parallax {
-      margin-bottom: calc(var(--why-choose-frame-height) + 1.5rem - var(--why-choose-slide-runway));
+      margin-bottom: calc(
+        var(--why-choose-frame-height) + var(--home-section-end-gap) - var(--why-choose-slide-runway)
+      );
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .why-choose-section {
+      --home-section-end-gap: 5rem;
     }
   }
 
@@ -148,7 +161,7 @@ const stackCount = whyChoose.length;
 
     .why-choose-parallax {
       margin-bottom: 0;
-      padding-bottom: 0.5rem;
+      padding-bottom: 0;
     }
 
     .why-choose-slide {
