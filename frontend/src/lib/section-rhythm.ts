@@ -16,7 +16,10 @@ export function rhythmBgWhiteFirst(index: number): typeof RHYTHM_ALT | typeof RH
   return index % 2 === 0 ? RHYTHM_WHITE : RHYTHM_ALT;
 }
 
-/** Padding dọc section trang chủ — đồng bộ khoảng trắng giữa các khối (theo HomeIntroSection). */
-export const homeSectionPy = 'py-12 md:py-16 lg:py-20';
-export const homeSectionPt = 'pt-12 md:pt-16 lg:pt-20';
-export const homeSectionPb = 'pb-12 md:pb-16 lg:pb-20';
+/** Padding dọc chuẩn — mọi section nội dung */
+export const sectionPy = 'py-16 md:py-24';
+
+/** @deprecated Dùng sectionPy */
+export const homeSectionPy = sectionPy;
+export const homeSectionPt = 'pt-16 md:pt-24';
+export const homeSectionPb = 'pb-16 md:pb-24';

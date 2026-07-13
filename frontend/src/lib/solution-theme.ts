@@ -1,5 +1,6 @@
 /** Biến thể giao diện cho 4 nhóm giải pháp (1–4). */
 import { imageRadius, portraitCardFrame } from './image-frame';
+import { sectionPy } from './section-rhythm';
 
 export type SolutionTheme = 1 | 2 | 3 | 4;
 
@@ -69,7 +70,7 @@ const caseCard: Record<SolutionTheme, string> = {
 export function getSolutionTheme(theme: SolutionTheme) {
   return {
     page: 'bg-white text-ink-dark',
-    section: 'py-8 md:py-12 bg-white [&_h2]:text-balance',
+    section: `${sectionPy} bg-white [&_h2]:text-balance`,
     heroGrid: heroGrid[theme],
     heroImage: `w-full aspect-[4/5] object-cover object-top ${imageRadius}`,
     heroImageDetail: heroImageDetail[theme],
@@ -125,7 +126,7 @@ export const solutionBoxHome = {
 
 /** Mosaic 4 khối — section Giải pháp trang chủ */
 export const solutionHomeMosaic = {
-  section: 'relative z-[2] py-10 md:py-12 bg-white text-ink-dark',
+  section: `relative z-[2] ${sectionPy} bg-white text-ink-dark`,
   headerWrap: 'text-left mb-8 md:mb-10 max-w-3xl',
   title:
     'font-headline-md font-bold text-ink-dark text-2xl md:text-4xl leading-tight tracking-tight text-balance m-0',
@@ -170,7 +171,7 @@ export const solutionHomeMosaic = {
 
 /** Layout 1+3 Process — GP1 trái tĩnh, GP2–4 phải sticky stack */
 export const solutionHomeSplit = {
-  section: 'solutions-section py-16 md:py-24 bg-white text-ink-dark',
+  section: `${sectionPy} bg-white text-ink-dark`,
   stageWrap: 'solutions-stage',
   layout: 'solutions-split',
   headerRow: 'solutions-intro',
@@ -209,7 +210,7 @@ export const solutionHomeSplit = {
 
 /** Grid 4 cột — trang chủ section Giải pháp (tuân DESIGN.md) */
 export const solutionHomeCarousel = {
-  section: 'py-16 md:py-24 bg-white text-ink-dark',
+  section: `${sectionPy} bg-white text-ink-dark`,
   headerRow: 'mb-8 md:mb-12',
   eyebrow: 'm-0 mb-3 text-xs font-bold uppercase tracking-widest text-accent-teal',
   headerText: 'max-w-2xl',

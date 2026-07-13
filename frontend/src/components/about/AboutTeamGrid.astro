@@ -1,6 +1,6 @@
 ---
 import { teamDepartments } from '../../data/gioi-thieu';
-import { RHYTHM_WHITE } from '../../lib/section-rhythm';
+import { RHYTHM_WHITE, sectionPy } from '../../lib/section-rhythm';
 
 interface Props {
   sectionBg?: string;
@@ -9,7 +9,7 @@ interface Props {
 const { sectionBg = RHYTHM_WHITE } = Astro.props;
 ---
 
-<section class:list={[sectionBg, 'py-[clamp(4.5rem,9vw,8rem)]']}>
+<section class:list={[sectionBg, sectionPy]}>
   <div class="max-w-container-max-width mx-auto px-6 md:px-8">
     <div class="max-w-[44rem] mb-[clamp(2.75rem,5vw,4rem)]">
       <span class="font-eyebrow text-xs uppercase tracking-[0.2em] text-accent-teal block mb-5">

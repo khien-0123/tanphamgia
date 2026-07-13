@@ -1,6 +1,7 @@
 ---
 import { homeFeaturedCases } from '../../data/site';
 import { imageRadius } from '../../lib/image-frame';
+import { sectionPy } from '../../lib/section-rhythm';
 
 const { featured, secondary, quote, allProjectsHref } = homeFeaturedCases;
 
@@ -14,7 +15,7 @@ const secondaryCard =
   `relative shrink-0 snap-start overflow-hidden ${imageRadius} bg-ink-mid min-h-[220px] basis-[85vw] sm:basis-[calc(50%-0.425rem)] transition-transform duration-250 hover:-translate-y-0.5 lg:shrink lg:min-h-[220px] lg:h-full`;
 ---
 
-<section class="py-8 md:py-14 text-white bg-ink-dark overflow-hidden" id="du-an">
+<section class:list={[sectionPy, 'text-white bg-ink-dark overflow-hidden']} id="du-an">
   <header
     data-reveal
     class="max-w-container-max-width w-full mx-auto px-6 md:px-8 pb-4 md:pb-6 flex flex-col md:flex-row justify-between items-start md:items-end gap-4 md:gap-6"

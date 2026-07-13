@@ -5,7 +5,7 @@ import {
   catalogueDocuments,
   guideDocuments,
 } from '../../data/tai-lieu';
-import { RHYTHM_WHITE } from '../../lib/section-rhythm';
+import { RHYTHM_WHITE, sectionPy } from '../../lib/section-rhythm';
 
 interface Props {
   sectionBg?: string;
@@ -14,7 +14,7 @@ interface Props {
 const { sectionBg = RHYTHM_WHITE } = Astro.props;
 ---
 
-<section class:list={['py-8 md:py-12', sectionBg]}>
+<section class:list={[sectionPy, sectionBg]}>
   <div class="max-w-container-max-width mx-auto px-6 md:px-8 space-y-8 md:space-y-10">
     <DocumentListSection title="Tài liệu thương hiệu" icon="description" documents={brandDocuments} />
     <DocumentListSection title="Catalogue sản phẩm" icon="menu_book" documents={catalogueDocuments} />

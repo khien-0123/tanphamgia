@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./src/**/*.{astro,html,js,ts,md}'],
-  safelist: ['bg-surface-alt', 'bg-white', 'bg-texture-fabric', 'bg-texture-grain'],
+  safelist: ['bg-surface-alt', 'bg-white', 'bg-texture-fabric', 'bg-texture-grain', 'py-16', 'md:py-24'],
   darkMode: 'class',
   theme: {
     extend: {

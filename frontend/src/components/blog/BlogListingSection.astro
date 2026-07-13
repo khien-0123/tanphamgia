@@ -3,7 +3,7 @@ import BlogPostCard from './BlogPostCard.astro';
 import BlogPostGrid from './BlogPostGrid.astro';
 import BlogPagination from './BlogPagination.astro';
 import type { BlogPost } from '../../data/site';
-import { RHYTHM_WHITE } from '../../lib/section-rhythm';
+import { RHYTHM_WHITE, sectionPy } from '../../lib/section-rhythm';
 
 interface Props {
   items: BlogPost[];
@@ -17,7 +17,7 @@ interface Props {
 const { items, currentPage, totalPages, featuredPost, sectionBg = RHYTHM_WHITE } = Astro.props;
 ---
 
-<section class:list={['py-8 md:py-12', sectionBg]}>
+<section class:list={[sectionPy, sectionBg]}>
   <div class="max-w-container-max-width mx-auto px-6 md:px-8">
     {
       featuredPost && (

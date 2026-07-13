@@ -1,8 +1,9 @@
 /** Class Tailwind — thẻ dự án (ảnh full + gradient navy đáy + CTA) */
 
 import { imageRadius } from './image-frame';
+import { sectionPy } from './section-rhythm';
 
-export const projectCardSectionClasses = 'bg-surface-alt py-8 md:py-12';
+export const projectCardSectionClasses = `bg-surface-alt ${sectionPy}`;
 
 export const projectCardGrid3Classes =
   'grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 md:gap-6';

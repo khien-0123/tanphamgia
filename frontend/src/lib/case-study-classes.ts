@@ -1,6 +1,8 @@
 /** Class Tailwind dùng chung — section Case study trang Khách hàng */
 
-export const caseStudySection = 'py-12 md:py-20 bg-white border-b border-border-subtle';
+import { sectionPy } from './section-rhythm';
+
+export const caseStudySection = `${sectionPy} bg-white border-b border-border-subtle`;
 
 /** Khung viền chung — căn đường kẻ dọc 50/50 giữa thẻ lớn và hàng phụ */
 export const caseStudyStack = 'border border-ink-dark/10 overflow-hidden bg-white';

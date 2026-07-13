@@ -1,6 +1,6 @@
 ---
 import { missionVision, missionVisionSection, coreValues } from '../../data/gioi-thieu';
-import { RHYTHM_WHITE } from '../../lib/section-rhythm';
+import { RHYTHM_WHITE, sectionPy } from '../../lib/section-rhythm';
 
 interface Props {
   sectionBg?: string;
@@ -31,7 +31,7 @@ const pillars = [
 ---
 
 {/* Định hướng — Sứ mệnh & Tầm nhìn: accent dọc + icon + lead/body (không card) */}
-<section class:list={['py-[clamp(4.5rem,9vw,8rem)]', sectionBg]}>
+<section class:list={[sectionPy, sectionBg]}>
   <div class="max-w-container-max-width mx-auto px-6 md:px-8">
     <header class="mb-[clamp(2.5rem,5vw,4rem)] max-w-[40rem]">
       <span class:list={[eyebrowClass, 'text-accent-teal mb-4']}>{missionVisionSection.eyebrow}</span>
@@ -86,7 +86,7 @@ const pillars = [
 </section>
 
 {/* 5 giá trị cốt lõi — tiêu đề dính + danh sách kẻ mảnh (không lưới card) */}
-<section class="bg-white py-[clamp(4.5rem,9vw,8rem)]">
+<section class:list={['bg-white', sectionPy]}>
   <div class="max-w-container-max-width mx-auto px-6 md:px-8">
     <div class="grid grid-cols-1 md:grid-cols-[0.85fr_1.15fr] gap-[clamp(2.5rem,6vw,6rem)] items-start">
       <div class="md:sticky md:top-10">

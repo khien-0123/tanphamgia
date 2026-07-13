@@ -1,6 +1,6 @@
 ---
 import HomeClientLogos from '../HomeClientLogos.astro';
-import { RHYTHM_WHITE, homeSectionPy } from '../../lib/section-rhythm';
+import { RHYTHM_WHITE, sectionPy } from '../../lib/section-rhythm';
 
 interface Props {
   sectionBg?: string;
@@ -9,7 +9,7 @@ interface Props {
 const { sectionBg = RHYTHM_WHITE } = Astro.props;
 ---
 
-<section class:list={[homeSectionPy, sectionBg]} id="doi-tac">
+<section class:list={[sectionPy, sectionBg]} id="doi-tac">
   <div
     class="max-w-container-max-width mx-auto px-6 md:px-8 grid lg:grid-cols-5 gap-8 lg:gap-10 items-center"
   >
