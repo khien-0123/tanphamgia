@@ -1,4 +1,5 @@
 ---
+import SiteImage from '../SiteImage.astro';
 import { brandStory } from '../../data/gioi-thieu';
 import { mediaTextRowClass, mediaTextCellClass } from '../../lib/about-layout';
 import { imageRadius } from '../../lib/image-frame';
@@ -21,12 +22,13 @@ const imgClass = `block w-full ${imageRadius} object-cover h-[clamp(24rem,42vw,3
           class="absolute -left-3 top-8 hidden h-20 w-1 bg-accent-gold lg:block"
           aria-hidden="true"
         ></span>
-        <img
+        <SiteImage
           src={brandStory.image}
           alt="Câu chuyện thương hiệu Tân Phạm Gia"
           class={imgClass}
           loading="lazy"
           decoding="async"
+          variant="card"
         />
         <div
           class="absolute left-4 bottom-4 max-w-[13rem] rounded-[4px] bg-ink-dark px-7 py-6 text-white md:-left-6 md:-bottom-6"

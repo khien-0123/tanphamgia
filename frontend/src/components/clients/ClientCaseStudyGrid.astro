@@ -1,4 +1,5 @@
 ---
+import SiteImage from '../SiteImage.astro';
 import type { ClientCaseStudy } from '../../data/site';
 import {
   caseStudyCarouselSlide,
@@ -71,7 +72,7 @@ const carouselPages = useSecondaryCarousel
               </span>
             </div>
             <div class:list={caseStudyFeaturedImage}>
-              <img
+              <SiteImage
                 src={featured.image}
                 alt={featured.alt}
                 width={960}
@@ -79,6 +80,7 @@ const carouselPages = useSecondaryCarousel
                 class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                 loading="lazy"
                 decoding="async"
+                variant="card"
               />
             </div>
           </a>

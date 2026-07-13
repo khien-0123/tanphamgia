@@ -1,15 +1,17 @@
 ---
+import SiteImage from './SiteImage.astro';
 import { siteCta } from '../data/site';
 import { sectionPy } from '../lib/section-rhythm';
 ---
 
 <section class:list={['relative overflow-hidden text-white bg-ink-dark', sectionPy]}>
   <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
-    <img
+    <SiteImage
       alt=""
       class="cta-section__photo absolute inset-0 h-full w-full object-cover object-center"
       src={siteCta.backgroundImage}
       loading="lazy"
+      variant="hero"
     />
     <div class="cta-section__overlay absolute inset-0"></div>
   </div>

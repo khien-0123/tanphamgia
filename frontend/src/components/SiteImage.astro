@@ -1,0 +1,80 @@
+---
+import { Image } from 'astro:assets';
+import type { HTMLAttributes } from 'astro/types';
+import {
+  SITE_IMAGE_PRESETS,
+  resolveSiteImage,
+  type SiteImageVariant,
+} from '../lib/site-image';
+
+type Props = HTMLAttributes<'img'> & {
+  /** Path logic từ siteAssets — ví dụ `/images/hero/fallback.jpg` */
+  src: string;
+  alt: string;
+  variant?: SiteImageVariant;
+  /** Path dự phòng khi ảnh chính không có trong assets */
+  fallback?: string;
+  widths?: number[];
+  sizes?: string;
+  quality?: number;
+};
+
+const {
+  src,
+  alt,
+  class: className,
+  variant = 'card',
+  loading = 'lazy',
+  decoding = 'async',
+  widths,
+  sizes,
+  quality,
+  fallback,
+  width,
+  height,
+  draggable,
+  style,
+  ...rest
+} = Astro.props;
+
+const preset = SITE_IMAGE_PRESETS[variant];
+const resolved =
+  (await resolveSiteImage(src)) ?? (fallback ? await resolveSiteImage(fallback) : undefined);
+
+if (!resolved && import.meta.env.DEV) {
+  console.warn(`[SiteImage] Không tìm thấy asset cho: ${src}`);
+}
+---
+
+{
+  resolved ? (
+    <Image
+      src={resolved}
+      alt={alt}
+      class={className}
+      loading={loading}
+      decoding={decoding}
+      widths={widths ?? preset.widths}
+      sizes={sizes ?? preset.sizes}
+      quality={quality ?? preset.quality}
+      width={width}
+      height={height}
+      draggable={draggable}
+      style={style}
+      {...rest}
+    />
+  ) : (
+    <img
+      src={src}
+      alt={alt}
+      class={className}
+      loading={loading}
+      decoding={decoding}
+      width={width}
+      height={height}
+      draggable={draggable}
+      style={style}
+      {...rest}
+    />
+  )
+}

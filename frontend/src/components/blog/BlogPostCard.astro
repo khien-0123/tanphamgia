@@ -5,6 +5,7 @@
  */
 import BlogPostTitle from '../BlogPostTitle.astro';
 import BlogPostFigure from '../BlogPostFigure.astro';
+import SiteImage from '../SiteImage.astro';
 import { listingZigzagFrame, listingZigzagImg } from '../../lib/image-frame';
 import type { BlogPost } from '../../data/site';
 
@@ -40,12 +41,13 @@ const articleBase = isFeatured
     isFeatured ? (
       <>
         <figure class:list={[listingZigzagFrame, 'w-full md:w-1/2 lg:w-3/5 md:aspect-auto md:min-h-[280px]']}>
-          <img
+          <SiteImage
             src={post.image}
             alt={post.alt}
             class:list={[listingZigzagImg, 'group-hover:scale-105']}
             loading="eager"
             decoding="async"
+            variant="card"
           />
         </figure>
         <div class="relative z-0 flex flex-1 flex-col justify-between p-6 md:p-8">

@@ -8,11 +8,13 @@
     "build": "npm run check:urls && astro build",
     "preview": "astro preview",
     "check:urls": "node scripts/check-hardcoded-urls.mjs",
-    "download:assets": "node scripts/download-assets.mjs"
+    "download:assets": "node scripts/download-assets.mjs",
+    "prune:assets": "node scripts/prune-orphan-assets.mjs"
   },
   "dependencies": {
     "@astrojs/tailwind": "^6.0.2",
     "astro": "^5.18.2",
+    "sharp": "^0.35.3",
     "tailwindcss": "^3.4.17"
   }
 }

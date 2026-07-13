@@ -1,4 +1,5 @@
 ---
+import SiteImage from './SiteImage.astro';
 import { RHYTHM_WHITE, sectionPy } from '../lib/section-rhythm';
 import { surfaceTextureContent, surfaceTextureSectionShell } from '../lib/surface-texture';
 import SurfaceTextureLayer from './SurfaceTextureLayer.astro';
@@ -88,11 +89,12 @@ const speedClasses = [
               >
                 {[...column, ...column].map((cert) => (
                   <figure class="certificate-marquee__card">
-                    <img
+                    <SiteImage
                       alt={cert.title}
                       class="certificate-marquee__image"
                       loading="lazy"
                       src={cert.image}
+                      variant="thumb"
                     />
                     <figcaption class="certificate-marquee__caption">{cert.title}</figcaption>
                   </figure>
@@ -116,11 +118,12 @@ const speedClasses = [
               >
                 {[...column, ...column].map((cert) => (
                   <figure class="certificate-marquee__card">
-                    <img
+                    <SiteImage
                       alt={cert.title}
                       class="certificate-marquee__image"
                       loading="lazy"
                       src={cert.image}
+                      variant="thumb"
                     />
                     <figcaption class="certificate-marquee__caption">{cert.title}</figcaption>
                   </figure>
@@ -144,11 +147,12 @@ const speedClasses = [
               >
                 {[...column, ...column].map((cert) => (
                   <figure class="certificate-marquee__card">
-                    <img
+                    <SiteImage
                       alt={cert.title}
                       class="certificate-marquee__image"
                       loading="lazy"
                       src={cert.image}
+                      variant="thumb"
                     />
                     <figcaption class="certificate-marquee__caption">{cert.title}</figcaption>
                   </figure>

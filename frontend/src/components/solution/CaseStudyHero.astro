@@ -1,4 +1,5 @@
 ---
+import SiteImage from '../SiteImage.astro';
 import {
   pageHeroDescription,
   pageHeroEyebrow,
@@ -22,7 +23,7 @@ const { name, intro, image, eyebrow, backHref, backLabel } = Astro.props;
 ---
 
 <header data-page-hero class:list={[pageHeroShell, 'text-white']}>
-  <img alt="" class={pageHeroImage} src={image} loading="eager" decoding="async" />
+  <SiteImage alt="" class={pageHeroImage} src={image} loading="eager" decoding="async" variant="hero" />
   <div class={pageHeroScrim} aria-hidden="true"></div>
 
   <div class={pageHeroInner}>

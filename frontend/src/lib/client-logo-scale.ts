@@ -10,7 +10,7 @@ const LOGO_SCALE: Record<string, number> = {
   '/images/logos/bosch.webp': 0.95,
   '/images/logos/dat.webp': 0.95,
   '/images/logos/vinamilk.png': 0.95,
-  '/images/logos/techcombank.jpg': 1.18,
+  '/images/logos/techcombank.svg': 1.18,
   '/images/logos/bidv.webp': 1.12,
   '/images/logos/bidv.png': 1.05,
   '/images/logos/sacombank.png': 0.9,

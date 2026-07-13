@@ -1,4 +1,5 @@
 ---
+import SiteImage from '../SiteImage.astro';
 import SiteLayout from '../../layouts/SiteLayout.astro';
 import { sectionPy } from '../../lib/section-rhythm';
 import { solutions } from '../../data/site';
@@ -117,12 +118,13 @@ const h2Macro =
 >
   {/* ══ 00 · HERO — 504px, ảnh nền, chữ đè ══ */}
   <header data-page-hero class:list={[pageHeroShell, 'overflow-hidden']}>
-    <img
+    <SiteImage
       src={solution?.image}
       alt={content.hero.imageAlt}
       class={pageHeroImage}
       loading="eager"
       decoding="async"
+      variant="hero"
     />
     <div class={pageHeroScrim} aria-hidden="true"></div>
     <div class={pageHeroInner}>
@@ -205,11 +207,12 @@ const h2Macro =
           <figure
             class:list={['m-0 self-start overflow-hidden lg:sticky lg:top-28', imageRadius]}
           >
-            <img
+            <SiteImage
               src={solution?.image}
               alt={content.hero.imageAlt}
               loading="lazy"
               class="block aspect-[4/5] w-full object-cover object-top"
+              variant="card"
             />
           </figure>
 
@@ -278,11 +281,12 @@ const h2Macro =
           {
             content.fabricTable.map((row, i) => (
               <div class:list={['exp__shot', i === 0 && 'on']} data-s={i}>
-                <img
+                <SiteImage
                   src={fabricImages[i] ?? solution?.image}
                   alt={row.material}
                   loading="lazy"
                   class="exp__img"
+                  variant="card"
                 />
                 <dl class="exp__spec">
                   <div>
@@ -320,11 +324,12 @@ const h2Macro =
               content.fabricTable.map((row, i) => (
                 <article class="exp__mrow" data-fabric-slide role="listitem">
                   <figure class="m-0 mb-5 aspect-[4/3] overflow-hidden rounded-[4px]">
-                    <img
+                    <SiteImage
                       src={fabricImages[i] ?? solution?.image}
                       alt={row.material}
                       loading="lazy"
                       class="h-full w-full object-cover"
+                      variant="card"
                     />
                   </figure>
                   <h3 class="mb-4 text-2xl font-bold">{row.material}</h3>
@@ -375,7 +380,7 @@ const h2Macro =
           {
             proofItems.map((item) => (
               <a href={item.href} class="proof-case group" data-reveal>
-                <img src={item.image} alt="" loading="lazy" class="proof-case__img" />
+                <SiteImage src={item.image} alt="" loading="lazy" class="proof-case__img" variant="card" />
                 <div class="proof-case__in">
                   <span class:list={[chapterEyebrow, 'mb-4 block text-accent-gold']}>
                     {item.name}

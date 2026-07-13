@@ -3,7 +3,6 @@
 export const siteAssets = {
   brand: {
     logo: '/images/brand/tan-pham-gia-logo.png',
-    logoLight: '/images/brand/tan-pham-gia-logo-light.png',
     ministryCert: '/images/brand/logo-bo-cong-thuong.webp',
   },
   hero: {
@@ -18,9 +17,6 @@ export const siteAssets = {
   },
   cta: {
     background: '/images/cta/background.webp',
-  },
-  intro: {
-    home: '/images/about/home-intro.jpg',
   },
   documents: {
     catalogYTe: '/images/documents/catalog-y-te.webp',
@@ -55,10 +51,8 @@ export const siteAssets = {
     saviscoGp2: '/images/cases/savisco-gp2.webp',
     bvRangHamMatGp4: '/images/cases/bv-rang-ham-mat-gp4.webp',
     bvRangHamMat: '/images/cases/bv-rang-ham-mat-sai-gon.webp',
-    savisco: '/images/cases/savisco.webp',
     cocaCola: '/images/cases/coca-cola-philippines.jpg',
     kingGroup: '/images/cases/king-group.webp',
-    kingGroupAlt: '/images/cases/king-group-alt.jpg',
     datGroup: '/images/cases/dat-group.webp',
     zeroWaste: '/images/cases/zero-waste.webp',
     vivant: '/images/cases/vivant.webp',
@@ -81,7 +75,7 @@ export const siteAssets = {
     thoiTrangHoa: '/images/why-choose/thoi-trang-hoa.jpg',
     nangLucSanXuat: '/images/why-choose/nang-luc-san-xuat.png',
     /** Ảnh thẻ QC — nhà thiết kế thời trang */
-    qc: '/images/why-choose/professional-beautiful-asian-female-fashion-designer-working-with-fabric-sketches.jpg',
+    qc: '/images/why-choose/qc.webp',
   },
 } as const;
 
