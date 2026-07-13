@@ -21,11 +21,6 @@ export const sliderArrowPrevInset = 'left-3 md:left-4';
 
 export const sliderArrowNextInset = 'right-3 md:right-4';
 
-/** Nút trong vùng đệm ngoài track — không đè logo/ảnh */
-export const sliderArrowPrevGutter = 'left-1 md:left-1.5';
-
-export const sliderArrowNextGutter = 'right-1 md:right-1.5';
-
 /** Nút đặc — nền trắng, ẩn mặc định, hiện khi hover carousel */
 export const sliderArrowSolidBase = [
   'absolute top-1/2 -translate-y-1/2 z-10',
@@ -37,16 +32,4 @@ export const sliderArrowSolidBase = [
   'group-hover/slider:opacity-100 group-hover/slider:pointer-events-auto',
   'hover:shadow-[0_4px_16px_rgba(0,0,0,0.12)]',
   'disabled:opacity-0 disabled:pointer-events-none',
-];
-
-/** Nút trắng đặc — luôn hiển thị (testimonial, nền tối) */
-export const sliderArrowSolidVisibleBase = [
-  'absolute top-1/2 -translate-y-1/2 z-10',
-  'flex items-center justify-center',
-  'w-9 h-9 md:w-10 md:h-10 rounded-full',
-  'border-0 bg-white text-ink-dark',
-  'cursor-pointer opacity-100 pointer-events-auto shadow-[0_2px_12px_rgba(0,0,0,0.2)]',
-  'transition-shadow duration-200',
-  'hover:shadow-[0_4px_16px_rgba(0,0,0,0.28)]',
-  'disabled:opacity-40 disabled:pointer-events-none',
 ];

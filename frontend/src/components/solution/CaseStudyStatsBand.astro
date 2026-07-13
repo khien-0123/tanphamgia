@@ -4,6 +4,7 @@ import { rhythmBg, sectionPy } from '../../lib/section-rhythm';
 import {
   caseStudyDetailStatCell,
   caseStudyDetailStatCellBordered,
+  caseStudyDetailStatCellSpan,
   caseStudyDetailStatLabel,
   caseStudyDetailStatsGrid,
   caseStudyDetailStatsGridTwo,
@@ -80,7 +81,13 @@ const isNumericStatValue = (value: string) => /^[\d.,+]/.test(value.trim());
               stats.map((stat, index) => (
                 <div
                   data-reveal
-                  class:list={[caseStudyDetailStatCell, 'case-study-stats-band-item']}
+                  class:list={[
+                    caseStudyDetailStatCell,
+                    'case-study-stats-band-item',
+                    stats.length % 2 === 1 &&
+                      index === stats.length - 1 &&
+                      caseStudyDetailStatCellSpan,
+                  ]}
                   style={`--reveal-delay:${index * 80}ms`}
                 >
                   <p

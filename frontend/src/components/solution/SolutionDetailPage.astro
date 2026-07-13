@@ -309,33 +309,55 @@ const h2Macro =
         {content.fabricTable.map((_, i) => <div data-step={i}></div>)}
       </div>
 
-      {/* bản mobile: không ghim, xếp chồng */}
+      {/* Mobile: carousel ngang — desktop giữ trình khám phá ghim màn */}
       <div class="exp__mobile mx-auto max-w-container-max-width px-6 md:px-8">
         <span class:list={[chapterEyebrow, 'mb-6 block text-accent-gold']}>03 — Chất liệu</span>
         <h2 class="exp__h2">{heading(content.sections.productsTitle)}</h2>
-        {
-          content.fabricTable.map((row, i) => (
-            <article class="exp__mrow">
-              <figure class="m-0 mb-5 aspect-[4/3] overflow-hidden rounded-[4px]">
-                <img
-                  src={fabricImages[i] ?? solution?.image}
-                  alt={row.material}
-                  loading="lazy"
-                  class="h-full w-full object-cover"
-                />
-              </figure>
-              <h3 class="mb-4 text-2xl font-bold">{row.material}</h3>
-              <dl class="grid gap-2">
-                <dt>Thành phần</dt>
-                <dd class="tabular-nums">{row.composition}</dd>
-                <dt>Đặc tính</dt>
-                <dd>{row.features}</dd>
-                <dt>Môi trường</dt>
-                <dd>{row.environment}</dd>
-              </dl>
-            </article>
-          ))
-        }
+
+        <div class="exp__slider" data-fabric-mobile-slider>
+          <div class="exp__track" data-fabric-track role="list" aria-label="Danh sách vật liệu">
+            {
+              content.fabricTable.map((row, i) => (
+                <article class="exp__mrow" data-fabric-slide role="listitem">
+                  <figure class="m-0 mb-5 aspect-[4/3] overflow-hidden rounded-[4px]">
+                    <img
+                      src={fabricImages[i] ?? solution?.image}
+                      alt={row.material}
+                      loading="lazy"
+                      class="h-full w-full object-cover"
+                    />
+                  </figure>
+                  <h3 class="mb-4 text-2xl font-bold">{row.material}</h3>
+                  <dl class="grid gap-2">
+                    <dt>Thành phần</dt>
+                    <dd class="tabular-nums">{row.composition}</dd>
+                    <dt>Đặc tính</dt>
+                    <dd>{row.features}</dd>
+                    <dt>Môi trường</dt>
+                    <dd>{row.environment}</dd>
+                  </dl>
+                </article>
+              ))
+            }
+          </div>
+
+          {
+            content.fabricTable.length > 1 && (
+              <div class="exp__dots" role="tablist" aria-label="Chọn vật liệu">
+                {content.fabricTable.map((row, i) => (
+                  <button
+                    type="button"
+                    class="exp__dot"
+                    data-fabric-dot={i}
+                    role="tab"
+                    aria-label={row.material}
+                    aria-selected={i === 0 ? 'true' : 'false'}
+                  />
+                ))}
+              </div>
+            )
+          }
+        </div>
       </div>
     </section>
 
@@ -594,12 +616,47 @@ const h2Macro =
       display: block;
       padding-block: 4.5rem;
     }
-    .exp__mrow {
-      padding-block: 2.5rem;
-      border-top: 1px solid rgb(255 255 255 / 0.12);
+    .exp__slider {
+      margin-top: 2rem;
     }
-    .exp__mrow:first-of-type {
-      border-top: 0;
+    .exp__track {
+      display: flex;
+      gap: 1rem;
+      overflow-x: auto;
+      overscroll-x: contain;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .exp__track::-webkit-scrollbar {
+      display: none;
+    }
+    .exp__mrow {
+      flex: 0 0 100%;
+      scroll-snap-align: start;
+      min-width: 0;
+    }
+    .exp__dots {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1.75rem;
+    }
+    .exp__dot {
+      width: 0.5rem;
+      height: 0.5rem;
+      padding: 0;
+      border: 0;
+      border-radius: 999px;
+      background: rgb(255 255 255 / 0.35);
+      cursor: pointer;
+      transition:
+        width 0.25s ease,
+        background-color 0.25s ease;
+    }
+    .exp__dot[aria-selected='true'] {
+      width: 1.5rem;
+      background: #ffc933;
     }
     .exp__mobile dt {
       font-family: var(--font-body);
@@ -633,21 +690,22 @@ const h2Macro =
     width: 100%;
     height: 100%;
     object-fit: cover;
-    opacity: 0.42;
-    transition:
-      transform 1.2s cubic-bezier(0.22, 1, 0.36, 1),
-      opacity 0.6s;
+    transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
   }
   .proof-case::after {
     content: '';
     position: absolute;
     inset: 0;
     z-index: -1;
-    background: linear-gradient(to top, rgb(11 31 53 / 0.94) 10%, rgb(11 31 53 / 0.35) 70%);
+    background: linear-gradient(
+      to top,
+      rgb(11 31 53 / 0.88) 0%,
+      rgb(11 31 53 / 0.42) 52%,
+      transparent 90%
+    );
   }
   .proof-case:hover .proof-case__img {
     transform: scale(1.06);
-    opacity: 0.5;
   }
   .proof-case__in {
     width: 100%;
@@ -792,5 +850,64 @@ const h2Macro =
       { rootMargin: '-50% 0px -50% 0px' },
     );
     root.querySelectorAll<HTMLElement>('[data-step]').forEach((el) => steps.observe(el));
+  }
+
+  /* Carousel vật liệu — chỉ hiển thị mobile (<900px) */
+  const fabricSlider = document.querySelector<HTMLElement>('[data-fabric-mobile-slider]');
+  if (fabricSlider) {
+    const track = fabricSlider.querySelector<HTMLElement>('[data-fabric-track]');
+    const slides = track
+      ? [...track.querySelectorAll<HTMLElement>('[data-fabric-slide]')]
+      : [];
+    const dots = [...fabricSlider.querySelectorAll<HTMLButtonElement>('[data-fabric-dot]')];
+
+    if (track && slides.length > 1) {
+      const getStep = () => {
+        const first = slides[0];
+        const second = slides[1];
+        if (!first) return 0;
+        if (second) return second.offsetLeft - first.offsetLeft;
+        const gap = parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap) || 0;
+        return first.offsetWidth + gap;
+      };
+
+      const getActiveIndex = () => {
+        const step = getStep();
+        if (step <= 0) return 0;
+        return Math.min(slides.length - 1, Math.round(track.scrollLeft / step));
+      };
+
+      const syncDots = () => {
+        const active = getActiveIndex();
+        dots.forEach((dot, index) => {
+          dot.setAttribute('aria-selected', index === active ? 'true' : 'false');
+        });
+      };
+
+      const scrollToIndex = (index: number) => {
+        const step = getStep();
+        if (step <= 0) return;
+        track.scrollTo({ left: Math.round(step * index), behavior: 'smooth' });
+      };
+
+      let scrollTimer: ReturnType<typeof setTimeout> | undefined;
+
+      track.addEventListener(
+        'scroll',
+        () => {
+          clearTimeout(scrollTimer);
+          scrollTimer = setTimeout(syncDots, 80);
+        },
+        { passive: true },
+      );
+      track.addEventListener('scrollend', syncDots);
+
+      dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => scrollToIndex(index));
+      });
+
+      window.addEventListener('resize', syncDots);
+      syncDots();
+    }
   }
 </script>

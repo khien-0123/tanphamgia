@@ -1,11 +1,8 @@
 /** Nội dung trang Giới thiệu — Sitemap 2.1 → 2.9 */
-import { pageSeo, testimonialsAbout } from './site';
+import { pageSeo } from './site';
 import { siteAssets } from './assets';
 
 export const gioiThieuSeo = pageSeo.gioiThieu;
-
-/** @deprecated dùng testimonialsAbout từ site.ts */
-export const testimonials = testimonialsAbout;
 
 export const brandStory = {
   title: '23 Năm Theo Đuổi Giá Trị Của Một Sản Phẩm May Mặc Chất Lượng',
@@ -153,5 +150,3 @@ export const teamDepartments = [
     desc: 'Theo sát quá trình triển khai và hỗ trợ doanh nghiệp trong suốt quá trình sử dụng.',
   },
 ];
-/** 2.7 — Ảnh giấy khen & chứng nhận (nguồn chung site.ts) */
-export { certificates as certificateImages } from './site';

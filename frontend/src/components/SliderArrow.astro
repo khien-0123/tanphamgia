@@ -2,49 +2,35 @@
 import {
   sliderArrowBase,
   sliderArrowNext,
-  sliderArrowNextGutter,
   sliderArrowNextInset,
   sliderArrowPrev,
-  sliderArrowPrevGutter,
   sliderArrowPrevInset,
   sliderArrowSolidBase,
-  sliderArrowSolidVisibleBase,
 } from '../lib/slider-classes';
 
 interface Props {
   direction: 'prev' | 'next';
   /** true = nút nằm trong khung, không tràn ra mép ngoài */
   inset?: boolean;
-  /** true = nút nằm vùng đệm ngoài track (cần px trên wrapper) */
-  gutter?: boolean;
   /** true = nền trắng đặc, ẩn mặc định và hiện khi hover carousel */
   solid?: boolean;
-  /** true = nền trắng đặc, luôn hiển thị */
-  alwaysVisible?: boolean;
 }
 
-const { direction, inset = false, gutter = false, solid = false, alwaysVisible = false } = Astro.props;
+const { direction, inset = false, solid = false } = Astro.props;
 
-const positionClass = gutter
+const positionClass = inset
   ? direction === 'prev'
-    ? sliderArrowPrevGutter
-    : sliderArrowNextGutter
-  : inset
-    ? direction === 'prev'
-      ? sliderArrowPrevInset
-      : sliderArrowNextInset
-    : direction === 'prev'
-      ? sliderArrowPrev
-      : sliderArrowNext;
+    ? sliderArrowPrevInset
+    : sliderArrowNextInset
+  : direction === 'prev'
+    ? sliderArrowPrev
+    : sliderArrowNext;
 const label = direction === 'prev' ? 'Trước' : 'Sau';
 ---
 
 <button
   {...(direction === 'prev' ? { 'data-slider-prev': true } : { 'data-slider-next': true })}
-  class:list={[
-    alwaysVisible ? sliderArrowSolidVisibleBase : solid ? sliderArrowSolidBase : sliderArrowBase,
-    positionClass,
-  ]}
+  class:list={[solid ? sliderArrowSolidBase : sliderArrowBase, positionClass]}
   aria-label={label}
 >
   <svg

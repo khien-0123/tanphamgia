@@ -3,9 +3,6 @@
 export const RHYTHM_ALT = 'bg-surface-alt';
 export const RHYTHM_WHITE = 'bg-white';
 
-/** @deprecated Dùng RHYTHM_ALT */
-export const RHYTHM_FRESH = RHYTHM_ALT;
-
 /** index chẵn → xám, index lẻ → trắng */
 export function rhythmBg(index: number): typeof RHYTHM_ALT | typeof RHYTHM_WHITE {
   return index % 2 === 0 ? RHYTHM_ALT : RHYTHM_WHITE;
@@ -18,8 +15,3 @@ export function rhythmBgWhiteFirst(index: number): typeof RHYTHM_ALT | typeof RH
 
 /** Padding dọc chuẩn — mọi section nội dung */
 export const sectionPy = 'py-16 md:py-24';
-
-/** @deprecated Dùng sectionPy */
-export const homeSectionPy = sectionPy;
-export const homeSectionPt = 'pt-16 md:pt-24';
-export const homeSectionPb = 'pb-16 md:pb-24';
