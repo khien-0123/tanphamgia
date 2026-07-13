@@ -9,10 +9,14 @@ export const pageHeroInner =
 export const pageHeroStats =
   'flex flex-wrap items-baseline gap-x-6 gap-y-2 max-md:gap-x-4 max-md:gap-y-1.5';
 
-export const pageHeroImage = 'absolute inset-0 h-full w-full object-cover opacity-[0.42]';
+export const pageHeroImage = 'absolute inset-0 h-full w-full object-cover';
 
 export const pageHeroScrim =
   'absolute inset-0 bg-[linear-gradient(to_top,rgba(11,31,53,0.95),rgba(11,31,53,0.35)_60%,rgba(11,31,53,0.7))]';
+
+/** Nền gradient — hero không dùng ảnh (tránh watermark / chữ đè trong file) */
+export const pageHeroGradientBg =
+  'bg-[radial-gradient(ellipse_80%_60%_at_15%_-10%,rgba(255,201,51,0.12),transparent_55%),linear-gradient(135deg,#0E2640_0%,#1A3A5C_52%,#102C4D_100%)]';
 
 export const pageHeroEyebrow =
   'font-eyebrow text-xs uppercase tracking-[0.2em] font-medium text-white/65';

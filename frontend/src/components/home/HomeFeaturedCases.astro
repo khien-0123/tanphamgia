@@ -12,7 +12,7 @@ const featuredImg =
 const featuredOverlay =
   'featured-case-copy absolute inset-0 z-[2] flex flex-col justify-end gap-3.5 p-6';
 const secondaryCard =
-  `relative shrink-0 snap-start overflow-hidden ${imageRadius} bg-ink-mid min-h-[220px] basis-[85vw] sm:basis-[calc(50%-0.425rem)] transition-transform duration-250 hover:-translate-y-0.5 lg:shrink lg:min-h-[220px] lg:h-full`;
+  'relative shrink-0 snap-center overflow-hidden bg-ink-mid min-h-[220px] basis-full min-w-full max-sm:rounded-none sm:basis-[calc(50%-0.425rem)] sm:min-w-0 transition-transform duration-250 hover:-translate-y-0.5 lg:shrink lg:min-h-[220px] lg:h-full';
 ---
 
 <section class:list={[sectionPy, 'text-white bg-ink-dark overflow-hidden']} id="du-an">
@@ -136,14 +136,14 @@ const secondaryCard =
       </blockquote>
 
       <div
-        class="flex gap-3.5 overflow-x-auto snap-x snap-proximity overscroll-x-contain [-webkit-overflow-scrolling:touch] [scrollbar-width:none] pb-1 order-2 min-w-0 lg:order-none lg:flex-1 lg:grid lg:grid-cols-2 lg:auto-rows-fr lg:overflow-visible lg:min-h-[220px] [&::-webkit-scrollbar]:hidden"
+        class="featured-secondary-track flex gap-3.5 max-sm:gap-0 overflow-x-auto snap-x max-sm:snap-mandatory sm:snap-proximity overscroll-x-contain [-webkit-overflow-scrolling:touch] [scrollbar-width:none] pb-1 order-2 min-w-0 lg:order-none lg:flex-1 lg:grid lg:grid-cols-2 lg:auto-rows-fr lg:overflow-visible lg:min-h-[220px] [&::-webkit-scrollbar]:hidden"
         role="list"
       >
         {
           secondary.map((project) => (
             <a
               href={project.href}
-              class:list={[secondaryCard, 'group no-underline text-white']}
+              class:list={[secondaryCard, imageRadius, 'group no-underline text-white max-sm:rounded-none']}
               role="listitem"
               aria-label={`Xem chi tiết dự án ${project.name}`}
             >
@@ -183,6 +183,15 @@ const secondaryCard =
 </section>
 
 <style>
+  /* Mobile: carousel dự án phụ full bleed ngang */
+  @media (max-width: 639px) {
+    .featured-secondary-track {
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
+      margin-right: calc(50% - 50vw);
+    }
+  }
+
   /* Màn đen mờ sát đáy */
   .featured-case-scrim {
     height: 55%;

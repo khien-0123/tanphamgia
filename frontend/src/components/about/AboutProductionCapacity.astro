@@ -87,7 +87,7 @@ const isAltBg = sectionBg.includes('surface-alt');
       <p class="text-text-muted mt-4 leading-relaxed">{productionCapacity.qcDesc}</p>
     </div>
 
-    <ol data-reveal class="qc-steps relative grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-y-8 md:gap-y-0">
+    <ol data-reveal class="qc-steps relative grid grid-cols-2 md:grid-cols-5 gap-x-4 gap-y-8 md:gap-y-0">
       {
         productionCapacity.qcSteps.map((step, i) => (
           <li class="qc-step relative pt-9 pr-5">

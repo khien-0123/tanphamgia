@@ -162,9 +162,6 @@ export const mainNavigation = [
   { label: 'Liên hệ', href: routes.lienHe, icon: 'call', desc: 'Tư vấn & báo giá nhanh' },
 ];
 
-/** @deprecated Dùng mainNavigation */
-export const navigation = mainNavigation;
-
 export const brandQuote =
   'Tân Phạm Gia luôn lắng nghe và thấu hiểu để đưa ra giải pháp phù hợp nhất cho doanh nghiệp.';
 

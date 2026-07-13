@@ -1,5 +1,5 @@
 ---
-import { RHYTHM_ALT, RHYTHM_WHITE, sectionPy } from '../lib/section-rhythm';
+import { RHYTHM_WHITE, sectionPy } from '../lib/section-rhythm';
 import { surfaceTextureContent, surfaceTextureSectionShell } from '../lib/surface-texture';
 import SurfaceTextureLayer from './SurfaceTextureLayer.astro';
 
@@ -14,18 +14,13 @@ interface Props {
   centeredTitle?: boolean;
   /** Nền section — xen kẽ xám/trắng */
   sectionBg?: string;
-  /** @deprecated Dùng sectionBg */
-  alternateSectionBg?: boolean;
 }
 
 const {
   items,
   centeredTitle = false,
-  sectionBg,
-  alternateSectionBg = false,
+  sectionBg = RHYTHM_WHITE,
 } = Astro.props;
-
-const resolvedSectionBg = sectionBg ?? (alternateSectionBg ? RHYTHM_ALT : RHYTHM_WHITE);
 
 /** Chia đều N chứng nhận vào N cột */
 function buildColumns(certs: Certificate[], colCount: number) {
@@ -53,7 +48,7 @@ const speedClasses = [
   class:list={[
     sectionPy,
     'w-full',
-    resolvedSectionBg,
+    sectionBg,
     surfaceTextureSectionShell,
   ]}
   id="chung-nhan"

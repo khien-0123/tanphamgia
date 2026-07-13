@@ -9,7 +9,7 @@ export const siteAssets = {
   hero: {
     video: '/videos/header-dong-phuc.mp4',
     fallback: '/images/hero/fallback.jpg',
-    gioiThieu: '/images/hero/gioi-thieu.jpg',
+    gioiThieu: '/images/about/banner1.jpg',
     giaiPhap: '/images/hero/giai-phap.jpg',
     khachHang: '/images/hero/khach-hang.jpg',
     tinTuc: '/images/hero/tin-tuc.webp',

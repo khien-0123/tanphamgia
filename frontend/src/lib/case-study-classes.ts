@@ -1,9 +1,5 @@
 /** Class Tailwind dùng chung — section Case study trang Khách hàng */
 
-import { sectionPy } from './section-rhythm';
-
-export const caseStudySection = `${sectionPy} bg-white border-b border-border-subtle`;
-
 /** Khung viền chung — căn đường kẻ dọc 50/50 giữa thẻ lớn và hàng phụ */
 export const caseStudyStack = 'border border-ink-dark/10 overflow-hidden bg-white';
 
@@ -44,7 +40,6 @@ export const caseStudyCarouselSlide = [
 
 export const caseStudyDotBase = 'h-2 rounded-full transition-all duration-300';
 export const caseStudyDotActive = 'w-6 bg-accent-teal';
-export const caseStudyDotIdle = 'w-2 bg-ink-dark/15 hover:bg-ink-dark/30';
 export const caseStudyDotIdleOnImage = 'w-2 bg-white/35 hover:bg-white/55';
 
 /** Dots đè lên đáy ảnh carousel */

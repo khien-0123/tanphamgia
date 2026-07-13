@@ -75,7 +75,6 @@ const stackCount = whyChoose.length;
 <style>
   .why-choose-section {
     --why-choose-sticky-top: calc(4rem + 10px);
-    --home-section-end-gap: 0;
     --why-choose-frame-rest-max: 56rem;
     --why-choose-frame-rest-height: clamp(380px, 68vh, 760px);
     --why-choose-frame-expanded-height: calc(100dvh - var(--why-choose-sticky-top));
@@ -120,15 +119,7 @@ const stackCount = whyChoose.length;
 
   .why-choose-parallax {
     --why-choose-sticky-top: calc(4rem + 10px);
-    --why-choose-frame-height: var(--why-choose-frame-expanded-height);
     padding-bottom: 0;
-  }
-
-  /* Desktop: parallax không cần margin âm — sectionPy lo đệm dưới */
-  @media (min-width: 768px) {
-    .why-choose-parallax {
-      margin-bottom: 0;
-    }
   }
 
   /* Slide cuối: bỏ runway thừa — không còn khoảng trống dưới thẻ */
@@ -142,6 +133,34 @@ const stackCount = whyChoose.length;
     z-index: calc(var(--slide-index) + 1);
     min-height: 82dvh;
     padding-inline: 0;
+  }
+
+  /* Desktop: mỗi thẻ = full viewport — không lộ ảnh kế tiếp phía dưới */
+  @media (min-width: 768px) {
+    .why-choose-section {
+      --why-choose-frame-rest-height: var(--why-choose-frame-expanded-height);
+      --why-choose-frame-rest-max: 100%;
+    }
+
+    .why-choose-slide {
+      min-height: var(--why-choose-frame-expanded-height);
+      align-items: stretch;
+      justify-content: stretch;
+      padding-inline: 0;
+      animation: none !important;
+    }
+
+    .why-choose-slide:last-child {
+      min-height: var(--why-choose-frame-expanded-height);
+    }
+
+    .why-choose-frame {
+      max-width: 100%;
+      width: 100%;
+      height: var(--why-choose-frame-expanded-height);
+      border-radius: 0.5rem;
+      animation: none !important;
+    }
   }
 
   /* Mobile: giữ sticky stack, chiều cao thẻ gọn hơn desktop */
@@ -184,79 +203,11 @@ const stackCount = whyChoose.length;
         animation-range: cover 0% cover 12%;
       }
     }
-  }
 
-  .why-choose-frame {
-    max-width: 100%;
-    height: var(--why-choose-frame-rest-height);
-    border-radius: 0.5rem;
-  }
-
-  /* Desktop: thu hẹp lúc đầu, mở rộng khi vào vùng chồng thẻ */
-  @media (min-width: 768px) {
-    .why-choose-slide {
-      min-height: var(--why-choose-slide-runway);
-      padding-inline: var(--why-choose-slide-rest-padding);
-    }
-
-    .why-choose-slide:last-child {
-      min-height: var(--why-choose-frame-expanded-height);
-    }
-
-    .why-choose-frame {
-      max-width: var(--why-choose-frame-rest-max);
-      height: var(--why-choose-frame-rest-height);
-      border-radius: 0.75rem;
-    }
-
-    @supports (animation-timeline: view()) {
-      .why-choose-slide {
-        animation: why-choose-expand-slide linear both;
-        animation-timeline: view();
-        /* Bung full sớm — trước khi thẻ kế tiếp trượt lên */
-        animation-range: cover 0% cover 12%;
-      }
-
-      .why-choose-frame {
-        animation: why-choose-expand-frame linear both;
-        animation-timeline: view();
-        animation-range: cover 0% cover 12%;
-      }
-    }
-
-    @supports not (animation-timeline: view()) {
-      .why-choose-slide.is-pinned {
-        padding-inline: 0;
-        align-items: stretch;
-      }
-
-      .why-choose-slide.is-pinned .why-choose-frame {
-        max-width: 100%;
-        height: var(--why-choose-frame-expanded-height);
-        border-radius: 0.25rem;
-      }
-    }
-  }
-
-  @media (max-width: 767px) {
     @supports not (animation-timeline: view()) {
       .why-choose-slide.is-pinned .why-choose-frame {
         height: var(--why-choose-frame-expanded-height);
       }
-    }
-  }
-
-  @keyframes why-choose-expand-frame {
-    from {
-      max-width: var(--why-choose-frame-rest-max);
-      height: var(--why-choose-frame-rest-height);
-      border-radius: 0.75rem;
-    }
-
-    to {
-      max-width: 100%;
-      height: var(--why-choose-frame-expanded-height);
-      border-radius: 0.25rem;
     }
   }
 
@@ -276,7 +227,7 @@ const stackCount = whyChoose.length;
 
   @keyframes why-choose-expand-slide {
     from {
-      padding-inline: var(--why-choose-slide-rest-padding);
+      padding-inline: 0;
       align-items: flex-start;
     }
 
@@ -284,6 +235,12 @@ const stackCount = whyChoose.length;
       padding-inline: 0;
       align-items: stretch;
     }
+  }
+
+  .why-choose-frame {
+    max-width: 100%;
+    height: var(--why-choose-frame-rest-height);
+    border-radius: 0.5rem;
   }
 
   @media (prefers-reduced-motion: reduce) {
