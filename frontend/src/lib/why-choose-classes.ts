@@ -38,10 +38,10 @@ export const whyChooseFrameMediaClasses =
 export const whyChooseFrameTitleClasses = [
   'm-0 text-pretty text-balance',
   'font-headline-md font-bold leading-snug text-white',
-  'text-xl sm:text-2xl md:text-3xl lg:text-4xl',
+  'text-lg sm:text-xl md:text-2xl lg:text-3xl',
 ];
 
 export const whyChooseFrameDescClasses = [
-  'm-0 max-w-[48rem] text-pretty',
+  'm-0 max-w-[52rem] text-pretty',
   'text-sm sm:text-base md:text-lg font-medium leading-relaxed text-white/85',
 ];
