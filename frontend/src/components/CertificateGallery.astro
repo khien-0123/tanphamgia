@@ -1,5 +1,7 @@
 ---
 import { RHYTHM_ALT, RHYTHM_WHITE } from '../lib/section-rhythm';
+import { surfaceTextureContent, surfaceTextureSectionShell } from '../lib/surface-texture';
+import SurfaceTextureLayer from './SurfaceTextureLayer.astro';
 
 interface Certificate {
   title: string;
@@ -49,12 +51,14 @@ const speedClasses = [
 
 <section
   class:list={[
-    'pt-16 pb-8 md:pt-20 md:pb-10 overflow-hidden w-full',
+    'pt-16 pb-8 md:pt-20 md:pb-10 w-full',
     resolvedSectionBg,
+    surfaceTextureSectionShell,
   ]}
   id="chung-nhan"
 >
-  <div class="max-w-container-max-width mx-auto px-6 md:px-8">
+  <SurfaceTextureLayer variant="grain" />
+  <div class:list={['max-w-container-max-width mx-auto px-6 md:px-8', surfaceTextureContent]}>
     <header
       class:list={[
         'mb-5 md:mb-6 max-w-2xl',

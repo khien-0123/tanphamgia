@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./src/**/*.{astro,html,js,ts,md}'],
-  safelist: ['bg-surface-alt', 'bg-white'],
+  safelist: ['bg-surface-alt', 'bg-white', 'bg-texture-fabric', 'bg-texture-grain'],
   darkMode: 'class',
   theme: {
     extend: {
@@ -17,15 +17,16 @@ export default {
         'ink-dark': '#0E2640',
         'ink-mid': '#1A3A5C',
         'ink-light': '#1A4569',
-        background: '#F7FAF9',
+        background: '#FFFFFF',
         'surface-warm': '#FFFFFF',
-        'surface-fresh': '#EEF6F3',
+        /** @deprecated Dùng surface-alt — giữ token để không vỡ class cũ */
+        'surface-fresh': '#EDEDED',
         /** Nền section xen kẽ — xám nhạt (#EDEDED), qua --color-surface-alt */
         'surface-alt': 'rgb(var(--color-surface-alt) / <alpha-value>)',
-        'surface-neutral': '#DDE3EA',
-        'surface-container-low': '#F1F5F4',
-        'surface-muted': '#E8EEEC',
-        'border-subtle': '#DCE5E2',
+        'surface-neutral': '#E0E0E0',
+        'surface-container-low': '#F5F5F5',
+        'surface-muted': '#E5E5E5',
+        'border-subtle': '#D4D4D4',
         'text-muted': '#5F6F78',
         'on-surface': '#1A2B36',
         'primary-container': '#0E2640',
@@ -45,6 +46,14 @@ export default {
         soft: '0 4px 24px -4px rgba(14, 38, 64, 0.08)',
         card: '0 8px 32px -8px rgba(14, 38, 64, 0.12)',
         gold: '0 8px 24px -6px rgba(255, 201, 51, 0.4)',
+      },
+      backgroundImage: {
+        /** Vân vải — Intro (weave 1px, navy 3.5%) */
+        'texture-fabric':
+          'repeating-linear-gradient(0deg, rgba(14, 38, 64, 0.035) 0, rgba(14, 38, 64, 0.035) 1px, transparent 1px, transparent 5px), repeating-linear-gradient(90deg, rgba(14, 38, 64, 0.035) 0, rgba(14, 38, 64, 0.035) 1px, transparent 1px, transparent 5px)',
+        /** Grain giấy — Chứng nhận (SVG noise, tile 128px) */
+        'texture-grain':
+          "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='128' height='128'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
       },
       spacing: {
         'container-max-width': '1280px',

@@ -74,21 +74,27 @@ body {
 /* Scroll reveal — mặc định hiển thị; chỉ ẩn khi JS đã kích hoạt (tránh trang trắng nếu script lỗi) */
 [data-reveal] {
   opacity: 1;
-  transform: none;
+  transform: translate3d(0, 0, 0);
+}
+
+/* Transition luôn trên [data-reveal] — nếu chỉ đặt ở :not(.is-revealed) thì animation không chạy */
+html.js-scroll-reveal-ready [data-reveal] {
+  transition:
+    opacity 1.65s cubic-bezier(0.25, 0.1, 0.25, 1),
+    transform 1.9s cubic-bezier(0.22, 0.68, 0, 1);
+  transition-delay: var(--reveal-delay, 0ms);
 }
 
 html.js-scroll-reveal-ready [data-reveal]:not(.is-revealed) {
   opacity: 0;
-  transform: translateY(1.25rem);
-  transition:
-    opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-  transition-delay: var(--reveal-delay, 0ms);
+  transform: translate3d(0, 2rem, 0);
+  will-change: opacity, transform;
 }
 
 html.js-scroll-reveal-ready [data-reveal].is-revealed {
   opacity: 1;
-  transform: none;
+  transform: translate3d(0, 0, 0);
+  will-change: auto;
 }
 
 @media (prefers-reduced-motion: reduce) {

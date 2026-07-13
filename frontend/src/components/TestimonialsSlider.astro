@@ -27,8 +27,8 @@ const titleClass = isDark
   : 'font-headline-md text-2xl md:text-3xl font-bold text-ink-dark mb-10 md:mb-14';
 
 const blockquoteClass = isDark
-  ? 'flex-[0_0_100%] md:flex-[0_0_calc((100%-6rem)/3)] snap-start min-w-0 box-border px-1 md:px-0 self-stretch m-0 flex flex-col h-auto md:h-full border-l-[3px] border-accent-gold pl-5 md:border-l-0 md:pl-0 [&>p]:flex-1 [&>footer]:mt-auto [&>footer]:shrink-0'
-  : 'flex-[0_0_100%] md:flex-[0_0_calc((100%-6rem)/3)] snap-start min-w-0 box-border px-1 md:px-0 flex flex-col self-stretch m-0 [&>p]:flex-1 [&>p]:flex-auto [&>footer]:mt-auto [&>footer]:shrink-0';
+  ? 'testimonial-slide testimonial-slide--dark flex-[0_0_100%] md:flex-[0_0_calc((100%-6rem)/3)] snap-start min-w-0 box-border px-1 md:px-0 self-stretch m-0 flex flex-col border-l-[3px] border-accent-gold pl-5 md:border-l-0 md:pl-0'
+  : 'testimonial-slide flex-[0_0_100%] md:flex-[0_0_calc((100%-6rem)/3)] snap-start min-w-0 box-border px-1 md:px-0 flex flex-col self-stretch m-0';
 ---
 
 <section class:list={sectionClass}>
@@ -57,13 +57,13 @@ const blockquoteClass = isDark
               >
                 <p
                   class:list={[
-                    'leading-relaxed mb-6',
+                    'testimonial-slide__quote leading-relaxed mb-0',
                     isDark ? 'text-white/90' : 'text-text-muted italic',
                   ]}
                 >
                   "{item.quote}"
                 </p>
-                <footer class:list={[!isDark && 'not-italic']}>
+                <footer class:list={['testimonial-slide__footer', !isDark && 'not-italic']}>
                   <cite
                     class:list={[
                       'font-bold not-italic block',
@@ -81,10 +81,35 @@ const blockquoteClass = isDark
           })
         }
       </div>
-      <SliderArrow direction="prev" />
-      <SliderArrow direction="next" />
+      <SliderArrow direction="prev" solid />
+      <SliderArrow direction="next" solid />
     </div>
   </div>
 </section>
 
 <script src="../scripts/about-testimonials-slider.ts"></script>
+
+<style>
+  /* Căn chữ ký (tên + chức danh) thẳng hàng — quote dài ngắn khác nhau */
+  .testimonial-slide {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .testimonial-slide__quote {
+    flex: 1 1 auto;
+    margin-bottom: 1.5rem;
+  }
+
+  .testimonial-slide__footer {
+    flex-shrink: 0;
+    margin-top: auto;
+  }
+
+  @media (min-width: 768px) {
+    .testimonial-slide__quote {
+      flex: 1 1 0;
+      min-height: 7.5rem;
+    }
+  }
+</style>
