@@ -64,10 +64,9 @@ export const navCtaClasses = [
 ];
 
 export const navToggleClasses = [
-  'w-10 p-0 rounded-full border border-white/20 cursor-pointer',
-  'bg-ink-dark/70 text-white backdrop-blur-xl',
-  'group-[.nav-scrolled]:border-border-subtle group-[.nav-scrolled]:bg-white',
-  'group-[.nav-scrolled]:text-ink-dark group-[.nav-scrolled]:rounded-xl',
+  'w-10 p-0 rounded-xl border-0 cursor-pointer',
+  'bg-white/90 text-ink-dark backdrop-blur-xl shadow-soft',
+  'group-[.nav-scrolled]:bg-white group-[.nav-scrolled]:text-ink-dark',
   'group-[.nav-scrolled]:backdrop-blur-none lg:hidden',
 ];
 

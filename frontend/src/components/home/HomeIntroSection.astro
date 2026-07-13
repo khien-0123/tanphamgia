@@ -1,7 +1,7 @@
 ---
 import { homeIntro } from '../../data/site';
 import { imageRadius } from '../../lib/image-frame';
-import { RHYTHM_WHITE } from '../../lib/section-rhythm';
+import { RHYTHM_WHITE, homeSectionPy } from '../../lib/section-rhythm';
 import {
   introJourneyIconClasses,
   introJourneySlideClasses,
@@ -24,7 +24,7 @@ const firstStep = homeIntro.steps[0];
 const lastStep = homeIntro.steps[stepCount - 1];
 ---
 
-<section class:list={['py-12 md:py-16 lg:py-20', sectionBg]} id="gioi-thieu" data-intro-journey>
+<section class:list={[homeSectionPy, sectionBg]} id="gioi-thieu" data-intro-journey>
   <div class="max-w-container-max-width mx-auto px-6 md:px-8">
     <div class="grid gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-x-16 xl:gap-x-20 lg:items-start">
       <div data-reveal class="min-w-0 flex flex-col">
