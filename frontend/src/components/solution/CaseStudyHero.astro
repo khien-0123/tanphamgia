@@ -1,56 +1,42 @@
 ---
 import {
-  caseStudyDetailHeroGrid,
-  caseStudyDetailHeroImageWrap,
-  caseStudyDetailHeroSection,
-} from '../../lib/case-study-detail-classes';
+  pageHeroDescription,
+  pageHeroEyebrow,
+  pageHeroImage,
+  pageHeroInner,
+  pageHeroScrim,
+  pageHeroShell,
+  pageHeroTitle,
+} from '../../lib/page-hero-shell';
 
 interface Props {
   name: string;
   intro: string;
   image: string;
-  imageClass: string;
   eyebrow?: string;
   backHref: string;
   backLabel: string;
 }
 
-const { name, intro, image, imageClass, eyebrow, backHref, backLabel } = Astro.props;
+const { name, intro, image, eyebrow, backHref, backLabel } = Astro.props;
 ---
 
-<section class:list={caseStudyDetailHeroSection}>
-  <div class="max-w-container-max-width mx-auto px-6 md:px-8">
+<header data-page-hero class:list={[pageHeroShell, 'text-white']}>
+  <img alt="" class={pageHeroImage} src={image} loading="eager" decoding="async" />
+  <div class={pageHeroScrim} aria-hidden="true"></div>
+
+  <div class={pageHeroInner}>
     <a
       href={backHref}
-      class="text-sm font-semibold text-accent-teal hover:text-ink-dark transition-colors"
+      class="text-sm font-semibold text-white/65 transition-colors hover:text-accent-gold"
     >
       {backLabel}
     </a>
 
-    <div class:list={caseStudyDetailHeroGrid}>
-      <div class="min-w-0">
-        {
-          eyebrow && (
-            <p class="font-eyebrow text-xs uppercase tracking-[0.14em] text-accent-teal mb-3">
-              {eyebrow}
-            </p>
-          )
-        }
-        <h1 class="text-3xl md:text-5xl lg:text-6xl font-extrabold leading-[1.05] text-ink-dark text-balance mb-5 md:mb-6">
-          {name}
-        </h1>
-        <p class="text-base md:text-lg text-text-muted leading-relaxed max-w-prose">{intro}</p>
-      </div>
-
-      <figure class:list={caseStudyDetailHeroImageWrap}>
-        <img
-          src={image}
-          alt={name}
-          class:list={[imageClass, 'transition-transform duration-700 hover:scale-[1.03]']}
-          loading="eager"
-          decoding="async"
-        />
-      </figure>
+    <div>
+      {eyebrow && <p class:list={[pageHeroEyebrow, 'mb-3 text-accent-gold/90']}>{eyebrow}</p>}
+      <h1 class:list={[pageHeroTitle, 'mb-5 md:mb-6 max-w-[24ch]']}>{name}</h1>
+      <p class={pageHeroDescription}>{intro}</p>
     </div>
   </div>
-</section>
+</header>

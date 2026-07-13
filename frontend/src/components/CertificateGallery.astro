@@ -36,7 +36,7 @@ function buildColumns(certs: Certificate[], colCount: number) {
   });
 }
 
-const mobileColumns = [items];
+const mobileColumns = buildColumns(items, 2);
 const tabletColumns = buildColumns(items, 2);
 const desktopColumns = buildColumns(items, 3);
 
@@ -75,12 +75,17 @@ const speedClasses = [
     </header>
 
     <div class="certificate-marquee">
-      {/* Mobile — 1 cột cuộn đủ {items.length} chứng nhận */}
+      {/* Mobile — 2 cột cuộn dọc */}
       <div class="certificate-marquee__columns certificate-marquee__columns--mobile">
         {
-          mobileColumns.map((column) => (
+          mobileColumns.map((column, columnIndex) => (
             <div class="certificate-marquee__column">
-              <div class="certificate-marquee__track certificate-marquee__track--16">
+              <div
+                class:list={[
+                  'certificate-marquee__track',
+                  speedClasses[columnIndex % speedClasses.length],
+                ]}
+              >
                 {[...column, ...column].map((cert) => (
                   <figure class="certificate-marquee__card">
                     <img
@@ -191,6 +196,14 @@ const speedClasses = [
 
   .certificate-marquee__columns--mobile {
     display: flex;
+    gap: 0.75rem;
+  }
+
+  .certificate-marquee__columns--mobile .certificate-marquee__column {
+    flex: 1 1 0;
+    min-width: 0;
+    max-width: none;
+    width: auto;
   }
 
   .certificate-marquee__columns--tablet,
@@ -312,10 +325,17 @@ const speedClasses = [
 
   .certificate-marquee__caption {
     margin-top: 0.5rem;
-    font-size: 0.8125rem;
+    font-size: 0.75rem;
     font-weight: 600;
     line-height: 1.3;
     color: #0e2640;
+    text-align: center;
+  }
+
+  @media (min-width: 640px) {
+    .certificate-marquee__caption {
+      font-size: 0.8125rem;
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {

@@ -8,6 +8,14 @@ import { duAnGiaiPhap3 } from '../../data/giai-phap-3-du-an';
 import { duAnGiaiPhap4 } from '../../data/giai-phap-4-du-an';
 import { caseStudyHref, routes } from '../../lib/routes';
 import { imageRadius } from '../../lib/image-frame';
+import {
+  pageHeroEyebrow,
+  pageHeroImage,
+  pageHeroInner,
+  pageHeroScrim,
+  pageHeroShell,
+  pageHeroTitle,
+} from '../../lib/page-hero-shell';
 
 interface Props {
   content: SolutionPageContent;
@@ -106,25 +114,19 @@ const h2Macro =
   currentPath={routes.giaiPhap}
 >
   {/* ══ 00 · HERO — 504px, ảnh nền, chữ đè ══ */}
-  <header class="relative h-[504px] max-sm:h-auto max-sm:min-h-[460px] overflow-hidden bg-ink-dark">
+  <header data-page-hero class:list={[pageHeroShell, 'overflow-hidden']}>
     <img
       src={solution?.image}
       alt={content.hero.imageAlt}
-      class="absolute inset-0 h-full w-full object-cover opacity-50"
+      class={pageHeroImage}
+      loading="eager"
+      decoding="async"
     />
-    <div
-      class="absolute inset-0 bg-gradient-to-t from-ink-dark/95 via-ink-dark/45 to-ink-dark/70"
-      aria-hidden="true"
-    >
-    </div>
-    <div
-      class="relative z-10 mx-auto flex h-full max-w-container-max-width flex-col justify-between px-6 pb-10 pt-28 md:px-8 md:pt-32"
-    >
-      <p class:list={[chapterEyebrow, 'text-white/65']}>Giải pháp {heroId}</p>
+    <div class={pageHeroScrim} aria-hidden="true"></div>
+    <div class={pageHeroInner}>
+      <p class:list={[pageHeroEyebrow]}>Giải pháp {heroId}</p>
       <div>
-        <h1
-          class="max-w-[15ch] text-balance text-[clamp(1.875rem,4.4vw,3.5rem)] font-extrabold leading-[0.98] tracking-tight text-white"
-        >
+        <h1 class:list={[pageHeroTitle, 'max-w-[15ch] md:max-w-[18ch]']}>
           {content.hero.title}
         </h1>
         <div class="mt-7 flex flex-wrap items-baseline gap-x-10 gap-y-4">
@@ -134,7 +136,7 @@ const h2Macro =
                 <b class="text-xl font-extrabold leading-none tabular-nums text-white md:text-2xl">
                   {s.value}
                 </b>
-                <span class:list={[chapterEyebrow, 'text-white/55']}>{s.label}</span>
+                <span class:list={[pageHeroEyebrow, 'text-white/55']}>{s.label}</span>
               </div>
             ))
           }
@@ -145,7 +147,7 @@ const h2Macro =
 
   <main class="bg-white text-ink-dark">
     {/* ══ 01b · NGÀNH — dải mảnh, mỗi ngành một icon ══ */}
-    <section class="bg-surface-fresh">
+    <section class="bg-surface-alt">
       <div class="mx-auto max-w-container-max-width px-6 py-5 md:px-8">
         <p class="flex flex-wrap items-center gap-x-6 gap-y-3 text-sm">
           <span class="font-bold text-ink-dark">Phù hợp cho</span>
@@ -195,7 +197,7 @@ const h2Macro =
     </section>
 
     {/* ══ 02 · GIẢI PHÁP — ảnh sticky + cột hairline ══ */}
-    <section class="bg-surface-fresh py-16 md:py-24">
+    <section class="bg-surface-alt py-16 md:py-24">
       <div class="mx-auto max-w-container-max-width px-6 md:px-8">
         <div class="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
           <figure
@@ -216,7 +218,7 @@ const h2Macro =
             <ul class="grid list-none gap-px bg-border-subtle p-0" data-reveal-stagger>
               {
                 content.plans.map((plan) => (
-                  <li data-reveal class="flex gap-4 bg-surface-fresh py-6">
+                  <li data-reveal class="flex gap-4 bg-surface-alt py-6">
                     <span class="material-symbols-outlined mt-0.5 shrink-0 text-xl text-accent-teal">
                       check_circle
                     </span>
@@ -338,10 +340,12 @@ const h2Macro =
     {/* ══ BẰNG CHỨNG — một dải ba cột, số lớn đè ảnh ══ */}
     <section class="bg-white py-16 md:py-24">
       <div class="mx-auto max-w-container-max-width px-6 md:px-8">
-        <div class="mb-10 flex flex-wrap items-baseline justify-between gap-3">
-          <span class:list={[chapterEyebrow, 'text-accent-teal']}>Bằng chứng</span>
-          <h2 class:list={[h2Macro, 'max-w-[20ch]']}>Đã giao cho những đội ngũ ở quy mô này</h2>
-        </div>
+        <header class="mb-10 md:mb-12">
+          <span class:list={[chapterEyebrow, 'mb-5 block text-accent-teal']}>Bằng chứng</span>
+          <h2 class:list={[h2Macro, 'md:whitespace-nowrap']}>
+            Đã giao cho những đội ngũ ở quy mô này
+          </h2>
+        </header>
 
         <div class="grid list-none gap-px bg-border-subtle sm:grid-cols-3" data-reveal-stagger>
           {
@@ -374,7 +378,7 @@ const h2Macro =
     </section>
 
     {/* ══ 04 · QUY TRÌNH — số thứ tự khổng lồ dẫn dắt ══ */}
-    <section class="bg-surface-fresh py-16 md:py-24">
+    <section class="bg-surface-alt py-16 md:py-24">
       <div class="mx-auto max-w-container-max-width px-6 md:px-8">
         <span class:list={[chapterEyebrow, 'mb-5 block text-accent-teal']}>04 — Quy trình</span>
         <h2 class:list={[h2Macro, 'mb-12 max-w-[22ch] md:mb-16']}>
@@ -505,7 +509,6 @@ const h2Macro =
   .exp__mname {
     font-size: clamp(1.375rem, 2.8vw, 2.5rem);
     font-weight: 700;
-    font-stretch: 89%;
     letter-spacing: -0.03em;
     line-height: 1.15;
   }
@@ -552,7 +555,7 @@ const h2Macro =
   }
   .exp__spec dt {
     margin-bottom: 0.55rem;
-    font-family: var(--mono);
+    font-family: var(--font-body);
     font-size: 0.625rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
@@ -595,7 +598,7 @@ const h2Macro =
       border-top: 0;
     }
     .exp__mobile dt {
-      font-family: var(--mono);
+      font-family: var(--font-body);
       font-size: 0.625rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
@@ -675,7 +678,7 @@ const h2Macro =
   }
   .flow-step {
     position: relative;
-    background: #EEF6F3;
+    background: rgb(var(--color-surface-alt));
     padding: 0 1.25rem;
   }
   .flow-no {
@@ -683,8 +686,7 @@ const h2Macro =
     z-index: 3;
     display: inline-block;
     font-size: clamp(2.75rem, 4.4vw, 4.25rem);
-    font-weight: 800;
-    font-stretch: 80%;
+    font-weight: 700;
     letter-spacing: -0.04em;
     line-height: 1;
     color: #DCE5E2;

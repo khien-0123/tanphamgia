@@ -58,9 +58,8 @@ export default {
         'body-lg': ['var(--font-body)'],
         'body-md': ['var(--font-body)'],
         'label-sm': ['var(--font-body)'],
-        /* Eyebrow = giọng "spec label" → IBM Plex Mono, tách hẳn khỏi thân Archivo.
-           Đổi về var(--font-body) nếu muốn eyebrow trở lại sans. */
-        eyebrow: ['var(--mono)'],
+        /* Eyebrow dùng cùng Google Sans — phân tầng bằng uppercase + tracking */
+        eyebrow: ['var(--font-body)'],
         'display-lg': ['var(--font-display)'],
         'headline-md': ['var(--font-display)'],
         'display-lg-mobile': ['var(--font-display)'],

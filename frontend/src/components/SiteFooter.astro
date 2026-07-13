@@ -220,10 +220,35 @@ const socialBox =
   </div>
 
   <a
-    class="fixed bottom-6 right-6 z-40 inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-ink-dark/90 text-white shadow-soft backdrop-blur-sm transition-all hover:border-accent-gold hover:text-accent-gold"
+    data-back-to-top
+    class="back-to-top fixed bottom-6 right-6 z-40 inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-ink-dark/90 text-white shadow-soft backdrop-blur-sm transition-all hover:border-accent-gold hover:text-accent-gold"
     href="#top"
     aria-label="Lên đầu trang"
+    aria-hidden="true"
+    tabindex="-1"
   >
     <span class="material-symbols-outlined text-xl" aria-hidden="true">keyboard_arrow_up</span>
   </a>
 </footer>
+
+<style>
+  .back-to-top {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(0.5rem);
+  }
+
+  .back-to-top.is-visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .back-to-top {
+      transform: none;
+    }
+  }
+</style>
+
+<script src="../scripts/back-to-top.ts"></script>

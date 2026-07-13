@@ -1,6 +1,14 @@
 ---
 import { siteAssets } from '../data/assets';
 import { routes } from '../lib/routes';
+import {
+  pageHeroDescription,
+  pageHeroImage,
+  pageHeroInner,
+  pageHeroScrim,
+  pageHeroShell,
+  pageHeroTitle,
+} from '../lib/page-hero-shell';
 
 interface Props {
   title: string;
@@ -21,18 +29,14 @@ const {
 } = Astro.props;
 ---
 
-<header class="relative pt-28 pb-8 md:pt-32 md:pb-12 bg-ink-dark text-white overflow-hidden">
-  <div class="absolute inset-0 opacity-25">
-    <img alt="" class="w-full h-full object-cover" src={bgImage} />
-    <div
-      class="absolute inset-0 bg-gradient-to-br from-[rgba(14,38,64,0.88)] via-[rgba(14,38,64,0.55)] to-[rgba(16,44,77,0.25)]"
-    >
-    </div>
-  </div>
-  <div class="relative z-10 max-w-container-max-width mx-auto px-6 md:px-8">
+<header data-page-hero class:list={[pageHeroShell, 'text-white']}>
+  <img alt="" class={pageHeroImage} src={bgImage} loading="eager" decoding="async" />
+  <div class={pageHeroScrim} aria-hidden="true"></div>
+
+  <div class={pageHeroInner}>
     {
       breadcrumb.length > 0 && (
-        <nav aria-label="Breadcrumb" class="text-sm text-white/60 mb-6">
+        <nav aria-label="Breadcrumb" class="text-sm text-white/60">
           {breadcrumb.map((item, i) => (
             <>
               {i > 0 && <span class="mx-2">/</span>}
@@ -48,32 +52,34 @@ const {
         </nav>
       )
     }
-    <h1
-      class="font-display-lg text-[clamp(1.5rem,5vw,3rem)] leading-[1.2] text-balance md:text-5xl font-extrabold tracking-normal mb-5"
-    >
-      {title}
-    </h1>
-    {description && (
-      <p
-        class:list={[
-          'text-pretty text-white/80 max-w-2xl leading-relaxed',
-          descriptionLines
-            ? 'max-md:text-[0.8125rem] max-md:leading-[1.45] max-md:tracking-normal'
-            : 'text-base md:text-lg',
-        ]}
-      >
-        {
-          descriptionLines ? (
-            <>
-              <span class="block md:hidden">{descriptionLines[0]}</span>
-              <span class="block md:hidden">{descriptionLines[1]}</span>
-              <span class="hidden md:inline">{description}</span>
-            </>
-          ) : (
-            description
-          )
-        }
-      </p>
-    )}
+
+    <div>
+      <h1 class:list={[pageHeroTitle, 'mb-5 md:mb-6']}>
+        {title}
+      </h1>
+      {
+        description && (
+          <p
+            class:list={[
+              pageHeroDescription,
+              descriptionLines &&
+                'max-md:text-[0.8125rem] max-md:leading-[1.45] max-md:tracking-normal',
+            ]}
+          >
+            {
+              descriptionLines ? (
+                <>
+                  <span class="block md:hidden">{descriptionLines[0]}</span>
+                  <span class="block md:hidden">{descriptionLines[1]}</span>
+                  <span class="hidden md:inline">{description}</span>
+                </>
+              ) : (
+                description
+              )
+            }
+          </p>
+        )
+      }
+    </div>
   </div>
 </header>
