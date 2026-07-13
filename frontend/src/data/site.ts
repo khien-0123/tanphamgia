@@ -75,7 +75,7 @@ export const siteContact = {
 
 /** Footer — bố cục & link đồng bộ dongphucvn.vn */
 export const siteFooter = {
-  tagline: 'Giải pháp đồng phục doanh nghiệp chuẩn thời trang với 22 năm kinh nghiệm.',
+  tagline: 'Giải pháp đồng phục doanh nghiệp chuẩn thời trang với 23 năm kinh nghiệm.',
   social: [
     {
       label: 'Facebook',
@@ -161,9 +161,6 @@ export const mainNavigation = [
   { label: 'Tài liệu', href: routes.taiLieu, icon: 'folder_open', desc: 'Hồ sơ năng lực & catalog' },
   { label: 'Liên hệ', href: routes.lienHe, icon: 'call', desc: 'Tư vấn & báo giá nhanh' },
 ];
-
-export const brandQuote =
-  'Tân Phạm Gia luôn lắng nghe và thấu hiểu để đưa ra giải pháp phù hợp nhất cho doanh nghiệp.';
 
 /** Media hero trang chủ — chỉ video, không dùng ảnh nền */
 export const heroMedia = {
@@ -388,9 +385,9 @@ export const homeFeaturedCases = {
     },
     {
       name: 'SAVISCO',
-      image: siteAssets.cases.savisco,
-      alt: 'Dự án SAVISCO',
-      href: caseStudyHref('giai-phap-2', 'savisco'),
+      image: siteAssets.cases.saviscoGp3,
+      alt: 'Dự án SAVISCO — Sales & Activation',
+      href: caseStudyHref('giai-phap-3', 'savisco'),
       statHighlight: { value: '2.800', suffix: 'sản phẩm', valueClass: 'white' },
     },
   ] satisfies HomeFeaturedCase[],
@@ -398,7 +395,6 @@ export const homeFeaturedCases = {
     text: 'Xây dựng hình ảnh đội ngũ chuyên nghiệp và đồng bộ — chất lượng ổn định qua nhiều đợt triển khai.',
     author: 'BIDV Team',
   },
-  allProjectsHref: routes.tinTuc,
 };
 
 /** Bài viết tin tức — section #tin-tuc (sẽ đồng bộ WordPress sau) */
@@ -467,10 +463,6 @@ export const blogPosts: BlogPost[] = blogPostsRaw.map((post) => ({
   ...post,
   href: blogPostHref(post.slug),
 }));
-
-export const blogSectionMeta = {
-  allPostsHref: routes.tinTuc,
-};
 
 /** Logo khách hàng — Sitemap 1.6 (18 thương hiệu) */
 export const clientLogos = [

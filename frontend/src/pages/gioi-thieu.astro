@@ -8,6 +8,7 @@ import AboutTeamGrid from '../components/about/AboutTeamGrid.astro';
 import CertificateGallery from '../components/CertificateGallery.astro';
 import TestimonialsSlider from '../components/TestimonialsSlider.astro';
 import { gioiThieuSeo } from '../data/gioi-thieu';
+import SiteImage from '../components/SiteImage.astro';
 import { siteAssets } from '../data/assets';
 import { testimonialsAbout, certificates } from '../data/site';
 import { routes } from '../lib/routes';
@@ -32,12 +33,13 @@ const eyebrowClass =
 >
   {/* Banner — ảnh xưởng may, scrim giữ độ đọc chữ */}
   <header data-page-hero class:list={[pageHeroShell, 'text-white']}>
-    <img
+    <SiteImage
       alt=""
       class={pageHeroImage}
       src={siteAssets.hero.gioiThieu}
       loading="eager"
       decoding="async"
+      variant="hero"
     />
     <div class={pageHeroScrim} aria-hidden="true"></div>
 

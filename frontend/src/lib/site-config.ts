@@ -11,10 +11,3 @@ export function legacyUrl(path: string): string {
   const base = siteConfig.legacySiteUrl.replace(/\/$/, '');
   return `${base}${path.startsWith('/') ? path : `/${path}`}`;
 }
-
-/** URL tuyệt đối cho canonical/OG */
-export function absoluteUrl(path: string): string {
-  const normalized = path.startsWith('/') ? path : `/${path}`;
-  if (!siteConfig.siteUrl) return normalized;
-  return `${siteConfig.siteUrl.replace(/\/$/, '')}${normalized}`;
-}

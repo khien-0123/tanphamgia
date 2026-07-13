@@ -1,4 +1,5 @@
 ---
+import SiteImage from './SiteImage.astro';
 import { siteBrand } from '../data/site';
 
 interface Props {
@@ -25,7 +26,7 @@ const logoGoldOnHero =
   class:list={['inline-flex items-center justify-center no-underline leading-none', className]}
   {...(navClose ? { 'data-nav-close': true } : {})}
 >
-  <img
+  <SiteImage
     class:list={[
       logoImgBase,
       footer ? logoImgFooter : logoImgHeader,
@@ -33,9 +34,10 @@ const logoGoldOnHero =
     ]}
     src={siteBrand.logo}
     alt={siteBrand.name}
-    width="200"
-    height="40"
+    width={200}
+    height={40}
     loading="eager"
     decoding="async"
+    variant="logo"
   />
 </a>

@@ -36,4 +36,4 @@ web/
 
 - **Zero-JS mặc định**: chỉ script nav scroll được bundle tối thiểu.
 - **Tailwind**: dùng `@astrojs/tailwind`, không còn CDN.
-- **Ảnh**: hiện dùng URL `aida-public` (sẽ chuyển sang `<Image />` khi tích hợp WordPress).
+- **Ảnh**: dùng `SiteImage` (Astro `<Image />`) — path logic qua `siteAssets`, file nguồn trong `src/assets/images/`.

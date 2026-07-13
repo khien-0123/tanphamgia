@@ -1,4 +1,5 @@
 ---
+import SiteImage from './SiteImage.astro';
 import { siteContact, siteFooter } from '../data/site';
 import SiteBrandLogo from './SiteBrandLogo.astro';
 
@@ -110,13 +111,14 @@ const socialBox =
         target="_blank"
         rel="noopener noreferrer"
       >
-        <img
+        <SiteImage
           class="h-14 w-auto"
           src={siteFooter.ministryCert.image}
           alt={siteFooter.ministryCert.alt}
           loading="lazy"
-          width="150"
-          height="56"
+          width={150}
+          height={56}
+          variant="logo"
         />
       </a>
     </div>
@@ -202,13 +204,14 @@ const socialBox =
           target="_blank"
           rel="noopener noreferrer"
         >
-          <img
+          <SiteImage
             class="h-14 w-auto"
             src={siteFooter.ministryCert.image}
             alt={siteFooter.ministryCert.alt}
             loading="lazy"
-            width="150"
-            height="56"
+            width={150}
+            height={56}
+            variant="logo"
           />
         </a>
       </div>

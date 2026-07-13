@@ -1,4 +1,5 @@
 ---
+import SiteImage from '../SiteImage.astro';
 import { solutions } from '../../data/site';
 import { imageRadius } from '../../lib/image-frame';
 import { RHYTHM_WHITE, sectionPy } from '../../lib/section-rhythm';
@@ -32,13 +33,14 @@ const { sectionBg = RHYTHM_WHITE } = Astro.props;
       >
         {
           solutions.map((item, i) => (
-            <img
+            <SiteImage
               data-stage={i}
               data-active={i === 0 ? 'true' : 'false'}
               src={item.image}
               alt={item.title}
               loading="lazy"
               class="absolute inset-0 h-full w-full object-cover object-top opacity-0 transition-opacity duration-500 data-[active=true]:opacity-100"
+              variant="card"
             />
           ))
         }
@@ -79,7 +81,7 @@ const { sectionBg = RHYTHM_WHITE } = Astro.props;
               <div class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-500 ease-out group-data-[active=true]/acc:grid-rows-[1fr]">
                 <div class="overflow-hidden">
                   <div class="max-w-[54ch] pb-8">
-                    <img
+                    <SiteImage
                       src={item.image}
                       alt={item.title}
                       loading="lazy"
@@ -87,6 +89,7 @@ const { sectionBg = RHYTHM_WHITE } = Astro.props;
                         imageRadius,
                         'mb-6 aspect-[4/3] w-full object-cover object-top ring-1 ring-border-subtle lg:hidden',
                       ]}
+                      variant="card"
                     />
                     <p class="text-text-muted text-base leading-relaxed text-pretty">{item.desc}</p>
                     <ul class="mt-5 grid gap-x-8 gap-y-3 sm:grid-cols-2">

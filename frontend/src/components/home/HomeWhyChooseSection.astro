@@ -1,4 +1,5 @@
 ---
+import SiteImage from '../SiteImage.astro';
 import { homeWhyChoose, whyChoose } from '../../data/site';
 import { siteAssets } from '../../data/assets';
 import {
@@ -49,13 +50,14 @@ const stackCount = whyChoose.length;
         whyChoose.map((item, index) => (
           <article class:list={whyChooseSlideClasses} style={`--slide-index: ${index}`}>
             <div class:list={whyChooseFrameClasses}>
-              <img
+              <SiteImage
                 alt={item.imageAlt}
                 class:list={[whyChooseFrameMediaClasses, item.imagePosition]}
                 decoding="async"
                 loading={index === 0 ? 'eager' : 'lazy'}
                 src={item.image}
-                onerror={`this.onerror=null;this.src='${imageFallback}'`}
+                fallback={imageFallback}
+                variant="full"
               />
               <div class:list={whyChooseFrameScrimClasses} aria-hidden="true" />
               <div class:list={whyChooseFrameBodyClasses}>

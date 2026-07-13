@@ -1,4 +1,6 @@
 ---
+import SiteImage from './SiteImage.astro';
+
 interface Props {
   name: string;
   logo: string;
@@ -13,13 +15,13 @@ const imgStyle = scale !== 1 ? `transform: scale(${scale}); transform-origin: ce
   class="group flex h-14 w-28 sm:h-16 sm:w-32 md:h-16 md:w-36 shrink-0 items-center justify-center bg-transparent transition-opacity duration-200"
   title={name}
 >
-  <img
+  <SiteImage
     alt={name}
     class="max-h-11 sm:max-h-12 md:max-h-14 max-w-full object-contain object-center opacity-[0.92] transition-opacity duration-200 group-hover:opacity-100"
     style={imgStyle}
     loading="lazy"
     src={logo}
-    onerror="this.style.display='none';this.nextElementSibling.style.display='block'"
+    variant="logo"
   />
   <span
     data-logo-fallback

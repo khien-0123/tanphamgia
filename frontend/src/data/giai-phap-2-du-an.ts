@@ -89,7 +89,3 @@ export const duAnGiaiPhap2: DuAnGiaiPhap2[] = [
     ],
   },
 ];
-
-export function getDuAnGiaiPhap2(slug: string) {
-  return duAnGiaiPhap2.find((item) => item.slug === slug);
-}

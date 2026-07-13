@@ -7,7 +7,7 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = join(fileURLToPath(new URL('.', import.meta.url)), '..');
-const publicDir = join(root, 'public');
+const assetsDir = join(root, 'src', 'assets', 'images');
 const BASE = 'https://dongphucvn.vn/wp-content/uploads';
 
 /** [url, đường dẫn trong public/] */
@@ -23,7 +23,6 @@ const downloads = [
 
   // CTA + intro trang chủ
   [`${BASE}/2026/01/nang-luc-sx_nha-xuong-04.webp`, 'images/cta/background.webp'],
-  [`${BASE}/2022/12/Gioi-Thieu-Cong-Ty-May-Dong-Phuc-1.jpg`, 'images/about/home-intro.jpg'],
 
   // Catalogue
   [`${BASE}/2026/01/catalog-1.webp`, 'images/documents/catalog-y-te.webp'],
@@ -54,12 +53,8 @@ const downloads = [
   [`${BASE}/2023/03/quy-mo-xuong-may-dong-phuc-Tan-Pham-Gia.jpg`, 'images/about/production-1.jpg'],
   // qc-5-tang.png: ảnh tùy chỉnh Kiểm soát chất lượng 5 tầng — không tải đè
 
-  // Section Tại sao chọn — ảnh tối, tương phản chữ trắng (Unsplash)
-  ['https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=1920&q=85', 'images/why-choose/kinh-nghiem.jpg'],
-  ['https://images.unsplash.com/photo-1594938298603-c8148c4dae35?auto=format&fit=crop&w=1920&q=85', 'images/why-choose/thoi-trang-hoa.jpg'],
-  ['https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1920&q=85', 'images/why-choose/nang-luc-san-xuat.jpg'],
-  // thiet-ke-thoi-trang.png: ảnh tùy chỉnh thẻ QC — không tải đè
-  ['https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1920&q=85', 'images/why-choose/qc.jpg'],
+  // Section Tại sao chọn — ảnh tùy chỉnh trong src/assets/images/why-choose/ (xem siteAssets.whyChoose)
+  // kinh-nghiem.png, thoi-trang-hoa.jpg, nang-luc-san-xuat.png, qc.webp — không tải đè
 
   // Case study — ảnh từ dongphucvn.vn/du-an/ và thư viện khách hàng TPG (tải về public/, không hotlink)
   [`${BASE}/2025/12/Coca_khach-hang-1402x850.webp`, 'images/cases/coca-cola-philippines.jpg'],
@@ -72,7 +67,6 @@ const downloads = [
   [`${BASE}/2025/12/zero-waste_khach-hang-scaled.webp`, 'images/cases/zero-waste.webp'],
   // King Group — trang /du-an/ dùng ảnh Unsplash; lấy ảnh thật Jung-Talents từ thư viện TPG
   [`${BASE}/2025/12/Jung-Talents_khach-hang-scaled.webp`, 'images/cases/king-group.webp'],
-  [`${BASE}/2026/05/jung-talents8.jpg`, 'images/cases/king-group-alt.jpg'],
   [`${BASE}/2025/12/SMYOU_khach-hang-scaled.webp`, 'images/cases/savisco.webp'],
   [`${BASE}/2025/12/SMYOU_khach-hang-scaled.webp`, 'images/cases/savisco-gp2.webp'],
   [`${BASE}/2025/12/thuong-mai-qte_nganh-scaled.webp`, 'images/cases/savisco-gp3.webp'],
@@ -85,7 +79,7 @@ const downloads = [
 ];
 
 async function download(url, dest) {
-  const fullPath = join(publicDir, dest);
+  const fullPath = join(assetsDir, dest.replace(/^images\//, ''));
   await mkdir(dirname(fullPath), { recursive: true });
   const res = await fetch(url, {
     headers: { 'User-Agent': 'Mozilla/5.0 (compatible; TPG-asset-sync/1.0)' },

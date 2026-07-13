@@ -1,4 +1,5 @@
 ---
+import SiteImage from '../SiteImage.astro';
 import type { ClientCaseStudy } from '../../data/site';
 import { getClientLogoScale } from '../../lib/client-logo-scale';
 import { caseStudySecondaryCard } from '../../lib/case-study-classes';
@@ -11,7 +12,7 @@ const { item } = Astro.props;
 ---
 
 <a href={item.href} class:list={caseStudySecondaryCard}>
-  <img
+  <SiteImage
     src={item.image}
     alt={item.alt}
     width={800}
@@ -19,13 +20,14 @@ const { item } = Astro.props;
     class="absolute inset-0 z-0 h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.04]"
     loading="lazy"
     decoding="async"
+    variant="card"
   />
   <div class="case-study-secondary-scrim pointer-events-none absolute inset-x-0 bottom-0 z-[1]" aria-hidden="true" />
   <div class="case-study-secondary-copy relative z-[2] mt-auto flex w-full flex-col gap-3 p-6 md:p-8">
     <div class="flex w-fit max-w-full items-center gap-2.5">
       {item.logoMark && item.logoWordmark ? (
         <>
-          <img
+          <SiteImage
             src={item.logoMark}
             alt=""
             width={32}
@@ -34,12 +36,13 @@ const { item } = Astro.props;
             style={`transform: scale(${getClientLogoScale(item.logoMark)}); transform-origin: center;`}
             loading="lazy"
             decoding="async"
+            variant="logo"
           />
           <span class="text-sm font-bold tracking-wide text-white">{item.logoWordmark}</span>
           <span class="text-sm font-semibold text-white">{item.client}</span>
         </>
       ) : item.logo ? (
-        <img
+        <SiteImage
           src={item.logo}
           alt=""
           width={120}
@@ -48,6 +51,7 @@ const { item } = Astro.props;
           style={`transform: scale(${getClientLogoScale(item.logo)}); transform-origin: left center;`}
           loading="lazy"
           decoding="async"
+          variant="logo"
         />
       ) : null}
       {!item.logoWordmark && (

@@ -1,5 +1,6 @@
 ---
 /** Ảnh bài viết — khung 4:3, ưu tiên giữ phần trên khi ảnh dọc */
+import SiteImage from './SiteImage.astro';
 import { blogThumbFrame, blogThumbImg } from '../lib/image-frame';
 
 interface Props {
@@ -18,5 +19,5 @@ const imageClass = [blogThumbImg, imgClass].filter(Boolean).join(' ');
 ---
 
 <figure class={figureClass}>
-  <img src={src} alt={alt} class={imageClass} loading={loading} decoding="async" />
+  <SiteImage src={src} alt={alt} class={imageClass} loading={loading} variant="thumb" />
 </figure>

@@ -1,4 +1,5 @@
 ---
+import SiteImage from '../SiteImage.astro';
 import {
   projectCardBodyClasses,
   projectCardCtaClasses,
@@ -91,11 +92,12 @@ const gridClass = columns === 3 ? projectCardGrid3Classes : projectCardGrid4Clas
                 class:list={projectCardLinkClasses}
                 aria-label={`${ctaLabel} dự án ${item.name}`}
               >
-                <img
+                <SiteImage
                   src={item.image}
                   alt=""
                   class:list={projectCardImageClasses}
                   loading="lazy"
+                  variant="card"
                 />
                 <div class:list={projectCardScrimClasses} aria-hidden="true" />
                 <div class:list={projectCardBodyClasses}>

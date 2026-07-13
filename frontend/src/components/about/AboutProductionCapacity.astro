@@ -1,4 +1,5 @@
 ---
+import SiteImage from '../SiteImage.astro';
 import { productionCapacity } from '../../data/gioi-thieu';
 import { RHYTHM_WHITE, sectionPy } from '../../lib/section-rhythm';
 
@@ -51,11 +52,12 @@ const isAltBg = sectionBg.includes('surface-alt');
         data-reveal
         class="relative m-0 rounded-[4px] overflow-hidden min-h-[22rem] max-md:order-first max-md:min-h-[18rem]"
       >
-        <img
+        <SiteImage
           src={productionCapacity.factoryImage}
           alt="Xưởng may 2.000m² Tân Phạm Gia"
           loading="lazy"
           class="absolute inset-0 h-full w-full object-cover"
+          variant="card"
         />
         <div
           class="absolute inset-0 bg-[linear-gradient(to_top,rgba(11,31,53,0.9),rgba(11,31,53,0)_55%)]"
