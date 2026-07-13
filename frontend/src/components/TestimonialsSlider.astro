@@ -1,4 +1,5 @@
 ---
+import { sectionPy } from '../lib/section-rhythm';
 import type { Testimonial } from '../../data/site';
 import SliderArrow from './SliderArrow.astro';
 
@@ -19,8 +20,8 @@ const sliderItems = Array.from({ length: SLIDER_SETS }, () => items).flat();
 const itemsPerSet = items.length;
 
 const sectionClass = isDark
-  ? 'py-8 md:py-14 bg-ink-dark text-white'
-  : ['py-8 md:py-12', sectionBg ?? 'bg-white'];
+  ? `${sectionPy} bg-ink-dark text-white`
+  : [sectionPy, sectionBg ?? 'bg-white'];
 
 const titleClass = isDark
   ? 'font-headline-md text-2xl md:text-4xl font-bold mb-12 md:mb-14'

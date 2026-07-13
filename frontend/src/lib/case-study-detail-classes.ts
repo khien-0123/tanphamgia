@@ -1,6 +1,8 @@
 /** Class Tailwind — trang chi tiết case study */
 
-export const caseStudyDetailSectionLg = 'py-16 md:py-24';
+import { sectionPy } from './section-rhythm';
+
+export const caseStudyDetailSectionLg = sectionPy;
 
 export const caseStudyDetailHeroSection = [
   'bg-white pt-28 md:pt-32 pb-12 md:pb-16',
@@ -13,7 +15,7 @@ export const caseStudyDetailHeroGrid = [
 
 export const caseStudyDetailHeroImageWrap = 'm-0 lg:relative lg:-mr-8';
 
-export const caseStudyDetailStatsSection = 'bg-surface-alt py-16 md:py-20';
+export const caseStudyDetailStatsSection = `bg-surface-alt ${sectionPy}`;
 
 export const caseStudyDetailStatsGrid = [
   'grid gap-8 sm:grid-cols-3 sm:gap-0',

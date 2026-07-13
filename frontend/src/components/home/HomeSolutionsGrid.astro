@@ -2,7 +2,7 @@
 import { solutions } from '../../data/site';
 import { siteAssets } from '../../data/assets';
 import { solutionHomeMosaic } from '../../lib/solution-theme';
-import { RHYTHM_WHITE, homeSectionPt, homeSectionPb } from '../../lib/section-rhythm';
+import { RHYTHM_WHITE, sectionPy } from '../../lib/section-rhythm';
 
 interface Props {
   sectionBg?: string;
@@ -16,7 +16,7 @@ const t = solutionHomeMosaic;
 
 <section
   id="giai-phap"
-  class:list={['relative z-[2]', homeSectionPt, homeSectionPb, 'text-ink-dark', sectionBg]}
+  class:list={['relative z-[2]', sectionPy, 'text-ink-dark', sectionBg]}
 >
   <div class="max-w-container-max-width mx-auto px-6 md:px-8">
     <div data-reveal class={t.headerWrap}>

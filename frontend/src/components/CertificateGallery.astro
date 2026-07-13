@@ -1,5 +1,5 @@
 ---
-import { RHYTHM_ALT, RHYTHM_WHITE } from '../lib/section-rhythm';
+import { RHYTHM_ALT, RHYTHM_WHITE, sectionPy } from '../lib/section-rhythm';
 import { surfaceTextureContent, surfaceTextureSectionShell } from '../lib/surface-texture';
 import SurfaceTextureLayer from './SurfaceTextureLayer.astro';
 
@@ -51,7 +51,8 @@ const speedClasses = [
 
 <section
   class:list={[
-    'pt-16 pb-8 md:pt-20 md:pb-10 w-full',
+    sectionPy,
+    'w-full',
     resolvedSectionBg,
     surfaceTextureSectionShell,
   ]}

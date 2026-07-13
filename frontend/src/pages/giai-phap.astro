@@ -5,7 +5,7 @@ import SolutionsListingGrid from '../components/solution/SolutionsListingGrid.as
 import { pageSeo, pageHeroBg } from '../data/site';
 import { routes } from '../lib/routes';
 import { giaiPhap1Content } from '../data/giai-phap-1';
-import { rhythmBg } from '../lib/section-rhythm';
+import { rhythmBg, sectionPy } from '../lib/section-rhythm';
 
 /** Quy trình 6 bước — nhất quán cho cả 4 nhóm (nguồn: data giải pháp). */
 const processSteps = giaiPhap1Content.processSteps;
@@ -29,7 +29,7 @@ const processSteps = giaiPhap1Content.processSteps;
   <SolutionsListingGrid sectionBg={rhythmBg(0)} />
 
   <!-- S4 · Dải sáng — một quy trình cho bốn ngành -->
-  <section class:list={['py-20 md:py-32', rhythmBg(1)]}>
+  <section class:list={[sectionPy, rhythmBg(1)]}>
     <div class="max-w-container-max-width mx-auto px-6 md:px-8">
       <header data-reveal class="max-w-3xl mb-12 md:mb-16">
         <p class="font-eyebrow text-xs uppercase tracking-widest text-accent-teal mb-3">

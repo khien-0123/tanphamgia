@@ -13,7 +13,7 @@ import {
   whyChooseParallaxShellClasses,
   whyChooseSlideClasses,
 } from '../../lib/why-choose-classes';
-import { RHYTHM_WHITE } from '../../lib/section-rhythm';
+import { RHYTHM_WHITE, sectionPy } from '../../lib/section-rhythm';
 
 interface Props {
   sectionBg?: string;
@@ -25,7 +25,7 @@ const imageFallback = siteAssets.hero.fallback;
 const stackCount = whyChoose.length;
 ---
 
-<section class:list={[sectionBg, 'why-choose-section']} id="tai-sao" data-no-reveal>
+<section class:list={[sectionPy, sectionBg, 'why-choose-section']} id="tai-sao" data-no-reveal>
   <header data-reveal class:list={whyChooseIntroClasses}>
     <p class="font-eyebrow text-xs uppercase tracking-[0.18em] text-accent-teal mb-3 m-0">
       {homeWhyChoose.eyebrow}
@@ -75,7 +75,7 @@ const stackCount = whyChoose.length;
 <style>
   .why-choose-section {
     --why-choose-sticky-top: calc(4rem + 10px);
-    --home-section-end-gap: 3rem;
+    --home-section-end-gap: 0;
     --why-choose-frame-rest-max: 56rem;
     --why-choose-frame-rest-height: clamp(380px, 68vh, 760px);
     --why-choose-frame-expanded-height: calc(100dvh - var(--why-choose-sticky-top));
@@ -124,23 +124,16 @@ const stackCount = whyChoose.length;
     padding-bottom: 0;
   }
 
-  /* Desktop: gom khoảng trắng cuối section — đệm cuối bằng HomeIntroSection */
+  /* Desktop: parallax không cần margin âm — sectionPy lo đệm dưới */
   @media (min-width: 768px) {
-    .why-choose-section {
-      --home-section-end-gap: 4rem;
-    }
-
     .why-choose-parallax {
-      margin-bottom: calc(
-        var(--why-choose-frame-height) + var(--home-section-end-gap) - var(--why-choose-slide-runway)
-      );
+      margin-bottom: 0;
     }
   }
 
-  @media (min-width: 1024px) {
-    .why-choose-section {
-      --home-section-end-gap: 5rem;
-    }
+  /* Slide cuối: bỏ runway thừa — không còn khoảng trống dưới thẻ */
+  .why-choose-slide:last-child {
+    min-height: var(--why-choose-frame-expanded-height);
   }
 
   .why-choose-slide {
@@ -168,6 +161,10 @@ const stackCount = whyChoose.length;
       min-height: calc(
         var(--why-choose-frame-expanded-height) + var(--why-choose-slide-stack-buffer)
       );
+    }
+
+    .why-choose-slide:last-child {
+      min-height: var(--why-choose-frame-expanded-height);
     }
 
     .why-choose-frame {
@@ -200,6 +197,10 @@ const stackCount = whyChoose.length;
     .why-choose-slide {
       min-height: var(--why-choose-slide-runway);
       padding-inline: var(--why-choose-slide-rest-padding);
+    }
+
+    .why-choose-slide:last-child {
+      min-height: var(--why-choose-frame-expanded-height);
     }
 
     .why-choose-frame {

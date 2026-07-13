@@ -1,7 +1,7 @@
 /** Class Tailwind cho section Tại sao chọn — parallax sticky stack (pattern scroll-cards) */
 
 export const whyChooseIntroClasses = [
-  'text-center px-6 md:px-8 pt-8 md:pt-10 pb-4 md:pb-5',
+  'text-center px-6 md:px-8 pt-0 pb-6 md:pb-8',
   'max-w-3xl mx-auto',
 ];
 

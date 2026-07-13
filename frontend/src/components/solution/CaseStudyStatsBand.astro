@@ -1,6 +1,6 @@
 ---
 import type { CaseStudyStat } from '../../lib/parse-case-study-stats';
-import { rhythmBg } from '../../lib/section-rhythm';
+import { rhythmBg, sectionPy } from '../../lib/section-rhythm';
 import {
   caseStudyDetailStatCell,
   caseStudyDetailStatCellBordered,
@@ -18,7 +18,7 @@ interface Props {
 
 const { stats } = Astro.props;
 
-const statsSectionClass = `${rhythmBg(0)} py-16 md:py-20`;
+const statsSectionClass = `${rhythmBg(0)} ${sectionPy}`;
 const isTwoStats = stats.length === 2;
 const isNumericStatValue = (value: string) => /^[\d.,+]/.test(value.trim());
 ---
