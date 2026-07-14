@@ -67,6 +67,7 @@ const processSteps = giaiPhap1Content.processSteps;
 <style>
   .process-grid {
     display: grid;
+    grid-template-columns: repeat(2, 1fr);
     gap: 1px;
     overflow: hidden;
     border-radius: 4px;
@@ -74,12 +75,6 @@ const processSteps = giaiPhap1Content.processSteps;
     list-style: none;
     margin: 0;
     padding: 0;
-  }
-
-  @media (min-width: 640px) {
-    .process-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
   }
 
   @media (min-width: 1024px) {
@@ -90,12 +85,23 @@ const processSteps = giaiPhap1Content.processSteps;
 
   .process-step {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
-    gap: 1rem;
+    text-align: center;
+    gap: 0.5rem;
     overflow: hidden;
     min-height: 9rem;
-    padding: 1.5rem 1.5rem 1.75rem;
+    padding: 1.25rem 1.25rem 1.5rem;
+  }
+
+  @media (min-width: 640px) {
+    .process-step {
+      flex-direction: row;
+      align-items: center;
+      text-align: left;
+      gap: 1rem;
+      padding: 1.5rem 1.5rem 1.75rem;
+    }
   }
 
   @media (min-width: 768px) {
