@@ -1,60 +1,26 @@
 ---
-import SiteImage from './SiteImage.astro';
 import { siteCta } from '../data/site';
-import { sectionPy } from '../lib/section-rhythm';
 ---
 
-<section class:list={['relative overflow-hidden text-white bg-ink-dark', sectionPy]}>
-  <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
-    <SiteImage
-      alt=""
-      class="cta-section__photo absolute inset-0 h-full w-full object-cover object-center"
-      src={siteCta.backgroundImage}
-      loading="lazy"
-      variant="hero"
-    />
-    <div class="cta-section__overlay absolute inset-0"></div>
-  </div>
-  <div class="relative z-10 max-w-container-max-width mx-auto px-6 md:px-8 text-center">
-    <div data-reveal class="inline-flex flex-col items-stretch mx-auto max-w-full gap-4 md:gap-6">
-      <h2
-        class="font-display-lg text-[clamp(1.5rem,5vw,3rem)] leading-tight md:text-5xl font-bold m-0 text-white text-balance [text-shadow:0_2px_20px_rgba(14,38,64,0.35)]"
-      >
+<section class="bg-[#fbf8f1] px-6 py-7 md:px-8 lg:py-8" aria-labelledby="site-cta-title">
+  <div class="relative mx-auto flex min-h-[15rem] max-w-container-max-width items-center justify-center overflow-hidden rounded-[1.8rem] bg-[#ffc72c] px-6 py-10 text-center sm:px-10 lg:min-h-[15rem]">
+    <svg class="pointer-events-none absolute inset-0 h-full w-full" viewBox="0 0 1000 280" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M18 255 C105 112 184 38 284 40 C390 42 426 172 528 126 C618 86 649 45 741 52 C814 58 870 102 972 38" fill="none" stroke="#b88a20" stroke-width="1.2" stroke-dasharray="8 9" opacity="0.72" />
+    </svg>
+
+    <div class="relative z-10 flex max-w-3xl flex-col items-center">
+      <h2 id="site-cta-title" class="text-balance text-[clamp(1.8rem,4vw,2.7rem)] font-extrabold leading-[1.1] tracking-[-0.035em] text-white">
         {siteCta.title}
       </h2>
-      <p class="text-white/85 m-0 text-base md:text-lg leading-relaxed">
-        {siteCta.description}
-      </p>
-      <div class="flex flex-row gap-2 sm:gap-3 items-stretch">
-        <a
-          href={siteCta.primaryHref}
-          class="flex-1 min-w-0 inline-flex items-center justify-center bg-accent-gold text-ink-dark px-4 py-2.5 md:px-5 md:py-3 rounded-full font-bold text-xs md:text-sm leading-tight hover:shadow-gold hover:scale-105 transition-all shadow-soft text-center"
-        >
-          {siteCta.primaryLabel}
+      <p class="mt-3 text-sm leading-relaxed text-white/90 sm:text-base">{siteCta.description}</p>
+      <div class="mt-7 flex w-full flex-col items-stretch justify-center gap-3 sm:w-auto sm:flex-row">
+        <a href={siteCta.primaryHref} class="inline-flex min-h-12 items-center justify-center gap-5 rounded-full bg-[#171717] px-7 py-3 text-xs font-extrabold text-white transition-transform hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#171717] sm:min-w-[13.2rem]">
+          <span>{siteCta.primaryLabel}</span><span aria-hidden="true">→</span>
         </a>
-        <a
-          href={siteCta.secondaryHref}
-          class="flex-1 min-w-0 inline-flex items-center justify-center border border-white/45 bg-white/12 text-white px-4 py-2.5 md:px-5 md:py-3 rounded-full font-bold text-xs md:text-sm leading-tight hover:bg-white hover:text-ink-dark transition-all text-center backdrop-blur-sm"
-        >
+        <a href={siteCta.secondaryHref} class="inline-flex min-h-12 items-center justify-center rounded-full border border-[#171717] px-7 py-3 text-xs font-extrabold text-[#171717] transition-colors hover:bg-white/30 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#171717] sm:min-w-[10rem]">
           {siteCta.secondaryLabel}
         </a>
       </div>
     </div>
   </div>
 </section>
-
-<style>
-  /* Ảnh mờ + lớp ink-dark (#0E2640) — cùng tone header, nhạt hơn footer */
-  .cta-section__photo {
-    opacity: 0.34;
-  }
-
-  .cta-section__overlay {
-    background: linear-gradient(
-      135deg,
-      rgba(14, 38, 64, 0.44) 0%,
-      rgba(14, 38, 64, 0.34) 50%,
-      rgba(14, 38, 64, 0.4) 100%
-    );
-  }
-</style>

@@ -1,4 +1,4 @@
-const MOCKUP_AUTO_INTERVAL_MS = 4000;
+const MOCKUP_AUTO_INTERVAL_MS = 3000;
 const MOCKUP_FIRST_DELAY_MS = 2200;
 const TOTAL_SETS = 3;
 
@@ -68,17 +68,7 @@ function initMockupProjectsSlider(root: HTMLElement) {
     });
 
     dots.forEach((dot, dotIndex) => {
-      const isActive = dotIndex === activeIndex;
-      dot.setAttribute('aria-selected', isActive ? 'true' : 'false');
-      dot.classList.toggle('h-4', isActive);
-      dot.classList.toggle('w-4', isActive);
-      dot.classList.toggle('border-[#9c7200]', isActive);
-      dot.classList.toggle('bg-[#ffc72c]', isActive);
-      dot.classList.toggle('h-2', !isActive);
-      dot.classList.toggle('w-2', !isActive);
-      dot.classList.toggle('self-center', !isActive);
-      dot.classList.toggle('border-transparent', !isActive);
-      dot.classList.toggle('bg-[#eadfbf]', !isActive);
+      dot.setAttribute('aria-selected', dotIndex === activeIndex ? 'true' : 'false');
     });
   };
 
