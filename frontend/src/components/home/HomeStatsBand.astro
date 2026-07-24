@@ -1,0 +1,163 @@
+---
+import { homeHero } from '../../data/home';
+---
+
+<section
+  class="mockup-stats-band relative z-10 overflow-hidden bg-[#fbf8f1] pb-12 pt-0 text-[#765b00]"
+  aria-label="Năng lực Tân Phạm Gia"
+>
+  <div class="mx-auto w-full max-w-[96rem] px-5 sm:px-8 lg:px-12 xl:px-16">
+    <div class="relative h-24 sm:h-28 lg:h-32" aria-hidden="true">
+      <svg
+        class="absolute inset-0 h-full w-full overflow-visible"
+        viewBox="0 0 1400 190"
+        fill="none"
+        preserveAspectRatio="none"
+      >
+        <path
+          pathLength="1"
+          class="mockup-thread mockup-thread--lead [stroke-dasharray:1] [stroke-dashoffset:1] motion-reduce:[stroke-dashoffset:0]"
+          d="M696 0 C 625 16 555 17 445 26 C 330 36 212 36 108 60 C 48 74 8 102 0 130 C -2 137 2 143 10 144"
+          stroke="#FFBE1B"
+          stroke-width="2"
+          stroke-linecap="round"
+        ></path>
+        <path
+          d="M10 144 C 126 119 234 113 330 115 C 420 117 464 143 570 143 C 668 143 740 114 848 114 C 924 114 982 124 1048 139"
+          pathLength="1"
+          class="mockup-thread mockup-thread--main [stroke-dasharray:1] [stroke-dashoffset:1] motion-reduce:[stroke-dashoffset:0]"
+          stroke="#FFB800"
+          stroke-width="2"
+          stroke-linecap="round"
+        ></path>
+        <circle class="mockup-thread-dot origin-center scale-25 opacity-0 [transform-box:fill-box] motion-reduce:scale-100 motion-reduce:opacity-100" cx="10" cy="144" r="6" fill="#FFB800"></circle>
+        <circle class="mockup-thread-dot origin-center scale-25 opacity-0 [transform-box:fill-box] motion-reduce:scale-100 motion-reduce:opacity-100" cx="330" cy="115" r="6" fill="#FFB800"></circle>
+        <circle class="mockup-thread-dot origin-center scale-25 opacity-0 [transform-box:fill-box] motion-reduce:scale-100 motion-reduce:opacity-100" cx="570" cy="143" r="6" fill="#FFB800"></circle>
+        <circle class="mockup-thread-dot origin-center scale-25 opacity-0 [transform-box:fill-box] motion-reduce:scale-100 motion-reduce:opacity-100" cx="982" cy="124" r="6" fill="#FFB800"></circle>
+      </svg>
+    </div>
+
+    <dl class="grid grid-cols-2 gap-x-5 gap-y-9 pt-3 text-center lg:grid-cols-4 lg:gap-x-8 lg:pt-4">
+      {
+        homeHero.stats.map((stat) => (
+          <div class="flex min-w-0 flex-col items-center">
+            <dt
+              class="whitespace-nowrap text-[clamp(2rem,3.25vw,3.65rem)] font-extrabold leading-none tracking-[-0.035em] tabular-nums"
+              data-mockup-stat-counter
+              data-mockup-stat-target={stat.value}
+            >
+              {stat.value}
+            </dt>
+            <dd class="mt-4 text-center text-xs font-medium leading-snug text-[#5f5a50] sm:text-sm">
+              {stat.label}
+            </dd>
+          </div>
+        ))
+      }
+    </dl>
+  </div>
+</section>
+
+<script>
+  const statsBands = document.querySelectorAll<HTMLElement>('.mockup-stats-band');
+  const numberFormatter = new Intl.NumberFormat('vi-VN');
+
+  const animateThread = (band: HTMLElement) => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const lead = band.querySelector<SVGPathElement>('.mockup-thread--lead');
+    const main = band.querySelector<SVGPathElement>('.mockup-thread--main');
+    const dots = band.querySelectorAll<SVGCircleElement>('.mockup-thread-dot');
+
+    lead?.animate([{ strokeDashoffset: 1 }, { strokeDashoffset: 0 }], {
+      duration: 1700,
+      easing: 'ease-out',
+      fill: 'forwards',
+    });
+
+    main?.animate([{ strokeDashoffset: 1 }, { strokeDashoffset: 0 }], {
+      duration: 2300,
+      delay: 1700,
+      easing: 'ease-out',
+      fill: 'forwards',
+    });
+
+    const dotDelays = [1700, 2450, 3000, 3800];
+    dots.forEach((dot, index) => {
+      dot.animate(
+        [
+          { opacity: 0, transform: 'scale(0.25)' },
+          { opacity: 1, transform: 'scale(1)' },
+        ],
+        {
+          duration: 360,
+          delay: dotDelays[index] ?? 250,
+          easing: 'ease-out',
+          fill: 'forwards',
+        },
+      );
+    });
+  };
+
+  const animateStats = (band: HTMLElement) => {
+    const counters = band.querySelectorAll<HTMLElement>('[data-mockup-stat-counter]');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    counters.forEach((counter, index) => {
+      const raw = counter.dataset.mockupStatTarget ?? '';
+      const target = Number(raw.replace(/\D/g, ''));
+      if (!target) return;
+
+      const suffix = raw.trim().endsWith('+') ? '+' : '';
+      if (reduceMotion) {
+        counter.textContent = `${numberFormatter.format(target)}${suffix}`;
+        return;
+      }
+
+      const delay = index * 160;
+      const duration = 2200;
+      const startAt = performance.now() + delay;
+      counter.textContent = `0${suffix}`;
+
+      const tick = (now: number) => {
+        const elapsed = now - startAt;
+        if (elapsed < 0) {
+          requestAnimationFrame(tick);
+          return;
+        }
+
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = 1 - (1 - progress) ** 3;
+        counter.textContent = `${numberFormatter.format(Math.round(target * eased))}${suffix}`;
+
+        if (progress < 1) requestAnimationFrame(tick);
+      };
+
+      requestAnimationFrame(tick);
+    });
+  };
+
+  const revealStatsBand = (band: HTMLElement) => {
+    if (band.dataset.visible === 'true') return;
+    band.dataset.visible = 'true';
+    animateThread(band);
+    animateStats(band);
+  };
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          revealStatsBand(entry.target as HTMLElement);
+          observer.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.28 },
+    );
+
+    statsBands.forEach((band) => observer.observe(band));
+  } else {
+    statsBands.forEach(revealStatsBand);
+  }
+</script>

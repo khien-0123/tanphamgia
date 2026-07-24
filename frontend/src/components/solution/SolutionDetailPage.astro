@@ -323,7 +323,7 @@ const h2Macro =
             {
               content.fabricTable.map((row, i) => (
                 <article class="exp__mrow" data-fabric-slide role="listitem">
-                  <figure class="m-0 mb-5 aspect-[4/3] overflow-hidden rounded-[4px]">
+                  <figure class="m-0 mb-5 aspect-[4/3] overflow-hidden rounded-none">
                     <SiteImage
                       src={fabricImages[i] ?? solution?.image}
                       alt={row.material}
@@ -498,7 +498,7 @@ const h2Macro =
   .exp__tags li {
     background: rgb(255 255 255 / 0.07);
     padding: 0.55rem 1.1rem;
-    border-radius: 999px;
+    border-radius: 0;
     font-size: 0.8125rem;
     color: rgb(255 255 255 / 0.9);
   }
@@ -652,7 +652,7 @@ const h2Macro =
       height: 0.5rem;
       padding: 0;
       border: 0;
-      border-radius: 999px;
+      border-radius: 0;
       background: rgb(255 255 255 / 0.35);
       cursor: pointer;
       transition:

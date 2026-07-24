@@ -4,7 +4,7 @@ export const introJourneyStepClasses = [
   'flex w-full items-start gap-2 text-left text-sm leading-snug m-0 p-0 border-0 bg-transparent cursor-pointer',
   'text-ink-dark/62 font-medium transition-colors duration-[550ms]',
   'focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent-gold',
-  'focus-visible:outline-offset-2 focus-visible:rounded-sm',
+  'focus-visible:outline-offset-2 focus-visible:rounded-none',
   'group-[.is-journey-active]/journey:text-ink-dark group-[.is-journey-active]/journey:font-semibold',
 ];
 

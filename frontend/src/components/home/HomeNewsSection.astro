@@ -1,0 +1,65 @@
+---
+import SiteImage from '../SiteImage.astro';
+import { homeNews } from '../../data/home';
+import newsMark from '../../assets/images/brand/TPG-11.webp';
+
+const [largePosts, compactPosts] = [homeNews.items.slice(0, 2), homeNews.items.slice(2)];
+---
+
+<section class="relative overflow-hidden bg-[#fbf8f1] text-[#201f1c]" aria-labelledby="mockup-news-title">
+  <img
+    src={newsMark.src}
+    alt=""
+    class="pointer-events-none absolute right-[-8rem] top-8 h-[30rem] w-[30rem] object-contain opacity-90 sm:right-[-5rem] lg:right-[4%] lg:top-8 lg:h-[35rem] lg:w-[35rem]"
+    aria-hidden="true"
+  />
+
+  <div class="relative z-10 mx-auto w-full max-w-container-max-width px-6 py-12 md:px-8 lg:py-16">
+    <header class="mb-8 flex items-end justify-between gap-6 lg:mb-10">
+      <div>
+        <p class="inline-flex rounded-full bg-[#fff0bd] px-4 py-2 text-[0.68rem] font-extrabold uppercase tracking-[0.025em] text-[#806000]">{homeNews.eyebrow}</p>
+        <h2 id="mockup-news-title" class="mt-5 text-[clamp(2rem,4vw,3.1rem)] font-extrabold leading-[1.05] tracking-[-0.045em]">{homeNews.title}</h2>
+      </div>
+      <a href={homeNews.cta.href} class="hidden items-center gap-2 pb-1 text-xs font-extrabold text-[#171717] transition-colors hover:text-[#b07800] sm:inline-flex">
+        <span>{homeNews.cta.label}</span><span aria-hidden="true">→</span>
+      </a>
+    </header>
+
+    <div class="grid items-stretch gap-5 lg:grid-cols-[minmax(0,1.35fr)_minmax(19rem,0.65fr)] lg:gap-5">
+      <div class="grid items-stretch gap-5 sm:grid-cols-2 lg:grid-cols-2">
+        {largePosts.map((post) => (
+          <article class="group relative flex h-full flex-col overflow-hidden rounded-[1rem] border border-[#e5dfd2] bg-white shadow-[0_8px_20px_rgba(45,35,20,0.06)] transition-transform duration-300 hover:-translate-y-1">
+            <a href={post.href ?? '#'} class="absolute inset-0 z-10" aria-label={`Đọc thêm: ${post.title}`}><span class="sr-only">Đọc thêm</span></a>
+            <figure class="overflow-hidden bg-[#f1f1f1]">
+              <SiteImage src={post.image} alt={post.alt} class="block aspect-[1.52/1] w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" loading="lazy" variant="card" />
+            </figure>
+            <div class="flex flex-1 flex-col p-5 sm:p-6">
+              <p class="text-[0.58rem] font-extrabold uppercase tracking-[0.04em] text-[#c18a00]">{post.category} <span class="px-1 text-[#c18a00]">·</span> {post.publishedAt}</p>
+              <h3 class="mt-3 max-w-[22ch] text-xl font-extrabold leading-[1.12] tracking-[-0.025em] sm:text-[1.35rem]">{post.title}</h3>
+              <p class="mt-3 line-clamp-3 text-xs leading-[1.55] text-[#6f6a60]">{post.excerpt}</p>
+              <span class="mt-auto pt-5 text-[0.65rem] font-extrabold">Đọc bài viết <span class="ml-2" aria-hidden="true">→</span></span>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <div class="relative z-10 flex h-full flex-col justify-between gap-4">
+        {compactPosts.map((post) => (
+          <article class="group relative grid min-h-[7.2rem] grid-cols-[6.5rem_1fr] items-center gap-4 overflow-hidden rounded-[0.9rem] border border-[#e5dfd2] bg-white px-3 py-3 shadow-[0_8px_18px_rgba(45,35,20,0.05)] transition-transform duration-300 hover:-translate-y-1 sm:grid-cols-[7rem_1fr]">
+            <a href={post.href ?? '#'} class="absolute inset-0 z-10" aria-label={`Đọc thêm: ${post.title}`}><span class="sr-only">Đọc thêm</span></a>
+            <figure class="overflow-hidden rounded-[0.6rem] bg-[#f1f1f1]">
+              <SiteImage src={post.image} alt={post.alt} class="block aspect-square w-full object-cover transition-transform duration-500 group-hover:scale-[1.06]" loading="lazy" variant="card" />
+            </figure>
+            <div class="min-w-0 pr-2">
+              <p class="text-[0.55rem] font-extrabold uppercase tracking-[0.04em] text-[#c18a00]">{post.category}</p>
+              <h3 class="mt-2 line-clamp-2 text-sm font-extrabold leading-[1.25]">{post.title}</h3>
+              <span class="mt-3 block text-right text-sm font-extrabold text-[#c18a00]" aria-hidden="true">→</span>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+
+    <a href={homeNews.cta.href} class="mt-6 inline-flex items-center gap-2 text-xs font-extrabold sm:hidden">{homeNews.cta.label} <span aria-hidden="true">→</span></a>
+  </div>
+</section>

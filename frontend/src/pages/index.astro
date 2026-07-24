@@ -1,25 +1,33 @@
 ---
 import SiteLayout from '../layouts/SiteLayout.astro';
 import HomeHero from '../components/home/HomeHero.astro';
+import HomeStatsBand from '../components/home/HomeStatsBand.astro';
 import HomeIntroSection from '../components/home/HomeIntroSection.astro';
 import HomeWhyChooseSection from '../components/home/HomeWhyChooseSection.astro';
 import HomeSolutionsGrid from '../components/home/HomeSolutionsGrid.astro';
 import HomePartnersSection from '../components/home/HomePartnersSection.astro';
 import HomeFeaturedCases from '../components/home/HomeFeaturedCases.astro';
+import HomeProcessSection from '../components/home/HomeProcessSection.astro';
 import HomeDownloadTeaser from '../components/home/HomeDownloadTeaser.astro';
-import CertificateGallery from '../components/CertificateGallery.astro';
-import { seo, certificates } from '../data/site';
-import { routes } from '../lib/routes';
-import { rhythmBg } from '../lib/section-rhythm';
+import HomeNewsSection from '../components/home/HomeNewsSection.astro';
+import HomeCtaSection from '../components/home/HomeCtaSection.astro';
 ---
 
-<SiteLayout title={seo.title} description={seo.description} currentPath={routes.home}>
+<SiteLayout
+  title="Tân Phạm Gia | Fashion × Manufacturing"
+  description="Tân Phạm Gia — tư duy thời trang kết hợp năng lực sản xuất quy mô lớn."
+  currentPath="/"
+  showCta={false}
+>
   <HomeHero />
-  <HomeIntroSection sectionBg={rhythmBg(0)} />
-  <HomeWhyChooseSection sectionBg={rhythmBg(1)} />
-  <HomeSolutionsGrid sectionBg={rhythmBg(2)} />
-  <HomePartnersSection sectionBg={rhythmBg(3)} />
+  <HomeStatsBand />
+  <HomeIntroSection />
+  <HomeWhyChooseSection />
+  <HomeSolutionsGrid />
+  <HomePartnersSection />
   <HomeFeaturedCases />
-  <HomeDownloadTeaser sectionBg={rhythmBg(4)} />
-  <CertificateGallery items={certificates} centeredTitle sectionBg={rhythmBg(5)} />
+  <HomeProcessSection />
+  <HomeDownloadTeaser />
+  <HomeNewsSection />
+  <HomeCtaSection />
 </SiteLayout>

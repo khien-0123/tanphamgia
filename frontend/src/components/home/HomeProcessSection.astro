@@ -1,0 +1,102 @@
+---
+import { homeProcess } from '../../data/home';
+
+const iconPaths = {
+  consulting: '<path d="M12 3v4m0 0 6 5m-6-5-6 5m12 0H6l-3 3h18l-3-3ZM8 18h8v3H8z" />',
+  design: '<path d="m12 4 3 3 3-2 3 4-4 3v8H7v-8L3 9l3-4 3 2 3-3Z" />',
+  production: '<path d="M8 4h8l1 16H7L8 4Zm2 4h4m-4 4h4m-3-8v12" />',
+  delivery: '<path d="m4 8 8-4 8 4-8 4-8-4Zm0 0v9l8 4 8-4V8m-8 4v9" />',
+} as const;
+---
+
+<section class="mockup-process-section relative overflow-hidden bg-[#fbf8f1] text-[#171717]" aria-labelledby="mockup-process-title">
+  <div class="pointer-events-none absolute -right-20 -top-32 h-[28rem] w-[28rem] rounded-full bg-[#f8edc8]" aria-hidden="true"></div>
+
+  <div class="relative mx-auto w-full max-w-container-max-width px-6 py-12 pb-24 lg:px-8 lg:py-12 lg:pb-28">
+    <header class="max-w-[64rem]">
+      <p class="inline-flex rounded-full bg-[#fff0bd] px-4 py-2 text-[0.7rem] font-extrabold uppercase tracking-[0.025em] text-[#806000] sm:text-xs">
+        {homeProcess.eyebrow}
+      </p>
+      <h2 id="mockup-process-title" class="mt-6 max-w-[34ch] text-balance text-[clamp(1.8rem,3vw,3rem)] font-extrabold leading-[1.08] tracking-[-0.04em]">
+        {homeProcess.title}
+      </h2>
+      <p class="mt-3 max-w-[58rem] text-sm leading-[1.55] text-[#625a50] sm:text-base">
+        {homeProcess.description}
+      </p>
+    </header>
+
+    <div class="mockup-process-grid relative mt-10 lg:mt-12">
+      <div class="mockup-process-connector" aria-hidden="true">
+        <svg viewBox="0 0 1000 90" preserveAspectRatio="none">
+          <path d="M0 45 C 28 27, 48 27, 76 45 S 124 63, 152 45 S 200 27, 228 45 S 276 63, 304 45 S 352 27, 380 45 S 428 63, 456 45 S 504 27, 532 45 S 580 63, 608 45 S 656 27, 684 45 S 732 63, 760 45 S 808 27, 836 45 S 884 63, 912 45 S 960 27, 1000 45" />
+        </svg>
+      </div>
+
+      <ol class="relative grid list-none gap-5 p-0 md:grid-cols-2 lg:grid-cols-4 lg:gap-5">
+        {homeProcess.items.map((item, index) => (
+          <li class:list={['mockup-process-card relative flex min-h-[16.5rem] flex-col items-stretch rounded-[1rem] px-6 pb-7 pt-6 text-center shadow-[0_16px_28px_rgba(38,31,21,0.14)]', index % 2 === 0 ? 'bg-[#0d1b3a] text-white' : 'bg-[#ffc72c] text-[#111827]']}>
+            <span class="mx-auto flex h-11 w-11 shrink-0 items-center justify-center" aria-hidden="true">
+              <svg class="h-8 w-8 fill-none stroke-current stroke-[1.8]" viewBox="0 0 24 24" set:html={iconPaths[item.icon]}></svg>
+            </span>
+            <h3 class="mt-3 flex min-h-[3.45rem] items-center justify-center text-base font-extrabold leading-[1.2] sm:text-lg">{item.title}</h3>
+            <p class:list={['mt-4 flex flex-1 items-start justify-center text-xs leading-[1.5] sm:text-[0.8rem]', index % 2 === 0 ? 'text-white/75' : 'text-[#43370c]']}>
+              {item.description}
+            </p>
+            <span class="mockup-process-number absolute -bottom-[4.05rem] left-1/2 z-10 flex h-12 w-12 -translate-x-1/2 items-center justify-center rounded-full border-[3px] border-[#e1a900] bg-[#fbf8f1] text-base font-extrabold text-[#b07800]">
+              {item.number}
+            </span>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </div>
+</section>
+
+<style>
+  .mockup-process-connector {
+    position: absolute;
+    z-index: 0;
+    top: calc(100% + 1.55rem - 10px);
+    left: 4%;
+    width: 92%;
+    height: 4rem;
+    pointer-events: none;
+  }
+
+  .mockup-process-connector svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+
+  .mockup-process-connector path {
+    fill: none;
+    stroke: #e1a900;
+    stroke-width: 2;
+  }
+
+  .mockup-process-number {
+    bottom: -4.05rem;
+  }
+
+  @media (max-width: 1023px) {
+    .mockup-process-connector {
+      display: none;
+    }
+
+    .mockup-process-number {
+      bottom: -1.5rem;
+    }
+
+    .mockup-process-card {
+      margin-bottom: 1.5rem;
+    }
+  }
+
+  @media (max-width: 639px) {
+    .mockup-process-card {
+      min-height: 0;
+      padding-inline: 1.25rem;
+    }
+  }
+</style>
