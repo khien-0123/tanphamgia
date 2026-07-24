@@ -1,272 +1,78 @@
 ---
-import SiteImage from '../SiteImage.astro';
-import { homeWhyChoose, whyChoose } from '../../data/site';
-import { siteAssets } from '../../data/assets';
-import {
-  whyChooseFrameBodyClasses,
-  whyChooseFrameClasses,
-  whyChooseFrameDescClasses,
-  whyChooseFrameMediaClasses,
-  whyChooseFrameScrimClasses,
-  whyChooseFrameTitleClasses,
-  whyChooseIntroClasses,
-  whyChooseParallaxClasses,
-  whyChooseParallaxShellClasses,
-  whyChooseSlideClasses,
-} from '../../lib/why-choose-classes';
-import { RHYTHM_WHITE, sectionPy } from '../../lib/section-rhythm';
+import { homeWhyChoose } from '../../data/home';
 
-interface Props {
-  sectionBg?: string;
-}
-
-const { sectionBg = RHYTHM_WHITE } = Astro.props;
-
-const imageFallback = siteAssets.hero.fallback;
-const stackCount = whyChoose.length;
+const cardPositions = [
+  'lg:mt-10',
+  'lg:mt-32',
+  'lg:mt-0',
+  'lg:mt-28',
+] as const;
 ---
 
-<section class:list={[sectionPy, sectionBg, 'why-choose-section']} id="tai-sao" data-no-reveal>
-  <header data-reveal class:list={whyChooseIntroClasses}>
-    <p class="font-eyebrow text-xs uppercase tracking-[0.18em] text-accent-teal mb-3 m-0">
-      {homeWhyChoose.eyebrow}
-    </p>
-    <h2
-      class="font-headline-md font-bold text-ink-dark text-xl leading-snug md:text-3xl lg:text-4xl md:leading-tight m-0 text-pretty"
-    >
-      {homeWhyChoose.title}
-    </h2>
-    <p class="text-text-muted text-sm md:text-base leading-relaxed mt-4 md:mt-5 m-0">
-      {homeWhyChoose.description}
-    </p>
-  </header>
+<section class="overflow-hidden bg-[#fbf8f1] text-[#1f1b17]" aria-labelledby="mockup-why-choose-title">
+  <div class="mx-auto w-full max-w-container-max-width px-6 py-12">
+    <header class="max-w-[62rem]">
+      <p class="mb-6 inline-flex rounded-full bg-[#ffedb7] px-4 py-2 text-xs font-extrabold uppercase tracking-[0.025em] text-[#806000] sm:text-sm">
+        {homeWhyChoose.eyebrow}
+      </p>
+      <h2
+        id="mockup-why-choose-title"
+        class="max-w-[34ch] text-balance text-[clamp(1.75rem,2.7vw,3rem)] font-extrabold leading-[1.1] tracking-[-0.03em] text-[#1f1b17]"
+      >
+        {homeWhyChoose.title}
+      </h2>
+    </header>
 
-  <div class:list={whyChooseParallaxShellClasses}>
-    <div
-      class:list={whyChooseParallaxClasses}
-      style={`--stack-count: ${stackCount}`}
-    >
-      {
-        whyChoose.map((item, index) => (
-          <article class:list={whyChooseSlideClasses} style={`--slide-index: ${index}`}>
-            <div class:list={whyChooseFrameClasses}>
-              <SiteImage
-                alt={item.imageAlt}
-                class:list={[whyChooseFrameMediaClasses, item.imagePosition]}
-                decoding="async"
-                loading={index === 0 ? 'eager' : 'lazy'}
-                src={item.image}
-                fallback={imageFallback}
-                variant="full"
+    <div class="relative mt-10 lg:min-h-80 lg:mt-12">
+      <svg
+        class="pointer-events-none absolute inset-x-[-5%] top-4 hidden h-[25rem] w-[110%] lg:block"
+        viewBox="0 0 1440 400"
+        fill="none"
+        preserveAspectRatio="none"
+        aria-hidden="true"
+      >
+        <defs>
+          <linearGradient id="mockup-gold-thread" x1="40" y1="248" x2="1400" y2="166" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#FFBE1B" stop-opacity="0.12"></stop>
+            <stop offset="0.48" stop-color="#FFBE1B" stop-opacity="0.75"></stop>
+            <stop offset="1" stop-color="#FFBE1B" stop-opacity="0.14"></stop>
+          </linearGradient>
+        </defs>
+        {
+          Array.from({ length: 12 }, (_, index) => {
+            const offset = index * 5;
+            return (
+              <path
+                d={`M20 ${212 + offset} C 210 ${250 + offset}, 330 ${342 - offset}, 520 ${294 - offset} C 720 ${244 - offset}, 750 ${78 + offset}, 970 ${94 + offset} C 1135 ${106 + offset}, 1240 ${204 + offset}, 1420 ${226 + offset}`}
+                stroke="url(#mockup-gold-thread)"
+                stroke-width="1.2"
+                stroke-linecap="round"
               />
-              <div class:list={whyChooseFrameScrimClasses} aria-hidden="true" />
-              <div class:list={whyChooseFrameBodyClasses}>
-                <h3 class:list={whyChooseFrameTitleClasses}>{item.title}</h3>
-                <p class:list={whyChooseFrameDescClasses}>{item.desc}</p>
+            );
+          })
+        }
+      </svg>
+
+      <div class="relative z-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4 lg:gap-5">
+        {
+          homeWhyChoose.items.map((item, index) => (
+            <article class:list={['min-w-0', cardPositions[index]]}>
+              <div class="inline-flex max-w-full items-center gap-3 rounded-full border border-[#e8dfcf] bg-[#faf5e9]/95 px-4 py-3 shadow-[0_8px_24px_rgba(65,48,13,0.05)] backdrop-blur-sm">
+                <span class="shrink-0 text-lg font-extrabold tabular-nums text-[#8a6700]">{item.number}</span>
+                <h3 class="text-sm font-extrabold leading-snug text-[#26211c] sm:text-[0.95rem]">
+                  {item.title}
+                </h3>
               </div>
-            </div>
-          </article>
-        ))
-      }
+
+              <div class="ml-7 border-l border-[#efbd35]/65 pl-7 pt-6">
+                <p class="max-w-[19rem] text-sm leading-[1.75] text-[#655c51] lg:text-[0.94rem]">
+                  {item.description}
+                </p>
+              </div>
+            </article>
+          ))
+        }
+      </div>
     </div>
   </div>
 </section>
-
-<script src="../../scripts/why-choose-expand.ts"></script>
-
-<style>
-  .why-choose-section {
-    --why-choose-sticky-top: calc(4rem + 10px);
-    --why-choose-frame-rest-max: 56rem;
-    --why-choose-frame-rest-height: clamp(380px, 68vh, 760px);
-    --why-choose-frame-expanded-height: calc(100dvh - var(--why-choose-sticky-top));
-    /* Vùng scroll thêm sau khi thẻ full — thẻ kế tiếp chưa lộ */
-    --why-choose-slide-stack-buffer: 36dvh;
-    --why-choose-slide-runway: calc(
-      var(--why-choose-frame-expanded-height) + var(--why-choose-slide-stack-buffer)
-    );
-    --why-choose-slide-rest-padding: clamp(1.5rem, 5vw, 5rem);
-    scroll-margin-top: var(--why-choose-sticky-top);
-    position: relative;
-    z-index: 1;
-    isolation: isolate;
-  }
-
-  .why-choose-scrim {
-    height: 50%;
-    background: linear-gradient(
-      to top,
-      rgb(0 0 0 / 0.82) 0%,
-      rgb(0 0 0 / 0.48) 45%,
-      transparent 100%
-    );
-  }
-
-  /* Mobile: gradient đen nhạt hơn desktop */
-  @media (max-width: 767px) {
-    .why-choose-scrim {
-      height: 68%;
-      background: linear-gradient(
-        to top,
-        rgb(0 0 0 / 0.88) 0%,
-        rgb(0 0 0 / 0.7) 32%,
-        rgb(0 0 0 / 0.42) 62%,
-        transparent 100%
-      );
-    }
-
-    .why-choose-frame {
-      background-color: rgb(0 0 0 / 0.28);
-    }
-  }
-
-  .why-choose-parallax {
-    --why-choose-sticky-top: calc(4rem + 10px);
-    padding-bottom: 0;
-  }
-
-  /* Slide cuối: bỏ runway thừa — không còn khoảng trống dưới thẻ */
-  .why-choose-slide:last-child {
-    min-height: var(--why-choose-frame-expanded-height);
-  }
-
-  .why-choose-slide {
-    position: sticky;
-    top: var(--why-choose-sticky-top);
-    z-index: calc(var(--slide-index) + 1);
-    min-height: 82dvh;
-    padding-inline: 0;
-  }
-
-  /* Desktop: mỗi thẻ = full viewport — không lộ ảnh kế tiếp phía dưới */
-  @media (min-width: 768px) {
-    .why-choose-section {
-      --why-choose-frame-rest-height: var(--why-choose-frame-expanded-height);
-      --why-choose-frame-rest-max: 100%;
-    }
-
-    .why-choose-slide {
-      min-height: var(--why-choose-frame-expanded-height);
-      align-items: stretch;
-      justify-content: stretch;
-      padding-inline: 0;
-      animation: none !important;
-    }
-
-    .why-choose-slide:last-child {
-      min-height: var(--why-choose-frame-expanded-height);
-    }
-
-    .why-choose-frame {
-      max-width: 100%;
-      width: 100%;
-      height: var(--why-choose-frame-expanded-height);
-      border-radius: 0.5rem;
-      animation: none !important;
-    }
-  }
-
-  /* Mobile: giữ sticky stack, chiều cao thẻ gọn hơn desktop */
-  @media (max-width: 767px) {
-    .why-choose-section {
-      --why-choose-frame-rest-height: clamp(260px, 46vh, 380px);
-      --why-choose-frame-expanded-height: clamp(300px, 58vh, 480px);
-      --why-choose-slide-stack-buffer: 8dvh;
-    }
-
-    .why-choose-parallax {
-      margin-bottom: 0;
-      padding-bottom: 0;
-    }
-
-    .why-choose-slide {
-      min-height: calc(
-        var(--why-choose-frame-expanded-height) + var(--why-choose-slide-stack-buffer)
-      );
-    }
-
-    .why-choose-slide:last-child {
-      min-height: var(--why-choose-frame-expanded-height);
-    }
-
-    .why-choose-frame {
-      height: var(--why-choose-frame-rest-height);
-    }
-
-    @supports (animation-timeline: view()) {
-      .why-choose-slide {
-        animation: why-choose-expand-slide linear both;
-        animation-timeline: view();
-        animation-range: cover 0% cover 12%;
-      }
-
-      .why-choose-frame {
-        animation: why-choose-expand-frame-mobile linear both;
-        animation-timeline: view();
-        animation-range: cover 0% cover 12%;
-      }
-    }
-
-    @supports not (animation-timeline: view()) {
-      .why-choose-slide.is-pinned .why-choose-frame {
-        height: var(--why-choose-frame-expanded-height);
-      }
-    }
-  }
-
-  @keyframes why-choose-expand-frame-mobile {
-    from {
-      max-width: 100%;
-      height: var(--why-choose-frame-rest-height);
-      border-radius: 0.5rem;
-    }
-
-    to {
-      max-width: 100%;
-      height: var(--why-choose-frame-expanded-height);
-      border-radius: 0.25rem;
-    }
-  }
-
-  @keyframes why-choose-expand-slide {
-    from {
-      padding-inline: 0;
-      align-items: flex-start;
-    }
-
-    to {
-      padding-inline: 0;
-      align-items: stretch;
-    }
-  }
-
-  .why-choose-frame {
-    max-width: 100%;
-    height: var(--why-choose-frame-rest-height);
-    border-radius: 0.5rem;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .why-choose-slide {
-      position: relative;
-      top: auto !important;
-      min-height: 0;
-      height: auto;
-      padding-bottom: 1.5rem;
-      padding-inline: 0;
-      animation: none !important;
-    }
-
-    .why-choose-frame {
-      max-width: 100%;
-      height: clamp(280px, 52vh, 420px);
-      border-radius: 0.5rem;
-      animation: none !important;
-    }
-
-    .why-choose-parallax {
-      margin-bottom: 0;
-      padding-bottom: 0;
-    }
-  }
-</style>

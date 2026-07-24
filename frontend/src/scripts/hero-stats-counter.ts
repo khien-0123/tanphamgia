@@ -1,6 +1,6 @@
 /** Counter số liệu hero — đếm từ 0 mỗi lần load trang chủ */
-const DURATION_MS = 3000;
-const STAGGER_MS = 200;
+const DURATION_MS = 1400;
+const STAGGER_MS = 120;
 
 interface ParsedHeroStat {
   target: number;

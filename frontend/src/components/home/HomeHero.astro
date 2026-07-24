@@ -1,97 +1,78 @@
 ---
-import { stats, heroMedia } from '../../data/site';
+import { homeHero } from '../../data/home';
+import SiteNav from '../SiteNav.astro';
 import { routes } from '../../lib/routes';
-
-/** Lớp phủ hero — mờ nhẹ để video vẫn thấy chuyển động nhưng không lấn chữ */
-const heroOverlay = heroMedia.video
-  ? 'absolute inset-0 z-10 bg-black/30'
-  : 'absolute inset-0 z-10 bg-black/40';
 ---
 
-<header
-  data-page-hero
-  class="relative flex flex-col overflow-hidden pt-24 min-h-0 sm:min-h-[480px] md:min-h-[520px] lg:min-h-screen"
->
-  <div class="absolute inset-0 z-0">
-    <div class={heroOverlay}></div>
-    {
-      heroMedia.video ? (
-        <video
-          class="w-full h-full object-cover object-center opacity-90"
-          id="hero-video"
-          autoplay
-          loop
-          muted
-          playsinline
-        >
-          <source src={heroMedia.video} type="video/mp4" />
-        </video>
-      ) : (
-        <div class="w-full h-full bg-ink-dark" id="hero-image" aria-hidden="true"></div>
-      )
-    }
-  </div>
+<main class="relative overflow-visible bg-[#f5f0e7] p-0 sm:p-2 lg:p-0">
+  <section class="relative min-h-[46rem] overflow-visible bg-ink-dark text-white sm:min-h-[48rem] lg:h-[min(50rem,100svh)] lg:min-h-[42rem]">
+    <div class="absolute inset-0" aria-hidden="true">
+      <video class="h-full w-full object-cover object-center" autoplay loop muted playsinline preload="metadata" poster={homeHero.poster}>
+        <source src={homeHero.media} type="video/mp4" />
+        Trình duyệt của bạn không hỗ trợ video nền.
+      </video>
+      <div class="absolute inset-0 bg-black/45"></div>
+      <div class="absolute inset-0 bg-[linear-gradient(90deg,rgba(0,0,0,.44),rgba(0,0,0,.12)_62%,rgba(6,22,35,.46))]"></div>
+      <div class="absolute inset-x-0 bottom-0 h-52 bg-gradient-to-t from-black/45 to-transparent"></div>
+    </div>
 
-  <div
-    class="relative z-20 flex flex-1 flex-col max-w-container-max-width mx-auto px-6 md:px-8 w-full text-center text-white py-8 md:py-12"
-  >
-    <div class="flex flex-1 flex-col items-center justify-center w-full">
-      <div class="w-full flex flex-col items-center md:inline-grid md:w-max md:max-w-full md:mx-auto md:[grid-template-columns:minmax(0,max-content)] md:justify-items-stretch">
-        <h1
-          class="font-display-lg font-extrabold mb-5 flex flex-col gap-2 md:gap-1 leading-[1.35] md:leading-[1.12] tracking-normal md:tracking-normal md:[grid-row:1]"
-        >
-          <span class="block text-[clamp(1.75rem,7.5vw,2.25rem)] md:text-[3.5rem] md:whitespace-nowrap">Đồng Phục Chuẩn Thương Hiệu.</span>
-          <span class="block text-[clamp(1.05rem,4.5vw,1.875rem)] text-accent-gold md:text-[3.5rem] md:whitespace-nowrap">
-            Chuẩn Tiến Độ. Chuẩn Từng Chiếc.
-          </span>
-        </h1>
-        <p
-          class="font-body-lg text-base md:text-lg mb-5 md:mb-8 max-w-2xl mx-auto md:mx-0 md:w-full md:max-w-none text-white/85 leading-relaxed text-center md:[grid-row:2]"
-        >
-          23 năm đồng hành cùng doanh nghiệp xây dựng hình ảnh chuyên nghiệp với giải pháp đồng phục
-          toàn diện.
-        </p>
-        <div class="flex flex-row gap-2 sm:gap-2.5 items-stretch w-full max-w-full sm:max-w-[92%] md:max-w-xl mx-auto md:[grid-row:3]">
+    <SiteNav currentPath={routes.home} navOverDark />
+
+    <div class="relative z-10 mx-auto h-full w-full max-w-[96rem] px-5 pb-5 pt-24 sm:px-8 sm:pt-28 lg:px-12 lg:pb-5 xl:px-16">
+
+      <div class="flex h-[calc(100%-5rem)] flex-col pt-10 sm:pt-12 lg:h-[calc(100%-5rem)] lg:pt-0">
+        <div data-reveal-stagger class="mx-auto w-full max-w-[84rem]">
+          <p data-reveal class="mb-5 text-center text-[0.65rem] font-bold uppercase tracking-[0.26em] text-accent-gold lg:hidden">{homeHero.eyebrow}</p>
+          <h1 data-reveal class="mx-auto max-w-[84rem] text-center text-[clamp(2.6rem,5vw,5.75rem)] font-extrabold leading-[1.03] tracking-[-0.045em] text-white">
+            {homeHero.title}
+          </h1>
+
+          <p data-reveal class="mx-auto mt-7 max-w-[75rem] text-center text-sm leading-relaxed text-white/80 sm:text-lg lg:text-xl">
+            {homeHero.description}
+          </p>
+
+          <div data-reveal class="mx-auto mt-8 flex w-full max-w-full flex-row items-stretch gap-2 sm:max-w-[92%] sm:gap-2.5 md:max-w-xl">
+            <a
+              href={routes.lienHe}
+              class="min-w-0 flex-1 rounded-full bg-accent-gold px-3.5 py-3 text-center text-sm font-bold leading-snug text-ink-dark shadow-soft transition-all hover:scale-105 hover:shadow-gold sm:px-4 sm:py-3.5 sm:text-base md:px-[1.575rem] md:py-[0.7875rem] md:text-[0.9rem]"
+            >
+              Nhận tư vấn giải pháp
+            </a>
+            <a
+              href={routes.taiLieu}
+              class="min-w-0 flex-1 rounded-full border border-white bg-white px-3.5 py-3 text-center text-sm font-bold leading-snug text-ink-dark transition-all hover:scale-105 hover:shadow-soft sm:px-4 sm:py-3.5 sm:text-base md:px-[1.575rem] md:py-[0.7875rem] md:text-[0.9rem]"
+            >
+              Tải hồ sơ năng lực
+            </a>
+          </div>
+        </div>
+
+        <div data-reveal class="mt-auto flex items-end justify-between gap-5 pt-14">
+          <div class="w-[15.5rem] rounded-[2rem] border border-white/35 bg-white/10 px-6 py-6 shadow-[0_18px_45px_rgba(0,0,0,.2)] backdrop-blur-md sm:w-[18rem] sm:px-7">
+            <p
+              class="text-4xl font-extrabold tracking-[-0.045em] text-white sm:text-5xl"
+              data-hero-stat-counter
+              data-hero-stat-target={homeHero.stat.value}
+            >
+              {homeHero.stat.value}
+            </p>
+            <p class="mt-2 text-xs text-white/75 sm:text-sm">{homeHero.stat.label}</p>
+          </div>
+
           <a
-            href={routes.lienHe}
-            class="flex-1 min-w-0 bg-accent-gold text-ink-dark px-3.5 py-3 sm:px-4 sm:py-3.5 md:px-[1.575rem] md:py-[0.7875rem] rounded-full font-bold text-sm sm:text-base md:text-[0.9rem] leading-snug hover:shadow-gold hover:scale-105 transition-all shadow-soft text-center"
+            href={homeHero.dossier.href}
+            class="relative z-30 -mb-7 -mr-5 flex h-28 w-[17.5rem] translate-y-[15px] shrink-0 items-center rounded-tl-[3rem] rounded-br-[2rem] bg-[#faf8f2] px-8 text-ink-dark shadow-[-6px_-4px_16px_rgba(0,0,0,.1)] sm:-mr-8 sm:w-[18.5rem] lg:-mb-5 lg:-mr-12 lg:translate-y-0 xl:-mr-16"
           >
-            Nhận tư vấn giải pháp
-          </a>
-          <a
-            href={routes.taiLieu}
-            class="flex-1 min-w-0 bg-white text-ink-dark border border-white px-3.5 py-3 sm:px-4 sm:py-3.5 md:px-[1.575rem] md:py-[0.7875rem] rounded-full font-bold text-sm sm:text-base md:text-[0.9rem] leading-snug hover:shadow-soft hover:scale-105 transition-all text-center"
-          >
-            Tải hồ sơ năng lực
+            <span aria-hidden="true" class="mr-9 text-[1.75rem] font-bold leading-none">↗</span>
+            <span class="text-left">
+              <strong class="block text-xl font-extrabold leading-tight tracking-[-0.025em]">{homeHero.dossier.title}</strong>
+              <span class="mt-1 block text-base leading-tight text-ink-dark/80">{homeHero.dossier.subtitle}</span>
+            </span>
           </a>
         </div>
       </div>
     </div>
-
-    <dl
-      class="mt-10 md:mt-14 lg:mt-auto lg:pt-10 w-full max-w-4xl mx-auto grid grid-cols-4 gap-x-2 md:gap-x-8 pb-2 md:pb-4"
-    >
-      {
-        stats.map((item, i) => (
-          <div
-            class:list={[
-              'text-center m-0 min-w-0',
-              i > 0 && 'border-l border-white/20 pl-2 md:pl-5',
-            ]}
-          >
-            <dt
-              class="text-xl sm:text-2xl md:text-4xl font-extrabold text-white mb-0.5 md:mb-1 leading-none tabular-nums"
-              data-hero-stat-counter
-              data-hero-stat-target={item.value}
-            >
-              {item.value}
-            </dt>
-            <dd class="text-[0.625rem] sm:text-[0.6875rem] md:text-xs text-white/70 leading-snug m-0">{item.label}</dd>
-          </div>
-        ))
-      }
-    </dl>
-  </div>
-</header>
+  </section>
+</main>
 
 <script src="../../scripts/hero-stats-counter.ts"></script>

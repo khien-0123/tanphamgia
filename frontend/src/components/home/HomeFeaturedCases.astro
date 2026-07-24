@@ -1,222 +1,242 @@
 ---
 import SiteImage from '../SiteImage.astro';
-import { homeFeaturedCases } from '../../data/site';
-import { imageRadius } from '../../lib/image-frame';
-import { sectionPy } from '../../lib/section-rhythm';
+import { homeRecentProjects } from '../../data/home';
 
-const { featured, secondary, quote } = homeFeaturedCases;
-
-const featuredCard =
-  `relative block overflow-hidden ${imageRadius} bg-ink-mid min-h-[280px] lg:min-h-[380px] order-1 lg:order-none`;
-const featuredImg =
-  'absolute inset-0 w-full h-full object-cover opacity-75 transition-[transform,opacity] duration-700 group-hover:scale-[1.04] group-hover:opacity-[0.88]';
-const featuredOverlay =
-  'featured-case-copy absolute inset-0 z-[2] flex flex-col justify-end gap-3.5 p-6';
-const secondaryCard =
-  'relative shrink-0 snap-center overflow-hidden bg-ink-mid min-h-[220px] basis-full min-w-full max-sm:rounded-none sm:basis-[calc(50%-0.425rem)] sm:min-w-0 transition-transform duration-250 hover:-translate-y-0.5 lg:shrink lg:min-h-[220px] lg:h-full';
+const projects = homeRecentProjects.items;
+const loopProjects = [...projects, ...projects, ...projects];
 ---
 
-<section class:list={[sectionPy, 'text-white bg-ink-dark overflow-hidden']} id="du-an">
-  <header
-    data-reveal
-    class="max-w-container-max-width w-full mx-auto px-6 md:px-8 pb-4 md:pb-6 flex flex-col md:flex-row justify-between items-start md:items-end gap-4 md:gap-6"
-  >
-    <div class="max-w-2xl">
-      <h2 class="text-[clamp(1.5rem,5vw,3rem)] leading-tight md:text-5xl font-bold tracking-normal mb-3 text-balance">
-        Dự Án Tiêu Biểu
-      </h2>
-      <p class="text-white/60 text-base md:text-lg">
-        Chứng thực năng lực qua các dự án quy mô lớn cho tập đoàn đa quốc gia.
-      </p>
-    </div>
-  </header>
-
+<section
+  class="relative overflow-hidden bg-[#fbf8f1] text-[#1f1b17]"
+  aria-labelledby="mockup-recent-projects-title"
+  data-mockup-projects-slider
+>
   <div
-    data-reveal
-    class="grid gap-4 max-w-container-max-width mx-auto px-6 md:px-8 lg:grid-cols-[5fr_7fr] lg:[grid-template-areas:'featured_aside'] lg:items-stretch"
-  >
-    {
-      featured.href ? (
-        <a
-          href={featured.href}
-          class:list={[featuredCard, 'group no-underline text-white lg:[grid-area:featured]']}
-        >
-          <SiteImage src={featured.image} alt={featured.alt} class={featuredImg} loading="lazy" variant="card" />
-          <div class="featured-case-scrim pointer-events-none absolute inset-x-0 bottom-0 z-[1]" aria-hidden="true" />
-          <div class={featuredOverlay}>
-            {featured.tag && (
-              <span class="inline-block w-fit px-3 py-1 rounded-full bg-accent-gold text-ink-dark text-[0.625rem] font-bold tracking-widest uppercase">
-                {featured.tag}
-              </span>
-            )}
-            <div class="flex items-center gap-2.5 md:gap-3">
-              {featured.logoMark && (
-                <SiteImage
-                  src={featured.logoMark}
-                  alt=""
-                  width={40}
-                  height={40}
-                  class="featured-case-logo-mark h-9 w-9 md:h-10 md:w-10 shrink-0 object-contain"
-                  loading="lazy"
-                  decoding="async"
-                  variant="logo"
-                />
-              )}
-              <h3 class="m-0 text-[clamp(1.5rem,3vw,1.875rem)] font-bold leading-tight">
-                {featured.name}
-              </h3>
-            </div>
-            {featured.stats && (
-              <dl class="flex flex-wrap gap-x-8 gap-y-5 m-0">
-                {featured.stats.map((stat) => (
-                  <div class="m-0">
-                    <dt class="sr-only">{stat.label}</dt>
-                    <dd class="flex flex-col gap-0.5 m-0">
-                      <span class="text-[clamp(1.35rem,2.5vw,1.75rem)] font-bold text-accent-gold leading-none">
-                        {stat.value}
-                      </span>
-                      <span class="text-[0.8125rem] text-white/65">{stat.label}</span>
-                    </dd>
-                  </div>
-                ))}
-              </dl>
-            )}
-          </div>
-        </a>
-      ) : (
-        <article class:list={[featuredCard, 'group lg:[grid-area:featured]']}>
-          <SiteImage src={featured.image} alt={featured.alt} class={featuredImg} loading="lazy" variant="card" />
-          <div class="featured-case-scrim pointer-events-none absolute inset-x-0 bottom-0 z-[1]" aria-hidden="true" />
-          <div class={featuredOverlay}>
-            {featured.tag && (
-              <span class="inline-block w-fit px-3 py-1 rounded-full bg-accent-gold text-ink-dark text-[0.625rem] font-bold tracking-widest uppercase">
-                {featured.tag}
-              </span>
-            )}
-            <div class="flex items-center gap-2.5 md:gap-3">
-              {featured.logoMark && (
-                <SiteImage
-                  src={featured.logoMark}
-                  alt=""
-                  width={40}
-                  height={40}
-                  class="featured-case-logo-mark h-9 w-9 md:h-10 md:w-10 shrink-0 object-contain"
-                  loading="lazy"
-                  decoding="async"
-                  variant="logo"
-                />
-              )}
-              <h3 class="m-0 text-[clamp(1.5rem,3vw,1.875rem)] font-bold leading-tight">
-                {featured.name}
-              </h3>
-            </div>
-            {featured.stats && (
-              <dl class="flex flex-wrap gap-x-8 gap-y-5 m-0">
-                {featured.stats.map((stat) => (
-                  <div class="m-0">
-                    <dt class="sr-only">{stat.label}</dt>
-                    <dd class="flex flex-col gap-0.5 m-0">
-                      <span class="text-[clamp(1.35rem,2.5vw,1.75rem)] font-bold text-accent-gold leading-none">
-                        {stat.value}
-                      </span>
-                      <span class="text-[0.8125rem] text-white/65">{stat.label}</span>
-                    </dd>
-                  </div>
-                ))}
-              </dl>
-            )}
-          </div>
-        </article>
-      )
-    }
+    class="pointer-events-none absolute -left-36 top-0 h-[27rem] w-[30rem] rounded-[42%_58%_54%_46%/46%_44%_56%_54%] bg-[#f8edc8] sm:-left-28 lg:-left-20"
+    aria-hidden="true"
+  ></div>
 
-    <div class="contents lg:flex lg:flex-col lg:gap-4 lg:[grid-area:aside] lg:min-h-[380px]">
-      <blockquote class="m-0 pl-5 border-l-4 border-accent-gold order-3 lg:order-none lg:shrink-0 lg:pt-1">
-        <p class="m-0 text-[clamp(1rem,2vw,1.125rem)] leading-relaxed text-white/92">
-          "{quote.text}"
-        </p>
-        <footer class="mt-3.5 text-sm font-semibold text-accent-gold">— {quote.author}</footer>
-      </blockquote>
-
-      <div
-        class="featured-secondary-track flex gap-3.5 max-sm:gap-0 overflow-x-auto snap-x max-sm:snap-mandatory sm:snap-proximity overscroll-x-contain [-webkit-overflow-scrolling:touch] [scrollbar-width:none] pb-1 order-2 min-w-0 lg:order-none lg:flex-1 lg:grid lg:grid-cols-2 lg:auto-rows-fr lg:overflow-visible lg:min-h-[220px] [&::-webkit-scrollbar]:hidden"
-        role="list"
+  <div class="relative mx-auto w-full max-w-container-max-width px-6 py-12">
+    <header data-reveal data-reveal-direction="up" class="max-w-[64rem]">
+      <h2
+        id="mockup-recent-projects-title"
+        class="max-w-[34ch] text-balance text-[clamp(1.75rem,2.7vw,3rem)] font-extrabold leading-[1.1] tracking-[-0.03em] text-[#1f1b17]"
       >
-        {
-          secondary.map((project) => (
-            <a
-              href={project.href}
-              class:list={[secondaryCard, imageRadius, 'group no-underline text-white max-sm:rounded-none']}
-              role="listitem"
-              aria-label={`Xem chi tiết dự án ${project.name}`}
-            >
-              <SiteImage
-                src={project.image}
-                alt=""
-                loading="lazy"
-                class="absolute inset-0 w-full h-full object-cover opacity-70 transition-opacity duration-350 group-hover:opacity-[0.82]"
-                variant="card"
-              />
-              <div class="absolute inset-0 z-[1] flex flex-col justify-end p-5 bg-gradient-to-t from-black/90 via-black/40 from-0% via-45% to-transparent">
-                <h3 class="m-0 mb-1.5 text-[1.0625rem] font-bold leading-snug line-clamp-2">{project.name}</h3>
-                {project.statHighlight && (
-                  <p class="m-0 text-[1.35rem] font-bold leading-normal">
-                    <span
-                      class:list={[
-                        'text-white',
-                        project.statHighlight.valueClass === 'gold' && 'text-accent-gold',
-                      ]}
+        {homeRecentProjects.title}
+      </h2>
+      <p class="mt-4 max-w-[54rem] text-sm leading-[1.55] text-[#625a50] sm:text-base">
+        {homeRecentProjects.description}
+      </p>
+      <a
+        href={homeRecentProjects.cta.href}
+        target="_blank"
+        rel="noreferrer"
+        class="mt-6 inline-flex items-center gap-2 rounded-full border border-[#dca900] bg-[#fffaf0]/75 px-5 py-2.5 text-xs font-extrabold text-[#332b1c] no-underline transition-colors hover:bg-[#ffedb7] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#b88900] sm:text-sm"
+      >
+        {homeRecentProjects.cta.label}
+      </a>
+    </header>
+
+    <div data-reveal data-reveal-motion="fade" class="mockup-projects-slider relative mt-8 lg:mt-9">
+      <div
+        class="mockup-projects-viewport"
+        data-mockup-projects-viewport
+        aria-label="Các dự án gần đây"
+        tabindex="0"
+      >
+        <div class="mockup-projects-track" data-mockup-projects-track>
+          {loopProjects.map((item, index) => {
+            const logicalIndex = index % projects.length;
+            const setIndex = Math.floor(index / projects.length);
+            const isCanonical = setIndex === 1;
+
+            return (
+              <article
+                class="mockup-project-card group shrink-0 overflow-hidden rounded-[1.25rem] bg-white shadow-[0_18px_48px_rgba(38,31,21,0.10)]"
+                data-mockup-projects-slide
+                data-logical-index={logicalIndex}
+                data-slide-set={setIndex}
+                data-canonical={isCanonical ? 'true' : 'false'}
+                aria-label={isCanonical ? `${logicalIndex + 1} / ${projects.length}: ${item.title}` : undefined}
+                aria-current={isCanonical ? 'false' : undefined}
+                aria-hidden={isCanonical ? undefined : 'true'}
+                inert={isCanonical ? undefined : true}
+              >
+                <div class="mockup-project-card-inner">
+                  <div class="mockup-project-content">
+                    <div>
+                      <p class="text-sm leading-snug text-[#3d3832] sm:text-base">
+                        {item.eyebrow}
+                      </p>
+                      <h3 class="mt-1.5 text-[clamp(1.2rem,1.8vw,1.75rem)] font-extrabold leading-[0.98] tracking-[-0.04em] text-[#d99500]">
+                        {item.title}
+                      </h3>
+                    </div>
+
+                    <p class="mt-4 text-sm leading-[1.5] text-[#71685d]">
+                      {item.caption}
+                    </p>
+                  </div>
+
+                  <div class="mockup-project-media">
+                    <SiteImage
+                      src={item.image}
+                      alt={item.alt}
+                      class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.02]"
+                      loading="lazy"
+                      variant="card"
+                    />
+                    <div class="absolute inset-0 bg-gradient-to-r from-black/5 to-transparent" aria-hidden="true"></div>
+                    <a
+                      href={homeRecentProjects.cta.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      tabindex={isCanonical ? undefined : '-1'}
+                      class="absolute left-1/2 top-1/2 inline-flex h-12 w-[4.25rem] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-2xl bg-[#ff1f18] text-white opacity-0 shadow-[0_14px_35px_rgba(0,0,0,0.3)] transition-[opacity,transform] group-hover:scale-105 group-hover:opacity-100 group-focus-within:opacity-100 focus-visible:opacity-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+                      aria-label={`Xem video ${item.title} trên YouTube`}
                     >
-                      {project.statHighlight.value}
-                    </span>
-                    <span class="ml-1.5 text-[0.8125rem] font-medium text-white/70">
-                      {project.statHighlight.suffix}
-                    </span>
-                  </p>
-                )}
-                <span class="mt-2.5 pl-1 text-xs font-semibold leading-normal text-white/55 transition-colors group-hover:text-accent-gold">
-                  Xem chi tiết →
-                </span>
-              </div>
-            </a>
-          ))
-        }
+                      <svg class="ml-1 h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path d="M8 5v14l11-7z"></path>
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+              </article>
+            );
+          })}
+        </div>
       </div>
+    </div>
+
+    <div
+      class="mt-7 flex justify-center gap-3 lg:mt-8"
+      role="tablist"
+      aria-label="Chọn dự án đang hiển thị"
+    >
+      {projects.map((item, index) => (
+        <button
+          type="button"
+          role="tab"
+          data-mockup-projects-dot={index}
+          class:list={[
+            'mockup-projects-dot block rounded-full transition-[width,background-color] duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#9c7200]',
+            index === 0
+              ? 'h-4 w-4 border border-[#9c7200] bg-[#ffc72c]'
+              : 'h-2 w-2 self-center border border-transparent bg-[#eadfbf]',
+          ]}
+          aria-label={`Hiển thị dự án ${index + 1}: ${item.title}`}
+          aria-selected={index === 0 ? 'true' : 'false'}
+        />
+      ))}
     </div>
   </div>
 </section>
 
 <style>
-  /* Mobile: carousel dự án phụ full bleed ngang */
+  .mockup-projects-slider {
+    --slide-width: min(48rem, calc(100vw - 7rem));
+    --slider-gap: 1.5rem;
+    --stage-width: calc(var(--slide-width) * 1.8 + var(--slider-gap) * 2);
+  }
+
+  .mockup-projects-viewport {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    padding-inline: calc((100vw - var(--slide-width)) / 2);
+  }
+
+  .mockup-projects-viewport::-webkit-scrollbar {
+    display: none;
+  }
+
+  .mockup-projects-track {
+    display: flex;
+    width: max-content;
+    gap: var(--slider-gap);
+  }
+
+  .mockup-project-card {
+    width: var(--slide-width);
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+  }
+
+  .mockup-project-card-inner {
+    display: grid;
+    min-height: 29rem;
+    grid-template-columns: 1fr;
+    grid-template-rows: minmax(19rem, 1fr) auto;
+  }
+
+  .mockup-project-content {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    justify-content: flex-start;
+    order: 2;
+    padding: 1.25rem 1.5rem 1.25rem;
+    background: #fff;
+  }
+
+  .mockup-project-media {
+    position: relative;
+    min-width: 0;
+    min-height: 19rem;
+    order: 1;
+    overflow: hidden;
+    background: #161b22;
+  }
+
   @media (max-width: 639px) {
-    .featured-secondary-track {
-      width: 100vw;
-      margin-left: calc(50% - 50vw);
-      margin-right: calc(50% - 50vw);
+    .mockup-projects-slider {
+      --slide-width: calc(100vw - 3rem);
+      --slider-gap: 1rem;
+    }
+
+    .mockup-projects-viewport {
+      padding-inline: 1.5rem;
+    }
+
+    .mockup-project-card-inner {
+      min-height: 28rem;
+      grid-template-columns: 1fr;
+    }
+
+    .mockup-project-content {
+      min-height: 13rem;
+      padding: 1.5rem;
+    }
+
+    .mockup-project-media {
+      min-height: 15rem;
     }
   }
 
-  /* Màn đen mờ sát đáy */
-  .featured-case-scrim {
-    height: 55%;
-    background: linear-gradient(
-      to top,
-      rgb(0 0 0 / 0.88) 0%,
-      rgb(0 0 0 / 0.72) 28%,
-      rgb(0 0 0 / 0.4) 55%,
-      transparent 100%
-    );
+  @media (min-width: 640px) and (max-width: 1023px) {
+    .mockup-projects-slider {
+      --slide-width: 42rem;
+    }
   }
 
-  .featured-case-copy,
-  .featured-case-copy *:not(img) {
-    text-shadow:
-      0 1px 2px rgb(0 0 0 / 0.9),
-      0 2px 14px rgb(0 0 0 / 0.7);
+  @media (min-width: 1024px) {
+    .mockup-project-content {
+      padding: 2.25rem 1.5rem 1.5rem;
+    }
   }
 
-  .featured-case-logo-mark {
-    filter: drop-shadow(0 2px 10px rgb(0 0 0 / 0.75));
-    mix-blend-mode: lighten;
+  @media (prefers-reduced-motion: reduce) {
+    .mockup-projects-viewport {
+      scroll-behavior: auto;
+    }
+
+    .mockup-project-card :global(*) {
+      transition-duration: 0.01ms !important;
+    }
   }
 </style>
+
+<script src="../../scripts/home-recent-projects-slider.ts"></script>

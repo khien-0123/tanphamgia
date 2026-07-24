@@ -12,6 +12,7 @@
     "prune:assets": "node scripts/prune-orphan-assets.mjs"
   },
   "dependencies": {
+    "@astrojs/sitemap": "^3.7.3",
     "@astrojs/tailwind": "^6.0.2",
     "astro": "^5.18.2",
     "sharp": "^0.35.3",

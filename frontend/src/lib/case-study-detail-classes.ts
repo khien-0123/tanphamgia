@@ -50,7 +50,7 @@ export const caseStudyNarrativeHeaderGrid =
 
 export const caseStudyNarrativeBadge = [
   'inline-flex items-center justify-center min-w-9 h-9 px-2',
-  'rounded-full bg-accent-gold text-ink-dark',
+  'rounded-none bg-accent-gold text-ink-dark',
   'text-xs font-extrabold tracking-wide',
 ];
 

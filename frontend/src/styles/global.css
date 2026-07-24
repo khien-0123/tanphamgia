@@ -80,15 +80,25 @@ body {
 /* Transition luôn trên [data-reveal] — nếu chỉ đặt ở :not(.is-revealed) thì animation không chạy */
 html.js-scroll-reveal-ready [data-reveal] {
   transition:
-    opacity 1.65s cubic-bezier(0.25, 0.1, 0.25, 1),
-    transform 1.9s cubic-bezier(0.22, 0.68, 0, 1);
+    opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1.15s cubic-bezier(0.16, 1, 0.3, 1);
   transition-delay: var(--reveal-delay, 0ms);
 }
 
 html.js-scroll-reveal-ready [data-reveal]:not(.is-revealed) {
   opacity: 0;
-  transform: translate3d(0, 2rem, 0);
+  transform: translate3d(0, 8rem, 0);
   will-change: opacity, transform;
+}
+
+/* Biến thể opt-in cho các block cần đi xuống từ phía trên. */
+html.js-scroll-reveal-ready [data-reveal][data-reveal-direction='down']:not(.is-revealed) {
+  transform: translate3d(0, -8rem, 0);
+}
+
+/* Vùng có cơ chế transform riêng (slider/marquee) chỉ fade để không lệch geometry. */
+html.js-scroll-reveal-ready [data-reveal][data-reveal-motion='fade']:not(.is-revealed) {
+  transform: none;
 }
 
 html.js-scroll-reveal-ready [data-reveal].is-revealed {
@@ -98,7 +108,8 @@ html.js-scroll-reveal-ready [data-reveal].is-revealed {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html.js-scroll-reveal-ready [data-reveal] {
+  html.js-scroll-reveal-ready [data-reveal],
+  html.js-scroll-reveal-ready [data-reveal]:not(.is-revealed) {
     opacity: 1;
     transform: none;
     transition: none;

@@ -1,324 +1,70 @@
 ---
 import SiteImage from '../SiteImage.astro';
-import { solutions } from '../../data/site';
-import { siteAssets } from '../../data/assets';
-import { solutionHomeMosaic } from '../../lib/solution-theme';
-import { RHYTHM_WHITE, sectionPy } from '../../lib/section-rhythm';
-
-interface Props {
-  sectionBg?: string;
-}
-
-const { sectionBg = RHYTHM_WHITE } = Astro.props;
-
-const imageFallback = siteAssets.hero.fallback;
-const t = solutionHomeMosaic;
+import { homeSolutions } from '../../data/home';
 ---
 
-<section
-  id="giai-phap"
-  class:list={['relative z-[2]', sectionPy, 'text-ink-dark', sectionBg]}
->
-  <div class="max-w-container-max-width mx-auto px-6 md:px-8">
-    <div data-reveal class={t.headerWrap}>
-      <h2 class={t.title}>
-        Giải pháp đồng phục toàn&nbsp;diện
-      </h2>
-      <p class={t.lead}>
-        Lắng nghe và thấu hiểu để đưa ra giải pháp phù hợp nhất cho từng mô hình doanh&nbsp;nghiệp.
+<section class="overflow-hidden bg-[#fbf8f1] text-[#1f1b17]" aria-labelledby="mockup-solutions-title">
+  <div class="mx-auto w-full max-w-container-max-width px-6 py-12">
+    <header data-reveal data-reveal-direction="up" class="max-w-[64rem]">
+      <p class="mb-6 inline-flex rounded-full bg-[#ffedb7] px-4 py-2 text-xs font-extrabold uppercase tracking-[0.025em] text-[#806000] sm:text-sm">
+        {homeSolutions.eyebrow}
       </p>
-    </div>
-    <div data-reveal-stagger class={t.grid}>
+      <h2
+        id="mockup-solutions-title"
+        class="max-w-[34ch] text-balance text-[clamp(1.75rem,2.7vw,3rem)] font-extrabold leading-[1.1] tracking-[-0.03em] text-[#1f1b17]"
+      >
+        {homeSolutions.title}
+      </h2>
+      <p class="mt-6 max-w-[62rem] text-sm leading-[1.55] text-[#625a50] sm:text-base">
+        {homeSolutions.description}
+      </p>
+    </header>
+
+    <div data-reveal data-reveal-direction="up" class="mt-10 grid gap-5 sm:grid-cols-2 lg:mt-12 lg:grid-cols-4">
       {
-        solutions.map((item, index) => {
-          const layoutClass =
-            index === 0
-              ? t.spanLarge
-              : index === 1
-                ? t.spanTall
-                : index === 2
-                  ? t.spanTall
-                : index === 3
-                  ? t.spanWide
-                  : '';
-
-          // Ô FMCG hẹp — hover gọn hơn; các ô khác giữ đủ bullet
-          const isCompactHover = item.slug === 'giai-phap-3';
-
-          return (
-            <article
-              data-reveal
+        homeSolutions.items.map((item) => (
+          <a
+            href={item.href}
+            class="group relative min-h-[24rem] overflow-hidden rounded-3xl border border-[#ded5c5] bg-[#e8e1d5] text-[#1f1b17] no-underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#b88900] lg:min-h-[24rem]"
+          >
+            <SiteImage
+              src={item.image}
+              alt={item.imageAlt}
+              loading="lazy"
               class:list={[
-                t.cardWrap,
-                layoutClass,
-                isCompactHover && 'solutions-mosaic__card--compact',
+                'absolute inset-0 h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105 group-focus-visible:scale-105',
+                item.imagePosition,
               ]}
-            >
-              <a
-                class={t.cardLink}
-                href={item.href}
-                data-solutions-mosaic-link
-                aria-expanded="false"
-              >
-                <SiteImage
-                  alt={item.title}
-                  class:list={[t.media, item.homeImagePosition ?? 'object-top']}
-                  loading="lazy"
-                  src={item.image}
-                  fallback={imageFallback}
-                  variant="card"
-                />
-                <div class={t.scrim} aria-hidden="true"></div>
-                <div class={isCompactHover ? t.bodyCompact : t.body}>
-                  <h3 class={isCompactHover ? t.titleInCardCompact : t.titleInCard}>
-                    {item.title}
-                  </h3>
-                  <div class={t.revealWrap}>
-                    <div class={isCompactHover ? t.revealInnerCompact : t.revealInner}>
-                      {
-                        isCompactHover ? (
-                          <>
-                            <p class={t.descCompact}>{item.desc}</p>
-                            {
-                              item.homeBullets && item.homeBullets.length > 0 && (
-                                <ul class={t.bulletsCompact}>
-                                  {item.homeBullets.map((bullet) => (
-                                    <li class={t.bulletItemCompact}>{bullet}</li>
-                                  ))}
-                                </ul>
-                              )
-                            }
-                          </>
-                        ) : (
-                          <>
-                            <p class={t.desc}>{item.desc}</p>
-                            {
-                              item.bullets && item.bullets.length > 0 && (
-                                <ul class={t.bullets}>
-                                  {item.bullets.slice(0, 3).map((bullet) => (
-                                    <li class={t.bulletItem}>{bullet}</li>
-                                  ))}
-                                </ul>
-                              )
-                            }
-                          </>
-                        )
-                      }
-                      <span class={isCompactHover ? t.ctaCompact : t.cta}>
-                        Xem chi tiết
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </a>
-            </article>
-          );
-        })
+              variant="card"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-[#f8f4eb] via-[#f8f4eb]/55 to-[#f8f4eb]/10 transition-colors duration-300 group-hover:bg-[#f8f4eb]/95 group-focus-visible:bg-[#f8f4eb]/95" aria-hidden="true"></div>
+
+            <div class="absolute inset-x-0 bottom-0 p-5 transition-opacity duration-200 group-hover:opacity-0 group-focus-visible:opacity-0">
+              <span class="inline-flex rounded-full bg-[#ffedb7] px-3 py-2 text-lg font-extrabold tabular-nums text-[#806000]">
+                {item.number}
+              </span>
+              <h3 class="mt-2 text-sm font-extrabold leading-snug tracking-[-0.025em] text-[#26211c] sm:text-[0.95rem]">
+                {item.title}
+              </h3>
+            </div>
+
+            <div class="absolute inset-0 flex translate-y-4 flex-col justify-center bg-[#f8f0df]/95 p-5 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100">
+              <div class="flex items-start gap-3">
+                <span class="inline-flex shrink-0 rounded-full bg-[#ffedb7] px-3 py-2 text-sm font-extrabold tabular-nums text-[#806000]">
+                  {item.number}
+                </span>
+                <h3 class="text-sm font-extrabold leading-snug text-[#26211c] sm:text-[0.95rem]">{item.title}</h3>
+              </div>
+              <ul class="mt-4 space-y-2 text-xs leading-[1.55] text-[#2b2722] sm:text-sm">
+                {item.bullets.map((bullet) => <li><span aria-hidden="true">&gt;</span> {bullet}</li>)}
+              </ul>
+              <span class="mt-4 inline-flex items-center text-sm font-extrabold">
+                Xem chi tiết
+              </span>
+            </div>
+          </a>
+        ))
       }
     </div>
   </div>
 </section>
-
-<script src="../../scripts/solutions-mosaic-mobile.ts"></script>
-
-<style>
-  /* Lưới mosaic: hàng trên cao hơn để khung ngang/nhỏ không cắt mất đầu người */
-  .solutions-mosaic__grid {
-    grid-auto-rows: minmax(260px, auto);
-  }
-
-  @media (min-width: 768px) {
-    .solutions-mosaic__grid {
-      grid-template-rows: minmax(300px, auto) minmax(280px, auto);
-    }
-  }
-
-  /* Đen mờ sát đáy — đủ contrast chữ, không che kín ảnh */
-  .solutions-mosaic-scrim {
-    height: 38%;
-    background: linear-gradient(
-      to top,
-      rgb(0 0 0 / 0.76) 0%,
-      rgb(0 0 0 / 0.52) 30%,
-      rgb(0 0 0 / 0.18) 58%,
-      transparent 82%
-    );
-    transition:
-      height 0.4s cubic-bezier(0.22, 1, 0.36, 1),
-      background 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-
-  .solutions-mosaic-body,
-  .solutions-mosaic-body * {
-    text-shadow:
-      0 1px 3px rgb(0 0 0 / 0.7),
-      0 6px 20px rgb(0 0 0 / 0.4);
-  }
-
-  /* Mặc định chỉ tiêu đề; hover/focus bung nội dung */
-  .solutions-mosaic-reveal {
-    display: grid;
-    grid-template-rows: 0fr;
-    opacity: 0;
-    transform: translateY(0.35rem);
-    transition:
-      grid-template-rows 0.42s cubic-bezier(0.22, 1, 0.36, 1),
-      opacity 0.32s ease,
-      transform 0.42s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-
-  .solutions-mosaic-reveal__inner {
-    overflow: hidden;
-  }
-
-  /* Desktop: hover/focus sổ nội dung */
-  @media (min-width: 768px) {
-    .solutions-mosaic__grid a:is(:hover, :focus-visible) .solutions-mosaic-body,
-    .solutions-mosaic__grid a:is(:hover, :focus-visible) .solutions-mosaic-body * {
-      text-shadow:
-        0 1px 4px rgb(0 0 0 / 0.8),
-        0 8px 22px rgb(0 0 0 / 0.48);
-    }
-
-    .solutions-mosaic__grid a:is(:hover, :focus-visible) .solutions-mosaic-scrim {
-      height: 86%;
-      background: linear-gradient(
-        to top,
-        rgb(0 0 0 / 0.8) 0%,
-        rgb(0 0 0 / 0.68) 34%,
-        rgb(0 0 0 / 0.46) 60%,
-        rgb(0 0 0 / 0.18) 80%,
-        transparent 96%
-      );
-    }
-
-    .solutions-mosaic__grid .solutions-mosaic__card--compact a:is(:hover, :focus-visible) .solutions-mosaic-scrim {
-      height: 80%;
-      background: linear-gradient(
-        to top,
-        rgb(0 0 0 / 0.78) 0%,
-        rgb(0 0 0 / 0.64) 32%,
-        rgb(0 0 0 / 0.42) 58%,
-        rgb(0 0 0 / 0.16) 78%,
-        transparent 94%
-      );
-    }
-
-    .solutions-mosaic__grid a:is(:hover, :focus-visible) .solutions-mosaic-reveal {
-      grid-template-rows: 1fr;
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  /* Mobile: tap mở — class .is-expanded (JS) */
-  @media (max-width: 767px) {
-    .solutions-mosaic__grid a.is-expanded .solutions-mosaic-body,
-    .solutions-mosaic__grid a.is-expanded .solutions-mosaic-body * {
-      text-shadow:
-        0 1px 4px rgb(0 0 0 / 0.8),
-        0 8px 22px rgb(0 0 0 / 0.48);
-    }
-
-    .solutions-mosaic__grid a.is-expanded .solutions-mosaic-scrim {
-      height: 86%;
-      background: linear-gradient(
-        to top,
-        rgb(0 0 0 / 0.8) 0%,
-        rgb(0 0 0 / 0.68) 34%,
-        rgb(0 0 0 / 0.46) 60%,
-        rgb(0 0 0 / 0.18) 80%,
-        transparent 96%
-      );
-    }
-
-    .solutions-mosaic__grid .solutions-mosaic__card--compact a.is-expanded .solutions-mosaic-scrim {
-      height: 80%;
-      background: linear-gradient(
-        to top,
-        rgb(0 0 0 / 0.78) 0%,
-        rgb(0 0 0 / 0.64) 32%,
-        rgb(0 0 0 / 0.42) 58%,
-        rgb(0 0 0 / 0.16) 78%,
-        transparent 94%
-      );
-    }
-
-    .solutions-mosaic__grid a.is-expanded .solutions-mosaic-reveal {
-      grid-template-rows: 1fr;
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .solutions-mosaic-scrim,
-    .solutions-mosaic-reveal {
-      transition: none;
-    }
-
-    @media (min-width: 768px) {
-      .solutions-mosaic__grid a:is(:hover, :focus-visible) .solutions-mosaic-scrim {
-        height: 86%;
-        background: linear-gradient(
-          to top,
-          rgb(0 0 0 / 0.8) 0%,
-          rgb(0 0 0 / 0.68) 34%,
-          rgb(0 0 0 / 0.46) 60%,
-          rgb(0 0 0 / 0.18) 80%,
-          transparent 96%
-        );
-      }
-
-      .solutions-mosaic__grid .solutions-mosaic__card--compact a:is(:hover, :focus-visible) .solutions-mosaic-scrim {
-        height: 80%;
-        background: linear-gradient(
-          to top,
-          rgb(0 0 0 / 0.78) 0%,
-          rgb(0 0 0 / 0.64) 32%,
-          rgb(0 0 0 / 0.42) 58%,
-          rgb(0 0 0 / 0.16) 78%,
-          transparent 94%
-        );
-      }
-
-      .solutions-mosaic__grid a:is(:hover, :focus-visible) .solutions-mosaic-reveal {
-        grid-template-rows: 1fr;
-        opacity: 1;
-        transform: none;
-      }
-    }
-
-    @media (max-width: 767px) {
-      .solutions-mosaic__grid a.is-expanded .solutions-mosaic-scrim {
-        height: 86%;
-        background: linear-gradient(
-          to top,
-          rgb(0 0 0 / 0.8) 0%,
-          rgb(0 0 0 / 0.68) 34%,
-          rgb(0 0 0 / 0.46) 60%,
-          rgb(0 0 0 / 0.18) 80%,
-          transparent 96%
-        );
-      }
-
-      .solutions-mosaic__grid .solutions-mosaic__card--compact a.is-expanded .solutions-mosaic-scrim {
-        height: 80%;
-        background: linear-gradient(
-          to top,
-          rgb(0 0 0 / 0.78) 0%,
-          rgb(0 0 0 / 0.64) 32%,
-          rgb(0 0 0 / 0.42) 58%,
-          rgb(0 0 0 / 0.16) 78%,
-          transparent 94%
-        );
-      }
-
-      .solutions-mosaic__grid a.is-expanded .solutions-mosaic-reveal {
-        grid-template-rows: 1fr;
-        opacity: 1;
-        transform: none;
-      }
-    }
-  }
-</style>
