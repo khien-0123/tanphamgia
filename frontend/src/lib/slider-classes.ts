@@ -6,6 +6,8 @@ export const sliderArrowBase = [
   'w-9 h-9 md:w-10 md:h-10 rounded-full',
   'border border-ink-dark/12 bg-white/92 text-ink-dark',
   'cursor-pointer opacity-0 pointer-events-none backdrop-blur-sm shadow-[0_2px_8px_rgba(0,0,0,0.08)]',
+  // Touch devices have no hover state; keep controls available there and for keyboard users.
+  '[@media(pointer:coarse)]:opacity-100 [@media(pointer:coarse)]:pointer-events-auto focus-visible:opacity-100 focus-visible:pointer-events-auto',
   'transition-[opacity,background,box-shadow] duration-200',
   'group-hover/slider:opacity-100 group-hover/slider:pointer-events-auto',
   'hover:bg-white hover:shadow-[0_4px_16px_rgba(0,0,0,0.12)]',
@@ -28,6 +30,8 @@ export const sliderArrowSolidBase = [
   'w-9 h-9 md:w-10 md:h-10 rounded-full',
   'border border-ink-dark/12 bg-white text-ink-dark',
   'cursor-pointer opacity-0 pointer-events-none shadow-[0_2px_8px_rgba(0,0,0,0.08)]',
+  // Touch devices have no hover state; keep controls available there and for keyboard users.
+  '[@media(pointer:coarse)]:opacity-100 [@media(pointer:coarse)]:pointer-events-auto focus-visible:opacity-100 focus-visible:pointer-events-auto',
   'transition-[opacity,box-shadow] duration-200',
   'group-hover/slider:opacity-100 group-hover/slider:pointer-events-auto',
   'hover:shadow-[0_4px_16px_rgba(0,0,0,0.12)]',

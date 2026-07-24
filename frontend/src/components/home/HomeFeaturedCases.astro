@@ -109,7 +109,7 @@ const loopProjects = [...projects, ...projects, ...projects];
     </div>
 
     <div
-      class="mt-7 flex justify-center gap-3 lg:mt-8"
+      class="mt-7 flex min-h-4 items-center justify-center gap-3 lg:mt-8"
       role="tablist"
       aria-label="Chọn dự án đang hiển thị"
     >
@@ -118,21 +118,38 @@ const loopProjects = [...projects, ...projects, ...projects];
           type="button"
           role="tab"
           data-mockup-projects-dot={index}
-          class:list={[
-            'mockup-projects-dot block rounded-full transition-[width,background-color] duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#9c7200]',
-            index === 0
-              ? 'h-4 w-4 border border-[#9c7200] bg-[#ffc72c]'
-              : 'h-2 w-2 self-center border border-transparent bg-[#eadfbf]',
-          ]}
+          class="mockup-projects-dot focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#9c7200]"
           aria-label={`Hiển thị dự án ${index + 1}: ${item.title}`}
           aria-selected={index === 0 ? 'true' : 'false'}
-        />
+        ></button>
       ))}
     </div>
   </div>
 </section>
 
 <style>
+  .mockup-projects-dot {
+    display: block;
+    width: 0.5rem;
+    height: 0.5rem;
+    flex: 0 0 auto;
+    align-self: center;
+    padding: 0;
+    border: 1px solid transparent;
+    border-radius: 9999px;
+    background: #eadfbf;
+    appearance: none;
+    transition: width 300ms, height 300ms, background-color 300ms;
+  }
+
+  .mockup-projects-dot[aria-selected='true'] {
+    width: 1rem;
+    height: 1rem;
+    align-self: auto;
+    border-color: #9c7200;
+    background: #ffc72c;
+  }
+
   .mockup-projects-slider {
     --slide-width: min(48rem, calc(100vw - 7rem));
     --slider-gap: 1.5rem;
