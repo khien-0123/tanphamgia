@@ -118,7 +118,7 @@ const loopProjects = [...projects, ...projects, ...projects];
           type="button"
           role="tab"
           data-mockup-projects-dot={index}
-          class="mockup-projects-dot focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#9c7200]"
+          class="mockup-projects-dot block h-2 w-2 shrink-0 self-center rounded-full border border-transparent bg-[#eadfbf] transition-[width,height,background-color] duration-300 aria-selected:h-4 aria-selected:w-4 aria-selected:border-[#9c7200] aria-selected:bg-[#ffc72c] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#9c7200]"
           aria-label={`Hiển thị dự án ${index + 1}: ${item.title}`}
           aria-selected={index === 0 ? 'true' : 'false'}
         ></button>

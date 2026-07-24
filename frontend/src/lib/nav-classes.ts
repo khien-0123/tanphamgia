@@ -1,7 +1,7 @@
 /** Class Tailwind dùng chung cho header SiteNav — một track menu, hai trạng thái visual */
 
 export const navShellClasses = [
-  'group fixed top-0 inset-x-0 z-50 w-full transition-all duration-300',
+  'group fixed top-0 inset-x-0 z-[55] w-full transition-all duration-300',
   'bg-transparent border-b border-transparent shadow-none backdrop-blur-none',
   '[&.nav-scrolled]:bg-white/80 [&.nav-scrolled]:backdrop-blur-xl',
   '[&.nav-scrolled]:border-border-subtle [&.nav-scrolled]:shadow-soft',
@@ -64,7 +64,7 @@ export const navCtaClasses = [
 ];
 
 export const navToggleClasses = [
-  'w-10 p-0 rounded-xl border-0 cursor-pointer',
+  'relative z-10 w-10 p-0 rounded-xl border-0 cursor-pointer',
   'bg-white/90 text-ink-dark backdrop-blur-xl shadow-soft',
   'group-[.nav-scrolled]:bg-white group-[.nav-scrolled]:text-ink-dark',
   'group-[.nav-scrolled]:backdrop-blur-none lg:hidden',
