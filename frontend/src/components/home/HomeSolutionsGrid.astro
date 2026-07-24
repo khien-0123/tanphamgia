@@ -20,11 +20,12 @@ import { homeSolutions } from '../../data/home';
       </p>
     </header>
 
-    <div data-reveal data-reveal-direction="up" class="mt-10 grid gap-5 sm:grid-cols-2 lg:mt-12 lg:grid-cols-4">
+    <div data-reveal data-reveal-direction="up" class="solutions-mosaic__grid mt-10 grid gap-5 sm:grid-cols-2 lg:mt-12 lg:grid-cols-4">
       {
         homeSolutions.items.map((item) => (
           <a
             href={item.href}
+            data-solutions-mosaic-link
             class="group relative min-h-[24rem] overflow-hidden rounded-3xl border border-[#ded5c5] bg-[#e8e1d5] text-[#1f1b17] no-underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#b88900] lg:min-h-[24rem]"
           >
             <SiteImage
@@ -37,9 +38,9 @@ import { homeSolutions } from '../../data/home';
               ]}
               variant="card"
             />
-            <div class="absolute inset-0 bg-gradient-to-t from-[#f8f4eb] via-[#f8f4eb]/55 to-[#f8f4eb]/10 transition-colors duration-300 group-hover:bg-[#f8f4eb]/95 group-focus-visible:bg-[#f8f4eb]/95" aria-hidden="true"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-[#f8f4eb] via-[#f8f4eb]/55 to-[#f8f4eb]/10 transition-colors duration-300 group-hover:bg-[#f8f4eb]/95 group-[.is-expanded]:bg-[#f8f4eb]/95 group-focus-visible:bg-[#f8f4eb]/95" aria-hidden="true"></div>
 
-            <div class="absolute inset-x-0 bottom-0 p-5 transition-opacity duration-200 group-hover:opacity-0 group-focus-visible:opacity-0">
+            <div class="absolute inset-x-0 bottom-0 p-5 transition-opacity duration-200 group-hover:opacity-0 group-[.is-expanded]:opacity-0 group-focus-visible:opacity-0">
               <span class="inline-flex rounded-full bg-[#ffedb7] px-3 py-2 text-lg font-extrabold tabular-nums text-[#806000]">
                 {item.number}
               </span>
@@ -48,7 +49,7 @@ import { homeSolutions } from '../../data/home';
               </h3>
             </div>
 
-            <div class="absolute inset-0 flex translate-y-4 flex-col justify-center bg-[#f8f0df]/95 p-5 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100">
+            <div class="absolute inset-0 flex translate-y-4 flex-col justify-center bg-[#f8f0df]/95 p-5 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 group-[.is-expanded]:translate-y-0 group-[.is-expanded]:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100">
               <div class="flex items-start gap-3">
                 <span class="inline-flex shrink-0 rounded-full bg-[#ffedb7] px-3 py-2 text-sm font-extrabold tabular-nums text-[#806000]">
                   {item.number}
@@ -68,3 +69,5 @@ import { homeSolutions } from '../../data/home';
     </div>
   </div>
 </section>
+
+<script src="../../scripts/solutions-mosaic-mobile.ts"></script>
