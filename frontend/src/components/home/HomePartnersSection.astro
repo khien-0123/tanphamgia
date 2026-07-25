@@ -13,24 +13,15 @@ function repeatLogos<T>(items: readonly T[], times = 4): T[] {
   return Array.from({ length: times }, () => [...items]).flat();
 }
 
-const mockupLogoScale: Record<string, number> = {
-  '/images/logos/van-hanh-mall.webp': 1.55,
-  '/images/logos/vfm.webp': 1.85,
-  '/images/logos/vietbank.jpg': 1.55,
-  '/images/logos/bv-rang-ham-mat-sg.webp': 1.55,
-  '/images/logos/hanwha-life.webp': 1.5,
-  '/images/logos/zero-waste.png': 1.5,
-};
-
 function getMockupLogoScale(logo: string): number {
-  return mockupLogoScale[logo] ?? getClientLogoScale(logo);
+  return getClientLogoScale(logo);
 }
 ---
 
 <section class="overflow-hidden bg-[#0d1b3a] text-white" aria-labelledby="mockup-clients-title">
   <div class="mx-auto w-full max-w-container-max-width px-6 py-10 lg:py-12">
     <header data-reveal data-reveal-direction="up" class="max-w-[64rem]">
-      <p class="mb-5 inline-flex rounded-full bg-[#ffedb7] px-4 py-2 text-xs font-extrabold uppercase tracking-[0.025em] text-[#806000] sm:text-sm">
+      <p class="mb-5 inline-flex rounded-full bg-[#ffedb7] px-4 py-2 text-xs font-extrabold uppercase tracking-[0.025em] text-[#5c4500] sm:text-sm">
         {homeClients.eyebrow}
       </p>
       <h2
@@ -88,21 +79,7 @@ function getMockupLogoScale(logo: string): number {
 
 <style>
   .mockup-clients-marquee {
-    width: 100vw;
-    margin-left: calc(50% - 50vw);
-    padding-inline: 1.5rem;
-  }
-
-  @media (min-width: 640px) {
-    .mockup-clients-marquee {
-      padding-inline: 2rem;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    .mockup-clients-marquee {
-      padding-inline: 3rem;
-    }
+    width: 100%;
   }
 
   @keyframes mockup-clients-scroll-left {

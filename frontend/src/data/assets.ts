@@ -62,7 +62,7 @@ export const siteAssets = {
     betrimex: '/images/cases/betrimex.webp',
   },
   about: {
-    brandStory: '/images/about/brand-story.png',
+    brandStory: '/images/why-choose/Group 8.png',
     production1: '/images/about/production-1.jpg',
     production2: '/images/about/qc-5-tang.png',
     heThongSanXuat: '/images/about/he-thong-san-xuat.png',
