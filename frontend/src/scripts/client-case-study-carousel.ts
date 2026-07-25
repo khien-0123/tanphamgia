@@ -78,12 +78,23 @@ function initSecondaryCarousel(root: HTMLElement) {
   viewport.addEventListener('scrollend', syncUi);
   window.addEventListener('resize', () => {
     scrollToIndex(Math.min(getActiveIndex(), getMaxIndex()));
+
     syncUi();
   });
 
   syncUi();
 }
 
-document
-  .querySelectorAll<HTMLElement>('[data-client-case-secondary-carousel]')
-  .forEach(initSecondaryCarousel);
+function bootSecondaryCarousel() {
+  document
+    .querySelectorAll<HTMLElement>('[data-client-case-secondary-carousel]')
+    .forEach(initSecondaryCarousel);
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', bootSecondaryCarousel);
+} else {
+  bootSecondaryCarousel();
+}
+
+document.addEventListener('astro:page-load', bootSecondaryCarousel);

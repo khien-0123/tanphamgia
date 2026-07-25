@@ -201,4 +201,14 @@ function initClientsSlider(root: HTMLElement) {
   }
 }
 
-document.querySelectorAll<HTMLElement>('[data-clients-slider]').forEach(initClientsSlider);
+function bootClientsSlider() {
+  document.querySelectorAll<HTMLElement>('[data-clients-slider]').forEach(initClientsSlider);
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', bootClientsSlider);
+} else {
+  bootClientsSlider();
+}
+
+document.addEventListener('astro:page-load', bootClientsSlider);

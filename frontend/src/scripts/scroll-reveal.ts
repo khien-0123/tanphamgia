@@ -31,6 +31,7 @@ function bindAutoReveal() {
       const candidates = [...wrapper.children].filter(
         (el): el is HTMLElement =>
           el instanceof HTMLElement &&
+          !el.hasAttribute('data-no-reveal') &&
           !el.hasAttribute('data-reveal') &&
           !el.querySelector('[data-reveal]'),
       );

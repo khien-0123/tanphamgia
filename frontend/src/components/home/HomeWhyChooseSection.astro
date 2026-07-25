@@ -1,5 +1,6 @@
 ---
 import { homeWhyChoose } from '../../data/home';
+import waveBgImage from '../../assets/images/about/dai-chi-tpg 1.png';
 
 const cardPositions = [
   'lg:mt-10',
@@ -12,7 +13,7 @@ const cardPositions = [
 <section class="overflow-hidden bg-[#fbf8f1] text-[#1f1b17]" aria-labelledby="mockup-why-choose-title">
   <div class="mx-auto w-full max-w-container-max-width px-6 py-12">
     <header class="max-w-[62rem]">
-      <p class="mb-6 inline-flex rounded-full bg-[#ffedb7] px-4 py-2 text-xs font-extrabold uppercase tracking-[0.025em] text-[#806000] sm:text-sm">
+      <p class="mb-6 inline-flex rounded-full bg-[#ffedb7] px-4 py-2 text-xs font-extrabold uppercase tracking-[0.025em] text-[#5c4500] sm:text-sm">
         {homeWhyChoose.eyebrow}
       </p>
       <h2
@@ -24,34 +25,12 @@ const cardPositions = [
     </header>
 
     <div class="relative mt-10 lg:min-h-80 lg:mt-12">
-      <svg
-        class="pointer-events-none absolute inset-x-[-5%] top-4 hidden h-[25rem] w-[110%] lg:block"
-        viewBox="0 0 1440 400"
-        fill="none"
-        preserveAspectRatio="none"
+      <img
+        src={waveBgImage.src}
+        alt=""
+        class="pointer-events-none absolute inset-x-[-5%] top-0 hidden w-[110%] object-contain lg:block mix-blend-multiply"
         aria-hidden="true"
-      >
-        <defs>
-          <linearGradient id="mockup-gold-thread" x1="40" y1="248" x2="1400" y2="166" gradientUnits="userSpaceOnUse">
-            <stop stop-color="#FFBE1B" stop-opacity="0.12"></stop>
-            <stop offset="0.48" stop-color="#FFBE1B" stop-opacity="0.75"></stop>
-            <stop offset="1" stop-color="#FFBE1B" stop-opacity="0.14"></stop>
-          </linearGradient>
-        </defs>
-        {
-          Array.from({ length: 12 }, (_, index) => {
-            const offset = index * 5;
-            return (
-              <path
-                d={`M20 ${212 + offset} C 210 ${250 + offset}, 330 ${342 - offset}, 520 ${294 - offset} C 720 ${244 - offset}, 750 ${78 + offset}, 970 ${94 + offset} C 1135 ${106 + offset}, 1240 ${204 + offset}, 1420 ${226 + offset}`}
-                stroke="url(#mockup-gold-thread)"
-                stroke-width="1.2"
-                stroke-linecap="round"
-              />
-            );
-          })
-        }
-      </svg>
+      />
 
       <div class="relative z-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4 lg:gap-5">
         {

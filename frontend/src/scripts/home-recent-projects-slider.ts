@@ -263,6 +263,16 @@ function initMockupProjectsSlider(root: HTMLElement) {
   syncUi(0);
 }
 
-document
-  .querySelectorAll<HTMLElement>('[data-mockup-projects-slider]')
-  .forEach(initMockupProjectsSlider);
+function initMockupProjectsSliders() {
+  document
+    .querySelectorAll<HTMLElement>('[data-mockup-projects-slider]')
+    .forEach(initMockupProjectsSlider);
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initMockupProjectsSliders);
+} else {
+  initMockupProjectsSliders();
+}
+
+document.addEventListener('astro:page-load', initMockupProjectsSliders);

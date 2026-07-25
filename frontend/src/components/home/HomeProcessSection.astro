@@ -14,7 +14,7 @@ const iconPaths = {
 
   <div class="relative mx-auto w-full max-w-container-max-width px-6 py-12 pb-24 lg:px-8 lg:py-12 lg:pb-28">
     <header class="max-w-[64rem]">
-      <p class="inline-flex rounded-full bg-[#fff0bd] px-4 py-2 text-[0.7rem] font-extrabold uppercase tracking-[0.025em] text-[#806000] sm:text-xs">
+      <p class="inline-flex rounded-full bg-[#fff0bd] px-4 py-2 text-[0.7rem] font-extrabold uppercase tracking-[0.025em] text-[#5c4500] sm:text-xs">
         {homeProcess.eyebrow}
       </p>
       <h2 id="mockup-process-title" class="mt-6 max-w-[34ch] text-balance text-[clamp(1.8rem,3vw,3rem)] font-extrabold leading-[1.08] tracking-[-0.04em]">
@@ -34,7 +34,7 @@ const iconPaths = {
 
       <ol class="relative grid list-none gap-5 p-0 md:grid-cols-2 lg:grid-cols-4 lg:gap-5">
         {homeProcess.items.map((item, index) => (
-          <li class:list={['mockup-process-card relative flex min-h-[16.5rem] flex-col items-stretch rounded-[1rem] px-6 pb-7 pt-6 text-center shadow-[0_16px_28px_rgba(38,31,21,0.14)]', index % 2 === 0 ? 'bg-[#0d1b3a] text-white' : 'bg-[#ffc72c] text-[#111827]']}>
+          <li class:list={['mockup-process-card relative flex min-h-[16.5rem] flex-col items-stretch rounded-[1rem] px-[34px] pb-7 pt-6 text-center shadow-[0_16px_28px_rgba(38,31,21,0.14)]', index % 2 === 0 ? 'bg-[#0d1b3a] text-white' : 'bg-[#ffc72c] text-[#111827]']}>
             <span class="mx-auto flex h-11 w-11 shrink-0 items-center justify-center" aria-hidden="true">
               <svg class="h-8 w-8 fill-none stroke-current stroke-[1.8]" viewBox="0 0 24 24" set:html={iconPaths[item.icon]}></svg>
             </span>

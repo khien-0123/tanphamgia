@@ -6,7 +6,7 @@ import { homeSolutions } from '../../data/home';
 <section class="overflow-hidden bg-[#fbf8f1] text-[#1f1b17]" aria-labelledby="mockup-solutions-title">
   <div class="mx-auto w-full max-w-container-max-width px-6 py-12">
     <header data-reveal data-reveal-direction="up" class="max-w-[64rem]">
-      <p class="mb-6 inline-flex rounded-full bg-[#ffedb7] px-4 py-2 text-xs font-extrabold uppercase tracking-[0.025em] text-[#806000] sm:text-sm">
+      <p class="mb-6 inline-flex rounded-full bg-[#ffedb7] px-4 py-2 text-xs font-extrabold uppercase tracking-[0.025em] text-[#5c4500] sm:text-sm">
         {homeSolutions.eyebrow}
       </p>
       <h2
@@ -41,7 +41,7 @@ import { homeSolutions } from '../../data/home';
             <div class="absolute inset-0 bg-gradient-to-t from-[#f8f4eb] via-[#f8f4eb]/55 to-[#f8f4eb]/10 transition-colors duration-300 group-hover:bg-[#f8f4eb]/95 group-[.is-expanded]:bg-[#f8f4eb]/95 group-focus-visible:bg-[#f8f4eb]/95" aria-hidden="true"></div>
 
             <div class="absolute inset-x-0 bottom-0 p-5 transition-opacity duration-200 group-hover:opacity-0 group-[.is-expanded]:opacity-0 group-focus-visible:opacity-0">
-              <span class="inline-flex rounded-full bg-[#ffedb7] px-3 py-2 text-lg font-extrabold tabular-nums text-[#806000]">
+              <span class="inline-flex rounded-full bg-[#ffedb7] px-3 py-2 text-lg font-extrabold tabular-nums text-[#5c4500]">
                 {item.number}
               </span>
               <h3 class="mt-2 text-sm font-extrabold leading-snug tracking-[-0.025em] text-[#26211c] sm:text-[0.95rem]">
@@ -49,9 +49,9 @@ import { homeSolutions } from '../../data/home';
               </h3>
             </div>
 
-            <div class="absolute inset-0 flex translate-y-4 flex-col justify-center bg-[#f8f0df]/95 p-5 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 group-[.is-expanded]:translate-y-0 group-[.is-expanded]:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100">
+            <div class="absolute inset-0 flex translate-y-4 flex-col justify-start bg-[#f8f0df]/95 p-5 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 group-[.is-expanded]:translate-y-0 group-[.is-expanded]:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100">
               <div class="flex items-start gap-3">
-                <span class="inline-flex shrink-0 rounded-full bg-[#ffedb7] px-3 py-2 text-sm font-extrabold tabular-nums text-[#806000]">
+                <span class="inline-flex shrink-0 rounded-full bg-[#ffedb7] px-3 py-2 text-sm font-extrabold tabular-nums text-[#5c4500]">
                   {item.number}
                 </span>
                 <h3 class="text-sm font-extrabold leading-snug text-[#26211c] sm:text-[0.95rem]">{item.title}</h3>
@@ -59,7 +59,7 @@ import { homeSolutions } from '../../data/home';
               <ul class="mt-4 space-y-2 text-xs leading-[1.55] text-[#2b2722] sm:text-sm">
                 {item.bullets.map((bullet) => <li><span aria-hidden="true">&gt;</span> {bullet}</li>)}
               </ul>
-              <span class="mt-4 inline-flex items-center text-sm font-extrabold">
+              <span class="mt-auto pt-4 inline-flex items-center text-sm font-extrabold">
                 Xem chi tiết
               </span>
             </div>

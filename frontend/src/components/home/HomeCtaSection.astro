@@ -1,13 +1,12 @@
 ---
 import { siteCta } from '../../data/site';
+import needleBg from '../../assets/images/why-choose/kim_chi.svg';
 
 ---
 
 <section class="bg-[#fbf8f1] px-6 py-7 md:px-8 lg:py-8" aria-labelledby="mockup-cta-title">
-  <div class="relative mx-auto flex min-h-[15rem] max-w-container-max-width items-center justify-center overflow-hidden rounded-[1.8rem] bg-[#ffc72c] px-6 py-10 text-center sm:px-10 lg:min-h-[15rem]">
-    <svg class="pointer-events-none absolute inset-0 h-full w-full" viewBox="0 0 1000 280" preserveAspectRatio="none" aria-hidden="true">
-      <path d="M18 255 C105 112 184 38 284 40 C390 42 426 172 528 126 C618 86 649 45 741 52 C814 58 870 102 972 38" fill="none" stroke="#b88a20" stroke-width="1.2" stroke-dasharray="8 9" opacity="0.72" />
-    </svg>
+  <div class="relative mx-auto flex max-w-container-max-width items-center justify-center overflow-hidden rounded-[1.8rem] bg-[#ffc72c] px-6 py-24 text-center sm:px-10 lg:py-32">
+    <img src={needleBg.src} alt="" class="pointer-events-none absolute inset-0 h-full w-full object-contain opacity-70" aria-hidden="true" />
 
     <div class="relative z-10 flex max-w-3xl flex-col items-center">
       <h2 id="mockup-cta-title" class="text-balance text-[clamp(1.8rem,4vw,2.7rem)] font-extrabold leading-[1.1] tracking-[-0.035em] text-white">
