@@ -52,7 +52,7 @@ const loopProjects = [...projects, ...projects, ...projects];
 
             return (
               <article
-                class="mockup-project-card group shrink-0 overflow-hidden rounded-[1.25rem] bg-white shadow-[0_18px_48px_rgba(38,31,21,0.10)]"
+                class="mockup-project-card group shrink-0 rounded-[1.25rem] bg-white shadow-[0_18px_48px_rgba(38,31,21,0.10)]"
                 data-mockup-projects-slide
                 data-logical-index={logicalIndex}
                 data-slide-set={setIndex}
@@ -63,21 +63,6 @@ const loopProjects = [...projects, ...projects, ...projects];
                 inert={isCanonical ? undefined : true}
               >
                 <div class="mockup-project-card-inner">
-                  <div class="mockup-project-content">
-                    <div>
-                      <p class="text-sm leading-snug text-[#3d3832] sm:text-base">
-                        {item.eyebrow}
-                      </p>
-                      <h3 class="mt-1.5 text-[clamp(1.2rem,1.8vw,1.75rem)] font-extrabold leading-[0.98] tracking-[-0.04em] text-[#d99500]">
-                        {item.title}
-                      </h3>
-                    </div>
-
-                    <p class="mt-4 text-sm leading-[1.5] text-[#71685d]">
-                      {item.caption}
-                    </p>
-                  </div>
-
                   <div class="mockup-project-media">
                     <SiteImage
                       src={item.image}
@@ -99,6 +84,21 @@ const loopProjects = [...projects, ...projects, ...projects];
                         <path d="M8 5v14l11-7z"></path>
                       </svg>
                     </a>
+                  </div>
+
+                  <div class="mockup-project-content">
+                    <div>
+                      <p class="text-sm leading-snug text-[#3d3832] sm:text-base">
+                        {item.eyebrow}
+                      </p>
+                      <h3 class="mt-1.5 text-[clamp(1.2rem,1.8vw,1.75rem)] font-extrabold leading-[0.98] tracking-[-0.04em] text-[#d99500]">
+                        {item.title}
+                      </h3>
+                    </div>
+
+                    <p class="mt-4 text-sm leading-[1.5] text-[#71685d]">
+                      {item.caption}
+                    </p>
                   </div>
                 </div>
               </article>
@@ -160,6 +160,7 @@ const loopProjects = [...projects, ...projects, ...projects];
     width: var(--slide-width);
     scroll-snap-align: center;
     scroll-snap-stop: always;
+    overflow: hidden;
   }
 
   .mockup-project-card-inner {
@@ -169,28 +170,26 @@ const loopProjects = [...projects, ...projects, ...projects];
     grid-template-rows: minmax(19rem, 1fr) auto;
   }
 
+  .mockup-project-media {
+    position: relative;
+    min-width: 0;
+    min-height: 19rem;
+    overflow: hidden;
+    background: #161b22;
+  }
+
   .mockup-project-content {
     display: flex;
     min-width: 0;
     flex-direction: column;
     justify-content: flex-start;
-    order: 2;
     padding: 1.25rem 1.5rem 1.25rem;
     background: #fff;
   }
 
-  .mockup-project-media {
-    position: relative;
-    min-width: 0;
-    min-height: 19rem;
-    order: 1;
-    overflow: hidden;
-    background: #161b22;
-  }
-
   @media (max-width: 639px) {
     .mockup-projects-slider {
-      --slide-width: calc(100% - 3rem);
+      --slide-width: calc(100vw - 3rem);
       --slider-gap: 1rem;
     }
 
@@ -198,18 +197,31 @@ const loopProjects = [...projects, ...projects, ...projects];
       padding-inline: 1.5rem;
     }
 
-    .mockup-project-card-inner {
-      min-height: 28rem;
-      grid-template-columns: 1fr;
+    .mockup-project-card {
+      overflow: visible;
+      border-radius: 1.25rem;
     }
 
-    .mockup-project-content {
-      min-height: 13rem;
-      padding: 1.5rem;
+    .mockup-project-card-inner {
+      display: block;
+      min-height: 0;
+      overflow: hidden;
+      border-radius: 1.25rem;
     }
 
     .mockup-project-media {
-      min-height: 15rem;
+      display: block;
+      height: auto;
+      min-height: 0;
+      aspect-ratio: 16 / 9;
+    }
+
+    .mockup-project-content {
+      display: flex;
+      min-height: 0;
+      padding: 1.25rem 1.5rem;
+      background: #fff;
+      color: #3d3832;
     }
   }
 
