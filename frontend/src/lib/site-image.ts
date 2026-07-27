@@ -31,8 +31,8 @@ export const SITE_IMAGE_PRESETS: Record<SiteImageVariant, SiteImagePreset> = {
     quality: 78,
   },
   logo: {
-    widths: [96, 144, 192, 256],
-    sizes: '(max-width: 768px) 28vw, 144px',
+    widths: [144, 192, 256, 320, 416, 584],
+    sizes: '(min-width: 1024px) 232px, 184px',
     quality: 90,
   },
 };

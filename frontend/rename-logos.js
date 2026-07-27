@@ -1,7 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 
-const dir = 'c:\\HOC-TAP\\Vareno\\tanphamgia\\frontend\\src\\assets\\images\\logos';
+// Đường dẫn tương đối theo vị trí script — chạy được ở mọi máy/VPS
+const dir = path.join(__dirname, 'src', 'assets', 'images', 'logos');
 
 const renames = [
   { from: 'CHUAXACDINH_fa9ba542.png', to: 'zero-waste.png' },

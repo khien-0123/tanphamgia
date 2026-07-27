@@ -7,11 +7,11 @@ const { about } = homeHero;
 
 <section class="flex bg-[#0D1B3A] text-white lg:min-h-[max(42rem,100svh)]" aria-labelledby="mockup-about-title">
   <div class="mx-auto grid w-full max-w-container-max-width items-center gap-10 px-6 py-12 lg:min-h-[max(42rem,100svh)] lg:grid-cols-[1.02fr_1fr] lg:gap-14 xl:gap-16">
-    <figure data-reveal data-reveal-direction="up" class="m-0 overflow-hidden rounded-[1.75rem] bg-white/5 lg:max-h-[calc(100svh-6rem)]">
+    <figure data-reveal data-reveal-direction="up" class="m-0 overflow-hidden rounded-[1.75rem] bg-white/5 lg:self-stretch">
       <SiteImage
         src={about.image}
         alt={about.imageAlt}
-        class="block aspect-[1.1/1] sm:aspect-square lg:aspect-[0.95/1] h-full max-h-[calc(100svh-6rem)] w-full object-cover"
+        class="block aspect-[1.1/1] sm:aspect-square h-full w-full object-cover lg:aspect-auto lg:h-full"
         loading="lazy"
         variant="card"
         sizes="(min-width: 1024px) 46vw, 100vw"
@@ -47,9 +47,10 @@ const { about } = homeHero;
 
       <a
         href={about.cta.href}
-        class="mt-8 inline-flex min-h-12 items-center justify-center gap-3 rounded-full bg-[#FFBE1B] px-8 py-3.5 text-center text-sm font-extrabold text-[#2c250d] shadow-[0_12px_30px_rgba(255,190,27,0.16)] transition-all hover:-translate-y-0.5 hover:shadow-[0_16px_34px_rgba(255,190,27,0.25)] sm:text-base"
+        class="mt-8 inline-flex min-h-14 items-center justify-center gap-2.5 rounded-full bg-accent-gold px-9 py-4 text-center text-base font-extrabold leading-snug text-ink-dark shadow-[0_12px_30px_rgba(255,201,51,0.2)] transition-all hover:-translate-y-0.5 hover:shadow-[0_16px_34px_rgba(255,201,51,0.32)] sm:px-10 sm:text-lg"
       >
         <span>{about.cta.label}</span>
+        <span class="material-symbols-outlined text-xl leading-none sm:text-2xl" aria-hidden="true">arrow_forward</span>
       </a>
     </div>
   </div>

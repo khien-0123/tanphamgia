@@ -1,112 +1,95 @@
 ---
 import SiteImage from '../SiteImage.astro';
 import { productionCapacity } from '../../data/gioi-thieu';
-import { RHYTHM_WHITE, sectionPy } from '../../lib/section-rhythm';
-
-interface Props {
-  sectionBg?: string;
-}
-
-const { sectionBg = RHYTHM_WHITE } = Astro.props;
-
-const eyebrowClass = 'font-eyebrow text-xs uppercase tracking-[0.2em] block';
-const isAltBg = sectionBg.includes('surface-alt');
 ---
 
-{/* Năng lực sản xuất — dải navy nén: chữ + 6 số | ảnh xưởng */}
-<section class:list={['bg-[#0B1F35] text-white', sectionPy]} id="nang-luc">
-  <div class="max-w-container-max-width mx-auto px-6 md:px-8">
-    <div
-      class="grid grid-cols-1 md:grid-cols-[1.08fr_0.92fr] gap-[clamp(2rem,4vw,4rem)] items-stretch"
-    >
-      <div data-reveal class="flex flex-col">
-        <span class:list={[eyebrowClass, 'text-accent-gold mb-5']}>Năng lực sản xuất</span>
-        <h2
-          class="text-white text-[clamp(1.75rem,3.4vw,3rem)] leading-[1.05] font-bold max-w-[16ch] text-balance"
-        >
-          Quy mô & Kiểm soát chất lượng
-        </h2>
-        <p class="text-white/70 mt-[1.35rem] max-w-[48ch] text-[1.0625rem] leading-relaxed">
-          {productionCapacity.intro}
-        </p>
-
-        <dl
-          class="grid grid-cols-2 sm:grid-cols-3 gap-px bg-white/10 rounded-none overflow-hidden mt-[clamp(2.25rem,4vw,3rem)]"
-        >
-          {
-            productionCapacity.stats.map((stat) => (
-              <div class="bg-[#0B1F35] p-[clamp(1.15rem,1.8vw,1.6rem)]">
-                <dt class="text-white font-extrabold tabular-nums text-[clamp(1.25rem,2.2vw,1.875rem)] leading-none">
-                  {stat.value}
-                </dt>
-                <dd class="text-white/60 text-[0.8125rem] leading-[1.4] mt-[0.55rem] m-0">
-                  {stat.label}
-                </dd>
-              </div>
-            ))
-          }
-        </dl>
-      </div>
-
-      <figure
-        data-reveal
-        class="relative m-0 rounded-none overflow-hidden min-h-[22rem] max-md:order-first max-md:min-h-[18rem]"
+{/* Năng lực sản xuất — dải navy: chữ + 6 ô số bo tròn | ảnh xưởng bo lớn */}
+<section class="bg-[#0d1b3a] text-white" id="nang-luc" aria-labelledby="about-capacity-title">
+  <div class="mx-auto grid w-full max-w-container-max-width items-stretch gap-10 px-6 py-12 md:px-8 lg:grid-cols-[1.08fr_0.92fr] lg:gap-14 lg:py-16">
+    <div data-reveal>
+      <p class="inline-flex rounded-full bg-[#fff0bd] px-5 py-2 text-xs font-extrabold uppercase tracking-[0.025em] text-[#7a5900]">
+        Năng lực sản xuất
+      </p>
+      <h2
+        id="about-capacity-title"
+        class="mt-6 max-w-[16ch] text-balance text-[clamp(2rem,3.2vw,3rem)] font-extrabold leading-[1.08] tracking-[-0.04em]"
       >
-        <SiteImage
-          src={productionCapacity.factoryImage}
-          alt="Xưởng may 2.000m² Tân Phạm Gia"
-          loading="lazy"
-          class="absolute inset-0 h-full w-full object-cover"
-          variant="card"
-        />
-        <div
-          class="absolute inset-0 bg-[linear-gradient(to_top,rgba(11,31,53,0.9),rgba(11,31,53,0)_55%)]"
-          aria-hidden="true"
-        >
-        </div>
-        <figcaption class="absolute left-6 right-6 bottom-6 z-[2]">
-          <b class="block text-white font-bold text-[clamp(1.125rem,1.8vw,1.375rem)] leading-[1.25]">
-            Xưởng may 2.000m² đạt chuẩn quốc tế
-          </b>
-          <span class="block text-white/75 text-sm leading-[1.5] mt-2">
-            Máy móc hiện đại nhập khẩu từ Nhật Bản và Đức, đáp ứng đơn hàng khắt khe nhất về kỹ
-            thuật lẫn mỹ thuật.
-          </span>
-        </figcaption>
-      </figure>
+        Quy mô & Kiểm soát chất lượng
+      </h2>
+      <p class="mt-5 max-w-[37rem] text-sm leading-[1.65] text-white/78 sm:text-[0.95rem]">
+        {productionCapacity.intro}
+      </p>
+
+      <dl class="mt-9 grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4">
+        {
+          productionCapacity.stats.map((stat) => (
+            <div class="rounded-[1rem] border border-white/10 bg-white/[0.05] p-4 sm:p-5">
+              <dt class="text-[clamp(1.2rem,1.9vw,1.7rem)] font-extrabold leading-none tracking-[-0.02em] tabular-nums">
+                {stat.value}
+              </dt>
+              <dd class="m-0 mt-2 text-xs leading-[1.45] text-white/60 sm:text-[0.8rem]">{stat.label}</dd>
+            </div>
+          ))
+        }
+      </dl>
     </div>
+
+    <figure data-reveal class="relative m-0 min-h-[20rem] overflow-hidden rounded-[1.75rem] bg-white/5 max-lg:order-first max-lg:min-h-[16rem]">
+      <SiteImage
+        src={productionCapacity.factoryImage}
+        alt="Xưởng may 2.000m² Tân Phạm Gia"
+        loading="lazy"
+        class="absolute inset-0 h-full w-full object-cover"
+        variant="card"
+        sizes="(min-width: 1024px) 44vw, 100vw"
+      />
+      <div class="absolute inset-0 bg-[linear-gradient(to_top,rgba(13,27,58,0.92),rgba(13,27,58,0)_55%)]" aria-hidden="true"></div>
+      <figcaption class="absolute bottom-6 left-6 right-6 z-[2]">
+        <b class="block text-lg font-extrabold leading-[1.25] tracking-[-0.02em] sm:text-xl">
+          Xưởng may 2.000m² đạt chuẩn quốc tế
+        </b>
+        <span class="mt-2 block text-sm leading-[1.5] text-white/75">
+          Máy móc hiện đại nhập khẩu từ Nhật Bản và Đức, đáp ứng đơn hàng khắt khe nhất về kỹ thuật lẫn mỹ thuật.
+        </span>
+      </figcaption>
+    </figure>
   </div>
 </section>
 
-{/* Kiểm soát chất lượng 5 tầng — nền xen kẽ trắng/xám, stepper ngang chấm vàng */}
-<section class:list={[sectionBg, 'qc-section', sectionPy, isAltBg && 'qc-section--alt']}>
-  <div class="max-w-container-max-width mx-auto px-6 md:px-8">
-    <div data-reveal class="max-w-[56ch] mb-[clamp(2.5rem,4vw,3.5rem)]">
-      <span class:list={[eyebrowClass, 'text-accent-teal mb-5']}>Kiểm soát chất lượng</span>
-      <h2 class="text-ink-dark text-[clamp(1.75rem,3.4vw,3rem)] leading-[1.05] font-bold text-balance">
+{/* Kiểm soát chất lượng 5 tầng — stepper ngang chấm vàng tròn trên nền kem */}
+<section class="qc-section bg-[#fbf8f1] text-[#1f1b17]" aria-labelledby="about-qc-title">
+  <div class="mx-auto w-full max-w-container-max-width px-6 py-12 md:px-8 lg:py-16">
+    <header data-reveal class="max-w-[56ch]">
+      <p class="inline-flex rounded-full bg-[#ffedb7] px-4 py-2 text-[0.7rem] font-extrabold uppercase tracking-[0.025em] text-[#5c4500] sm:text-xs">
+        Kiểm soát chất lượng
+      </p>
+      <h2
+        id="about-qc-title"
+        class="mt-6 text-balance text-[clamp(1.75rem,2.7vw,3rem)] font-extrabold leading-[1.1] tracking-[-0.03em]"
+      >
         {productionCapacity.qcTitle}
       </h2>
-      <p class="text-text-muted mt-4 leading-relaxed">{productionCapacity.qcDesc}</p>
-    </div>
+      <p class="mt-4 text-sm leading-[1.7] text-[#655c51] sm:text-base">{productionCapacity.qcDesc}</p>
+    </header>
 
-    <ol data-reveal class="qc-steps relative grid grid-cols-2 md:grid-cols-5 gap-x-4 gap-y-8 md:gap-y-0">
+    <ol data-reveal class="qc-steps relative mt-10 grid list-none grid-cols-2 gap-x-4 gap-y-8 p-0 md:grid-cols-5 md:gap-y-0 lg:mt-12">
       {
-        productionCapacity.qcSteps.map((step, i) => (
-          <li class="qc-step relative pt-9 pr-5">
-            <span class="block text-[0.6875rem] uppercase tracking-[0.14em] font-bold text-accent-teal mb-[0.55rem]">
-              Tầng {i + 1}
+        productionCapacity.qcSteps.map((step, index) => (
+          <li class="qc-step relative pr-4 md:pt-9">
+            <span class="mb-2 block text-[0.65rem] font-extrabold uppercase tracking-[0.14em] text-[#c18a00]">
+              Tầng {index + 1}
             </span>
-            <h3 class="text-ink-dark text-base font-bold leading-[1.35]">{step}</h3>
+            <h3 class="text-base font-extrabold leading-[1.35] text-[#26211c]">{step}</h3>
           </li>
         ))
       }
     </ol>
 
-    <ul class="flex flex-wrap gap-[0.6rem] mt-[clamp(2.5rem,4vw,3.5rem)]">
+    <ul class="mt-10 flex list-none flex-wrap gap-2.5 p-0 lg:mt-12">
       {
-        productionCapacity.qcStandards.map((std) => (
-          <li class="bg-white text-ink-dark font-semibold text-[0.8125rem] px-[1.1rem] py-[0.55rem] rounded-none shadow-[0_1px_0_rgba(14,38,64,0.08)]">
-            {std}
+        productionCapacity.qcStandards.map((standard) => (
+          <li class="rounded-full border border-[#e5dfd2] bg-white px-4 py-2 text-xs font-extrabold text-[#1f1b17] shadow-[0_8px_18px_rgba(45,35,20,0.05)]">
+            {standard}
           </li>
         ))
       }
@@ -115,10 +98,7 @@ const isAltBg = sectionBg.includes('surface-alt');
 </section>
 
 <style>
-  /* Stepper ngang — đường nối + chấm vàng (chỉ md trở lên) */
-  .qc-step {
-    position: relative;
-  }
+  /* Stepper ngang — đường nối + chấm vàng tròn (chỉ md trở lên) */
   @media (min-width: 768px) {
     .qc-steps::before {
       content: '';
@@ -127,8 +107,9 @@ const isAltBg = sectionBg.includes('surface-alt');
       right: 0;
       top: 0.4375rem;
       height: 1px;
-      background: rgba(14, 38, 64, 0.12);
+      background: #e8dfcf;
     }
+
     .qc-step::before {
       content: '';
       position: absolute;
@@ -137,12 +118,10 @@ const isAltBg = sectionBg.includes('surface-alt');
       width: 0.75rem;
       height: 0.75rem;
       transform: translateY(-50%);
-      border-radius: 0;
-      background: #ffc933;
-      box-shadow: 0 0 0 4px #fff;
-    }
-    .qc-section--alt .qc-step::before {
-      box-shadow: 0 0 0 4px rgb(var(--color-surface-alt));
+      border-radius: 9999px;
+      background: #ffc72c;
+      border: 2px solid #e1a900;
+      box-shadow: 0 0 0 4px #fbf8f1;
     }
   }
 </style>

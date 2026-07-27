@@ -17,7 +17,7 @@ const { sectionBg = RHYTHM_WHITE } = Astro.props;
     </p>
     <h2
       data-reveal
-      class="font-headline-md text-xl md:text-2xl lg:text-[2rem] font-bold text-ink-dark leading-snug max-w-3xl text-balance"
+      class="text-[clamp(1.75rem,2.7vw,3rem)] font-extrabold text-ink-dark leading-[1.1] tracking-[-0.03em] max-w-3xl text-balance"
     >
       {timelineSection.title}
     </h2>
@@ -83,7 +83,7 @@ const { sectionBg = RHYTHM_WHITE } = Astro.props;
                   {item.year}
                 </span>
                 <h3
-                  class="font-headline-md text-[1.0625rem] md:text-lg lg:text-xl font-bold text-ink-dark leading-snug mb-2 md:mb-2.5"
+                  class="text-[1.0625rem] md:text-lg lg:text-xl font-extrabold tracking-[-0.02em] text-ink-dark leading-snug mb-2 md:mb-2.5"
                 >
                   {item.title}
                 </h3>

@@ -8,7 +8,8 @@ import { fileURLToPath } from 'node:url';
 
 const root = join(fileURLToPath(new URL('.', import.meta.url)), '..');
 const assetsDir = join(root, 'src', 'assets', 'images');
-const BASE = 'https://dongphucvn.vn/wp-content/uploads';
+const LEGACY = (process.env.PUBLIC_LEGACY_SITE_URL ?? 'https://dongphucvn.vn').replace(/\/$/, '');
+const BASE = `${LEGACY}/wp-content/uploads`;
 
 /** [url, đường dẫn trong public/] */
 const downloads = [
