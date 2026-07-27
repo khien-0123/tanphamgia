@@ -1,58 +1,48 @@
 ---
 import SiteImage from '../SiteImage.astro';
 import { brandStory } from '../../data/gioi-thieu';
-import { mediaTextRowClass, mediaTextCellClass } from '../../lib/about-layout';
-import { imageRadius } from '../../lib/image-frame';
-import { RHYTHM_WHITE, sectionPy } from '../../lib/section-rhythm';
-
-interface Props {
-  sectionBg?: string;
-}
-
-const { sectionBg = RHYTHM_WHITE } = Astro.props;
-
-const imgClass = `block w-full ${imageRadius} object-cover h-[clamp(24rem,42vw,32rem)]`;
 ---
 
-<section class:list={[sectionPy, sectionBg]}>
-  <div data-reveal class="max-w-container-max-width mx-auto px-6 md:px-8">
-    <div class={mediaTextRowClass}>
-      <figure class={`${mediaTextCellClass} order-2 md:order-1 m-0 relative`}>
-        <span
-          class="absolute -left-3 top-8 hidden h-20 w-1 bg-accent-gold lg:block"
-          aria-hidden="true"
-        ></span>
-        <SiteImage
-          src={brandStory.image}
-          alt="Câu chuyện thương hiệu Tân Phạm Gia"
-          class={imgClass}
-          loading="lazy"
-          decoding="async"
-          variant="card"
-        />
-        <div
-          class="absolute left-4 bottom-4 max-w-[13rem] rounded-none bg-ink-dark px-7 py-6 text-white md:-left-6 md:-bottom-6"
-        >
-          <b class="block text-[2.75rem] leading-none text-accent-gold tabular-nums">2003</b>
-          <span class="mt-2 block text-[0.8125rem] leading-[1.4] text-white/70">
-            Khởi nguồn hành trình may mặc
-          </span>
-        </div>
-      </figure>
+<section class="bg-[#0d1b3a] text-white" aria-labelledby="about-story-title">
+  <div class="mx-auto grid w-full max-w-container-max-width items-center gap-10 px-6 py-12 md:px-8 lg:grid-cols-[1.02fr_1fr] lg:gap-14 lg:py-16 xl:gap-16">
+    <figure data-reveal data-reveal-direction="up" class="relative m-0 overflow-hidden rounded-[1.75rem] bg-white/5 lg:self-stretch">
+      <SiteImage
+        src={brandStory.image}
+        alt="Câu chuyện thương hiệu Tân Phạm Gia"
+        class="block aspect-[1.1/1] h-full w-full object-cover sm:aspect-square lg:aspect-auto lg:h-full"
+        loading="lazy"
+        variant="card"
+        sizes="(min-width: 1024px) 46vw, 100vw"
+      />
+      <figcaption class="absolute bottom-4 left-4 max-w-[13.5rem] rounded-[1.25rem] bg-[#ffc72c] px-6 py-5 text-[#17140a] shadow-[0_16px_34px_rgba(0,0,0,0.28)] sm:bottom-6 sm:left-6 sm:px-7 sm:py-6">
+        <b class="block text-[2.5rem] font-extrabold leading-none tracking-[-0.035em] tabular-nums sm:text-[2.75rem]">2003</b>
+        <span class="mt-2 block text-[0.8125rem] font-semibold leading-[1.4] text-[#43370c]">Khởi nguồn hành trình may mặc</span>
+      </figcaption>
+    </figure>
 
-      <div class={`${mediaTextCellClass} order-1 md:order-2`}>
-        <h2 class="text-pretty font-headline-md text-2xl md:text-3xl font-bold text-ink-dark mb-6">
-          <span class="md:hidden">
-            {brandStory.titleLines[0]}
-            <br />
-            Một Sản Phẩm May Mặc Chất{'\u00a0'}Lượng
-          </span>
-          <span class="hidden md:inline">{brandStory.title}</span>
-        </h2>
-        <div class="space-y-4 text-text-muted leading-relaxed">
-          {brandStory.paragraphs.map((p) => <p>{p}</p>)}
-        </div>
+    <div data-reveal data-reveal-direction="up" class="max-w-[43rem] lg:py-3">
+      <p class="mb-4 inline-flex rounded-full bg-[#fff0bd] px-5 py-2 text-xs font-extrabold uppercase tracking-[0.025em] text-[#7a5900]">
+        Câu chuyện thương hiệu
+      </p>
+
+      <h2
+        id="about-story-title"
+        class="max-w-[24ch] text-balance text-[clamp(1.75rem,2.7vw,3rem)] font-extrabold leading-[1.1] tracking-[-0.03em] text-white"
+      >
+        {brandStory.title}
+      </h2>
+
+      <div class="mt-6 space-y-4 text-sm leading-[1.65] text-white/78 sm:text-base">
+        {brandStory.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
       </div>
+
+      <a
+        href="#nang-luc"
+        class="mt-8 inline-flex min-h-14 items-center justify-center gap-2.5 rounded-full bg-accent-gold px-9 py-4 text-center text-base font-extrabold leading-snug text-ink-dark shadow-[0_12px_30px_rgba(255,201,51,0.2)] transition-all hover:-translate-y-0.5 hover:shadow-[0_16px_34px_rgba(255,201,51,0.32)] sm:px-10 sm:text-lg"
+      >
+        <span>Khám phá năng lực sản xuất</span>
+        <span class="material-symbols-outlined text-xl leading-none sm:text-2xl" aria-hidden="true">arrow_forward</span>
+      </a>
     </div>
   </div>
 </section>

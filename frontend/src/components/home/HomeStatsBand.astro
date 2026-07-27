@@ -61,47 +61,80 @@ import { homeHero } from '../../data/home';
 <script>
   const statsBands = document.querySelectorAll<HTMLElement>('.mockup-stats-band');
   const numberFormatter = new Intl.NumberFormat('vi-VN');
+  const reduceMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const PLAY_THRESHOLD = 0.28;
+
+  /** Animation đường chỉ đang giữ fill:forwards — cancel để trả về trạng thái ẩn khi reset */
+  const threadAnimations = new WeakMap<HTMLElement, Animation[]>();
+  /** Thế hệ counter — tăng lên khi play/reset để vòng rAF cũ tự dừng */
+  const counterGeneration = new WeakMap<HTMLElement, number>();
+
+  const bumpGeneration = (band: HTMLElement): number => {
+    const next = (counterGeneration.get(band) ?? 0) + 1;
+    counterGeneration.set(band, next);
+    return next;
+  };
+
+  const cancelThread = (band: HTMLElement) => {
+    threadAnimations.get(band)?.forEach((animation) => animation.cancel());
+    threadAnimations.delete(band);
+  };
 
   const animateThread = (band: HTMLElement) => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (reduceMotionQuery.matches) return;
+
+    cancelThread(band);
+    const animations: Animation[] = [];
 
     const lead = band.querySelector<SVGPathElement>('.mockup-thread--lead');
     const main = band.querySelector<SVGPathElement>('.mockup-thread--main');
     const dots = band.querySelectorAll<SVGCircleElement>('.mockup-thread-dot');
 
-    lead?.animate([{ strokeDashoffset: 1 }, { strokeDashoffset: 0 }], {
-      duration: 1700,
-      easing: 'ease-out',
-      fill: 'forwards',
-    });
+    if (lead) {
+      animations.push(
+        lead.animate([{ strokeDashoffset: 1 }, { strokeDashoffset: 0 }], {
+          duration: 1700,
+          easing: 'ease-out',
+          fill: 'forwards',
+        }),
+      );
+    }
 
-    main?.animate([{ strokeDashoffset: 1 }, { strokeDashoffset: 0 }], {
-      duration: 2300,
-      delay: 1700,
-      easing: 'ease-out',
-      fill: 'forwards',
-    });
+    if (main) {
+      animations.push(
+        main.animate([{ strokeDashoffset: 1 }, { strokeDashoffset: 0 }], {
+          duration: 2300,
+          delay: 1700,
+          easing: 'ease-out',
+          fill: 'forwards',
+        }),
+      );
+    }
 
     const dotDelays = [1700, 2450, 3000, 3800];
     dots.forEach((dot, index) => {
-      dot.animate(
-        [
-          { opacity: 0, transform: 'scale(0.25)' },
-          { opacity: 1, transform: 'scale(1)' },
-        ],
-        {
-          duration: 360,
-          delay: dotDelays[index] ?? 250,
-          easing: 'ease-out',
-          fill: 'forwards',
-        },
+      animations.push(
+        dot.animate(
+          [
+            { opacity: 0, transform: 'scale(0.25)' },
+            { opacity: 1, transform: 'scale(1)' },
+          ],
+          {
+            duration: 360,
+            delay: dotDelays[index] ?? 250,
+            easing: 'ease-out',
+            fill: 'forwards',
+          },
+        ),
       );
     });
+
+    threadAnimations.set(band, animations);
   };
 
   const animateStats = (band: HTMLElement) => {
+    const generation = bumpGeneration(band);
     const counters = band.querySelectorAll<HTMLElement>('[data-mockup-stat-counter]');
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     counters.forEach((counter, index) => {
       const raw = counter.dataset.mockupStatTarget ?? '';
@@ -109,7 +142,7 @@ import { homeHero } from '../../data/home';
       if (!target) return;
 
       const suffix = raw.trim().endsWith('+') ? '+' : '';
-      if (reduceMotion) {
+      if (reduceMotionQuery.matches) {
         counter.textContent = `${numberFormatter.format(target)}${suffix}`;
         return;
       }
@@ -120,6 +153,8 @@ import { homeHero } from '../../data/home';
       counter.textContent = `0${suffix}`;
 
       const tick = (now: number) => {
+        if (counterGeneration.get(band) !== generation) return;
+
         const elapsed = now - startAt;
         if (elapsed < 0) {
           requestAnimationFrame(tick);
@@ -137,27 +172,46 @@ import { homeHero } from '../../data/home';
     });
   };
 
-  const revealStatsBand = (band: HTMLElement) => {
-    if (band.dataset.visible === 'true') return;
-    band.dataset.visible = 'true';
+  const playStatsBand = (band: HTMLElement) => {
+    if (band.dataset.statsPlayed === 'true') return;
+    band.dataset.statsPlayed = 'true';
     animateThread(band);
     animateStats(band);
+  };
+
+  /** Trả band về trạng thái ẩn khi rời hẳn viewport để lần cuộn tới sau chạy lại */
+  const resetStatsBand = (band: HTMLElement) => {
+    if (band.dataset.statsPlayed !== 'true') return;
+    if (reduceMotionQuery.matches) return;
+
+    band.dataset.statsPlayed = 'false';
+    bumpGeneration(band);
+    cancelThread(band);
+    band.querySelectorAll<HTMLElement>('[data-mockup-stat-counter]').forEach((counter) => {
+      const raw = counter.dataset.mockupStatTarget ?? '';
+      const suffix = raw.trim().endsWith('+') ? '+' : '';
+      counter.textContent = `0${suffix}`;
+    });
   };
 
   if ('IntersectionObserver' in window) {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          revealStatsBand(entry.target as HTMLElement);
-          observer.unobserve(entry.target);
+          const band = entry.target as HTMLElement;
+          if (entry.isIntersecting && entry.intersectionRatio >= PLAY_THRESHOLD) {
+            playStatsBand(band);
+          } else if (!entry.isIntersecting) {
+            resetStatsBand(band);
+          }
         });
       },
-      { threshold: 0.28 },
+      // rootMargin -1px: band chạm đúng mép viewport (hero cao 100svh) vẫn tính là đã rời màn hình
+      { threshold: [0, PLAY_THRESHOLD], rootMargin: '-1px 0px -1px 0px' },
     );
 
     statsBands.forEach((band) => observer.observe(band));
   } else {
-    statsBands.forEach(revealStatsBand);
+    statsBands.forEach(playStatsBand);
   }
 </script>

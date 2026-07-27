@@ -1,7 +1,7 @@
 ---
 import SiteImage from '../SiteImage.astro';
 import SiteLayout from '../../layouts/SiteLayout.astro';
-import { sectionPy } from '../../lib/section-rhythm';
+import { RHYTHM_WHITE, sectionPy } from '../../lib/section-rhythm';
 import { solutions } from '../../data/site';
 import type { SolutionPageContent } from '../../data/solution-page';
 import { duAnGiaiPhap1 } from '../../data/giai-phap-1-du-an';
@@ -149,9 +149,9 @@ const h2Macro =
     </div>
   </header>
 
-  <main class="bg-white text-ink-dark">
+  <main class="bg-[#FFFCF7] text-ink-dark">
     {/* ══ 01b · NGÀNH — dải mảnh, mỗi ngành một icon ══ */}
-    <section class="bg-surface-alt">
+    <section class:list={[RHYTHM_WHITE]}>
       <div class="mx-auto max-w-container-max-width px-6 py-5 md:px-8">
         <p class="flex flex-wrap items-center gap-x-6 gap-y-3 text-sm">
           <span class="font-bold text-ink-dark">Phù hợp cho</span>
@@ -173,7 +173,7 @@ const h2Macro =
     </section>
 
     {/* ══ 01 · VẤN ĐỀ — hai cột đều, tiêu đề dính trái ══ */}
-    <section class:list={['bg-white', sectionPy]}>
+    <section class:list={[RHYTHM_WHITE, sectionPy]}>
       <div class="mx-auto max-w-container-max-width px-6 md:px-8">
         <div class="grid items-start gap-x-[clamp(2rem,4vw,4.5rem)] gap-y-10 md:grid-cols-2">
           <div class="md:sticky md:top-28">
@@ -186,7 +186,7 @@ const h2Macro =
               content.issues.map((issue, i) => (
                 <li
                   data-reveal
-                  class="grid grid-cols-[2.5rem_1fr] items-start gap-4 bg-white py-6"
+                  class:list={['grid grid-cols-[2.5rem_1fr] items-start gap-4 py-6', RHYTHM_WHITE]}
                 >
                   <span class="font-eyebrow text-xs tabular-nums text-text-muted">
                     {String(i + 1).padStart(2, '0')}
@@ -201,7 +201,7 @@ const h2Macro =
     </section>
 
     {/* ══ 02 · GIẢI PHÁP — ảnh sticky + cột hairline ══ */}
-    <section class:list={['bg-surface-alt', sectionPy]}>
+    <section class:list={[RHYTHM_WHITE, sectionPy]}>
       <div class="mx-auto max-w-container-max-width px-6 md:px-8">
         <div class="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
           <figure
@@ -223,7 +223,7 @@ const h2Macro =
             <ul class="grid list-none gap-px bg-border-subtle p-0" data-reveal-stagger>
               {
                 content.plans.map((plan) => (
-                  <li data-reveal class="flex gap-4 bg-surface-alt py-6">
+                  <li data-reveal class:list={['flex gap-4 py-6', RHYTHM_WHITE]}>
                     <span class="material-symbols-outlined mt-0.5 shrink-0 text-xl text-accent-teal">
                       check_circle
                     </span>
@@ -367,7 +367,7 @@ const h2Macro =
     </section>
 
     {/* ══ BẰNG CHỨNG — một dải ba cột, số lớn đè ảnh ══ */}
-    <section class:list={['bg-white', sectionPy]}>
+    <section class:list={[RHYTHM_WHITE, sectionPy]}>
       <div class="mx-auto max-w-container-max-width px-6 md:px-8">
         <header class="mb-10 md:mb-12">
           <span class:list={[chapterEyebrow, 'mb-5 block text-accent-teal']}>Bằng chứng</span>
@@ -407,7 +407,7 @@ const h2Macro =
     </section>
 
     {/* ══ 04 · QUY TRÌNH — số thứ tự khổng lồ dẫn dắt ══ */}
-    <section class:list={['bg-white', sectionPy]}>
+    <section class:list={[RHYTHM_WHITE, sectionPy]}>
       <div class="mx-auto max-w-container-max-width px-6 md:px-8">
         <span class:list={[chapterEyebrow, 'mb-5 block text-accent-teal']}>04 — Quy trình</span>
         <h2 class:list={[h2Macro, 'mb-12 max-w-[22ch] md:mb-16']}>
@@ -430,13 +430,13 @@ const h2Macro =
     </section>
 
     {/* ══ GIẢI PHÁP KHÁC — dải điều hướng mảnh ══ */}
-    <section class:list={['bg-surface-alt', sectionPy]}>
+    <section class:list={[RHYTHM_WHITE, sectionPy]}>
       <div class="mx-auto max-w-container-max-width px-6 md:px-8">
         <span class:list={[chapterEyebrow, 'mb-8 block text-accent-teal']}>Chuyển hướng</span>
         <div class="grid list-none gap-px bg-border-subtle">
           {
             relatedSolutions.map((item) => (
-              <a href={item.href} class="more-row group bg-surface-alt">
+              <a href={item.href} class:list={['more-row group', RHYTHM_WHITE]}>
                 <span class="font-eyebrow text-xs tabular-nums text-text-muted">
                   {String(item.slug.replace(/\D/g, '')).padStart(2, '0')}
                 </span>

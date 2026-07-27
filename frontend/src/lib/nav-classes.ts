@@ -3,14 +3,14 @@
 export const navShellClasses = [
   'group fixed top-0 inset-x-0 z-[55] w-full transition-all duration-300',
   'bg-transparent border-b border-transparent shadow-none backdrop-blur-none',
-  '[&.nav-scrolled]:bg-white/80 [&.nav-scrolled]:backdrop-blur-xl',
+  '[&.nav-scrolled]:bg-white',
   '[&.nav-scrolled]:border-border-subtle [&.nav-scrolled]:shadow-soft',
 ];
 
 export const navInnerClasses = [
   'flex items-center justify-between',
   'items-center gap-x-3 lg:gap-x-4 min-h-16',
-  'px-4 min-[400px]:px-6 md:px-8 py-5 lg:py-6 group-[.nav-scrolled]:py-3 transition-[padding] duration-300 max-w-container-max-width mx-auto min-w-0',
+  'px-4 min-[400px]:px-6 md:px-8 pt-10 pb-5 lg:pt-14 lg:pb-6 group-[.nav-scrolled]:py-3 transition-[padding] duration-300 max-w-container-max-width mx-auto min-w-0',
 ];
 
 export const navStartClasses = 'flex items-center min-h-10 shrink-0';
@@ -28,7 +28,7 @@ export const navMenuTrackClasses = [
 
 /** Link menu — layout chung, màu chữ tách riêng inactive/active */
 export const navMenuLinkBaseClasses = [
-  'inline-flex items-center justify-center py-2 px-3 lg:py-[10px] lg:px-4 xl:py-[15px] xl:px-[20px] rounded-full box-border',
+  'inline-flex items-center justify-center py-1.5 px-3 lg:py-2 lg:px-4 xl:py-[9px] xl:px-[20px] rounded-full box-border',
   'border-0 bg-transparent shadow-none text-sm font-medium leading-none',
   'whitespace-nowrap no-underline transition-colors',
 ];
@@ -39,9 +39,9 @@ export const navMenuLinkInactiveClasses = [
 ];
 
 export const navMenuLinkActiveClasses = [
-  '!bg-white !text-ink-dark shadow-[0_1px_4px_rgba(14,38,64,0.12)] font-medium',
-  'hover:!text-ink-dark',
-  'group-[.nav-scrolled]:!bg-transparent group-[.nav-scrolled]:!shadow-none group-[.nav-scrolled]:!text-[#b07800]'
+  '!bg-white !text-[#1f1b17] shadow-[0_1px_4px_rgba(14,38,64,0.12)] font-medium',
+  'hover:!text-[#1f1b17]',
+  'group-[.nav-scrolled]:!bg-transparent group-[.nav-scrolled]:!shadow-none group-[.nav-scrolled]:!text-[#7a5900]'
 ];
 
 export const navMenuLabelClasses =
@@ -54,15 +54,15 @@ export const navControlClasses =
   'inline-flex items-center justify-center h-auto min-h-10 box-border leading-none m-0 py-0';
 
 export const navCtaClasses = [
-  'px-4 min-[400px]:px-5 rounded-full border-0 font-bold leading-none',
-  'tracking-normal text-ink-dark bg-accent-gold shadow-soft no-underline whitespace-nowrap',
+  'min-[400px]:gap-2.5 px-3 min-[400px]:pl-5 min-[400px]:pr-1.5 rounded-full border-0 font-bold leading-none',
+  'tracking-normal text-[#1f1b17] bg-accent-gold shadow-soft no-underline whitespace-nowrap',
   'transition-shadow text-[0.6875rem] min-[400px]:text-xs sm:text-sm',
 ];
 
 export const navToggleClasses = [
   'relative z-10 w-10 p-0 rounded-xl border-0 cursor-pointer',
-  'bg-white/90 text-ink-dark backdrop-blur-xl shadow-soft',
-  'group-[.nav-scrolled]:bg-white group-[.nav-scrolled]:text-ink-dark',
+  'bg-white/90 text-[#1f1b17] backdrop-blur-xl shadow-soft',
+  'group-[.nav-scrolled]:bg-white group-[.nav-scrolled]:text-[#1f1b17]',
   'group-[.nav-scrolled]:backdrop-blur-none lg:hidden',
 ];
 

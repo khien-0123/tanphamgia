@@ -1,7 +1,9 @@
 /** Nền section xen kẽ xám / trắng — index chẵn = xám, lẻ = trắng */
 
-export const RHYTHM_ALT = 'bg-surface-alt';
-export const RHYTHM_WHITE = 'bg-white';
+/** Trắng ấm #FFFCF7 — đồng bộ toàn site thay cho xám #EDEDED cũ */
+export const RHYTHM_ALT = 'bg-[#FFFCF7]';
+/** Trắng ấm #FFFCF7 — đồng bộ toàn site thay cho trắng thuần */
+export const RHYTHM_WHITE = 'bg-[#FFFCF7]';
 
 /** index chẵn → xám, index lẻ → trắng */
 export function rhythmBg(index: number): typeof RHYTHM_ALT | typeof RHYTHM_WHITE {

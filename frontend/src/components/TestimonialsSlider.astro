@@ -1,5 +1,5 @@
 ---
-import { sectionPy } from '../lib/section-rhythm';
+import { RHYTHM_WHITE, sectionPy } from '../lib/section-rhythm';
 import type { Testimonial } from '../data/site';
 import SliderArrow from './SliderArrow.astro';
 
@@ -21,7 +21,7 @@ const itemsPerSet = items.length;
 
 const sectionClass = isDark
   ? `${sectionPy} bg-ink-dark text-white`
-  : [sectionPy, sectionBg ?? 'bg-white'];
+  : [sectionPy, sectionBg ?? RHYTHM_WHITE];
 
 const titleClass = isDark
   ? 'font-headline-md text-2xl md:text-4xl font-bold mb-12 md:mb-14'

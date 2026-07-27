@@ -49,7 +49,7 @@ const {
 >
   <div class:list={navInnerClasses}>
     <div class={navStartClasses}>
-      <SiteBrandLogo class="leading-none bg-white/[0.62] px-5 py-1.5 rounded-[1.25rem] backdrop-blur-md shadow-sm group-[.nav-scrolled]:bg-transparent group-[.nav-scrolled]:shadow-none group-[.nav-scrolled]:p-0 group-[.nav-scrolled]:backdrop-blur-none transition-all duration-300" />
+      <SiteBrandLogo class="leading-none bg-white/[0.62] px-3 min-[400px]:px-5 py-1.5 rounded-[1.25rem] backdrop-blur-md shadow-sm group-[.nav-scrolled]:bg-transparent group-[.nav-scrolled]:shadow-none group-[.nav-scrolled]:p-0 group-[.nav-scrolled]:backdrop-blur-none transition-all duration-300" />
     </div>
 
     <div class={navCenterClasses}>
@@ -74,8 +74,14 @@ const {
     </div>
 
     <div class={navEndClasses}>
-      <a href={ctaHref} class:list={[navControlClasses, navCtaClasses]}>
-        Nhận Báo Giá
+      <a href={ctaHref} class:list={[navControlClasses, navCtaClasses, 'max-sm:hidden']}>
+        Nhận tư vấn
+        <span
+          class="hidden min-[400px]:flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#1f1b17]/15 text-[#1f1b17]"
+          aria-hidden="true"
+        >
+          <span class="material-symbols-outlined text-base leading-none">arrow_forward</span>
+        </span>
       </a>
       <button
         type="button"
@@ -165,10 +171,13 @@ const {
     >
       <a
         href={siteCta.primaryHref}
-        class="block w-full py-3 px-4 text-sm font-bold text-center no-underline bg-accent-gold text-ink-dark shadow-[0_4px_14px_rgba(255,201,51,0.35)] transition-[transform,box-shadow,background] active:scale-[0.98]"
+        class="flex w-full items-center justify-center gap-2.5 py-2 px-4 text-sm font-bold text-center no-underline bg-accent-gold text-ink-dark shadow-[0_4px_14px_rgba(255,201,51,0.35)] transition-[transform,box-shadow,background] active:scale-[0.98]"
         data-nav-close
       >
-        {siteCta.primaryLabel}
+        Nhận tư vấn
+        <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-ink-dark/15 text-ink-dark" aria-hidden="true">
+          <span class="material-symbols-outlined text-base leading-none">arrow_forward</span>
+        </span>
       </a>
       <a
         href={siteCta.secondaryHref}

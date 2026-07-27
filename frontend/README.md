@@ -1,6 +1,6 @@
 # Tan Phạm Gia — Astro Frontend
 
-Trang chủ Tân Phạm Gia được xây dựng bằng **Astro** + **Tailwind CSS**, migrate từ `business1/home.html`.
+Trang chủ Tân Phạm Gia được xây dựng bằng **Astro** + **Tailwind CSS**.
 
 ## Chạy dự án
 
