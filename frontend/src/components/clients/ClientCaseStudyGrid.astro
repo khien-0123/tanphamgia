@@ -6,10 +6,6 @@ import {
   caseStudyCarouselTrack,
   caseStudyCarouselViewport,
   caseStudyCarouselShell,
-  caseStudyCarouselDots,
-  caseStudyDotActive,
-  caseStudyDotBase,
-  caseStudyDotIdleOnImage,
   caseStudyFeaturedCopy,
   caseStudyFeaturedImage,
   caseStudySecondaryGrid,
@@ -103,22 +99,6 @@ const carouselPages = useSecondaryCarousel
                 </div>
                 <SliderArrow direction="prev" inset solid />
                 <SliderArrow direction="next" inset solid />
-                <div
-                  class:list={caseStudyCarouselDots}
-                  role="tablist"
-                  aria-label="Chọn nhóm case study phụ"
-                >
-                  {Array.from({ length: carouselPages }, (_, index) => (
-                    <button
-                      type="button"
-                      role="tab"
-                      data-carousel-dot={index}
-                      aria-label={`Trang ${index + 1}`}
-                      aria-selected={index === 0 ? 'true' : 'false'}
-                      class:list={[caseStudyDotBase, index === 0 ? caseStudyDotActive : caseStudyDotIdleOnImage]}
-                    />
-                  ))}
-                </div>
               </div>
             </div>
           ) : (

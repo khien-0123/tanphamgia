@@ -1,5 +1,6 @@
 ---
 import SiteImage from '../SiteImage.astro';
+import SolutionProcessSection from './SolutionProcessSection.astro';
 import SiteLayout from '../../layouts/SiteLayout.astro';
 import { RHYTHM_WHITE, sectionPy } from '../../lib/section-rhythm';
 import { solutions } from '../../data/site';
@@ -406,28 +407,12 @@ const h2Macro =
       </div>
     </section>
 
-    {/* ══ 04 · QUY TRÌNH — số thứ tự khổng lồ dẫn dắt ══ */}
-    <section class:list={[RHYTHM_WHITE, sectionPy]}>
-      <div class="mx-auto max-w-container-max-width px-6 md:px-8">
-        <span class:list={[chapterEyebrow, 'mb-5 block text-accent-teal']}>04 — Quy trình</span>
-        <h2 class:list={[h2Macro, 'mb-12 max-w-[22ch] md:mb-16']}>
-          Sáu bước, minh bạch từ yêu cầu đến hậu mãi
-        </h2>
-
-        <ol class="flow-rail bg-border-subtle" data-reveal-stagger>
-          {
-            content.processSteps.map((step, i) => (
-              <li class="flow-step" data-reveal>
-                <span class="flow-no tabular-nums" aria-hidden="true">
-                  {String(i + 1).padStart(2, '0')}
-                </span>
-                <h3>{step}</h3>
-              </li>
-            ))
-          }
-        </ol>
-      </div>
-    </section>
+    {/* ══ 04 · QUY TRÌNH ══ */}
+    <SolutionProcessSection
+      steps={content.processSteps}
+      sectionBg={RHYTHM_WHITE}
+      eyebrow="04 — Quy trình"
+    />
 
     {/* ══ GIẢI PHÁP KHÁC — dải điều hướng mảnh ══ */}
     <section class:list={[RHYTHM_WHITE, sectionPy]}>
@@ -719,85 +704,6 @@ const h2Macro =
   @media (max-width: 640px) {
     .proof-case {
       min-height: 16rem;
-    }
-  }
-
-  /* ── Quy trình: số thứ tự khổng lồ ── */
-  .flow-rail {
-    display: grid;
-    grid-template-columns: repeat(6, minmax(0, 1fr));
-    gap: 1px;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    overflow: hidden;
-  }
-  .flow-step {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 0.75rem;
-    overflow: hidden;
-    background: #fff;
-    padding: 1.5rem 1rem 1.75rem;
-    min-height: 9.5rem;
-  }
-  .flow-no {
-    display: block;
-    flex-shrink: 0;
-    margin: 0;
-    font-size: clamp(2.25rem, 4.2vw, 3.75rem);
-    font-weight: 800;
-    letter-spacing: -0.05em;
-    line-height: 1;
-    color: rgb(14 38 64 / 0.07);
-    pointer-events: none;
-    user-select: none;
-    transition: color 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-  .flow-step h3 {
-    position: relative;
-    margin: 0;
-    flex: 1;
-    min-width: 0;
-    font-size: 0.9375rem;
-    font-weight: 700;
-    line-height: 1.45;
-    color: #0e2640;
-  }
-  .flow-step h3::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: -0.55rem;
-    width: 1.6rem;
-    height: 3px;
-    background: #FFC933;
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-  .flow-step:hover .flow-no {
-    color: rgb(14 38 64 / 0.1);
-  }
-  .flow-step:hover h3::after {
-    transform: scaleX(1);
-  }
-  @media (max-width: 1000px) {
-    .flow-rail {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-    .flow-step {
-      padding: 1.75rem 1.25rem;
-      min-height: 8rem;
-    }
-    .flow-step h3 {
-      font-size: 1rem;
-    }
-  }
-  @media (max-width: 560px) {
-    .flow-rail {
-      grid-template-columns: 1fr;
     }
   }
 

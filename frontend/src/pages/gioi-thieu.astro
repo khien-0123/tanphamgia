@@ -7,7 +7,7 @@ import AboutProductionCapacity from '../components/about/AboutProductionCapacity
 import AboutTeamGrid from '../components/about/AboutTeamGrid.astro';
 import CertificateGallery from '../components/CertificateGallery.astro';
 import TestimonialsSlider from '../components/TestimonialsSlider.astro';
-import SiteImage from '../components/SiteImage.astro';
+import PageHero from '../components/PageHero.astro';
 import { gioiThieuSeo } from '../data/gioi-thieu';
 import { siteAssets } from '../data/assets';
 import { testimonialsAbout, certificates } from '../data/site';
@@ -25,47 +25,20 @@ const heroStats = [
   description={gioiThieuSeo.description}
   currentPath={routes.gioiThieu}
 >
-  {/* Hero — ảnh xưởng + overlay tối theo ngôn ngữ hero trang chủ */}
-  <header data-page-hero class="relative flex min-h-[32rem] flex-col overflow-hidden bg-[#0d1b3a] text-white max-md:min-h-[27rem]">
-    <SiteImage
-      alt=""
-      class="absolute inset-0 h-full w-full object-cover"
-      src={siteAssets.hero.gioiThieu}
-      loading="eager"
-      decoding="async"
-      variant="hero"
-    />
-    <div class="absolute inset-0 bg-black/40" aria-hidden="true"></div>
-    <div class="absolute inset-0 bg-[linear-gradient(90deg,rgba(6,14,32,0.55),rgba(6,14,32,0.15)_58%,rgba(6,14,32,0.45))]" aria-hidden="true"></div>
-    <div class="absolute inset-x-0 bottom-0 h-44 bg-gradient-to-t from-[#050d1f]/85 to-transparent" aria-hidden="true"></div>
-
-    <div class="relative z-10 mx-auto flex w-full max-w-container-max-width flex-1 flex-col justify-end gap-8 px-6 pb-10 pt-32 md:px-8 md:gap-10 md:pb-12 md:pt-36">
-      <div>
-        <p class="inline-flex rounded-full bg-[#fff0bd] px-4 py-2 text-[0.68rem] font-extrabold uppercase tracking-[0.025em] text-[#7a5900] sm:text-xs">
-          Giới thiệu · Est. 2003
-        </p>
-        <h1 class="mt-6 max-w-[22ch] text-balance text-[clamp(2rem,4.6vw,3.75rem)] font-extrabold leading-[1.05] tracking-[-0.045em] text-white">
-          23 năm theo đuổi giá trị của một sản phẩm may mặc chất lượng
-        </h1>
-      </div>
-
-      <dl class="flex flex-wrap gap-x-10 gap-y-5 border-t border-white/15 pt-6 max-md:gap-x-7">
-        {
-          heroStats.map((stat) => (
-            <div class="min-w-0">
-              <dt class="whitespace-nowrap text-2xl font-extrabold leading-none tracking-[-0.03em] tabular-nums sm:text-[2rem]">
-                {stat.value}
-                {stat.suffix && <span class="text-[#ffc72c]">{stat.suffix}</span>}
-              </dt>
-              <dd class="m-0 mt-2 text-[0.65rem] font-bold uppercase tracking-[0.18em] text-white/65 sm:text-[0.7rem]">
-                {stat.label}
-              </dd>
-            </div>
-          ))
-        }
-      </dl>
-    </div>
-  </header>
+  <PageHero
+    eyebrow="Giới thiệu · Est. 2003"
+    title="23 năm theo đuổi giá trị của một sản phẩm may mặc chất lượng"
+    titleLines={[
+      '23 năm theo đuổi giá trị của',
+      'một sản phẩm may mặc chất lượng',
+    ]}
+    bgImage={siteAssets.hero.gioiThieu}
+    breadcrumb={[
+      { label: 'Trang chủ', href: routes.home },
+      { label: 'Giới thiệu' },
+    ]}
+    stats={heroStats}
+  />
 
   <AboutBrandStory />
   <AboutTimeline />
