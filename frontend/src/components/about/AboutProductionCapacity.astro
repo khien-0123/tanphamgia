@@ -1,11 +1,12 @@
 ---
 import SiteImage from '../SiteImage.astro';
 import { productionCapacity } from '../../data/gioi-thieu';
+import { sectionPy } from '../../lib/section-rhythm';
 ---
 
 {/* Năng lực sản xuất — dải navy: chữ + 6 ô số bo tròn | ảnh xưởng bo lớn */}
 <section class="bg-[#0d1b3a] text-white" id="nang-luc" aria-labelledby="about-capacity-title">
-  <div class="mx-auto grid w-full max-w-container-max-width items-stretch gap-10 px-6 py-12 md:px-8 lg:grid-cols-[1.08fr_0.92fr] lg:gap-14 lg:py-16">
+  <div class:list={['mx-auto grid w-full max-w-container-max-width items-stretch gap-10 px-6 md:px-8 lg:grid-cols-[1.08fr_0.92fr] lg:gap-14', sectionPy]}>
     <div data-reveal>
       <p class="inline-flex rounded-full bg-[#fff0bd] px-5 py-2 text-xs font-extrabold uppercase tracking-[0.025em] text-[#7a5900]">
         Năng lực sản xuất
@@ -56,72 +57,88 @@ import { productionCapacity } from '../../data/gioi-thieu';
   </div>
 </section>
 
-{/* Kiểm soát chất lượng 5 tầng — stepper ngang chấm vàng tròn trên nền kem */}
-<section class="qc-section bg-[#fbf8f1] text-[#1f1b17]" aria-labelledby="about-qc-title">
-  <div class="mx-auto w-full max-w-container-max-width px-6 py-12 md:px-8 lg:py-16">
-    <header data-reveal class="max-w-[56ch]">
-      <p class="inline-flex rounded-full bg-[#ffedb7] px-4 py-2 text-[0.7rem] font-extrabold uppercase tracking-[0.025em] text-[#5c4500] sm:text-xs">
+{/* Quy trình QC đa tầng — ngôn ngữ thiết kế đồng bộ với quy trình trang chủ */}
+<section class="qc-section relative overflow-hidden bg-[#fbf8f1] text-[#171717]" aria-labelledby="about-qc-title">
+  <div class="pointer-events-none absolute -right-20 -top-32 h-[28rem] w-[28rem] rounded-full bg-[#f8edc8]" aria-hidden="true"></div>
+
+  <div class:list={['relative mx-auto w-full max-w-container-max-width px-6 md:px-8 pb-24 lg:pb-28', sectionPy]}>
+    <header data-reveal class="max-w-[64rem]">
+      <p class="inline-flex rounded-full bg-[#fff0bd] px-4 py-2 text-[0.7rem] font-extrabold uppercase tracking-[0.025em] text-[#5c4500] sm:text-xs">
         Kiểm soát chất lượng
       </p>
       <h2
         id="about-qc-title"
-        class="mt-6 text-balance text-[clamp(1.75rem,2.7vw,3rem)] font-extrabold leading-[1.1] tracking-[-0.03em]"
+        class="mt-6 max-w-[34ch] text-balance text-[clamp(1.8rem,3vw,3rem)] font-extrabold leading-[1.08] tracking-[-0.04em]"
       >
         {productionCapacity.qcTitle}
       </h2>
-      <p class="mt-4 text-sm leading-[1.7] text-[#655c51] sm:text-base">{productionCapacity.qcDesc}</p>
+      <p class="mt-3 max-w-[58rem] text-sm leading-[1.55] text-[#625a50] sm:text-base">{productionCapacity.qcDesc}</p>
     </header>
 
-    <ol data-reveal class="qc-steps relative mt-10 grid list-none grid-cols-2 gap-x-4 gap-y-8 p-0 md:grid-cols-5 md:gap-y-0 lg:mt-12">
-      {
-        productionCapacity.qcSteps.map((step, index) => (
-          <li class="qc-step relative pr-4 md:pt-9">
-            <span class="mb-2 block text-[0.65rem] font-extrabold uppercase tracking-[0.14em] text-[#c18a00]">
-              Tầng {index + 1}
-            </span>
-            <h3 class="text-base font-extrabold leading-[1.35] text-[#26211c]">{step}</h3>
-          </li>
-        ))
-      }
-    </ol>
+    <div data-reveal class="qc-process-grid relative mt-10 lg:mt-12">
+      <div class="qc-process-connector" aria-hidden="true">
+        <svg viewBox="0 0 1000 90" preserveAspectRatio="none">
+          <path d="M0 45 C 28 27, 48 27, 76 45 S 124 63, 152 45 S 200 27, 228 45 S 276 63, 304 45 S 352 27, 380 45 S 428 63, 456 45 S 504 27, 532 45 S 580 63, 608 45 S 656 27, 684 45 S 732 63, 760 45 S 808 27, 836 45 S 884 63, 912 45 S 960 27, 1000 45" />
+        </svg>
+      </div>
 
-    <ul class="mt-10 flex list-none flex-wrap gap-2.5 p-0 lg:mt-12">
-      {
-        productionCapacity.qcStandards.map((standard) => (
-          <li class="rounded-full border border-[#e5dfd2] bg-white px-4 py-2 text-xs font-extrabold text-[#1f1b17] shadow-[0_8px_18px_rgba(45,35,20,0.05)]">
-            {standard}
-          </li>
-        ))
-      }
-    </ul>
+      <ol class="relative grid list-none grid-cols-1 gap-5 p-0 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          productionCapacity.qcSteps.map((step, index) => (
+            <li class:list={['qc-process-card relative flex min-h-[22rem] flex-col rounded-[1rem] px-5 pb-7 pt-6 text-center shadow-[0_16px_28px_rgba(38,31,21,0.14)] sm:px-6', index % 2 === 0 ? 'bg-[#0d1b3a] text-white' : 'bg-[#ffc72c] text-[#111827]']}>
+              <span class:list={['text-xs font-extrabold uppercase tracking-[0.14em]', index % 2 === 0 ? 'text-[#ffc72c]' : 'text-[#6e5200]']}>
+                Bước {step.number}
+              </span>
+              <h3 class="mt-5 text-xl font-extrabold leading-[1.18] tracking-[-0.025em]">{step.title}</h3>
+              <p class:list={['mt-5 text-sm leading-[1.65]', index % 2 === 0 ? 'text-white/75' : 'text-[#43370c]']}>
+                {step.description}
+              </p>
+              <span class="qc-process-number absolute -bottom-[4.05rem] left-1/2 z-10 flex h-12 w-12 -translate-x-1/2 items-center justify-center rounded-full border-[3px] border-[#e1a900] bg-[#fbf8f1] text-sm font-extrabold text-[#9b6d00]">
+                {step.number}
+              </span>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+
   </div>
 </section>
 
 <style>
-  /* Stepper ngang — đường nối + chấm vàng tròn (chỉ md trở lên) */
-  @media (min-width: 768px) {
-    .qc-steps::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 0.4375rem;
-      height: 1px;
-      background: #e8dfcf;
+  .qc-process-connector {
+    position: absolute;
+    z-index: 0;
+    top: calc(100% + 1.55rem - 10px);
+    left: 4%;
+    width: 92%;
+    height: 4rem;
+    pointer-events: none;
+  }
+
+  .qc-process-connector svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+
+  .qc-process-connector path {
+    fill: none;
+    stroke: #e1a900;
+    stroke-width: 2;
+  }
+
+  @media (max-width: 1023px) {
+    .qc-process-connector {
+      display: none;
     }
 
-    .qc-step::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0.4375rem;
-      width: 0.75rem;
-      height: 0.75rem;
-      transform: translateY(-50%);
-      border-radius: 9999px;
-      background: #ffc72c;
-      border: 2px solid #e1a900;
-      box-shadow: 0 0 0 4px #fbf8f1;
+    .qc-process-number {
+      bottom: -1.5rem;
+    }
+
+    .qc-process-card {
+      margin-bottom: 1.5rem;
     }
   }
 </style>

@@ -33,23 +33,23 @@ export const giaiPhap4Content: SolutionPageContent = {
   plans: [
     {
       title: 'Thiết kế đồng phục theo hình ảnh thương hiệu',
-      desc: 'Tư vấn màu sắc, kiểu dáng và chi tiết nhận diện phù hợp định vị — gia tăng sự chuyên nghiệp từ điểm chạm đầu tiên.',
+      desc: 'Tư vấn màu sắc, kiểu dáng và chi tiết nhận diện phù hợp với định vị thương hiệu của doanh nghiệp. → Gia tăng sự chuyên nghiệp và tạo thiện cảm ngay từ điểm chạm đầu tiên.',
     },
     {
       title: 'Tư vấn thiết kế & chất liệu theo môi trường làm việc',
-      desc: 'Phân tích đặc thù công việc và tần suất sử dụng, đảm bảo thoải mái và tính thẩm mỹ.',
+      desc: 'Phân tích đặc thù công việc và tần suất sử dụng để đề xuất thiết kế, form dáng và chất liệu phù hợp. → Đảm bảo sự thoải mái cho nhân sự và tính thẩm mỹ trong quá trình sử dụng.',
     },
     {
       title: 'Phân nhóm đồng phục theo chức danh',
-      desc: 'Giải pháp riêng cho lễ tân, tư vấn viên, điều dưỡng, kỹ thuật viên hoặc quản lý — khách hàng dễ nhận diện.',
+      desc: 'Xây dựng giải pháp đồng phục riêng cho lễ tân, tư vấn viên, điều dưỡng, kỹ thuật viên hoặc quản lý. → Giúp khách hàng dễ dàng nhận diện và nâng cao trải nghiệm dịch vụ.',
     },
     {
       title: 'Chuẩn hóa đồng phục cho hệ thống nhiều chi nhánh',
-      desc: 'Lưu trữ hồ sơ kỹ thuật, bảng size và tiêu chuẩn sản xuất — duy trì tính đồng nhất khi mở rộng.',
+      desc: 'Lưu trữ hồ sơ kỹ thuật, bảng size và tiêu chuẩn sản xuất cho từng dự án. → Duy trì tính đồng nhất khi mở rộng hệ thống hoặc bổ sung nhân sự.',
     },
     {
       title: 'Quản lý chất lượng xuyên suốt dự án',
-      desc: 'Kiểm soát từ nguyên phụ liệu đến thành phẩm, đảm bảo tiêu chuẩn sử dụng và hình ảnh thương hiệu.',
+      desc: 'Kiểm soát chất lượng từ nguyên phụ liệu đến thành phẩm trước khi bàn giao. → Đảm bảo đồng phục đạt tiêu chuẩn sử dụng và hình ảnh thương hiệu.',
     },
   ],
   products: [

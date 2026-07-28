@@ -1,5 +1,6 @@
 ---
 import { missionVision, missionVisionSection, coreValues } from '../../data/gioi-thieu';
+import { sectionPy } from '../../lib/section-rhythm';
 
 const pillars = [
   {
@@ -17,7 +18,7 @@ const pillars = [
 
 {/* Định hướng — Sứ mệnh & Tầm nhìn: cặp thẻ navy / vàng theo ngôn ngữ thẻ quy trình trang chủ */}
 <section class="bg-[#fbf8f1] text-[#1f1b17]" aria-label="Sứ mệnh và tầm nhìn">
-  <div class="mx-auto w-full max-w-container-max-width px-6 py-12 md:px-8 lg:py-16">
+  <div class:list={['mx-auto w-full max-w-container-max-width px-6 md:px-8', sectionPy]}>
     <header class="max-w-[44rem]">
       <p class="inline-flex rounded-full bg-[#ffedb7] px-4 py-2 text-[0.7rem] font-extrabold uppercase tracking-[0.025em] text-[#5c4500] sm:text-xs">
         {missionVisionSection.eyebrow}
@@ -72,7 +73,7 @@ const pillars = [
 
 {/* 5 giá trị cốt lõi — tiêu đề dính bên trái + pill số & line vàng mờ dần (ngôn ngữ "Tại sao chọn TPG") */}
 <section class="bg-[#fbf8f1] text-[#1f1b17]" aria-labelledby="about-values-title">
-  <div class="mx-auto w-full max-w-container-max-width px-6 py-12 md:px-8 lg:py-16">
+  <div class:list={['mx-auto w-full max-w-container-max-width px-6 md:px-8', sectionPy]}>
     <div class="grid items-start gap-12 md:grid-cols-[0.85fr_1.15fr] md:gap-16">
       <div class="md:sticky md:top-28">
         <p class="inline-flex rounded-full bg-[#ffedb7] px-4 py-2 text-[0.7rem] font-extrabold uppercase tracking-[0.025em] text-[#5c4500] sm:text-xs">

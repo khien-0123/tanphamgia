@@ -32,23 +32,23 @@ export const giaiPhap3Content: SolutionPageContent = {
   plans: [
     {
       title: 'Chuẩn hóa nhận diện trên toàn hệ thống',
-      desc: 'Thống nhất màu sắc, logo, chất liệu và quy cách sản xuất — hình ảnh thương hiệu đồng bộ trên toàn quốc.',
+      desc: 'Xây dựng tiêu chuẩn đồng phục thống nhất về màu sắc, logo, chất liệu và quy cách sản xuất. → Đảm bảo hình ảnh thương hiệu đồng bộ trên toàn quốc.',
     },
     {
       title: 'Tư vấn thiết kế & chất liệu theo môi trường làm việc',
-      desc: 'Phân tích đặc thù công việc và tần suất sử dụng để gia tăng sự thoải mái cho đội ngũ di chuyển ngoài thị trường.',
+      desc: 'Phân tích đặc thù công việc và tần suất sử dụng để tư vấn thiết kế, form dáng và chất liệu phù hợp. → Gia tăng sự thoải mái cho đội ngũ thường xuyên di chuyển và làm việc ngoài thị trường.',
     },
     {
       title: 'Quản lý hồ sơ kỹ thuật cho đơn tái đặt',
-      desc: 'Lưu trữ thông số kỹ thuật, bảng size, màu sắc và hồ sơ sản xuất — duy trì đồng nhất giữa các đợt và khu vực.',
+      desc: 'Lưu trữ toàn bộ thông số kỹ thuật, bảng size, màu sắc và hồ sơ sản xuất của từng dự án. → Duy trì sự đồng nhất giữa các đợt đặt hàng và các khu vực.',
     },
     {
       title: 'Triển khai linh hoạt cho hệ thống nhiều tỉnh thành',
-      desc: 'Hỗ trợ đóng gói, phân loại và giao hàng theo khu vực hoặc danh sách nhân sự, giảm tải hành chính.',
+      desc: 'Hỗ trợ đóng gói, phân loại và giao hàng theo khu vực hoặc theo danh sách nhân sự. → Giảm tải công việc cho bộ phận hành chính và đảm bảo tiến độ triển khai.',
     },
     {
       title: 'Năng lực sản xuất số lượng lớn',
-      desc: 'Đáp ứng linh hoạt từ vài trăm đến hàng chục nghìn sản phẩm cho chiến dịch hoặc mở rộng hệ thống.',
+      desc: 'Đáp ứng linh hoạt từ vài trăm đến hàng chục nghìn sản phẩm cho các chiến dịch hoặc hoạt động mở rộng hệ thống. → Đảm bảo tiến độ và chất lượng trên quy mô lớn.',
     },
   ],
   products: [

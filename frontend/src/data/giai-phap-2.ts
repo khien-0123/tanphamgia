@@ -33,19 +33,19 @@ export const giaiPhap2Content: SolutionPageContent = {
   plans: [
     {
       title: 'Phát triển đồng phục theo tư duy thời trang ứng dụng',
-      desc: 'Vừa chuyên nghiệp vừa giúp người mặc tự tin hơn trong công việc.',
+      desc: 'Ứng dụng kinh nghiệm hơn 20 năm trong ngành thời trang vào phát triển đồng phục doanh nghiệp. → Đồng phục vừa chuyên nghiệp vừa giúp người mặc tự tin hơn trong công việc.',
     },
     {
       title: 'Tư vấn thiết kế & chất liệu phù hợp mục đích sử dụng',
-      desc: 'Phân tích vai trò công việc, tần suất và môi trường làm việc thay vì áp dụng một mẫu cho toàn bộ doanh nghiệp.',
+      desc: 'Thay vì áp dụng một mẫu đồng phục cho toàn bộ doanh nghiệp, Tân Phạm Gia phân tích vai trò công việc, tần suất sử dụng và môi trường làm việc để xây dựng giải pháp phù hợp. → Giúp nâng cao trải nghiệm nhân viên và tối ưu hiệu quả sử dụng trong dài hạn.',
     },
     {
       title: 'Công nghệ rập 3D & chuẩn hóa form dáng',
-      desc: 'Tôn dáng người mặc, phù hợp nhiều vóc dáng, tạo sự khác biệt tinh tế.',
+      desc: 'Ứng dụng tiêu chuẩn "Tỷ lệ vàng" cùng công nghệ rập 3D & may trên mannequin để tạo nên những sản phẩm tôn dáng, thoải mái và phù hợp với nhiều vóc dáng người mặc. → Tôn dáng người mặc, tạo nên sự khác biệt tinh tế trong đồng phục.',
     },
     {
-      title: 'Lưu trữ hồ sơ kỹ thuật',
-      desc: 'Đồng bộ toàn hệ thống, đảm bảo đồng nhất giữa nhiều lần tái đặt hàng.',
+      title: 'Lưu trữ hồ sơ kỹ thuật - đồng bộ toàn hệ thống',
+      desc: 'Toàn bộ thông số kỹ thuật, mã màu Pantone, mẫu vải và hồ sơ sản xuất đều được lưu trữ. Đảm bảo đồng phục đồng nhất giữa nhiều lần tái đặt hàng, chuẩn chất lượng như lô đầu tiên. → Hình ảnh đội ngũ nhất quán trên toàn hệ thống.',
     },
   ],
   products: [
@@ -57,28 +57,28 @@ export const giaiPhap2Content: SolutionPageContent = {
   ],
   fabricTable: [
     {
-      material: 'Oxford Cotton',
-      composition: '100% Cotton / CVC',
-      features: 'Mềm mại, thấm hút, giữ form tốt',
-      environment: 'Văn phòng, lễ tân',
+      material: 'Pique Polyester',
+      composition: '100% Poly',
+      features: 'Thoáng khí, mau khô, bền màu cao',
+      environment: 'Sản xuất thông thường',
     },
     {
       material: 'Pique Tici (CVC)',
       composition: '65% Cotton, 35% Poly',
-      features: 'Thoáng khí, bền màu, in logo sắc nét',
-      environment: 'Polo văn phòng, kinh doanh',
+      features: 'Mềm mại, thấm hút, in màu sắc nét',
+      environment: 'Văn phòng nhà máy',
     },
     {
-      material: 'Polyester cao cấp',
-      composition: '100% Poly',
-      features: 'Chống nhăn, mau khô, dễ bảo quản',
-      environment: 'Đội ngũ di chuyển nhiều',
+      material: 'Oxford kỹ thuật',
+      composition: '100% Poly chuyên dụng',
+      features: 'Bền cơ học, chống xước, chống tĩnh điện',
+      environment: 'Điện tử, hóa chất',
     },
     {
       material: 'Kaki Việt Nam',
       composition: '95% Poly, 5% Spandex',
       features: 'Co giãn nhẹ, chống nhăn, lịch sự',
-      environment: 'Quản lý, điều hành',
+      environment: 'Kỹ sư, quản lý xưởng',
     },
   ],
   processSteps: [

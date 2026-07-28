@@ -89,7 +89,7 @@ export const homeSolutions = {
 
 export const homeClients = {
   eyebrow: 'Khách hàng tiêu biểu',
-  title: '500+ doanh nghiệp — chia theo đúng 4 nhóm giải pháp',
+  title: 'Tân Phạm Gia được tin tưởng lựa chọn bởi:',
   description:
     '23 năm đồng hành cùng doanh nghiệp trong hành trình xây dựng hình ảnh chuyên nghiệp thông qua các giải pháp đồng phục được phát triển bài bản và bền vững.',
   logosLabel: '18 thương hiệu đồng hành',

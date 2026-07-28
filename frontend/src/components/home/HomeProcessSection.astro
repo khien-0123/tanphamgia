@@ -1,5 +1,6 @@
 ---
 import { homeProcess } from '../../data/home';
+import { sectionPy } from '../../lib/section-rhythm';
 
 const iconPaths = {
   consulting: '<path d="M12 3v4m0 0 6 5m-6-5-6 5m12 0H6l-3 3h18l-3-3ZM8 18h8v3H8z" />',
@@ -12,7 +13,7 @@ const iconPaths = {
 <section class="mockup-process-section relative overflow-hidden bg-[#fbf8f1] text-[#171717]" aria-labelledby="mockup-process-title">
   <div class="pointer-events-none absolute -right-20 -top-32 h-[28rem] w-[28rem] rounded-full bg-[#f8edc8]" aria-hidden="true"></div>
 
-  <div class="relative mx-auto w-full max-w-container-max-width px-6 py-12 pb-24 lg:px-8 lg:py-12 lg:pb-28">
+  <div class:list={['relative mx-auto w-full max-w-container-max-width px-6 pb-24 lg:px-8 lg:pb-28', sectionPy]}>
     <header class="max-w-[64rem]">
       <p class="inline-flex rounded-full bg-[#fff0bd] px-4 py-2 text-[0.7rem] font-extrabold uppercase tracking-[0.025em] text-[#5c4500] sm:text-xs">
         {homeProcess.eyebrow}

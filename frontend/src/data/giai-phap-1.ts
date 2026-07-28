@@ -21,35 +21,35 @@ export const giaiPhap1Content: SolutionPageContent = {
     ],
   },
   sections: {
-    issuesTitle: '01. Những vấn đề doanh nghiệp sản xuất thường gặp',
+    issuesTitle: '01. Những vấn đề doanh nghiệp sản xuất thường gặp khi đặt đồng phục',
     productsTitle: '03. Danh mục sản phẩm & thông số kỹ thuật vải',
   },
   issues: [
-    'Số lượng lớn nhưng chất lượng không đồng đều giữa các đợt sản xuất.',
-    'Chất liệu đồng phục chưa phù hợp môi trường đặc thù, nhanh xuống cấp.',
-    'Đơn tái đặt hàng dễ lệch màu sắc, form dáng so với lô đầu tiên.',
-    'Doanh nghiệp FDI khó kiểm soát tiêu chuẩn chất lượng khi làm việc từ xa.',
+    'Số lượng lớn nhưng chất lượng không đồng đều',
+    'Chất liệu đồng phục không đáp ứng yêu cầu môi trường đặc thù',
+    'Đơn tái đặt hàng chất lượng lệch so với ban đầu',
+    'Công ty tại nước ngoài khó khăn khi chọn nhà cung cấp đồng phục tại Việt Nam',
   ],
   plans: [
     {
-      title: 'QC đa tầng cho đơn hàng số lượng lớn',
-      desc: 'Kiểm soát từ nguyên liệu đến thành phẩm, đảm bảo đồng bộ màu sắc và kích thước.',
+      title: 'Quy trình QC đa tầng cho đơn hàng số lượng lớn',
+      desc: 'Kiểm soát chất lượng từ nguyên vật liệu, bán thành phẩm đến thành phẩm trước khi bàn giao. → Đảm bảo sự đồng bộ về màu sắc, kích thước và chất lượng sản phẩm.',
     },
     {
       title: 'Tư vấn chất liệu theo môi trường làm việc',
-      desc: 'Tối ưu sự thoải mái và tuổi thọ sử dụng cho từng bộ phận, từng môi trường.',
+      desc: 'Khảo sát đặc thù công việc và nhu cầu sử dụng để đề xuất chất liệu phù hợp. → Gia tăng sự thoải mái cho người mặc và tối ưu tuổi thọ đồng phục.',
     },
     {
-      title: 'Quản lý hồ sơ kỹ thuật cho đơn tái đặt',
-      desc: 'Duy trì chuẩn chất lượng giữa các giai đoạn phát triển doanh nghiệp.',
+      title: 'Quản lý tiêu chuẩn cho đơn tái đặt',
+      desc: 'Lưu trữ thông số kỹ thuật, màu sắc, chất liệu và hồ sơ sản xuất của từng dự án. → Duy trì sự đồng nhất giữa các đợt đặt hàng và trong suốt quá trình phát triển của doanh nghiệp.',
     },
     {
-      title: 'Hỗ trợ doanh nghiệp FDI',
-      desc: 'Quy trình minh bạch, tài liệu kỹ thuật rõ ràng, theo dõi tiến độ xuyên suốt.',
+      title: 'Hỗ trợ doanh nghiệp FDI & công ty đa quốc gia',
+      desc: 'Quy trình làm việc minh bạch, tài liệu kỹ thuật rõ ràng và đội ngũ đồng hành xuyên suốt dự án. → Giúp doanh nghiệp kiểm soát chất lượng, tiến độ và triển khai hiệu quả dù làm việc từ xa.',
     },
     {
       title: 'Năng lực sản xuất quy mô lớn',
-      desc: 'Đáp ứng linh hoạt từ vài trăm đến hàng chục nghìn sản phẩm.',
+      desc: 'Nhà xưởng trực tiếp cùng hệ thống sản xuất ổn định, đáp ứng linh hoạt từ đơn hàng vài trăm đến hàng chục nghìn sản phẩm. → Đảm bảo chất lượng và tiến độ cho các dự án đồng phục doanh nghiệp.',
     },
   ],
   products: ['Polo dài/ngắn tay kỹ thuật', 'Đồng phục bảo hộ chuyên dụng', 'Áo khoác công xưởng'],
