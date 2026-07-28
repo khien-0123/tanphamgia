@@ -1,7 +1,7 @@
 /** Banner chuẩn cho mọi trang con — theo cấu trúc hero trang Giới thiệu. */
 
 export const pageHeroShell =
-  'relative flex h-[32rem] flex-col overflow-hidden bg-[#0d1b3a] text-white max-md:h-[24rem]';
+  'relative flex min-h-[32rem] flex-col overflow-hidden bg-[#0d1b3a] text-white max-md:min-h-[30rem]';
 
 export const pageHeroInner =
   'relative z-10 mx-auto flex w-full max-w-container-max-width flex-1 flex-col justify-between gap-5 px-6 pb-7 pt-40 md:gap-6 md:px-8 md:pb-8 md:pt-44';
