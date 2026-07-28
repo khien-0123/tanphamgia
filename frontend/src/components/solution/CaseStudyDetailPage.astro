@@ -8,7 +8,7 @@ import { getOtherCaseStudies } from '../../lib/case-study-pool';
 import { parseCaseStudyStats } from '../../lib/parse-case-study-stats';
 import { caseStudyHref, routes, solutionAnchorHref } from '../../lib/routes';
 import { getSolutionTheme } from '../../lib/solution-theme';
-import { rhythmBg } from '../../lib/section-rhythm';
+import { rhythmBg, sectionPy } from '../../lib/section-rhythm';
 
 export interface CaseStudyProject {
   slug: string;
@@ -78,7 +78,7 @@ const seoSuffix: Record<Props['solutionId'], string> = {
       items={otherProjects}
       columns={4}
       headerStyle="solution"
-      sectionClass={`${rhythmBg(4)} py-16 md:py-24 border-t border-border-subtle`}
+      sectionClass={`${rhythmBg(4)} ${sectionPy} border-t border-border-subtle`}
     />
   </main>
 </SiteLayout>

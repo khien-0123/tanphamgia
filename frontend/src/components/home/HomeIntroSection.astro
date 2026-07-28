@@ -1,12 +1,13 @@
 ---
 import { homeHero } from '../../data/home';
 import SiteImage from '../SiteImage.astro';
+import { sectionPy } from '../../lib/section-rhythm';
 
 const { about } = homeHero;
 ---
 
 <section class="flex bg-[#0D1B3A] text-white lg:min-h-[max(42rem,100svh)]" aria-labelledby="mockup-about-title">
-  <div class="mx-auto grid w-full max-w-container-max-width items-center gap-10 px-6 py-12 lg:min-h-[max(42rem,100svh)] lg:grid-cols-[1.02fr_1fr] lg:gap-8 xl:gap-10">
+  <div class:list={['mx-auto grid w-full max-w-container-max-width items-center gap-10 px-6 lg:min-h-[max(42rem,100svh)] lg:grid-cols-[1.02fr_1fr] lg:gap-8 xl:gap-10', sectionPy]}>
     <figure data-reveal data-reveal-direction="up" class="m-0 overflow-hidden rounded-[1.75rem] bg-white/5 lg:self-stretch">
       <SiteImage
         src={about.image}

@@ -1,6 +1,7 @@
 ---
 import SiteImage from '../SiteImage.astro';
 import { homeRecentProjects } from '../../data/home';
+import { sectionPy } from '../../lib/section-rhythm';
 
 const projects = homeRecentProjects.items;
 const loopProjects = [...projects, ...projects, ...projects];
@@ -16,7 +17,7 @@ const loopProjects = [...projects, ...projects, ...projects];
     aria-hidden="true"
   ></div>
 
-  <div class="relative mx-auto w-full max-w-container-max-width px-6 py-12">
+  <div class:list={['relative mx-auto w-full max-w-container-max-width px-6', sectionPy]}>
     <header data-reveal data-reveal-direction="up" class="max-w-[64rem]">
       <h2
         id="mockup-recent-projects-title"

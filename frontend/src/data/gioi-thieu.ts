@@ -109,15 +109,34 @@ export const productionCapacity = {
     { value: 'Chủ động', label: 'Tiến độ — không phụ thuộc trung gian' },
     { value: 'Linh hoạt', label: 'Từ 100 đến hàng chục nghìn sản phẩm' },
   ],
-  qcTitle: 'Quy trình kiểm định 5 tầng',
+  qcTitle: 'Quy trình QC đa tầng',
   qcDesc:
-    'Kiểm tra nghiêm ngặt từ sợi vải đầu vào đến đóng gói cuối cùng — không bỏ sót lỗi nào trước khi thành phẩm rời xưởng.',
+    'Kiểm soát chặt chẽ qua từng công đoạn, từ nguyên liệu đầu vào đến khi sản phẩm hoàn thiện và sẵn sàng bàn giao.',
   qcSteps: [
-    'Sợi vải đầu vào',
-    'Cắt vải',
-    'May bán thành phẩm',
-    'Hoàn thiện',
-    'Kiểm định & đóng gói',
+    {
+      number: '01',
+      title: 'Kiểm soát nguyên liệu đầu vào',
+      description:
+        'Mỗi lô vải và phụ liệu đều được kiểm tra theo các tiêu chí về màu sắc, độ co rút, độ bền màu và thông số kỹ thuật trước khi đưa vào sản xuất. Việc kiểm soát ngay từ đầu giúp TPG đảm bảo tính ổn định của chất lượng và hạn chế rủi ro trong toàn bộ đơn hàng.',
+    },
+    {
+      number: '02',
+      title: 'Kiểm soát sau cắt',
+      description:
+        'Toàn bộ chi tiết sau khi cắt được đối chiếu với rập kỹ thuật và thông số đã phê duyệt. Quy trình này giúp đảm bảo độ chính xác của từng chi tiết, tạo nền tảng cho sản phẩm đồng nhất khi sản xuất số lượng lớn.',
+    },
+    {
+      number: '03',
+      title: 'Kiểm soát trong quá trình sản xuất',
+      description:
+        'Đội ngũ QC theo dõi liên tục tại từng công đoạn may, kiểm tra đường may, kết cấu và các vị trí chịu lực. Sai sót được phát hiện và xử lý ngay trên chuyền, giúp giảm thiểu lỗi tích lũy và duy trì chất lượng xuyên suốt quá trình sản xuất.',
+    },
+    {
+      number: '04',
+      title: 'Kiểm soát trước khi xuất xưởng',
+      description:
+        '100% thành phẩm được kiểm tra về kích thước, màu sắc, form dáng, logo và mức độ hoàn thiện trước khi đóng gói. Chỉ những sản phẩm đáp ứng đúng tiêu chuẩn chất lượng mới được bàn giao đến khách hàng.',
+    },
   ],
   qcStandards: ['ISO 9001:2015', 'Tiêu chuẩn Oeko-Tex', 'Kim may Groz-Beckert', 'Chỉ may Coats'],
   factoryImage: siteAssets.about.production1,
