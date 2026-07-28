@@ -11,21 +11,35 @@ import {
   pageHeroTitle,
 } from '../lib/page-hero-shell';
 
+interface HeroStat {
+  value: string;
+  label: string;
+  suffix?: string;
+}
+
 interface Props {
   title: string;
+  titleLines?: readonly [string, string];
+  /** Override title sizing for pages requiring the homepage scale. */
+  titleClass?: string;
+  eyebrow?: string;
   description?: string;
   /** Ngắt dòng mô tả trên mobile — tránh chữ rớt hàng lẻ */
   descriptionLines?: readonly [string, string];
   breadcrumb?: { label: string; href?: string }[];
+  stats?: HeroStat[];
   /** Ảnh nền hero — khớp chủ đề từng trang (xem pageHeroBg trong site.ts) */
   bgImage?: string;
 }
 
 const {
   title,
+  titleLines,
+  titleClass,
   description,
   descriptionLines,
   breadcrumb = [{ label: 'Trang chủ', href: routes.home }],
+  stats = [],
   bgImage = siteAssets.hero.fallback,
 } = Astro.props;
 ---
@@ -35,28 +49,35 @@ const {
   <div class={pageHeroScrim} aria-hidden="true"></div>
 
   <div class={pageHeroInner}>
-    {
-      breadcrumb.length > 0 && (
-        <nav aria-label="Breadcrumb" class="text-sm text-white/60">
-          {breadcrumb.map((item, i) => (
-            <>
-              {i > 0 && <span class="mx-2">/</span>}
-              {item.href ? (
-                <a class="hover:text-accent-gold transition-colors" href={item.href}>
-                  {item.label}
-                </a>
-              ) : (
-                <span class="text-white">{item.label}</span>
-              )}
-            </>
-          ))}
-        </nav>
-      )
-    }
-
     <div>
-      <h1 class:list={[pageHeroTitle, 'mb-5 md:mb-6']}>
-        {title}
+      {
+        breadcrumb.length > 0 && (
+          <nav
+            aria-label="Breadcrumb"
+            class="mb-10 inline-flex min-h-10 items-center rounded-full bg-[#fff0bd] px-4 py-2 text-[0.68rem] font-extrabold uppercase leading-none tracking-[0.025em] text-[#7a5900] sm:text-xs"
+          >
+            {breadcrumb.map((item, i) => (
+              <>
+                {i > 0 && <span class="mx-1.5">/</span>}
+                {item.href ? (
+                  <a class="inline-flex min-h-6 items-center transition-colors hover:text-[#3f2d00]" href={item.href}>
+                    {item.label}
+                  </a>
+                ) : (
+                  <span>{item.label}</span>
+                )}
+              </>
+            ))}
+          </nav>
+        )
+      }
+      <h1 class:list={[titleClass ?? pageHeroTitle, titleLines && 'max-w-[32ch]', 'mb-3 md:mb-4']}>
+        {titleLines ? (
+          <>
+            <span class="block">{titleLines[0]}</span>
+            <span class="block">{titleLines[1]}</span>
+          </>
+        ) : title}
       </h1>
       {
         description && (
@@ -82,5 +103,23 @@ const {
         )
       }
     </div>
+
+    {
+      stats.length > 0 && (
+        <dl class="flex flex-wrap gap-x-10 gap-y-5 border-t border-white/15 pt-6 max-md:gap-x-7">
+          {stats.map((stat) => (
+            <div class="min-w-0">
+              <dt class="whitespace-nowrap text-2xl font-extrabold leading-none tracking-[-0.03em] tabular-nums sm:text-[2rem]">
+                {stat.value}
+                {stat.suffix && <span class="text-[#ffc72c]">{stat.suffix}</span>}
+              </dt>
+              <dd class="m-0 mt-2 text-[0.65rem] font-bold uppercase tracking-[0.18em] text-white/65 sm:text-[0.7rem]">
+                {stat.label}
+              </dd>
+            </div>
+          ))}
+        </dl>
+      )
+    }
   </div>
 </header>

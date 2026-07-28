@@ -82,11 +82,11 @@ export const giaiPhap2Content: SolutionPageContent = {
     },
   ],
   processSteps: [
-    'Tiếp nhận yêu cầu & Tư vấn chuyên sâu',
-    'Thiết kế & Báo giá',
-    'May mẫu thử & Duyệt mẫu',
+    'Tiếp nhận yêu cầu & tư vấn chuyên sâu',
+    'Thiết kế & báo giá',
+    'May mẫu thử & duyệt mẫu',
     'Ký kết hợp đồng',
-    'Sản xuất & Kiểm soát chất lượng',
-    'Bàn giao & Hậu mãi',
+    'Sản xuất & kiểm soát chất lượng',
+    'Bàn giao & hậu mãi',
   ],
 };

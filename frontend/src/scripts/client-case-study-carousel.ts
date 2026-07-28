@@ -9,7 +9,6 @@ function initSecondaryCarousel(root: HTMLElement) {
 
   const prevBtn = root.querySelector<HTMLButtonElement>('[data-slider-prev]');
   const nextBtn = root.querySelector<HTMLButtonElement>('[data-slider-next]');
-  const dots = [...root.querySelectorAll<HTMLButtonElement>('[data-carousel-dot]')];
   const desktopMq = window.matchMedia('(min-width: 768px)');
 
   const getVisibleCount = () => (desktopMq.matches ? 2 : 1);
@@ -33,20 +32,9 @@ function initSecondaryCarousel(root: HTMLElement) {
 
   const syncUi = () => {
     const active = getActiveIndex();
-    const max = getMaxIndex();
 
-    dots.forEach((dot, index) => {
-      const isActive = index === active;
-      dot.setAttribute('aria-selected', isActive ? 'true' : 'false');
-      dot.classList.toggle('w-6', isActive);
-      dot.classList.toggle('w-2', !isActive);
-      dot.classList.toggle('bg-accent-teal', isActive);
-      dot.classList.toggle('bg-white/35', !isActive);
-      dot.classList.toggle('hover:bg-white/55', !isActive);
-    });
-
-    if (prevBtn) prevBtn.disabled = active <= 0;
-    if (nextBtn) nextBtn.disabled = active >= max;
+    if (prevBtn) prevBtn.disabled = false;
+    if (nextBtn) nextBtn.disabled = false;
   };
 
   const scrollToIndex = (index: number) => {
@@ -62,17 +50,30 @@ function initSecondaryCarousel(root: HTMLElement) {
     scrollTimer = setTimeout(syncUi, 80);
   };
 
-  prevBtn?.addEventListener('click', () => {
-    scrollToIndex(Math.max(0, getActiveIndex() - 1));
-  });
+  const moveNext = () => {
+    const step = getStep();
+    const first = slides[0];
+    if (!first || step <= 0) return;
+    viewport.scrollBy({ left: step, behavior: 'smooth' });
+    window.setTimeout(() => {
+      track.append(first);
+      slides.push(slides.shift()!);
+      viewport.scrollBy({ left: -step, behavior: 'instant' as ScrollBehavior });
+    }, 450);
+  };
 
-  nextBtn?.addEventListener('click', () => {
-    scrollToIndex(Math.min(getMaxIndex(), getActiveIndex() + 1));
-  });
+  const movePrevious = () => {
+    const step = getStep();
+    const last = slides[slides.length - 1];
+    if (!last || step <= 0) return;
+    track.prepend(last);
+    slides.unshift(slides.pop()!);
+    viewport.scrollBy({ left: step, behavior: 'instant' as ScrollBehavior });
+    window.setTimeout(() => viewport.scrollBy({ left: -step, behavior: 'smooth' }), 20);
+  };
 
-  dots.forEach((dot, index) => {
-    dot.addEventListener('click', () => scrollToIndex(index));
-  });
+  prevBtn?.addEventListener('click', movePrevious);
+  nextBtn?.addEventListener('click', moveNext);
 
   viewport.addEventListener('scroll', scheduleSync, { passive: true });
   viewport.addEventListener('scrollend', syncUi);

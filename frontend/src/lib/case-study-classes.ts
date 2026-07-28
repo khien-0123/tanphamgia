@@ -38,9 +38,10 @@ export const caseStudyCarouselSlide = [
   'md:border-r md:last:border-r-0',
 ];
 
-export const caseStudyDotBase = 'h-2 rounded-full transition-all duration-300';
-export const caseStudyDotActive = 'w-6 bg-accent-teal';
-export const caseStudyDotIdleOnImage = 'w-2 bg-white/35 hover:bg-white/55';
+export const caseStudyDotBase =
+  'group inline-flex h-6 w-6 items-center justify-center rounded-full';
+export const caseStudyDotVisual =
+  'h-2 w-2 rounded-full bg-white/35 transition-all duration-300 group-hover:bg-white/55 group-aria-selected:w-6 group-aria-selected:bg-accent-teal';
 
 /** Dots đè lên đáy ảnh carousel */
 export const caseStudyCarouselDots =

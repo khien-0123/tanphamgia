@@ -4,7 +4,7 @@ import { routes } from '../../lib/routes';
 ---
 
 <main class="relative overflow-visible bg-[#f5f0e7] p-0 sm:p-2 lg:p-0">
-  <section class="relative flex flex-col pb-12 sm:min-h-[100svh] sm:pb-0 overflow-visible bg-ink-dark text-white">
+  <section class="relative flex flex-col overflow-visible bg-ink-dark pb-12 text-white lg:min-h-[100svh] lg:pb-0">
     <div class="absolute inset-0" aria-hidden="true">
       <video class="h-full w-full object-cover object-center" autoplay loop muted playsinline preload="metadata" poster={homeHero.poster}>
         <source src={homeHero.media} type="video/mp4" />
@@ -16,12 +16,11 @@ import { routes } from '../../lib/routes';
     </div>
 
 
-    <div class="relative z-10 mx-auto flex w-full max-w-[96rem] flex-1 flex-col px-5 pb-5 pt-[clamp(6.5rem,12svh,7.5rem)] sm:pt-[clamp(5.5rem,13svh,9rem)] sm:px-8 lg:px-12 xl:px-16">
+    <div class="relative z-10 mx-auto flex w-full max-w-[96rem] flex-col px-5 pb-8 pt-[clamp(6.5rem,12svh,7.5rem)] sm:px-8 sm:pb-10 sm:pt-[clamp(5.5rem,13svh,9rem)] lg:flex-1 lg:px-12 lg:pb-5 xl:px-16">
 
-      <div class="flex flex-1 flex-col pt-[clamp(1.5rem,4svh,3rem)] sm:pb-[clamp(3rem,7svh,5rem)] lg:pt-0">
-        <div aria-hidden="true" class="grow sm:grow-[4]"></div>
+      <div class="flex flex-col pt-[clamp(1.5rem,4svh,3rem)] lg:flex-1 lg:pt-0">
+        <div aria-hidden="true" class="hidden grow lg:block lg:grow-[4]"></div>
         <div data-reveal-stagger class="mx-auto w-full max-w-[84rem]">
-          <p data-reveal class="mb-5 text-center text-[0.65rem] font-bold uppercase tracking-[0.26em] text-accent-gold lg:hidden">{homeHero.eyebrow}</p>
           <h1 data-reveal class="mx-auto max-w-[84rem] text-center text-[clamp(2.25rem,min(1.1rem+4.2vw,8.5svh),5.75rem)] font-extrabold leading-[1.05] tracking-[-0.045em] text-white">
             {homeHero.title}
           </h1>
@@ -48,11 +47,11 @@ import { routes } from '../../lib/routes';
             </a>
           </div>
         </div>
-        <div aria-hidden="true" class="grow"></div>
+        <div aria-hidden="true" class="hidden grow lg:block"></div>
 
-        <div data-reveal class="hidden sm:flex items-end justify-between gap-5 pt-[clamp(1.5rem,4svh,3.5rem)]">
-          {/* Stat card — ẩn trên mobile, hiện từ sm trở lên */}
-          <div class="hidden sm:block w-[15.5rem] rounded-[2rem] border border-white/35 bg-white/10 px-6 py-6 shadow-[0_18px_45px_rgba(0,0,0,.2)] backdrop-blur-md sm:w-[18rem] sm:px-7">
+        <div data-reveal class="hidden lg:flex items-end justify-between gap-5 pt-[clamp(1.5rem,4svh,3.5rem)]">
+          {/* Stat card — ẩn trên mobile/tablet, hiện từ desktop trở lên */}
+          <div class="hidden lg:block w-[15.5rem] rounded-[2rem] border border-white/35 bg-white/10 px-6 py-6 shadow-[0_18px_45px_rgba(0,0,0,.2)] backdrop-blur-md lg:w-[18rem] lg:px-7">
             <p
               class="text-4xl font-extrabold tracking-[-0.045em] text-white sm:text-5xl"
               data-hero-stat-counter
@@ -70,7 +69,7 @@ import { routes } from '../../lib/routes';
     {/* Dossier card — Đặt ở level section để neo sát màn hình, không bị giới hạn bởi container max-width */}
     <a
       href={homeHero.dossier.href}
-      class="hidden sm:flex absolute right-0 bottom-0 z-30 min-h-[7rem] w-[17.5rem] sm:w-[18.5rem] items-center rounded-tl-[3rem] bg-[#faf8f2] px-8 py-4 text-ink-dark shadow-[-6px_-4px_16px_rgba(0,0,0,.1)]"
+      class="hidden lg:flex absolute right-0 bottom-0 z-30 min-h-[7rem] w-[17.5rem] lg:w-[18.5rem] items-center rounded-tl-[3rem] bg-[#faf8f2] px-8 py-4 text-ink-dark shadow-[-6px_-4px_16px_rgba(0,0,0,.1)]"
     >
       <span aria-hidden="true" class="mr-9 text-[1.75rem] font-bold leading-none">↗</span>
       <span class="text-left">
