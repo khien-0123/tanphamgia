@@ -1,149 +1,129 @@
 ---
 import SiteImage from '../SiteImage.astro';
 import { solutions } from '../../data/site';
-import { imageRadius } from '../../lib/image-frame';
+import { listingKeywords } from '../../data/giai-phap-listing';
 import { RHYTHM_WHITE, sectionPy } from '../../lib/section-rhythm';
+import { routes } from '../../lib/routes';
 
 interface Props {
   sectionBg?: string;
 }
 
 const { sectionBg = RHYTHM_WHITE } = Astro.props;
+
+type SolutionLike = { slug: string; bullets: string[]; homeBullets?: string[] };
+
+/** Thẻ hẹp 411px chỉ chứa được keyword ngắn — xem `data/giai-phap-listing.ts` */
+const keywordsFor = (item: SolutionLike): string[] =>
+  listingKeywords[item.slug] ?? item.homeBullets ?? item.bullets.slice(0, 3);
 ---
 
 <section class:list={[sectionPy, sectionBg]}>
   <div class="max-w-container-max-width mx-auto px-6 md:px-8">
-    <header data-reveal class="max-w-3xl mb-14 md:mb-20">
-      <p class="font-eyebrow text-xs uppercase tracking-widest text-accent-teal mb-4">
-        Tuyển tập · 04 phân khúc
-      </p>
-      <h2 class="font-headline-md text-4xl md:text-5xl font-extrabold text-ink-dark mb-5 text-balance">
-        Chọn ngành của bạn
-      </h2>
-      <p class="text-text-muted text-base md:text-lg leading-relaxed max-w-[58ch] text-pretty">
-        Mỗi phân khúc xây trên pain points thực tế và một quy trình triển khai 6 bước nhất quán. Mở
-        từng ngành để xem chi tiết.
-      </p>
-    </header>
-
-    <div class="grid gap-10 lg:grid-cols-[1fr_minmax(0,30rem)] lg:items-start lg:gap-16 xl:gap-20">
-      <!-- SÂN KHẤU ẢNH (desktop) — đổi theo ngành đang mở -->
+    <div class="grid gap-3 sm:gap-5 md:grid-cols-2 lg:grid-cols-[0.86fr_1fr_1fr]">
+      <!-- Ô ĐẦU — tiêu đề section nằm trong lưới, không phải thẻ ảnh.
+           Không nền, không viền: khoảng trống giữa mô tả và CTA là khoảng thở, không phải hộp rỗng.
+           Ở lg cột này cao bằng 2 hàng thẻ nên `flex-col` + `lg:mt-auto` ghim khối CTA xuống đáy,
+           thẳng hàng với mép dưới thẻ hàng 2. -->
       <div
-        class={`relative order-2 hidden aspect-[4/5] overflow-hidden bg-surface-alt ring-1 ring-border-subtle lg:sticky lg:top-28 lg:block ${imageRadius}`}
+        data-reveal
+        class="flex flex-col md:col-span-2 lg:col-span-1 lg:row-span-2 lg:pr-3"
       >
-        {
-          solutions.map((item, i) => (
+        <span
+          class="inline-flex self-start rounded-full bg-[#FFF0BD] px-4 py-2 text-xs font-extrabold uppercase tracking-[0.025em] text-[#5c4500] sm:text-sm"
+        >
+          Tuyển tập · 04 phân khúc
+        </span>
+        <h2
+          class="font-headline-md mt-6 text-[clamp(1.75rem,2.7vw,3rem)] font-extrabold leading-[1.1] tracking-[-0.03em] text-balance text-[#1f1b17]"
+        >
+          Chọn ngành của bạn
+        </h2>
+        <p class="mt-4 text-sm leading-[1.55] text-pretty text-[#625a50] sm:text-base">
+          Hiểu sâu đặc thù từng ngành để mang đến giải pháp phù hợp nhất — từ an toàn lao động ở nhà
+          máy đến thẩm mỹ ở phòng khám.
+        </p>
+
+        <!-- Đường kẻ hổ phách tách CTA khỏi mô tả. Ở lg khối này bị đẩy xuống đáy cột. -->
+        <div class="mt-6 border-t-2 border-accent-gold pt-4 lg:mt-auto">
+          <strong class="block text-sm font-extrabold text-[#1f1b17] sm:text-base">
+            Không thấy ngành của bạn?
+          </strong>
+          <a
+            href={routes.lienHe}
+            class="group/cta relative mt-2 inline-flex items-center gap-2 text-sm font-bold text-[#5c4500] transition-colors after:absolute after:bottom-[-5px] after:left-0 after:h-[2px] after:w-full after:origin-left after:scale-x-0 after:bg-current after:transition-transform after:duration-300 after:ease-out hover:text-[#1f1b17] hover:after:scale-x-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#E1A900] focus-visible:after:scale-x-100 motion-reduce:after:transition-none"
+          >
+            <span>Đặt lịch tư vấn riêng</span>
+            <span
+              aria-hidden="true"
+              class="material-symbols-outlined text-lg leading-none"
+            >
+              arrow_forward
+            </span>
+          </a>
+        </div>
+      </div>
+
+      <!-- 4 THẺ NGÀNH — không đánh số 01–04: bốn phân khúc không phải một chuỗi có trình tự -->
+      {
+        solutions.map((item) => (
+          <a
+            data-reveal
+            href={item.href}
+            class="group relative isolate flex min-h-[300px] flex-col justify-end overflow-hidden rounded-[20px] bg-ink-dark p-5 no-underline sm:p-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-gold"
+          >
             <SiteImage
-              data-stage={i}
-              data-active={i === 0 ? 'true' : 'false'}
               src={item.image}
-              alt={item.title}
+              alt={`Đồng phục cho ${item.title}`}
               loading="lazy"
-              class="absolute inset-0 h-full w-full object-cover object-top opacity-0 transition-opacity duration-500 data-[active=true]:opacity-100"
+              class="absolute inset-0 -z-20 h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105 motion-reduce:transition-none motion-reduce:group-hover:scale-100"
               variant="card"
             />
-          ))
-        }
-      </div>
+            <span aria-hidden="true" class="ind-scrim absolute inset-0 -z-10" />
 
-      <!-- DANH SÁCH NGÀNH — chữ khổ lớn, mở/đóng -->
-      <div class="order-1">
-        {
-          solutions.map((item, i) => (
-            <div
-              data-acc
-              data-active={i === 0 ? 'true' : 'false'}
-              class="group/acc border-t border-border-subtle last:border-b"
+            <span
+              aria-hidden="true"
+              class="absolute left-4 top-4 grid h-10 w-10 place-items-center rounded-[11px] border border-white/30 bg-white/15 backdrop-blur-[6px] sm:left-5 sm:top-5"
             >
-              <h3 class="m-0">
-                <button
-                  type="button"
-                  data-acc-btn={i}
-                  aria-expanded={i === 0 ? 'true' : 'false'}
-                  class="flex w-full items-center gap-5 py-6 text-left md:py-8"
-                >
-                  <span class="font-mono text-xs tabular-nums text-text-muted">
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
-                  <span class="flex-1 text-2xl md:text-4xl font-extrabold leading-tight text-ink-dark text-balance transition-colors group-data-[active=true]/acc:text-accent-gold">
-                    {item.title}
-                  </span>
-                  <span
-                    aria-hidden="true"
-                    class="relative h-4 w-4 shrink-0 text-accent-gold transition-transform duration-300 group-data-[active=true]/acc:rotate-45"
-                  >
-                    <span class="absolute left-0 top-1/2 h-px w-full -translate-y-1/2 bg-current" />
-                    <span class="absolute left-1/2 top-0 h-full w-px -translate-x-1/2 bg-current" />
-                  </span>
-                </button>
-              </h3>
+              <span class="material-symbols-outlined text-lg leading-none text-white">
+                {item.icon}
+              </span>
+            </span>
 
-              <div class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-500 ease-out group-data-[active=true]/acc:grid-rows-[1fr]">
-                <div class="overflow-hidden">
-                  <div class="max-w-[54ch] pb-8">
-                    <SiteImage
-                      src={item.image}
-                      alt={item.title}
-                      loading="lazy"
-                      class:list={[
-                        imageRadius,
-                        'mb-6 aspect-[4/3] w-full object-cover object-top ring-1 ring-border-subtle lg:hidden',
-                      ]}
-                      variant="card"
-                    />
-                    <p class="text-text-muted text-base leading-relaxed text-pretty">{item.desc}</p>
-                    <ul class="mt-5 grid gap-x-8 gap-y-3 sm:grid-cols-2">
-                      {item.bullets.map((bullet) => (
-                        <li class="flex items-start gap-3 text-sm text-ink-mid leading-snug">
-                          <span aria-hidden="true" class="mt-2 h-px w-4 shrink-0 bg-accent-gold" />
-                          <span class="min-w-0">{bullet}</span>
-                        </li>
-                      ))}
-                    </ul>
-                    <a
-                      href={item.href}
-                      class="group/cta mt-7 inline-flex items-center gap-2 text-sm font-bold text-accent-teal no-underline"
-                    >
-                      <span class="relative">
-                        Xem chi tiết giải pháp
-                        <span
-                          aria-hidden="true"
-                          class="absolute -bottom-0.5 left-0 h-px w-full origin-left scale-x-0 bg-accent-gold transition-transform duration-300 group-hover/cta:scale-x-100"
-                        />
-                      </span>
-                      <span
-                        aria-hidden="true"
-                        class="transition-transform duration-300 group-hover/cta:translate-x-1"
-                      >
-                        →
-                      </span>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))
-        }
-      </div>
+            <h3 class="pr-14 text-lg font-extrabold leading-snug text-balance text-white sm:text-xl">
+              {item.title}
+            </h3>
+            <ul class="mt-3 list-none space-y-1 p-0 pr-14 text-xs leading-snug text-white/90 sm:text-[0.8125rem]">
+              {keywordsFor(item).map((keyword) => (
+                <li>{keyword}</li>
+              ))}
+            </ul>
+
+            <span
+              aria-hidden="true"
+              class="absolute bottom-4 right-4 grid h-10 w-10 place-items-center rounded-full bg-accent-gold text-[#171717] transition-transform duration-300 group-hover:translate-x-1 motion-reduce:transition-none sm:bottom-[18px] sm:right-[18px]"
+            >
+              <span class="material-symbols-outlined text-lg leading-none">arrow_forward</span>
+            </span>
+          </a>
+        ))
+      }
     </div>
   </div>
 </section>
 
-<script>
-  // Accordion + sân khấu ảnh đồng bộ: mở một ngành, đóng các ngành khác, đổi ảnh.
-  const accs = Array.from(document.querySelectorAll<HTMLElement>('[data-acc]'));
-  const btns = document.querySelectorAll<HTMLButtonElement>('[data-acc-btn]');
-  const stages = document.querySelectorAll<HTMLElement>('[data-stage]');
-
-  btns.forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const idx = btn.dataset.accBtn ?? '0';
-      accs.forEach((a) => {
-        const on = a.contains(btn);
-        a.setAttribute('data-active', on ? 'true' : 'false');
-        a.querySelector('[data-acc-btn]')?.setAttribute('aria-expanded', on ? 'true' : 'false');
-      });
-      stages.forEach((s) => s.setAttribute('data-active', s.dataset.stage === idx ? 'true' : 'false'));
-    });
-  });
-</script>
+<style>
+  /* Scrim navy đáy → đỉnh: điều kiện để chữ trắng đọc được trên ảnh sáng (DESIGN.md §2),
+     không phải hiệu ứng làm ảnh tối cho sang.
+     Viết ở đây chứ không dùng class Tailwind arbitrary: Tailwind 3 không dịch được
+     `rgba()` lồng trong `linear-gradient()` — class sinh ra nhưng CSS thì không. */
+  .ind-scrim {
+    background: linear-gradient(
+      to top,
+      rgba(13, 27, 58, 0.94) 0%,
+      rgba(13, 27, 58, 0.72) 32%,
+      rgba(13, 27, 58, 0.2) 62%,
+      rgba(13, 27, 58, 0.06) 100%
+    );
+  }
+</style>

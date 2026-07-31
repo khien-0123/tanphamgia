@@ -14,8 +14,11 @@ import needleBg from '../assets/images/why-choose/kim_chi.svg';
       </h2>
       <p class="mt-3 text-sm leading-relaxed text-white/90 sm:text-base">{siteCta.description}</p>
       <div class="mt-7 flex w-full flex-col items-stretch justify-center gap-3 sm:w-auto sm:flex-row">
-        <a href={siteCta.primaryHref} class="inline-flex min-h-12 items-center justify-center gap-5 rounded-full bg-[#171717] px-7 py-3 text-xs font-extrabold text-white transition-transform hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#171717] sm:min-w-[13.2rem]">
-          <span>{siteCta.primaryLabel}</span><span aria-hidden="true">→</span>
+        <a href={siteCta.primaryHref} class="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-[#171717] px-7 py-3 text-xs font-extrabold text-white transition-transform hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#171717] sm:min-w-[13.2rem]">
+          <span>{siteCta.primaryLabel}</span><span
+            class="material-symbols-outlined text-lg leading-none"
+            aria-hidden="true">arrow_forward</span
+          >
         </a>
         <a href={siteCta.secondaryHref} class="inline-flex min-h-12 items-center justify-center rounded-full border border-[#171717] px-7 py-3 text-xs font-extrabold text-[#171717] transition-colors hover:bg-white/30 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#171717] sm:min-w-[10rem]">
           {siteCta.secondaryLabel}

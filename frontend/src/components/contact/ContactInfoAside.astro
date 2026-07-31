@@ -1,47 +1,80 @@
 ---
 import { siteContact } from '../../data/site';
+import { sectionEyebrow } from '../../lib/section-eyebrow';
+
+/**
+ * Cột trái trang Liên hệ. Trước đây là danh sách chữ, số hotline nằm lẫn dưới dạng
+ * link cỡ 15px — mà gọi điện mới là hành động đáng giá nhất trên trang này, nên nó
+ * được kéo lên thành nút riêng. Các kênh còn lại xếp dòng có gạch phân cách, cùng
+ * ngôn ngữ với khung "Phù hợp cho" ở hero và dải cam kết ở trang tài liệu.
+ */
+const channels = [
+  {
+    icon: 'mail',
+    label: 'Email',
+    value: siteContact.email,
+    href: siteContact.emailHref,
+  },
+  {
+    icon: 'location_on',
+    label: 'Showroom',
+    value: siteContact.address,
+  },
+  {
+    icon: 'schedule',
+    label: 'Giờ làm việc',
+    value: siteContact.hours,
+  },
+];
 ---
 
-<aside data-reveal class="lg:pt-14">
-  <h2 class="font-headline-md text-xl font-bold text-ink-dark mb-6">Thông tin liên hệ</h2>
-  <ul class="space-y-5 text-sm md:text-base">
-    <li class="flex gap-3">
-      <span class="material-symbols-outlined text-accent-gold shrink-0">location_on</span>
-      <span class="text-text-muted break-words [overflow-wrap:anywhere]">
-        <strong class="text-ink-dark block mb-1">Showroom</strong>
-        {siteContact.address}
-      </span>
-    </li>
-    <li class="flex gap-3">
-      <span class="material-symbols-outlined text-accent-gold shrink-0">call</span>
-      <span class="text-text-muted">
-        <strong class="text-ink-dark block mb-1">Hotline</strong>
-        <a class="text-accent-teal font-semibold hover:underline" href={siteContact.phoneHref}>
-          {siteContact.phoneDisplay}
-        </a>
-        <span class="block text-sm mt-1">8:00–18:00, T2–T7</span>
-      </span>
-    </li>
-    <li class="flex gap-3">
-      <span class="material-symbols-outlined text-accent-gold shrink-0">mail</span>
-      <span class="text-text-muted">
-        <strong class="text-ink-dark block mb-1">Email</strong>
-        <a class="text-accent-teal hover:underline break-words [overflow-wrap:anywhere]" href={siteContact.emailHref}>
-          {siteContact.email}
-        </a>
-      </span>
-    </li>
-    <li class="flex gap-3">
-      <span class="material-symbols-outlined text-accent-gold shrink-0">schedule</span>
-      <span class="text-text-muted">
-        <strong class="text-ink-dark block mb-1">Giờ làm việc</strong>
-        {siteContact.hours}
-      </span>
-    </li>
-  </ul>
+<div data-reveal>
+  <p class={sectionEyebrow}>Liên hệ</p>
 
-  <div class="mt-10 p-6 rounded-none bg-surface-alt border border-border-subtle">
-    <h3 class="font-bold text-ink-dark mb-2">Cam kết phản hồi</h3>
-    <p class="text-text-muted text-sm leading-relaxed">{siteContact.responseCommitment}</p>
-  </div>
-</aside>
+  <h2 class="mt-6 text-[clamp(1.75rem,2.7vw,3rem)] font-extrabold leading-[1.1] tracking-[-0.03em] text-ink-dark">
+    Nói cho chúng tôi biết doanh nghiệp bạn cần gì
+  </h2>
+
+  <p class="mt-5 max-w-[46ch] text-sm leading-[1.7] text-[#625a50] sm:text-[0.95rem]">
+    {siteContact.responseCommitment}
+  </p>
+
+  <a
+    class="mt-7 inline-flex min-h-[3.4rem] items-center justify-center gap-2 rounded-full bg-[#ffc72c] px-7 text-[0.95rem] font-extrabold text-[#17140a] no-underline transition-transform duration-200 hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#ffc72c]"
+    href={siteContact.phoneHref}
+  >
+    <span class="material-symbols-outlined text-xl leading-none" aria-hidden="true">call</span>
+    {siteContact.phoneDisplay}
+  </a>
+
+  <ul class="m-0 mt-8 list-none border-t border-[#e5dfd2] p-0">
+    {
+      channels.map((item) => (
+        <li class="grid grid-cols-[2.5rem_1fr] items-start gap-4 border-b border-[#e5dfd2] py-[1.05rem]">
+          <span class="flex h-10 w-10 items-center justify-center rounded-[0.7rem] bg-[#fff0bd] text-[#5c4500]">
+            <span class="material-symbols-outlined text-xl leading-none" aria-hidden="true">
+              {item.icon}
+            </span>
+          </span>
+          <span class="min-w-0">
+            <span class="block text-[0.65rem] font-extrabold uppercase tracking-[0.16em] text-[#625a50]">
+              {item.label}
+            </span>
+            {item.href ? (
+              <a
+                class="mt-[0.3rem] block break-words text-[0.9375rem] font-bold leading-[1.45] text-ink-dark no-underline [overflow-wrap:anywhere] hover:underline"
+                href={item.href}
+              >
+                {item.value}
+              </a>
+            ) : (
+              <span class="mt-[0.3rem] block break-words text-[0.9375rem] font-bold leading-[1.45] text-ink-dark [overflow-wrap:anywhere]">
+                {item.value}
+              </span>
+            )}
+          </span>
+        </li>
+      ))
+    }
+  </ul>
+</div>

@@ -26,6 +26,16 @@ export function blogPageHref(page: number): string {
   return page <= 1 ? routes.tinTuc : `${routes.tinTuc}/trang/${page}`;
 }
 
+/**
+ * Trang thư viện tài liệu. `category` là 'all' thì dùng route gốc /tai-lieu,
+ * còn lại đi qua /tai-lieu/danh-muc/<slug> — nhờ vậy lọc nhóm và phân trang
+ * không giẫm chân nhau khi thư viện vượt quá một trang.
+ */
+export function docLibraryHref(category: string, page = 1): string {
+  const base = category === 'all' ? routes.taiLieu : `${routes.taiLieu}/danh-muc/${category}`;
+  return page <= 1 ? base : `${base}/trang/${page}`;
+}
+
 export function solutionAnchorHref(solutionSlug: string, anchor: string): string {
   return `${solutionHref(solutionSlug)}#${anchor}`;
 }

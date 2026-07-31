@@ -1,0 +1,48 @@
+---
+import { documentCategories, documentsByCategory } from '../../data/tai-lieu';
+import { docLibraryHref } from '../../lib/routes';
+
+interface Props {
+  /** Nhóm đang mở — khớp với DocumentCategoryDef['id'] */
+  active: string;
+}
+
+const { active } = Astro.props;
+
+/* Đếm sẵn ở lúc build: ô nào rỗng thì không hiện, tránh bấm vào ra lưới trắng */
+const tiles = documentCategories
+  .map((cat) => ({ ...cat, count: documentsByCategory(cat.id).length }))
+  .filter((cat) => cat.count > 0);
+---
+
+<nav aria-label="Danh mục tài liệu">
+  <span class="mb-[1.15rem] block text-xs font-bold uppercase tracking-[0.2em] text-[#5c4500]">
+    Danh mục tài liệu
+  </span>
+  <ul class="m-0 grid list-none grid-cols-2 gap-3 p-0 sm:grid-cols-4">
+    {
+      tiles.map((cat) => (
+        <li>
+          <a
+            href={docLibraryHref(cat.id)}
+            aria-current={cat.id === active ? 'page' : undefined}
+            class:list={[
+              'flex min-h-[5.75rem] flex-col items-center justify-center gap-[0.6rem] rounded-[1rem] border px-3 py-4 text-center no-underline transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0d1b3a]',
+              cat.id === active
+                ? 'border-[#ffc933] bg-[#fff0bd] text-[#5c4500]'
+                : 'border-[#e5dfd2] bg-[#fffcf7] text-[#1f1b17] hover:border-[#c9bfa8]',
+            ]}
+          >
+            <span class="material-symbols-outlined text-[1.6rem] leading-none" aria-hidden="true">
+              {cat.icon}
+            </span>
+            <span class="text-[0.78rem] font-bold leading-[1.25]">{cat.label}</span>
+            <span class="text-[0.65rem] font-bold tabular-nums text-[#625a50]">
+              {String(cat.count).padStart(2, '0')}
+            </span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>

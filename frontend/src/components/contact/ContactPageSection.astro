@@ -1,25 +1,37 @@
 ---
 import ContactForm from '../ContactForm.astro';
 import ContactInfoAside from './ContactInfoAside.astro';
-import { RHYTHM_WHITE, sectionPy } from '../../lib/section-rhythm';
+import { SURFACE_PAPER, sectionPy } from '../../lib/section-rhythm';
 
 interface Props {
   sectionBg?: string;
 }
 
-const { sectionBg = RHYTHM_WHITE } = Astro.props;
+const { sectionBg = SURFACE_PAPER } = Astro.props;
 ---
 
+{/*
+  Cột trái 5 phần giữ kênh liên hệ, cột phải 7 phần giữ form — form cần bề ngang hơn.
+  Cả hai căn đỉnh bằng `items-start`; bản cũ phải chèn `lg:pt-14` vào cột phải để
+  hai đầu trông ngang nhau, mà con số đó chỉ đúng với đúng một cỡ chữ tiêu đề.
+*/}
 <section class:list={[sectionPy, sectionBg]}>
-  <div class="max-w-container-max-width mx-auto px-6 md:px-8 grid lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16">
-    <div>
-      <h2 class="font-headline-md text-2xl font-bold text-ink-dark mb-6">Gửi yêu cầu tư vấn</h2>
-      <p class="text-text-muted mb-8 leading-relaxed">
-        Điền form bên cạnh hoặc liên hệ trực tiếp qua hotline. Đội ngũ Tân Phạm Gia sẵn sàng hỗ trợ
-        khảo sát, tư vấn và báo giá nhanh chóng.
-      </p>
-      <ContactForm />
-    </div>
+  <div
+    class="mx-auto grid max-w-container-max-width items-start gap-10 px-6 md:px-8 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16"
+  >
     <ContactInfoAside />
+
+    <div data-reveal class="rounded-[1.25rem] border border-[#e5dfd2] bg-white p-6 sm:p-8 lg:p-9">
+      <h3 class="text-xl font-extrabold leading-tight tracking-[-0.02em] text-ink-dark sm:text-2xl">
+        Gửi yêu cầu tư vấn
+      </h3>
+      <p class="mt-2 text-sm leading-relaxed text-[#625a50]">
+        Đội ngũ Tân Phạm Gia sẵn sàng hỗ trợ khảo sát, tư vấn và báo giá nhanh chóng.
+      </p>
+
+      <div class="mt-7">
+        <ContactForm />
+      </div>
+    </div>
   </div>
 </section>
