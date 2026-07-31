@@ -19,6 +19,18 @@ interface HeroStat {
   suffix?: string;
 }
 
+/**
+ * Khung thông số cột phải hero — mỗi mục một dòng nên tên dài chỉ nở xuống,
+ * không kéo dài ngang như khi xếp thành hàng chip.
+ * Không truyền prop này thì hero giữ nguyên một cột như cũ.
+ */
+interface HeroAside {
+  label: string;
+  /** Chuỗi đếm hiển thị bên phải nhãn, ví dụ "05 ngành" — chữ do trang gọi truyền vào */
+  countLabel?: string;
+  items: { name: string; icon: string }[];
+}
+
 interface Props {
   title: string;
   titleLines?: readonly [string, string];
@@ -29,6 +41,7 @@ interface Props {
   stats?: HeroStat[];
   /** Ảnh nền hero — khớp chủ đề từng trang (xem pageHeroBg trong site.ts) */
   bgImage?: string;
+  aside?: HeroAside;
 }
 
 const {
@@ -39,6 +52,7 @@ const {
   breadcrumb = [{ label: 'Trang chủ', href: routes.home }],
   stats = [],
   bgImage = siteAssets.hero.fallback,
+  aside,
 } = Astro.props;
 ---
 
@@ -47,7 +61,8 @@ const {
   <div class={pageHeroScrim} aria-hidden="true"></div>
 
   <div class={pageHeroInner}>
-    <div class={pageHeroCopy}>
+    <div class="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between lg:gap-12">
+      <div class:list={[pageHeroCopy, 'min-w-0 lg:flex-1']}>
       {
         breadcrumb.length > 0 && (
           <nav aria-label="Breadcrumb" class={pageHeroBreadcrumb}>
@@ -91,6 +106,48 @@ const {
           </p>
         )
       }
+      </div>
+
+      {
+        aside && aside.items.length > 0 && (
+          <aside class="lg:w-[20.5rem] lg:shrink-0">
+            <div
+              data-hero-aside
+              class="overflow-hidden rounded-[1.25rem] border border-white/20 bg-[#0d1b3a]/[0.34] backdrop-blur-md"
+            >
+              <div
+                data-hero-aside-row
+                style="--row-index: 0"
+                class="flex items-baseline justify-between gap-4 border-b border-white/15 px-[1.15rem] py-3.5"
+              >
+                <span class="text-[0.625rem] font-extrabold uppercase tracking-[0.2em] text-white/70">
+                  {aside.label}
+                </span>
+                {aside.countLabel && (
+                  <span class="text-xs font-bold tabular-nums text-[#ffc933]">{aside.countLabel}</span>
+                )}
+              </div>
+              <ul class="m-0 list-none p-0">
+                {aside.items.map((item, i) => (
+                  <li
+                    data-hero-aside-row
+                    style={`--row-index: ${i + 1}`}
+                    class="flex items-center gap-2.5 border-b border-white/10 px-[1.15rem] py-3 text-[0.86rem] font-semibold leading-snug text-white/95 last:border-b-0"
+                  >
+                    <span
+                      class="material-symbols-outlined shrink-0 text-[1.125rem] leading-none text-[#ffc933]"
+                      aria-hidden="true"
+                    >
+                      {item.icon}
+                    </span>
+                    {item.name}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </aside>
+        )
+      }
     </div>
 
     {
@@ -112,3 +169,39 @@ const {
     }
   </div>
 </header>
+
+<style>
+  /* Khung thông số nằm ngay màn hình đầu nên biên độ phải nhỏ:
+     trượt 0.75rem chứ không phải 8rem như hệ data-reveal dùng cho section cuộn tới.
+     CSS thuần — không JS, nên không có rủi ro nội dung kẹt vô hình nếu script lỗi. */
+  @keyframes hero-aside-in {
+    from {
+      opacity: 0;
+      transform: translateY(0.75rem);
+    }
+  }
+
+  @keyframes hero-aside-row-in {
+    from {
+      opacity: 0;
+      transform: translateY(0.4rem);
+    }
+  }
+
+  [data-hero-aside] {
+    animation: hero-aside-in 520ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  /* Từng dòng nối nhau 60ms, vào sau khung 200ms */
+  [data-hero-aside-row] {
+    animation: hero-aside-row-in 420ms cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: calc(var(--row-index, 0) * 60ms + 200ms);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    [data-hero-aside],
+    [data-hero-aside-row] {
+      animation: none;
+    }
+  }
+</style>

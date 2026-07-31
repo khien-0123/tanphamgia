@@ -4,7 +4,7 @@ import PageHero from '../components/PageHero.astro';
 import ContactPageSection from '../components/contact/ContactPageSection.astro';
 import { pageSeo, pageHeroBg } from '../data/site';
 import { routes } from '../lib/routes';
-import { rhythmBg } from '../lib/section-rhythm';
+import { SURFACE_PAPER } from '../lib/section-rhythm';
 ---
 
 <SiteLayout
@@ -22,5 +22,5 @@ import { rhythmBg } from '../lib/section-rhythm';
     ]}
   />
 
-  <ContactPageSection sectionBg={rhythmBg(0)} />
+  <ContactPageSection sectionBg={SURFACE_PAPER} />
 </SiteLayout>

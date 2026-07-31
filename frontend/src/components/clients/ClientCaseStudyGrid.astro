@@ -1,128 +1,281 @@
 ---
+/**
+ * Listing case study — layout sole (ảnh | chữ xen kẽ)
+ * Hàng lẻ (1, 3): nền navy · Hàng chẵn (2): nền sáng
+ */
 import SiteImage from '../SiteImage.astro';
 import type { ClientCaseStudy } from '../../data/site';
+import { siteAssets } from '../../data/assets';
+import { sectionEyebrow } from '../../lib/section-eyebrow';
+import { getClientLogoScale } from '../../lib/client-logo-scale';
+import { sectionPy } from '../../lib/section-rhythm';
 import {
-  caseStudyCarouselSlide,
-  caseStudyCarouselTrack,
-  caseStudyCarouselViewport,
-  caseStudyCarouselShell,
-  caseStudyFeaturedCopy,
-  caseStudyFeaturedImage,
-  caseStudySecondaryGrid,
-  caseStudyStack,
-} from '../../lib/case-study-classes';
-import ClientCaseStudySecondaryCard from './ClientCaseStudySecondaryCard.astro';
-import SliderArrow from '../SliderArrow.astro';
-import { RHYTHM_WHITE, sectionPy } from '../../lib/section-rhythm';
+  sectionBody,
+  sectionCardTitle,
+  sectionTitleOnLight,
+} from '../../lib/section-typography';
 
 interface Props {
   items: ClientCaseStudy[];
   sectionBg?: string;
+  eyebrow?: string;
+  title?: string;
 }
 
-const { items, sectionBg = RHYTHM_WHITE } = Astro.props;
-
-const featured = items[0];
-const secondary = items.slice(1);
-const useSecondaryCarousel = secondary.length >= 3;
-const carouselPages = useSecondaryCarousel
-  ? Math.max(1, secondary.length - 1)
-  : 0;
+const {
+  items,
+  sectionBg = 'bg-[#fbf8f1]',
+  eyebrow = 'Dự án tiêu biểu',
+  title = 'Case study tiêu biểu',
+} = Astro.props;
 ---
 
-<section class:list={[sectionPy, 'border-b border-border-subtle', sectionBg]}>
-  <div class="max-w-container-max-width mx-auto px-6 md:px-8">
-    <h2 data-reveal class="font-headline-md text-2xl md:text-3xl font-bold text-ink-dark mb-10">
-      Case study tiêu biểu
-    </h2>
+<section class:list={[sectionPy, 'border-b border-[#e8dfcf]', sectionBg]} aria-labelledby="client-cs-title">
+  <div class="mx-auto max-w-container-max-width px-6 md:px-8">
+    <header class="mb-12 md:mb-16">
+      <p class={sectionEyebrow}>{eyebrow}</p>
+      <h2 id="client-cs-title" class:list={['mt-5 max-w-[18ch]', sectionTitleOnLight]}>
+        {title}
+      </h2>
+    </header>
 
-    <div class={caseStudyStack}>
-      {featured && (
-        <article class="border-b border-ink-dark/10">
-          <a
-            href={featured.href}
-            class="group grid md:grid-cols-2 gap-0 no-underline text-inherit"
-          >
-            <div class:list={caseStudyFeaturedCopy}>
-              <p class="text-[11px] font-bold uppercase tracking-[0.14em] text-ink-dark mb-3">
-                {featured.tags}
-              </p>
-              <h3 class="font-headline-md text-xl md:text-2xl lg:text-[1.75rem] font-bold text-ink-dark leading-snug mb-4">
-                {featured.title}
-              </h3>
-              <p class="text-text-muted text-sm md:text-base leading-relaxed mb-6 max-w-prose">
-                {featured.excerpt}
-              </p>
-              <span class="inline-flex items-center gap-2 text-sm font-semibold text-ink-dark group-hover:text-accent-gold transition-colors">
-                Case study
-                <svg
-                  class="w-4 h-4 transition-transform group-hover:translate-x-1"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  aria-hidden="true"
-                >
-                  <path d="M5 12h14M13 6l6 6-6 6" />
-                </svg>
-              </span>
-            </div>
-            <div class:list={caseStudyFeaturedImage}>
-              <SiteImage
-                src={featured.image}
-                alt={featured.alt}
-                width={960}
-                height={600}
-                class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                loading="lazy"
-                decoding="async"
-                variant="card"
-              />
-            </div>
-          </a>
-        </article>
-      )}
-
+    <div class="flex flex-col gap-0 overflow-hidden">
       {
-        secondary.length > 0 &&
-          (useSecondaryCarousel ? (
-            <div data-client-case-secondary-carousel>
-              <div class:list={caseStudyCarouselShell}>
-                <div class:list={caseStudyCarouselViewport} data-carousel-viewport>
-                  <div class:list={caseStudyCarouselTrack} data-carousel-track>
-                    {secondary.map((item) => (
-                      <div class:list={caseStudyCarouselSlide} data-carousel-slide>
-                        <ClientCaseStudySecondaryCard item={item} />
+        items.map((item, index) => {
+          const imageLeft = index % 2 === 0;
+          const isNavy = index % 2 === 0;
+          const href = item.href ?? '#';
+
+          return (
+            <article
+              class:list={[
+                'group overflow-hidden last:border-b-0',
+                isNavy ? 'border-b border-white/10 bg-[#0d1b3a]' : 'border-b border-[#e8dfcf] bg-transparent',
+              ]}
+            >
+              <div class="grid grid-cols-1 md:grid-cols-2 md:items-stretch">
+                {imageLeft && (
+                  <div class="relative overflow-hidden bg-[#ebe4d6]">
+                    <SiteImage
+                      src={item.image}
+                      alt={item.alt}
+                      width={960}
+                      height={720}
+                      class="aspect-[4/3] h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03] md:aspect-auto md:min-h-[26rem] lg:min-h-[30rem]"
+                      loading="lazy"
+                      decoding="async"
+                      variant="card"
+                      sizes="(min-width: 768px) 50vw, 100vw"
+                    />
+                  </div>
+                )}
+
+                <div
+                  class:list={[
+                    'flex flex-col py-6 max-md:px-0 md:p-6 lg:p-8',
+                    isNavy ? 'bg-[#0d1b3a]' : 'bg-transparent',
+                  ]}
+                >
+                  <div class="flex items-center justify-between gap-3">
+                    <div class="flex items-center">
+                      {item.logo?.includes('/brand/') && isNavy ? (
+                        <div class="flex items-center gap-2.5" aria-label="Tân Phạm Gia">
+                          <SiteImage
+                            src={siteAssets.brand.mark}
+                            alt=""
+                            width={40}
+                            height={40}
+                            class="h-8 w-8 shrink-0 object-contain"
+                            loading="lazy"
+                            decoding="async"
+                            variant="logo"
+                          />
+                          <span class="text-[0.7rem] font-extrabold uppercase leading-none tracking-[0.14em] text-white sm:text-xs">
+                            TAN PHAM GIA
+                          </span>
+                        </div>
+                      ) : item.logo ? (
+                        <SiteImage
+                          src={item.logo}
+                          alt=""
+                          width={180}
+                          height={48}
+                          class="h-8 w-auto max-w-[9rem] object-contain object-left"
+                          style={`transform: scale(${getClientLogoScale(item.logo)}); transform-origin: left center;`}
+                          loading="lazy"
+                          decoding="async"
+                          variant="logo"
+                        />
+                      ) : item.logoMark ? (
+                        <SiteImage
+                          src={item.logoMark}
+                          alt=""
+                          width={48}
+                          height={48}
+                          class="h-10 w-10 object-contain"
+                          style={`transform: scale(${getClientLogoScale(item.logoMark)}); transform-origin: center;`}
+                          loading="lazy"
+                          decoding="async"
+                          variant="logo"
+                        />
+                      ) : (
+                        <span
+                          class:list={[
+                            'text-sm font-extrabold',
+                            isNavy ? 'text-white' : 'text-[#0d1b3a]',
+                          ]}
+                        >
+                          {item.client}
+                        </span>
+                      )}
+                    </div>
+                    <span
+                      class:list={[
+                        'rounded-full px-3 py-1 text-[0.65rem] font-extrabold',
+                        isNavy ? 'bg-[#ffc72c] text-[#0d1b3a]' : 'bg-[#0d1b3a] text-white',
+                      ]}
+                    >
+                      {item.badge}
+                    </span>
+                  </div>
+
+                  <h3
+                    class:list={[
+                      'mt-4',
+                      sectionCardTitle,
+                      isNavy ? 'text-white' : 'text-[#0d1b3a]',
+                    ]}
+                  >
+                    {item.client}
+                  </h3>
+
+                  <div
+                    class:list={[
+                      'mt-4 grid grid-cols-2 gap-4 border-b pb-4',
+                      isNavy ? 'border-white/15' : 'border-[#e8dfcf]',
+                    ]}
+                  >
+                    {item.metrics.map((m) => (
+                      <div>
+                        <p
+                          class:list={[
+                            'text-xl font-extrabold leading-none tabular-nums md:text-2xl',
+                            isNavy ? 'text-[#ffc72c]' : 'text-[#c18a00]',
+                          ]}
+                        >
+                          {m.value}
+                        </p>
+                        <p class:list={['mt-1 text-xs', isNavy ? 'text-white/55' : 'text-[#6f675c]']}>
+                          {m.label}
+                        </p>
                       </div>
                     ))}
                   </div>
+
+                  <p
+                    class:list={[
+                      'mt-4',
+                      sectionBody,
+                      isNavy ? 'text-white/75' : 'text-[#4a453c]',
+                    ]}
+                  >
+                    {item.intro}
+                  </p>
+
+                  <div
+                    class:list={[
+                      'mt-5 grid grid-cols-1 gap-5 border-t pt-5 sm:grid-cols-2',
+                      isNavy ? 'border-white/15' : 'border-[#e8dfcf]',
+                    ]}
+                  >
+                    <div>
+                      <p class={sectionEyebrow}>Thách thức</p>
+                      <ol
+                        class:list={[
+                          'mt-2 list-decimal space-y-1 pl-4',
+                          sectionBody,
+                          isNavy ? 'text-white/80' : 'text-[#2a251f]',
+                        ]}
+                      >
+                        {item.challenges.map((c) => (
+                          <li>{c}</li>
+                        ))}
+                      </ol>
+                    </div>
+                    <div>
+                      <p class={sectionEyebrow}>Giải pháp</p>
+                      <ol
+                        class:list={[
+                          'mt-2 list-decimal space-y-1 pl-4',
+                          sectionBody,
+                          isNavy ? 'text-white/80' : 'text-[#2a251f]',
+                        ]}
+                      >
+                        {item.solutions.map((s) => (
+                          <li>{s}</li>
+                        ))}
+                      </ol>
+                    </div>
+                  </div>
+
+                  <a
+                    href={href}
+                    class:list={[
+                      'case-cta mt-6 inline-flex items-center gap-2 text-sm font-extrabold no-underline',
+                      isNavy ? 'text-white' : 'text-[#0d1b3a]',
+                    ]}
+                  >
+                    <span class="case-cta__label">Tìm hiểu thêm về dự án</span>
+                    <span class="case-cta__arrow material-symbols-outlined text-lg leading-none" aria-hidden="true">
+                      arrow_forward
+                    </span>
+                  </a>
                 </div>
-                <SliderArrow direction="prev" inset solid />
-                <SliderArrow direction="next" inset solid />
+
+                {!imageLeft && (
+                  <div class="relative overflow-hidden bg-[#ebe4d6]">
+                    <SiteImage
+                      src={item.image}
+                      alt={item.alt}
+                      width={960}
+                      height={720}
+                      class="aspect-[4/3] h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03] md:aspect-auto md:min-h-[26rem] lg:min-h-[30rem]"
+                      loading="lazy"
+                      decoding="async"
+                      variant="card"
+                      sizes="(min-width: 768px) 50vw, 100vw"
+                    />
+                  </div>
+                )}
               </div>
-            </div>
-          ) : (
-            <div class:list={caseStudySecondaryGrid}>
-              {secondary.map((item, index) => (
-                <div class:list={[index === 0 && 'md:border-r border-ink-dark/10']}>
-                  <ClientCaseStudySecondaryCard item={item} />
-                </div>
-              ))}
-            </div>
-          ))
+            </article>
+          );
+        })
       }
     </div>
   </div>
 </section>
 
 <style>
-  /* Căn snap theo đúng nửa viewport — tránh lệch đường kẻ giữa */
-  @media (min-width: 768px) {
-    [data-carousel-track] > [data-carousel-slide] {
-      scroll-snap-align: start;
-      scroll-snap-stop: always;
-    }
+  .case-cta__label {
+    text-decoration-line: none;
+    text-decoration-color: #ffc72c;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 6px;
+    transition: text-decoration-color 0.2s ease;
+  }
+
+  .case-cta:hover .case-cta__label,
+  .group:hover .case-cta__label {
+    text-decoration-line: underline;
+  }
+
+  .case-cta__arrow {
+    transition: transform 0.2s ease;
+  }
+
+  .case-cta:hover .case-cta__arrow,
+  .group:hover .case-cta__arrow {
+    transform: translateX(4px);
   }
 </style>
-
-{useSecondaryCarousel && <script src="../../scripts/client-case-study-carousel.ts"></script>}

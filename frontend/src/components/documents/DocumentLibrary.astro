@@ -1,23 +1,61 @@
 ---
-import DocumentListSection from './DocumentListSection.astro';
-import {
-  brandDocuments,
-  catalogueDocuments,
-  guideDocuments,
-} from '../../data/tai-lieu';
+import DocumentCard from './DocumentCard.astro';
+import DocumentCategoryTiles from './DocumentCategoryTiles.astro';
+import DocumentPagination from './DocumentPagination.astro';
+import type { DocumentItem } from '../../data/tai-lieu';
+import { documentCategories } from '../../data/tai-lieu';
 import { RHYTHM_WHITE, sectionPy } from '../../lib/section-rhythm';
 
 interface Props {
+  /** Tài liệu của riêng trang này — đã cắt theo DOCUMENTS_PER_PAGE */
+  documents: DocumentItem[];
+  /** Nhóm đang mở */
+  category: string;
+  currentPage: number;
+  totalPages: number;
+  /** Tổng số tài liệu trong nhóm, không phải số trên trang này */
+  totalItems: number;
   sectionBg?: string;
 }
 
-const { sectionBg = RHYTHM_WHITE } = Astro.props;
+const {
+  documents,
+  category,
+  currentPage,
+  totalPages,
+  totalItems,
+  sectionBg = RHYTHM_WHITE,
+} = Astro.props;
+
+const activeGroup = documentCategories.find((c) => c.id === category);
+const groupLabel = activeGroup?.label ?? 'Tất cả tài liệu';
+/* Chỉ nhắc số trang khi thật sự có nhiều trang — một trang thì câu đó thừa */
+const countLine =
+  totalPages > 1
+    ? `${groupLabel} · ${totalItems} tài liệu · trang ${currentPage}/${totalPages}`
+    : `${groupLabel} · ${totalItems} tài liệu`;
 ---
 
 <section class:list={[sectionPy, sectionBg]}>
-  <div class="max-w-container-max-width mx-auto px-6 md:px-8 space-y-8 md:space-y-10">
-    <DocumentListSection title="Tài liệu thương hiệu" icon="description" documents={brandDocuments} />
-    <DocumentListSection title="Catalogue sản phẩm" icon="menu_book" documents={catalogueDocuments} />
-    <DocumentListSection title="Tài liệu hữu ích" icon="lightbulb" documents={guideDocuments} />
+  <div class="mx-auto max-w-container-max-width px-6 md:px-8">
+    <DocumentCategoryTiles active={category} />
+
+    <header class="mb-6 mt-10 md:mt-12">
+      <h2 class="text-[clamp(1.35rem,2.3vw,1.85rem)] font-extrabold leading-[1.1] tracking-[-0.03em] text-ink-dark">
+        Thư viện tài liệu
+      </h2>
+      <p class="mt-[0.35rem] text-sm text-[#625a50]">{countLine}</p>
+    </header>
+
+    {/* 5 thẻ một hàng ở desktop, đúng bản khách gửi.
+        Khung 1280 trừ padding còn ~1216px → mỗi thẻ ~227px, nên gap siết còn 1rem từ xl. */}
+    <div
+      class="grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 xl:gap-4"
+      data-reveal-stagger
+    >
+      {documents.map((doc, index) => <DocumentCard doc={doc} index={index} />)}
+    </div>
+
+    <DocumentPagination currentPage={currentPage} totalPages={totalPages} category={category} />
   </div>
 </section>

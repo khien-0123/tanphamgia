@@ -3,10 +3,13 @@ import SiteLayout from '../layouts/SiteLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import ClientLogosSection from '../components/clients/ClientLogosSection.astro';
 import ClientCaseStudyGrid from '../components/clients/ClientCaseStudyGrid.astro';
+import BlogPostCard from '../components/blog/BlogPostCard.astro';
 import TestimonialsSlider from '../components/TestimonialsSlider.astro';
-import { pageSeo, clientCaseStudies, testimonialsClients, pageHeroBg } from '../data/site';
+import { pageSeo, clientCaseStudies, testimonialsClients, pageHeroBg, caseStudyBlogPosts } from '../data/site';
 import { routes } from '../lib/routes';
-import { rhythmBgWhiteFirst } from '../lib/section-rhythm';
+import { rhythmBgWhiteFirst, sectionPy } from '../lib/section-rhythm';
+import { sectionEyebrow } from '../lib/section-eyebrow';
+import { sectionTitleOnLight } from '../lib/section-typography';
 ---
 
 <SiteLayout
@@ -26,6 +29,24 @@ import { rhythmBgWhiteFirst } from '../lib/section-rhythm';
   />
 
   <ClientLogosSection sectionBg={rhythmBgWhiteFirst(0)} />
-  <ClientCaseStudyGrid items={clientCaseStudies} sectionBg={rhythmBgWhiteFirst(1)} />
+  <ClientCaseStudyGrid items={clientCaseStudies} sectionBg="bg-[#fbf8f1]" />
+
+  <section class:list={[sectionPy, 'border-t border-[#e8dfcf] bg-white']} aria-labelledby="kh-blog-title">
+    <div class="mx-auto max-w-container-max-width px-6 md:px-8">
+      <header class="mb-10 md:mb-12">
+        <p class={sectionEyebrow}>Case study</p>
+        <h2 id="kh-blog-title" class:list={['mt-5 max-w-[18ch]', sectionTitleOnLight]}>
+          Bài viết case study
+        </h2>
+      </header>
+
+      <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 lg:gap-10">
+        {caseStudyBlogPosts.map((post) => (
+          <BlogPostCard post={post} readMoreText="Xem case study" />
+        ))}
+      </div>
+    </div>
+  </section>
+
   <TestimonialsSlider items={testimonialsClients} variant="dark" />
 </SiteLayout>

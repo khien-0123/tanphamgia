@@ -11,7 +11,7 @@ const LOGO_SCALE: Record<string, number> = {
   '/images/logos/dat.png': 1.25,
   '/images/logos/vinamilk.png': 0.9,
   '/images/logos/logo-techcombank.png': 1.6,
-  '/images/logos/Logo_Bidv.png': 0.85,
+  '/images/logos/Logo_Bidv.png': 1.1,
   '/images/logos/sacombank.png': 1.65,
   '/images/logos/vietbank.png': 1.35,
   '/images/logos/bvsg.png': 1.2,
@@ -21,6 +21,7 @@ const LOGO_SCALE: Record<string, number> = {
   '/images/logos/mb.png': 1.4,
   '/images/logos/viettcomback.png': 1.55,
   '/images/logos/hinhan-bank-3.png': 1.45,
+  '/images/brand/tan-pham-gia-logo.png': 1.15,
 };
 
 export function getClientLogoScale(logo: string): number {

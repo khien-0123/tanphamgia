@@ -1,26 +1,16 @@
 ---
 import SiteImage from '../SiteImage.astro';
+import PageHero from '../PageHero.astro';
 import SolutionProcessSection from './SolutionProcessSection.astro';
+import ClientCaseStudyGrid from '../clients/ClientCaseStudyGrid.astro';
 import SiteLayout from '../../layouts/SiteLayout.astro';
 import { RHYTHM_WHITE, sectionPy } from '../../lib/section-rhythm';
-import { solutions } from '../../data/site';
+import { solutions, clientCaseStudies } from '../../data/site';
+import { siteAssets } from '../../data/assets';
+import { listingKeywords } from '../../data/giai-phap-listing';
 import type { SolutionPageContent } from '../../data/solution-page';
-import { duAnGiaiPhap1 } from '../../data/giai-phap-1-du-an';
-import { duAnGiaiPhap2 } from '../../data/giai-phap-2-du-an';
-import { duAnGiaiPhap3 } from '../../data/giai-phap-3-du-an';
-import { duAnGiaiPhap4 } from '../../data/giai-phap-4-du-an';
-import { caseStudyHref, routes } from '../../lib/routes';
+import { routes } from '../../lib/routes';
 import { imageRadius } from '../../lib/image-frame';
-import {
-  pageHeroCopy,
-  pageHeroEyebrow,
-  pageHeroImage,
-  pageHeroInner,
-  pageHeroScrim,
-  pageHeroShell,
-  pageHeroStats,
-  pageHeroTitle,
-} from '../../lib/page-hero-shell';
 
 interface Props {
   content: SolutionPageContent;
@@ -31,30 +21,15 @@ const { content } = Astro.props;
 const solution = solutions.find((item) => item.slug === content.slug);
 const relatedSolutions = solutions.filter((item) => item.slug !== content.slug);
 
-const projectsBySolution = {
-  1: duAnGiaiPhap1,
-  2: duAnGiaiPhap2,
-  3: duAnGiaiPhap3,
-  4: duAnGiaiPhap4,
-} as const;
+type SolutionLike = { slug: string; bullets: string[]; homeBullets?: string[] };
 
-const projects = projectsBySolution[content.solutionId];
+const keywordsFor = (item: SolutionLike): string[] =>
+  listingKeywords[item.slug] ?? item.homeBullets ?? item.bullets.slice(0, 3);
 
 /** Data mang sẵn tiền tố "0N. " — số đó chuyển lên eyebrow, tiêu đề để sạch. */
 const heading = (raw: string) => raw.replace(/^\d{2}\.\s*/, '');
 
 const heroId = String(content.solutionId).padStart(2, '0');
-
-/**
- * Số quy mô ở hero. Rút dải "từ X đến Y" trong mô tả nếu có — đây là con số
- * mạnh nhất; không có thì bỏ qua, ba số còn lại suy từ data nên luôn đúng.
- */
-const scaleMatch = content.hero.description.match(/từ\s*([\d.]+)\s*đến\s*([\d.+]+)/i);
-const heroStats = [
-  scaleMatch && { value: `${scaleMatch[1]}–${scaleMatch[2]}`, label: 'Nhân sự / đội ngũ' },
-  { value: String(projects.length).padStart(2, '0'), label: 'Dự án tiêu biểu' },
-  { value: String(content.fabricTable.length).padStart(2, '0'), label: 'Chất liệu kỹ thuật' },
-].filter(Boolean) as { value: string; label: string }[];
 
 /**
  * Mỗi ngành một icon riêng — icon phải PHÂN BIỆT được các mục; lặp cùng một hình
@@ -83,30 +58,27 @@ const INDUSTRY_ICON: Record<string, string> = {
 };
 
 /**
- * Ảnh nền cho từng vật liệu trong trình khám phá.
- * Tạm dùng ảnh giải pháp + 3 ảnh dự án (đủ 4, khác nhau, có sẵn) để crossfade
- * hoạt động thật. NÂNG CẤP: thay bằng 4 ảnh macro chụp vải + thêm field ảnh vào
- * fabricTable — lúc đó chỉ cần đổi mảng này.
+ * Khung "Phù hợp cho" ở cột phải hero.
+ * Trước đây là một dải riêng dưới banner, xếp 5 ngành thành một hàng ngang —
+ * 5 tên cộng lại ~96 ký tự nên luôn chiếm gần trọn chiều ngang. Xếp dọc thì
+ * tên dài chỉ nở xuống, không đẩy ngang.
  */
-const fabricImages = [solution?.image, ...projects.map((p) => p.image)].filter(Boolean) as string[];
-
-/** Tách chuỗi stats tự do "1.086 sản phẩm | 45 ngày | Đối tác 5 năm" thành số lớn + đơn vị + phụ chú. */
-const parseStat = (raw: string) => {
-  const parts = raw.split('|').map((s) => s.trim()).filter(Boolean);
-  const m = parts[0]?.match(/^([\d.,+]+)\s*(.*)$/);
-  return {
-    big: m ? m[1] : parts[0] ?? '',
-    unit: m ? m[2] : '',
-    meta: parts.slice(1),
-  };
+const heroAside = {
+  label: 'Phù hợp cho',
+  countLabel: `${String(content.hero.industries.length).padStart(2, '0')} ngành`,
+  items: content.hero.industries.map((name) => ({
+    name,
+    icon: INDUSTRY_ICON[name] ?? 'business_center',
+  })),
 };
 
-const proofItems = projects.map((p) => ({
-  name: p.name,
-  image: p.image,
-  href: caseStudyHref(content.slug, p.slug),
-  ...parseStat(p.stats),
-}));
+/** Bộ ảnh macro dùng chung cho bảng so sánh; thứ tự bám đúng nhịp 4 cột của mockup. */
+const fabricImages = [
+  siteAssets.materials.piquePolyester,
+  siteAssets.materials.piqueTiciCvc,
+  siteAssets.materials.oxfordTechnical,
+  siteAssets.materials.kakiStretch,
+] as const;
 
 const chapterEyebrow = 'font-eyebrow text-xs uppercase tracking-[0.2em]';
 const h2Macro =
@@ -118,62 +90,19 @@ const h2Macro =
   description={content.seo.description}
   currentPath={routes.giaiPhap}
 >
-  {/* ══ 00 · HERO — chiều cao đồng bộ pageHeroShell ══ */}
-  <header data-page-hero class:list={[pageHeroShell]}>
-    <SiteImage
-      src={solution?.image}
-      alt={content.hero.imageAlt}
-      class={pageHeroImage}
-      loading="eager"
-      decoding="async"
-      variant="hero"
-    />
-    <div class={pageHeroScrim} aria-hidden="true"></div>
-    <div class={pageHeroInner}>
-      <div class={pageHeroCopy}>
-        <p class:list={[pageHeroEyebrow, 'mb-3']}>Giải pháp {heroId}</p>
-        <h1 class={pageHeroTitle}>
-          {content.hero.title}
-        </h1>
-        <div class:list={[pageHeroStats, 'mt-4 md:mt-7']}>
-          {
-            heroStats.map((s) => (
-              <div class="flex items-baseline gap-3">
-                <b class="text-lg font-extrabold leading-none tabular-nums text-white md:text-2xl">
-                  {s.value}
-                </b>
-                <span class:list={[pageHeroEyebrow, 'text-white/55']}>{s.label}</span>
-              </div>
-            ))
-          }
-        </div>
-      </div>
-    </div>
-  </header>
+  <PageHero
+    title={content.hero.title}
+    bgImage={solution?.image}
+    description={content.hero.description}
+    breadcrumb={[
+      { label: 'Trang chủ', href: routes.home },
+      { label: 'Giải pháp', href: routes.giaiPhap },
+      { label: `Giải pháp ${heroId}` },
+    ]}
+    aside={heroAside}
+  />
 
   <main class="bg-[#FFFCF7] text-ink-dark">
-    {/* ══ 01b · NGÀNH — dải mảnh, mỗi ngành một icon ══ */}
-    <section class:list={[RHYTHM_WHITE]}>
-      <div class="mx-auto max-w-container-max-width px-6 py-5 md:px-8">
-        <p class="flex flex-wrap items-center gap-x-6 gap-y-3 text-sm">
-          <span class="font-bold text-ink-dark">Phù hợp cho</span>
-          {
-            content.hero.industries.map((item) => (
-              <span class="inline-flex items-center gap-2 text-ink-mid">
-                <span
-                  class="material-symbols-outlined text-[1.125rem] leading-none text-accent-teal"
-                  aria-hidden="true"
-                >
-                  {INDUSTRY_ICON[item] ?? 'business_center'}
-                </span>
-                {item}
-              </span>
-            ))
-          }
-        </p>
-      </div>
-    </section>
-
     {/* ══ 01 · VẤN ĐỀ — hai cột đều, tiêu đề dính trái ══ */}
     <section class:list={[RHYTHM_WHITE, sectionPy]}>
       <div class="mx-auto max-w-container-max-width px-6 md:px-8">
@@ -183,14 +112,21 @@ const h2Macro =
             <h2 class={h2Macro}>{heading(content.sections.issuesTitle)}</h2>
           </div>
 
-          <ul class="grid list-none gap-px bg-border-subtle p-0" data-reveal-stagger>
+          {/* Nét ngăn vẽ bằng border thật trên từng hàng. Trước đây dùng gap-px + nền của <ul>
+              lộ qua khe, nhưng mỗi <li> là [data-reveal] nên bị đẩy thành lớp compositing riêng,
+              khe 1px giữa hai lớp bị làm tròn mất — nét lúc có lúc không. */}
+          <ul class="grid list-none p-0" data-reveal-stagger>
             {
               content.issues.map((issue, i) => (
                 <li
                   data-reveal
-                  class:list={['grid grid-cols-[2.5rem_1fr] items-start gap-4 py-6', RHYTHM_WHITE]}
+                  class:list={[
+                    'grid grid-cols-[2.25rem_1fr] items-baseline gap-4 border-t border-border-subtle py-4 first:border-t-0',
+                    RHYTHM_WHITE,
+                  ]}
                 >
-                  <span class="font-eyebrow text-xs tabular-nums text-text-muted">
+                  {/* Số dẫn đầu — 1.5rem cố định mọi khổ màn, nên cột chỉ cần đủ ôm 2 chữ số */}
+                  <span class="text-[1.5rem] font-extrabold leading-none tabular-nums text-[#5c4500]">
                     {String(i + 1).padStart(2, '0')}
                   </span>
                   <p class="text-[1.0625rem] leading-relaxed text-ink-mid">{issue}</p>
@@ -225,7 +161,13 @@ const h2Macro =
             <ul class="list-none p-0" data-reveal-stagger>
               {
                 content.plans.map((plan) => (
-                  <li data-reveal class:list={['flex gap-4 border-b border-border-subtle py-6', RHYTHM_WHITE]}>
+                  <li
+                    data-reveal
+                    class:list={[
+                      'flex gap-3 border-t border-border-subtle py-4 first:border-t-0',
+                      RHYTHM_WHITE,
+                    ]}
+                  >
                     <span class="material-symbols-outlined mt-0.5 shrink-0 text-xl text-accent-teal">
                       check_circle
                     </span>
@@ -246,167 +188,104 @@ const h2Macro =
       </div>
     </section>
 
-    {/* ══ 03 · CHẤT LIỆU — dải navy duy nhất, trình khám phá ghim màn ══ */}
-    <section class="exp bg-ink-dark text-white" aria-label="Chất liệu kỹ thuật">
-      <div class="exp__stage">
-        <div class="exp__left">
-          <span class:list={[chapterEyebrow, 'mb-6 block text-accent-gold']}>03 — Chất liệu</span>
-          <h2 class="exp__h2">
-            {heading(content.sections.productsTitle)}
-          </h2>
-
-          <ul class="exp__tags">
-            {content.products.map((product) => <li>{product}</li>)}
-          </ul>
-
-          <div class="exp__list">
-            <span class="exp__bar" data-bar></span>
-            {
-              content.fabricTable.map((row, i) => (
-                <button
-                  type="button"
-                  class:list={['exp__m', i === 0 && 'on']}
-                  data-m={i}
-                  aria-label={`Xem ${row.material}`}
-                >
-                  <span class="font-eyebrow text-xs tabular-nums">
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
-                  <span class="exp__mname">{row.material}</span>
-                </button>
-              ))
-            }
-          </div>
-        </div>
-
-        <div class="exp__media">
-          {
-            content.fabricTable.map((row, i) => (
-              <div class:list={['exp__shot', i === 0 && 'on']} data-s={i}>
-                <SiteImage
-                  src={fabricImages[i] ?? solution?.image}
-                  alt={row.material}
-                  loading="lazy"
-                  class="exp__img"
-                  variant="card"
-                />
-                <dl class="exp__spec">
-                  <div>
-                    <dt>Thành phần</dt>
-                    <dd class="tabular-nums">{row.composition}</dd>
-                  </div>
-                  <div>
-                    <dt>Đặc tính</dt>
-                    <dd>{row.features}</dd>
-                  </div>
-                  <div>
-                    <dt>Môi trường</dt>
-                    <dd>{row.environment}</dd>
-                  </div>
-                </dl>
-              </div>
-            ))
-          }
-        </div>
-      </div>
-
-      {/* mốc cuộn — vô hình, đổi vật liệu khi đi qua tâm màn */}
-      <div class="exp__steps" aria-hidden="true">
-        {content.fabricTable.map((_, i) => <div data-step={i}></div>)}
-      </div>
-
-      {/* Mobile: carousel ngang — desktop giữ trình khám phá ghim màn */}
-      <div class="exp__mobile mx-auto max-w-container-max-width px-6 md:px-8">
-        <span class:list={[chapterEyebrow, 'mb-6 block text-accent-gold']}>03 — Chất liệu</span>
-        <h2 class="exp__h2">{heading(content.sections.productsTitle)}</h2>
-
-        <div class="exp__slider" data-fabric-mobile-slider>
-          <div class="exp__track" data-fabric-track role="list" aria-label="Danh sách vật liệu">
-            {
-              content.fabricTable.map((row, i) => (
-                <article class="exp__mrow" data-fabric-slide role="listitem">
-                  <figure class="m-0 mb-5 aspect-[4/3] overflow-hidden rounded-none">
-                    <SiteImage
-                      src={fabricImages[i] ?? solution?.image}
-                      alt={row.material}
-                      loading="lazy"
-                      class="h-full w-full object-cover"
-                      variant="card"
-                    />
-                  </figure>
-                  <h3 class="mb-4 text-2xl font-bold">{row.material}</h3>
-                  <dl class="grid gap-2">
-                    <dt>Thành phần</dt>
-                    <dd class="tabular-nums">{row.composition}</dd>
-                    <dt>Đặc tính</dt>
-                    <dd>{row.features}</dd>
-                    <dt>Môi trường</dt>
-                    <dd>{row.environment}</dd>
-                  </dl>
-                </article>
-              ))
-            }
-          </div>
-
-          {
-            content.fabricTable.length > 1 && (
-              <div class="exp__dots" role="tablist" aria-label="Chọn vật liệu">
-                {content.fabricTable.map((row, i) => (
-                  <button
-                    type="button"
-                    class="exp__dot"
-                    data-fabric-dot={i}
-                    role="tab"
-                    aria-label={row.material}
-                    aria-selected={i === 0 ? 'true' : 'false'}
-                  />
-                ))}
-              </div>
-            )
-          }
-        </div>
-      </div>
-    </section>
-
-    {/* ══ BẰNG CHỨNG — một dải ba cột, số lớn đè ảnh ══ */}
-    <section class:list={[RHYTHM_WHITE, sectionPy]}>
+    {/* ══ 03 · CHẤT LIỆU — bảng mẫu vải so sánh, không sticky-scroll ══ */}
+    <section
+      class:list={[RHYTHM_WHITE, sectionPy]}
+      aria-labelledby="material-comparison-title"
+    >
       <div class="mx-auto max-w-container-max-width px-6 md:px-8">
-        <header class="mb-10 md:mb-12">
-          <span class:list={[chapterEyebrow, 'mb-5 block text-accent-teal']}>Dự án tiêu biểu</span>
-          <h2 class:list={[h2Macro, 'md:whitespace-nowrap']}>
-            Đã giao cho những đội ngũ ở quy mô này
-          </h2>
+        <header class="grid items-start gap-8 lg:grid-cols-[minmax(0,1.45fr)_minmax(18rem,0.75fr)] lg:gap-16">
+          <div data-reveal>
+            <span class:list={[chapterEyebrow, 'mb-6 block text-[#A46F00]']}>03 — Chất liệu</span>
+            <h2
+              id="material-comparison-title"
+              class="max-w-[15ch] text-balance text-[clamp(2.25rem,5vw,4.75rem)] font-extrabold leading-[0.98] tracking-[-0.045em] text-ink-dark"
+            >
+              So sánh nhanh {content.fabricTable.length} nhóm chất liệu
+            </h2>
+          </div>
+
+          <div data-reveal class="lg:pt-10">
+            <p class="max-w-[34rem] text-base leading-[1.65] text-[#4F4942] md:text-lg">
+              Nhìn cùng lúc thành phần, đặc tính và môi trường phù hợp để lựa chọn nhanh hơn.
+            </p>
+          </div>
         </header>
 
-        <div class="grid list-none gap-px bg-border-subtle sm:grid-cols-3" data-reveal-stagger>
-          {
-            proofItems.map((item) => (
-              <a href={item.href} class="proof-case group" data-reveal>
-                <SiteImage src={item.image} alt="" loading="lazy" class="proof-case__img" variant="card" />
-                <div class="proof-case__in">
-                  <span class:list={[chapterEyebrow, 'mb-4 block text-accent-gold']}>
-                    {item.name}
-                  </span>
-                  <p class="text-[clamp(2.75rem,5vw,4.25rem)] font-extrabold leading-[0.85] tracking-tight tabular-nums text-white">
-                    {item.big}
-                  </p>
-                  {item.unit && <p class="mt-1 text-sm text-white/65">{item.unit}</p>}
-                  {
-                    item.meta.length > 0 && (
-                      <p class="mt-5 flex flex-wrap gap-x-4 gap-y-1 text-xs text-white/55">
-                        {item.meta.map((m) => (
-                          <span>{m}</span>
-                        ))}
-                      </p>
-                    )
-                  }
-                </div>
-              </a>
-            ))
-          }
+        <div
+          data-reveal
+          class="mt-10 overflow-hidden rounded-[1.5rem] border border-[#D8CFBF] bg-[#D8CFBF] shadow-[0_24px_70px_rgba(66,50,22,0.08)] md:mt-12"
+        >
+          <ol
+            class="grid list-none grid-cols-1 gap-px p-0 min-[560px]:grid-cols-2 lg:grid-cols-4"
+            aria-label="So sánh các chất liệu kỹ thuật"
+          >
+            {
+              content.fabricTable.map((row, index) => (
+                <li class="group flex min-w-0 flex-col bg-[#FFFDF8]">
+                  <figure class="relative m-0 aspect-[16/10] overflow-hidden min-[560px]:aspect-[4/3] lg:aspect-[7/8]">
+                    <SiteImage
+                      src={fabricImages[index % fabricImages.length]}
+                      alt={`Cận cảnh bề mặt ${row.material}`}
+                      loading="lazy"
+                      class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.025] motion-reduce:transition-none"
+                      variant="card"
+                      widths={[320, 480, 640, 800]}
+                      sizes="(max-width: 559px) 100vw, (max-width: 1023px) 50vw, 25vw"
+                    />
+                    <span class="absolute left-4 top-4 inline-flex h-11 min-w-11 items-center justify-center rounded-[0.65rem] bg-[#FFC72C] px-2.5 text-lg font-extrabold leading-none tabular-nums text-[#171717] shadow-[0_8px_20px_rgba(83,58,0,0.18)] sm:left-5 sm:top-5 sm:h-12 sm:min-w-12 sm:text-xl">
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
+                  </figure>
+
+                  <div class="px-4 py-4 sm:px-5 sm:py-5">
+                    <h3 class="min-h-[2.75rem] text-[clamp(1.25rem,1.55vw,1.5rem)] font-extrabold leading-[1.08] tracking-[-0.03em] text-ink-dark">
+                      {row.material}
+                    </h3>
+
+                    <dl class="mt-2.5 grid">
+                      <div class="grid min-h-[3.75rem] grid-cols-[5rem_minmax(0,1fr)] items-start gap-2.5 border-t border-[#DDD4C6] py-2.5 xl:grid-cols-[5.5rem_minmax(0,1fr)]">
+                        <dt class="pt-0.5 text-[0.625rem] font-extrabold uppercase tracking-[0.09em] text-[#A46F00]">
+                          Thành phần
+                        </dt>
+                        <dd class="m-0 text-[0.8125rem] leading-[1.45] tabular-nums text-[#3D3832]">
+                          {row.composition}
+                        </dd>
+                      </div>
+                      <div class="grid min-h-[3.75rem] grid-cols-[5rem_minmax(0,1fr)] items-start gap-2.5 border-t border-[#DDD4C6] py-2.5 xl:grid-cols-[5.5rem_minmax(0,1fr)]">
+                        <dt class="pt-0.5 text-[0.625rem] font-extrabold uppercase tracking-[0.09em] text-[#A46F00]">
+                          Đặc tính
+                        </dt>
+                        <dd class="m-0 text-[0.8125rem] leading-[1.45] text-[#3D3832]">
+                          {row.features}
+                        </dd>
+                      </div>
+                      <div class="grid min-h-[3.75rem] grid-cols-[5rem_minmax(0,1fr)] items-start gap-2.5 border-t border-[#DDD4C6] py-2.5 xl:grid-cols-[5.5rem_minmax(0,1fr)]">
+                        <dt class="pt-0.5 text-[0.625rem] font-extrabold uppercase tracking-[0.09em] text-[#A46F00]">
+                          Phù hợp
+                        </dt>
+                        <dd class="m-0 text-[0.8125rem] leading-[1.45] text-[#3D3832]">
+                          {row.environment}
+                        </dd>
+                      </div>
+                    </dl>
+                  </div>
+                </li>
+              ))
+            }
+          </ol>
+          <div class="h-[3px] bg-[#E1A900]" aria-hidden="true"></div>
         </div>
       </div>
     </section>
+
+    {/* ══ CASE STUDY — layout sole giống /khach-hang ══ */}
+    <ClientCaseStudyGrid
+      items={clientCaseStudies}
+      sectionBg="bg-[#fbf8f1]"
+      eyebrow="Dự án tiêu biểu"
+      title="Case study tiêu biểu"
+    />
 
     {/* ══ 04 · QUY TRÌNH ══ */}
     <SolutionProcessSection
@@ -415,25 +294,77 @@ const h2Macro =
       eyebrow="04 — Quy trình"
     />
 
-    {/* ══ GIẢI PHÁP KHÁC — dải điều hướng mảnh ══ */}
+    {/* ══ GIẢI PHÁP KHÁC — mosaic 1 lớn / 2 nhỏ ══ */}
     <section class:list={[RHYTHM_WHITE, sectionPy]}>
       <div class="mx-auto max-w-container-max-width px-6 md:px-8">
-        <span class:list={[chapterEyebrow, 'mb-8 block text-accent-teal']}>Tìm hiểu thêm</span>
-        <div class="grid list-none gap-px bg-border-subtle">
+        <header class="mb-10 flex flex-col gap-6 md:mb-12 md:flex-row md:items-end md:justify-between">
+          <div>
+            <span class:list={[chapterEyebrow, 'block text-[#5C4500]']}>Tìm hiểu thêm</span>
+            <h2 class="mt-5 text-balance text-[clamp(1.75rem,2.7vw,3rem)] font-extrabold leading-[1.1] tracking-[-0.03em] text-ink-dark">
+              Khám phá giải pháp phù hợp
+            </h2>
+          </div>
+
+          <a
+            href={routes.giaiPhap}
+            class="group/section inline-flex w-fit items-center gap-4 border-b border-accent-gold pb-2 text-sm font-bold text-ink-dark no-underline transition-colors hover:text-[#5C4500] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#E1A900]"
+          >
+            <span>Xem tất cả giải pháp</span>
+            <span
+              class="material-symbols-outlined text-lg leading-none transition-transform duration-300 group-hover/section:translate-x-1 motion-reduce:transition-none"
+              aria-hidden="true"
+            >
+              arrow_forward
+            </span>
+          </a>
+        </header>
+
+        <div class="grid gap-3 sm:gap-5 md:grid-cols-2 lg:grid-rows-2" data-reveal-stagger>
           {
-            relatedSolutions.map((item) => (
-              <a href={item.href} class:list={['more-row group', RHYTHM_WHITE]}>
-                <span class="font-eyebrow text-xs tabular-nums text-text-muted">
-                  {String(item.slug.replace(/\D/g, '')).padStart(2, '0')}
+            relatedSolutions.map((item, index) => (
+              <a
+                data-reveal
+                href={item.href}
+                class:list={[
+                  'group relative isolate flex min-h-[300px] flex-col justify-end overflow-hidden rounded-[20px] bg-ink-dark p-5 no-underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-gold sm:p-6',
+                  index === 0
+                    ? 'md:col-span-2 md:min-h-[420px] lg:col-span-1 lg:row-span-2 lg:min-h-[620px]'
+                    : 'lg:min-h-[300px]',
+                ]}
+              >
+                <SiteImage
+                  src={item.image}
+                  alt={`Đồng phục cho ${item.title}`}
+                  loading="lazy"
+                  class:list={[
+                    'absolute inset-0 -z-20 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105 motion-reduce:transition-none motion-reduce:group-hover:scale-100',
+                    item.homeImagePosition ?? 'object-top',
+                  ]}
+                  variant="card"
+                />
+                <span aria-hidden="true" class="related-scrim absolute inset-0 -z-10"></span>
+
+                <span
+                  aria-hidden="true"
+                  class="absolute left-4 top-4 grid h-10 w-10 place-items-center rounded-[11px] border border-white/30 bg-white/15 backdrop-blur-[6px] sm:left-5 sm:top-5"
+                >
+                  <span class="material-symbols-outlined text-lg leading-none text-white">
+                    {item.icon}
+                  </span>
                 </span>
-                <h3 class="text-[clamp(1.25rem,2.4vw,1.875rem)] font-bold text-ink-dark transition-colors group-hover:text-accent-teal">
+
+                <h3 class="pr-14 text-balance text-lg font-extrabold leading-snug text-white sm:text-xl">
                   {item.title}
                 </h3>
+                <ul class="mt-3 list-none space-y-1 p-0 pr-14 text-xs leading-snug text-white/90 sm:text-[0.8125rem]">
+                  {keywordsFor(item).map((keyword) => <li>{keyword}</li>)}
+                </ul>
+
                 <span
-                  class="material-symbols-outlined text-accent-teal transition-transform duration-300 group-hover:translate-x-1.5"
                   aria-hidden="true"
+                  class="absolute bottom-4 right-4 grid h-10 w-10 place-items-center rounded-full bg-accent-gold text-[#171717] transition-transform duration-300 group-hover:translate-x-1 motion-reduce:transition-none sm:bottom-[18px] sm:right-[18px]"
                 >
-                  arrow_forward
+                  <span class="material-symbols-outlined text-lg leading-none">arrow_forward</span>
                 </span>
               </a>
             ))
@@ -445,381 +376,15 @@ const h2Macro =
 </SiteLayout>
 
 <style>
-  /* ── Trình khám phá vật liệu (03) ── */
-  .exp {
-    position: relative;
-    height: 380vh;
-  }
-  .exp__stage {
-    position: sticky;
-    top: 0;
-    display: grid;
-    height: 100svh;
-    grid-template-columns: 1fr 1.1fr;
-    overflow: hidden;
-  }
-  .exp__left {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 4rem clamp(1.5rem, 5vw, 6rem);
-  }
-  .exp__h2 {
-    font-size: clamp(1.5rem, 2.4vw, 2.25rem);
-    font-weight: 700;
-    line-height: 1.15;
-    letter-spacing: -0.02em;
-    text-wrap: balance;
-    max-width: 20ch;
-    margin: 0 0 2.5rem;
-  }
-  .exp__tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.6rem;
-    margin: 0 0 3rem;
-    padding: 0;
-    list-style: none;
-  }
-  .exp__tags li {
-    background: rgb(255 255 255 / 0.07);
-    padding: 0.55rem 1.1rem;
-    border-radius: 0;
-    font-size: 0.8125rem;
-    color: rgb(255 255 255 / 0.9);
-  }
-  .exp__list {
-    position: relative;
-    padding-left: 2.25rem;
-  }
-  .exp__list::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0.35rem;
-    bottom: 0.35rem;
-    width: 1px;
-    background: rgb(255 255 255 / 0.14);
-  }
-  .exp__bar {
-    position: absolute;
-    left: 0;
-    top: 0.35rem;
-    width: 2px;
-    height: calc((100% - 0.7rem) / 4);
-    background: #ffc933;
-    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-  .exp__m {
-    display: flex;
-    align-items: baseline;
-    gap: 1.5rem;
-    width: 100%;
-    padding: 0.7rem 0;
-    background: none;
-    border: 0;
-    text-align: left;
-    cursor: pointer;
-    color: rgb(255 255 255 / 0.25);
-    transition: color 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-  .exp__mname {
-    font-size: clamp(1.375rem, 2.8vw, 2.5rem);
-    font-weight: 700;
-    letter-spacing: -0.03em;
-    line-height: 1.15;
-  }
-  .exp__m.on {
-    color: #fff;
-  }
-  .exp__media {
-    position: relative;
-    overflow: hidden;
-  }
-  .exp__shot {
-    position: absolute;
-    inset: 0;
-    opacity: 0;
-    transition: opacity 1s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-  .exp__shot.on {
-    opacity: 1;
-  }
-  .exp__img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transform: scale(1.08);
-    transition: transform 1.6s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-  .exp__shot.on .exp__img {
-    transform: scale(1);
-  }
-  .exp__spec {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1px;
-    margin: 0;
-    padding: 2.5rem clamp(1.5rem, 3vw, 3rem);
-    background: linear-gradient(to top, rgb(11 31 53 / 0.94), rgb(11 31 53 / 0));
-  }
-  .exp__spec div {
-    padding-right: 1.25rem;
-  }
-  .exp__spec dt {
-    margin-bottom: 0.55rem;
-    font-family: var(--font-body);
-    font-size: 0.625rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: #FFC933;
-  }
-  .exp__spec dd {
-    margin: 0;
-    font-size: 0.9375rem;
-    line-height: 1.5;
-    color: #fff;
-  }
-  .exp__steps {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-  }
-  .exp__steps > div {
-    height: 95vh;
-  }
-  .exp__mobile {
-    display: none;
-  }
-  @media (max-width: 900px) {
-    .exp {
-      height: auto;
-    }
-    .exp__stage,
-    .exp__steps {
-      display: none;
-    }
-    .exp__mobile {
-      display: block;
-      padding-block: 4.5rem;
-    }
-    .exp__slider {
-      margin-top: 2rem;
-    }
-    .exp__track {
-      display: flex;
-      gap: 1rem;
-      overflow-x: auto;
-      overscroll-x: contain;
-      scroll-snap-type: x mandatory;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
-    }
-    .exp__track::-webkit-scrollbar {
-      display: none;
-    }
-    .exp__mrow {
-      flex: 0 0 100%;
-      scroll-snap-align: start;
-      min-width: 0;
-    }
-    .exp__dots {
-      display: flex;
-      justify-content: center;
-      gap: 0.5rem;
-      margin-top: 1.75rem;
-    }
-    .exp__dot {
-      width: 0.5rem;
-      height: 0.5rem;
-      padding: 0;
-      border: 0;
-      border-radius: 0;
-      background: rgb(255 255 255 / 0.35);
-      cursor: pointer;
-      transition:
-        width 0.25s ease,
-        background-color 0.25s ease;
-    }
-    .exp__dot[aria-selected='true'] {
-      width: 1.5rem;
-      background: #ffc933;
-    }
-    .exp__mobile dt {
-      font-family: var(--font-body);
-      font-size: 0.625rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: #FFC933;
-    }
-    .exp__mobile dd {
-      margin: 0 0 0.5rem;
-      font-size: 0.9375rem;
-      color: rgb(255 255 255 / 0.8);
-    }
-  }
-
-  /* ── Bằng chứng: ảnh nền + số đè ── */
-  .proof-case {
-    position: relative;
-    display: flex;
-    align-items: flex-end;
-    min-height: 20rem;
-    overflow: hidden;
-    background: #0E2640;
-    text-decoration: none;
-    isolation: isolate;
-  }
-  .proof-case__img {
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-  .proof-case::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: -1;
+  /* ── Giải pháp khác: cùng scrim card với trang /giai-phap ── */
+  .related-scrim {
     background: linear-gradient(
       to top,
-      rgb(11 31 53 / 0.88) 0%,
-      rgb(11 31 53 / 0.42) 52%,
-      transparent 90%
+      rgba(13, 27, 58, 0.94) 0%,
+      rgba(13, 27, 58, 0.72) 32%,
+      rgba(13, 27, 58, 0.2) 62%,
+      rgba(13, 27, 58, 0.06) 100%
     );
   }
-  .proof-case:hover .proof-case__img {
-    transform: scale(1.06);
-  }
-  .proof-case__in {
-    width: 100%;
-    padding: 2rem;
-  }
-  @media (max-width: 640px) {
-    .proof-case {
-      min-height: 16rem;
-    }
-  }
 
-  /* ── Giải pháp khác: dòng điều hướng ── */
-  .more-row {
-    display: grid;
-    grid-template-columns: 3.5rem 1fr auto;
-    gap: 1.5rem;
-    align-items: center;
-    padding: 2rem 0;
-    text-decoration: none;
-    transition: padding-left 0.35s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-  .more-row:hover {
-    padding-left: 1.25rem;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .exp {
-      height: auto;
-    }
-    .exp__stage {
-      position: static;
-      height: auto;
-    }
-  }
 </style>
-
-<script>
-  /* Trình khám phá vật liệu — zero thư viện, một IntersectionObserver.
-     Cuộn qua mốc → đổi vật liệu; bấm tên vải cũng đổi được. */
-  const root = document.querySelector<HTMLElement>('.exp');
-  if (root) {
-    const names = Array.from(root.querySelectorAll<HTMLElement>('.exp__m'));
-    const shots = Array.from(root.querySelectorAll<HTMLElement>('.exp__shot'));
-    const bar = root.querySelector<HTMLElement>('[data-bar]');
-
-    const activate = (i: number) => {
-      names.forEach((n, k) => n.classList.toggle('on', k === i));
-      shots.forEach((s, k) => s.classList.toggle('on', k === i));
-      if (bar) bar.style.transform = `translateY(${i * 100}%)`;
-    };
-
-    names.forEach((n, i) => n.addEventListener('click', () => activate(i)));
-
-    const steps = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            const i = Number((e.target as HTMLElement).dataset.step);
-            if (!Number.isNaN(i)) activate(i);
-          }
-        });
-      },
-      { rootMargin: '-50% 0px -50% 0px' },
-    );
-    root.querySelectorAll<HTMLElement>('[data-step]').forEach((el) => steps.observe(el));
-  }
-
-  /* Carousel vật liệu — chỉ hiển thị mobile (<900px) */
-  const fabricSlider = document.querySelector<HTMLElement>('[data-fabric-mobile-slider]');
-  if (fabricSlider) {
-    const track = fabricSlider.querySelector<HTMLElement>('[data-fabric-track]');
-    const slides = track
-      ? [...track.querySelectorAll<HTMLElement>('[data-fabric-slide]')]
-      : [];
-    const dots = [...fabricSlider.querySelectorAll<HTMLButtonElement>('[data-fabric-dot]')];
-
-    if (track && slides.length > 1) {
-      const getStep = () => {
-        const first = slides[0];
-        const second = slides[1];
-        if (!first) return 0;
-        if (second) return second.offsetLeft - first.offsetLeft;
-        const gap = parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap) || 0;
-        return first.offsetWidth + gap;
-      };
-
-      const getActiveIndex = () => {
-        const step = getStep();
-        if (step <= 0) return 0;
-        return Math.min(slides.length - 1, Math.round(track.scrollLeft / step));
-      };
-
-      const syncDots = () => {
-        const active = getActiveIndex();
-        dots.forEach((dot, index) => {
-          dot.setAttribute('aria-selected', index === active ? 'true' : 'false');
-        });
-      };
-
-      const scrollToIndex = (index: number) => {
-        const step = getStep();
-        if (step <= 0) return;
-        track.scrollTo({ left: Math.round(step * index), behavior: 'smooth' });
-      };
-
-      let scrollTimer: ReturnType<typeof setTimeout> | undefined;
-
-      track.addEventListener(
-        'scroll',
-        () => {
-          clearTimeout(scrollTimer);
-          scrollTimer = setTimeout(syncDots, 80);
-        },
-        { passive: true },
-      );
-      track.addEventListener('scrollend', syncDots);
-
-      dots.forEach((dot, index) => {
-        dot.addEventListener('click', () => scrollToIndex(index));
-      });
-
-      window.addEventListener('resize', syncDots);
-      syncDots();
-    }
-  }
-</script>

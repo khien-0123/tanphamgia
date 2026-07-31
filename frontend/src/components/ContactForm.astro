@@ -23,11 +23,17 @@ const industryOptions = [
   'Y tế, Spa & Dịch vụ',
   'Khác',
 ];
-
 ---
 
-<form class="contact-form space-y-5" id="contact-form" method="post" action="#">
-  <div class="grid sm:grid-cols-2 gap-5">
+{/*
+  Đủ 9 trường, gộp còn 6 dòng nên ngắn hơn hẳn một cột thẳng.
+  Baymard chê form nhiều cột vì người dùng KHÔNG ĐOÁN ĐƯỢC hai ô cạnh nhau có liên quan
+  hay phải điền cả hai — nên chỗ nào ghép đôi thì hai ô đó phải cùng nói về một thứ.
+  Form không còn nhãn nhóm nào; thứ tự trường tự dẫn từ người gửi sang nhu cầu đơn hàng.
+  Dưới 640px mọi cặp tự tách dòng.
+*/}
+<form class="contact-form grid gap-4" id="contact-form" method="post" action="#">
+  <div class="grid gap-4 sm:grid-cols-2">
     <div>
       <label class={formLabelClass} for="contact-name">Họ tên *</label>
       <input class={formInputClass} id="contact-name" name="name" type="text" required placeholder="Nhập họ tên" />
@@ -41,7 +47,7 @@ const industryOptions = [
     <label class={formLabelClass} for="contact-company">Tên công ty *</label>
     <input class={formInputClass} id="contact-company" name="company" type="text" required placeholder="Nhập tên công ty" />
   </div>
-  <div class="grid sm:grid-cols-2 gap-5">
+  <div class="grid gap-4 sm:grid-cols-2">
     <div>
       <label class={formLabelClass} for="contact-phone">SĐT / Zalo *</label>
       <input class={formInputClass} id="contact-phone" name="phone" type="tel" required placeholder="Nhập SĐT/Zalo" />
@@ -51,7 +57,8 @@ const industryOptions = [
       <input class={formInputClass} id="contact-email" name="email" type="email" placeholder="Nhập email" />
     </div>
   </div>
-  <div class="grid sm:grid-cols-2 gap-5">
+
+  <div class="grid gap-4 sm:grid-cols-2">
     <div>
       <label class={formLabelClass} for="contact-industry">Ngành nghề</label>
       <select class={formInputClass} id="contact-industry" name="industry">
@@ -77,23 +84,26 @@ const industryOptions = [
   <div>
     <label class={formLabelClass} for="contact-message">Yêu cầu cụ thể</label>
     <textarea
-      class:list={[formInputClass, 'resize-y min-h-16']}
+      class:list={[formInputClass, 'min-h-[4.5rem] resize-y']}
       id="contact-message"
       name="message"
       rows="2"
-      placeholder="Mô tả nhu cầu đồng phục, chất liệu, số lượng..."
-    ></textarea>
+      placeholder="Mô tả nhu cầu đồng phục, chất liệu, số lượng..."></textarea>
   </div>
+
   <button
-    class="w-full bg-accent-gold text-ink-dark py-4 rounded-full font-bold hover:shadow-gold transition-all"
+    class="mt-1 flex min-h-[3.4rem] w-full items-center justify-center gap-2 rounded-full bg-[#ffc72c] text-[0.9375rem] font-extrabold text-[#17140a] transition-transform duration-200 hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#ffc72c]"
     type="submit"
   >
     Gửi yêu cầu tư vấn
+    <span class="material-symbols-outlined text-xl leading-none" aria-hidden="true">arrow_forward</span>
   </button>
-  <p class="text-xs text-text-muted text-center">
-    Hoặc gọi hotline <a class="text-accent-teal font-semibold" href={siteContact.phoneHref}
-      >{siteContact.phoneDisplay}</a
-    >
+
+  <p class="m-0 text-center text-xs text-[#625a50]">
+    Hoặc gọi hotline
+    <a class="font-bold text-[#5c4500] hover:underline" href={siteContact.phoneHref}>
+      {siteContact.phoneDisplay}
+    </a>
   </p>
 </form>
 
@@ -103,3 +113,17 @@ const industryOptions = [
     alert('Cảm ơn bạn! Đội ngũ Tân Phạm Gia sẽ phản hồi trong 24 giờ làm việc.');
   });
 </script>
+
+<style>
+  /* Mũi tên xổ mặc định của trình duyệt dính sát mép phải và mỗi trình duyệt đặt một kiểu.
+     Tắt đi, tự vẽ chevron rồi neo cách mép 1rem — bằng đúng padding trái của ô (px-4). */
+  .contact-form select {
+    appearance: none;
+    -webkit-appearance: none;
+    padding-right: 2.75rem;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230e2640' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1.05rem 1.05rem;
+  }
+</style>

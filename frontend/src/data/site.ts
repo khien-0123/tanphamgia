@@ -551,23 +551,34 @@ export const testimonialsClients: Testimonial[] = [
   },
 ];
 
-/** Case study blog — trang Khách hàng 4.4–4.6 */
+/** Case study — trang Khách hàng (layout sole) */
+export interface ClientCaseStudyMetric {
+  value: string;
+  label: string;
+}
+
 export interface ClientCaseStudy {
   slug: string;
+  /** Tiêu đề dài — dùng SEO / fallback */
   title: string;
   excerpt: string;
   client: string;
-  /** Nhãn phân khúc — hiển thị trên card (vd: VĂN PHÒNG & TẬP ĐOÀN) */
+  /** Badge ngắn trên hàng logo (vd: Văn phòng, Ngân hàng) */
+  badge: string;
+  /** Nhãn phân khúc cũ — giữ tương thích */
   tags: string;
-  /** Logo thương hiệu — đường dẫn local trong public/images/logos */
   logo?: string;
-  /** Biểu tượng logo (màu gốc) — dùng khi tách icon khỏi wordmark */
   logoMark?: string;
-  /** Chữ thương hiệu ngắn hiển thị màu trắng cạnh logoMark */
   logoWordmark?: string;
   image: string;
   alt: string;
   href?: string;
+  /** Đoạn giới thiệu ngắn trên listing sole */
+  intro: string;
+  metrics: ClientCaseStudyMetric[];
+  /** Danh sách thách thức — hiển thị dạng list như giải pháp */
+  challenges: string[];
+  solutions: string[];
 }
 
 export const clientCaseStudies: ClientCaseStudy[] = [
@@ -576,46 +587,97 @@ export const clientCaseStudies: ClientCaseStudy[] = [
     title: 'Coca-Cola Philippines — Đồng bộ chất lượng xuyên suốt chuỗi sản xuất',
     excerpt:
       'Case study triển khai đồng phục quy mô lớn với QC đa tầng và quy trình phối hợp rõ ràng.',
-    client: 'Coca-Cola Philippines',
+    client: 'Coca Cola Philippines',
+    badge: 'Văn phòng',
     tags: 'VĂN PHÒNG & TẬP ĐOÀN / FMCG',
-    logo: '/images/logos/coca-cola.webp',
+    logo: '/images/logos/coca-cola.png',
     image: siteAssets.cases.cocaCola,
-    alt: 'Dự án Coca-Cola Philippines',
+    alt: 'Đội ngũ Coca-Cola Philippines trong đồng phục Tân Phạm Gia',
     href: caseStudyHref('giai-phap-2', 'coca-cola-philippines'),
+    intro:
+      'Tân Phạm Gia trở thành đối tác của Coca-Cola Philippines từ những đơn hàng nhỏ, từng bước cung cấp đồng phục cho các phòng ban và đồng hành cùng nhiều sự kiện quan trọng.',
+    metrics: [
+      { value: '1000', label: 'Sản phẩm' },
+      { value: '66 ngày', label: 'Tư vấn & sản xuất' },
+    ],
+    challenges: [
+      'Thiết kế đồng phục văn phòng cho 500 nhân viên Sales & Marketing — đồng bộ, chuyên nghiệp, phản ánh văn hóa hiện đại.',
+    ],
+    solutions: [
+      'Thiết kế 3 mẫu để khách chọn',
+      'Vải chống nhăn, thoải mái cả ngày',
+      'Form Slim-fit tôn dáng',
+      'Fitting tại văn phòng khách',
+    ],
   },
   {
     slug: 'bidv',
     title: 'BIDV — Chuẩn hóa hình ảnh đội ngũ giao dịch',
     excerpt: '800 sản phẩm triển khai trong 45 ngày, đồng nhất màu sắc và hoàn thiện theo tiêu chí nghiệm thu.',
     client: 'Ngân hàng BIDV',
+    badge: 'Ngân hàng',
     tags: 'VĂN PHÒNG & TẬP ĐOÀN / NGÂN HÀNG',
-    logoMark: '/images/logos/bidv.png',
-    logoWordmark: 'BIDV',
+    logo: '/images/logos/Logo_Bidv.png',
     image: siteAssets.cases.bidvClient,
-    alt: 'Dự án Ngân hàng BIDV',
+    alt: 'Đội ngũ BIDV trong đồng phục Tân Phạm Gia',
     href: caseStudyHref('giai-phap-2', 'bidv'),
+    intro:
+      'Chuẩn hóa hình ảnh đội ngũ giao dịch — đồng nhất màu sắc, form dáng và hoàn thiện theo tiêu chí nghiệm thu trên toàn hệ thống.',
+    metrics: [
+      { value: '800', label: 'Sản phẩm' },
+      { value: '45 ngày', label: 'Tư vấn & sản xuất' },
+    ],
+    challenges: [
+      'Triển khai đồng phục giao dịch quy mô lớn trong thời gian ngắn, đạt tiêu chí nghiệm thu nghiêm ngặt.',
+    ],
+    solutions: [
+      'Chuẩn hóa thông số kỹ thuật brand',
+      'Kiểm soát màu sắc từng lô',
+      'Duyệt mẫu nhiều bước',
+      'Bàn giao đúng tiến độ',
+    ],
   },
   {
     slug: 'king-group',
     title: 'King Group — Đáp ứng đơn hàng 3.000+ áo đồng phục công nghiệp',
     excerpt: 'Giải pháp đồng phục cho môi trường sản xuất với chất liệu bền và tiêu chuẩn an toàn lao động.',
     client: 'King Group',
+    badge: 'Sản xuất',
     tags: 'SẢN XUẤT & FDI / CÔNG NGHIỆP',
+    logo: siteAssets.brand.logo,
     image: siteAssets.cases.kingGroup,
-    alt: 'Dự án King Group',
+    alt: 'Đội ngũ King Group trong đồng phục sản xuất',
     href: caseStudyHref('giai-phap-1', 'king-group'),
-  },
-  {
-    slug: 'savisco',
-    title: 'SAVISCO — Đồng bộ hình ảnh đa phòng ban',
-    excerpt: '950 sản phẩm triển khai trong 40 ngày, chuẩn hóa màu sắc và quy cách cho toàn hệ thống nhân sự.',
-    client: 'SAVISCO',
-    tags: 'VĂN PHÒNG & TẬP ĐOÀN / DỊCH VỤ',
-    image: siteAssets.cases.saviscoGp2,
-    alt: 'Dự án SAVISCO',
-    href: caseStudyHref('giai-phap-2', 'savisco'),
+    intro:
+      'Đáp ứng đơn hàng đồng phục công nghiệp quy mô lớn — chất liệu bền, ATLĐ và chất lượng ổn định qua nhiều đợt tái đặt.',
+    metrics: [
+      { value: '3.000+', label: 'Sản phẩm' },
+      { value: '4+ năm', label: 'Hợp tác' },
+    ],
+    challenges: [
+      'Nhu cầu đặt mới/bổ sung số lượng lớn thường xuyên; cần chất lượng ổn định và tiến độ cung ứng nhà máy.',
+    ],
+    solutions: [
+      'Chất liệu phù hợp sản xuất',
+      'QC đa tầng',
+      'Hồ sơ kỹ thuật tái đặt',
+      'Đáp ứng đơn định kỳ lớn',
+    ],
   },
 ];
+
+/** Bài blog case study — section liên quan trên /khach-hang (không dùng tin tức chung) */
+export const caseStudyBlogPosts: BlogPost[] = clientCaseStudies.map((item) => ({
+  slug: item.slug,
+  title: item.title,
+  excerpt: item.intro,
+  category: 'Case Study',
+  categoryColor: '#0d1b3a',
+  publishedAt: '2025-01-01',
+  image: item.image,
+  alt: item.alt,
+  href: item.href,
+}));
 
 /** Phân trang tin tức */
 export const BLOG_POSTS_PER_PAGE = 12;

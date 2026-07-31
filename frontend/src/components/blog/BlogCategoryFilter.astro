@@ -1,0 +1,81 @@
+---
+/**
+ * Bộ lọc chuyên mục tin tức — hướng A tinh gọn
+ * Active: nền navy · Idle: outline mỏng · Mobile: scroll ngang
+ */
+import { sectionEyebrow } from '../../lib/section-eyebrow';
+
+interface Props {
+  categories: string[];
+  /** Giữ prop để tương thích BlogListingSection — không hiển thị số */
+  counts?: Record<string, number>;
+}
+
+const { categories } = Astro.props;
+
+const filters = [{ id: 'all', label: 'Tất cả' }, ...categories.map((c) => ({ id: c, label: c }))];
+---
+
+<div class="blog-filter mb-10 md:mb-12" role="toolbar" aria-label="Lọc theo chuyên mục">
+  <div class="mb-5">
+    <p class={sectionEyebrow}>Chuyên mục</p>
+  </div>
+
+  <div
+    class="blog-filter__track flex max-w-full items-center gap-2 overflow-x-auto overscroll-x-contain pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+  >
+    {
+      filters.map((f, i) => (
+        <button
+          type="button"
+          data-blog-filter-btn={f.id}
+          aria-pressed={i === 0 ? 'true' : 'false'}
+          class:list={['blog-filter-btn', i === 0 && 'is-active']}
+        >
+          {f.label}
+        </button>
+      ))
+    }
+  </div>
+</div>
+
+<style>
+  .blog-filter-btn {
+    appearance: none;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+    padding: 0.6rem 1.05rem;
+    border-radius: 999px;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    color: #5c564c;
+    white-space: nowrap;
+    box-shadow: inset 0 0 0 1px rgb(13 27 58 / 0.1);
+    transition:
+      color 0.18s ease,
+      background-color 0.18s ease,
+      box-shadow 0.18s ease;
+  }
+
+  .blog-filter-btn:hover {
+    color: #0d1b3a;
+    background: rgb(13 27 58 / 0.04);
+    box-shadow: inset 0 0 0 1px rgb(13 27 58 / 0.18);
+  }
+
+  .blog-filter-btn.is-active {
+    color: #fff;
+    background: #0d1b3a;
+    box-shadow: none;
+  }
+
+  .blog-filter-btn:focus-visible {
+    outline: 2px solid #ffc72c;
+    outline-offset: 3px;
+  }
+</style>
