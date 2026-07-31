@@ -38,6 +38,12 @@ export const siteAssets = {
     giaiPhap3: '/images/solutions/giai-phap-3.webp',
     giaiPhap4: '/images/solutions/giai-phap-4.webp',
   },
+  materials: {
+    piquePolyester: '/images/materials/pique-polyester.webp',
+    piqueTiciCvc: '/images/materials/pique-tici-cvc.webp',
+    oxfordTechnical: '/images/materials/oxford-technical.webp',
+    kakiStretch: '/images/materials/kaki-stretch.webp',
+  },
   blog: {
     chonVaiPolo: '/images/blog/chon-vai-polo-khi-hau-viet-nam.jpg',
     dongPhucToiGian: '/images/blog/dong-phuc-toi-gian-branding-2024.jpg',

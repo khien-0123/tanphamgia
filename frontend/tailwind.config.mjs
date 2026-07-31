@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./src/**/*.{astro,html,js,ts,md}'],
-  safelist: ['bg-surface-alt', 'bg-white', 'bg-[#FFFCF7]', 'bg-texture-fabric', 'bg-texture-grain', 'py-16', 'md:py-24'],
+  safelist: ['bg-surface-alt', 'bg-white', 'bg-[#FFFCF7]', 'bg-[#FBF8F1]', 'bg-texture-fabric', 'bg-texture-grain', 'py-16', 'md:py-24'],
   darkMode: 'class',
   theme: {
     extend: {
@@ -27,7 +27,15 @@ export default {
         'surface-container-low': '#F5F5F5',
         'surface-muted': '#E5E5E5',
         'border-subtle': '#D4D4D4',
+        /** Viền input — #D4D4D4 chỉ đạt 1.48:1, trượt ngưỡng 3:1 của WCAG 1.4.11
+            (viền là thứ duy nhất cho biết ô nhập ở đâu). #8A8A8A = 3.45:1.
+            Chỉ dùng cho input/select/textarea, KHÔNG thay border-subtle ở đường kẻ trang trí. */
+        'border-field': '#8A8A8A',
         'text-muted': '#5F6F78',
+        /** text-muted đậm hơn một bậc — dùng khi chữ nằm trên nền xám.
+            #5F6F78 trên #EDEDED chỉ được 4.45:1 (hover #E5E5E5 còn 4.14).
+            #4E5D67 → 5.81 / 5.40. Trên nền sáng vẫn dùng text-muted bình thường. */
+        'text-muted-strong': '#4E5D67',
         'on-surface': '#1A2B36',
         'primary-container': '#0E2640',
         error: '#E05252',

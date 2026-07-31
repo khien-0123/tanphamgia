@@ -1,0 +1,91 @@
+---
+import SiteImage from '../SiteImage.astro';
+import type { DocumentItem } from '../../data/tai-lieu';
+import { documentCategories } from '../../data/tai-lieu';
+
+interface Props {
+  doc: DocumentItem;
+  /** Vị trí trong lưới — quyết định tông bìa chữ xen kẽ navy / giấy */
+  index: number;
+}
+
+const { doc, index } = Astro.props;
+
+const group = documentCategories.find((c) => c.id === doc.category);
+const cardLabel = group?.cardLabel ?? 'Tài liệu';
+const coverType = doc.coverType ?? cardLabel;
+const coverTitle = doc.coverTitle ?? doc.title;
+/* Bìa chữ đổi tông theo vị trí để lưới không thành một mảng navy liền khối */
+const coverNavy = index % 2 === 0;
+---
+
+<article
+  data-reveal
+  class="group flex flex-col overflow-hidden rounded-[1.25rem] border border-[#e5dfd2] bg-[#fffcf7] transition-[border-color,transform] duration-300 hover:-translate-y-[3px] hover:border-[#0d1b3a]/20"
+>
+  <div class="relative aspect-[16/10] overflow-hidden border-b border-[#e5dfd2] bg-[#fbf8f1]">
+    {
+      doc.cover ? (
+        <SiteImage
+          src={doc.cover}
+          alt={`Bìa tài liệu ${doc.title}`}
+          class="h-full w-full object-cover transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105"
+          variant="card"
+        />
+      ) : (
+        /* Chưa có ảnh bìa thật → dựng bìa chữ, không để ô ảnh trống */
+        <div
+          class:list={[
+            'flex h-full flex-col justify-between p-4',
+            coverNavy ? 'bg-[#0d1b3a] text-white' : 'bg-[#fbf8f1] text-[#1f1b17]',
+          ]}
+          aria-hidden="true"
+        >
+          <span class="pointer-events-none absolute inset-2 rounded-[0.5rem] border border-current opacity-20"></span>
+          <span
+            class:list={[
+              'text-[0.6rem] font-bold uppercase tracking-[0.18em]',
+              coverNavy ? 'text-[#ffc933]' : 'text-[#5c4500]',
+            ]}
+          >
+            {coverType}
+          </span>
+          {/* Bìa là khung cao cố định nên đây là chỗ duy nhất được cắt dòng —
+              chữ trên bìa do mình đặt qua coverTitle nên rút gọn được */}
+          <span class="line-clamp-3 text-[0.95rem] font-extrabold leading-[1.22] tracking-[-0.02em]">
+            {coverTitle}
+          </span>
+          <span class="self-end text-[0.62rem] font-bold tracking-[0.2em] opacity-60">TPG</span>
+        </div>
+      )
+    }
+  </div>
+
+  <div class="flex flex-1 flex-col p-4 pb-[1.05rem]">
+    <span class="text-[0.62rem] font-bold uppercase tracking-[0.16em] text-[#5c4500]">
+      {cardLabel}
+    </span>
+    {/* Ô chữ trong thẻ chỉ ăn theo padding trái–phải: không max-width, không cắt dòng.
+        text-wrap:initial để gỡ `balance` mà global.css áp cho mọi h3 — balance chia đều
+        độ dài các dòng nên khối chữ tự thu hẹp, trông như bị chặn chiều ngang. */}
+    <h3
+      class="mt-[0.55rem] w-full text-[0.9375rem] font-extrabold leading-[1.32] tracking-[-0.015em] text-[#1f1b17] [text-wrap:initial]"
+    >
+      {doc.title}
+    </h3>
+    {/* Backend gửi meta rỗng thì bỏ hẳn dòng, không để lại khoảng trắng lệch nhịp */}
+    {doc.meta && <span class="mt-[0.45rem] text-xs tabular-nums text-[#625a50]">{doc.meta}</span>}
+
+    <div class="mt-auto pt-[0.95rem]">
+      <button
+        type="button"
+        class="flex min-h-10 w-full items-center justify-center gap-[0.45rem] rounded-full border border-[#ffc933] bg-transparent text-[0.78rem] font-extrabold text-[#5c4500] transition-colors duration-200 group-hover:bg-[#ffc933] group-hover:text-[#3f2d00] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0d1b3a]"
+        data-doc-download
+        data-doc-id={doc.id}
+      >
+        Tải ngay
+        <span class="material-symbols-outlined text-base leading-none" aria-hidden="true">download</span>
+      </button>
+    </div>
+  </div>
+</article>
