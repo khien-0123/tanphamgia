@@ -1,6 +1,7 @@
 ---
 import SiteImage from './SiteImage.astro';
 import { sectionEyebrow } from '../lib/section-eyebrow';
+import { sectionTitleOnDark } from '../lib/section-typography';
 import { RHYTHM_WHITE, sectionPy } from '../lib/section-rhythm';
 import type { Testimonial } from '../data/site';
 import SliderArrow from './SliderArrow.astro';
@@ -42,10 +43,7 @@ const sectionClass = isDark
       isDark ? (
         <header>
           <p class={sectionEyebrow}>Ý kiến khách hàng</p>
-          <h2
-            id="testimonials-title"
-            class="mt-6 max-w-[18ch] text-[clamp(1.75rem,2.8vw,3rem)] font-extrabold leading-[1.08] tracking-[-0.03em] text-white"
-          >
+          <h2 id="testimonials-title" class:list={['mt-5 max-w-[18ch]', sectionTitleOnDark]}>
             {title}
           </h2>
         </header>

@@ -1,0 +1,646 @@
+---
+/**
+ * SNAPSHOT — Mockup chi tiết case study blog (đã chốt tạm)
+ * Khôi phục: copy đè lên case-study-detail.astro
+ * Mở: /mockup/case-study-detail-saved
+ *
+ * Chỉ mockup — không áp production.
+ * Nội dung tham chiếu: dongphucvn Coca-Cola Philippines
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SiteImage from '../../components/SiteImage.astro';
+import { siteAssets } from '../../data/assets';
+import { caseStudyHref, routes } from '../../lib/routes';
+
+/** Ảnh tải từ dongphucvn — chỉ dùng cho mockup */
+const mockImages = {
+  hero: '/images/mockup/coca-cola/group-2.jpg',
+  productBack: '/images/mockup/coca-cola/group-1.jpg',
+  detailLogo: '/images/mockup/coca-cola/detail-1.jpg',
+  detailColors: '/images/mockup/coca-cola/detail-2.jpg',
+  rack: '/images/mockup/coca-cola/portrait.jpg',
+};
+
+const requirements = [
+  {
+    id: 'req-thiet-ke',
+    title: 'Thiết kế & form dáng',
+    body: 'Áo polo form hiện đại, gọn gàng, dễ mặc, phù hợp với nhiều vóc dáng nhân sự và môi trường làm việc năng động.',
+  },
+  {
+    id: 'req-mau-sac',
+    title: 'Màu sắc & nhận diện thương hiệu',
+    body: 'Màu đỏ đặc trưng của Coca-Cola phải được kiểm soát chính xác, đảm bảo sự đồng nhất giữa các sản phẩm và đúng theo bộ nhận diện thương hiệu.',
+  },
+  {
+    id: 'req-logo',
+    title: 'Logo & chi tiết hoàn thiện',
+    body: 'Logo Coca-Cola được thêu sắc nét, 4 vị trí, đảm bảo độ bền và tính thẩm mỹ.',
+  },
+  {
+    id: 'req-tieu-chuan',
+    title: 'Tiêu chuẩn sản xuất',
+    body: 'Đáp ứng các yêu cầu kỹ thuật và chất lượng đơn hàng phục vụ thị trường quốc tế.',
+  },
+];
+
+const processSteps = [
+  {
+    id: 'buoc-form',
+    title: 'Phát triển form dáng & may mẫu',
+    body: 'Áp dụng rập 3D và may trên mannequin để kiểm soát form áo ngay từ giai đoạn đầu. Điều chỉnh form dáng polo theo hướng hiện đại, đảm bảo tính thẩm mỹ và sự thoải mái khi mặc.',
+  },
+  {
+    id: 'buoc-chat-lieu',
+    title: 'Lựa chọn chất liệu & kiểm soát màu sắc',
+    body: 'Sử dụng chất liệu polo cao cấp, thoáng mát, giữ form tốt. Kiểm soát màu nhuộm theo tiêu chuẩn, đảm bảo độ ổn định màu và không sai lệch giữa các lô sản xuất.',
+  },
+  {
+    id: 'buoc-theu',
+    title: 'Thêu logo',
+    body: 'Logo Coca-Cola được xử lý với kỹ thuật phù hợp, đảm bảo sắc nét, đúng tỷ lệ và bền bỉ trong quá trình sử dụng. Kiểm tra kỹ vị trí, độ bám và độ hoàn thiện của logo trên từng sản phẩm.',
+  },
+  {
+    id: 'buoc-qc',
+    title: 'Kiểm soát chất lượng (QC)',
+    body: 'Kiểm tra sản phẩm sau khi may hoàn thiện. Kiểm tra lần cuối sau khi thêu logo, trước khi đóng gói và bàn giao.',
+  },
+];
+
+const related = [
+  {
+    name: 'BIDV — Chuẩn hóa hình ảnh đội ngũ giao dịch',
+    tag: 'Ngân hàng',
+    image: siteAssets.cases.bidvClient,
+    href: caseStudyHref('giai-phap-2', 'bidv'),
+  },
+  {
+    name: 'King Group — Đồng phục môi trường sản xuất',
+    tag: 'Sản xuất',
+    image: siteAssets.cases.kingGroup,
+    href: caseStudyHref('giai-phap-1', 'king-group'),
+  },
+  {
+    name: 'SAVISCO — Đồng bộ đa phòng ban',
+    tag: 'Dịch vụ',
+    image: siteAssets.cases.saviscoGp2,
+    href: caseStudyHref('giai-phap-2', 'savisco'),
+  },
+];
+
+const toc = [
+  { id: 'yeu-cau', label: '1. Yêu cầu từ phía Coca-Cola Philippines' },
+  { id: 'quy-trinh', label: '2. Giải pháp và quy trình thực hiện của Tân Phạm Gia' },
+  { id: 'ket-qua', label: '3. Kết quả dự án Đồng phục Coca-Cola' },
+  { id: 'doi-tac', label: '4. Tân Phạm Gia – Đối tác sản xuất đồng phục' },
+];
+---
+
+<BaseLayout
+  title="Mockup đã lưu · Case study blog — Coca-Cola Philippines"
+  description="Snapshot mockup chi tiết dự án — phong cách blog."
+>
+  <div class="border-b border-[#e8dfcf] bg-[#0d1b3a] px-6 py-3 text-white md:px-8">
+    <p class="mx-auto max-w-[68rem] text-[0.65rem] font-extrabold uppercase tracking-[0.14em] text-[#ffc72c]">
+      Mockup đã lưu · Case study · Blog — không sửa file này khi thí nghiệm
+    </p>
+  </div>
+
+  <article class="bg-white text-[#1c1915]">
+    {/* Header kiểu bài blog — chữ trước, ảnh sau */}
+    <header class="mx-auto max-w-[52rem] px-6 pb-8 pt-10 md:px-8 md:pb-10 md:pt-14">
+      <nav aria-label="Breadcrumb" class="mb-7 text-[0.8125rem] text-[#8a8278]">
+        <a class="no-underline transition-colors hover:text-[#0d1b3a]" href={routes.khachHang}>Khách hàng</a>
+        <span class="mx-2" aria-hidden="true">/</span>
+        <span class="text-[#4a453c]">Case study</span>
+      </nav>
+
+      <p class="text-[0.7rem] font-extrabold uppercase tracking-[0.14em] text-[#a67c00]">
+        Case study · FMCG · FDI
+      </p>
+
+      <h1 class="mt-4 text-[clamp(1.85rem,4.2vw,2.65rem)] font-extrabold leading-[1.15] tracking-[-0.035em] text-[#0d1b3a]">
+        Tân Phạm Gia sản xuất áo đồng phục Coca-Cola Philippines
+      </h1>
+
+      <p class="mt-5 text-lg leading-relaxed text-[#5c564c] md:text-[1.2rem] md:leading-relaxed">
+        Đối tác sản xuất áo polo — đáp ứng màu sắc thương hiệu, form hiện đại và chất lượng đạt chuẩn xuất khẩu.
+      </p>
+
+      <div
+        class="mt-7 flex flex-wrap items-center gap-x-4 gap-y-2 border-y border-[#ebe4d6] py-4 text-[0.8125rem] text-[#6f675c]"
+      >
+        <span>Coca-Cola Philippines</span>
+        <span class="text-[#d4cbba]" aria-hidden="true">·</span>
+        <span>564 áo polo</span>
+        <span class="text-[#d4cbba]" aria-hidden="true">·</span>
+        <span>60 ngày triển khai</span>
+      </div>
+    </header>
+
+    {/* Ảnh nổi bật */}
+    <figure class="mx-auto max-w-[58rem] px-6 md:px-8">
+      <div class="overflow-hidden bg-[#ebe4d6]">
+        <SiteImage
+          src={mockImages.hero}
+          alt="Áo polo Coca-Cola Philippines — đỏ, trắng, xám"
+          class="aspect-[16/10] w-full object-cover object-center"
+          loading="eager"
+          decoding="async"
+          variant="hero"
+        />
+      </div>
+      <figcaption class="mt-3 text-[0.8125rem] leading-snug text-[#8a8278]">
+        Bộ polo Coca-Cola Philippines do Tân Phạm Gia sản xuất — logo thêu và cờ Philippines trên tay áo.
+      </figcaption>
+    </figure>
+
+    {/* Thân bài + mục lục trái */}
+    <div class="mx-auto max-w-[68rem] px-6 py-12 md:px-8 md:py-14">
+      {/* Mục lục mobile — hàng ngang */}
+      <nav class="cs-toc-mobile mb-8 lg:hidden" aria-label="Mục lục">
+        <p class="mb-3 text-[0.65rem] font-extrabold uppercase tracking-[0.14em] text-[#8a8278]">Mục lục</p>
+        <ul class="m-0 flex list-none gap-2 overflow-x-auto pb-1">
+          {
+            toc.map((item) => (
+              <li class="shrink-0">
+                <a
+                  href={`#${item.id}`}
+                  data-cs-toc-link
+                  class="cs-toc-chip inline-flex whitespace-nowrap border border-[#ebe4d6] px-3 py-1.5 text-[0.8125rem] font-semibold text-[#4a453c] no-underline transition-colors hover:border-[#ffc72c] hover:text-[#0d1b3a]"
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+
+      <div class="grid gap-10 lg:grid-cols-[15rem_minmax(0,1fr)] lg:gap-12 xl:grid-cols-[16rem_minmax(0,1fr)] xl:gap-14">
+        {/* Mục lục desktop — sticky trái */}
+        <aside class="cs-toc-aside hidden lg:block" aria-label="Mục lục">
+          <div class="sticky top-28">
+            <p class="text-[0.65rem] font-extrabold uppercase tracking-[0.14em] text-[#8a8278]">Mục lục</p>
+            <nav class="mt-4 border-l border-[#ebe4d6]">
+              <ul class="m-0 list-none space-y-0 p-0">
+                {
+                  toc.map((item) => (
+                    <li>
+                      <a href={`#${item.id}`} data-cs-toc-link class="cs-toc-link">
+                        {item.label}
+                      </a>
+                    </li>
+                  ))
+                }
+              </ul>
+            </nav>
+          </div>
+        </aside>
+
+        <div class="cs-blog min-w-0">
+          <p class="cs-blog-lead">
+            <strong>Coca-Cola Philippines</strong> là một trong những thị trường trọng điểm của Coca-Cola tại khu vực Đông
+            Nam Á, với hệ thống nhân sự quy mô lớn và tiêu chuẩn nhận diện thương hiệu toàn cầu.
+          </p>
+          <p>
+            Trong dự án này, <strong>Tân Phạm Gia</strong> được lựa chọn là đối tác sản xuất áo polo đồng phục cho đội ngũ
+            nhân sự Coca-Cola Philippines, đáp ứng đồng thời các yêu cầu khắt khe về
+            <strong> màu sắc thương hiệu – form dáng hiện đại – chất lượng sản phẩm đạt chuẩn xuất khẩu</strong>.
+          </p>
+
+          <blockquote>
+            <p>
+              Màu sắc thương hiệu – form dáng hiện đại – chất lượng sản phẩm đạt chuẩn xuất khẩu.
+            </p>
+          </blockquote>
+
+          <p>
+            Để triển khai thành công đơn hàng phục vụ thị trường quốc tế, hai bên thống nhất bộ tiêu chí nghiệm thu ngay từ
+            giai đoạn brief: màu đỏ Coca-Cola không được sai lệch giữa các lô, logo thêu đúng vị trí và tỷ lệ, form polo phù
+            hợp nhiều vóc dáng, đồng thời tiến độ sản xuất – QC – bàn giao được kiểm soát theo từng mốc.
+          </p>
+
+          <aside class="cs-blog-stats" aria-label="Chỉ số dự án">
+            <div>
+              <p class="cs-blog-stat-v">564</p>
+              <p class="cs-blog-stat-l">Áo polo</p>
+            </div>
+            <div>
+              <p class="cs-blog-stat-v">60</p>
+              <p class="cs-blog-stat-l">Ngày</p>
+            </div>
+            <div>
+              <p class="cs-blog-stat-v">4</p>
+              <p class="cs-blog-stat-l">Vị trí thêu</p>
+            </div>
+            <div>
+              <p class="cs-blog-stat-v">FDI</p>
+              <p class="cs-blog-stat-l">Xuất khẩu</p>
+            </div>
+          </aside>
+
+          <h2 id="yeu-cau">1. Yêu cầu từ phía Coca-Cola Philippines</h2>
+          <p>
+            Với đặc thù là thương hiệu toàn cầu, Coca-Cola Philippines đặt ra những yêu cầu rõ ràng ngay từ đầu dự án.
+            Mỗi tiêu chí đều gắn với hình ảnh nhận diện và trải nghiệm mặc của nhân sự trên thực tế:
+          </p>
+          <ul class="cs-blog-reqs">
+            {
+              requirements.map((item) => (
+                <li id={item.id}>
+                  <strong>{item.title}:</strong> {item.body}
+                </li>
+              ))
+            }
+          </ul>
+          <p>
+            Những yêu cầu trên buộc quy trình sản xuất phải có điểm kiểm soát ở từng công đoạn — từ phát triển mẫu, chọn
+            chất liệu, thêu logo đến QC trước khi đóng gói — thay vì chỉ kiểm tra lần cuối ở thành phẩm.
+          </p>
+
+          <figure class="cs-blog-figure">
+            <div class="overflow-hidden bg-[#ebe4d6]">
+              <SiteImage
+                src={mockImages.productBack}
+                alt="Mặt sau áo polo đỏ và trắng — logo chai và thêu tay áo"
+                class="aspect-[16/10] w-full object-cover"
+                loading="lazy"
+                decoding="async"
+                variant="card"
+              />
+            </div>
+            <figcaption>Chi tiết mặt sau và tay áo — logo chai Coca-Cola cùng chữ CCEAP.</figcaption>
+          </figure>
+
+          <h2 id="quy-trinh">2. Giải pháp và quy trình thực hiện của Tân Phạm Gia</h2>
+          <p>
+            Ngay sau khi tiếp nhận yêu cầu từ phía khách hàng, Tân Phạm Gia triển khai dự án theo quy trình sản xuất tiêu
+            chuẩn, được kiểm soát chặt chẽ ở từng công đoạn. Mục tiêu là đảm bảo mẫu duyệt và thành phẩm hàng loạt đồng
+            nhất về form, màu và chi tiết nhận diện.
+          </p>
+
+          {
+            processSteps.map((step, i) => (
+              <>
+                <h3 id={step.id}>
+                  {i + 1}. {step.title}
+                </h3>
+                <p>{step.body}</p>
+              </>
+            ))
+          }
+
+          <p>
+            Việc tách rõ bốn công đoạn giúp đội ngũ kỹ thuật và QC có điểm dừng kiểm tra độc lập. Nhờ đó, sai lệch màu,
+            lệch vị trí thêu hoặc form chưa đạt được phát hiện sớm — trước khi chuyển sang sản xuất hàng loạt và xuất
+            hàng.
+          </p>
+
+          <figure class="cs-blog-figure cs-blog-figure-pair">
+            <div class="grid grid-cols-2 gap-3">
+              <div class="overflow-hidden bg-[#ebe4d6]">
+                <SiteImage
+                  src={mockImages.detailLogo}
+                  alt="Chi tiết logo thêu trên áo đỏ"
+                  class="aspect-square w-full object-cover object-top"
+                  loading="lazy"
+                  decoding="async"
+                  variant="card"
+                />
+              </div>
+              <div class="overflow-hidden bg-[#ebe4d6]">
+                <SiteImage
+                  src={mockImages.detailColors}
+                  alt="Bộ ba màu polo đỏ — trắng — xám"
+                  class="aspect-square w-full object-cover object-top"
+                  loading="lazy"
+                  decoding="async"
+                  variant="card"
+                />
+              </div>
+            </div>
+            <figcaption>Logo thêu sắc nét và bộ màu chuẩn nhận diện thương hiệu.</figcaption>
+          </figure>
+
+          <h2 id="ket-qua">3. Kết quả dự án Đồng phục Coca-Cola</h2>
+          <p>
+            Sau khi hoàn tất sản xuất và bàn giao, thành phẩm polo đồng phục đáp ứng các tiêu chí đã thống nhất với phía
+            khách hàng:
+          </p>
+          <ul>
+            <li>
+              Áo polo đồng phục hoàn thiện đạt yêu cầu cao về <strong>form dáng, màu sắc và chất lượng đường may</strong>.
+            </li>
+            <li>Logo và các chi tiết nhận diện thương hiệu được thể hiện rõ ràng, đúng chuẩn Coca-Cola.</li>
+            <li>
+              Sản phẩm đáp ứng đầy đủ các tiêu chuẩn kỹ thuật cho{' '}
+              <strong>đơn hàng phục vụ thị trường quốc tế</strong>.
+            </li>
+          </ul>
+          <p>
+            Dự án <strong>Coca-Cola Philippines</strong> tiếp tục khẳng định năng lực của Tân Phạm Gia trong việc:
+          </p>
+
+          <blockquote>
+            <p>
+              Sản xuất đồng phục cho các doanh nghiệp và thương hiệu toàn cầu với yêu cầu cao về hình ảnh và chất lượng.
+            </p>
+          </blockquote>
+
+          <figure class="cs-blog-figure">
+            <div class="overflow-hidden bg-[#ebe4d6]">
+              <SiteImage
+                src={mockImages.rack}
+                alt="Giá treo polo Tân Phạm Gia x Coca-Cola"
+                class="aspect-[4/5] max-h-[28rem] w-full object-cover object-[center_15%] mx-auto"
+                loading="lazy"
+                decoding="async"
+                variant="card"
+              />
+            </div>
+            <figcaption>Thành phẩm trên giá — Tân Phạm Gia × Coca-Cola Philippines.</figcaption>
+          </figure>
+
+          <h2 id="doi-tac">4. Tân Phạm Gia – Đối tác sản xuất đồng phục cho doanh nghiệp trong và ngoài nước</h2>
+          <p>
+            Với hơn 22 năm kinh nghiệm trong ngành may mặc, Tân Phạm Gia không chỉ tập trung vào sản xuất, mà còn đồng hành
+            cùng doanh nghiệp trong việc <strong>chuẩn hóa hình ảnh thương hiệu thông qua từng bộ đồng phục</strong>.
+          </p>
+          <p>
+            Từ tư vấn form – chất liệu, duyệt mẫu nhiều bước đến kiểm soát màu và hoàn thiện logo, đội ngũ Tân Phạm Gia
+            xây dựng quy trình rõ ràng để doanh nghiệp dễ tái đặt hàng, bổ sung nhân sự và giữ đồng nhất nhận diện qua nhiều
+            đợt triển khai.
+          </p>
+          <p>
+            <strong>
+              Doanh nghiệp của bạn đang tìm đối tác sản xuất đồng phục chuyên nghiệp, đáp ứng tiêu chuẩn xuất khẩu?
+            </strong>
+          </p>
+          <p>
+            <strong>Tân Phạm Gia sẵn sàng đồng hành từ khâu thiết kế đến sản xuất và hoàn thiện.</strong>
+          </p>
+          <p>Liên hệ với Tân Phạm Gia để cùng tạo dựng các giá trị khác biệt cho thương hiệu.</p>
+
+          <div class="cs-blog-cta">
+            <p class="cs-blog-cta-title">Liên hệ tư vấn dự án đồng phục</p>
+            <p class="cs-blog-cta-body">
+              Trao đổi brief kỹ thuật, mẫu và tiến độ với đội ngũ Tân Phạm Gia — từ thiết kế đến sản xuất và bàn giao.
+            </p>
+            <a href={routes.lienHe} class="cs-blog-cta-link">
+              Liên hệ ngay
+              <span class="material-symbols-outlined text-base leading-none" aria-hidden="true">arrow_forward</span>
+            </a>
+          </div>
+
+          <p class="cs-blog-back">
+            <a href={routes.khachHang}>← Quay lại danh sách khách hàng</a>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    {/* Đọc tiếp */}
+    <footer class="border-t border-[#ebe4d6] bg-[#f7f4ee] py-12 md:py-14">
+      <div class="mx-auto max-w-[68rem] px-6 md:px-8">
+        <p class="text-[0.65rem] font-extrabold uppercase tracking-[0.14em] text-[#a67c00]">Đọc tiếp</p>
+        <h2 class="mt-2 text-xl font-extrabold tracking-[-0.03em] text-[#0d1b3a] md:text-2xl">Dự án liên quan</h2>
+
+        <div class="mt-8 grid gap-8 sm:grid-cols-3 sm:gap-6">
+          {
+            related.map((p) => (
+              <a href={p.href} class="group block no-underline text-inherit">
+                <figure class="m-0 overflow-hidden bg-[#ebe4d6]">
+                  <SiteImage
+                    src={p.image}
+                    alt={p.name}
+                    class="aspect-[3/2] w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                    loading="lazy"
+                    decoding="async"
+                    variant="card"
+                  />
+                </figure>
+                <p class="mt-3 text-[0.65rem] font-extrabold uppercase tracking-[0.12em] text-[#a67c00]">{p.tag}</p>
+                <h3 class="mt-1.5 text-[0.9375rem] font-bold leading-snug text-[#0d1b3a] transition-colors group-hover:text-[#8a6700]">
+                  {p.name}
+                </h3>
+              </a>
+            ))
+          }
+        </div>
+      </div>
+    </footer>
+  </article>
+</BaseLayout>
+
+<script src="../../scripts/case-study-toc-spy.ts"></script>
+
+<style>
+  .cs-toc-link {
+    display: block;
+    border-left: 2px solid transparent;
+    margin-left: -1px;
+    padding: 0.55rem 0 0.55rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    line-height: 1.35;
+    color: #6f675c;
+    text-decoration: none;
+    transition:
+      color 0.15s ease,
+      border-color 0.15s ease;
+  }
+
+  .cs-toc-link:hover {
+    color: #0d1b3a;
+  }
+
+  .cs-toc-link.is-active {
+    color: #0d1b3a;
+    border-left-color: #ffc72c;
+  }
+
+  .cs-toc-chip.is-active {
+    border-color: #ffc72c;
+    color: #0d1b3a;
+  }
+
+  .cs-blog {
+    font-size: 1.0625rem;
+    line-height: 1.8;
+    color: #3d3830;
+  }
+
+  .cs-blog-lead {
+    margin: 0 0 1.75rem;
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: #2a251f;
+  }
+
+  .cs-blog-lead strong {
+    font-weight: 700;
+    color: #0d1b3a;
+  }
+
+  .cs-blog-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem 1.25rem;
+    margin: 0 0 2.25rem;
+    padding: 1.25rem 0;
+    border-top: 1px solid #ebe4d6;
+    border-bottom: 1px solid #ebe4d6;
+  }
+
+  @media (min-width: 480px) {
+    .cs-blog-stats {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .cs-blog-stat-v {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    color: #0d1b3a;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .cs-blog-stat-l {
+    margin: 0.35rem 0 0;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #8a8278;
+  }
+
+  .cs-blog :global(h2) {
+    margin: 2.5rem 0 0.85rem;
+    scroll-margin-top: 5.5rem;
+    font-size: clamp(1.3rem, 2.4vw, 1.55rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.25;
+    color: #0d1b3a;
+  }
+
+  .cs-blog :global(h3) {
+    margin: 1.75rem 0 0.5rem;
+    font-size: 1.1rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: #0d1b3a;
+  }
+
+  .cs-blog :global(p) {
+    margin: 0 0 1.15rem;
+  }
+
+  .cs-blog :global(ul) {
+    margin: 0 0 1.5rem;
+    padding: 0;
+    list-style: none;
+  }
+
+  .cs-blog :global(ul li) {
+    position: relative;
+    padding: 0.7rem 0 0.7rem 1.1rem;
+    border-bottom: 1px solid #f0ebe0;
+    line-height: 1.7;
+  }
+
+  .cs-blog :global(ul li::before) {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 1.15rem;
+    width: 0.35rem;
+    height: 0.35rem;
+    border-radius: 999px;
+    background: #ffc72c;
+  }
+
+  .cs-blog-reqs li strong {
+    color: #0d1b3a;
+  }
+
+  .cs-blog :global(blockquote) {
+    margin: 2rem 0;
+    padding: 0 0 0 1.15rem;
+    border-left: 3px solid #ffc72c;
+  }
+
+  .cs-blog :global(blockquote p) {
+    margin: 0;
+    font-size: 1.15rem;
+    font-weight: 650;
+    line-height: 1.55;
+    letter-spacing: -0.02em;
+    color: #0d1b3a;
+  }
+
+  .cs-blog-figure {
+    margin: 2rem 0;
+  }
+
+  .cs-blog-figure figcaption {
+    margin-top: 0.65rem;
+    font-size: 0.8125rem;
+    line-height: 1.45;
+    color: #8a8278;
+  }
+
+  .cs-blog-cta {
+    margin-top: 2.75rem;
+    padding-top: 1.75rem;
+    border-top: 1px solid #ebe4d6;
+  }
+
+  .cs-blog-cta-title {
+    margin: 0 0 0.4rem !important;
+    font-size: 1.15rem !important;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: #0d1b3a !important;
+  }
+
+  .cs-blog-cta-body {
+    margin: 0 0 1.1rem !important;
+    color: #5c564c !important;
+  }
+
+  .cs-blog-cta-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.9375rem;
+    font-weight: 800;
+    color: #0d1b3a;
+    text-decoration: none;
+    border-bottom: 2px solid #ffc72c;
+    padding-bottom: 0.1rem;
+  }
+
+  .cs-blog-cta-link:hover {
+    color: #8a6700;
+  }
+
+  .cs-blog-back {
+    margin-top: 2.5rem !important;
+  }
+
+  .cs-blog-back a {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: #6f675c;
+    text-decoration: none;
+  }
+
+  .cs-blog-back a:hover {
+    color: #0d1b3a;
+  }
+</style>

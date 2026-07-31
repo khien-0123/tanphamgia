@@ -37,5 +37,11 @@ const seoTitle = `${pageSeo.tinTuc.title} — Trang ${currentPage}`;
     ]}
   />
 
-  <BlogListingSection items={items} currentPage={currentPage} totalPages={totalPages} sectionBg={rhythmBg(0)} />
+  <BlogListingSection
+    items={items}
+    currentPage={currentPage}
+    totalPages={totalPages}
+    allPosts={blogPosts}
+    sectionBg={rhythmBg(0)}
+  />
 </SiteLayout>

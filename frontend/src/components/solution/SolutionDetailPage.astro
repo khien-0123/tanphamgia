@@ -1,15 +1,16 @@
 ---
 import SiteImage from '../SiteImage.astro';
 import SolutionProcessSection from './SolutionProcessSection.astro';
+import ClientCaseStudyGrid from '../clients/ClientCaseStudyGrid.astro';
 import SiteLayout from '../../layouts/SiteLayout.astro';
 import { RHYTHM_WHITE, sectionPy } from '../../lib/section-rhythm';
-import { solutions } from '../../data/site';
+import { solutions, clientCaseStudies } from '../../data/site';
 import type { SolutionPageContent } from '../../data/solution-page';
 import { duAnGiaiPhap1 } from '../../data/giai-phap-1-du-an';
 import { duAnGiaiPhap2 } from '../../data/giai-phap-2-du-an';
 import { duAnGiaiPhap3 } from '../../data/giai-phap-3-du-an';
 import { duAnGiaiPhap4 } from '../../data/giai-phap-4-du-an';
-import { caseStudyHref, routes } from '../../lib/routes';
+import { routes } from '../../lib/routes';
 import { imageRadius } from '../../lib/image-frame';
 import {
   pageHeroCopy,
@@ -89,24 +90,6 @@ const INDUSTRY_ICON: Record<string, string> = {
  * fabricTable — lúc đó chỉ cần đổi mảng này.
  */
 const fabricImages = [solution?.image, ...projects.map((p) => p.image)].filter(Boolean) as string[];
-
-/** Tách chuỗi stats tự do "1.086 sản phẩm | 45 ngày | Đối tác 5 năm" thành số lớn + đơn vị + phụ chú. */
-const parseStat = (raw: string) => {
-  const parts = raw.split('|').map((s) => s.trim()).filter(Boolean);
-  const m = parts[0]?.match(/^([\d.,+]+)\s*(.*)$/);
-  return {
-    big: m ? m[1] : parts[0] ?? '',
-    unit: m ? m[2] : '',
-    meta: parts.slice(1),
-  };
-};
-
-const proofItems = projects.map((p) => ({
-  name: p.name,
-  image: p.image,
-  href: caseStudyHref(content.slug, p.slug),
-  ...parseStat(p.stats),
-}));
 
 const chapterEyebrow = 'font-eyebrow text-xs uppercase tracking-[0.2em]';
 const h2Macro =
@@ -368,45 +351,13 @@ const h2Macro =
       </div>
     </section>
 
-    {/* ══ BẰNG CHỨNG — một dải ba cột, số lớn đè ảnh ══ */}
-    <section class:list={[RHYTHM_WHITE, sectionPy]}>
-      <div class="mx-auto max-w-container-max-width px-6 md:px-8">
-        <header class="mb-10 md:mb-12">
-          <span class:list={[chapterEyebrow, 'mb-5 block text-accent-teal']}>Dự án tiêu biểu</span>
-          <h2 class:list={[h2Macro, 'md:whitespace-nowrap']}>
-            Đã giao cho những đội ngũ ở quy mô này
-          </h2>
-        </header>
-
-        <div class="grid list-none gap-px bg-border-subtle sm:grid-cols-3" data-reveal-stagger>
-          {
-            proofItems.map((item) => (
-              <a href={item.href} class="proof-case group" data-reveal>
-                <SiteImage src={item.image} alt="" loading="lazy" class="proof-case__img" variant="card" />
-                <div class="proof-case__in">
-                  <span class:list={[chapterEyebrow, 'mb-4 block text-accent-gold']}>
-                    {item.name}
-                  </span>
-                  <p class="text-[clamp(2.75rem,5vw,4.25rem)] font-extrabold leading-[0.85] tracking-tight tabular-nums text-white">
-                    {item.big}
-                  </p>
-                  {item.unit && <p class="mt-1 text-sm text-white/65">{item.unit}</p>}
-                  {
-                    item.meta.length > 0 && (
-                      <p class="mt-5 flex flex-wrap gap-x-4 gap-y-1 text-xs text-white/55">
-                        {item.meta.map((m) => (
-                          <span>{m}</span>
-                        ))}
-                      </p>
-                    )
-                  }
-                </div>
-              </a>
-            ))
-          }
-        </div>
-      </div>
-    </section>
+    {/* ══ CASE STUDY — layout sole giống /khach-hang ══ */}
+    <ClientCaseStudyGrid
+      items={clientCaseStudies}
+      sectionBg="bg-[#fbf8f1]"
+      eyebrow="Dự án tiêu biểu"
+      title="Case study tiêu biểu"
+    />
 
     {/* ══ 04 · QUY TRÌNH ══ */}
     <SolutionProcessSection
@@ -660,51 +611,6 @@ const h2Macro =
       margin: 0 0 0.5rem;
       font-size: 0.9375rem;
       color: rgb(255 255 255 / 0.8);
-    }
-  }
-
-  /* ── Bằng chứng: ảnh nền + số đè ── */
-  .proof-case {
-    position: relative;
-    display: flex;
-    align-items: flex-end;
-    min-height: 20rem;
-    overflow: hidden;
-    background: #0E2640;
-    text-decoration: none;
-    isolation: isolate;
-  }
-  .proof-case__img {
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-  .proof-case::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    background: linear-gradient(
-      to top,
-      rgb(11 31 53 / 0.88) 0%,
-      rgb(11 31 53 / 0.42) 52%,
-      transparent 90%
-    );
-  }
-  .proof-case:hover .proof-case__img {
-    transform: scale(1.06);
-  }
-  .proof-case__in {
-    width: 100%;
-    padding: 2rem;
-  }
-  @media (max-width: 640px) {
-    .proof-case {
-      min-height: 16rem;
     }
   }
 

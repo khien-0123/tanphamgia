@@ -3,6 +3,7 @@
 export const siteAssets = {
   brand: {
     logo: '/images/brand/tan-pham-gia-logo.png',
+    mark: '/images/brand/TPG-11.webp',
     ministryCert: '/images/brand/logo-bo-cong-thuong.webp',
   },
   hero: {
