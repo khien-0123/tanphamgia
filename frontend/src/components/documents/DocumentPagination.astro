@@ -1,0 +1,35 @@
+---
+import { docLibraryHref } from '../../lib/routes';
+
+interface Props {
+  currentPage: number;
+  totalPages: number;
+  /** Nhóm đang mở — giữ nguyên khi nhảy trang */
+  category: string;
+}
+
+const { currentPage, totalPages, category } = Astro.props;
+---
+
+{/* Thư viện chưa đủ một trang thì cả thanh này biến mất —
+    thêm tài liệu vượt DOCUMENTS_PER_PAGE là nó tự hiện lại. */}
+{
+  totalPages > 1 && (
+    <nav aria-label="Phân trang tài liệu" class="mt-12 flex justify-center gap-2">
+      {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+        <a
+          href={docLibraryHref(category, page)}
+          class:list={[
+            'flex h-10 w-10 items-center justify-center rounded-full text-sm font-bold tabular-nums no-underline transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0d1b3a]',
+            page === currentPage
+              ? 'bg-[#0d1b3a] text-white'
+              : 'border border-[#e5dfd2] bg-[#fffcf7] text-[#1f1b17] hover:border-[#ffc933] hover:bg-[#fff0bd] hover:text-[#5c4500]',
+          ]}
+          aria-current={page === currentPage ? 'page' : undefined}
+        >
+          {page}
+        </a>
+      ))}
+    </nav>
+  )
+}

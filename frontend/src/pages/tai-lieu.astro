@@ -4,15 +4,16 @@ import PageHero from '../components/PageHero.astro';
 import DocumentLibrary from '../components/documents/DocumentLibrary.astro';
 import DocumentDownloadForm from '../components/documents/DocumentDownloadForm.astro';
 import { pageSeo, pageHeroBg } from '../data/site';
-import {
-  brandDocuments,
-  catalogueDocuments,
-  guideDocuments,
-} from '../data/tai-lieu';
+import { allDocuments, DOCUMENTS_PER_PAGE } from '../data/tai-lieu';
+import { paginate } from '../utils/pagination';
 import { routes } from '../lib/routes';
-import { rhythmBg } from '../lib/section-rhythm';
+import { SURFACE_NAVY, SURFACE_PAPER } from '../lib/section-rhythm';
 
-const allDocuments = [...brandDocuments, ...catalogueDocuments, ...guideDocuments];
+const { items, currentPage, totalPages, totalItems } = paginate(
+  allDocuments,
+  1,
+  DOCUMENTS_PER_PAGE,
+);
 ---
 
 <SiteLayout
@@ -26,7 +27,7 @@ const allDocuments = [...brandDocuments, ...catalogueDocuments, ...guideDocument
     description="Tải miễn phí catalogue, hồ sơ năng lực và tài liệu hướng dẫn triển khai đồng phục doanh nghiệp."
     descriptionLines={[
       'Tải miễn phí catalogue, hồ sơ năng lực và tài liệu',
-      'hướng dẫn triển khai đồng\u00a0phục doanh\u00a0nghiệp.',
+      'hướng dẫn triển khai đồng phục doanh nghiệp.',
     ]}
     breadcrumb={[
       { label: 'Trang chủ', href: routes.home },
@@ -34,6 +35,13 @@ const allDocuments = [...brandDocuments, ...catalogueDocuments, ...guideDocument
     ]}
   />
 
-  <DocumentLibrary sectionBg={rhythmBg(0)} />
-  <DocumentDownloadForm allDocuments={allDocuments} sectionBg={rhythmBg(1)} />
+  <DocumentLibrary
+    documents={items}
+    category="all"
+    currentPage={currentPage}
+    totalPages={totalPages}
+    totalItems={totalItems}
+    sectionBg={SURFACE_PAPER}
+  />
+  <DocumentDownloadForm allDocuments={allDocuments} sectionBg={SURFACE_NAVY} />
 </SiteLayout>

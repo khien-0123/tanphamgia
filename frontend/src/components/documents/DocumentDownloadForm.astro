@@ -1,78 +1,144 @@
 ---
 import type { DocumentItem } from '../../data/tai-lieu';
 import { downloadFormCommitments, industryOptions } from '../../data/tai-lieu';
-import { formInputClass, formLabelClass } from '../../lib/form-classes';
-import { RHYTHM_WHITE, sectionPy } from '../../lib/section-rhythm';
+import { SURFACE_NAVY, sectionPy } from '../../lib/section-rhythm';
 
 interface Props {
   allDocuments: DocumentItem[];
   sectionBg?: string;
 }
 
-const { allDocuments, sectionBg = RHYTHM_WHITE } = Astro.props;
+/**
+ * Cùng chức năng với HomeDownloadTeaser trên trang chủ nên dùng đúng ngôn ngữ đó:
+ * dải navy đặc, eyebrow viên vàng, khung form chỉ có viền trắng không nền,
+ * ô nhập màu kem #f5ecd9, nút vàng #ffc72c với mũi tên trần cách chữ 8px.
+ */
+const { allDocuments, sectionBg = SURFACE_NAVY } = Astro.props;
 ---
 
-<section class:list={[sectionPy, sectionBg]} id="tai-lieu-form">
-  <div class="max-w-container-max-width mx-auto px-6 md:px-8 grid lg:grid-cols-2 gap-8 md:gap-12 items-start">
-    <div>
-      <h2 class="font-headline-md text-2xl font-bold text-ink-dark mb-4">
+<section class:list={[sectionBg]} id="tai-lieu-form" aria-labelledby="tai-lieu-form-title">
+  <div
+    class:list={[
+      'mx-auto grid w-full max-w-container-max-width items-stretch gap-10 px-6 md:px-8 lg:grid-cols-[0.96fr_1.04fr] lg:gap-16',
+      sectionPy,
+    ]}
+  >
+    <div class="lg:pl-1">
+      <p
+        class="inline-flex rounded-full bg-[#fff0bd] px-5 py-2 text-[0.68rem] font-extrabold uppercase tracking-[0.025em] text-[#7a5900]"
+      >
+        Nhận tài liệu
+      </p>
+
+      <h2
+        id="tai-lieu-form-title"
+        class="mt-6 max-w-[14ch] text-balance text-[clamp(2rem,3.2vw,3rem)] font-extrabold leading-[1.08] tracking-[-0.04em]"
+      >
         Tải tài liệu miễn phí
       </h2>
-      <p class="text-text-muted mb-8 leading-relaxed">
+
+      <p class="mt-5 max-w-[37rem] text-sm leading-[1.65] text-white/78 sm:text-[0.95rem]">
         Điền thông tin để nhận link tải qua email. Chúng tôi cam kết bảo mật dữ liệu doanh nghiệp.
       </p>
-      <ul class="space-y-3">
+
+      {/* Icon nằm trong ô rộng cố định và cùng line-height với chữ, nên tâm biểu tượng
+          khớp tâm dòng đầu — kể cả khi cam kết dài xuống hai dòng. */}
+      <ul class="mt-8 list-none border-t border-white/15 p-0">
         {
           downloadFormCommitments.map((item) => (
-            <li class="flex items-start gap-2 text-sm text-text-muted">
-              <span class="material-symbols-outlined text-accent-gold text-lg shrink-0">
+            <li class="grid grid-cols-[1.5rem_1fr] items-start gap-3 border-b border-white/15 py-[0.85rem]">
+              <span
+                class="material-symbols-outlined text-xl leading-6 text-[#ffc72c]"
+                aria-hidden="true"
+              >
                 check_circle
               </span>
-              {item}
+              <span class="text-[0.9375rem] leading-6 text-white/85">{item}</span>
             </li>
           ))
         }
       </ul>
     </div>
 
-    <form class="doc-download-form bg-white rounded-2xl p-8 shadow-soft space-y-5" id="doc-form">
-      <input type="hidden" name="documentId" id="doc-selected-id" value="" />
-      <p class="text-sm text-accent-teal font-semibold hidden" id="doc-selected-label"></p>
-      <div>
-        <label class={formLabelClass} for="doc-name">Họ và tên *</label>
-        <input class={formInputClass} id="doc-name" name="name" type="text" required />
-      </div>
-      <div>
-        <label class={formLabelClass} for="doc-company">Tên công ty *</label>
-        <input class={formInputClass} id="doc-company" name="company" type="text" required />
-      </div>
-      <div class="grid sm:grid-cols-2 gap-5">
-        <div>
-          <label class={formLabelClass} for="doc-email">Email *</label>
-          <input class={formInputClass} id="doc-email" name="email" type="email" required />
+    <div
+      class="rounded-[1.6rem] border border-white/70 px-6 py-8 sm:px-9 sm:py-10 lg:px-10 lg:py-11"
+    >
+      <header>
+        <h3 class="text-xl font-extrabold leading-tight sm:text-2xl">Đăng ký nhận tài liệu</h3>
+        <p class="mt-2 text-xs leading-relaxed text-white/70 sm:text-sm">
+          Bấm “Tải ngay” ở tài liệu bất kỳ phía trên, tên tài liệu sẽ tự điền vào đây.
+        </p>
+      </header>
+
+      <form class="doc-download-form mt-8" id="doc-form">
+        <input type="hidden" name="documentId" id="doc-selected-id" value="" />
+        <p
+          class="mb-5 hidden rounded-[0.65rem] bg-[#fff0bd] px-4 py-3 text-sm font-bold text-[#7a5900]"
+          id="doc-selected-label"
+        >
+        </p>
+
+        <div class="grid gap-4 sm:grid-cols-2 sm:gap-x-5 sm:gap-y-5">
+          <input
+            class="doc-field"
+            id="doc-name"
+            name="name"
+            type="text"
+            required
+            placeholder="Họ và tên *"
+            aria-label="Họ và tên"
+          />
+          <input
+            class="doc-field"
+            id="doc-company"
+            name="company"
+            type="text"
+            required
+            placeholder="Tên công ty *"
+            aria-label="Tên công ty"
+          />
+          <input
+            class="doc-field"
+            id="doc-email"
+            name="email"
+            type="email"
+            required
+            placeholder="Email công việc *"
+            aria-label="Email công việc"
+          />
+          <input
+            class="doc-field"
+            id="doc-phone"
+            name="phone"
+            type="tel"
+            required
+            placeholder="Số điện thoại / Zalo *"
+            aria-label="Số điện thoại hoặc Zalo"
+          />
+          <select class="doc-field sm:col-span-2" id="doc-industry" name="industry" aria-label="Ngành nghề">
+            <option value="">Ngành nghề</option>
+            {industryOptions.map((opt) => <option value={opt}>{opt}</option>)}
+          </select>
         </div>
-        <div>
-          <label class={formLabelClass} for="doc-phone">Số điện thoại *</label>
-          <input class={formInputClass} id="doc-phone" name="phone" type="tel" required />
-        </div>
-      </div>
-      <div>
-        <label class={formLabelClass} for="doc-industry">Ngành nghề</label>
-        <select class={formInputClass} id="doc-industry" name="industry">
-          <option value="">Chọn ngành</option>
-          {industryOptions.map((opt) => <option value={opt}>{opt}</option>)}
-        </select>
-      </div>
-      <button
-        class="w-full bg-accent-gold text-ink-dark py-4 rounded-full font-bold hover:shadow-gold transition-all"
-        type="submit"
-      >
-        Nhận link tải qua email
-      </button>
-      <p class="text-xs text-text-muted text-center italic" id="doc-success" hidden role="status">
-        Đã ghi nhận! Link tài liệu sẽ được gửi đến email của bạn trong vài phút.
-      </p>
-    </form>
+
+        <button
+          class="mt-7 flex min-h-14 w-full items-center justify-center gap-2 rounded-full bg-[#ffc72c] px-6 py-3 text-sm font-extrabold text-[#17140a] transition-transform hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#ffc72c] disabled:cursor-not-allowed disabled:opacity-70"
+          type="submit"
+        >
+          <span>Nhận link tải qua email</span>
+          {/* Mũi tên trần: không huy hiệu, không nền, không bo tròn.
+              arrow_forward — cùng hình với Lucide arrow-right và Heroicons arrow-right,
+              tức hình mũi tên phổ biến nhất trên web: trục thẳng + đầu chevron 45°. */}
+          <span class="material-symbols-outlined text-xl leading-none" aria-hidden="true">
+            arrow_forward
+          </span>
+        </button>
+
+        <p class="mt-5 text-center text-xs text-[#ffc72c]" id="doc-success" hidden role="status">
+          Đã ghi nhận! Link tài liệu sẽ được gửi đến email của bạn trong vài phút.
+        </p>
+      </form>
+    </div>
   </div>
 </section>
 
@@ -97,9 +163,50 @@ const { allDocuments, sectionBg = RHYTHM_WHITE } = Astro.props;
 
   form?.addEventListener('submit', (e) => {
     e.preventDefault();
+    if (!form.reportValidity()) return;
     if (successMsg) {
       successMsg.hidden = false;
       form.querySelector('button[type="submit"]')?.setAttribute('disabled', 'true');
     }
   });
 </script>
+
+<style>
+  /* Ô nhập nền kem — sao đúng .mockup-documents-input của trang chủ */
+  .doc-field {
+    width: 100%;
+    min-height: 3.55rem;
+    border: 1px solid transparent;
+    border-radius: 0.65rem;
+    background: #f5ecd9;
+    padding: 0.9rem 1.1rem;
+    color: #302b24;
+    font-size: 0.82rem;
+    outline: none;
+    transition:
+      border-color 160ms ease,
+      box-shadow 160ms ease;
+  }
+
+  .doc-field::placeholder {
+    color: #8d8579;
+    opacity: 1;
+  }
+
+  .doc-field:focus {
+    border-color: #ffc72c;
+    box-shadow: 0 0 0 3px rgba(255, 199, 44, 0.16);
+  }
+
+  /* Mũi tên xổ mặc định của trình duyệt dính sát mép phải và mỗi trình duyệt đặt một kiểu.
+     Tắt nó đi, tự vẽ chevron rồi neo cách mép 1.1rem — bằng đúng padding trái của ô. */
+  select.doc-field {
+    appearance: none;
+    -webkit-appearance: none;
+    padding-right: 2.85rem;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23302b24' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1.1rem center;
+    background-size: 1.05rem 1.05rem;
+  }
+</style>

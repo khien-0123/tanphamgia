@@ -3,7 +3,8 @@ import SiteLayout from '../layouts/SiteLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import SolutionsListingGrid from '../components/solution/SolutionsListingGrid.astro';
 import SolutionProcessSection from '../components/solution/SolutionProcessSection.astro';
-import { pageSeo, pageHeroBg } from '../data/site';
+import TestimonialsSlider from '../components/TestimonialsSlider.astro';
+import { pageSeo, pageHeroBg, testimonialsClients } from '../data/site';
 import { routes } from '../lib/routes';
 import { giaiPhap1Content } from '../data/giai-phap-1';
 import { rhythmBg } from '../lib/section-rhythm';
@@ -28,4 +29,5 @@ const processSteps = giaiPhap1Content.processSteps;
 
   <SolutionsListingGrid sectionBg={rhythmBg(0)} />
   <SolutionProcessSection steps={processSteps} sectionBg={rhythmBg(1)} />
+  <TestimonialsSlider items={testimonialsClients} sectionBg={rhythmBg(2)} />
 </SiteLayout>
