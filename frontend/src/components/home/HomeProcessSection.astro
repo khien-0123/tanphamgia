@@ -1,5 +1,6 @@
 ---
 import { homeProcess } from '../../data/home';
+import { sectionEyebrowWarm } from '../../lib/section-eyebrow';
 import { sectionPy } from '../../lib/section-rhythm';
 
 const iconPaths = {
@@ -15,9 +16,7 @@ const iconPaths = {
 
   <div class:list={['relative mx-auto w-full max-w-container-max-width px-6 pb-24 lg:px-8 lg:pb-28', sectionPy]}>
     <header class="max-w-[64rem]">
-      <p class="inline-flex rounded-full bg-[#fff0bd] px-4 py-2 text-[0.7rem] font-extrabold uppercase tracking-[0.025em] text-[#5c4500] sm:text-xs">
-        {homeProcess.eyebrow}
-      </p>
+      <p class={sectionEyebrowWarm}>{homeProcess.eyebrow}</p>
       <h2 id="mockup-process-title" class="mt-6 max-w-[34ch] text-balance text-[clamp(1.8rem,3vw,3rem)] font-extrabold leading-[1.08] tracking-[-0.04em]">
         {homeProcess.title}
       </h2>

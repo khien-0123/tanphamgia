@@ -73,18 +73,25 @@ const loopProjects = [...projects, ...projects, ...projects];
                       variant="card"
                     />
                     <div class="absolute inset-0 bg-black/45" aria-hidden="true"></div>
-                    <a
-                      href={homeRecentProjects.cta.href}
-                      target="_blank"
-                      rel="noreferrer"
-                      tabindex={isCanonical ? undefined : '-1'}
-                      class="absolute left-1/2 top-1/2 inline-flex h-10 w-14 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-[0.625rem] bg-[#ff0000] text-white shadow-[0_10px_28px_rgba(0,0,0,0.35)] transition-transform duration-300 hover:scale-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
-                      aria-label={`Xem video ${item.title} trên YouTube`}
-                    >
-                      <svg class="ml-0.5 h-[1.125rem] w-[1.125rem]" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                        <path d="M8 5v14l11-7z"></path>
-                      </svg>
-                    </a>
+                    {'youtubeVideoId' in item && item.youtubeVideoId && (
+                      <button
+                        type="button"
+                        data-video-id={item.youtubeVideoId}
+                        tabindex={isCanonical ? undefined : '-1'}
+                        class="absolute left-1/2 top-1/2 inline-flex h-14 w-14 -translate-x-1/2 -translate-y-1/2 items-center justify-center text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.55)] transition-transform duration-300 hover:scale-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+                        aria-label={`Phát video ${item.title}`}
+                      >
+                        <svg class="h-12 w-12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                          <path d="M8 5v14l11-7z"></path>
+                        </svg>
+                      </button>
+                    )}
+                    {'youtubeVideoId' in item && item.youtubeVideoId && (
+                      <div class="absolute inset-0 hidden bg-[#101010]" data-video-player>
+                        <iframe class="h-full w-full" title={`Video ${item.title}`} allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+                        <button type="button" data-video-close class="absolute right-3 top-3 rounded-full bg-black/70 px-3 py-1.5 text-xs font-bold text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-white" aria-label={`Đóng video ${item.title}`}>Đóng</button>
+                      </div>
+                    )}
                   </div>
 
                   <div class="mockup-project-content">
@@ -168,15 +175,15 @@ const loopProjects = [...projects, ...projects, ...projects];
 
   .mockup-project-card-inner {
     display: grid;
-    min-height: 29rem;
+    min-height: 34rem;
     grid-template-columns: 1fr;
-    grid-template-rows: minmax(19rem, 1fr) auto;
+    grid-template-rows: minmax(24rem, 1fr) auto;
   }
 
   .mockup-project-media {
     position: relative;
     min-width: 0;
-    min-height: 19rem;
+    min-height: 24rem;
     overflow: hidden;
     background: #161b22;
   }

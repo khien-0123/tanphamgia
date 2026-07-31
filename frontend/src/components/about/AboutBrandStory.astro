@@ -1,6 +1,7 @@
 ---
 import SiteImage from '../SiteImage.astro';
 import { brandStory } from '../../data/gioi-thieu';
+import { sectionEyebrowWarm } from '../../lib/section-eyebrow';
 import { sectionPy } from '../../lib/section-rhythm';
 ---
 
@@ -22,9 +23,7 @@ import { sectionPy } from '../../lib/section-rhythm';
     </figure>
 
     <div data-reveal data-reveal-direction="up" class="max-w-[43rem] lg:py-3">
-      <p class="mb-4 inline-flex rounded-full bg-[#fff0bd] px-5 py-2 text-xs font-extrabold uppercase tracking-[0.025em] text-[#7a5900]">
-        Câu chuyện thương hiệu
-      </p>
+      <p class:list={['mb-4', sectionEyebrowWarm]}>Câu chuyện thương hiệu</p>
 
       <h2
         id="about-story-title"
@@ -33,7 +32,7 @@ import { sectionPy } from '../../lib/section-rhythm';
         {brandStory.title}
       </h2>
 
-      <div class="mt-6 space-y-4 text-sm leading-[1.65] text-white/78 sm:text-base">
+      <div class="mt-10 space-y-4 text-sm leading-[1.65] text-white/78 sm:mt-12 sm:text-base">
         {brandStory.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
       </div>
 

@@ -497,6 +497,8 @@ export interface Testimonial {
   quote: string;
   name: string;
   role: string;
+  /** Logo thương hiệu (vòng tròn) — để trống thì hiện chữ cái viết tắt */
+  avatar?: string;
 }
 
 /** Testimonial trang Giới thiệu — Sitemap 2.8 */
@@ -506,18 +508,21 @@ export const testimonialsAbout: Testimonial[] = [
       'Đội ngũ tư vấn rất kỹ từ thiết kế đến chất liệu nên chúng tôi khá yên tâm trong suốt quá trình triển khai. Đồng phục hoàn thiện đẹp, nhân viên mặc thoải mái và tạo được hình ảnh chuyên nghiệp.',
     name: 'Ông Trương Hoàng Nam',
     role: 'CEO, Hoàng Thiên Scale',
+    avatar: '/images/logos/dat.png',
   },
   {
     quote:
       'Chúng tôi muốn một bộ đồng phục vừa chuyên nghiệp vừa tạo cảm giác thoải mái cho nhân viên khi mặc hằng ngày. Tân Phạm Gia đã tư vấn khá kỹ về chất liệu, form dáng và hỗ trợ điều chỉnh cho đến khi ra được mẫu phù hợp.',
     name: 'Ông Đồng Minh Hồng',
     role: 'CEO, Dịch vụ Kế toán Thuế DVL',
+    avatar: '/images/logos/logo-techcombank.png',
   },
   {
     quote:
       'Điều tôi đánh giá cao là khả năng kiểm soát chất lượng của Tân Phạm Gia. Từ mẫu duyệt đến thành phẩm đều được thực hiện nhất quán, quy trình phối hợp rõ ràng và đội ngũ luôn chủ động xử lý khi có phát sinh.',
     name: 'Lê Văn Tùng',
     role: 'Factory Ops Manager, Coca-Cola Philippines',
+    avatar: '/images/logos/coca-cola.png',
   },
 ];
 
@@ -528,18 +533,21 @@ export const testimonialsClients: Testimonial[] = [
       'Chúng tôi đã hợp tác với Tân Phạm Gia trong 5 năm qua. Chất lượng sản phẩm chuẩn xác đến từng đường kim mũi chỉ, kèm cam kết tuyệt đối về tiến độ — họ là đối tác chiến lược đúng nghĩa.',
     name: 'Nguyễn Văn Anh',
     role: 'Giám đốc Vận hành, Coca-Cola Vietnam',
+    avatar: '/images/logos/coca-cola.png',
   },
   {
     quote:
       'Chuẩn hóa màu–form–logo. Sản phẩm vượt kỳ vọng về thẩm mỹ và tiện dụng cho toàn hệ thống chi nhánh.',
     name: 'BIDV Team',
     role: 'Ngân hàng TMCP Đầu tư và Phát triển Việt Nam',
+    avatar: '/images/logos/Logo_Bidv.png',
   },
   {
     quote:
       'Triển khai hơn 3.000 áo trong thời gian ngắn mà vẫn giữ đồng nhất chất lượng — điều ít đơn vị may có thể đảm bảo ở quy mô này.',
     name: 'Đại diện King Group',
     role: 'Doanh nghiệp sản xuất & FDI',
+    avatar: '/images/logos/dat.png',
   },
 ];
 

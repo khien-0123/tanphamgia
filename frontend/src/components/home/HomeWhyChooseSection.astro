@@ -1,6 +1,7 @@
 ---
 import { homeWhyChoose } from '../../data/home';
 import waveBgImage from '../../assets/images/about/dai-chi-tpg 1.png';
+import { sectionEyebrow } from '../../lib/section-eyebrow';
 import { sectionPy } from '../../lib/section-rhythm';
 
 const cardPositions = [
@@ -14,9 +15,7 @@ const cardPositions = [
 <section class="overflow-hidden bg-[#fbf8f1] text-[#1f1b17]" aria-labelledby="mockup-why-choose-title">
   <div class:list={['mx-auto w-full max-w-container-max-width px-6', sectionPy]}>
     <header class="w-full">
-      <p class="mb-6 inline-flex rounded-full bg-[#ffedb7] px-4 py-2 text-xs font-extrabold uppercase tracking-[0.025em] text-[#5c4500] sm:text-sm">
-        {homeWhyChoose.eyebrow}
-      </p>
+      <p class:list={['mb-6', sectionEyebrow]}>{homeWhyChoose.eyebrow}</p>
       <h2
         id="mockup-why-choose-title"
         class="max-w-[63rem] text-wrap text-[clamp(1.75rem,2.7vw,3rem)] font-extrabold leading-[1.1] tracking-[-0.03em] text-[#1f1b17]"

@@ -44,12 +44,12 @@ const {
 
 <nav
   id="site-nav"
-  class:list={[...navShellClasses, 'no-transition', !navOverDark && 'nav-scrolled']}
+  class:list={navShellClasses}
   data-nav-over-dark={navOverDark ? 'true' : 'false'}
 >
   <div class:list={navInnerClasses}>
     <div class={navStartClasses}>
-      <SiteBrandLogo class="leading-none bg-white/[0.62] px-3 min-[400px]:px-5 py-1.5 rounded-[1.25rem] backdrop-blur-md shadow-sm group-[.nav-scrolled]:bg-transparent group-[.nav-scrolled]:shadow-none group-[.nav-scrolled]:p-0 group-[.nav-scrolled]:backdrop-blur-none transition-all duration-300" />
+      <SiteBrandLogo class="leading-none bg-transparent p-0 shadow-none backdrop-blur-none" />
     </div>
 
     <div class={navCenterClasses}>
@@ -95,19 +95,6 @@ const {
     </div>
   </div>
 </nav>
-
-<script is:inline>
-(function () {
-  var n = document.getElementById('site-nav');
-  if (!n) return;
-  if (window.pageYOffset > 60) n.classList.add('nav-scrolled');
-  requestAnimationFrame(function () {
-    requestAnimationFrame(function () {
-      n.classList.remove('no-transition');
-    });
-  });
-})();
-</script>
 
 <div
   id="site-nav-mobile"

@@ -1,8 +1,7 @@
 /** Class Tailwind dùng chung cho header SiteNav — một track menu, hai trạng thái visual */
 
 export const navShellClasses = [
-  'group fixed top-0 inset-x-0 z-[55] w-full transition-all duration-300',
-  'bg-transparent border-b border-transparent shadow-none backdrop-blur-none',
+  'group fixed top-0 inset-x-0 z-[55] w-full bg-white border-b border-border-subtle shadow-soft transition-all duration-300',
   '[&.nav-scrolled]:bg-white',
   '[&.nav-scrolled]:border-border-subtle [&.nav-scrolled]:shadow-soft',
 ];
@@ -10,7 +9,7 @@ export const navShellClasses = [
 export const navInnerClasses = [
   'flex items-center justify-between',
   'items-center gap-x-3 lg:gap-x-4 min-h-16',
-  'px-4 min-[400px]:px-6 md:px-8 pt-10 pb-5 lg:pt-14 lg:pb-6 group-[.nav-scrolled]:py-3 transition-[padding] duration-300 max-w-container-max-width mx-auto min-w-0',
+  'px-4 min-[400px]:px-6 md:px-8 py-3 max-w-container-max-width mx-auto min-w-0',
 ];
 
 export const navStartClasses = 'flex items-center min-h-10 shrink-0';
@@ -20,10 +19,8 @@ export const navCenterClasses =
 
 /** Track menu desktop — giữ nguyên khung h-10 p-1 gap-0.5 khi đổi hero ↔ scrolled */
 export const navMenuTrackClasses = [
-  'inline-flex items-center gap-1 p-2 px-3 rounded-full box-border transition-all duration-300',
-  'bg-gradient-to-r from-[#F5ECDA] via-[#FBF4E6] to-[#FFFCF7] backdrop-blur-md',
-  'shadow-sm',
-  'group-[.nav-scrolled]:bg-none group-[.nav-scrolled]:bg-transparent group-[.nav-scrolled]:shadow-none group-[.nav-scrolled]:backdrop-blur-none group-[.nav-scrolled]:p-0'
+  'inline-flex items-center gap-1 rounded-full box-border transition-all duration-300',
+  'bg-transparent shadow-none backdrop-blur-none p-0'
 ];
 
 /** Link menu — layout chung, màu chữ tách riêng inactive/active */
@@ -39,9 +36,8 @@ export const navMenuLinkInactiveClasses = [
 ];
 
 export const navMenuLinkActiveClasses = [
-  '!bg-white !text-[#1f1b17] shadow-[0_1px_4px_rgba(14,38,64,0.12)] font-medium',
-  'hover:!text-[#1f1b17]',
-  'group-[.nav-scrolled]:!bg-transparent group-[.nav-scrolled]:!shadow-none group-[.nav-scrolled]:!text-[#7a5900]'
+  '!bg-transparent !text-[#7a5900] shadow-none font-medium',
+  'hover:!text-[#7a5900]'
 ];
 
 export const navMenuLabelClasses =

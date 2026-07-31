@@ -2,6 +2,7 @@
 import SiteImage from '../SiteImage.astro';
 import { homeClients } from '../../data/home';
 import { getClientLogoScale } from '../../lib/client-logo-scale';
+import { sectionEyebrow } from '../../lib/section-eyebrow';
 import { sectionPy } from '../../lib/section-rhythm';
 
 const midpoint = Math.ceil(homeClients.items.length / 2);
@@ -22,9 +23,7 @@ function getMockupLogoScale(logo: string): number {
 <section class="overflow-hidden bg-[#0d1b3a] text-white" aria-labelledby="mockup-clients-title">
   <div class:list={['mx-auto w-full max-w-container-max-width px-6', sectionPy]}>
     <header data-reveal data-reveal-direction="up" class="max-w-[64rem]">
-      <p class="mb-5 inline-flex rounded-full bg-[#ffedb7] px-4 py-2 text-xs font-extrabold uppercase tracking-[0.025em] text-[#5c4500] sm:text-sm">
-        {homeClients.eyebrow}
-      </p>
+      <p class:list={['mb-5', sectionEyebrow]}>{homeClients.eyebrow}</p>
       <h2
         id="mockup-clients-title"
         class="max-w-[34ch] text-balance text-[clamp(1.75rem,2.7vw,3rem)] font-extrabold leading-[1.1] tracking-[-0.03em] text-white"

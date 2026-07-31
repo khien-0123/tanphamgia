@@ -78,6 +78,15 @@ export const siteAssets = {
     /** Ảnh thẻ QC — nhà thiết kế thời trang */
     qc: '/images/why-choose/qc.webp',
   },
+  /** Avatar tạm cho testimonial — thay bằng ảnh thật khi có */
+  testimonials: {
+    avatar1: '/images/testimonials/avatar-1.jpg',
+    avatar2: '/images/testimonials/avatar-2.jpg',
+    avatar3: '/images/testimonials/avatar-3.jpg',
+    avatar4: '/images/testimonials/avatar-4.jpg',
+    avatar5: '/images/testimonials/avatar-5.jpg',
+    avatar6: '/images/testimonials/avatar-6.jpg',
+  },
 } as const;
 
 /** Bìa catalogue trang chủ */
