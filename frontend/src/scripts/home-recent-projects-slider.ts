@@ -192,6 +192,37 @@ function initMockupProjectsSlider(root: HTMLElement) {
     });
   };
 
+  const videoButtons = [...root.querySelectorAll<HTMLButtonElement>('[data-video-id]')];
+  videoButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      const media = button.closest<HTMLElement>('.mockup-project-media');
+      const player = media?.querySelector<HTMLElement>('[data-video-player]');
+      const iframe = player?.querySelector<HTMLIFrameElement>('iframe');
+      const videoId = button.dataset.videoId;
+      if (!player || !iframe || !videoId) return;
+      iframe.src = `https://www.youtube-nocookie.com/embed/${encodeURIComponent(videoId)}?autoplay=1&rel=0`;
+      player.classList.remove('hidden');
+      button.classList.add('hidden');
+      player.querySelector<HTMLButtonElement>('[data-video-close]')?.focus();
+      stopAuto();
+    });
+  });
+
+  root.querySelectorAll<HTMLButtonElement>('[data-video-close]').forEach((closeButton) => {
+    closeButton.addEventListener('click', () => {
+      const player = closeButton.closest<HTMLElement>('[data-video-player]');
+      const media = closeButton.closest<HTMLElement>('.mockup-project-media');
+      const iframe = player?.querySelector<HTMLIFrameElement>('iframe');
+      const playButton = media?.querySelector<HTMLButtonElement>('[data-video-id]');
+      if (!player || !iframe || !playButton) return;
+      iframe.src = '';
+      player.classList.add('hidden');
+      playButton.classList.remove('hidden');
+      playButton.focus();
+      startAuto();
+    });
+  });
+
   dots.forEach((dot, index) => {
     dot.addEventListener('click', () => {
       goTo(index);

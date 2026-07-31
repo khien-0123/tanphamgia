@@ -2,6 +2,7 @@
 import SiteImage from '../SiteImage.astro';
 import type { BlogPost } from '../../data/site';
 import {
+  pageHeroCopy,
   pageHeroDescription,
   pageHeroEyebrow,
   pageHeroImage,
@@ -25,22 +26,22 @@ const { post } = Astro.props;
   <div class={pageHeroScrim} aria-hidden="true"></div>
 
   <div class={pageHeroInner}>
-    <nav aria-label="Breadcrumb" class="text-sm text-white/60">
-      <a class="hover:text-accent-gold transition-colors" href={routes.home}>Trang chủ</a>
-      <span class="mx-2">/</span>
-      <a class="hover:text-accent-gold transition-colors" href={routes.tinTuc}>Tin tức</a>
-      <span class="mx-2">/</span>
-      <span class="text-white line-clamp-1" title={post.title}>{post.title}</span>
-    </nav>
+    <div class={pageHeroCopy}>
+      <nav aria-label="Breadcrumb" class="mb-8 text-sm text-white/60 sm:mb-9">
+        <a class="hover:text-accent-gold transition-colors" href={routes.home}>Trang chủ</a>
+        <span class="mx-2">/</span>
+        <a class="hover:text-accent-gold transition-colors" href={routes.tinTuc}>Tin tức</a>
+        <span class="mx-2">/</span>
+        <span class="text-white line-clamp-1" title={post.title}>{post.title}</span>
+      </nav>
 
-    <div>
       <span
         class:list={[pageHeroEyebrow, 'mb-3 block']}
         style={post.categoryColor ? `color: ${post.categoryColor}` : undefined}
       >
         {post.category}
       </span>
-      <h1 class:list={[pageHeroTitle, 'mb-5 md:mb-6 max-w-[28ch]']}>{post.title}</h1>
+      <h1 class={pageHeroTitle}>{post.title}</h1>
       <p class={pageHeroDescription}>{post.excerpt}</p>
     </div>
   </div>

@@ -47,22 +47,8 @@ import { routes } from '../../lib/routes';
             </a>
           </div>
         </div>
+        <div aria-hidden="true" class="hidden h-[clamp(8.5rem,20svh,12rem)] lg:block"></div>
         <div aria-hidden="true" class="hidden grow lg:block"></div>
-
-        <div data-reveal class="hidden lg:flex items-end justify-between gap-5 pt-[clamp(1.5rem,4svh,3.5rem)]">
-          {/* Stat card — ẩn trên mobile/tablet, hiện từ desktop trở lên */}
-          <div class="hidden lg:block w-[15.5rem] rounded-[2rem] border border-white/35 bg-white/10 px-6 py-6 shadow-[0_18px_45px_rgba(0,0,0,.2)] backdrop-blur-md lg:w-[18rem] lg:px-7">
-            <p
-              class="text-4xl font-extrabold tracking-[-0.045em] text-white sm:text-5xl"
-              data-hero-stat-counter
-              data-hero-stat-target={homeHero.stat.value}
-            >
-              {homeHero.stat.value}
-            </p>
-            <p class="mt-2 text-xs text-white/75 sm:text-sm">{homeHero.stat.label}</p>
-          </div>
-
-        </div>
       </div>
     </div>
 

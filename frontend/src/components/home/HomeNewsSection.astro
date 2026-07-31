@@ -2,6 +2,7 @@
 import SiteImage from '../SiteImage.astro';
 import { homeNews } from '../../data/home';
 import newsMark from '../../assets/images/brand/TPG-11.webp';
+import { sectionEyebrowWarm } from '../../lib/section-eyebrow';
 import { sectionPy } from '../../lib/section-rhythm';
 
 const [largePosts, compactPosts] = [homeNews.items.slice(0, 2), homeNews.items.slice(2)];
@@ -18,7 +19,7 @@ const [largePosts, compactPosts] = [homeNews.items.slice(0, 2), homeNews.items.s
   <div class:list={['relative z-10 mx-auto w-full max-w-container-max-width px-6 md:px-8', sectionPy]}>
     <header class="mb-8 flex items-end justify-between gap-6 lg:mb-10">
       <div>
-        <p class="inline-flex rounded-full bg-[#fff0bd] px-4 py-2 text-[0.68rem] font-extrabold uppercase tracking-[0.025em] text-[#5c4500]">{homeNews.eyebrow}</p>
+        <p class={sectionEyebrowWarm}>{homeNews.eyebrow}</p>
         <h2 id="mockup-news-title" class="mt-5 text-[clamp(2rem,4vw,3.1rem)] font-extrabold leading-[1.05] tracking-[-0.045em]">{homeNews.title}</h2>
       </div>
       <a href={homeNews.cta.href} class="hidden min-h-6 items-center gap-2 text-xs font-extrabold text-[#171717] transition-colors hover:text-[#b07800] sm:inline-flex">

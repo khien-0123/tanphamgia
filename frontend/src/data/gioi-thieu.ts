@@ -145,27 +145,31 @@ export const productionCapacity = {
 
 export const teamDepartments = [
   {
-    num: '01',
     icon: 'support_agent',
     title: 'Tư vấn & phát triển giải pháp',
     desc: 'Đồng hành cùng doanh nghiệp từ giai đoạn khảo sát nhu cầu đến xây dựng phương án triển khai.',
+    image: siteAssets.about.dongHanhTuVanBanGiao,
+    alt: 'Tư vấn và phát triển giải pháp đồng phục',
   },
   {
-    num: '02',
     icon: 'draw',
     title: 'Thiết kế & phát triển mẫu',
     desc: 'Nghiên cứu form dáng, chất liệu và nhận diện thương hiệu để tạo ra sản phẩm phù hợp.',
+    image: siteAssets.whyChoose.thoiTrangHoa,
+    alt: 'Thiết kế và phát triển mẫu đồng phục',
   },
   {
-    num: '03',
     icon: 'precision_manufacturing',
     title: 'Sản xuất & quản lý chất lượng',
     desc: 'Đảm bảo chất lượng ổn định trong từng công đoạn và từng đơn hàng.',
+    image: siteAssets.about.heThongSanXuat,
+    alt: 'Sản xuất và quản lý chất lượng tại xưởng',
   },
   {
-    num: '04',
     icon: 'handshake',
     title: 'Chăm sóc khách hàng & hậu mãi',
     desc: 'Theo sát quá trình triển khai và hỗ trợ doanh nghiệp trong suốt quá trình sử dụng.',
+    image: siteAssets.about.sanPhamDaSanXuat,
+    alt: 'Chăm sóc khách hàng và hậu mãi',
   },
 ];

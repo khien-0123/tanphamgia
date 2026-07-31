@@ -178,6 +178,7 @@ export const homeRecentProjects = {
       eyebrow: 'Dự án đồng phục',
       title: 'BIDV — Đồng bộ hình ảnh đội ngũ',
       caption: 'Khám phá câu chuyện triển khai đồng phục từ tư vấn, sản xuất đến bàn giao.',
+      youtubeVideoId: 'ET6Bn7ebpA4',
     },
     {
       image: siteAssets.cases.bvRangHamMat,
@@ -185,6 +186,7 @@ export const homeRecentProjects = {
       eyebrow: 'Dự án đồng phục',
       title: 'BV Răng Hàm Mặt Sài Gòn',
       caption: 'Sự chuyên nghiệp và thân thiện được gửi gắm trong từng bộ đồng phục y tế.',
+      youtubeVideoId: 'igj3oMf1Kcw',
     },
     {
       image: siteAssets.cases.bidv,
@@ -192,6 +194,7 @@ export const homeRecentProjects = {
       eyebrow: 'Dự án đồng phục',
       title: 'Thiết kế chuẩn mực cho ngành tài chính',
       caption: 'Giải pháp đồng phục toàn diện đáp ứng tiêu chuẩn khắt khe của tập đoàn lớn.',
+      youtubeVideoId: '288LySAmglk',
     },
     {
       image: siteAssets.cases.bvRangHamMat,

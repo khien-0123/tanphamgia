@@ -10,12 +10,6 @@ import { gioiThieuSeo } from '../data/gioi-thieu';
 import { siteAssets } from '../data/assets';
 import { testimonialsAbout } from '../data/site';
 import { routes } from '../lib/routes';
-
-const heroStats = [
-  { value: '23', label: 'Năm kinh nghiệm', suffix: '' },
-  { value: '2.000m²', label: 'Nhà xưởng', suffix: '' },
-  { value: '30.000', label: 'Sản phẩm / tháng', suffix: '+' },
-];
 ---
 
 <SiteLayout
@@ -24,18 +18,17 @@ const heroStats = [
   currentPath={routes.gioiThieu}
 >
   <PageHero
-    eyebrow="Giới thiệu · Est. 2003"
     title="23 năm theo đuổi giá trị của một sản phẩm may mặc chất lượng"
     titleLines={[
-      '23 năm theo đuổi giá trị của',
-      'một sản phẩm may mặc chất lượng',
+      '23 năm theo đuổi giá trị của một',
+      'sản phẩm may mặc chất lượng',
     ]}
     bgImage={siteAssets.hero.gioiThieu}
+    description="Năm 2003, Tân Phạm Gia khởi đầu hành trình may mặc với khát vọng tạo sản phẩm chất lượng và bền vững."
     breadcrumb={[
       { label: 'Trang chủ', href: routes.home },
       { label: 'Giới thiệu' },
     ]}
-    stats={heroStats}
   />
 
   <AboutBrandStory />

@@ -1,10 +1,14 @@
-/** Banner chuẩn cho mọi trang con — theo cấu trúc hero trang Giới thiệu. */
+/** Banner chuẩn — chiều cao cố định, đồng bộ mọi trang con (trừ trang chủ). */
+
+import { sectionEyebrow } from './section-eyebrow';
+
+export const PAGE_HERO_HEIGHT = 'h-[26rem] max-md:h-[22rem]';
 
 export const pageHeroShell =
-  'relative flex min-h-[32rem] flex-col overflow-hidden bg-[#0d1b3a] text-white max-md:min-h-[30rem]';
+  `relative flex ${PAGE_HERO_HEIGHT} shrink-0 flex-col overflow-hidden bg-[#0d1b3a] text-white`;
 
 export const pageHeroInner =
-  'relative z-10 mx-auto flex w-full max-w-container-max-width flex-1 flex-col justify-between gap-5 px-6 pb-7 pt-40 md:gap-6 md:px-8 md:pb-8 md:pt-44';
+  'relative z-10 mx-auto flex h-full w-full max-w-container-max-width min-h-0 flex-col justify-end gap-4 overflow-hidden px-6 pb-12 pt-28 md:gap-5 md:px-8 md:pb-16 md:pt-32';
 
 export const pageHeroStats =
   'flex flex-wrap items-baseline gap-x-6 gap-y-2 max-md:gap-x-4 max-md:gap-y-1.5';
@@ -17,8 +21,16 @@ export const pageHeroScrim =
 export const pageHeroEyebrow =
   'font-eyebrow text-xs uppercase tracking-[0.2em] font-medium text-white/65';
 
-export const pageHeroTitle =
-  'max-w-[20ch] text-balance text-[clamp(1.5rem,6.5vw,3.25rem)] font-bold leading-none tracking-[-0.035em] text-white';
+/** Pill breadcrumb — cùng chuẩn tag vàng toàn site */
+export const pageHeroBreadcrumb = `mb-8 ${sectionEyebrow} sm:mb-9`;
 
+/** Cột chữ chung — cùng mép trái / bề rộng mọi trang con */
+export const pageHeroCopy = 'w-full max-w-[42rem] text-left';
+
+/** Tiêu đề H1 — chuẩn trang Giới thiệu */
+export const pageHeroTitle =
+  'w-full text-left text-[clamp(1.35rem,5vw,2.75rem)] font-bold leading-[1.15] tracking-[-0.035em] text-white';
+
+/** Mô tả dưới tiêu đề — chuẩn trang Giới thiệu */
 export const pageHeroDescription =
-  'text-pretty max-w-2xl text-sm leading-relaxed text-white/80 max-md:line-clamp-3 md:text-base lg:text-lg';
+  'mt-3 w-full text-left line-clamp-3 text-base leading-relaxed text-white/80 md:mt-4 md:text-lg';

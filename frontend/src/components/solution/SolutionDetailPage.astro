@@ -12,6 +12,7 @@ import { duAnGiaiPhap4 } from '../../data/giai-phap-4-du-an';
 import { caseStudyHref, routes } from '../../lib/routes';
 import { imageRadius } from '../../lib/image-frame';
 import {
+  pageHeroCopy,
   pageHeroEyebrow,
   pageHeroImage,
   pageHeroInner,
@@ -117,8 +118,8 @@ const h2Macro =
   description={content.seo.description}
   currentPath={routes.giaiPhap}
 >
-  {/* ══ 00 · HERO — 504px, ảnh nền, chữ đè ══ */}
-  <header data-page-hero class:list={[pageHeroShell, 'overflow-hidden']}>
+  {/* ══ 00 · HERO — chiều cao đồng bộ pageHeroShell ══ */}
+  <header data-page-hero class:list={[pageHeroShell]}>
     <SiteImage
       src={solution?.image}
       alt={content.hero.imageAlt}
@@ -129,9 +130,9 @@ const h2Macro =
     />
     <div class={pageHeroScrim} aria-hidden="true"></div>
     <div class={pageHeroInner}>
-      <p class:list={[pageHeroEyebrow]}>Giải pháp {heroId}</p>
-      <div>
-        <h1 class:list={[pageHeroTitle, 'max-w-[15ch] md:max-w-[18ch]']}>
+      <div class={pageHeroCopy}>
+        <p class:list={[pageHeroEyebrow, 'mb-3']}>Giải pháp {heroId}</p>
+        <h1 class={pageHeroTitle}>
           {content.hero.title}
         </h1>
         <div class:list={[pageHeroStats, 'mt-4 md:mt-7']}>

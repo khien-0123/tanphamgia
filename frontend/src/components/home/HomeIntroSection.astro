@@ -1,6 +1,7 @@
 ---
 import { homeHero } from '../../data/home';
 import SiteImage from '../SiteImage.astro';
+import { sectionEyebrowWarm } from '../../lib/section-eyebrow';
 import { sectionPy } from '../../lib/section-rhythm';
 
 const { about } = homeHero;
@@ -20,9 +21,7 @@ const { about } = homeHero;
     </figure>
 
     <div data-reveal data-reveal-direction="up" class="max-w-[43rem] lg:py-3">
-      <p class="mb-4 inline-flex rounded-full bg-[#fff0bd] px-5 py-2 text-xs font-extrabold uppercase tracking-[0.025em] text-[#7a5900]">
-        {about.eyebrow}
-      </p>
+      <p class:list={['mb-4', sectionEyebrowWarm]}>{about.eyebrow}</p>
 
       <h2
         id="mockup-about-title"

@@ -1,6 +1,7 @@
 ---
 import SiteImage from '../SiteImage.astro';
 import {
+  pageHeroCopy,
   pageHeroDescription,
   pageHeroEyebrow,
   pageHeroImage,
@@ -27,16 +28,16 @@ const { name, intro, image, eyebrow, backHref, backLabel } = Astro.props;
   <div class={pageHeroScrim} aria-hidden="true"></div>
 
   <div class={pageHeroInner}>
-    <a
-      href={backHref}
-      class="text-sm font-semibold text-white/65 transition-colors hover:text-accent-gold"
-    >
-      {backLabel}
-    </a>
+    <div class={pageHeroCopy}>
+      <a
+        href={backHref}
+        class="mb-8 inline-flex text-sm font-semibold text-white/65 transition-colors hover:text-accent-gold sm:mb-9"
+      >
+        {backLabel}
+      </a>
 
-    <div>
       {eyebrow && <p class:list={[pageHeroEyebrow, 'mb-3 text-accent-gold/90']}>{eyebrow}</p>}
-      <h1 class:list={[pageHeroTitle, 'mb-5 md:mb-6 max-w-[24ch]']}>{name}</h1>
+      <h1 class={pageHeroTitle}>{name}</h1>
       <p class={pageHeroDescription}>{intro}</p>
     </div>
   </div>

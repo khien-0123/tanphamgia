@@ -1,6 +1,7 @@
 ---
 import SiteImage from '../SiteImage.astro';
 import { productionCapacity } from '../../data/gioi-thieu';
+import { sectionEyebrowWarm } from '../../lib/section-eyebrow';
 import { sectionPy } from '../../lib/section-rhythm';
 ---
 
@@ -8,9 +9,7 @@ import { sectionPy } from '../../lib/section-rhythm';
 <section class="bg-[#0d1b3a] text-white" id="nang-luc" aria-labelledby="about-capacity-title">
   <div class:list={['mx-auto grid w-full max-w-container-max-width items-stretch gap-10 px-6 md:px-8 lg:grid-cols-[1.08fr_0.92fr] lg:gap-14', sectionPy]}>
     <div data-reveal>
-      <p class="inline-flex rounded-full bg-[#fff0bd] px-5 py-2 text-xs font-extrabold uppercase tracking-[0.025em] text-[#7a5900]">
-        Năng lực sản xuất
-      </p>
+      <p class={sectionEyebrowWarm}>Năng lực sản xuất</p>
       <h2
         id="about-capacity-title"
         class="mt-6 max-w-[16ch] text-balance text-[clamp(2rem,3.2vw,3rem)] font-extrabold leading-[1.08] tracking-[-0.04em]"
@@ -63,9 +62,7 @@ import { sectionPy } from '../../lib/section-rhythm';
 
   <div class:list={['relative mx-auto w-full max-w-container-max-width px-6 md:px-8 pb-24 lg:pb-28', sectionPy]}>
     <header data-reveal class="max-w-[64rem]">
-      <p class="inline-flex rounded-full bg-[#fff0bd] px-4 py-2 text-[0.7rem] font-extrabold uppercase tracking-[0.025em] text-[#5c4500] sm:text-xs">
-        Kiểm soát chất lượng
-      </p>
+      <p class={sectionEyebrowWarm}>Kiểm soát chất lượng</p>
       <h2
         id="about-qc-title"
         class="mt-6 max-w-[34ch] text-balance text-[clamp(1.8rem,3vw,3rem)] font-extrabold leading-[1.08] tracking-[-0.04em]"

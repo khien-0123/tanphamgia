@@ -3,6 +3,8 @@ import SiteImage from './SiteImage.astro';
 import { siteAssets } from '../data/assets';
 import { routes } from '../lib/routes';
 import {
+  pageHeroBreadcrumb,
+  pageHeroCopy,
   pageHeroDescription,
   pageHeroImage,
   pageHeroInner,
@@ -20,9 +22,6 @@ interface HeroStat {
 interface Props {
   title: string;
   titleLines?: readonly [string, string];
-  /** Override title sizing for pages requiring the homepage scale. */
-  titleClass?: string;
-  eyebrow?: string;
   description?: string;
   /** Ngắt dòng mô tả trên mobile — tránh chữ rớt hàng lẻ */
   descriptionLines?: readonly [string, string];
@@ -35,7 +34,6 @@ interface Props {
 const {
   title,
   titleLines,
-  titleClass,
   description,
   descriptionLines,
   breadcrumb = [{ label: 'Trang chủ', href: routes.home }],
@@ -49,13 +47,10 @@ const {
   <div class={pageHeroScrim} aria-hidden="true"></div>
 
   <div class={pageHeroInner}>
-    <div>
+    <div class={pageHeroCopy}>
       {
         breadcrumb.length > 0 && (
-          <nav
-            aria-label="Breadcrumb"
-            class="mb-10 inline-flex min-h-10 items-center rounded-full bg-[#fff0bd] px-4 py-2 text-[0.68rem] font-extrabold uppercase leading-none tracking-[0.025em] text-[#7a5900] sm:text-xs"
-          >
+          <nav aria-label="Breadcrumb" class={pageHeroBreadcrumb}>
             {breadcrumb.map((item, i) => (
               <>
                 {i > 0 && <span class="mx-1.5">/</span>}
@@ -71,34 +66,28 @@ const {
           </nav>
         )
       }
-      <h1 class:list={[titleClass ?? pageHeroTitle, titleLines && 'max-w-[32ch]', 'mb-3 md:mb-4']}>
+      <h1 class={pageHeroTitle}>
         {titleLines ? (
           <>
             <span class="block">{titleLines[0]}</span>
             <span class="block">{titleLines[1]}</span>
           </>
-        ) : title}
+        ) : (
+          title
+        )}
       </h1>
       {
         description && (
-          <p
-            class:list={[
-              pageHeroDescription,
-              descriptionLines &&
-                'max-md:text-[0.8125rem] max-md:leading-[1.45] max-md:tracking-normal',
-            ]}
-          >
-            {
-              descriptionLines ? (
-                <>
-                  <span class="block md:hidden">{descriptionLines[0]}</span>
-                  <span class="block md:hidden">{descriptionLines[1]}</span>
-                  <span class="hidden md:inline">{description}</span>
-                </>
-              ) : (
-                description
-              )
-            }
+          <p class={pageHeroDescription}>
+            {descriptionLines ? (
+              <>
+                <span class="block md:hidden">{descriptionLines[0]}</span>
+                <span class="block md:hidden">{descriptionLines[1]}</span>
+                <span class="hidden md:inline">{description}</span>
+              </>
+            ) : (
+              description
+            )}
           </p>
         )
       }
