@@ -15,17 +15,17 @@ export const navInnerClasses = [
 export const navStartClasses = 'flex items-center min-h-10 shrink-0';
 
 export const navCenterClasses =
-  'hidden lg:flex items-center min-h-10 justify-center';
+  'hidden min-w-0 flex-1 items-center justify-center px-3 lg:flex xl:px-6 2xl:px-8';
 
 /** Track menu desktop — giữ nguyên khung h-10 p-1 gap-0.5 khi đổi hero ↔ scrolled */
 export const navMenuTrackClasses = [
-  'inline-flex items-center gap-1 rounded-full box-border transition-all duration-300',
+  'inline-flex items-center gap-0 rounded-full box-border transition-all duration-300',
   'bg-transparent shadow-none backdrop-blur-none p-0'
 ];
 
 /** Link menu — layout chung, màu chữ tách riêng inactive/active */
 export const navMenuLinkBaseClasses = [
-  'inline-flex items-center justify-center py-1.5 px-3 lg:py-2 lg:px-4 xl:py-[9px] xl:px-[20px] rounded-full box-border',
+  'inline-flex items-center justify-center px-2.5 py-1.5 lg:px-3 lg:py-2 xl:px-3.5 xl:py-[9px] 2xl:px-4 rounded-full box-border',
   'border-0 bg-transparent shadow-none text-sm font-medium leading-none',
   'whitespace-nowrap no-underline transition-colors',
 ];
