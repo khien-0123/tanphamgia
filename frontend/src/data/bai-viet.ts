@@ -11,128 +11,12 @@
  */
 
 import { siteAssets } from './assets';
-import { solutionHref } from '../lib/routes';
 
 export type PostBlock =
-  | { type: 'lead' | 'p' | 'h2' | 'h3' | 'result'; text: string }
+  | { type: 'lead' | 'p' | 'h2' | 'h3'; text: string }
   | { type: 'ul' | 'ol'; items: string[] }
   | { type: 'figure'; src: string; alt: string; caption: string; ratio?: 'wide' | 'square' }
   | { type: 'table'; caption?: string; head: string[]; rows: string[][] };
-
-/**
- * Hồ sơ dự án.
- *
- * Ba trường này lấy nguyên từ giai-phap-N-du-an.ts (`name`, `field`, `stats`)
- * cộng nhóm giải pháp mà dự án thuộc về. Trước đây `field` và nhóm giải pháp
- * không hiện ở đâu cả — người đọc case study không biết dự án nằm ở ngành nào.
- */
-export interface CaseFacts {
-  client: string;
-  field: string;
-  solution: string;
-  solutionSlug: string;
-  scale: string;
-}
-
-const caseFacts: Record<string, CaseFacts> = {
-  'dat-group': {
-    client: 'DAT GROUP',
-    field: 'Sản xuất & kỹ thuật hiện trường',
-    solution: 'Doanh nghiệp Sản xuất & FDI',
-    solutionSlug: 'giai-phap-1',
-    scale: '1.086 sản phẩm · 45 ngày triển khai · đối tác hơn 5 năm',
-  },
-  'zero-waste': {
-    client: 'Zero Waste',
-    field: 'Hệ sinh thái đa doanh nghiệp',
-    solution: 'Doanh nghiệp Sản xuất & FDI',
-    solutionSlug: 'giai-phap-1',
-    scale: '800 áo polo · 5 đơn vị · đối tác hơn 3 năm',
-  },
-  'king-group': {
-    client: 'King Group',
-    field: 'Sản xuất bao bì công nghiệp',
-    solution: 'Doanh nghiệp Sản xuất & FDI',
-    solutionSlug: 'giai-phap-1',
-    scale: 'Hơn 3.000 áo polo · hợp tác hơn 4 năm',
-  },
-  'coca-cola-philippines': {
-    client: 'Coca-Cola Philippines',
-    field: 'Doanh nghiệp FDI · FMCG',
-    solution: 'Văn phòng & Tập đoàn',
-    solutionSlug: 'giai-phap-2',
-    scale: '564 áo polo · 60 ngày triển khai',
-  },
-  vfm: {
-    client: 'VFM',
-    field: 'Quản lý quỹ đầu tư',
-    solution: 'Văn phòng & Tập đoàn',
-    solutionSlug: 'giai-phap-2',
-    scale: '1.100 sản phẩm · 35 ngày triển khai · đối tác 3 năm',
-  },
-  'savisco-van-phong': {
-    client: 'SAVISCO',
-    field: 'Văn phòng · kinh doanh · dịch vụ khách hàng',
-    solution: 'Văn phòng & Tập đoàn',
-    solutionSlug: 'giai-phap-2',
-    scale: '950 sản phẩm · 40 ngày triển khai · đối tác 2 năm',
-  },
-  vivant: {
-    client: 'VIVANT',
-    field: 'Doanh nghiệp FDI',
-    solution: 'FMCG & Chuỗi phân phối',
-    solutionSlug: 'giai-phap-3',
-    scale: '1.250 sản phẩm · đối tác chiến lược 3 năm',
-  },
-  'savisco-sales-activation': {
-    client: 'SAVISCO',
-    field: 'Sales & Activation',
-    solution: 'FMCG & Chuỗi phân phối',
-    solutionSlug: 'giai-phap-3',
-    scale: '2.800 sản phẩm · nhiều tỉnh thành',
-  },
-  discovery: {
-    client: 'DISCOVERY',
-    field: 'Chuỗi phân phối',
-    solution: 'FMCG & Chuỗi phân phối',
-    solutionSlug: 'giai-phap-3',
-    scale: '950 sản phẩm · đối tác 4 năm',
-  },
-  'bv-rang-ham-mat-sai-gon': {
-    client: 'BV Răng Hàm Mặt Sài Gòn',
-    field: 'Nha khoa & Y tế',
-    solution: 'Y tế, Spa & Dịch vụ',
-    solutionSlug: 'giai-phap-4',
-    scale: '650 sản phẩm · Scrub & áo Blouse',
-  },
-  'engadine-clinic': {
-    client: 'Engadine Clinic',
-    field: 'Phòng khám & Dịch vụ',
-    solution: 'Y tế, Spa & Dịch vụ',
-    solutionSlug: 'giai-phap-4',
-    scale: '420 sản phẩm · 30 ngày triển khai',
-  },
-  betrimex: {
-    client: 'BETRIMEX',
-    field: 'Sản xuất & phân phối',
-    solution: 'Y tế, Spa & Dịch vụ',
-    solutionSlug: 'giai-phap-4',
-    scale: '850 sản phẩm · đối tác 3 năm',
-  },
-};
-
-/**
- * Hồ sơ dự án đổ vào THẺ THÔNG TIN cạnh ảnh bìa, không phải bảng trong bài.
- * Đây là chỗ bản mockup dành riêng cho nó — nhờ vậy case study giữ được dải
- * số liệu mà không phải dựng thêm khối riêng trong thân bài.
- */
-export function getCaseFacts(slug: string): CaseFacts | undefined {
-  return caseFacts[slug];
-}
-
-export function caseSolutionHref(facts: CaseFacts): string {
-  return solutionHref(facts.solutionSlug);
-}
 
 /* ═══════════════════════════════════════════════════════════════
    CASE STUDY — 12 dự án thật, lấy từ giai-phap-1..4-du-an.ts
@@ -203,7 +87,6 @@ const caseStudyBodies: Record<string, PostBlock[]> = {
         'Đảm bảo tính nhất quán về màu sắc, chất liệu và form dáng qua nhiều năm sử dụng.',
       ],
     },
-    { type: 'result', text: '1.086 sản phẩm · 45 ngày triển khai · đối tác hơn 5 năm' },
   ],
 
   'zero-waste': [
@@ -264,7 +147,6 @@ const caseStudyBodies: Record<string, PostBlock[]> = {
         'Đảm bảo chất lượng ổn định qua nhiều đợt sản xuất.',
       ],
     },
-    { type: 'result', text: '800 áo polo · 5 đơn vị trong hệ sinh thái · đối tác hơn 3 năm' },
   ],
 
   'king-group': [
@@ -325,7 +207,6 @@ const caseStudyBodies: Record<string, PostBlock[]> = {
         'Đảm bảo nguồn cung ổn định cho hoạt động nhà máy.',
       ],
     },
-    { type: 'result', text: 'Hơn 3.000 áo polo · đơn hàng định kỳ trên 1.000 sản phẩm · hợp tác hơn 4 năm' },
   ],
 
   /* ─── Giải pháp 2 · Văn phòng & Tập đoàn ─── */
@@ -388,7 +269,6 @@ const caseStudyBodies: Record<string, PostBlock[]> = {
         'Hoàn thành dự án đúng tiến độ và tiêu chuẩn đã thống nhất.',
       ],
     },
-    { type: 'result', text: '564 áo polo · 60 ngày triển khai · phối hợp hoàn toàn từ xa' },
   ],
 
   vfm: [
@@ -450,7 +330,6 @@ const caseStudyBodies: Record<string, PostBlock[]> = {
         'Duy trì chất lượng ổn định qua nhiều đợt triển khai.',
       ],
     },
-    { type: 'result', text: '1.100 sản phẩm · 35 ngày triển khai · đối tác 3 năm' },
   ],
 
   'savisco-van-phong': [
@@ -511,7 +390,6 @@ const caseStudyBodies: Record<string, PostBlock[]> = {
         'Rút ngắn thời gian triển khai các đơn hàng bổ sung và tái đặt hàng.',
       ],
     },
-    { type: 'result', text: '950 sản phẩm · 40 ngày triển khai · đối tác 2 năm' },
   ],
 
   /* ─── Giải pháp 3 · FMCG & Chuỗi phân phối ─── */
@@ -573,7 +451,6 @@ const caseStudyBodies: Record<string, PostBlock[]> = {
         'Hoàn thành dự án đúng tiến độ.',
       ],
     },
-    { type: 'result', text: '1.250 sản phẩm · chuẩn màu Pantone · đối tác chiến lược 3 năm' },
   ],
 
   'savisco-sales-activation': [
@@ -633,7 +510,6 @@ const caseStudyBodies: Record<string, PostBlock[]> = {
         'Đảm bảo chất lượng ổn định qua nhiều đợt triển khai.',
       ],
     },
-    { type: 'result', text: '2.800 sản phẩm · đội Sales & Activation nhiều tỉnh thành' },
   ],
 
   discovery: [
@@ -693,7 +569,6 @@ const caseStudyBodies: Record<string, PostBlock[]> = {
         'Duy trì chất lượng ổn định trong nhiều năm hợp tác.',
       ],
     },
-    { type: 'result', text: '950 sản phẩm · bổ sung nhiều đợt · đối tác 4 năm' },
   ],
 
   /* ─── Giải pháp 4 · Y tế, Spa & Dịch vụ ─── */
@@ -755,7 +630,6 @@ const caseStudyBodies: Record<string, PostBlock[]> = {
         'Duy trì chất lượng ổn định qua nhiều năm hợp tác.',
       ],
     },
-    { type: 'result', text: '650 sản phẩm · đồng phục Scrub và áo Blouse · nhiều chi nhánh' },
   ],
 
   'engadine-clinic': [
@@ -816,7 +690,6 @@ const caseStudyBodies: Record<string, PostBlock[]> = {
         'Gia tăng sự tự tin cho đội ngũ nhân sự.',
       ],
     },
-    { type: 'result', text: '420 sản phẩm · 30 ngày triển khai' },
   ],
 
   betrimex: [
@@ -876,7 +749,6 @@ const caseStudyBodies: Record<string, PostBlock[]> = {
         'Rút ngắn thời gian triển khai các đơn hàng bổ sung.',
       ],
     },
-    { type: 'result', text: '850 sản phẩm · nhiều chi nhánh · đối tác 3 năm' },
   ],
 };
 
@@ -1094,7 +966,6 @@ const blogBodies: Record<string, PostBlock[]> = {
       type: 'p',
       text: 'Toàn bộ sản phẩm được hoàn thiện theo kế hoạch, chia lô rõ ràng và có biên bản kiểm soát chất lượng trước khi xuất xưởng.',
     },
-    { type: 'result', text: '10.000 sản phẩm · 7 ngày · kiểm soát chất lượng đa tầng' },
   ],
 };
 
@@ -1138,10 +1009,3 @@ export function getCaseBody(solutionSlug: string, projectSlug: string): PostBloc
   return key ? (caseStudyBodies[key] ?? []) : [];
 }
 
-export function getCaseFactsByPath(
-  solutionSlug: string,
-  projectSlug: string,
-): CaseFacts | undefined {
-  const key = caseKey(solutionSlug, projectSlug);
-  return key ? caseFacts[key] : undefined;
-}

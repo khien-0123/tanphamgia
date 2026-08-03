@@ -1,7 +1,7 @@
 ---
 import SiteLayout from '../../layouts/SiteLayout.astro';
 import PostEditorialLayout from '../blog/PostEditorialLayout.astro';
-import { getCaseBody, getCaseFactsByPath } from '../../data/bai-viet';
+import { getCaseBody } from '../../data/bai-viet';
 import { getOtherCaseStudies } from '../../lib/case-study-pool';
 import { caseStudyHref, routes, solutionAnchorHref, solutionHref } from '../../lib/routes';
 
@@ -31,7 +31,7 @@ const { solutionId, solutionSlug, project } = Astro.props;
   vừa sai phân cấp nội dung, vừa tạo hai URL cùng một nội dung.
 */
 const blocks = getCaseBody(solutionSlug, project.slug);
-const facts = getCaseFactsByPath(solutionSlug, project.slug);
+
 
 const pool = getOtherCaseStudies(solutionSlug, project.slug, 6);
 
@@ -72,7 +72,8 @@ const seoSuffix: Record<Props['solutionId'], string> = {
     image={project.image}
     alt={`Đồng phục ${project.name} do Tân Phạm Gia sản xuất`}
     blocks={blocks}
-    facts={facts}
+    clientName={project.name}
+    clientRole={project.field}
     breadcrumbLabel={`Giải pháp ${solutionId}`}
     breadcrumbHref={solutionHref(solutionSlug)}
     backLabel={`Quay lại Giải pháp ${solutionId}`}

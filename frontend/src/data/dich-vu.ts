@@ -186,7 +186,9 @@ export const services: Service[] = [
     lines: ['Gia công OEM · ODM'],
     icon: 'precision_manufacturing',
     image: siteAssets.about.heThongSanXuat,
-    heroImage: productionCapacity.factoryImage,
+    /* Không lấy productionCapacity.factoryImage làm hero: ảnh đó đã cháy sẵn
+       dòng chữ "QUY MÔ XƯỞNG MAY HƠN 2000m²" và số hotline, đặt tiêu đề hero
+       đè lên thành hai lớp chữ chồng nhau. Bỏ trống thì hero dùng `image`. */
     heroDescription:
       'Sản xuất trực tiếp, kiểm soát chất lượng đa tầng và chủ động tiến độ cho đơn hàng B2B.',
     /* Không đưa productionCapacity.intro lên hero: đoạn đó dài hơn 3 dòng nên

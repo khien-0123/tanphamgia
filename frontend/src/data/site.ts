@@ -57,6 +57,10 @@ export const pageHeroBg = {
   tinTuc: siteAssets.hero.tinTuc,
   taiLieu: siteAssets.hero.taiLieu,
   lienHe: siteAssets.hero.lienHe,
+  /* Chưa có ảnh banner riêng cho trang Dịch vụ. Mượn tạm ảnh xưởng đang dùng
+     trong bài viết: đúng chủ đề, khổ ngang và không có chữ cháy sẵn trên ảnh
+     như hero/fallback.jpg. Thay bằng ảnh khách gửi khi có. */
+  dichVu: siteAssets.blog.poloQcWorkshop,
 } as const;
 
 /** Liên hệ chung — dùng footer, menu mobile, trang Liên hệ */
