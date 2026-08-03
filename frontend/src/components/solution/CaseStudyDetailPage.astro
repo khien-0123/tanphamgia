@@ -1,14 +1,9 @@
 ---
 import SiteLayout from '../../layouts/SiteLayout.astro';
-import CaseStudyHero from './CaseStudyHero.astro';
-import CaseStudyStatsBand from './CaseStudyStatsBand.astro';
-import CaseStudyNarrative from './CaseStudyNarrative.astro';
-import ProjectCardsGrid from './ProjectCardsGrid.astro';
+import PostEditorialLayout from '../blog/PostEditorialLayout.astro';
+import { getCaseBody, getCaseFactsByPath } from '../../data/bai-viet';
 import { getOtherCaseStudies } from '../../lib/case-study-pool';
-import { parseCaseStudyStats } from '../../lib/parse-case-study-stats';
-import { caseStudyHref, routes, solutionAnchorHref } from '../../lib/routes';
-import { getSolutionTheme } from '../../lib/solution-theme';
-import { rhythmBg, sectionPy } from '../../lib/section-rhythm';
+import { caseStudyHref, routes, solutionAnchorHref, solutionHref } from '../../lib/routes';
 
 export interface CaseStudyProject {
   slug: string;
@@ -30,14 +25,30 @@ interface Props {
 
 const { solutionId, solutionSlug, project } = Astro.props;
 
-const solutionTheme = getSolutionTheme(solutionId);
-const parsedStats = parseCaseStudyStats(project.stats);
-const otherProjects = getOtherCaseStudies(solutionSlug, project.slug, 4).map((item) => ({
-  name: item.name,
-  stats: item.stats,
-  field: item.field,
-  image: item.image,
+/*
+  Case study dùng CHUNG layout với bài blog (PostEditorialLayout) nhưng GIỮ
+  đường dẫn riêng /giai-phap/<nhóm>/du-an/<dự án>. Đưa case study vào /tin-tuc
+  vừa sai phân cấp nội dung, vừa tạo hai URL cùng một nội dung.
+*/
+const blocks = getCaseBody(solutionSlug, project.slug);
+const facts = getCaseFactsByPath(solutionSlug, project.slug);
+
+const pool = getOtherCaseStudies(solutionSlug, project.slug, 6);
+
+const related = pool.slice(0, 3).map((item) => ({
   href: caseStudyHref(item.solutionSlug, item.slug),
+  title: item.name,
+  image: item.image,
+  alt: `Dự án đồng phục ${item.name}`,
+  category: item.field ?? 'Dự án tiêu biểu',
+  meta: item.stats,
+}));
+
+/* Danh sách chữ ở cột phải đầu trang — nhiều hơn lưới thẻ dưới chân vì
+   không tốn diện tích ảnh. */
+const sidebarLinks = pool.map((item) => ({
+  href: caseStudyHref(item.solutionSlug, item.slug),
+  title: item.name,
 }));
 
 const seoSuffix: Record<Props['solutionId'], string> = {
@@ -52,33 +63,27 @@ const seoSuffix: Record<Props['solutionId'], string> = {
   title={`${project.name} | Dự án tiêu biểu — Giải pháp ${solutionId}`}
   description={`Case study ${project.name} — ${seoSuffix[solutionId]}.`}
   currentPath={routes.giaiPhap}
-  navOverDark={true}
+  navOverDark={false}
 >
-  <main class={solutionTheme.page}>
-    <CaseStudyHero
-      name={project.name}
-      intro={project.intro}
-      image={project.image}
-      eyebrow={project.field}
-      backHref={solutionAnchorHref(solutionSlug, 'du-an')}
-      backLabel={`← Quay lại Giải pháp ${solutionId}`}
-    />
-
-    <CaseStudyStatsBand stats={parsedStats} />
-
-    <CaseStudyNarrative
-      challenges={project.challenges}
-      solutions={project.solutions}
-      results={project.results}
-    />
-
-    <ProjectCardsGrid
-      title="Dự án khác"
-      description="Khám phá thêm dự án đã triển khai trong và ngoài nhóm giải pháp này."
-      items={otherProjects}
-      columns={4}
-      headerStyle="solution"
-      sectionClass={`${rhythmBg(4)} ${sectionPy} border-t border-border-subtle`}
-    />
-  </main>
+  <PostEditorialLayout
+    title={project.name}
+    excerpt={project.intro}
+    category="Case study"
+    image={project.image}
+    alt={`Đồng phục ${project.name} do Tân Phạm Gia sản xuất`}
+    blocks={blocks}
+    facts={facts}
+    breadcrumbLabel={`Giải pháp ${solutionId}`}
+    breadcrumbHref={solutionHref(solutionSlug)}
+    backLabel={`Quay lại Giải pháp ${solutionId}`}
+    backHref={solutionAnchorHref(solutionSlug, 'du-an')}
+    ctaLabel="Nhận tư vấn cho dự án tương tự"
+    ctaHref={routes.lienHe}
+    relatedTitle="Dự án khác"
+    relatedAllLabel="Xem tất cả dự án"
+    relatedAllHref={routes.khachHang}
+    related={related}
+    sidebarLinksTitle="Dự án liên quan"
+    sidebarLinks={sidebarLinks}
+  />
 </SiteLayout>

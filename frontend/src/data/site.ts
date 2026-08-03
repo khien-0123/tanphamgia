@@ -73,6 +73,16 @@ export const siteContact = {
     'Phản hồi trong 24 giờ làm việc. Gọi hotline 084 3406 406 cho đơn cấp bách. Tư vấn hoàn toàn miễn phí!',
 };
 
+/**
+ * Thông báo sau khi gửi biểu mẫu — nổi lên rồi tự tắt sau vài giây.
+ * Cố ý ngắn và KHÔNG kèm số điện thoại: thông báo chỉ đứng vài giây, nhét số
+ * vào thì người dùng không kịp chép mà cũng không bấm gọi được.
+ */
+export const formThankYou = {
+  title: 'Cảm ơn anh/chị đã gửi yêu cầu',
+  message: 'Tân Phạm Gia sẽ phản hồi trong 24 giờ làm việc.',
+};
+
 /** Footer — bố cục & link đồng bộ dongphucvn.vn */
 export const siteFooter = {
   tagline: 'Giải pháp đồng phục doanh nghiệp chuẩn thời trang với 23 năm kinh nghiệm.',
@@ -155,6 +165,7 @@ export const mainNavigation = [
     icon: 'apartment',
     desc: 'Lịch sử & năng lực xưởng may',
   },
+  { label: 'Dịch vụ', href: routes.dichVu, icon: 'design_services', desc: 'Thiết kế, may, in & thêu' },
   { label: 'Giải pháp', href: routes.giaiPhap, icon: 'category', desc: 'Nhóm giải pháp đồng phục' },
   { label: 'Khách hàng', href: routes.khachHang, icon: 'groups', desc: 'Thương hiệu đã đồng hành' },
   { label: 'Tin tức', href: routes.tinTuc, icon: 'newspaper', desc: 'Kiến thức ngành & dự án' },
@@ -417,14 +428,15 @@ export interface BlogPost {
 const blogPostsRaw: Omit<BlogPost, 'href'>[] = [
   {
     slug: 'chon-vai-polo-khi-hau-viet-nam',
-    title: 'Cách chọn vải Polo phù hợp với khí hậu Việt Nam',
-    excerpt: 'Phân tích ưu nhược điểm của 5 dòng vải sợi tự nhiên thịnh hành nhất 2024...',
-    category: 'Kiến Thức Vải',
+    title: '5 tiêu chí chọn vải polo cho đội ngũ làm việc tại Việt Nam',
+    excerpt:
+      'Chọn đúng chất liệu giúp đồng phục giữ form, thoáng khí và bền màu trong điều kiện làm việc thực tế của doanh nghiệp.',
+    category: 'Kiến thức đồng phục',
     categoryColor: '#102C4D',
     badge: 'Must Read',
     publishedAt: '2025-07-13',
-    image: siteAssets.blog.chonVaiPolo,
-    alt: 'Cách chọn vải Polo',
+    image: siteAssets.blog.poloFabricSelection,
+    alt: 'Chuyên viên đồng phục đang so sánh các mẫu vải polo màu navy',
   },
   {
     slug: 'dong-phuc-toi-gian-branding-2024',
@@ -441,7 +453,7 @@ const blogPostsRaw: Omit<BlogPost, 'href'>[] = [
     slug: 'san-xuat-10000-ao-thun-7-ngay',
     title: 'Quy trình sản xuất 10.000 áo thun trong 7 ngày',
     excerpt: 'Bài học vận hành xưởng may quy mô lớn — từ lập kế hoạch đến QC đa tầng trước khi bàn giao.',
-    category: 'Vận Hành',
+    category: 'Case study',
     categoryColor: '#a63e2d',
     publishedAt: '2025-05-04',
     image: siteAssets.blog.sanXuat10000,
