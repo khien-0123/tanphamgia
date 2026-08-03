@@ -1,5 +1,6 @@
 ---
 import { sectionPy } from '../../lib/section-rhythm';
+import { sectionEyebrow } from '../../lib/section-eyebrow';
 
 interface Props {
   steps: string[];
@@ -50,7 +51,7 @@ const processDetails = [
       <div class="process-glow process-glow-right" aria-hidden="true"></div>
 
       <header data-reveal class="relative z-10 mx-auto text-center">
-        {eyebrow && <span class="process-eyebrow mb-5 block">{eyebrow}</span>}
+        {eyebrow && <span class:list={[sectionEyebrow, 'mb-[1.15rem]']}>{eyebrow}</span>}
         <h2 class="text-balance text-[clamp(1.75rem,2.7vw,3rem)] font-extrabold uppercase leading-[1.1] tracking-[-0.03em] text-[#0e1630]">
           Quy trình <span class="process-gradient-text">làm việc</span>
         </h2>
@@ -87,7 +88,6 @@ const processDetails = [
   .process-glow { position: absolute; width: 26rem; height: 26rem; top: 50%; transform: translateY(-50%); border-radius: 999px; background: radial-gradient(circle, rgb(255 190 39 / 0.55), rgb(255 235 183 / 0.1) 62%, transparent 72%); }
   .process-glow-left { left: -10rem; }
   .process-glow-right { right: -10rem; }
-  .process-eyebrow { font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #0D1B3A; }
   .process-gradient-text { color: #0D1B3A; }
   .process-heading-line { background: #FFC933; }
   .process-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem 0.75rem; }

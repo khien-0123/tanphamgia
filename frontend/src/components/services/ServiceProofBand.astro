@@ -1,0 +1,30 @@
+---
+import { serviceProofStats } from '../../data/dich-vu';
+---
+
+<section class="bg-[#0d1b3a] text-white" aria-label="Năng lực Tân Phạm Gia">
+  <div class="mx-auto w-full max-w-container-max-width px-6 md:px-8">
+    <dl class="grid grid-cols-2 py-9 md:py-11 lg:grid-cols-4">
+      {
+        serviceProofStats.map((stat, index) => (
+          <div
+            data-reveal
+            class:list={[
+              'flex min-w-0 flex-col items-center px-4 text-center md:px-6',
+              index % 2 === 1 && 'max-lg:border-l max-lg:border-white/15',
+              index > 1 && 'max-lg:mt-8 max-lg:border-t max-lg:border-white/15 max-lg:pt-8',
+              index > 0 && 'lg:border-l lg:border-white/15',
+            ]}
+          >
+            <dt class="whitespace-nowrap text-[clamp(2rem,3.25vw,3.65rem)] font-extrabold leading-none tracking-[-0.035em] text-[#ffc933] tabular-nums">
+              {stat.value}
+            </dt>
+            <dd class="m-0 mt-3 text-xs font-medium leading-snug text-white/70 sm:text-sm">
+              {stat.label}
+            </dd>
+          </div>
+        ))
+      }
+    </dl>
+  </div>
+</section>

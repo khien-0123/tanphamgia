@@ -3,6 +3,7 @@
 export const routes = {
   home: '/',
   gioiThieu: '/gioi-thieu',
+  dichVu: '/dich-vu',
   giaiPhap: '/giai-phap',
   khachHang: '/khach-hang',
   tinTuc: '/tin-tuc',
@@ -12,6 +13,10 @@ export const routes = {
 
 export function solutionHref(slug: string): string {
   return `${routes.giaiPhap}/${slug}`;
+}
+
+export function serviceHref(slug: string): string {
+  return `${routes.dichVu}/${slug}`;
 }
 
 export function caseStudyHref(solutionSlug: string, projectSlug: string): string {

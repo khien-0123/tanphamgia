@@ -4,6 +4,14 @@ import { solutions } from '../../data/site';
 import { listingKeywords } from '../../data/giai-phap-listing';
 import { RHYTHM_WHITE, sectionPy } from '../../lib/section-rhythm';
 import { routes } from '../../lib/routes';
+import { sectionEyebrow } from '../../lib/section-eyebrow';
+import {
+  cardMediaHover,
+  focusRingOnDark,
+  ghostCta,
+  ghostCtaArrow,
+  ghostCtaLabel,
+} from '../../lib/button-classes';
 
 interface Props {
   sectionBg?: string;
@@ -29,11 +37,7 @@ const keywordsFor = (item: SolutionLike): string[] =>
         data-reveal
         class="flex flex-col md:col-span-2 lg:col-span-1 lg:row-span-2 lg:pr-3"
       >
-        <span
-          class="inline-flex self-start rounded-full bg-[#FFF0BD] px-4 py-2 text-xs font-extrabold uppercase tracking-[0.025em] text-[#5c4500] sm:text-sm"
-        >
-          Tuyển tập · 04 phân khúc
-        </span>
+        <span class:list={[sectionEyebrow, 'self-start']}>Tuyển tập · 04 phân khúc</span>
         <h2
           class="font-headline-md mt-6 text-[clamp(1.75rem,2.7vw,3rem)] font-extrabold leading-[1.1] tracking-[-0.03em] text-balance text-[#1f1b17]"
         >
@@ -49,17 +53,9 @@ const keywordsFor = (item: SolutionLike): string[] =>
           <strong class="block text-sm font-extrabold text-[#1f1b17] sm:text-base">
             Không thấy ngành của bạn?
           </strong>
-          <a
-            href={routes.lienHe}
-            class="group/cta relative mt-2 inline-flex items-center gap-2 text-sm font-bold text-[#5c4500] transition-colors after:absolute after:bottom-[-5px] after:left-0 after:h-[2px] after:w-full after:origin-left after:scale-x-0 after:bg-current after:transition-transform after:duration-300 after:ease-out hover:text-[#1f1b17] hover:after:scale-x-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#E1A900] focus-visible:after:scale-x-100 motion-reduce:after:transition-none"
-          >
-            <span>Đặt lịch tư vấn riêng</span>
-            <span
-              aria-hidden="true"
-              class="material-symbols-outlined text-lg leading-none"
-            >
-              arrow_forward
-            </span>
+          <a href={routes.lienHe} class:list={[ghostCta, 'mt-2']}>
+            <span class={ghostCtaLabel}>Đặt lịch tư vấn riêng</span>
+            <span aria-hidden="true" class={ghostCtaArrow}>arrow_forward</span>
           </a>
         </div>
       </div>
@@ -70,13 +66,16 @@ const keywordsFor = (item: SolutionLike): string[] =>
           <a
             data-reveal
             href={item.href}
-            class="group relative isolate flex min-h-[300px] flex-col justify-end overflow-hidden rounded-[20px] bg-ink-dark p-5 no-underline sm:p-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-gold"
+            class:list={[
+              'group relative isolate flex min-h-[300px] flex-col justify-end overflow-hidden rounded-[20px] bg-ink-dark p-5 no-underline sm:p-6',
+              focusRingOnDark,
+            ]}
           >
             <SiteImage
               src={item.image}
               alt={`Đồng phục cho ${item.title}`}
               loading="lazy"
-              class="absolute inset-0 -z-20 h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105 motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+              class:list={['absolute inset-0 -z-20 h-full w-full object-cover object-top', cardMediaHover]}
               variant="card"
             />
             <span aria-hidden="true" class="ind-scrim absolute inset-0 -z-10" />
@@ -101,9 +100,9 @@ const keywordsFor = (item: SolutionLike): string[] =>
 
             <span
               aria-hidden="true"
-              class="absolute bottom-4 right-4 grid h-10 w-10 place-items-center rounded-full bg-accent-gold text-[#171717] transition-transform duration-300 group-hover:translate-x-1 motion-reduce:transition-none sm:bottom-[18px] sm:right-[18px]"
+              class="material-symbols-outlined absolute bottom-4 right-4 text-[1.6rem] leading-none text-accent-gold transition-transform duration-300 group-hover:translate-x-1 motion-reduce:transition-none sm:bottom-5 sm:right-5"
             >
-              <span class="material-symbols-outlined text-lg leading-none">arrow_forward</span>
+              arrow_forward
             </span>
           </a>
         ))

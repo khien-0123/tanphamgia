@@ -1,0 +1,134 @@
+---
+interface Props {
+  /** id của lớp phủ — form gọi bằng id này để mở */
+  id: string;
+  title: string;
+  message: string;
+  /** Material Symbols cho vòng tròn trên cùng */
+  icon?: string;
+  /** Số mili-giây tự tắt. 4000ms đủ đọc hai dòng ngắn mà không chắn đường. */
+  duration?: number;
+}
+
+const { id, title, message, icon = 'mark_email_read', duration = 4000 } = Astro.props;
+---
+
+{/*
+  Thông báo nổi rồi tự tắt — KHÔNG phải hộp thoại.
+
+  Đây là lý do nó không có `role="dialog"`, không `aria-modal`, không giam tiêu
+  điểm và không khoá cuộn trang như menu mobile: tất cả những thứ đó dành cho
+  thứ người dùng phải tự đóng. Cái này tự biến mất sau vài giây, mà đẩy tiêu
+  điểm vào một khối sắp tan thì người dùng bàn phím bị hất về đầu trang lúc nó
+  tắt — mất chỗ đang đứng.
+
+  Thay vào đó dùng vùng sống `role="status"` ẩn riêng: trình đọc màn hình đọc
+  lên tại chỗ, tiêu điểm vẫn nằm nguyên trong form.
+
+  Màu phủ, thời lượng chuyển và cách đóng bằng Escape lấy đúng theo menu mobile
+  trong SiteNav — thứ nổi lên màn hình duy nhất site đang có.
+*/}
+<div
+  id={id}
+  class="group/notice invisible pointer-events-none fixed inset-0 z-[70] flex items-center justify-center p-4 [&.is-open]:visible [&.is-open]:pointer-events-auto"
+  data-duration={duration}
+>
+  <div
+    class="absolute inset-0 bg-ink-dark/45 opacity-0 transition-opacity duration-[280ms] ease-out group-[.is-open]/notice:opacity-100 motion-reduce:transition-none"
+    data-notice-close
+  >
+  </div>
+
+  <div
+    class="notice-card relative w-full max-w-[22rem] translate-y-2 scale-[0.96] rounded-[1.25rem] bg-[#fbf8f1] px-6 py-9 text-center opacity-0 shadow-[0_28px_70px_rgba(14,38,64,0.28)] transition-all duration-[320ms] ease-nav-panel group-[.is-open]/notice:translate-y-0 group-[.is-open]/notice:scale-100 group-[.is-open]/notice:opacity-100 motion-reduce:transition-none"
+    aria-hidden="true"
+  >
+    <span
+      class="notice-icon mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-[#ffedb7]"
+    >
+      <span class="material-symbols-outlined text-[2rem] leading-none text-[#5c4500]">{icon}</span>
+    </span>
+
+    <h2 class="mt-5 text-[1.375rem] font-extrabold leading-tight tracking-[-0.02em] text-ink-dark">
+      {title}
+    </h2>
+    <p data-notice-message class="mt-2.5 text-sm leading-relaxed text-[#625a50]">{message}</p>
+  </div>
+
+  {/* Khối nhìn thấy đặt aria-hidden để không bị đọc hai lần; câu thông báo thật
+      cho trình đọc màn hình do script đổ vào đây lúc mở. */}
+  <p class="sr-only" role="status" aria-live="polite" data-notice-live></p>
+</div>
+
+<style>
+  /* Icon nảy vào sau thẻ 120ms — thẻ hiện trước, icon điểm nhấn sau.
+     Viết keyframe ở đây vì Tailwind không đặt được delay riêng cho phần tử con
+     theo trạng thái của cha mà không sinh thêm một tầng biến thể. */
+  .notice-icon {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+
+  :global(.is-open) .notice-icon {
+    animation: notice-icon-in 420ms cubic-bezier(0.34, 1.56, 0.64, 1) 120ms both;
+  }
+
+  @keyframes notice-icon-in {
+    from {
+      opacity: 0;
+      transform: scale(0.7);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .notice-icon {
+      opacity: 1;
+      transform: none;
+    }
+
+    :global(.is-open) .notice-icon {
+      animation: none;
+    }
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-notice-live]').forEach((live) => {
+    const notice = live.parentElement;
+    if (!notice || notice.dataset.initialized) return;
+    notice.dataset.initialized = 'true';
+
+    const duration = Number(notice.dataset.duration) || 4000;
+    const message = notice.querySelector('[data-notice-message]')?.textContent?.trim() ?? '';
+    let timer: ReturnType<typeof setTimeout> | undefined;
+
+    const close = () => {
+      clearTimeout(timer);
+      notice.classList.remove('is-open');
+      live.textContent = '';
+    };
+
+    const open = () => {
+      clearTimeout(timer);
+      notice.classList.add('is-open');
+      /* Đổ chữ vào lúc mở chứ không để sẵn: vùng sống chỉ phát ra khi nội dung
+         ĐỔI. Để chữ sẵn rồi chỉ bật hiện thì trình đọc màn hình không đọc gì. */
+      live.textContent = message;
+      timer = setTimeout(close, duration);
+    };
+
+    notice.addEventListener('tpg:open', open);
+
+    notice.querySelectorAll('[data-notice-close]').forEach((el) => {
+      el.addEventListener('click', close);
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && notice.classList.contains('is-open')) close();
+    });
+  });
+</script>

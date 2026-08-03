@@ -1,0 +1,43 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import ServiceMosaic from '../components/services/ServiceMosaic.astro';
+import { services, servicesPage } from '../data/dich-vu';
+import { routes } from '../lib/routes';
+import { sectionEyebrow } from '../lib/section-eyebrow';
+import { SURFACE_PAPER } from '../lib/section-rhythm';
+---
+
+{/*
+  Trang chỉ có một khối nội dung: khảm dịch vụ. Khối CTA do SiteLayout tự chèn
+  (showCta mặc định true) nên không khai báo lại ở đây.
+  Không có PageHero, mà SiteNav lại fixed top-0 — nên khối đầu phải tự chừa
+  chỗ cho nav bằng pt-32/pt-40, không thì chữ chui xuống dưới thanh menu.
+*/}
+<SiteLayout
+  title={servicesPage.seo.title}
+  description={servicesPage.seo.description}
+  currentPath={routes.dichVu}
+  navOverDark={false}
+>
+  {/* Lề trên = chiều cao nav (~5.5rem) cộng đúng py của mockup (4rem / 6rem),
+      nếu chỉ để py thường thì eyebrow nằm sát gầm thanh menu. */}
+  <section class:list={[SURFACE_PAPER, 'pb-16 pt-[9.5rem] md:pb-24 md:pt-[11.5rem]']}>
+    <div class="mx-auto max-w-container-max-width px-6 md:px-8">
+      {/* Mẫu khách căn giữa cụm tiêu đề, không có eyebrow — bám đúng mẫu.
+          Giữ lại viên eyebrow của hệ thống nhưng đặt giữa cùng cụm. */}
+      <header data-reveal class="flex flex-col items-center text-center">
+        <span class={sectionEyebrow}>{servicesPage.eyebrow}</span>
+        <h1
+          class="mt-[1.15rem] text-balance text-[clamp(1.75rem,2.7vw,3rem)] font-extrabold leading-[1.1] tracking-[-0.03em] text-ink-dark"
+        >
+          {servicesPage.title}
+        </h1>
+        <p class="mt-[1.15rem] max-w-[44rem] text-base leading-[1.7] text-text-muted">
+          {servicesPage.description}
+        </p>
+      </header>
+
+      <ServiceMosaic services={services} />
+    </div>
+  </section>
+</SiteLayout>
