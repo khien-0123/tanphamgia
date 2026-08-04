@@ -2,11 +2,11 @@
 /**
  * Deep-link trang N trong một chuyên mục tin tức.
  */
-import SiteLayout from '../../../../layouts/SiteLayout.astro';
-import PageHero from '../../../../components/PageHero.astro';
-import BlogListingSection from '../../../../components/blog/BlogListingSection.astro';
-import { pageSeo, blogPosts, BLOG_POSTS_PER_PAGE, pageHeroBg } from '../../../../data/site';
-import { blogCategorySlug, routes } from '../../../../lib/routes';
+import SiteLayout from '../../../../../layouts/SiteLayout.astro';
+import PageHero from '../../../../../components/PageHero.astro';
+import BlogListingSection from '../../../../../components/blog/BlogListingSection.astro';
+import { pageSeo, blogPosts, BLOG_POSTS_PER_PAGE, pageHeroBg } from '../../../../../data/site';
+import { blogCategorySlug, routes } from '../../../../../lib/routes';
 
 export function getStaticPaths() {
   const labels = [...new Set(blogPosts.map((p) => p.category).filter(Boolean))];
