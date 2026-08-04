@@ -1,0 +1,27 @@
+---
+/**
+ * Chi tiết case study — nhánh Khách hàng.
+ * URL: /khach-hang/du-an/:slug
+ */
+import CaseStudyDetailPage from '../../../components/solution/CaseStudyDetailPage.astro';
+import { CASE_STUDY_POOL } from '../../../lib/case-study-pool';
+
+export function getStaticPaths() {
+  return CASE_STUDY_POOL.map((item) => ({
+    params: { slug: item.slug },
+    props: {
+      solutionId: item.solutionId,
+      solutionSlug: item.solutionSlug,
+      project: item.project,
+    },
+  }));
+}
+
+const { solutionId, solutionSlug, project } = Astro.props;
+---
+
+<CaseStudyDetailPage
+  solutionId={solutionId}
+  solutionSlug={solutionSlug}
+  project={project}
+/>

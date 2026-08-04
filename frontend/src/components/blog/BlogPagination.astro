@@ -10,14 +10,23 @@ interface Props {
    * Không truyền → dùng blogPageHref (/tin-tuc).
    */
   basePath?: string;
+  /**
+   * Neo cuộn — tránh nhảy lên đầu trang khi đổi trang
+   * (vd. section «Bài viết case study» dưới hero).
+   */
+  hash?: string;
 }
 
-const { currentPage, totalPages, basePath } = Astro.props;
+const { currentPage, totalPages, basePath, hash } = Astro.props;
 const pages = Math.max(1, totalPages);
 
 function hrefFor(page: number): string {
-  if (!basePath) return blogPageHref(page);
-  return page <= 1 ? basePath : `${basePath}/trang/${page}`;
+  const path = !basePath
+    ? blogPageHref(page)
+    : page <= 1
+      ? basePath
+      : `${basePath}/trang/${page}`;
+  return hash ? `${path}#${hash}` : path;
 }
 ---
 
@@ -39,3 +48,25 @@ function hrefFor(page: number): string {
     ))
   }
 </nav>
+
+{
+  hash && (
+    <script define:vars={{ hash }}>
+      // Sau khi đổi trang SSR, giữ tầm nhìn ở section (không kẹt đầu trang / hero)
+      const id = String(hash);
+      const scrollToSection = () => {
+        if (location.hash !== `#${id}`) return;
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.scrollIntoView({ behavior: 'auto', block: 'start' });
+      };
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', scrollToSection);
+      } else {
+        scrollToSection();
+      }
+      window.addEventListener('load', scrollToSection, { once: true });
+      document.addEventListener('astro:page-load', scrollToSection);
+    </script>
+  )
+}

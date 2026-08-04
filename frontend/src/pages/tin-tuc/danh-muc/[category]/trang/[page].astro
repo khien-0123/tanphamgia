@@ -1,0 +1,53 @@
+---
+/**
+ * Deep-link trang N trong một chuyên mục tin tức.
+ */
+import SiteLayout from '../../../../layouts/SiteLayout.astro';
+import PageHero from '../../../../components/PageHero.astro';
+import BlogListingSection from '../../../../components/blog/BlogListingSection.astro';
+import { pageSeo, blogPosts, BLOG_POSTS_PER_PAGE, pageHeroBg } from '../../../../data/site';
+import { blogCategorySlug, routes } from '../../../../lib/routes';
+
+export function getStaticPaths() {
+  const labels = [...new Set(blogPosts.map((p) => p.category).filter(Boolean))];
+  return labels.flatMap((label) => {
+    const matched = blogPosts.filter((p) => p.category === label);
+    const totalPages = Math.max(1, Math.ceil(matched.length / BLOG_POSTS_PER_PAGE));
+    return Array.from({ length: Math.max(0, totalPages - 1) }, (_, i) => ({
+      params: { category: blogCategorySlug(label), page: String(i + 2) },
+      props: { categoryLabel: label },
+    }));
+  });
+}
+
+const { categoryLabel } = Astro.props;
+const pageNum = Number(Astro.params.page);
+const featuredPost = blogPosts[0];
+---
+
+<SiteLayout
+  title={`${categoryLabel} — Trang ${pageNum} | ${pageSeo.tinTuc.title}`}
+  description={pageSeo.tinTuc.description}
+  currentPath={routes.tinTuc}
+>
+  <PageHero
+    title="Tin tức & Kiến thức chuyên ngành"
+    bgImage={pageHeroBg.tinTuc}
+    vAlign="center"
+    description="Chia sẻ kinh nghiệm quản lý đồng phục, lựa chọn chất liệu và xu hướng mới trong ngành."
+    breadcrumb={[
+      { label: 'Trang chủ', href: routes.home },
+      { label: 'Tin tức', href: routes.tinTuc },
+      { label: categoryLabel },
+      { label: `Trang ${pageNum}` },
+    ]}
+  />
+
+  <BlogListingSection
+    posts={blogPosts}
+    featuredPost={featuredPost}
+    category={categoryLabel}
+    currentPage={pageNum}
+    sectionBg="bg-[#fbf8f1]"
+  />
+</SiteLayout>

@@ -60,7 +60,10 @@ const pageIds = new Set(matchedDocs.slice(pageStart, pageStart + ssrPerPage).map
   <div class="mx-auto max-w-container-max-width px-6 md:px-8">
     <DocumentCategoryTiles active={category} />
 
-    <header class="mb-6 mt-10 md:mt-12">
+    <header
+      data-doc-scroll-pin
+      class="mb-6 mt-10 scroll-mt-24 md:mt-12 md:scroll-mt-28"
+    >
       <h2 class="text-[clamp(1.35rem,2.3vw,1.85rem)] font-extrabold leading-[1.1] tracking-[-0.03em] text-[#1f1b17]">
         Thư viện tài liệu
       </h2>

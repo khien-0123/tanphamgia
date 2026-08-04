@@ -10,6 +10,10 @@ export const pageHeroShell =
 export const pageHeroInner =
   'relative z-10 mx-auto flex h-full w-full max-w-container-max-width min-h-0 flex-col justify-end gap-4 overflow-hidden px-6 pb-12 pt-28 md:gap-5 md:px-8 md:pb-16 md:pt-32';
 
+/** Căn giữa dọc khối chữ — trừ chỗ nav sticky qua pt */
+export const pageHeroInnerCenter =
+  'relative z-10 mx-auto flex h-full w-full max-w-container-max-width min-h-0 flex-col justify-center gap-4 overflow-hidden px-6 pb-10 pt-28 md:gap-5 md:px-8 md:pb-12 md:pt-32';
+
 export const pageHeroStats =
   'flex flex-wrap items-baseline gap-x-6 gap-y-2 max-md:gap-x-4 max-md:gap-y-1.5';
 

@@ -137,7 +137,11 @@ function initDocumentLibraryFilter() {
 
       applyView(root, category, page);
       history.pushState({ docCategory: category, docPage: page }, '', docLibraryHref(category, page));
-      root.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      // Chỉ cuộn tới tiêu đề «Thư viện tài liệu» — không lên hết khối danh mục phía trên
+      const pin = root.querySelector<HTMLElement>('[data-doc-scroll-pin]') ?? root;
+      requestAnimationFrame(() => {
+        pin.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
     });
   });
 
