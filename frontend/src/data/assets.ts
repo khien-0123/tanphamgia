@@ -44,6 +44,24 @@ export const siteAssets = {
     oxfordTechnical: '/images/materials/oxford-technical.webp',
     kakiStretch: '/images/materials/kaki-stretch.webp',
   },
+  /** Ảnh dịch vụ — nguồn dongphucvn.vn/dich-vu/ */
+  services: {
+    polo: '/images/services/polo.webp',
+    tshirt: '/images/services/tshirt.webp',
+    soMi: '/images/services/so-mi.webp',
+    quanTay: '/images/services/quan-tay.webp',
+    chanVay: '/images/services/chan-vay.webp',
+    oemLocal: '/images/services/oem-local.webp',
+    oemGlobal: '/images/services/oem-global.webp',
+    oemFashion: '/images/services/oem-fashion.webp',
+    oemPrivate: '/images/services/oem-private.webp',
+    processBulk: '/images/services/process-bulk.webp',
+    processSpec: '/images/services/process-spec.webp',
+    processDelivery: '/images/services/process-delivery.webp',
+    /** Hoạ tiết vector tạm — thay bằng ảnh hiện trường khi có */
+    inAn: '/images/services/in-an.webp',
+    theuViTinh: '/images/services/theu-vi-tinh.webp',
+  },
   blog: {
     chonVaiPolo: '/images/blog/chon-vai-polo-khi-hau-viet-nam.jpg',
     poloFabricSelection: '/images/blog/blog-polo-fabric-selection.webp',
@@ -56,14 +74,19 @@ export const siteAssets = {
   cases: {
     bidv: '/images/cases/bidv.jpg',
     bidvClient: '/images/cases/bidv-client.jpg',
-    bidvGp2: '/images/cases/bidv-gp2.jpg',
     vfm: '/images/logos/VFM (1).png',
-    cocaColaGp2: '/images/cases/coca-cola-gp2.jpg',
+    /** Listing / thẻ — bộ 3 màu trên giá */
+    cocaCola: '/images/cases/coca-cola-portrait.jpg',
+    cocaColaGroup: '/images/cases/coca-cola-group.jpg',
+    cocaColaPortrait: '/images/cases/coca-cola-portrait.jpg',
+    cocaColaDetail1: '/images/cases/coca-cola-detail-1.jpg',
+    cocaColaDetail2: '/images/cases/coca-cola-detail-2.jpg',
     saviscoGp2: '/images/cases/savisco-gp2.webp',
-    bvRangHamMatGp4: '/images/cases/bv-rang-ham-mat-gp4.webp',
-    bvRangHamMat: '/images/cases/bv-rang-ham-mat-sai-gon.webp',
-    cocaCola: '/images/cases/coca-cola-philippines.jpg',
-    kingGroup: '/images/cases/king-group.webp',
+    bvRangHamMat: '/images/cases/bv-rang-ham-mat-sai-gon.jpg',
+    bvRhmDetail1: '/images/cases/bv-rhm-detail-1.jpg',
+    bvRhmDetail2: '/images/cases/bv-rhm-detail-2.jpg',
+    bvRhmDetail3: '/images/cases/bv-rhm-detail-3.jpg',
+    kingGroup: '/images/cases/king-group.jpg',
     datGroup: '/images/cases/dat-group.webp',
     zeroWaste: '/images/cases/zero-waste.webp',
     vivant: '/images/cases/vivant.webp',
@@ -74,6 +97,8 @@ export const siteAssets = {
   },
   about: {
     brandStory: '/images/why-choose/nang-luc-san-xuat.png',
+    /** Chân dung Nhà sáng lập — nguồn dongphucvn.vn/ve-tan-pham-gia/ */
+    leadership: '/images/about/lanh-dao.webp',
     production1: '/images/about/production-1.jpg',
     production2: '/images/about/qc-5-tang.png',
     heThongSanXuat: '/images/about/he-thong-san-xuat.png',
@@ -82,15 +107,6 @@ export const siteAssets = {
     sanPhamDaSanXuat: '/images/about/san-pham-da-san-xuat.png',
     /** Chân dung Nhà sáng lập — ảnh dọc 1778×2171, thẻ tên đè góc dưới trái */
     leaderPortrait: '/images/about/lanh-dao-08.webp',
-  },
-  /**
-   * Hoạ tiết thẻ dịch vụ — KHÔNG phải ảnh chụp. Dựng bằng vector theo đúng
-   * công đoạn (tram bán sắc cho in lưới, mũi chỉ satin cho thêu) vì khách
-   * chưa gửi ảnh hiện trường. Thay bằng ảnh thật khi có.
-   */
-  services: {
-    inAn: '/images/services/in-an.webp',
-    theuViTinh: '/images/services/theu-vi-tinh.webp',
   },
   whyChoose: {
     kinhNghiem: '/images/why-choose/kinh-nghiem.png',

@@ -14,6 +14,7 @@ import {
   projectCardStatsClasses,
   projectCardTitleClasses,
 } from '../../lib/project-card-classes';
+import { sectionEyebrow } from '../../lib/section-eyebrow';
 
 export interface ProjectCardItem {
   name: string;
@@ -27,6 +28,8 @@ interface Props {
   items: ProjectCardItem[];
   title: string;
   description?: string;
+  /** Pill title nhỏ phía trên H2 */
+  eyebrow?: string;
   /** 3 cột (trang giải pháp) hoặc 4 cột (dự án khác) */
   columns?: 3 | 4;
   sectionClass?: string;
@@ -40,6 +43,7 @@ const {
   items,
   title,
   description,
+  eyebrow,
   columns = 4,
   sectionClass = projectCardSectionClasses,
   id,
@@ -57,7 +61,13 @@ const gridClass = columns === 3 ? projectCardGrid3Classes : projectCardGrid4Clas
         {
           headerStyle === 'solution' ? (
             <header class="mb-10 max-w-2xl md:mb-14">
-              <h2 class="text-balance text-[clamp(1.75rem,4.2vw,3.25rem)] font-bold leading-[1.02] text-ink-dark">
+              {eyebrow && <p class={sectionEyebrow}>{eyebrow}</p>}
+              <h2
+                class:list={[
+                  'text-balance text-[clamp(1.75rem,4.2vw,3.25rem)] font-bold leading-[1.02] text-ink-dark',
+                  eyebrow && 'mt-5',
+                ]}
+              >
                 {title}
               </h2>
               {
@@ -70,7 +80,13 @@ const gridClass = columns === 3 ? projectCardGrid3Classes : projectCardGrid4Clas
             </header>
           ) : (
             <header class="mb-8 md:mb-10 max-w-2xl">
-              <h2 class="font-headline-md text-2xl font-bold text-ink-dark md:text-3xl">
+              {eyebrow && <p class={sectionEyebrow}>{eyebrow}</p>}
+              <h2
+                class:list={[
+                  'font-headline-md text-2xl font-bold text-ink-dark md:text-3xl',
+                  eyebrow && 'mt-5',
+                ]}
+              >
                 {title}
               </h2>
               {

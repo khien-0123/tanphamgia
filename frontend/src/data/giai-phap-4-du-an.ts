@@ -1,18 +1,9 @@
 /** Dự án tiêu biểu — Giải pháp 4 (Y tế, Spa & Dịch vụ) */
 
 import { siteAssets } from './assets';
+import type { CaseStudyProject } from '../lib/case-study-types';
 
-export interface DuAnGiaiPhap4 {
-  slug: string;
-  name: string;
-  stats: string;
-  field?: string;
-  image: string;
-  intro: string;
-  challenges: string[];
-  solutions: string[];
-  results: string[];
-}
+export type DuAnGiaiPhap4 = CaseStudyProject;
 
 export const duAnGiaiPhap4: DuAnGiaiPhap4[] = [
   {
@@ -20,7 +11,23 @@ export const duAnGiaiPhap4: DuAnGiaiPhap4[] = [
     name: 'BV Răng Hàm Mặt Sài Gòn',
     stats: '650 sản phẩm | Đồng phục Scrub & áo Blouse',
     field: 'Nha khoa & Y tế',
-    image: siteAssets.cases.bvRangHamMatGp4,
+    image: siteAssets.cases.bvRangHamMat,
+    gallery: {
+      afterChallenges: {
+        src: siteAssets.cases.bvRhmDetail1,
+        caption: 'Đồng phục Scrub & Blouse theo nhận diện hệ thống bệnh viện.',
+      },
+      afterSolutions: [
+        {
+          src: siteAssets.cases.bvRhmDetail2,
+          caption: 'Form và chất liệu phù hợp cường độ làm việc tại phòng khám.',
+        },
+        {
+          src: siteAssets.cases.bvRhmDetail3,
+          caption: 'Chi tiết hoàn thiện — logo và đường may được kiểm soát QC.',
+        },
+      ],
+    },
     intro:
       'Hệ thống bệnh viện cần đồng phục phù hợp cho đội ngũ bác sĩ và phụ tá, đảm bảo sự thoải mái trong cường độ làm việc cao, đồng thời duy trì hình ảnh chuyên nghiệp và đồng nhất giữa các chi nhánh.',
     challenges: [

@@ -2,6 +2,7 @@
 import SiteImage from '../SiteImage.astro';
 import type { BlogPost } from '../../data/site';
 import {
+  pageHeroBreadcrumb,
   pageHeroCopy,
   pageHeroDescription,
   pageHeroEyebrow,
@@ -29,17 +30,20 @@ const publishedLabel = formatBlogDate(post.publishedAt);
 
   <div class={pageHeroInner}>
     <div class={pageHeroCopy}>
-      <nav aria-label="Breadcrumb" class="mb-8 text-sm text-white/60 sm:mb-9">
-        <a class="hover:text-accent-gold transition-colors" href={routes.home}>Trang chủ</a>
-        <span class="mx-2">/</span>
-        <a class="hover:text-accent-gold transition-colors" href={routes.tinTuc}>Tin tức</a>
-        <span class="mx-2">/</span>
-        <span class="text-white line-clamp-1" title={post.title}>{post.title}</span>
+      <nav aria-label="Breadcrumb" class={pageHeroBreadcrumb}>
+        <a class="inline-flex items-center transition-colors hover:text-[#3f2d00]" href={routes.home}>
+          Trang chủ
+        </a>
+        <span class="mx-1.5">/</span>
+        <a class="inline-flex items-center transition-colors hover:text-[#3f2d00]" href={routes.tinTuc}>
+          Tin tức
+        </a>
+        <span class="mx-1.5">/</span>
+        <span class="line-clamp-1" title={post.title}>{post.title}</span>
       </nav>
 
-      <div class="mb-3 flex flex-wrap items-center gap-x-2 gap-y-1">
+      <div class="mb-3 flex flex-wrap items-center gap-3">
         <span class={pageHeroEyebrow}>{post.category}</span>
-        <span class="text-white/35" aria-hidden="true">·</span>
         <time class="text-sm font-medium text-white/65" datetime={post.publishedAt}>
           {publishedLabel}
         </time>

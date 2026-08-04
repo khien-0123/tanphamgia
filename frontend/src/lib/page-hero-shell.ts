@@ -1,6 +1,6 @@
 /** Banner chuẩn — chiều cao cố định, đồng bộ mọi trang con (trừ trang chủ). */
 
-import { sectionEyebrow } from './section-eyebrow';
+import { heroPill } from './section-eyebrow';
 
 export const PAGE_HERO_HEIGHT = 'h-[26rem] max-md:h-[22rem]';
 
@@ -18,11 +18,11 @@ export const pageHeroImage = 'absolute inset-0 h-full w-full object-cover';
 export const pageHeroScrim =
   'absolute inset-0 bg-black/40 after:absolute after:inset-0 after:bg-[linear-gradient(90deg,rgba(6,14,32,0.55),rgba(6,14,32,0.15)_58%,rgba(6,14,32,0.45))] before:absolute before:inset-x-0 before:bottom-0 before:h-44 before:bg-gradient-to-t before:from-[#050d1f]/85 before:to-transparent';
 
-export const pageHeroEyebrow =
-  'font-eyebrow text-xs uppercase tracking-[0.2em] font-medium text-white/65';
+/** Pill nhỏ trên banner — category / field (cùng cỡ breadcrumb) */
+export const pageHeroEyebrow = heroPill;
 
-/** Pill breadcrumb — cùng chuẩn tag vàng toàn site */
-export const pageHeroBreadcrumb = `mb-8 ${sectionEyebrow} sm:mb-9`;
+/** Pill breadcrumb trên banner — nhỏ */
+export const pageHeroBreadcrumb = `mb-6 ${heroPill} sm:mb-7`;
 
 /** Cột chữ chung — cùng mép trái / bề rộng mọi trang con */
 export const pageHeroCopy = 'w-full max-w-[42rem] text-left';

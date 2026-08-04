@@ -7,17 +7,21 @@ import { duAnGiaiPhap4 } from '../data/giai-phap-4-du-an';
 export interface PooledCaseStudy {
   slug: string;
   name: string;
-  stats: string;
   field?: string;
   image: string;
   solutionSlug: string;
 }
 
+const toPooled = (
+  items: { slug: string; name: string; field?: string; image: string }[],
+  solutionSlug: string,
+): PooledCaseStudy[] => items.map(({ slug, name, field, image }) => ({ slug, name, field, image, solutionSlug }));
+
 const CASE_STUDY_POOL: PooledCaseStudy[] = [
-  ...duAnGiaiPhap1.map((item) => ({ ...item, solutionSlug: 'giai-phap-1' })),
-  ...duAnGiaiPhap2.map((item) => ({ ...item, solutionSlug: 'giai-phap-2' })),
-  ...duAnGiaiPhap3.map((item) => ({ ...item, solutionSlug: 'giai-phap-3' })),
-  ...duAnGiaiPhap4.map((item) => ({ ...item, solutionSlug: 'giai-phap-4' })),
+  ...toPooled(duAnGiaiPhap1, 'giai-phap-1'),
+  ...toPooled(duAnGiaiPhap2, 'giai-phap-2'),
+  ...toPooled(duAnGiaiPhap3, 'giai-phap-3'),
+  ...toPooled(duAnGiaiPhap4, 'giai-phap-4'),
 ];
 
 /** Lấy tối đa `limit` dự án khác — ưu tiên cùng nhóm giải pháp, bổ sung từ nhóm khác */

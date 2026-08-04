@@ -1,42 +1,50 @@
 /** Dự án tiêu biểu — Giải pháp 2 (Văn phòng & Tập đoàn) */
 
 import { siteAssets } from './assets';
+import type { CaseStudyProject } from '../lib/case-study-types';
 
-export interface DuAnGiaiPhap2 {
-  slug: string;
-  name: string;
-  stats: string;
-  field?: string;
-  image: string;
-  intro: string;
-  challenges: string[];
-  solutions: string[];
-  results: string[];
-}
+export type DuAnGiaiPhap2 = CaseStudyProject;
 
 export const duAnGiaiPhap2: DuAnGiaiPhap2[] = [
   {
     slug: 'coca-cola-philippines',
     name: 'Coca-Cola Philippines',
-    stats: '500+ sản phẩm | 60 ngày triển khai | Doanh nghiệp FDI',
-    image: siteAssets.cases.cocaColaGp2,
+    stats: '564 áo polo | 60 ngày triển khai | Doanh nghiệp FDI',
+    image: siteAssets.cases.cocaColaPortrait,
+    gallery: {
+      afterChallenges: {
+        src: siteAssets.cases.cocaColaGroup,
+        caption: 'Chi tiết mặt sau và tay áo — logo chai Coca-Cola cùng chữ CCEAP.',
+      },
+      afterSolutions: [
+        {
+          src: siteAssets.cases.cocaColaDetail1,
+          caption: 'Thiết kế đồng bộ trên bộ màu đỏ – trắng – xám theo nhận diện thương hiệu.',
+        },
+        {
+          src: siteAssets.cases.cocaColaDetail2,
+          caption: 'Chất liệu premium dri-fit — thoáng mát, co giãn, bền màu.',
+        },
+      ],
+    },
     intro:
-      'Coca-Cola Philippines yêu cầu giải pháp đồng phục đảm bảo tính đồng nhất với hệ thống nhận diện thương hiệu toàn cầu, đồng thời đáp ứng các tiêu chuẩn chất lượng trong quá trình triển khai và sản xuất tại Việt Nam.',
+      'Coca-Cola Philippines là một trong những thị trường trọng điểm của Coca-Cola tại Đông Nam Á. Tân Phạm Gia được lựa chọn sản xuất áo polo đồng phục, đáp ứng màu sắc thương hiệu – form hiện đại – chất lượng đạt chuẩn xuất khẩu.',
     challenges: [
-      'Đảm bảo màu sắc, vị trí logo và quy cách thành phẩm theo đúng tiêu chuẩn thương hiệu.',
-      'Kiểm soát chất lượng khi các bên làm việc từ xa và không trực tiếp theo dõi quá trình sản xuất.',
-      'Đảm bảo tiến độ sản xuất và giao hàng cho dự án quốc tế.',
+      'Thiết kế & form dáng: áo polo form hiện đại, gọn gàng, phù hợp nhiều vóc dáng và môi trường làm việc năng động.',
+      'Màu sắc & nhận diện: màu đỏ Coca-Cola phải đồng nhất giữa các sản phẩm, đúng bộ nhận diện thương hiệu.',
+      'Logo & hoàn thiện: logo thêu sắc nét, 4 vị trí, đảm bảo độ bền và thẩm mỹ.',
+      'Tiêu chuẩn sản xuất: đáp ứng yêu cầu kỹ thuật cho đơn hàng thị trường quốc tế.',
     ],
     solutions: [
-      'Triển khai 564 áo polo cho đội ngũ nhân sự văn phòng và vận hành.',
-      'Chuẩn hóa toàn bộ thông số kỹ thuật theo bộ nhận diện thương hiệu của doanh nghiệp.',
-      'Thực hiện quy trình duyệt mẫu nhiều bước trước khi sản xuất hàng loạt.',
-      'Kiểm soát chất lượng xuyên suốt từ nguyên phụ liệu đến thành phẩm trước khi xuất hàng.',
+      'Phát triển form dáng & may mẫu: áp dụng rập 3D và may trên mannequin, điều chỉnh form polo hiện đại.',
+      'Lựa chọn chất liệu & kiểm soát màu: polo cao cấp, thoáng mát, giữ form; kiểm soát độ ổn định màu giữa các lô.',
+      'Thêu logo: kỹ thuật phù hợp, đúng tỷ lệ, kiểm tra vị trí – độ bám – hoàn thiện trên từng sản phẩm.',
+      'QC đa tầng: kiểm tra sau may và lần cuối sau thêu logo, trước khi đóng gói và bàn giao.',
     ],
     results: [
-      'Đảm bảo tính đồng nhất giữa mẫu duyệt và thành phẩm thực tế.',
-      'Đáp ứng yêu cầu chất lượng của doanh nghiệp FDI.',
-      'Hoàn thành dự án đúng tiến độ và tiêu chuẩn đã thống nhất.',
+      'Áo polo hoàn thiện đạt yêu cầu cao về form dáng, màu sắc và chất lượng đường may.',
+      'Logo và chi tiết nhận diện thể hiện rõ ràng, đúng chuẩn Coca-Cola.',
+      'Sản phẩm đáp ứng tiêu chuẩn kỹ thuật cho đơn hàng phục vụ thị trường quốc tế.',
     ],
   },
   {

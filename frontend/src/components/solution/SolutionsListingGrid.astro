@@ -3,6 +3,7 @@ import SiteImage from '../SiteImage.astro';
 import { solutions } from '../../data/site';
 import { listingKeywords } from '../../data/giai-phap-listing';
 import { RHYTHM_WHITE, sectionPy } from '../../lib/section-rhythm';
+import { sectionEyebrow } from '../../lib/section-eyebrow';
 import { routes } from '../../lib/routes';
 import { sectionEyebrow } from '../../lib/section-eyebrow';
 import {
@@ -37,7 +38,9 @@ const keywordsFor = (item: SolutionLike): string[] =>
         data-reveal
         class="flex flex-col md:col-span-2 lg:col-span-1 lg:row-span-2 lg:pr-3"
       >
-        <span class:list={[sectionEyebrow, 'self-start']}>Tuyển tập · 04 phân khúc</span>
+        <span class={sectionEyebrow}>
+          Tuyển tập · 04 phân khúc
+        </span>
         <h2
           class="font-headline-md mt-6 text-[clamp(1.75rem,2.7vw,3rem)] font-extrabold leading-[1.1] tracking-[-0.03em] text-balance text-[#1f1b17]"
         >

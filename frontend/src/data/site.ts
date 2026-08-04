@@ -5,6 +5,7 @@ import {
   blogPostHref,
   caseStudyHref,
   routes,
+  serviceHref,
   solutionHref,
 } from '../lib/routes';
 import { siteAssets } from './assets';
@@ -130,9 +131,11 @@ export const siteFooter = {
     },
   ],
   services: [
-    { label: 'Giải pháp đồng phục doanh nghiệp', href: routes.giaiPhap },
-    { label: 'Giải pháp OEM & ODM', href: solutionHref('giai-phap-1') },
-    { label: 'Cung cấp nguồn vải', href: solutionHref('giai-phap-1') },
+    { label: 'Tư vấn & Thiết kế theo brand', href: serviceHref('tu-van-thiet-ke') },
+    { label: 'Xưởng may & Gia công OEM/ODM', href: serviceHref('xuong-may-oem-odm') },
+    { label: 'Fabric Collection — Chất liệu TPG', href: serviceHref('fabric-collection') },
+    { label: 'In ấn', href: serviceHref('in-an') },
+    { label: 'Thêu vi tính', href: serviceHref('theu-vi-tinh') },
   ],
   ministryCert: {
     href: siteConfig.ministryCertUrl,
@@ -585,7 +588,6 @@ export interface ClientCaseStudy {
   tags: string;
   logo?: string;
   logoMark?: string;
-  logoWordmark?: string;
   image: string;
   alt: string;
   href?: string;

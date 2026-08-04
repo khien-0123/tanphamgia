@@ -1,21 +1,14 @@
 ---
+/**
+ * Trang chi tiết case study — layout kiểu bài blog.
+ */
 import SiteLayout from '../../layouts/SiteLayout.astro';
-import PostEditorialLayout from '../blog/PostEditorialLayout.astro';
-import { getCaseBody } from '../../data/bai-viet';
+import SiteImage from '../SiteImage.astro';
 import { getOtherCaseStudies } from '../../lib/case-study-pool';
-import { caseStudyHref, routes, solutionAnchorHref, solutionHref } from '../../lib/routes';
-
-export interface CaseStudyProject {
-  slug: string;
-  name: string;
-  stats: string;
-  field?: string;
-  image: string;
-  intro: string;
-  challenges: string[];
-  solutions: string[];
-  results: string[];
-}
+import type { CaseStudyProject } from '../../lib/case-study-types';
+import { parseCaseStudyStats } from '../../lib/parse-case-study-stats';
+import { caseStudyHref, routes, solutionHref } from '../../lib/routes';
+import { heroPill, sectionEyebrow } from '../../lib/section-eyebrow';
 
 interface Props {
   solutionId: 1 | 2 | 3 | 4;
@@ -25,17 +18,23 @@ interface Props {
 
 const { solutionId, solutionSlug, project } = Astro.props;
 
-/*
-  Case study dùng CHUNG layout với bài blog (PostEditorialLayout) nhưng GIỮ
-  đường dẫn riêng /giai-phap/<nhóm>/du-an/<dự án>. Đưa case study vào /tin-tuc
-  vừa sai phân cấp nội dung, vừa tạo hai URL cùng một nội dung.
-*/
-const blocks = getCaseBody(solutionSlug, project.slug);
+const midFigure = project.gallery?.afterChallenges ?? {
+  src: project.image,
+  caption: `Hình ảnh triển khai dự án ${project.name}.`,
+};
+const pairFigures = project.gallery?.afterSolutions;
+const resultFigure = project.gallery?.afterResults;
 
+const parsedStats = parseCaseStudyStats(project.stats);
+const metaParts = project.stats
+  .split('|')
+  .map((part) => part.trim())
+  .filter(Boolean);
 
-const pool = getOtherCaseStudies(solutionSlug, project.slug, 6);
-
-const related = pool.slice(0, 3).map((item) => ({
+const related = getOtherCaseStudies(solutionSlug, project.slug, 3).map((item) => ({
+  name: item.name,
+  tag: item.field ?? `Giải pháp ${item.solutionSlug.replace('giai-phap-', '')}`,
+  image: item.image,
   href: caseStudyHref(item.solutionSlug, item.slug),
   title: item.name,
   image: item.image,
@@ -51,12 +50,25 @@ const sidebarLinks = pool.map((item) => ({
   title: item.name,
 }));
 
+const toc = [
+  { id: 'yeu-cau', label: `1. Yêu cầu từ phía ${project.name}` },
+  { id: 'quy-trinh', label: '2. Giải pháp và quy trình thực hiện của Tân Phạm Gia' },
+  { id: 'ket-qua', label: `3. Kết quả dự án ${project.name}` },
+  { id: 'doi-tac', label: '4. Tân Phạm Gia – Đối tác sản xuất đồng phục' },
+];
+
 const seoSuffix: Record<Props['solutionId'], string> = {
   1: 'đồng phục doanh nghiệp sản xuất & FDI',
   2: 'đồng phục văn phòng & tập đoàn',
   3: 'đồng phục FMCG & chuỗi phân phối',
   4: 'đồng phục y tế, spa & dịch vụ',
 };
+
+const solutionBackHref = solutionHref(solutionSlug);
+const pullQuote = project.results[0] ?? project.intro;
+const fieldLabel = project.field
+  ? `Case study · ${project.field}`
+  : `Case study · Giải pháp ${String(solutionId).padStart(2, '0')}`;
 ---
 
 <SiteLayout
@@ -64,27 +76,523 @@ const seoSuffix: Record<Props['solutionId'], string> = {
   description={`Case study ${project.name} — ${seoSuffix[solutionId]}.`}
   currentPath={routes.giaiPhap}
   navOverDark={false}
+  showCta={false}
 >
-  <PostEditorialLayout
-    title={project.name}
-    excerpt={project.intro}
-    category="Case study"
-    image={project.image}
-    alt={`Đồng phục ${project.name} do Tân Phạm Gia sản xuất`}
-    blocks={blocks}
-    clientName={project.name}
-    clientRole={project.field}
-    breadcrumbLabel={`Giải pháp ${solutionId}`}
-    breadcrumbHref={solutionHref(solutionSlug)}
-    backLabel={`Quay lại Giải pháp ${solutionId}`}
-    backHref={solutionAnchorHref(solutionSlug, 'du-an')}
-    ctaLabel="Nhận tư vấn cho dự án tương tự"
-    ctaHref={routes.lienHe}
-    relatedTitle="Dự án khác"
-    relatedAllLabel="Xem tất cả dự án"
-    relatedAllHref={routes.khachHang}
-    related={related}
-    sidebarLinksTitle="Dự án liên quan"
-    sidebarLinks={sidebarLinks}
-  />
+  <article class="bg-white text-[#1c1915]">
+    <header class="mx-auto max-w-[52rem] px-6 pb-8 pt-28 md:px-8 md:pb-10 md:pt-32">
+      <p class={heroPill}>{fieldLabel}</p>
+
+      <h1 class="mt-4 text-[clamp(1.85rem,4.2vw,2.65rem)] font-extrabold leading-[1.15] tracking-[-0.035em] text-[#0d1b3a]">
+        {project.name}
+      </h1>
+
+      <p class="mt-5 text-lg leading-relaxed text-[#5c564c] md:text-[1.2rem] md:leading-relaxed">
+        {project.intro}
+      </p>
+
+      {
+        metaParts.length > 0 && (
+          <div class="mt-7 flex flex-wrap items-center gap-x-4 gap-y-2 border-y border-[#ebe4d6] py-4 text-[0.8125rem] text-[#6f675c]">
+            {metaParts.map((part, index) => (
+              <>
+                {index > 0 && (
+                  <span class="text-[#d4cbba]" aria-hidden="true">
+                    ·
+                  </span>
+                )}
+                <span>{part}</span>
+              </>
+            ))}
+          </div>
+        )
+      }
+    </header>
+
+    <figure class="mx-auto max-w-[58rem] px-6 md:px-8">
+      <div class="overflow-hidden bg-[#ebe4d6]">
+        <SiteImage
+          src={project.image}
+          alt={`Dự án đồng phục ${project.name}`}
+          class="aspect-[16/10] w-full object-cover object-center"
+          loading="eager"
+          decoding="async"
+          variant="hero"
+        />
+      </div>
+      <figcaption class="mt-3 text-[0.8125rem] leading-snug text-[#8a8278]">
+        Dự án đồng phục {project.name} do Tân Phạm Gia triển khai.
+      </figcaption>
+    </figure>
+
+    <div class="mx-auto max-w-[68rem] px-6 py-12 md:px-8 md:py-14">
+      <nav class="cs-toc-mobile mb-8 lg:hidden" aria-label="Mục lục">
+        <p class="mb-3 text-[0.65rem] font-extrabold uppercase tracking-[0.14em] text-[#8a8278]">Mục lục</p>
+        <ul class="m-0 flex list-none gap-2 overflow-x-auto pb-1">
+          {
+            toc.map((item) => (
+              <li class="shrink-0">
+                <a
+                  href={`#${item.id}`}
+                  data-cs-toc-link
+                  class="cs-toc-chip inline-flex whitespace-nowrap border border-[#ebe4d6] px-3 py-1.5 text-[0.8125rem] font-semibold text-[#4a453c] no-underline transition-colors hover:border-[#ffc72c] hover:text-[#0d1b3a]"
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+
+      <div class="grid gap-10 lg:grid-cols-[15rem_minmax(0,1fr)] lg:gap-12 xl:grid-cols-[16rem_minmax(0,1fr)] xl:gap-14">
+        <aside class="cs-toc-aside hidden lg:block" aria-label="Mục lục">
+          <div class="sticky top-28">
+            <p class="text-[0.65rem] font-extrabold uppercase tracking-[0.14em] text-[#8a8278]">Mục lục</p>
+            <nav class="mt-4 border-l border-[#ebe4d6]">
+              <ul class="m-0 list-none space-y-0 p-0">
+                {
+                  toc.map((item) => (
+                    <li>
+                      <a href={`#${item.id}`} data-cs-toc-link class="cs-toc-link">
+                        {item.label}
+                      </a>
+                    </li>
+                  ))
+                }
+              </ul>
+            </nav>
+          </div>
+        </aside>
+
+        <div class="cs-blog min-w-0">
+          <p class="cs-blog-lead">
+            <strong>{project.name}</strong> — dự án đồng phục thuộc nhóm giải pháp {String(solutionId).padStart(2, '0')}
+            của Tân Phạm Gia, triển khai theo quy trình tư vấn – thiết kế – sản xuất – bàn giao.
+          </p>
+
+          <p>{project.intro}</p>
+
+          {
+            pullQuote && (
+              <blockquote>
+                <p>{pullQuote}</p>
+              </blockquote>
+            )
+          }
+
+          {
+            parsedStats.length > 0 && (
+              <aside class="cs-blog-stats" aria-label="Chỉ số dự án">
+                {parsedStats.map((stat) => (
+                  <div>
+                    <p class="cs-blog-stat-v">{stat.value}</p>
+                    {stat.label && <p class="cs-blog-stat-l">{stat.label}</p>}
+                  </div>
+                ))}
+              </aside>
+            )
+          }
+
+          <h2 id="yeu-cau">1. Yêu cầu từ phía {project.name}</h2>
+          <p>
+            Doanh nghiệp đặt ra các yêu cầu rõ ràng ngay từ đầu dự án. Mỗi tiêu chí gắn với hình ảnh nhận diện và trải
+            nghiệm sử dụng thực tế:
+          </p>
+          <ul class="cs-blog-reqs">
+            {
+              project.challenges.map((item) => (
+                <li>{item}</li>
+              ))
+            }
+          </ul>
+
+          <figure class="cs-blog-figure">
+            <div class="overflow-hidden bg-[#ebe4d6]">
+              <SiteImage
+                src={midFigure.src}
+                alt={midFigure.caption}
+                class="aspect-[16/10] w-full object-cover"
+                loading="lazy"
+                decoding="async"
+                variant="card"
+              />
+            </div>
+            <figcaption>{midFigure.caption}</figcaption>
+          </figure>
+
+          <h2 id="quy-trinh">2. Giải pháp và quy trình thực hiện của Tân Phạm Gia</h2>
+          <p>
+            Ngay sau khi tiếp nhận yêu cầu, Tân Phạm Gia triển khai theo quy trình được kiểm soát ở từng công đoạn —
+            nhằm đảm bảo mẫu duyệt và thành phẩm hàng loạt đồng nhất về form, màu và chi tiết nhận diện.
+          </p>
+
+          {
+            project.solutions.map((step, i) => (
+              <>
+                <h3 id={`buoc-${i + 1}`}>
+                  {i + 1}. Giải pháp {String(i + 1).padStart(2, '0')}
+                </h3>
+                <p>{step}</p>
+              </>
+            ))
+          }
+
+          {
+            pairFigures && (
+              <div class="cs-blog-figure-pair">
+                {pairFigures.map((fig) => (
+                  <figure class="cs-blog-figure">
+                    <div class="overflow-hidden bg-[#ebe4d6]">
+                      <SiteImage
+                        src={fig.src}
+                        alt={fig.caption}
+                        class="aspect-[4/5] w-full object-cover"
+                        loading="lazy"
+                        decoding="async"
+                        variant="card"
+                      />
+                    </div>
+                    <figcaption>{fig.caption}</figcaption>
+                  </figure>
+                ))}
+              </div>
+            )
+          }
+
+          <h2 id="ket-qua">3. Kết quả dự án {project.name}</h2>
+          <p>Sau khi hoàn tất sản xuất và bàn giao, dự án đạt các kết quả chính:</p>
+          <ul>
+            {
+              project.results.map((item) => (
+                <li>{item}</li>
+              ))
+            }
+          </ul>
+
+          {
+            resultFigure && (
+              <figure class="cs-blog-figure">
+                <div class="overflow-hidden bg-[#ebe4d6]">
+                  <SiteImage
+                    src={resultFigure.src}
+                    alt={resultFigure.caption}
+                    class="aspect-[16/10] w-full object-cover"
+                    loading="lazy"
+                    decoding="async"
+                    variant="card"
+                  />
+                </div>
+                <figcaption>{resultFigure.caption}</figcaption>
+              </figure>
+            )
+          }
+
+          <blockquote>
+            <p>
+              Chuẩn hóa hình ảnh thương hiệu thông qua đồng phục — dễ tái đặt, bổ sung nhân sự và giữ đồng nhất qua nhiều
+              đợt triển khai.
+            </p>
+          </blockquote>
+
+          <h2 id="doi-tac">4. Tân Phạm Gia – Đối tác sản xuất đồng phục cho doanh nghiệp trong và ngoài nước</h2>
+          <p>
+            Với hơn 23 năm kinh nghiệm trong ngành may mặc, Tân Phạm Gia không chỉ tập trung vào sản xuất, mà còn đồng hành
+            cùng doanh nghiệp trong việc <strong>chuẩn hóa hình ảnh thương hiệu thông qua từng bộ đồng phục</strong>.
+          </p>
+          <p>
+            Từ tư vấn form – chất liệu, duyệt mẫu nhiều bước đến kiểm soát màu và hoàn thiện logo, đội ngũ Tân Phạm Gia
+            xây dựng quy trình rõ ràng để doanh nghiệp dễ tái đặt hàng và giữ đồng nhất nhận diện.
+          </p>
+          <p>
+            <strong>
+              Doanh nghiệp của bạn đang tìm đối tác sản xuất đồng phục chuyên nghiệp?
+            </strong>
+          </p>
+          <p>
+            <strong>Tân Phạm Gia sẵn sàng đồng hành từ khâu thiết kế đến sản xuất và hoàn thiện.</strong>
+          </p>
+
+          <div class="cs-blog-cta">
+            <p class="cs-blog-cta-title">Liên hệ tư vấn dự án đồng phục</p>
+            <p class="cs-blog-cta-body">
+              Trao đổi brief kỹ thuật, mẫu và tiến độ với đội ngũ Tân Phạm Gia — từ thiết kế đến sản xuất và bàn giao.
+            </p>
+            <a href={routes.lienHe} class="cs-blog-cta-link">
+              Liên hệ ngay
+              <span class="material-symbols-outlined text-base leading-none" aria-hidden="true">arrow_forward</span>
+            </a>
+          </div>
+
+          <p class="cs-blog-back">
+            <a href={solutionBackHref}>← Quay lại Giải pháp {String(solutionId).padStart(2, '0')}</a>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    {
+      related.length > 0 && (
+        <footer class="border-t border-[#ebe4d6] bg-[#f7f4ee] py-12 md:py-14">
+          <div class="mx-auto max-w-[68rem] px-6 md:px-8">
+            <p class={sectionEyebrow}>Đọc tiếp</p>
+            <h2 class="mt-4 text-xl font-extrabold tracking-[-0.03em] text-[#0d1b3a] md:text-2xl">
+              Dự án liên quan
+            </h2>
+
+            <div class="mt-8 grid gap-8 sm:grid-cols-3 sm:gap-6">
+              {related.map((p) => (
+                <a href={p.href} class="group block no-underline text-inherit">
+                  <figure class="m-0 overflow-hidden bg-[#ebe4d6]">
+                    <SiteImage
+                      src={p.image}
+                      alt={p.name}
+                      class="aspect-[3/2] w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                      loading="lazy"
+                      decoding="async"
+                      variant="card"
+                    />
+                  </figure>
+                  <p class="mt-3 text-[0.65rem] font-extrabold uppercase tracking-[0.12em] text-[#a67c00]">{p.tag}</p>
+                  <h3 class="mt-1.5 text-[0.9375rem] font-bold leading-snug text-[#0d1b3a] transition-colors group-hover:text-[#8a6700]">
+                    {p.name}
+                  </h3>
+                </a>
+              ))}
+            </div>
+          </div>
+        </footer>
+      )
+    }
+  </article>
 </SiteLayout>
+
+<script src="../../scripts/case-study-toc-spy.ts"></script>
+
+<style>
+  .cs-toc-link {
+    display: block;
+    border-left: 2px solid transparent;
+    margin-left: -1px;
+    padding: 0.55rem 0 0.55rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    line-height: 1.35;
+    color: #6f675c;
+    text-decoration: none;
+    transition:
+      color 0.15s ease,
+      border-color 0.15s ease;
+  }
+
+  .cs-toc-link:hover {
+    color: #0d1b3a;
+  }
+
+  .cs-toc-link.is-active {
+    color: #0d1b3a;
+    border-left-color: #ffc72c;
+  }
+
+  .cs-toc-chip.is-active {
+    border-color: #ffc72c;
+    color: #0d1b3a;
+  }
+
+  .cs-blog {
+    font-size: 1.0625rem;
+    line-height: 1.8;
+    color: #3d3830;
+  }
+
+  .cs-blog-lead {
+    margin: 0 0 1.75rem;
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: #2a251f;
+  }
+
+  .cs-blog-lead strong {
+    font-weight: 700;
+    color: #0d1b3a;
+  }
+
+  .cs-blog-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem 1.25rem;
+    margin: 0 0 2.25rem;
+    padding: 1.25rem 0;
+    border-top: 1px solid #ebe4d6;
+    border-bottom: 1px solid #ebe4d6;
+  }
+
+  @media (min-width: 480px) {
+    .cs-blog-stats {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .cs-blog-stat-v {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    color: #0d1b3a;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .cs-blog-stat-l {
+    margin: 0.35rem 0 0;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #8a8278;
+  }
+
+  .cs-blog :global(h2) {
+    margin: 2.5rem 0 0.85rem;
+    scroll-margin-top: 5.5rem;
+    font-size: clamp(1.3rem, 2.4vw, 1.55rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.25;
+    color: #0d1b3a;
+  }
+
+  .cs-blog :global(h3) {
+    margin: 1.75rem 0 0.5rem;
+    scroll-margin-top: 5.5rem;
+    font-size: 1.1rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: #0d1b3a;
+  }
+
+  .cs-blog :global(p) {
+    margin: 0 0 1.15rem;
+  }
+
+  .cs-blog :global(ul) {
+    margin: 0 0 1.5rem;
+    padding: 0;
+    list-style: none;
+  }
+
+  .cs-blog :global(ul li) {
+    position: relative;
+    padding: 0.7rem 0 0.7rem 1.1rem;
+    border-bottom: 1px solid #f0ebe0;
+    line-height: 1.7;
+  }
+
+  .cs-blog :global(ul li::before) {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 1.15rem;
+    width: 0.35rem;
+    height: 0.35rem;
+    border-radius: 999px;
+    background: #ffc72c;
+  }
+
+  .cs-blog-reqs li strong {
+    color: #0d1b3a;
+  }
+
+  .cs-blog :global(blockquote) {
+    margin: 2rem 0;
+    padding: 0 0 0 1.15rem;
+    border-left: 3px solid #ffc72c;
+  }
+
+  .cs-blog :global(blockquote p) {
+    margin: 0;
+    font-size: 1.15rem;
+    font-weight: 650;
+    line-height: 1.55;
+    letter-spacing: -0.02em;
+    color: #0d1b3a;
+  }
+
+  .cs-blog-figure {
+    margin: 2rem 0;
+  }
+
+  .cs-blog-figure figcaption {
+    margin-top: 0.65rem;
+    font-size: 0.8125rem;
+    line-height: 1.45;
+    color: #8a8278;
+  }
+
+  .cs-blog-figure-pair {
+    display: grid;
+    gap: 1.25rem;
+    margin: 2rem 0;
+  }
+
+  @media (min-width: 640px) {
+    .cs-blog-figure-pair {
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      align-items: start;
+    }
+
+    .cs-blog-figure-pair .cs-blog-figure {
+      margin: 0;
+    }
+  }
+
+  .cs-blog-cta {
+    margin-top: 2.75rem;
+    padding-top: 1.75rem;
+    border-top: 1px solid #ebe4d6;
+  }
+
+  .cs-blog-cta-title {
+    margin: 0 0 0.4rem !important;
+    font-size: 1.15rem !important;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: #0d1b3a !important;
+  }
+
+  .cs-blog-cta-body {
+    margin: 0 0 1.1rem !important;
+    color: #5c564c !important;
+  }
+
+  .cs-blog-cta-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.9375rem;
+    font-weight: 800;
+    color: #0d1b3a;
+    text-decoration: none;
+    border-bottom: 2px solid #ffc72c;
+    padding-bottom: 0.1rem;
+  }
+
+  .cs-blog-cta-link:hover {
+    color: #8a6700;
+  }
+
+  .cs-blog-back {
+    margin-top: 2.5rem !important;
+  }
+
+  .cs-blog-back a {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: #6f675c;
+    text-decoration: none;
+  }
+
+  .cs-blog-back a:hover {
+    color: #0d1b3a;
+  }
+</style>

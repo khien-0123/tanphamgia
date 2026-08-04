@@ -1,4 +1,4 @@
-/** Slider testimonial trang Giới thiệu — tự chạy, dừng khi hover hoặc bấm */
+/** Slider testimonial — tự chạy, tạm dừng khi hover / tương tác tay */
 function initTestimonialsSlider(root: HTMLElement) {
   const track = root.querySelector<HTMLElement>('[data-slider-track]');
   if (!track) return;
@@ -10,18 +10,17 @@ function initTestimonialsSlider(root: HTMLElement) {
   if (!Number.isInteger(count) || count < 2) return;
 
   const useInstantScroll = window.matchMedia('(pointer: coarse)').matches;
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   let isJumping = false;
   let isAutoScrolling = false;
   let isUserInteracting = false;
   let isHovered = false;
   let isInView = false;
-  let isPageScrolling = false;
   let scrollTimer: ReturnType<typeof setTimeout> | undefined;
   let autoTimer: ReturnType<typeof setInterval> | undefined;
   let firstTimer: ReturnType<typeof setTimeout> | undefined;
   let resumeTimer: ReturnType<typeof setTimeout> | undefined;
-  let pageScrollTimer: ReturnType<typeof setTimeout> | undefined;
   let autoScrollFallback: ReturnType<typeof setTimeout> | undefined;
 
   const getStep = () => {
@@ -94,8 +93,8 @@ function initTestimonialsSlider(root: HTMLElement) {
   };
 
   const canAutoPlay = () =>
+    !reduceMotion &&
     isInView &&
-    !isPageScrolling &&
     !isUserInteracting &&
     !isHovered &&
     !document.hidden &&
@@ -138,8 +137,8 @@ function initTestimonialsSlider(root: HTMLElement) {
     firstTimer = setTimeout(() => {
       if (!canAutoPlay()) return;
       advanceNext();
-      autoTimer = setInterval(advanceNext, 5000);
-    }, 1500);
+      autoTimer = setInterval(advanceNext, 4000);
+    }, 1200);
   };
 
   const pauseInteraction = () => {
@@ -149,17 +148,7 @@ function initTestimonialsSlider(root: HTMLElement) {
     resumeTimer = setTimeout(() => {
       isUserInteracting = false;
       startAuto();
-    }, 6000);
-  };
-
-  const onPageScroll = () => {
-    isPageScrolling = true;
-    stopAuto();
-    clearTimeout(pageScrollTimer);
-    pageScrollTimer = setTimeout(() => {
-      isPageScrolling = false;
-      startAuto();
-    }, 200);
+    }, 5000);
   };
 
   alignToMiddleSet();
@@ -204,7 +193,6 @@ function initTestimonialsSlider(root: HTMLElement) {
 
   window.addEventListener('resize', alignToMiddleSet);
   window.addEventListener('pageshow', alignToMiddleSet);
-  window.addEventListener('scroll', onPageScroll, { passive: true });
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) stopAuto();
     else startAuto();
@@ -212,11 +200,11 @@ function initTestimonialsSlider(root: HTMLElement) {
 
   const observer = new IntersectionObserver(
     ([entry]) => {
-      isInView = entry.isIntersecting;
+      isInView = Boolean(entry?.isIntersecting);
       if (isInView) startAuto();
       else stopAuto();
     },
-    { threshold: 0.2 },
+    { threshold: 0.15 },
   );
 
   observer.observe(root);

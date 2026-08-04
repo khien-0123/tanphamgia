@@ -21,16 +21,11 @@ const { items, currentPage, totalPages, featuredPost, sectionBg = RHYTHM_WHITE, 
 
 const categorySource = allPosts ?? [...(featuredPost ? [featuredPost] : []), ...items];
 const categories = [...new Set(categorySource.map((p) => p.category).filter(Boolean))];
-
-const categoryCounts: Record<string, number> = { all: categorySource.length };
-for (const cat of categories) {
-  categoryCounts[cat] = categorySource.filter((p) => p.category === cat).length;
-}
 ---
 
 <section class:list={[sectionPy, sectionBg]} data-blog-filter>
   <div class="max-w-container-max-width mx-auto px-6 md:px-8">
-    {categories.length > 1 && <BlogCategoryFilter categories={categories} counts={categoryCounts} />}
+    {categories.length > 1 && <BlogCategoryFilter categories={categories} />}
 
     {
       featuredPost && (
