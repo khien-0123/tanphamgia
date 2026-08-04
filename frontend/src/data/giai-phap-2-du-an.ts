@@ -48,6 +48,47 @@ export const duAnGiaiPhap2: DuAnGiaiPhap2[] = [
     ],
   },
   {
+    slug: 'bidv',
+    name: 'BIDV',
+    stats: '800 sản phẩm | 45 ngày triển khai | Ngân hàng & Tài chính',
+    field: 'Ngân hàng',
+    image: siteAssets.cases.bidvClient,
+    gallery: {
+      afterChallenges: {
+        src: siteAssets.cases.bidv,
+        caption: 'Đồng phục giao dịch — đồng nhất màu sắc và form trên toàn hệ thống.',
+      },
+      afterSolutions: [
+        {
+          src: siteAssets.cases.bidvClient,
+          caption: 'Chuẩn hóa logo và chi tiết nhận diện theo tiêu chí nghiệm thu.',
+        },
+        {
+          src: siteAssets.cases.bidv,
+          caption: 'Thành phẩm bàn giao đúng tiến độ — dễ tái đặt và bổ sung nhân sự.',
+        },
+      ],
+    },
+    intro:
+      'Chuẩn hóa hình ảnh đội ngũ giao dịch — đồng nhất màu sắc, form dáng và hoàn thiện theo tiêu chí nghiệm thu trên toàn hệ thống.',
+    challenges: [
+      'Triển khai đồng phục giao dịch quy mô lớn trong thời gian ngắn, đạt tiêu chí nghiệm thu nghiêm ngặt.',
+      'Đảm bảo màu sắc và form dáng đồng nhất giữa các chi nhánh và đợt sản xuất.',
+      'Kiểm soát hoàn thiện logo và chất lượng đường may ở quy mô hàng trăm sản phẩm.',
+    ],
+    solutions: [
+      'Chuẩn hóa toàn bộ thông số kỹ thuật theo bộ nhận diện thương hiệu BIDV.',
+      'Kiểm soát màu sắc từng lô sản xuất trước khi may hàng loạt.',
+      'Duyệt mẫu nhiều bước trước khi khóa sản xuất.',
+      'Bàn giao đúng tiến độ theo kế hoạch triển khai 45 ngày.',
+    ],
+    results: [
+      '800 sản phẩm hoàn thiện đạt tiêu chí nghiệm thu của ngân hàng.',
+      'Hình ảnh đội ngũ giao dịch đồng nhất trên toàn hệ thống.',
+      'Rút ngắn thời gian tái đặt và bổ sung nhân sự nhờ hồ sơ kỹ thuật đã chuẩn hóa.',
+    ],
+  },
+  {
     slug: 'vfm',
     name: 'VFM',
     stats: '1.100 sản phẩm | 35 ngày triển khai | Đối tác 3 năm',
