@@ -52,29 +52,46 @@ const downloads = [
 
   // Giới thiệu — xưởng may (brand-story.png: ảnh tùy chỉnh, không tải đè)
   [`${BASE}/2023/03/quy-mo-xuong-may-dong-phuc-Tan-Pham-Gia.jpg`, 'images/about/production-1.jpg'],
+  // Ban lãnh đạo — chân dung Nguyễn Chí An (dongphucvn.vn/ve-tan-pham-gia/)
+  [`${BASE}/2026/01/lanh-dao-08.webp`, 'images/about/lanh-dao.webp'],
+  // Dịch vụ — ảnh từ dongphucvn.vn/dich-vu/
+  [`${BASE}/2026/01/1_polo-15.webp`, 'images/services/polo.webp'],
+  [`${BASE}/2026/01/2_tshirt-15.webp`, 'images/services/tshirt.webp'],
+  [`${BASE}/2026/01/3_so-mi-15.webp`, 'images/services/so-mi.webp'],
+  [`${BASE}/2026/01/4_quan-tay-15.webp`, 'images/services/quan-tay.webp'],
+  [`${BASE}/2026/01/5_chan-vay-15.webp`, 'images/services/chan-vay.webp'],
+  [`${BASE}/2026/01/1_local-19.webp`, 'images/services/oem-local.webp'],
+  [`${BASE}/2026/01/2_global-19.webp`, 'images/services/oem-global.webp'],
+  [`${BASE}/2026/01/3_fashion-19.webp`, 'images/services/oem-fashion.webp'],
+  [`${BASE}/2026/01/4_private-19.webp`, 'images/services/oem-private.webp'],
+  [`${BASE}/2026/01/1-21-scaled.webp`, 'images/services/process-bulk.webp'],
+  [`${BASE}/2026/01/2-21-scaled.webp`, 'images/services/process-spec.webp'],
+  [`${BASE}/2026/01/4-21-scaled.webp`, 'images/services/process-delivery.webp'],
   // qc-5-tang.png: ảnh tùy chỉnh Kiểm soát chất lượng 5 tầng — không tải đè
 
   // Section Tại sao chọn — ảnh tùy chỉnh trong src/assets/images/why-choose/ (xem siteAssets.whyChoose)
   // kinh-nghiem.png, thoi-trang-hoa.jpg, nang-luc-san-xuat.png, qc.webp — không tải đè
 
-  // Case study — ảnh từ dongphucvn.vn/du-an/ và thư viện khách hàng TPG (tải về public/, không hotlink)
-  [`${BASE}/2025/12/Coca_khach-hang-1402x850.webp`, 'images/cases/coca-cola-philippines.jpg'],
-  [`${BASE}/2025/12/Coca_khach-hang-1402x850.webp`, 'images/cases/coca-cola-gp2.jpg'],
-  // BIDV — dự án trên dongphucvn.vn/du-an/ (không gán nhầm sang VFM)
-  [`${BASE}/2025/12/BIDV_khach-hang-scaled.webp`, 'images/cases/bidv.jpg'],
-  [`${BASE}/2025/12/BIDV_khach-hang-scaled.webp`, 'images/cases/bidv-client.jpg'],
-  [`${BASE}/2025/12/BIDV_khach-hang-scaled.webp`, 'images/cases/bidv-gp2.jpg'],
+  // Case study — ảnh từ trang chi tiết dongphucvn.vn/du-an/
+  // Coca-Cola: ảnh polo thật trong bài (không dùng banner SEO chữ)
+  [`${BASE}/2026/01/542757915_785160477789123_742952499737795753_n-1-e1768814978843.jpg`, 'images/cases/coca-cola-group.jpg'],
+  [`${BASE}/2026/01/541821757_785160227789148_7392114996314355892_n.jpg`, 'images/cases/coca-cola-portrait.jpg'],
+  [`${BASE}/2026/01/542758760_785160561122448_2269227140319130034_n-1-1.jpg`, 'images/cases/coca-cola-detail-1.jpg'],
+  [`${BASE}/2026/01/542750135_785160547789116_8606587171159125089_n-1.jpg`, 'images/cases/coca-cola-detail-2.jpg'],
+  // BIDV: /du-an-ao-thun-dong-phuc-bidv/
+  [`${BASE}/2026/03/du-an-ao-thun-dong-phuc-bidv.jpg`, 'images/cases/bidv.jpg'],
+  [`${BASE}/2026/03/Tan-Pham-Gia-2.jpg`, 'images/cases/bidv-client.jpg'],
+  // King Group card → /dong-phuc-cong-ty-cho-cong-ty-xuat-nhap-khau/ (không dùng Unsplash)
+  [`${BASE}/2026/01/dong-phuc-cong-ty-cho-cong-ty-xuat-nhap-khau.jpg`, 'images/cases/king-group.jpg'],
   [`${BASE}/2025/12/DAT_khach-hang-scaled.webp`, 'images/cases/dat-group.webp'],
   [`${BASE}/2025/12/zero-waste_khach-hang-scaled.webp`, 'images/cases/zero-waste.webp'],
-  // King Group — trang /du-an/ dùng ảnh Unsplash; lấy ảnh thật Jung-Talents từ thư viện TPG
-  [`${BASE}/2025/12/Jung-Talents_khach-hang-scaled.webp`, 'images/cases/king-group.webp'],
   [`${BASE}/2025/12/SMYOU_khach-hang-scaled.webp`, 'images/cases/savisco.webp'],
   [`${BASE}/2025/12/SMYOU_khach-hang-scaled.webp`, 'images/cases/savisco-gp2.webp'],
   [`${BASE}/2025/12/thuong-mai-qte_nganh-scaled.webp`, 'images/cases/savisco-gp3.webp'],
   [`${BASE}/2025/12/thuong-mai-qte_nganh-scaled.webp`, 'images/cases/vivant.webp'],
   [`${BASE}/2026/02/tan-pham-gia-quy-trinh-may-dong-phuc-polo-discovery.jpg`, 'images/cases/discovery.jpg'],
-  [`${BASE}/2025/12/RHM_khach-hang-scaled.webp`, 'images/cases/bv-rang-ham-mat-sai-gon.webp'],
-  [`${BASE}/2025/12/RHM_khach-hang-scaled.webp`, 'images/cases/bv-rang-ham-mat-gp4.webp'],
+  // BV RHM: /cong-ty-may-dong-phuc-cho-benh-vien/
+  [`${BASE}/2025/11/8-38.jpg`, 'images/cases/bv-rang-ham-mat-sai-gon.jpg'],
   [`${BASE}/2025/12/Tanla-Coffee-tea_khach-hang-scaled.webp`, 'images/cases/engadine-clinic.webp'],
   [`${BASE}/2025/12/thue-DVL_khach-hang-scaled.webp`, 'images/cases/betrimex.webp'],
 ];

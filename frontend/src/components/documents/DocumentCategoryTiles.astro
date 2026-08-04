@@ -1,6 +1,7 @@
 ---
 import { documentCategories, documentsByCategory } from '../../data/tai-lieu';
 import { docLibraryHref } from '../../lib/routes';
+import { sectionEyebrow } from '../../lib/section-eyebrow';
 
 interface Props {
   /** Nhóm đang mở — khớp với DocumentCategoryDef['id'] */
@@ -16,7 +17,7 @@ const tiles = documentCategories
 ---
 
 <nav aria-label="Danh mục tài liệu">
-  <span class="mb-[1.15rem] block text-xs font-bold uppercase tracking-[0.2em] text-[#5c4500]">
+  <span class:list={['mb-[1.15rem]', sectionEyebrow]}>
     Danh mục tài liệu
   </span>
   <ul class="m-0 grid list-none grid-cols-2 gap-3 p-0 sm:grid-cols-4">

@@ -1,0 +1,14 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import ServiceDetailPage from '../../components/service/ServiceDetailPage.astro';
+import { inAn } from '../../data/dich-vu';
+import { serviceHref } from '../../lib/routes';
+---
+
+<SiteLayout
+  title={inAn.seo.title}
+  description={inAn.seo.description}
+  currentPath={serviceHref(inAn.slug)}
+>
+  <ServiceDetailPage content={inAn} />
+</SiteLayout>

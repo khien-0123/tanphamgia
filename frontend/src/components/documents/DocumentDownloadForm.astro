@@ -2,6 +2,7 @@
 import type { DocumentItem } from '../../data/tai-lieu';
 import { downloadFormCommitments, industryOptions } from '../../data/tai-lieu';
 import { SURFACE_NAVY, sectionPy } from '../../lib/section-rhythm';
+import { sectionEyebrow } from '../../lib/section-eyebrow';
 
 interface Props {
   allDocuments: DocumentItem[];
@@ -24,9 +25,7 @@ const { allDocuments, sectionBg = SURFACE_NAVY } = Astro.props;
     ]}
   >
     <div class="lg:pl-1">
-      <p
-        class="inline-flex rounded-full bg-[#fff0bd] px-5 py-2 text-[0.68rem] font-extrabold uppercase tracking-[0.025em] text-[#7a5900]"
-      >
+      <p class={sectionEyebrow}>
         Nhận tài liệu
       </p>
 

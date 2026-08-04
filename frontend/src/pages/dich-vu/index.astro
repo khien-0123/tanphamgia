@@ -1,0 +1,6 @@
+---
+/** /dich-vu không còn listing — chuyển sang dịch vụ đầu trong chuỗi */
+import { serviceHref } from '../../lib/routes';
+
+return Astro.redirect(serviceHref('tu-van-thiet-ke'), 302);
+---

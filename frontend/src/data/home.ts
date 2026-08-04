@@ -202,6 +202,7 @@ export const homeRecentProjects = {
       eyebrow: 'Dự án đồng phục',
       title: 'Thoải mái tối đa cho đội ngũ Y Bác Sĩ',
       caption: 'Thiết kế công thái học giúp đội ngũ y tế dễ dàng vận động trong ca trực dài.',
+      youtubeVideoId: 'igj3oMf1Kcw',
     }
   ],
   pagination: {

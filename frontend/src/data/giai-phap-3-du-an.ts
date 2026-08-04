@@ -1,18 +1,9 @@
 /** Dự án tiêu biểu — Giải pháp 3 (FMCG & Chuỗi phân phối) */
 
 import { siteAssets } from './assets';
+import type { CaseStudyProject } from '../lib/case-study-types';
 
-export interface DuAnGiaiPhap3 {
-  slug: string;
-  name: string;
-  stats: string;
-  field?: string;
-  image: string;
-  intro: string;
-  challenges: string[];
-  solutions: string[];
-  results: string[];
-}
+export type DuAnGiaiPhap3 = CaseStudyProject;
 
 export const duAnGiaiPhap3: DuAnGiaiPhap3[] = [
   {

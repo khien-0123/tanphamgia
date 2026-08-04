@@ -1,0 +1,104 @@
+---
+import SiteImage from '../SiteImage.astro';
+import { routes } from '../../lib/routes';
+import type { ServiceBlock } from '../../data/dich-vu/types';
+
+interface Props {
+  block: ServiceBlock;
+  /** true: ảnh trái / chữ phải — khối chẵn theo ảnh mẫu */
+  reverse?: boolean;
+  index: number;
+}
+
+const { block, reverse = false, index } = Astro.props;
+const titleId = `service-block-${index}-title`;
+---
+
+<article
+  class="border-t border-[#E5DFD2] first:border-t-0"
+  aria-labelledby={titleId}
+>
+  <div
+    class:list={[
+      'mx-auto grid w-full max-w-container-max-width items-center gap-10 px-6 py-14 md:px-8 md:py-20 lg:grid-cols-2 lg:gap-14 xl:gap-16',
+      reverse && 'lg:[&>figure]:order-first',
+    ]}
+  >
+    <div data-reveal data-reveal-direction="up" class="max-w-[38rem]">
+      <h2
+        id={titleId}
+        class="text-balance text-[clamp(1.35rem,2.2vw,1.85rem)] font-extrabold leading-[1.2] tracking-[-0.02em] text-[#1f1b17]"
+      >
+        {block.title}
+      </h2>
+
+      <p class="mt-5 text-sm leading-[1.65] text-[#625a50] sm:text-base">
+        {block.intro}
+      </p>
+
+      {
+        block.processLabel && (
+          <h3 class="mt-8 text-sm font-extrabold leading-snug text-[#1f1b17] sm:text-base">
+            {block.processLabel}
+          </h3>
+        )
+      }
+
+      <ul
+        class:list={[
+          'list-none space-y-3 p-0 text-sm leading-[1.6] text-[#625a50] sm:text-base',
+          block.processLabel ? 'mt-4' : 'mt-8',
+        ]}
+      >
+        {
+          block.steps.map((step) => (
+            <li class="flex gap-3">
+              <span
+                class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#FFC933]"
+                aria-hidden="true"
+              />
+              <span>{step}</span>
+            </li>
+          ))
+        }
+      </ul>
+
+      {
+        block.deliverable && (
+          <p class="mt-6 text-sm font-bold leading-[1.65] text-[#1f1b17] sm:text-base">
+            {block.deliverable}
+          </p>
+        )
+      }
+
+      {
+        block.closing && (
+          <p class="mt-4 text-sm leading-[1.65] text-[#625a50] sm:text-base">{block.closing}</p>
+        )
+      }
+    </div>
+
+    <figure data-reveal data-reveal-direction="up" class="relative m-0">
+      <div class="relative overflow-hidden rounded-[1rem] bg-[#F5F0E7]">
+        <SiteImage
+          src={block.image}
+          alt={block.imageAlt}
+          class="block aspect-[4/3] h-auto w-full object-cover"
+          loading="lazy"
+          variant="card"
+          sizes="(min-width: 1024px) 44vw, 100vw"
+        />
+
+        <a
+          href={routes.lienHe}
+          class="absolute left-1/2 top-1/2 z-10 inline-flex -translate-x-1/2 -translate-y-1/2 items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-extrabold text-[#1f1b17] shadow-[0_10px_28px_rgba(38,31,21,0.22)] transition-transform hover:scale-[1.03] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-gold"
+        >
+          <span class="material-symbols-outlined text-lg leading-none" aria-hidden="true">
+            search
+          </span>
+          <span>Yêu cầu báo giá</span>
+        </a>
+      </div>
+    </figure>
+  </div>
+</article>

@@ -5,6 +5,7 @@ import {
   blogPostHref,
   caseStudyHref,
   routes,
+  serviceHref,
   solutionHref,
 } from '../lib/routes';
 import { siteAssets } from './assets';
@@ -116,9 +117,11 @@ export const siteFooter = {
     },
   ],
   services: [
-    { label: 'Giải pháp đồng phục doanh nghiệp', href: routes.giaiPhap },
-    { label: 'Giải pháp OEM & ODM', href: solutionHref('giai-phap-1') },
-    { label: 'Cung cấp nguồn vải', href: solutionHref('giai-phap-1') },
+    { label: 'Tư vấn & Thiết kế theo brand', href: serviceHref('tu-van-thiet-ke') },
+    { label: 'Xưởng may & Gia công OEM/ODM', href: serviceHref('xuong-may-oem-odm') },
+    { label: 'Fabric Collection — Chất liệu TPG', href: serviceHref('fabric-collection') },
+    { label: 'In ấn', href: serviceHref('in-an') },
+    { label: 'Thêu vi tính', href: serviceHref('theu-vi-tinh') },
   ],
   ministryCert: {
     href: siteConfig.ministryCertUrl,
@@ -155,6 +158,7 @@ export const mainNavigation = [
     icon: 'apartment',
     desc: 'Lịch sử & năng lực xưởng may',
   },
+  { label: 'Dịch vụ', href: routes.dichVu, icon: 'design_services', desc: 'Thiết kế, may, in & thêu' },
   { label: 'Giải pháp', href: routes.giaiPhap, icon: 'category', desc: 'Nhóm giải pháp đồng phục' },
   { label: 'Khách hàng', href: routes.khachHang, icon: 'groups', desc: 'Thương hiệu đã đồng hành' },
   { label: 'Tin tức', href: routes.tinTuc, icon: 'newspaper', desc: 'Kiến thức ngành & dự án' },
@@ -569,7 +573,6 @@ export interface ClientCaseStudy {
   tags: string;
   logo?: string;
   logoMark?: string;
-  logoWordmark?: string;
   image: string;
   alt: string;
   href?: string;

@@ -1,0 +1,56 @@
+---
+import SiteImage from '../SiteImage.astro';
+import { leadership } from '../../data/gioi-thieu';
+import { sectionPy } from '../../lib/section-rhythm';
+---
+
+<section class="bg-white text-[#1f1b17]" aria-labelledby="about-leadership-title">
+  <div class:list={['mx-auto w-full max-w-container-max-width px-6 md:px-8', sectionPy]}>
+    <h2
+      id="about-leadership-title"
+      data-reveal
+      class="text-center text-balance text-[clamp(1.75rem,2.7vw,3rem)] font-extrabold uppercase leading-[1.1] tracking-[-0.03em]"
+    >
+      {leadership.title}
+    </h2>
+
+    <div
+      class="mt-10 grid items-start gap-10 lg:mt-14 lg:grid-cols-[1.35fr_1fr] lg:gap-14 xl:gap-16"
+    >
+      <div data-reveal data-reveal-direction="up" class="max-w-[42rem]">
+        <div class="space-y-4 text-sm leading-[1.65] text-[#1f1b17] sm:text-base">
+          {leadership.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+        </div>
+
+        <h3 class="mt-8 text-base font-extrabold leading-snug sm:mt-10 sm:text-lg">
+          {leadership.quoteLabel}
+        </h3>
+
+        <blockquote class="mt-3 text-sm italic leading-[1.65] text-[#1f1b17] sm:text-base">
+          “{leadership.quote}”
+        </blockquote>
+
+        <p class="mt-6 text-right text-base font-extrabold leading-snug sm:text-lg">
+          {leadership.name}
+        </p>
+      </div>
+
+      <figure data-reveal data-reveal-direction="up" class="m-0 mx-auto w-full max-w-[22rem] lg:max-w-none">
+        <div class="overflow-hidden rounded-[1rem] shadow-[0_12px_32px_rgba(38,31,21,0.12)]">
+          <SiteImage
+            src={leadership.image}
+            alt={leadership.imageAlt}
+            class="block aspect-[3/4] h-auto w-full object-cover object-top"
+            loading="lazy"
+            variant="card"
+            sizes="(min-width: 1024px) 32vw, (min-width: 640px) 50vw, 88vw"
+          />
+        </div>
+        <figcaption class="mt-5 text-center">
+          <b class="block text-base font-extrabold leading-snug sm:text-lg">{leadership.name}</b>
+          <span class="mt-1 block text-sm leading-snug text-[#625a50]">{leadership.role}</span>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</section>

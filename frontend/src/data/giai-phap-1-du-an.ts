@@ -1,18 +1,9 @@
 /** Dự án tiêu biểu — Giải pháp 1 (Sản xuất & FDI) */
 
 import { siteAssets } from './assets';
+import type { CaseStudyProject } from '../lib/case-study-types';
 
-export interface DuAnGiaiPhap1 {
-  slug: string;
-  name: string;
-  stats: string;
-  field?: string;
-  image: string;
-  intro: string;
-  challenges: string[];
-  solutions: string[];
-  results: string[];
-}
+export type DuAnGiaiPhap1 = CaseStudyProject;
 
 export const duAnGiaiPhap1: DuAnGiaiPhap1[] = [
   {
