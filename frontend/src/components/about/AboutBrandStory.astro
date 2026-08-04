@@ -3,6 +3,7 @@ import SiteImage from '../SiteImage.astro';
 import { brandStory } from '../../data/gioi-thieu';
 import { sectionEyebrowWarm } from '../../lib/section-eyebrow';
 import { sectionPy } from '../../lib/section-rhythm';
+import { focusRingOnDark, primaryPill } from '../../lib/button-classes';
 ---
 
 <section class="bg-[#0d1b3a] text-white" aria-labelledby="about-story-title">
@@ -38,7 +39,7 @@ import { sectionPy } from '../../lib/section-rhythm';
 
       <a
         href="#nang-luc"
-        class="mt-8 inline-flex min-h-14 items-center justify-center gap-2.5 rounded-full bg-accent-gold px-9 py-4 text-center text-base font-extrabold leading-snug text-ink-dark shadow-[0_12px_30px_rgba(255,201,51,0.2)] transition-all hover:-translate-y-0.5 hover:shadow-[0_16px_34px_rgba(255,201,51,0.32)] sm:px-10 sm:text-lg"
+        class:list={[primaryPill, focusRingOnDark, 'mt-8']}
       >
         <span>Khám phá năng lực sản xuất</span>
         <span class="material-symbols-outlined text-xl leading-none sm:text-2xl" aria-hidden="true">arrow_forward</span>

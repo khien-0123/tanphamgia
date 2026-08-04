@@ -19,24 +19,6 @@ export const brandStory = {
   image: siteAssets.about.brandStory,
 };
 
-/** Ban lãnh đạo — nội dung đồng bộ dongphucvn.vn/ve-tan-pham-gia/ */
-export const leadership = {
-  title: 'Ban lãnh đạo Tân Phạm Gia',
-  paragraphs: [
-    'Ông Nguyễn Chí An, Nhà sáng lập và hiện là Tổng Giám đốc Công ty Cổ phần Tân Phạm Gia – một trong những đơn vị hàng đầu trong lĩnh vực thiết kế, sản xuất, kinh doanh và cung cấp đồng phục và thời trang cho thị trường trong nước và quốc tế.',
-    'Sáng lập Tân Phạm Gia vào năm 2003. Dưới sự dẫn dắt của ông, doanh nghiệp phát triển theo định hướng chuẩn hóa quy trình – nâng cao chất lượng – vận hành hiệu quả, trở thành đối tác đồng phục tin cậy của nhiều doanh nghiệp.',
-    'Hiện ông cũng đảm nhiệm vai trò Phó Chủ tịch Thường trực Hội Doanh nghiệp Tây Bắc Sài Gòn (HUBA), đóng góp vào hoạt động kết nối và phát triển cộng đồng doanh nghiệp.',
-    'Với hơn 30 năm gắn bó cùng ngành, ông đề cao đổi mới, kỷ luật và giá trị con người – những nền tảng cốt lõi tạo nên văn hóa và uy tín của Tân Phạm Gia.',
-  ],
-  quoteLabel: 'Định hướng lãnh đạo',
-  quote:
-    'Chúng tôi không chỉ sản xuất sản phẩm. Chúng tôi kiến tạo niềm tin từ bàn tay người thợ đến trải nghiệm của khách hàng.',
-  name: 'Nguyễn Chí An',
-  role: 'Nhà sáng lập & Tổng giám đốc',
-  image: siteAssets.about.leadership,
-  imageAlt: 'Ông Nguyễn Chí An — Nhà sáng lập & Tổng giám đốc Tân Phạm Gia',
-};
-
 export const timelineSection = {
   eyebrow: 'Các mốc lịch sử hình thành',
   title: 'Những dấu ấn trong hành trình phát triển của Tân Phạm Gia',
@@ -191,3 +173,27 @@ export const teamDepartments = [
     alt: 'Chăm sóc khách hàng và hậu mãi',
   },
 ];
+
+/**
+ * Ban lãnh đạo — nội dung khách gửi, giữ nguyên văn.
+ * Khối nằm ngay dưới Câu chuyện thương hiệu trên trang Giới thiệu.
+ */
+export const leadership = {
+  eyebrow: 'Ban lãnh đạo',
+  title: 'Ban lãnh đạo Tân Phạm Gia',
+  paragraphs: [
+    'Ông Nguyễn Chí An, Nhà sáng lập và hiện là Tổng Giám đốc Công ty Cổ phần Tân Phạm Gia – một trong những đơn vị hàng đầu trong lĩnh vực thiết kế, sản xuất, kinh doanh và cung cấp đồng phục và thời trang cho thị trường trong nước và quốc tế.',
+    'Sáng lập Tân Phạm Gia vào năm 2003. Dưới sự dẫn dắt của ông, doanh nghiệp phát triển theo định hướng chuẩn hóa quy trình – nâng cao chất lượng – vận hành hiệu quả, trở thành đối tác đồng phục tin cậy của nhiều doanh nghiệp.',
+    'Hiện ông cũng đảm nhiệm vai trò Phó Chủ tịch Thường trực Hội Doanh nghiệp Tây Bắc Sài Gòn (HUBA), đóng góp vào hoạt động kết nối và phát triển cộng đồng doanh nghiệp.',
+    'Với hơn 30 năm gắn bó cùng ngành, ông đề cao đổi mới, kỷ luật và giá trị con người – những nền tảng cốt lõi tạo nên văn hóa và uy tín của Tân Phạm Gia.',
+  ],
+  quoteLabel: 'Định hướng lãnh đạo',
+  quote:
+    'Chúng tôi không chỉ sản xuất sản phẩm. Chúng tôi kiến tạo niềm tin từ bàn tay người thợ đến trải nghiệm của khách hàng.',
+  /** Ký dưới câu trích — nét cá nhân, khác vai trò với thẻ tên trên ảnh */
+  signature: 'Nguyễn Chí An',
+  name: 'Nguyễn Chí An',
+  role: 'Nhà sáng lập & Tổng giám đốc',
+  image: siteAssets.about.leaderPortrait,
+  imageAlt: 'Ông Nguyễn Chí An — Nhà sáng lập và Tổng giám đốc Tân Phạm Gia',
+};

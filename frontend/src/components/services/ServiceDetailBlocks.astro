@@ -1,0 +1,165 @@
+---
+import SiteImage from '../SiteImage.astro';
+import { sectionEyebrow } from '../../lib/section-eyebrow';
+import { imageRadius } from '../../lib/image-frame';
+import { SURFACE_PAPER } from '../../lib/section-rhythm';
+import type { ServiceBlock, ServiceImageRatio } from '../../data/dich-vu';
+
+interface Props {
+  blocks: ServiceBlock[];
+}
+
+const { blocks } = Astro.props;
+
+/**
+ * Thân trang chi tiết dịch vụ — chữ một bên, ảnh một bên, đảo bên xen kẽ.
+ *
+ * Cột ảnh dính theo cuộn (sticky) từ lg trở lên: cột chữ có khối dài tới bốn
+ * bước kèm mô tả, để ảnh đứng yên thì bên cạnh hở một mảng trắng chết.
+ * `top-28` = chiều cao thanh nav cố định cộng một khoảng thở.
+ */
+const num = (index: number) => String(index + 1).padStart(2, '0');
+const serviceSectionPy = 'py-12 md:py-16 lg:py-20';
+const imageAspectClass: Record<ServiceImageRatio, string> = {
+  '1:1': 'aspect-square',
+  '5:4': 'aspect-[5/4]',
+  '3:4': 'aspect-[3/4]',
+};
+---
+
+{
+  blocks.map((block, index) => (
+    <section
+      class:list={[
+        SURFACE_PAPER,
+        serviceSectionPy,
+        /* Hai khối giấy liền nhau thì kẻ nét ngăn — khối đầu đã có dải navy
+           phía trên nên không cần. */
+        index > 0 && 'border-t border-border-subtle',
+      ]}
+      aria-labelledby={`service-block-${index}`}
+    >
+      <div class="mx-auto max-w-container-max-width px-6 md:px-8">
+        {/* Khối đảo bên phải lật luôn tỉ lệ cột, không chỉ đổi `order` —
+            nếu không thì cột chữ rơi vào cột hẹp hơn ở đúng những khối đảo. */}
+        <div
+          class:list={[
+            'grid gap-10 lg:items-start lg:gap-14',
+            index % 2 === 1
+              ? 'lg:grid-cols-[minmax(0,1fr)_minmax(0,1.06fr)]'
+              : 'lg:grid-cols-[minmax(0,1.06fr)_minmax(0,1fr)]',
+          ]}
+        >
+          <div data-reveal class:list={[index % 2 === 1 && 'lg:order-2']}>
+            <span class={sectionEyebrow}>
+              {num(index)} — {block.eyebrow}
+            </span>
+            <h2
+              id={`service-block-${index}`}
+              class="mt-[1.15rem] text-balance text-[clamp(1.75rem,2.7vw,3rem)] font-extrabold leading-[1.1] tracking-[-0.03em] text-ink-dark"
+            >
+              {block.title}
+            </h2>
+            <p class="mt-[1.15rem] text-base leading-[1.7] text-text-muted">{block.lede}</p>
+
+            {block.listLabel && (
+              <p class="mt-9 text-[0.72rem] font-extrabold uppercase tracking-[0.16em] text-[#5c4500]">
+                {block.listLabel}
+              </p>
+            )}
+
+            {block.facts && block.facts.length > 0 && (
+              <ul class="mt-4 grid list-none p-0" data-reveal-stagger>
+                {block.facts.map((fact, i) => (
+                  <li
+                    data-reveal
+                    class="grid grid-cols-[auto_minmax(0,1fr)] items-baseline gap-5 border-t border-border-subtle py-[0.85rem] first:border-t-0 first:pt-0"
+                    style={`--reveal-delay:${i * 60}ms`}
+                  >
+                    <span class="whitespace-nowrap text-[1.15rem] font-extrabold tracking-[-0.02em] text-ink-dark">
+                      {fact.value}
+                    </span>
+                    <span class="text-right text-[0.95rem] leading-[1.5] text-text-muted">
+                      {fact.label}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            )}
+
+            {block.steps && block.steps.length > 0 && (
+              <ol class="mt-4 grid list-none p-0" data-reveal-stagger>
+                {block.steps.map((step, i) => (
+                  <li
+                    data-reveal
+                    class="grid grid-cols-[2.25rem_minmax(0,1fr)] items-baseline gap-4 border-t border-border-subtle py-4 first:border-t-0 first:pt-0"
+                    style={`--reveal-delay:${i * 60}ms`}
+                  >
+                    <span class="text-[1.5rem] font-extrabold leading-none tabular-nums text-[#5c4500]">
+                      {num(i)}
+                    </span>
+                    <div class="min-w-0">
+                      {/* [text-wrap:initial] tắt `text-wrap: balance` mà global.css áp cho
+                          mọi h1..h4 — tên bước phải chạy hết bề ngang cột, không co về giữa. */}
+                      <h3 class="m-0 text-[1.0625rem] font-extrabold leading-[1.3] tracking-[-0.01em] text-ink-dark [text-wrap:initial]">
+                        {step.title}
+                      </h3>
+                      <p class="mt-2 text-[0.95rem] leading-[1.65] text-ink-mid">{step.desc}</p>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            )}
+
+            {block.chips && block.chips.length > 0 && (
+              <>
+                {block.chipsLabel && (
+                  <p class="mt-9 text-[0.72rem] font-extrabold uppercase tracking-[0.16em] text-[#5c4500]">
+                    {block.chipsLabel}
+                  </p>
+                )}
+                <ul class="mt-4 flex list-none flex-wrap gap-2 p-0">
+                  {block.chips.map((chip) => (
+                    <li class="inline-flex items-center gap-2 rounded-full border border-[#DED5C5] bg-white px-3 py-[0.45rem] text-[0.82rem] font-semibold text-ink-dark">
+                      <span
+                        class="material-symbols-outlined text-base leading-none text-[#5c4500]"
+                        aria-hidden="true"
+                      >
+                        verified
+                      </span>
+                      {chip}
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
+          </div>
+
+          {/* Chỉ fade, không trượt: cột này dính theo cuộn, để nó trượt 8rem khi
+              đang bám thì ảnh nhảy lệch khỏi vị trí đã ghim. */}
+          <div
+            data-reveal
+            data-reveal-motion="fade"
+            class:list={[
+              'grid min-h-0 lg:sticky lg:top-28',
+              imageAspectClass[block.image.ratio ?? '5:4'],
+              index % 2 === 1 && 'lg:order-1',
+            ]}
+          >
+            <figure class:list={['relative m-0 h-full min-h-0 overflow-hidden', imageRadius]}>
+              <SiteImage
+                src={block.image.src}
+                alt={block.image.alt}
+                loading="lazy"
+                class="absolute inset-0 h-full w-full object-cover"
+                variant="card"
+                widths={[480, 720, 960]}
+                sizes="(max-width: 1023px) 100vw, 40vw"
+              />
+            </figure>
+          </div>
+        </div>
+      </div>
+    </section>
+  ))
+}

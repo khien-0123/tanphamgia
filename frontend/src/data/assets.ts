@@ -58,9 +58,15 @@ export const siteAssets = {
     processBulk: '/images/services/process-bulk.webp',
     processSpec: '/images/services/process-spec.webp',
     processDelivery: '/images/services/process-delivery.webp',
+    /** Hoạ tiết vector tạm — thay bằng ảnh hiện trường khi có */
+    inAn: '/images/services/in-an.webp',
+    theuViTinh: '/images/services/theu-vi-tinh.webp',
   },
   blog: {
     chonVaiPolo: '/images/blog/chon-vai-polo-khi-hau-viet-nam.jpg',
+    poloFabricSelection: '/images/blog/blog-polo-fabric-selection.webp',
+    piqueFabricInspection: '/images/blog/blog-pique-fabric-inspection.webp',
+    poloQcWorkshop: '/images/blog/blog-polo-qc-workshop.webp',
     dongPhucToiGian: '/images/blog/dong-phuc-toi-gian-branding-2024.jpg',
     sanXuat10000: '/images/blog/san-xuat-10000-ao-thun-7-ngay.jpg',
     medicalUniform: '/images/blog/medical-uniform-2025.webp',
@@ -99,6 +105,8 @@ export const siteAssets = {
     sanPhamMoiThang: '/images/about/san-pham-moi-thang.png',
     dongHanhTuVanBanGiao: '/images/about/dong-hanh-tu-van-ban-giao.png',
     sanPhamDaSanXuat: '/images/about/san-pham-da-san-xuat.png',
+    /** Chân dung Nhà sáng lập — ảnh dọc 1778×2171, thẻ tên đè góc dưới trái */
+    leaderPortrait: '/images/about/lanh-dao-08.webp',
   },
   whyChoose: {
     kinhNghiem: '/images/why-choose/kinh-nghiem.png',

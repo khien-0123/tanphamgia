@@ -1,56 +1,85 @@
 ---
 import SiteImage from '../SiteImage.astro';
 import { leadership } from '../../data/gioi-thieu';
+import { sectionEyebrow } from '../../lib/section-eyebrow';
 import { sectionPy } from '../../lib/section-rhythm';
+import { sectionTitle } from '../../lib/section-typography';
 ---
 
-<section class="bg-white text-[#1f1b17]" aria-labelledby="about-leadership-title">
-  <div class:list={['mx-auto w-full max-w-container-max-width px-6 md:px-8', sectionPy]}>
-    <h2
-      id="about-leadership-title"
-      data-reveal
-      class="text-center text-balance text-[clamp(1.75rem,2.7vw,3rem)] font-extrabold uppercase leading-[1.1] tracking-[-0.03em]"
-    >
-      {leadership.title}
-    </h2>
+{/*
+  Khối này nằm ngay dưới Câu chuyện thương hiệu (nền navy) nên phải là nền giấy —
+  hai dải navy liền nhau thì mất ranh giới giữa hai khối.
 
-    <div
-      class="mt-10 grid items-start gap-10 lg:mt-14 lg:grid-cols-[1.35fr_1fr] lg:gap-14 xl:gap-16"
-    >
-      <div data-reveal data-reveal-direction="up" class="max-w-[42rem]">
-        <div class="space-y-4 text-sm leading-[1.65] text-[#1f1b17] sm:text-base">
-          {leadership.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
-        </div>
+  Khối trên đặt ảnh bên TRÁI, khối này đặt ảnh bên PHẢI. Trùng chiều thì hai
+  khối dính lại thành một mảng dài.
+*/}
+<section class="bg-[#fbf8f1] text-[#1f1b17]" aria-labelledby="about-leadership-title">
+  <div
+    class:list={[
+      'mx-auto grid w-full max-w-container-max-width items-start gap-10 px-6 md:px-8 lg:grid-cols-[1.05fr_0.85fr] lg:gap-14 xl:gap-16',
+      sectionPy,
+    ]}
+  >
+    <div data-reveal>
+      <span class={sectionEyebrow}>{leadership.eyebrow}</span>
+      <h2 id="about-leadership-title" class:list={[sectionTitle, 'mt-[1.15rem] text-ink-dark']}>
+        {leadership.title}
+      </h2>
 
-        <h3 class="mt-8 text-base font-extrabold leading-snug sm:mt-10 sm:text-lg">
-          {leadership.quoteLabel}
-        </h3>
-
-        <blockquote class="mt-3 text-sm italic leading-[1.65] text-[#1f1b17] sm:text-base">
-          “{leadership.quote}”
-        </blockquote>
-
-        <p class="mt-6 text-right text-base font-extrabold leading-snug sm:text-lg">
-          {leadership.name}
-        </p>
+      <div class="mt-7 grid gap-5">
+        {
+          leadership.paragraphs.map((paragraph) => (
+            <p class="m-0 text-base leading-[1.75] text-[#625a50]">{paragraph}</p>
+          ))
+        }
       </div>
 
-      <figure data-reveal data-reveal-direction="up" class="m-0 mx-auto w-full max-w-[22rem] lg:max-w-none">
-        <div class="overflow-hidden rounded-[1rem] shadow-[0_12px_32px_rgba(38,31,21,0.12)]">
-          <SiteImage
-            src={leadership.image}
-            alt={leadership.imageAlt}
-            class="block aspect-[3/4] h-auto w-full object-cover object-top"
-            loading="lazy"
-            variant="card"
-            sizes="(min-width: 1024px) 32vw, (min-width: 640px) 50vw, 88vw"
-          />
-        </div>
-        <figcaption class="mt-5 text-center">
-          <b class="block text-base font-extrabold leading-snug sm:text-lg">{leadership.name}</b>
-          <span class="mt-1 block text-sm leading-snug text-[#625a50]">{leadership.role}</span>
+      {/* Trích dẫn — dùng lại khuôn gạch hổ phách bên trái đã có ở case study */}
+      <figure class="m-0 mt-9 border-l-[3px] border-accent-gold pl-5">
+        <figcaption class="text-[0.72rem] font-extrabold uppercase tracking-[0.16em] text-[#5c4500]">
+          {leadership.quoteLabel}
         </figcaption>
+        <blockquote class="m-0 mt-3">
+          <p class="m-0 text-[1.0625rem] italic leading-[1.7] text-ink-dark md:text-lg">
+            “{leadership.quote}”
+          </p>
+        </blockquote>
+        <p class="m-0 mt-4 text-sm font-extrabold text-ink-dark">{leadership.signature}</p>
       </figure>
     </div>
+
+    {/*
+      Chỉ fade, không trượt: cột dính theo cuộn, để nó trượt 8rem khi đang bám
+      thì ảnh nhảy lệch khỏi vị trí đã ghim.
+      `aspect-[4/5]` chứ không phải 3/4 — ảnh gốc 1778×2171 (tỉ lệ 0,82) nên
+      khung 4/5 (0,80) chỉ xén một dải rất mỏng, khung 3/4 (0,75) xén nhiều hơn.
+    */}
+    <figure
+      data-reveal
+      data-reveal-motion="fade"
+      class="relative m-0 aspect-[4/5] overflow-hidden rounded-[1.75rem] bg-white/60 lg:sticky lg:top-28"
+    >
+      <SiteImage
+        src={leadership.image}
+        alt={leadership.imageAlt}
+        loading="lazy"
+        class="absolute inset-0 h-full w-full object-cover object-top"
+        variant="card"
+        widths={[480, 720, 960, 1280]}
+        sizes="(max-width: 1023px) 100vw, 40vw"
+      />
+
+      {/* Thẻ tên đè góc dưới trái — cùng cách ô "2003" ở khối ngay trên.
+          Nền navy chứ không phải nền vàng: vừa phân biệt hai khối, vừa tránh
+          chữ trắng trên vàng (DESIGN.md §2 luật 1, chỉ đạt 1,54:1). */}
+      <figcaption class="absolute bottom-4 left-4 max-w-[15rem] rounded-[1.25rem] bg-[#0d1b3a] px-6 py-5 text-white shadow-[0_16px_34px_rgba(0,0,0,0.28)] sm:bottom-6 sm:left-6 sm:px-7 sm:py-6">
+        <b class="block text-[1.25rem] font-extrabold leading-tight tracking-[-0.02em] sm:text-[1.375rem]">
+          {leadership.name}
+        </b>
+        <span class="mt-1.5 block text-[0.8125rem] leading-[1.4] text-white/75">
+          {leadership.role}
+        </span>
+      </figcaption>
+    </figure>
   </div>
 </section>

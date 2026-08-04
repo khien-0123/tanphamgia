@@ -1,0 +1,38 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import ServiceMosaic from '../components/services/ServiceMosaic.astro';
+import { services, servicesPage } from '../data/dich-vu';
+import { pageHeroBg } from '../data/site';
+import { routes } from '../lib/routes';
+import { SURFACE_PAPER, sectionPy } from '../lib/section-rhythm';
+---
+
+{/*
+  Cấu trúc bám đúng các trang danh sách khác (Giải pháp, Tin tức, Tài liệu):
+  PageHero mang tiêu đề + mô tả trang, rồi xuống thẳng khối nội dung. Vì vậy
+  KHÔNG lặp lại tiêu đề/mô tả ở khối dưới nữa, và cũng không cần pt-[9.5rem]
+  chừa chỗ cho nav — hero tự có pt-28/pt-32 trong page-hero-shell.
+  Khối CTA do SiteLayout tự chèn (showCta mặc định true).
+*/}
+<SiteLayout
+  title={servicesPage.seo.title}
+  description={servicesPage.seo.description}
+  currentPath={routes.dichVu}
+>
+  <PageHero
+    title={servicesPage.title}
+    bgImage={pageHeroBg.dichVu}
+    description={servicesPage.description}
+    breadcrumb={[
+      { label: 'Trang chủ', href: routes.home },
+      { label: 'Dịch vụ' },
+    ]}
+  />
+
+  <section class:list={[SURFACE_PAPER, sectionPy]}>
+    <div class="mx-auto max-w-container-max-width px-6 md:px-8">
+      <ServiceMosaic services={services} spaced={false} />
+    </div>
+  </section>
+</SiteLayout>

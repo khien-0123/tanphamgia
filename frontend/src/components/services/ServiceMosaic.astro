@@ -1,0 +1,141 @@
+---
+import SiteImage from '../SiteImage.astro';
+import { serviceHref } from '../../lib/routes';
+import { imageRadius } from '../../lib/image-frame';
+import type { Service } from '../../data/dich-vu';
+
+interface Props {
+  services: Service[];
+  /**
+   * Khoảng cách trên — dành cho tiêu đề section đứng ngay phía trên lưới.
+   * Trang danh sách /dich-vu đưa tiêu đề lên hero nên lưới nằm sát đầu
+   * section, truyền false để không cộng thêm 3rem vào padding của section.
+   */
+  spaced?: boolean;
+}
+
+const { services, spaced = true } = Astro.props;
+
+/**
+ * Khảm: thẻ đầu tiên chiếm trọn cột trái cao 2 hàng, bốn thẻ còn lại xếp 2×2 bên phải.
+ * Đúng 5 mục thì lấp kín khuôn. Khác 5 thì lưới tự rơi về 2 cột đều — thẻ lớn
+ * mất ưu thế nhưng không để lại ô trống, nên thêm/bớt dịch vụ vẫn không vỡ.
+ */
+const isMosaic = services.length === 5;
+---
+
+<div
+  class:list={[
+    'grid gap-3 sm:grid-cols-2 lg:gap-4',
+    spaced && 'mt-12',
+    isMosaic && 'lg:grid-cols-[1.18fr_1fr_1fr] lg:grid-rows-2',
+  ]}
+  data-reveal-stagger
+>
+  {
+    services.map((service, index) => {
+      const hero = isMosaic && index === 0;
+      return (
+        <a
+          data-reveal
+          href={serviceHref(service.slug)}
+          class:list={[
+            'group relative isolate flex min-h-[17rem] flex-col justify-end overflow-hidden p-6 no-underline transition-transform duration-300 hover:-translate-y-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#ffc72c] motion-reduce:transition-none motion-reduce:hover:translate-y-0',
+            imageRadius,
+            hero ? 'lg:col-start-1 lg:row-span-2 lg:min-h-[30rem]' : 'lg:min-h-[14.5rem]',
+            /* Chưa có ảnh thì nền navy đặc — icon phóng to làm hoa văn.
+               Mượn ảnh khác cho đủ chỗ là nói sai về dịch vụ. */
+            !service.image && 'bg-[#0d1b3a]',
+          ]}
+        >
+          {
+            service.image ? (
+              <>
+                <SiteImage
+                  src={service.image}
+                  alt=""
+                  loading="lazy"
+                  class="absolute inset-0 -z-20 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+                  variant="card"
+                  widths={[320, 480, 640, 900]}
+                  sizes={
+                    hero
+                      ? '(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 40vw'
+                      : '(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 25vw'
+                  }
+                />
+                <span class="service-scrim absolute inset-0 -z-10" aria-hidden="true" />
+              </>
+            ) : (
+              <span
+                class="material-symbols-outlined pointer-events-none absolute -bottom-6 -right-4 -z-10 text-[11rem] leading-none text-white/[0.07]"
+                aria-hidden="true"
+              >
+                {service.icon}
+              </span>
+            )
+          }
+
+          <span
+            class:list={[
+              'material-symbols-outlined absolute left-6 top-6 leading-none text-[#ffc72c]',
+              hero ? 'text-[1.9rem]' : 'text-[1.6rem]',
+            ]}
+            aria-hidden="true"
+          >
+            {service.icon}
+          </span>
+
+          {/* Hàng đáy thẻ: chữ bên trái, mũi tên nép góc phải — đúng vị trí mẫu khách. */}
+          <div class="flex items-end justify-between gap-4">
+            <div class="min-w-0">
+              {/* [text-wrap:initial] tắt `text-wrap: balance` mà global.css áp cho mọi h1..h4.
+                  Trong thẻ thì chữ chỉ được ăn theo padding, không co về một bên. */}
+              <h3
+                class:list={[
+                  'w-full font-extrabold leading-[1.2] tracking-[-0.02em] text-white [text-wrap:initial]',
+                  hero ? 'text-[clamp(1.375rem,2vw,1.75rem)]' : 'text-lg',
+                ]}
+              >
+                {service.cardTitle ?? service.title}
+              </h3>
+
+              {
+                service.lines.length > 0 && (
+                  <ul class="mt-2.5 grid list-none gap-1 p-0">
+                    {service.lines.map((line) => (
+                      <li class="text-[0.8125rem] leading-[1.45] text-white/[0.78]">{line}</li>
+                    ))}
+                  </ul>
+                )
+              }
+            </div>
+
+            {/* Mẫu khách để mũi tên trong nút tròn viền trắng. Giữ đúng VỊ TRÍ góc dưới
+                phải, nhưng bỏ vòng tròn: quy tắc dự án cấm mọi nền quanh mũi tên. */}
+            <span
+              class="material-symbols-outlined shrink-0 text-[1.6rem] leading-none text-[#ffc72c] transition-transform duration-300 group-hover:translate-x-1 motion-reduce:transition-none motion-reduce:group-hover:translate-x-0"
+              aria-hidden="true"
+            >
+              arrow_forward
+            </span>
+          </div>
+        </a>
+      );
+    })
+  }
+</div>
+
+<style>
+  /* Viết ở đây chứ không dùng class Tailwind: rgba() lồng trong linear-gradient()
+     ở arbitrary value thì Tailwind 3 sinh tên class nhưng KHÔNG sinh quy tắc CSS. */
+  .service-scrim {
+    background: linear-gradient(
+      to top,
+      rgba(9, 16, 34, 0.94) 0%,
+      rgba(9, 16, 34, 0.78) 30%,
+      rgba(9, 16, 34, 0.34) 62%,
+      rgba(9, 16, 34, 0.12) 100%
+    );
+  }
+</style>

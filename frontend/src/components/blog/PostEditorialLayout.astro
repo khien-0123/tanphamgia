@@ -1,0 +1,732 @@
+---
+import SiteImage from '../SiteImage.astro';
+import type { PostBlock } from '../../data/bai-viet';
+import { formatBlogDate } from '../../lib/format-blog-date';
+import { readingTimeLabel } from '../../lib/post-reading-time';
+import { buildToc } from '../../lib/post-toc';
+import { routes } from '../../lib/routes';
+import { ghostCta, ghostCtaLabel, ghostCtaArrow, cardMediaHover, focusRingOnPaper } from '../../lib/button-classes';
+
+/** Thẻ ở lưới "đọc tiếp" cuối trang — blog và case study đổ cùng hình dạng. */
+export interface PostRelatedCard {
+  href: string;
+  title: string;
+  image: string;
+  alt: string;
+  category: string;
+  meta?: string;
+}
+
+/**
+ * Layout dùng CHUNG cho bài blog và case study.
+ *
+ * Trang gọi phải tự chuẩn hoá dữ liệu về hình dạng này — layout không tự tra
+ * `blogPosts` nữa, vì case study nằm ở `giai-phap-N-du-an.ts` chứ không nằm
+ * trong danh sách bài viết. Nhờ vậy hai loại nội dung khác nguồn vẫn ra đúng
+ * một giao diện, và case study giữ được đường dẫn riêng của nó.
+ *
+ * Khác biệt giữa hai loại chỉ ở `facts`: có thì thẻ thông tin đổ hồ sơ dự án,
+ * không thì đổ tác giả.
+ */
+interface Props {
+  title: string;
+  excerpt: string;
+  category: string;
+  image: string;
+  alt: string;
+  blocks: PostBlock[];
+  /**
+   * Case study thì truyền tên khách hàng; bài blog để trống thì hiện tác giả.
+   * Lấy THẲNG từ giai-phap-N-du-an.ts, không chép lại thành bảng riêng.
+   */
+  clientName?: string;
+  clientRole?: string;
+  /** ISO 8601. Case study chưa có ngày triển khai thật nên bỏ trống, thẻ tự ẩn dòng đó. */
+  publishedAt?: string;
+  breadcrumbLabel: string;
+  breadcrumbHref: string;
+  backLabel: string;
+  backHref: string;
+  ctaLabel: string;
+  ctaHref: string;
+  relatedTitle: string;
+  relatedAllLabel: string;
+  relatedAllHref: string;
+  related: PostRelatedCard[];
+  /** Danh sách liên kết ở thẻ thứ ba trong cột phải đầu trang */
+  sidebarLinksTitle: string;
+  sidebarLinks: { href: string; title: string }[];
+}
+
+const {
+  title,
+  excerpt,
+  category,
+  image,
+  alt,
+  blocks,
+  clientName,
+  clientRole,
+  publishedAt,
+  breadcrumbLabel,
+  breadcrumbHref,
+  backLabel,
+  backHref,
+  ctaLabel,
+  ctaHref,
+  relatedTitle,
+  relatedAllLabel,
+  relatedAllHref,
+  related,
+  sidebarLinksTitle,
+  sidebarLinks,
+} = Astro.props;
+
+const post = { title, excerpt, category, image, alt };
+const publishedLabel = publishedAt ? formatBlogDate(publishedAt) : '';
+const readingLabel = readingTimeLabel(blocks);
+const { items: tocItems, idByIndex } = buildToc(blocks);
+const isCaseStudy = Boolean(clientName);
+const relatedPosts = related;
+
+
+---
+
+{/* Thanh tiến trình đọc — trả lời "tôi đang ở đâu" mà tốn 0 pixel bố cục.
+    Dưới lớp nav (z-55) một bậc để không che menu di động. */}
+<div class="fixed inset-x-0 top-0 z-[56] h-[3px] bg-transparent" aria-hidden="true">
+  <div class="h-full w-0 origin-left bg-accent-gold transition-[width] duration-75 ease-out" data-read-progress></div>
+</div>
+
+<header class="bg-[#FBF8F1] pt-28 md:pt-32">
+  <div class="mx-auto grid w-full max-w-container-max-width grid-cols-4 gap-x-6 gap-y-0 px-6 md:px-8 lg:grid-cols-12 lg:gap-x-8">
+    {/* Dải meta NGANG trên tiêu đề — thay cho một cột thông tin dựng đứng */}
+    <div class="col-span-full lg:col-span-9">
+      <div class="flex flex-wrap items-center gap-x-5 gap-y-3 text-sm text-text-muted">
+        <span class="inline-flex min-h-7 items-center rounded-full bg-accent-gold-light px-3 py-1 text-xs font-extrabold uppercase leading-none tracking-[0.1em] text-ink-dark">
+          {post.category}
+        </span>
+        <span class="inline-flex items-center gap-2">
+          <span class="material-symbols-outlined text-base leading-none text-text-muted" aria-hidden="true">schedule</span>
+          {readingLabel}
+        </span>
+        <nav aria-label="Breadcrumb" class="flex min-w-0 items-center gap-2">
+          <a class="transition-colors hover:text-ink-dark" href={routes.home}>Trang chủ</a>
+          <span class="opacity-40" aria-hidden="true">/</span>
+          <a class="transition-colors hover:text-ink-dark" href={breadcrumbHref}>{breadcrumbLabel}</a>
+        </nav>
+      </div>
+
+      <h1 class="mt-6 text-balance text-[clamp(2rem,3.2vw,3rem)] font-extrabold leading-[1.08] tracking-[-0.035em] text-ink-dark">
+        {post.title}
+      </h1>
+    </div>
+
+    {/*
+      Hàng hero: ảnh bìa 8 cột + thẻ thông tin 4 cột.
+      Cột phải CHỈ tồn tại ở đoạn này rồi biến mất khi vào thân bài — chiều cao
+      của ảnh bìa là thứ trả tiền cho nó. Nhờ vậy trang dùng đủ 12 cột ở đầu
+      mà thân bài vẫn là một cột đọc sạch.
+    */}
+    <figure class="col-span-full mt-9 overflow-hidden rounded-[6px] bg-[#e9e1d2] lg:col-span-8">
+      <SiteImage
+        src={post.image}
+        alt={post.alt}
+        class="block aspect-[3/2] w-full object-cover"
+        loading="eager"
+        decoding="async"
+        variant="hero"
+        widths={[640, 960, 1280, 1600]}
+        sizes="(max-width: 1023px) calc(100vw - 3rem), 62vw"
+      />
+    </figure>
+
+        <aside class="col-span-full mt-6 flex flex-col gap-4 lg:col-span-4 lg:mt-9" aria-label="Thông tin bài viết">
+      <div class="rounded-[0.85rem] border border-[#ded5c5] bg-white px-6 py-5">
+        <div class="flex items-center gap-2 text-xs font-extrabold uppercase tracking-[0.14em] text-ink-dark">
+          <span class="material-symbols-outlined text-[0.95rem] leading-none" aria-hidden="true">person</span>
+          <span>{isCaseStudy ? 'Khách hàng' : 'Tác giả'}</span>
+        </div>
+        <div class:list={['mt-3', !isCaseStudy && 'flex items-center gap-3']}>
+          {!isCaseStudy && (
+            <span class="grid h-11 w-11 flex-none place-items-center rounded-full bg-accent-gold-light text-ink-dark">
+              <span class="material-symbols-outlined text-xl leading-none" aria-hidden="true">person</span>
+            </span>
+          )}
+          <div class="min-w-0">
+            <p class="text-base font-bold leading-tight text-ink-dark">
+              {clientName ?? 'Đội ngũ Tân Phạm Gia'}
+            </p>
+            <p class="mt-1 text-sm leading-snug text-text-muted">
+              {clientRole ?? 'Tư vấn đồng phục doanh nghiệp'}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Thẻ này chỉ chứa những trường WordPress THỰC SỰ có. Dữ liệu dự án
+          hiện chưa có ngày triển khai nên case study bỏ hẳn thẻ, không dựng
+          một thẻ rỗng cho cân đối. */}
+      {publishedAt && (
+        <div class="rounded-[0.85rem] border border-[#ded5c5] bg-white px-6 py-5">
+          <dl>
+            <div>
+              <dt class="flex items-center gap-2 text-xs font-extrabold uppercase tracking-[0.14em] text-ink-dark">
+                <span class="material-symbols-outlined text-[0.95rem] leading-none" aria-hidden="true">folder</span>
+                Danh mục
+              </dt>
+              <dd class="mt-2 text-base font-semibold text-ink-dark">{post.category}</dd>
+            </div>
+
+            <div class="mt-4 border-t border-[#e5dfd2] pt-4">
+              <dt class="flex items-center gap-2 text-xs font-extrabold uppercase tracking-[0.14em] text-ink-dark">
+                <span class="material-symbols-outlined text-[0.95rem] leading-none" aria-hidden="true">calendar_today</span>
+                Ngày đăng
+              </dt>
+              <dd class="mt-2 text-base font-semibold text-ink-dark">
+                <time datetime={publishedAt}>{publishedLabel}</time>
+              </dd>
+            </div>
+          </dl>
+        </div>
+      )}
+
+      {sidebarLinks.length !== 0 && (
+        <div class="rounded-[0.85rem] border border-[#ded5c5] bg-white px-6 py-5">
+          <p class="flex items-center gap-2 text-xs font-extrabold uppercase tracking-[0.14em] text-ink-dark">
+            <span class="material-symbols-outlined text-[0.95rem] leading-none" aria-hidden="true">menu_book</span>
+            {sidebarLinksTitle}
+          </p>
+          <ul class="mt-3 list-none space-y-2.5 p-0">
+            {sidebarLinks.map((link) => (
+              <li class="flex gap-1.5">
+                <span class="material-symbols-outlined mt-[0.15rem] flex-none text-base leading-none text-accent-gold-dark" aria-hidden="true">chevron_right</span>
+                <a
+                  class:list={[
+                    'text-sm leading-snug text-text-muted no-underline transition-colors hover:text-ink-light',
+                    focusRingOnPaper,
+                  ]}
+                  href={link.href}
+                >
+                  {link.title}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      <a class:list={[ghostCta, focusRingOnPaper, 'px-1']} href={ctaHref}>
+        <span class={ghostCtaLabel}>{ctaLabel}</span>
+        <span class={ghostCtaArrow} aria-hidden="true">arrow_forward</span>
+      </a>
+    </aside>
+  </div>
+</header>
+
+<main class="bg-[#FBF8F1] py-16 md:py-24">
+  <div class="mx-auto grid w-full max-w-container-max-width grid-cols-4 items-start gap-x-6 px-6 md:px-8 lg:grid-cols-12 lg:gap-x-8">
+    {/* Mục lục dính ở lề TRÁI — chỉ có ở thân bài, không bám suốt trang */}
+    {/*
+      Thuộc tính sticky phải nằm trên chính ô lưới này, KHÔNG phải trên thẻ
+      nav bên trong. Đặt ở nav thì nó chỉ dính được trong lòng aside, mà
+      aside lại chỉ cao bằng đúng cái mục lục — không còn chỗ nào để chạy,
+      nên nhìn như không dính. Ô lưới thì có cả chiều cao của hàng để trượt.
+      items-start ở lưới cha là điều kiện bắt buộc: nếu ô bị kéo giãn hết
+      chiều cao hàng thì sticky cũng vô hiệu.
+    */}
+    {tocItems.length >= 2 && (
+      <aside class="sticky top-28 hidden lg:col-span-3 lg:block" aria-label="Mục lục bài viết">
+        <nav class="pr-4">
+          <p class="mb-3 text-xs font-extrabold uppercase tracking-[0.16em] text-ink-dark">Nội dung bài</p>
+          <ol class="m-0 list-none border-l border-[#e5dfd2] p-0">
+            {tocItems.map((item) => (
+              <li>
+                <a
+                  class="post-toc-link -ml-px block border-l-2 border-transparent py-2 pl-4 text-sm leading-[1.45] text-text-muted no-underline transition-colors hover:text-ink-dark"
+                  href={`#${item.id}`}
+                  data-post-toc-link
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))}
+          </ol>
+        </nav>
+      </aside>
+    )}
+
+    <div class:list={['col-span-full min-w-0', tocItems.length >= 2 ? 'lg:col-span-9' : 'lg:col-span-12']}>
+      {tocItems.length >= 2 && (
+        <details class="mb-9 rounded-[0.65rem] border border-[#ded5c5] bg-white px-5 py-4 lg:hidden">
+          <summary class="cursor-pointer text-sm font-extrabold text-ink-dark">Nội dung bài viết</summary>
+          <ol class="mt-3 list-decimal space-y-2 pl-5 text-sm text-text-muted">
+            {tocItems.map((item) => (
+              <li><a class="hover:text-ink-dark" href={`#${item.id}`}>{item.label}</a></li>
+            ))}
+          </ol>
+        </details>
+      )}
+
+      <article class="wp-post-content" data-wp-post-content aria-label="Nội dung bài viết">
+        {
+          blocks.map((block, index) => {
+            if (block.type === 'lead') return <p class="article-lead">{block.text}</p>;
+            if (block.type === 'p') return <p>{block.text}</p>;
+            if (block.type === 'h2') return <h2 id={idByIndex.get(index)}>{block.text}</h2>;
+            if (block.type === 'h3') return <h3>{block.text}</h3>;
+
+            if (block.type === 'ul') return <ul>{block.items.map((item) => <li>{item}</li>)}</ul>;
+            if (block.type === 'ol') return <ol>{block.items.map((item) => <li>{item}</li>)}</ol>;
+
+            if (block.type === 'figure')
+              return (
+                <figure>
+                  <SiteImage
+                    src={block.src}
+                    alt={block.alt}
+                    class:list={['block w-full object-cover', block.ratio === 'square' ? 'aspect-square' : 'aspect-[16/10]']}
+                    loading="lazy"
+                    decoding="async"
+                    variant="full"
+                    widths={[640, 960, 1280, 1600]}
+                    sizes="(max-width: 1023px) calc(100vw - 3rem), 68vw"
+                  />
+                  <figcaption>{block.caption}</figcaption>
+                </figure>
+              );
+
+            if (block.type === 'table')
+              return (
+                <div class="article-table-wrap" tabindex="0" aria-label={block.caption ?? 'Bảng dữ liệu, có thể cuộn ngang'}>
+                  <table>
+                    <thead>
+                      <tr>{block.head.map((cell) => <th>{cell}</th>)}</tr>
+                    </thead>
+                    <tbody>
+                      {block.rows.map((row) => (
+                        <tr>{row.map((cell) => <td>{cell}</td>)}</tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              );
+
+
+            return null;
+          })
+        }
+      </article>
+
+      {/* Chân bài: MỘT dải ngang, không phải mấy thẻ dựng đứng ở cột phải */}
+      <div class="mt-14 flex flex-wrap items-center justify-between gap-5 border-t border-[#e5dfd2] pt-6">
+        <a class:list={[ghostCta, focusRingOnPaper]} href={backHref}>
+          <span class="material-symbols-outlined text-lg leading-none" aria-hidden="true">arrow_back</span>
+          <span class={ghostCtaLabel}>{backLabel}</span>
+        </a>
+
+      </div>
+    </div>
+  </div>
+</main>
+
+<section class="bg-[#FBF8F1] pb-16 md:pb-24" aria-labelledby="related-content-title">
+  <div class="mx-auto w-full max-w-container-max-width px-6 md:px-8">
+    <div class="flex flex-wrap items-end justify-between gap-4 border-t border-[#e5dfd2] pt-14">
+      <div>
+        <span class="inline-flex min-h-7 items-center rounded-full bg-accent-gold-light px-3 py-1 text-xs font-extrabold uppercase leading-none tracking-[0.1em] text-ink-dark">
+          Đọc tiếp
+        </span>
+        <h2 id="related-content-title" class="mt-4 text-[clamp(1.5rem,2.6vw,2.1rem)] font-extrabold tracking-[-0.03em] text-ink-dark">
+          {relatedTitle}
+        </h2>
+      </div>
+      <a class:list={[ghostCta, focusRingOnPaper]} href={relatedAllHref}>
+        <span class={ghostCtaLabel}>{relatedAllLabel}</span>
+        <span class={ghostCtaArrow} aria-hidden="true">arrow_forward</span>
+      </a>
+    </div>
+
+    <ul class="mt-9 grid list-none grid-cols-1 gap-7 p-0 md:grid-cols-3">
+      {relatedPosts.map((item) => (
+        <li>
+          <a class:list={['group block no-underline', focusRingOnPaper]} href={item.href}>
+            <div class="overflow-hidden rounded-[6px] bg-[#e9e1d2]">
+              <SiteImage
+                src={item.image}
+                alt={item.alt}
+                class:list={['block aspect-[16/10] w-full object-cover', cardMediaHover]}
+                loading="lazy"
+                decoding="async"
+                variant="card"
+                widths={[400, 640, 900]}
+                sizes="(max-width: 767px) calc(100vw - 3rem), 30vw"
+              />
+            </div>
+            <p class="mt-4 text-xs font-extrabold uppercase tracking-[0.14em] text-ink-dark">{item.category}</p>
+            <p class="mt-2 text-lg font-extrabold leading-[1.3] tracking-[-0.02em] text-ink-dark transition-colors group-hover:text-ink-light">
+              {item.title}
+            </p>
+            <p class="mt-2 text-sm text-text-muted">{item.meta}</p>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<script>
+  /* Thanh tiến trình đọc — đo theo phần thân bài, không theo cả trang.
+     Đo cả trang thì phần chân trang cũng tính vào, thanh chạy hết trước khi
+     người đọc đọc xong bài. */
+  const bar = document.querySelector<HTMLElement>('[data-read-progress]');
+  const article = document.querySelector<HTMLElement>('[data-wp-post-content]');
+
+  if (bar && article) {
+    const update = () => {
+      const box = article.getBoundingClientRect();
+      const scrolled = -box.top;
+      const scrollable = box.height - window.innerHeight;
+      const ratio = scrollable <= 0 ? (box.top <= 0 ? 1 : 0) : scrolled / scrollable;
+      bar.style.width = `${Math.min(100, Math.max(0, ratio * 100))}%`;
+    };
+
+    let ticking = false;
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        update();
+        ticking = false;
+      });
+    };
+
+    update();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+  }
+
+  /* Mục lục: đánh dấu mục đang đọc. Bản thân mục lục đã nằm sẵn trong HTML
+     tĩnh (sinh lúc build) — script này chỉ thêm trạng thái. */
+  const tocLinks = Array.from(document.querySelectorAll<HTMLAnchorElement>('[data-post-toc-link]'));
+  const headings = tocLinks
+    .map((link) => document.querySelector<HTMLElement>(link.hash))
+    .filter((heading): heading is HTMLElement => Boolean(heading));
+
+  if (headings.length > 0) {
+    const setActive = (id: string) => {
+      tocLinks.forEach((link) => {
+        const on = link.hash === `#${id}`;
+        link.classList.toggle('is-active', on);
+        if (on) link.setAttribute('aria-current', 'location');
+        else link.removeAttribute('aria-current');
+      });
+    };
+
+    /*
+      Dùng vị trí cuộn, KHÔNG dùng IntersectionObserver.
+      Observer chỉ báo lúc phần tử ra/vào một dải hẹp — cuộn nhanh qua hai
+      tiêu đề liền nhau, hoặc dừng ở khoảng giữa hai tiêu đề, là không có sự
+      kiện nào bắn ra và đường vàng đứng im ở mục cũ.
+      Cách này thì mỗi lần cuộn đều tính lại: lấy tiêu đề CUỐI CÙNG còn nằm
+      trên vạch mốc — luôn có đúng một mục sáng, không bao giờ hụt.
+    */
+    const MARK = 140; // vạch mốc, tính từ đỉnh màn hình — chừa chỗ cho thanh điều hướng
+
+    const sync = () => {
+      let current = headings[0];
+      for (const heading of headings) {
+        if (heading.getBoundingClientRect().top - MARK <= 0) current = heading;
+        else break;
+      }
+      /* Cuộn tới sát đáy trang thì mục cuối phải sáng, kể cả khi tiêu đề của
+         nó chưa vượt qua vạch mốc (phần cuối bài quá ngắn để đẩy tiếp). */
+      const atBottom = window.innerHeight + window.scrollY >= document.body.scrollHeight - 2;
+      setActive(atBottom ? headings[headings.length - 1].id : current.id);
+    };
+
+    let ticking = false;
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        sync();
+        ticking = false;
+      });
+    };
+
+    sync();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+  }
+</script>
+
+<style is:global>
+  .post-toc-link.is-active {
+    border-left-color: #ffc933;
+    color: #0e2640;
+    font-weight: 700;
+  }
+
+  /*
+    Nội dung từ WordPress về dưới dạng MỘT khối HTML, không tách component
+    được — nên mọi kiểu chữ là CSS chọn xuống con của .wp-post-content.
+    Nội dung dàn ĐỦ dải bài 9 cột, không ghim max-width, không chừa lề phải.
+    Typography dùng đúng thang chữ và màu chung của dự án.
+  */
+  .wp-post-content {
+    color: #5f6f78;
+    font-family: var(--font-body);
+    font-size: 1.125rem;
+    line-height: 1.65;
+  }
+
+  .wp-post-content > :first-child {
+    margin-top: 0;
+  }
+
+  .wp-post-content > p {
+    margin-top: 1.25rem;
+  }
+
+  .wp-post-content > .article-lead {
+    margin: 0;
+    color: #5f6f78;
+    font-size: 1.125rem;
+    font-weight: 400;
+    line-height: 1.65;
+  }
+
+  /* Gutenberg gắn .wp-block-heading, Classic Editor thì không — chọn cả hai */
+  .wp-post-content h2,
+  .wp-post-content h2.wp-block-heading {
+    margin-top: clamp(3rem, 6vw, 4.5rem);
+    scroll-margin-top: 7rem;
+    color: #0e2640;
+    font-size: clamp(1.5rem, 2.2vw, 2rem);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+    text-wrap: balance;
+  }
+
+  .wp-post-content h3 {
+    margin-top: 2.25rem;
+    scroll-margin-top: 7rem;
+    color: #0e2640;
+    font-size: clamp(1.2rem, 1.6vw, 1.375rem);
+    font-weight: 800;
+    line-height: 1.3;
+  }
+
+  .wp-post-content a {
+    color: #1a4569;
+    text-decoration: underline;
+    text-decoration-color: #c9a000;
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 0.2em;
+  }
+
+  .wp-post-content a:hover {
+    color: #0e2640;
+  }
+
+  .wp-post-content strong {
+    color: #0e2640;
+    font-weight: 750;
+  }
+
+  .wp-post-content ul,
+  .wp-post-content ol {
+    margin-top: 1.25rem;
+    padding-left: 1.5rem;
+  }
+
+  .wp-post-content ul {
+    list-style-type: disc;
+  }
+
+  .wp-post-content ol {
+    list-style-type: decimal;
+  }
+
+  .wp-post-content li {
+    margin-top: 0.6rem;
+    padding-left: 0.2rem;
+  }
+
+  .wp-post-content li::marker {
+    color: #c9a000;
+    font-weight: 700;
+  }
+
+  .wp-post-content figure,
+  .wp-post-content .wp-caption {
+    width: auto !important;
+    max-width: 100% !important;
+    margin: clamp(2.5rem, 5vw, 3.5rem) 0 0;
+  }
+
+  .wp-post-content figure img,
+  .wp-post-content .wp-caption img,
+  .wp-post-content > img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 6px;
+  }
+
+  .wp-post-content figcaption,
+  .wp-post-content .wp-element-caption,
+  .wp-post-content .wp-caption-text {
+    margin-top: 0.75rem;
+    color: #5f6f78;
+    font-size: 0.82rem;
+    line-height: 1.55;
+    text-align: left;
+  }
+
+  /* Bảng bọc lớp cuộn ngang: bảng 4 cột không nhét vừa màn 360px, không cuộn
+     được thì nó đẩy vỡ cả trang. Gutenberg bọc sẵn .wp-block-table, Classic
+     Editor thì không — lớp .table-scroll phải thêm lúc build. */
+  .wp-post-content .article-table-wrap,
+  .wp-post-content .wp-block-table,
+  .wp-post-content .table-scroll {
+    margin-top: clamp(2.5rem, 5vw, 3.5rem);
+    overflow-x: auto;
+  }
+
+  .wp-post-content table {
+    width: 100%;
+    min-width: 34rem;
+    border-collapse: collapse;
+    color: #5f6f78;
+    font-size: 0.95rem;
+    line-height: 1.55;
+  }
+
+  .wp-post-content th,
+  .wp-post-content td {
+    padding: 0.9rem 1.1rem;
+    text-align: left;
+    vertical-align: top;
+  }
+
+  .wp-post-content th {
+    background: #ededed;
+    color: #0e2640;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .wp-post-content tbody tr:nth-child(even) {
+    background: rgb(237 237 237 / 45%);
+  }
+
+
+  .wp-post-content hr,
+  .wp-post-content .wp-block-separator {
+    margin-top: 2.5rem;
+    border: 0;
+    border-top: 1px solid #e5dfd2;
+  }
+
+  /* ═════ CLASSIC EDITOR ═════
+     Không sinh class wp-block-*, chỉ có thẻ trần cộng bộ class riêng. */
+  .wp-post-content .alignleft,
+  .wp-post-content .alignright {
+    max-width: 100% !important;
+  }
+
+  @media (min-width: 768px) {
+    .wp-post-content .alignleft {
+      float: left;
+      width: min(45%, 22rem) !important;
+      margin: 0.5rem 2rem 1.5rem 0 !important;
+    }
+
+    .wp-post-content .alignright {
+      float: right;
+      width: min(45%, 22rem) !important;
+      margin: 0.5rem 0 1.5rem 2rem !important;
+    }
+  }
+
+  .wp-post-content .aligncenter,
+  .wp-post-content .alignnone {
+    clear: both;
+  }
+
+  .wp-post-content h2,
+  .wp-post-content h3 {
+    clear: both;
+  }
+
+  /* Video: Classic Editor dán link YouTube ra iframe TRẦN, không khung bọc */
+  .wp-post-content iframe,
+  .wp-post-content video {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    aspect-ratio: 16 / 9;
+    height: auto;
+    margin-top: clamp(2.5rem, 5vw, 3.5rem);
+    border: 0;
+    border-radius: 6px;
+  }
+
+  /* Thư viện ảnh — khối chủ lực để phá nhịp. auto-fit: bỏ vào mấy ảnh cũng
+     tự chia đều, khách không phải chỉnh gì. */
+  .wp-post-content .wp-block-gallery,
+  .wp-post-content .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(15rem, 100%), 1fr));
+    gap: 0.85rem;
+    margin-top: clamp(2.5rem, 5vw, 3.5rem);
+  }
+
+  .wp-post-content .wp-block-gallery figure,
+  .wp-post-content .gallery-item {
+    width: auto !important;
+    margin: 0 !important;
+  }
+
+  .wp-post-content .wp-block-gallery.columns-2,
+  .wp-post-content .gallery-columns-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .wp-post-content .wp-block-gallery.columns-3,
+  .wp-post-content .gallery-columns-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .wp-post-content .wp-block-gallery.columns-4,
+  .wp-post-content .gallery-columns-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  @media (max-width: 699px) {
+    .wp-post-content .wp-block-gallery,
+    .wp-post-content .gallery,
+    .wp-post-content .wp-block-gallery[class*='columns-'],
+    .wp-post-content .gallery[class*='gallery-columns-'] {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 767px) {
+    .wp-post-content {
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+
+    .wp-post-content > .article-lead {
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+  }
+</style>

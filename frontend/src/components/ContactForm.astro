@@ -1,6 +1,7 @@
 ---
-import { siteContact } from '../data/site';
+import { siteContact, formThankYou } from '../data/site';
 import { formInputClass, formLabelClass } from '../lib/form-classes';
+import SuccessNotice from './SuccessNotice.astro';
 
 const quantityOptions = [
   'Dưới 100 sản phẩm',
@@ -92,12 +93,26 @@ const industryOptions = [
   </div>
 
   <button
-    class="mt-1 flex min-h-[3.4rem] w-full items-center justify-center gap-2 rounded-full bg-[#ffc72c] text-[0.9375rem] font-extrabold text-[#17140a] transition-transform duration-200 hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#ffc72c]"
+    class="mt-1 flex min-h-[3.4rem] w-full items-center justify-center gap-2 rounded-full bg-[#ffc72c] text-[0.9375rem] font-extrabold text-[#17140a] transition-transform duration-200 hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#ffc72c] disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:translate-y-0"
     type="submit"
+    data-contact-submit
   >
-    Gửi yêu cầu tư vấn
+    <span data-contact-submit-label>Gửi yêu cầu tư vấn</span>
     <span class="material-symbols-outlined text-xl leading-none" aria-hidden="true">arrow_forward</span>
   </button>
+
+  {/* Khối lỗi — hôm nay chưa bao giờ hiện vì không có lệnh gửi nào thất bại.
+      Dựng sẵn để lúc nối backend chỉ phải sửa <script>, không đụng markup. */}
+  <p
+    class="m-0 hidden rounded-[0.65rem] border border-[#e0a3a3] bg-[#fdf2f2] px-4 py-3 text-sm leading-relaxed text-[#8c2f2f]"
+    data-contact-error
+    role="alert"
+  >
+    Gửi không thành công. Anh/chị thử lại giúp, hoặc gọi hotline <a
+      class="font-bold underline"
+      href={siteContact.phoneHref}>{siteContact.phoneDisplay}</a
+    >.
+  </p>
 
   <p class="m-0 text-center text-xs text-[#625a50]">
     Hoặc gọi hotline
@@ -107,10 +122,61 @@ const industryOptions = [
   </p>
 </form>
 
+<SuccessNotice
+  id="contact-success-notice"
+  title={formThankYou.title}
+  message={formThankYou.message}
+/>
+
 <script>
-  document.getElementById('contact-form')?.addEventListener('submit', (e) => {
+  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+  const successNotice = document.getElementById('contact-success-notice');
+  const errorBox = document.querySelector<HTMLElement>('[data-contact-error]');
+  const submit = document.querySelector<HTMLButtonElement>('[data-contact-submit]');
+  const submitLabel = document.querySelector<HTMLElement>('[data-contact-submit-label]');
+
+  /**
+   * ĐÂY LÀ HÀM DUY NHẤT PHẢI SỬA KHI NỐI BACKEND.
+   *
+   * Hiện chưa có backend nên nó chỉ báo thành công — biểu mẫu KHÔNG gửi đi đâu,
+   * lead điền xong là mất. Khi có endpoint WordPress, thay thân hàm bằng:
+   *
+   *   const res = await fetch(ENDPOINT, { method: 'POST', body: data });
+   *   if (!res.ok) throw new Error(String(res.status));
+   *
+   * Contact Form 7 còn trả 200 kèm `status: 'validation_failed'`, nên với plugin
+   * đó phải đọc thêm JSON chứ không chỉ xét res.ok.
+   *
+   * Tên các ô nhập (name, phone, email…) khai báo ngay trong file này. Nếu backend
+   * là Contact Form 7 thì phải đổi sang tên riêng của plugin (your-name, your-email…).
+   */
+  async function sendLead(_data: FormData): Promise<void> {
+    return Promise.resolve();
+  }
+
+  form?.addEventListener('submit', async (e) => {
     e.preventDefault();
-    alert('Cảm ơn bạn! Đội ngũ Tân Phạm Gia sẽ phản hồi trong 24 giờ làm việc.');
+    if (!form.reportValidity()) return;
+
+    errorBox?.classList.add('hidden');
+    if (submit) submit.disabled = true;
+    if (submitLabel) submitLabel.textContent = 'Đang gửi…';
+
+    try {
+      await sendLead(new FormData(form));
+      /* Xoá nội dung đã nhập rồi mới mở thông báo: đóng thông báo lại là form
+         sạch, khách gửi tiếp yêu cầu khác không phải xoá tay từng ô. */
+      form.reset();
+      successNotice?.dispatchEvent(new CustomEvent('tpg:open'));
+    } catch {
+      errorBox?.classList.remove('hidden');
+    } finally {
+      /* Mở khoá ở cả hai nhánh, không riêng nhánh lỗi: form vẫn nằm sau lớp
+         phủ, đóng thông báo là thấy lại ngay. Chỉ mở khoá khi lỗi thì nút kẹt
+         vĩnh viễn ở trạng thái "Đang gửi…". */
+      if (submit) submit.disabled = false;
+      if (submitLabel) submitLabel.textContent = 'Gửi yêu cầu tư vấn';
+    }
   });
 </script>
 

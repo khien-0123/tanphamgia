@@ -3,6 +3,7 @@ import SiteImage from '../SiteImage.astro';
 import { teamDepartments } from '../../data/gioi-thieu';
 import { sectionEyebrow } from '../../lib/section-eyebrow';
 import { sectionPy } from '../../lib/section-rhythm';
+import { cardMediaHover } from '../../lib/button-classes';
 ---
 
 <section class="bg-[#fbf8f1] text-[#1f1b17]" aria-labelledby="about-team-title">
@@ -27,7 +28,7 @@ import { sectionPy } from '../../lib/section-rhythm';
             <SiteImage
               src={dept.image}
               alt={dept.alt}
-              class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+              class:list={['absolute inset-0 h-full w-full object-cover', cardMediaHover]}
               loading="lazy"
               variant="card"
               sizes="(min-width: 1024px) 23vw, (min-width: 640px) 45vw, 100vw"

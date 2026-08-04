@@ -34,7 +34,9 @@ import { routes } from '../lib/routes';
 
   <AboutBrandStory />
   <AboutLeadership />
-  <AboutTimeline />
+  {/* Ban lãnh đạo cũng nền giấy nên hai khối giấy nằm liền nhau — cần nét kẻ
+      ngăn, không có nét thì 192px giấy ở giữa đọc ra khoảng hụt. */}
+  <AboutTimeline sectionBg="bg-[#fbf8f1] border-t border-border-subtle" />
   <AboutProductionCapacity />
   <AboutTeamGrid />
   <TestimonialsSlider items={testimonialsAbout} variant="dark" />

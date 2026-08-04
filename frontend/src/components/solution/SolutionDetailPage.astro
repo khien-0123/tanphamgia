@@ -4,8 +4,16 @@ import PageHero from '../PageHero.astro';
 import SolutionProcessSection from './SolutionProcessSection.astro';
 import ClientCaseStudyGrid from '../clients/ClientCaseStudyGrid.astro';
 import SiteLayout from '../../layouts/SiteLayout.astro';
-import { RHYTHM_WHITE, sectionPy } from '../../lib/section-rhythm';
+import { RHYTHM_WHITE, SURFACE_PAPER, sectionPy } from '../../lib/section-rhythm';
 import { sectionEyebrow } from '../../lib/section-eyebrow';
+import { sectionTitle } from '../../lib/section-typography';
+import {
+  cardMediaHover,
+  focusRingOnDark,
+  ghostCta,
+  ghostCtaArrow,
+  ghostCtaLabel,
+} from '../../lib/button-classes';
 import { solutions, clientCaseStudies } from '../../data/site';
 import { siteAssets } from '../../data/assets';
 import { listingKeywords } from '../../data/giai-phap-listing';
@@ -81,9 +89,12 @@ const fabricImages = [
   siteAssets.materials.kakiStretch,
 ] as const;
 
-const chapterEyebrow = sectionEyebrow;
-const h2Macro =
-  'text-balance text-[clamp(1.75rem,3.6vw,3.25rem)] font-bold leading-[1.03] text-ink-dark';
+/**
+ * Một cỡ H2 duy nhất cho cả trang — đúng token sectionTitle dùng ở home, about,
+ * dịch vụ. Trước đây trang này có ba cỡ khác nhau: 3.25rem cho khối 01/02,
+ * 4.75rem cho khối Chất liệu, 3rem cho khối cuối.
+ */
+const h2Macro = `${sectionTitle} text-ink-dark`;
 ---
 
 <SiteLayout
@@ -103,14 +114,18 @@ const h2Macro =
     aside={heroAside}
   />
 
-  <main class="bg-[#FFFCF7] text-ink-dark">
+  {/* Nền chung là giấy ấm #FBF8F1 (DESIGN.md §2 luật 3). Trước đây để #FFFCF7 —
+      màu đó chỉ dành cho mặt thẻ nổi, không phải nền section. */}
+  <main class:list={[SURFACE_PAPER, 'text-ink-dark']}>
     {/* ══ 01 · VẤN ĐỀ — hai cột đều, tiêu đề dính trái ══ */}
     <section class:list={[RHYTHM_WHITE, sectionPy]}>
       <div class="mx-auto max-w-container-max-width px-6 md:px-8">
         <div class="grid items-start gap-x-[clamp(2rem,4vw,4.5rem)] gap-y-10 md:grid-cols-2">
           <div class="md:sticky md:top-28">
-            <span class:list={[chapterEyebrow, 'mb-5']}>01 — Vấn đề</span>
-            <h2 class={h2Macro}>{heading(content.sections.issuesTitle)}</h2>
+            <span class={sectionEyebrow}>01 — Vấn đề</span>
+            <h2 class:list={[h2Macro, 'mt-[1.15rem]']}>
+              {heading(content.sections.issuesTitle)}
+            </h2>
           </div>
 
           {/* Nét ngăn vẽ bằng border thật trên từng hàng. Trước đây dùng gap-px + nền của <ul>
@@ -156,8 +171,8 @@ const h2Macro =
           </figure>
 
           <div>
-            <span class:list={[chapterEyebrow, 'mb-5']}>02 — Giải pháp</span>
-            <h2 class:list={[h2Macro, 'mb-10']}>Giải pháp từ Tân Phạm Gia</h2>
+            <span class={sectionEyebrow}>02 — Giải pháp</span>
+            <h2 class:list={[h2Macro, 'mb-10 mt-[1.15rem]']}>Giải pháp từ Tân Phạm Gia</h2>
 
             <ul class="list-none p-0" data-reveal-stagger>
               {
@@ -197,10 +212,10 @@ const h2Macro =
       <div class="mx-auto max-w-container-max-width px-6 md:px-8">
         <header class="grid items-start gap-8 lg:grid-cols-[minmax(0,1.45fr)_minmax(18rem,0.75fr)] lg:gap-16">
           <div data-reveal>
-            <span class:list={[chapterEyebrow, 'mb-6']}>03 — Chất liệu</span>
+            <span class={sectionEyebrow}>03 — Chất liệu</span>
             <h2
               id="material-comparison-title"
-              class="max-w-[15ch] text-balance text-[clamp(2.25rem,5vw,4.75rem)] font-extrabold leading-[0.98] tracking-[-0.045em] text-ink-dark"
+              class:list={[h2Macro, 'mt-[1.15rem]']}
             >
               So sánh nhanh {content.fabricTable.length} nhóm chất liệu
             </h2>
@@ -234,7 +249,8 @@ const h2Macro =
                       widths={[320, 480, 640, 800]}
                       sizes="(max-width: 559px) 100vw, (max-width: 1023px) 50vw, 25vw"
                     />
-                    <span class="absolute left-4 top-4 inline-flex h-11 min-w-11 items-center justify-center rounded-[0.65rem] bg-[#FFC72C] px-2.5 text-lg font-extrabold leading-none tabular-nums text-[#171717] shadow-[0_8px_20px_rgba(83,58,0,0.18)] sm:left-5 sm:top-5 sm:h-12 sm:min-w-12 sm:text-xl">
+                    {/* #FFC72C là bản trôi của token; chuẩn là accent-gold #FFC933 (DESIGN.md §11) */}
+                    <span class="absolute left-4 top-4 inline-flex h-11 min-w-11 items-center justify-center rounded-[0.65rem] bg-accent-gold px-2.5 text-lg font-extrabold leading-none tabular-nums text-[#171717] shadow-[0_8px_20px_rgba(83,58,0,0.18)] sm:left-5 sm:top-5 sm:h-12 sm:min-w-12 sm:text-xl">
                       {String(index + 1).padStart(2, '0')}
                     </span>
                   </figure>
@@ -300,23 +316,13 @@ const h2Macro =
       <div class="mx-auto max-w-container-max-width px-6 md:px-8">
         <header class="mb-10 flex flex-col gap-6 md:mb-12 md:flex-row md:items-end md:justify-between">
           <div>
-            <span class={chapterEyebrow}>Tìm hiểu thêm</span>
-            <h2 class="mt-5 text-balance text-[clamp(1.75rem,2.7vw,3rem)] font-extrabold leading-[1.1] tracking-[-0.03em] text-ink-dark">
-              Khám phá giải pháp phù hợp
-            </h2>
+            <span class={sectionEyebrow}>Tìm hiểu thêm</span>
+            <h2 class:list={[h2Macro, 'mt-[1.15rem]']}>Khám phá giải pháp phù hợp</h2>
           </div>
 
-          <a
-            href={routes.giaiPhap}
-            class="group/section inline-flex w-fit items-center gap-4 border-b border-accent-gold pb-2 text-sm font-bold text-ink-dark no-underline transition-colors hover:text-[#5C4500] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#E1A900]"
-          >
-            <span>Xem tất cả giải pháp</span>
-            <span
-              class="material-symbols-outlined text-lg leading-none transition-transform duration-300 group-hover/section:translate-x-1 motion-reduce:transition-none"
-              aria-hidden="true"
-            >
-              arrow_forward
-            </span>
+          <a href={routes.giaiPhap} class:list={[ghostCta, 'w-fit']}>
+            <span class={ghostCtaLabel}>Xem tất cả giải pháp</span>
+            <span aria-hidden="true" class={ghostCtaArrow}>arrow_forward</span>
           </a>
         </header>
 
@@ -327,7 +333,10 @@ const h2Macro =
                 data-reveal
                 href={item.href}
                 class:list={[
-                  'group relative isolate flex min-h-[300px] flex-col justify-end overflow-hidden rounded-[20px] bg-ink-dark p-5 no-underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-gold sm:p-6',
+                  /* Thẻ nằm trên ảnh tối → viền focus màu trắng (DESIGN.md §Focus).
+                     Vàng trên ảnh navy không đủ tương phản để làm dấu focus. */
+                  'group relative isolate flex min-h-[300px] flex-col justify-end overflow-hidden rounded-[20px] bg-ink-dark p-5 no-underline sm:p-6',
+                  focusRingOnDark,
                   index === 0
                     ? 'md:col-span-2 md:min-h-[420px] lg:col-span-1 lg:row-span-2 lg:min-h-[620px]'
                     : 'lg:min-h-[300px]',
@@ -338,7 +347,8 @@ const h2Macro =
                   alt={`Đồng phục cho ${item.title}`}
                   loading="lazy"
                   class:list={[
-                    'absolute inset-0 -z-20 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105 motion-reduce:transition-none motion-reduce:group-hover:scale-100',
+                    'absolute inset-0 -z-20 h-full w-full object-cover',
+                    cardMediaHover,
                     item.homeImagePosition ?? 'object-top',
                   ]}
                   variant="card"
@@ -361,11 +371,13 @@ const h2Macro =
                   {keywordsFor(item).map((keyword) => <li>{keyword}</li>)}
                 </ul>
 
+                {/* Mũi tên trần — không vòng tròn, không nền. Trước đây nằm trong
+                    huy hiệu tròn màu vàng. */}
                 <span
                   aria-hidden="true"
-                  class="absolute bottom-4 right-4 grid h-10 w-10 place-items-center rounded-full bg-accent-gold text-[#171717] transition-transform duration-300 group-hover:translate-x-1 motion-reduce:transition-none sm:bottom-[18px] sm:right-[18px]"
+                  class="material-symbols-outlined absolute bottom-4 right-4 text-[1.6rem] leading-none text-accent-gold transition-transform duration-300 group-hover:translate-x-1 motion-reduce:transition-none sm:bottom-5 sm:right-5"
                 >
-                  <span class="material-symbols-outlined text-lg leading-none">arrow_forward</span>
+                  arrow_forward
                 </span>
               </a>
             ))

@@ -36,6 +36,18 @@ const related = getOtherCaseStudies(solutionSlug, project.slug, 3).map((item) =>
   tag: item.field ?? `Giải pháp ${item.solutionSlug.replace('giai-phap-', '')}`,
   image: item.image,
   href: caseStudyHref(item.solutionSlug, item.slug),
+  title: item.name,
+  image: item.image,
+  alt: `Dự án đồng phục ${item.name}`,
+  category: item.field ?? 'Dự án tiêu biểu',
+  meta: item.stats,
+}));
+
+/* Danh sách chữ ở cột phải đầu trang — nhiều hơn lưới thẻ dưới chân vì
+   không tốn diện tích ảnh. */
+const sidebarLinks = pool.map((item) => ({
+  href: caseStudyHref(item.solutionSlug, item.slug),
+  title: item.name,
 }));
 
 const toc = [

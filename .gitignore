@@ -15,6 +15,11 @@ Thumbs.db
 # Skill files & AI config
 .agents/
 .claude/
+.codex/
+.mcp.json
 AGENTS.md
 CLAUDE.md
 skills-lock.json
+
+# Thư mục nháp cục bộ — mockup, PDF khách gửi, ảnh chụp màn
+tmp/

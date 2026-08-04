@@ -3,8 +3,8 @@
 export const routes = {
   home: '/',
   gioiThieu: '/gioi-thieu',
-  giaiPhap: '/giai-phap',
   dichVu: '/dich-vu',
+  giaiPhap: '/giai-phap',
   khachHang: '/khach-hang',
   tinTuc: '/tin-tuc',
   taiLieu: '/tai-lieu',
