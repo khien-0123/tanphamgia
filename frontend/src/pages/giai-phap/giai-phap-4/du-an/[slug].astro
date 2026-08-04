@@ -1,19 +1,16 @@
 ---
-import CaseStudyDetailPage from '../../../../components/solution/CaseStudyDetailPage.astro';
+/**
+ * Redirect legacy URL → /khach-hang/du-an/:slug
+ */
+import { caseStudyHref } from '../../../../lib/routes';
 import { duAnGiaiPhap4 } from '../../../../data/giai-phap-4-du-an';
 
 export function getStaticPaths() {
   return duAnGiaiPhap4.map((project) => ({
     params: { slug: project.slug },
-    props: { project },
   }));
 }
 
-const { project } = Astro.props;
+const { slug } = Astro.params;
+return Astro.redirect(caseStudyHref(slug!), 301);
 ---
-
-<CaseStudyDetailPage
-  solutionId={4}
-  solutionSlug="giai-phap-4"
-  project={project}
-/>

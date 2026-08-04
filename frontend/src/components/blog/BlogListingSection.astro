@@ -1,36 +1,76 @@
 ---
+/**
+ * Listing tin tức — render đủ bài một lần; lọc chuyên mục + phân trang client (giống /tai-lieu).
+ */
 import BlogPostCard from './BlogPostCard.astro';
-import BlogPostGrid from './BlogPostGrid.astro';
-import BlogPagination from './BlogPagination.astro';
 import BlogCategoryFilter from './BlogCategoryFilter.astro';
 import type { BlogPost } from '../../data/site';
+import { BLOG_POSTS_PER_PAGE } from '../../data/site';
 import { sectionPy } from '../../lib/section-rhythm';
+import { blogCategorySlug } from '../../lib/routes';
 
 interface Props {
-  items: BlogPost[];
-  currentPage: number;
-  totalPages: number;
-  /** Bài nổi bật — chỉ trang 1 */
+  /** Toàn bộ bài — lọc + cắt trang phía client */
+  posts: BlogPost[];
+  /** Chuyên mục đang mở ('all' hoặc nhãn gốc) */
+  category?: string;
+  /** Trang đang mở (SSR / deep-link) */
+  currentPage?: number;
+  /** Bài nổi bật full-width — chỉ hiện khi «Tất cả» + trang 1 */
   featuredPost?: BlogPost;
   sectionBg?: string;
-  /** Tất cả bài để lấy danh sách chuyên mục (mặc định: featured + items) */
-  allPosts?: BlogPost[];
 }
 
-/** Mặc định khớp section Dự án tiêu biểu (khách hàng): giấy #fbf8f1 */
-const { items, currentPage, totalPages, featuredPost, sectionBg = 'bg-[#fbf8f1]', allPosts } = Astro.props;
+const {
+  posts = [],
+  category = 'all',
+  currentPage = 1,
+  featuredPost,
+  sectionBg = 'bg-[#fbf8f1]',
+} = Astro.props;
 
-const categorySource = allPosts ?? [...(featuredPost ? [featuredPost] : []), ...items];
-const categories = [...new Set(categorySource.map((p) => p.category).filter(Boolean))];
+const perPage = BLOG_POSTS_PER_PAGE;
+const categories = [...new Set(posts.map((p) => p.category).filter(Boolean))];
+const slugToLabel = Object.fromEntries(categories.map((c) => [blogCategorySlug(c), c]));
+
+const listingPosts = featuredPost
+  ? posts.filter((p) => p.slug !== featuredPost.slug)
+  : posts;
+
+const matched =
+  category === 'all' ? listingPosts : posts.filter((p) => p.category === category);
+const totalPages = Math.max(1, Math.ceil(matched.length / perPage));
+const maxPages = Math.max(1, Math.ceil(posts.length / Math.max(1, perPage)));
+const safePage = Math.min(Math.max(1, currentPage), totalPages);
+const pageStart = (safePage - 1) * perPage;
+
+const showFeatured = Boolean(featuredPost) && category === 'all' && safePage === 1;
+
+/** Slug hiện trên trang «Tất cả» (không gồm featured trên trang 1) */
+const pageSlugs = new Set(matched.slice(pageStart, pageStart + perPage).map((p) => p.slug));
 ---
 
-<section class:list={[sectionPy, sectionBg]} data-blog-filter>
+<section
+  class:list={[sectionPy, sectionBg, 'scroll-mt-24 md:scroll-mt-28']}
+  data-blog-filter
+  data-blog-active={category}
+  data-blog-page={String(safePage)}
+  data-blog-per-page={String(perPage)}
+  data-blog-featured-slug={featuredPost?.slug ?? ''}
+  data-blog-slug-map={JSON.stringify(slugToLabel)}
+  id="danh-sach-tin"
+>
   <div class="max-w-container-max-width mx-auto px-6 md:px-8">
-    {categories.length > 1 && <BlogCategoryFilter categories={categories} />}
+    {categories.length > 1 && <BlogCategoryFilter categories={categories} active={category} />}
 
     {
       featuredPost && (
-        <div data-reveal data-blog-category={featuredPost.category} class="mb-8 md:mb-12">
+        <div
+          data-reveal
+          data-blog-featured
+          data-blog-category={featuredPost.category}
+          class:list={['mb-8 md:mb-12', !showFeatured && 'hidden']}
+        >
           <BlogPostCard post={featuredPost} variant="featured" />
         </div>
       )
@@ -38,25 +78,58 @@ const categories = [...new Set(categorySource.map((p) => p.category).filter(Bool
 
     <div data-reveal-stagger class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 md:gap-10">
       {
-        items.map((post) => (
-          <div data-reveal data-blog-category={post.category} class="h-full">
-            <BlogPostCard post={post} variant="default" />
-          </div>
-        ))
+        posts.map((post) => {
+          const isFeaturedSlot =
+            featuredPost && post.slug === featuredPost.slug && showFeatured;
+          const onPage = pageSlugs.has(post.slug) && !isFeaturedSlot;
+          return (
+            <div
+              data-reveal
+              data-blog-card
+              data-blog-category={post.category}
+              data-blog-slug={post.slug}
+              class:list={['h-full', !onPage && 'hidden']}
+            >
+              <BlogPostCard post={post} variant="default" />
+            </div>
+          );
+        })
       }
     </div>
 
     <p
       data-blog-filter-empty
-      hidden
-      class="hidden mt-10 text-center text-sm text-text-muted"
+      class:list={['mt-10 text-center text-sm text-text-muted', matched.length > 0 && 'hidden']}
     >
       Chưa có bài viết trong chuyên mục này.
     </p>
 
-    <div data-blog-filter-pagination>
-      <BlogPagination currentPage={currentPage} totalPages={totalPages} />
-    </div>
+    <nav
+      class="mt-12 flex justify-center gap-2"
+      data-blog-pagination
+      aria-label="Phân trang tin tức"
+    >
+      {
+        Array.from({ length: maxPages }, (_, i) => i + 1).map((page) => (
+          <button
+            type="button"
+            class:list={[
+              'flex h-10 w-10 items-center justify-center rounded-full text-sm font-bold tabular-nums transition-colors',
+              page === safePage
+                ? 'bg-[#1f1b17] text-white'
+                : 'bg-surface-muted text-[#1f1b17] hover:bg-accent-gold hover:text-[#1f1b17]',
+              page > totalPages && 'hidden',
+            ]}
+            data-blog-page-btn
+            data-blog-page={String(page)}
+            aria-label={`Trang ${page}`}
+            aria-current={page === safePage ? 'page' : undefined}
+          >
+            {page}
+          </button>
+        ))
+      }
+    </nav>
   </div>
 </section>
 

@@ -8,6 +8,7 @@ import {
   pageHeroDescription,
   pageHeroImage,
   pageHeroInner,
+  pageHeroInnerCenter,
   pageHeroScrim,
   pageHeroShell,
   pageHeroTitle,
@@ -42,6 +43,11 @@ interface Props {
   /** Ảnh nền hero — khớp chủ đề từng trang (xem pageHeroBg trong site.ts) */
   bgImage?: string;
   aside?: HeroAside;
+  /**
+   * Căn khối chữ theo chiều dọc trong banner.
+   * `center` dùng cho trang chi tiết dịch vụ — `end` giữ chuẩn trang khác.
+   */
+  vAlign?: 'end' | 'center';
 }
 
 const {
@@ -53,14 +59,17 @@ const {
   stats = [],
   bgImage = siteAssets.hero.fallback,
   aside,
+  vAlign = 'end',
 } = Astro.props;
+
+const innerClass = vAlign === 'center' ? pageHeroInnerCenter : pageHeroInner;
 ---
 
 <header data-page-hero class:list={[pageHeroShell, 'text-white']}>
   <SiteImage alt="" class={pageHeroImage} src={bgImage} loading="eager" decoding="async" variant="hero" />
   <div class={pageHeroScrim} aria-hidden="true"></div>
 
-  <div class={pageHeroInner}>
+  <div class={innerClass}>
     <div class="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between lg:gap-12">
       <div class:list={[pageHeroCopy, 'min-w-0 lg:flex-1']}>
       {

@@ -2,13 +2,10 @@
 import SiteLayout from '../layouts/SiteLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import BlogListingSection from '../components/blog/BlogListingSection.astro';
-import { pageSeo, blogPosts, BLOG_POSTS_PER_PAGE, pageHeroBg } from '../data/site';
-import { paginate } from '../utils/pagination';
+import { pageSeo, blogPosts, pageHeroBg } from '../data/site';
 import { routes } from '../lib/routes';
 
 const featuredPost = blogPosts[0];
-const listingPosts = blogPosts.slice(1);
-const { items, currentPage, totalPages } = paginate(listingPosts, 1, BLOG_POSTS_PER_PAGE);
 ---
 
 <SiteLayout
@@ -19,6 +16,7 @@ const { items, currentPage, totalPages } = paginate(listingPosts, 1, BLOG_POSTS_
   <PageHero
     title="Tin tức & Kiến thức chuyên ngành"
     bgImage={pageHeroBg.tinTuc}
+    vAlign="center"
     description="Chia sẻ kinh nghiệm quản lý đồng phục, lựa chọn chất liệu và xu hướng mới trong ngành."
     breadcrumb={[
       { label: 'Trang chủ', href: routes.home },
@@ -27,11 +25,10 @@ const { items, currentPage, totalPages } = paginate(listingPosts, 1, BLOG_POSTS_
   />
 
   <BlogListingSection
+    posts={blogPosts}
     featuredPost={featuredPost}
-    items={items}
-    currentPage={currentPage}
-    totalPages={totalPages}
-    allPosts={blogPosts}
+    category="all"
+    currentPage={1}
     sectionBg="bg-[#fbf8f1]"
   />
 </SiteLayout>

@@ -9,6 +9,10 @@ import {
   solutionHref,
 } from '../lib/routes';
 import { siteAssets } from './assets';
+import { duAnGiaiPhap1 } from './giai-phap-1-du-an';
+import { duAnGiaiPhap2 } from './giai-phap-2-du-an';
+import { duAnGiaiPhap3 } from './giai-phap-3-du-an';
+import { duAnGiaiPhap4 } from './giai-phap-4-du-an';
 
 export const seo = {
   title: 'May Đồng Phục Doanh Nghiệp | Tân Phạm Gia',
@@ -387,7 +391,7 @@ export const homeFeaturedCases = {
     alt: 'Dự án Ngân hàng BIDV',
     tag: 'Ngân hàng & Tài chính',
     logoMark: '/images/logos/bidv.png',
-    href: caseStudyHref('giai-phap-2', 'bidv'),
+    href: caseStudyHref('bidv'),
     stats: [
       { value: '800', label: 'sản phẩm' },
       { value: '45 ngày', label: 'triển khai' },
@@ -398,14 +402,14 @@ export const homeFeaturedCases = {
       name: 'BV Răng Hàm Mặt Sài Gòn',
       image: siteAssets.cases.bvRangHamMat,
       alt: 'Dự án BV Răng Hàm Mặt Sài Gòn',
-      href: caseStudyHref('giai-phap-4', 'bv-rang-ham-mat-sai-gon'),
+      href: caseStudyHref('bv-rang-ham-mat-sai-gon'),
       statHighlight: { value: '650', suffix: 'sp Scrub & Blouse', valueClass: 'gold' },
     },
     {
       name: 'SAVISCO',
       image: siteAssets.cases.saviscoGp3,
       alt: 'Dự án SAVISCO — Sales & Activation',
-      href: caseStudyHref('giai-phap-3', 'savisco'),
+      href: caseStudyHref('savisco'),
       statHighlight: { value: '2.800', suffix: 'sản phẩm', valueClass: 'white' },
     },
   ] satisfies HomeFeaturedCase[],
@@ -475,6 +479,95 @@ const blogPostsRaw: Omit<BlogPost, 'href'>[] = [
     publishedAt: '2025-06-17',
     image: siteAssets.blog.medicalUniform,
     alt: 'Catalog',
+  },
+  /* ─── Bài demo — kiểm tra listing / phân trang (thay bằng WP sau) ─── */
+  {
+    slug: 'demo-qc-5-tang-dong-phuc',
+    title: 'QC 5 tầng trong sản xuất đồng phục doanh nghiệp',
+    excerpt:
+      'Demo: quy trình kiểm soát chất lượng từ nhận vải, cắt, may đến đóng gói — giữ chuẩn đồng đều qua từng đợt hàng.',
+    category: 'Kiến thức đồng phục',
+    categoryColor: '#102C4D',
+    publishedAt: '2025-08-01',
+    image: siteAssets.blog.poloQcWorkshop,
+    alt: 'Kiểm tra chất lượng áo polo tại xưởng',
+  },
+  {
+    slug: 'demo-bang-size-doanh-nghiep',
+    title: 'Cách xây bảng size đồng phục cho đội ngũ đa dạng',
+    excerpt:
+      'Demo: từ đo mẫu nhân sự đến chuẩn hóa size chart — giảm tỷ lệ đổi trả và giữ form đồng đều toàn công ty.',
+    category: 'Kiến thức đồng phục',
+    categoryColor: '#102C4D',
+    publishedAt: '2025-08-08',
+    image: siteAssets.blog.piqueFabricInspection,
+    alt: 'Kiểm tra vải pique trước khi cắt',
+  },
+  {
+    slug: 'demo-logo-theu-in',
+    title: 'Thêu hay in logo đồng phục? So sánh cho thương hiệu B2B',
+    excerpt:
+      'Demo: độ bền, chi phí và cảm giác mặc — lựa chọn kỹ thuật gắn logo phù hợp ngành nghề và ngân sách.',
+    category: 'Xu Hướng Thiết Kế',
+    categoryColor: '#2c4c34',
+    publishedAt: '2025-08-12',
+    image: siteAssets.blog.chonVaiPolo,
+    alt: 'Mẫu áo polo đồng phục doanh nghiệp',
+  },
+  {
+    slug: 'demo-mau-sac-thuong-hieu',
+    title: 'Đồng bộ màu thương hiệu trên đồng phục đa chất liệu',
+    excerpt:
+      'Demo: lab dip, pantone và kiểm màu dưới đèn chuẩn — tránh lệch tông giữa sơ mi, polo và áo khoác.',
+    category: 'Xu Hướng Thiết Kế',
+    categoryColor: '#2c4c34',
+    publishedAt: '2025-08-18',
+    image: siteAssets.blog.dongPhucToiGian,
+    alt: 'Đồng phục tối giản theo tone thương hiệu',
+  },
+  {
+    slug: 'demo-trien-khai-fdi',
+    title: 'Triển khai đồng phục cho nhà máy FDI: checklist 10 bước',
+    excerpt:
+      'Demo: từ brief kỹ thuật, phê duyệt mẫu đến giao hàng định kỳ — khung làm việc với doanh nghiệp nước ngoài.',
+    category: 'Case study',
+    categoryColor: '#a63e2d',
+    publishedAt: '2025-08-22',
+    image: siteAssets.blog.sanXuat10000,
+    alt: 'Chuyền may đồng phục quy mô lớn',
+  },
+  {
+    slug: 'demo-chuoi-ban-le',
+    title: 'Đồng phục chuỗi bán lẻ: giữ nhận diện khi mở rộng cửa hàng',
+    excerpt:
+      'Demo: chuẩn hóa SKU, số lượng theo ca làm việc và bổ sung nhanh khi khai trương điểm mới.',
+    category: 'Case study',
+    categoryColor: '#a63e2d',
+    publishedAt: '2025-08-26',
+    image: siteAssets.cases.vivant,
+    alt: 'Đồng phục nhân viên chuỗi bán lẻ',
+  },
+  {
+    slug: 'demo-catalogue-van-phong-2025',
+    title: 'Catalogue đồng phục văn phòng 2025',
+    excerpt:
+      'Demo: sơ mi, polo và blazer công sở — gợi ý phối màu trung tính cho môi trường làm việc hiện đại.',
+    category: 'Catalog',
+    categoryColor: '#1a2b8c',
+    publishedAt: '2025-09-02',
+    image: siteAssets.blog.poloFabricSelection,
+    alt: 'Catalogue mẫu đồng phục văn phòng',
+  },
+  {
+    slug: 'demo-catalogue-spa-y-te',
+    title: 'Catalogue đồng phục spa & phòng khám',
+    excerpt:
+      'Demo: trang phục nhẹ, dễ giặt và chỉnh chu — phù hợp spa, clinic và cơ sở dịch vụ chăm sóc sức khỏe.',
+    category: 'Catalog',
+    categoryColor: '#1a2b8c',
+    publishedAt: '2025-09-10',
+    image: siteAssets.blog.medicalUniform,
+    alt: 'Mẫu đồng phục spa và y tế',
   },
 ];
 
@@ -611,7 +704,7 @@ export const clientCaseStudies: ClientCaseStudy[] = [
     logo: '/images/logos/coca-cola.png',
     image: siteAssets.cases.cocaCola,
     alt: 'Đội ngũ Coca-Cola Philippines trong đồng phục Tân Phạm Gia',
-    href: caseStudyHref('giai-phap-2', 'coca-cola-philippines'),
+    href: caseStudyHref('coca-cola-philippines'),
     intro:
       'Tân Phạm Gia trở thành đối tác của Coca-Cola Philippines từ những đơn hàng nhỏ, từng bước cung cấp đồng phục cho các phòng ban và đồng hành cùng nhiều sự kiện quan trọng.',
     metrics: [
@@ -638,7 +731,7 @@ export const clientCaseStudies: ClientCaseStudy[] = [
     logo: '/images/logos/Logo_Bidv.png',
     image: siteAssets.cases.bidvClient,
     alt: 'Đội ngũ BIDV trong đồng phục Tân Phạm Gia',
-    href: caseStudyHref('giai-phap-2', 'bidv'),
+    href: caseStudyHref('bidv'),
     intro:
       'Chuẩn hóa hình ảnh đội ngũ giao dịch — đồng nhất màu sắc, form dáng và hoàn thiện theo tiêu chí nghiệm thu trên toàn hệ thống.',
     metrics: [
@@ -665,7 +758,7 @@ export const clientCaseStudies: ClientCaseStudy[] = [
     logo: siteAssets.brand.logo,
     image: siteAssets.cases.kingGroup,
     alt: 'Đội ngũ King Group trong đồng phục sản xuất',
-    href: caseStudyHref('giai-phap-1', 'king-group'),
+    href: caseStudyHref('king-group'),
     intro:
       'Đáp ứng đơn hàng đồng phục công nghiệp quy mô lớn — chất liệu bền, ATLĐ và chất lượng ổn định qua nhiều đợt tái đặt.',
     metrics: [
@@ -684,18 +777,55 @@ export const clientCaseStudies: ClientCaseStudy[] = [
   },
 ];
 
-/** Bài blog case study — section liên quan trên /khach-hang (không dùng tin tức chung) */
-export const caseStudyBlogPosts: BlogPost[] = clientCaseStudies.map((item) => ({
-  slug: item.slug,
-  title: item.title,
-  excerpt: item.intro,
-  category: 'Case Study',
-  categoryColor: '#0d1b3a',
-  publishedAt: '2025-01-01',
-  image: item.image,
-  alt: item.alt,
-  href: item.href,
-}));
+/** Bài blog case study trên /khach-hang — 9 bài / trang */
+export const CASE_STUDY_POSTS_PER_PAGE = 9;
 
-/** Phân trang tin tức */
-export const BLOG_POSTS_PER_PAGE = 12;
+/** Gom dự án từ 4 giải pháp; ưu tiên 3 case nổi bật, bỏ trùng slug */
+const caseStudySourceProjects = [
+  ...duAnGiaiPhap1.map((p) => ({ ...p, solutionSlug: 'giai-phap-1' })),
+  ...duAnGiaiPhap2.map((p) => ({ ...p, solutionSlug: 'giai-phap-2' })),
+  ...duAnGiaiPhap3.map((p) => ({ ...p, solutionSlug: 'giai-phap-3' })),
+  ...duAnGiaiPhap4.map((p) => ({ ...p, solutionSlug: 'giai-phap-4' })),
+];
+
+const featuredCaseSlugs = clientCaseStudies.map((c) => c.slug);
+const featuredTitleBySlug = Object.fromEntries(clientCaseStudies.map((c) => [c.slug, c.title]));
+
+/** Tiêu đề hiển thị — cùng nguồn với card listing / related */
+export function caseStudyDisplayTitle(slug: string, name: string): string {
+  return featuredTitleBySlug[slug] ?? `${name} — Case study đồng phục`;
+}
+
+function buildCaseStudyBlogPosts(): BlogPost[] {
+  const bySlug = new Map<string, (typeof caseStudySourceProjects)[number]>();
+  for (const project of caseStudySourceProjects) {
+    if (!bySlug.has(project.slug)) bySlug.set(project.slug, project);
+  }
+
+  const ordered: typeof caseStudySourceProjects = [];
+  for (const slug of featuredCaseSlugs) {
+    const hit = bySlug.get(slug);
+    if (hit) {
+      ordered.push(hit);
+      bySlug.delete(slug);
+    }
+  }
+  ordered.push(...bySlug.values());
+
+  return ordered.map((project, index) => ({
+    slug: project.slug,
+    title: caseStudyDisplayTitle(project.slug, project.name),
+    excerpt: project.intro,
+    category: 'Case Study',
+    categoryColor: '#0d1b3a',
+    publishedAt: `2025-01-${String((index % 28) + 1).padStart(2, '0')}`,
+    image: project.image,
+    alt: `Dự án đồng phục ${project.name}`,
+    href: caseStudyHref(project.slug),
+  }));
+}
+
+export const caseStudyBlogPosts: BlogPost[] = buildCaseStudyBlogPosts();
+
+/** Phân trang tin tức — 9 bài / trang (mọi chuyên mục) */
+export const BLOG_POSTS_PER_PAGE = 9;

@@ -32,7 +32,7 @@ const { sectionBg = RHYTHM_WHITE } = Astro.props;
   </div>
 
   <div
-    class="relative w-full max-w-none mx-0 pt-2 pb-4 px-6 md:px-[clamp(1.5rem,5vw,4rem)] max-md:pb-2"
+    class="relative w-full max-w-none mx-0 pt-1 pb-2 px-6 md:px-[clamp(1.5rem,5vw,4rem)] max-md:pb-1"
   >
     <div
       aria-hidden="true"
@@ -84,7 +84,7 @@ const { sectionBg = RHYTHM_WHITE } = Astro.props;
               >
                 <span
                   class:list={[
-                    'block font-bold text-[0.8125rem] md:text-sm uppercase tracking-[0.06em] tabular-nums mb-1.5',
+                    'mb-2 inline-block border-b-2 border-[#ffc72c] pb-1 text-[2rem] font-extrabold leading-none tracking-[-0.03em] tabular-nums md:mb-2.5',
                     textOnLightTitle,
                     side === 'left' && 'max-md:text-left',
                   ]}
@@ -92,7 +92,7 @@ const { sectionBg = RHYTHM_WHITE } = Astro.props;
                   {item.year}
                 </span>
                 <h3
-                  class:list={['text-[1.0625rem] md:text-lg lg:text-xl font-extrabold tracking-[-0.02em] leading-snug mb-2 md:mb-2.5', textOnLightTitle]}
+                  class:list={['text-[1.0625rem] md:text-lg lg:text-xl font-extrabold tracking-[-0.02em] leading-snug mb-1.5 md:mb-2', textOnLightTitle]}
                 >
                   {item.title}
                 </h3>

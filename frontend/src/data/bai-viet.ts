@@ -969,14 +969,25 @@ const blogBodies: Record<string, PostBlock[]> = {
   ],
 };
 
-/** Tra thân bài theo slug. Trả về mảng rỗng nếu bài chưa có nội dung. */
+/** Tra thân bài theo slug. Demo chưa viết nội dung thì trả placeholder ngắn. */
 export const postBodies: Record<string, PostBlock[]> = {
   ...caseStudyBodies,
   ...blogBodies,
 };
 
 export function getPostBody(slug: string): PostBlock[] {
-  return postBodies[slug] ?? [];
+  return (
+    postBodies[slug] ?? [
+      {
+        type: 'lead',
+        text: 'Nội dung demo — sẽ thay bằng bài viết đầy đủ khi kết nối WordPress.',
+      },
+      {
+        type: 'p',
+        text: 'Bài này dùng để kiểm tra listing, lọc chuyên mục và phân trang trên môi trường phát triển.',
+      },
+    ]
+  );
 }
 
 /**

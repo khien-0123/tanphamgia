@@ -36,13 +36,7 @@ const imageAspectClass: Record<ServiceImageRatio, string> = {
 {
   blocks.map((block, index) => (
     <section
-      class:list={[
-        SURFACE_PAPER,
-        serviceSectionPy,
-        /* Hai khối giấy liền nhau thì kẻ nét ngăn — khối đầu đã có dải navy
-           phía trên nên không cần. */
-        index > 0 && 'border-t border-border-subtle',
-      ]}
+      class:list={[SURFACE_PAPER, serviceSectionPy]}
       aria-labelledby={`service-block-${index}`}
     >
       <div class="mx-auto max-w-container-max-width px-6 md:px-8">

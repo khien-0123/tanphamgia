@@ -31,6 +31,7 @@ const totalPages = Math.ceil(allDocuments.length / DOCUMENTS_PER_PAGE);
   <PageHero
     title="Thư viện tài liệu"
     bgImage={pageHeroBg.taiLieu}
+    vAlign="center"
     description={`Trang ${currentPage} / ${totalPages}`}
     breadcrumb={[
       { label: 'Trang chủ', href: routes.home },

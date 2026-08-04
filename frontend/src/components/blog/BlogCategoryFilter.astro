@@ -7,9 +7,11 @@ import { sectionEyebrow } from '../../lib/section-eyebrow';
 
 interface Props {
   categories: string[];
+  /** Chuyên mục đang mở ('all' hoặc nhãn gốc) */
+  active?: string;
 }
 
-const { categories } = Astro.props;
+const { categories, active = 'all' } = Astro.props;
 
 const filters = [{ id: 'all', label: 'Tất cả' }, ...categories.map((c) => ({ id: c, label: c }))];
 ---
@@ -23,12 +25,12 @@ const filters = [{ id: 'all', label: 'Tất cả' }, ...categories.map((c) => ({
     class="blog-filter__track flex max-w-full items-center gap-2 overflow-x-auto overscroll-x-contain pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
   >
     {
-      filters.map((f, i) => (
+      filters.map((f) => (
         <button
           type="button"
           data-blog-filter-btn={f.id}
-          aria-pressed={i === 0 ? 'true' : 'false'}
-          class:list={['blog-filter-btn', i === 0 && 'is-active']}
+          aria-pressed={f.id === active ? 'true' : 'false'}
+          class:list={['blog-filter-btn', f.id === active && 'is-active']}
         >
           {f.label}
         </button>

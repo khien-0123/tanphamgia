@@ -1,0 +1,80 @@
+---
+/**
+ * Listing «Bài viết case study» — phân trang client-side (9 bài/trang), không reload.
+ */
+import BlogPostCard from '../blog/BlogPostCard.astro';
+import type { BlogPost } from '../../data/site';
+import { CASE_STUDY_POSTS_PER_PAGE } from '../../data/site';
+import { sectionPy } from '../../lib/section-rhythm';
+import { sectionEyebrow } from '../../lib/section-eyebrow';
+import { sectionTitleOnLight } from '../../lib/section-typography';
+
+interface Props {
+  posts: BlogPost[];
+  /** Trang mở khi SSR / deep-link */
+  currentPage?: number;
+}
+
+const { posts, currentPage = 1 } = Astro.props;
+const perPage = CASE_STUDY_POSTS_PER_PAGE;
+const totalPages = Math.max(1, Math.ceil(posts.length / perPage));
+const safePage = Math.min(Math.max(1, currentPage), totalPages);
+const start = (safePage - 1) * perPage;
+const end = start + perPage;
+---
+
+<section
+  id="bai-viet-case-study"
+  class:list={[sectionPy, 'scroll-mt-24 bg-[#fbf8f1] md:scroll-mt-28']}
+  aria-labelledby="kh-blog-title"
+  data-cs-blog
+  data-no-reveal
+  data-cs-page={String(safePage)}
+  data-cs-per-page={String(perPage)}
+>
+  <div class="mx-auto max-w-container-max-width px-6 md:px-8">
+    <header class="mb-10 md:mb-12">
+      <p class={sectionEyebrow}>Case study</p>
+      <h2 id="kh-blog-title" class:list={['mt-5 max-w-[18ch]', sectionTitleOnLight]}>
+        Bài viết case study
+      </h2>
+    </header>
+
+    <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 lg:gap-10 [overflow-anchor:none]">
+      {
+        posts.map((post, index) => (
+          <div
+            data-cs-card
+            class:list={['h-full', (index < start || index >= end) && 'hidden']}
+          >
+            <BlogPostCard post={post} readMoreText="Xem case study" />
+          </div>
+        ))
+      }
+    </div>
+
+    <nav aria-label="Phân trang bài viết case study" class="mt-12 flex justify-center gap-2">
+      {
+        Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+          <button
+            type="button"
+            class:list={[
+              'flex h-10 w-10 items-center justify-center rounded-full text-sm font-bold transition-colors',
+              page === safePage
+                ? 'bg-[#1f1b17] text-white'
+                : 'bg-surface-muted text-[#1f1b17] hover:bg-accent-gold hover:text-[#1f1b17]',
+            ]}
+            data-cs-page-btn
+            data-cs-page={String(page)}
+            aria-label={`Trang ${page}`}
+            aria-current={page === safePage ? 'page' : undefined}
+          >
+            {page}
+          </button>
+        ))
+      }
+    </nav>
+  </div>
+</section>
+
+<script src="../../scripts/case-study-blog-pagination.ts"></script>
