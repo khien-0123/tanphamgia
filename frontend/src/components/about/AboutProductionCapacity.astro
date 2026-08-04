@@ -3,20 +3,27 @@ import SiteImage from '../SiteImage.astro';
 import { productionCapacity } from '../../data/gioi-thieu';
 import { sectionEyebrowWarm } from '../../lib/section-eyebrow';
 import { sectionPy } from '../../lib/section-rhythm';
+import {
+  sectionTitleOnLight,
+  textOnDarkLead,
+  textOnDarkTitle,
+  textOnLightLead,
+  textOnLightTitle,
+} from '../../lib/section-typography';
 ---
 
 {/* Năng lực sản xuất — dải navy: chữ + 6 ô số bo tròn | ảnh xưởng bo lớn */}
-<section class="bg-[#0d1b3a] text-white" id="nang-luc" aria-labelledby="about-capacity-title">
+<section class:list={['bg-[#0d1b3a]', textOnDarkTitle]} id="nang-luc" aria-labelledby="about-capacity-title">
   <div class:list={['mx-auto grid w-full max-w-container-max-width items-stretch gap-10 px-6 md:px-8 lg:grid-cols-[1.08fr_0.92fr] lg:gap-14', sectionPy]}>
     <div data-reveal>
       <p class={sectionEyebrowWarm}>Năng lực sản xuất</p>
       <h2
         id="about-capacity-title"
-        class="mt-6 max-w-[16ch] text-balance text-[clamp(2rem,3.2vw,3rem)] font-extrabold leading-[1.08] tracking-[-0.04em]"
+        class:list={['mt-6 max-w-[16ch] text-balance text-[clamp(2rem,3.2vw,3rem)] font-extrabold leading-[1.08] tracking-[-0.04em]', textOnDarkTitle]}
       >
         Quy mô & Kiểm soát chất lượng
       </h2>
-      <p class="mt-5 max-w-[37rem] text-sm leading-[1.65] text-white/78 sm:text-[0.95rem]">
+      <p class:list={['mt-5 max-w-[37rem] text-sm leading-[1.65] sm:text-[0.95rem]', textOnDarkLead]}>
         {productionCapacity.intro}
       </p>
 
@@ -48,7 +55,7 @@ import { sectionPy } from '../../lib/section-rhythm';
         <b class="block text-lg font-extrabold leading-[1.25] tracking-[-0.02em] sm:text-xl">
           Xưởng may 2.000m² đạt chuẩn quốc tế
         </b>
-        <span class="mt-2 block text-sm leading-[1.5] text-white/75">
+        <span class:list={['mt-2 block text-sm leading-[1.5]', textOnDarkLead]}>
           Máy móc hiện đại nhập khẩu từ Nhật Bản và Đức, đáp ứng đơn hàng khắt khe nhất về kỹ thuật lẫn mỹ thuật.
         </span>
       </figcaption>
@@ -57,7 +64,7 @@ import { sectionPy } from '../../lib/section-rhythm';
 </section>
 
 {/* Quy trình QC đa tầng — ngôn ngữ thiết kế đồng bộ với quy trình trang chủ */}
-<section class="qc-section relative overflow-hidden bg-[#fbf8f1] text-[#171717]" aria-labelledby="about-qc-title">
+<section class:list={['qc-section relative overflow-hidden bg-[#fbf8f1]', textOnLightTitle]} aria-labelledby="about-qc-title">
   <div class="pointer-events-none absolute -right-20 -top-32 h-[28rem] w-[28rem] rounded-full bg-[#f8edc8]" aria-hidden="true"></div>
 
   <div class:list={['relative mx-auto w-full max-w-container-max-width px-6 md:px-8 pb-24 lg:pb-28', sectionPy]}>
@@ -65,11 +72,11 @@ import { sectionPy } from '../../lib/section-rhythm';
       <p class={sectionEyebrowWarm}>Kiểm soát chất lượng</p>
       <h2
         id="about-qc-title"
-        class="mt-6 max-w-[34ch] text-balance text-[clamp(1.8rem,3vw,3rem)] font-extrabold leading-[1.08] tracking-[-0.04em]"
+        class:list={['mt-6 max-w-[34ch]', sectionTitleOnLight]}
       >
         {productionCapacity.qcTitle}
       </h2>
-      <p class="mt-3 max-w-[58rem] text-sm leading-[1.55] text-[#625a50] sm:text-base">{productionCapacity.qcDesc}</p>
+      <p class:list={['mt-3 max-w-[58rem] text-sm leading-[1.55] sm:text-base', textOnLightLead]}>{productionCapacity.qcDesc}</p>
     </header>
 
     <div data-reveal class="qc-process-grid relative mt-10 lg:mt-12">
@@ -82,8 +89,8 @@ import { sectionPy } from '../../lib/section-rhythm';
       <ol class="relative grid list-none grid-cols-1 gap-5 p-0 sm:grid-cols-2 lg:grid-cols-4">
         {
           productionCapacity.qcSteps.map((step, index) => (
-            <li class:list={['qc-process-card relative flex min-h-[22rem] flex-col rounded-[1rem] px-5 pb-7 pt-6 text-center shadow-[0_16px_28px_rgba(38,31,21,0.14)] sm:px-6', index % 2 === 0 ? 'bg-[#0d1b3a] text-white' : 'bg-[#ffc72c] text-[#111827]']}>
-              <span class:list={['text-xs font-extrabold uppercase tracking-[0.14em]', index % 2 === 0 ? 'text-[#ffc72c]' : 'text-[#6e5200]']}>
+            <li class:list={['qc-process-card relative flex min-h-[22rem] flex-col rounded-[1rem] px-5 pb-7 pt-6 text-center shadow-[0_16px_28px_rgba(38,31,21,0.14)] sm:px-6', index % 2 === 0 ? 'bg-[#0d1b3a] text-white' : ['bg-[#ffc72c]', textOnLightTitle]]}>
+              <span class:list={['text-xs font-extrabold uppercase tracking-[0.14em]', index % 2 === 0 ? 'text-[#ffc72c]' : textOnLightTitle]}>
                 Bước {step.number}
               </span>
               <h3 class="mt-5 flex min-h-[3.5rem] items-center justify-center text-xl font-extrabold leading-[1.18] tracking-[-0.025em]">{step.title}</h3>

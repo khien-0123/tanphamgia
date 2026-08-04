@@ -2,6 +2,7 @@
 import { homeProcess } from '../../data/home';
 import { sectionEyebrowWarm } from '../../lib/section-eyebrow';
 import { sectionPy } from '../../lib/section-rhythm';
+import { textOnLightLead, textOnLightTitle } from '../../lib/section-typography';
 
 const iconPaths = {
   consulting: '<path d="M12 3v4m0 0 6 5m-6-5-6 5m12 0H6l-3 3h18l-3-3ZM8 18h8v3H8z" />',
@@ -11,16 +12,16 @@ const iconPaths = {
 } as const;
 ---
 
-<section class="mockup-process-section relative overflow-hidden bg-[#fbf8f1] text-[#171717]" aria-labelledby="mockup-process-title">
+<section class:list={['mockup-process-section relative overflow-hidden bg-[#fbf8f1]', textOnLightTitle]} aria-labelledby="mockup-process-title">
   <div class="pointer-events-none absolute -right-20 -top-32 h-[28rem] w-[28rem] rounded-full bg-[#f8edc8]" aria-hidden="true"></div>
 
   <div class:list={['relative mx-auto w-full max-w-container-max-width px-6 pb-24 lg:px-8 lg:pb-28', sectionPy]}>
     <header class="max-w-[64rem]">
       <p class={sectionEyebrowWarm}>{homeProcess.eyebrow}</p>
-      <h2 id="mockup-process-title" class="mt-6 max-w-[34ch] text-balance text-[clamp(1.8rem,3vw,3rem)] font-extrabold leading-[1.08] tracking-[-0.04em]">
+      <h2 id="mockup-process-title" class:list={['mt-6 max-w-[34ch] text-balance text-[clamp(1.8rem,3vw,3rem)] font-extrabold leading-[1.08] tracking-[-0.04em]', textOnLightTitle]}>
         {homeProcess.title}
       </h2>
-      <p class="mt-3 max-w-[58rem] text-sm leading-[1.55] text-[#625a50] sm:text-base">
+      <p class:list={['mt-3 max-w-[58rem] text-sm leading-[1.55] sm:text-base', textOnLightLead]}>
         {homeProcess.description}
       </p>
     </header>
@@ -34,7 +35,7 @@ const iconPaths = {
 
       <ol class="relative grid list-none grid-cols-2 gap-3 p-0 sm:gap-5 lg:grid-cols-4">
         {homeProcess.items.map((item, index) => (
-          <li class:list={['mockup-process-card relative flex min-h-0 flex-col items-stretch rounded-[1rem] px-4 pb-6 pt-5 text-center shadow-[0_16px_28px_rgba(38,31,21,0.14)] sm:min-h-[16.5rem] sm:px-[34px] sm:pb-7 sm:pt-6', index % 2 === 0 ? 'bg-[#0d1b3a] text-white' : 'bg-[#ffc72c] text-[#111827]']}>
+          <li class:list={['mockup-process-card relative flex min-h-0 flex-col items-stretch rounded-[1rem] px-4 pb-6 pt-5 text-center shadow-[0_16px_28px_rgba(38,31,21,0.14)] sm:min-h-[16.5rem] sm:px-[34px] sm:pb-7 sm:pt-6', index % 2 === 0 ? 'bg-[#0d1b3a] text-white' : ['bg-[#ffc72c]', textOnLightTitle]]}>
             <span class="mx-auto flex h-9 w-9 shrink-0 items-center justify-center sm:h-11 sm:w-11" aria-hidden="true">
               <svg class="h-7 w-7 fill-none stroke-current stroke-[1.8] sm:h-8 sm:w-8" viewBox="0 0 24 24" set:html={iconPaths[item.icon]}></svg>
             </span>

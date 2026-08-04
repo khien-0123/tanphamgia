@@ -5,7 +5,6 @@ import DocumentLibrary from '../../../components/documents/DocumentLibrary.astro
 import DocumentDownloadForm from '../../../components/documents/DocumentDownloadForm.astro';
 import { pageSeo, pageHeroBg } from '../../../data/site';
 import { allDocuments, DOCUMENTS_PER_PAGE } from '../../../data/tai-lieu';
-import { paginate } from '../../../utils/pagination';
 import { routes } from '../../../lib/routes';
 import { SURFACE_NAVY, SURFACE_PAPER } from '../../../lib/section-rhythm';
 
@@ -20,11 +19,8 @@ export function getStaticPaths() {
   }));
 }
 
-const { items, currentPage, totalPages, totalItems } = paginate(
-  allDocuments,
-  Number(Astro.params.page),
-  DOCUMENTS_PER_PAGE,
-);
+const currentPage = Number(Astro.params.page);
+const totalPages = Math.ceil(allDocuments.length / DOCUMENTS_PER_PAGE);
 ---
 
 <SiteLayout
@@ -44,11 +40,9 @@ const { items, currentPage, totalPages, totalItems } = paginate(
   />
 
   <DocumentLibrary
-    documents={items}
+    documents={allDocuments}
     category="all"
     currentPage={currentPage}
-    totalPages={totalPages}
-    totalItems={totalItems}
     sectionBg={SURFACE_PAPER}
   />
   <DocumentDownloadForm allDocuments={allDocuments} sectionBg={SURFACE_NAVY} />

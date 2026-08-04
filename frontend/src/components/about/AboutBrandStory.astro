@@ -4,9 +4,10 @@ import { brandStory } from '../../data/gioi-thieu';
 import { sectionEyebrowWarm } from '../../lib/section-eyebrow';
 import { sectionPy } from '../../lib/section-rhythm';
 import { focusRingOnDark, primaryPill } from '../../lib/button-classes';
+import { sectionTitleOnDark, textOnDarkLead, textOnDarkTitle } from '../../lib/section-typography';
 ---
 
-<section class="bg-[#0d1b3a] text-white" aria-labelledby="about-story-title">
+<section class:list={['bg-[#0d1b3a]', textOnDarkTitle]} aria-labelledby="about-story-title">
   <div class:list={['mx-auto grid w-full max-w-container-max-width items-center gap-10 px-6 md:px-8 lg:grid-cols-[1.02fr_1fr] lg:gap-14 xl:gap-16', sectionPy]}>
     <figure data-reveal data-reveal-direction="up" class="relative m-0 overflow-hidden rounded-[1.75rem] bg-white/5 lg:self-stretch">
       <SiteImage
@@ -26,14 +27,11 @@ import { focusRingOnDark, primaryPill } from '../../lib/button-classes';
     <div data-reveal data-reveal-direction="up" class="max-w-[43rem] lg:py-3">
       <p class:list={['mb-4', sectionEyebrowWarm]}>Câu chuyện thương hiệu</p>
 
-      <h2
-        id="about-story-title"
-        class="max-w-[24ch] text-balance text-[clamp(1.75rem,2.7vw,3rem)] font-extrabold leading-[1.1] tracking-[-0.03em] text-white"
-      >
+      <h2 id="about-story-title" class:list={['max-w-[24ch]', sectionTitleOnDark]}>
         {brandStory.title}
       </h2>
 
-      <div class="mt-10 space-y-4 text-sm leading-[1.65] text-white/78 sm:mt-12 sm:text-base">
+      <div class:list={['mt-10 space-y-4 text-sm leading-[1.65] sm:mt-12 sm:text-base', textOnDarkLead]}>
         {brandStory.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
       </div>
 

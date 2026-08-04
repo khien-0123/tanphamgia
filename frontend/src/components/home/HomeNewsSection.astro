@@ -5,11 +5,12 @@ import newsMark from '../../assets/images/brand/TPG-11.webp';
 import { formatBlogDate } from '../../lib/format-blog-date';
 import { sectionEyebrowWarm } from '../../lib/section-eyebrow';
 import { sectionPy } from '../../lib/section-rhythm';
+import { textOnLightBodyMuted, textOnLightTitle } from '../../lib/section-typography';
 
 const [largePosts, compactPosts] = [homeNews.items.slice(0, 2), homeNews.items.slice(2)];
 ---
 
-<section class="relative overflow-hidden bg-[#fbf8f1] text-[#201f1c]" aria-labelledby="mockup-news-title">
+<section class:list={['relative overflow-hidden bg-[#fbf8f1]', textOnLightTitle]} aria-labelledby="mockup-news-title">
   <img
     src={newsMark.src}
     alt=""
@@ -21,9 +22,9 @@ const [largePosts, compactPosts] = [homeNews.items.slice(0, 2), homeNews.items.s
     <header class="mb-8 flex items-end justify-between gap-6 lg:mb-10">
       <div>
         <p class={sectionEyebrowWarm}>{homeNews.eyebrow}</p>
-        <h2 id="mockup-news-title" class="mt-5 text-[clamp(2rem,4vw,3.1rem)] font-extrabold leading-[1.05] tracking-[-0.045em]">{homeNews.title}</h2>
+        <h2 id="mockup-news-title" class:list={['mt-5 text-[clamp(2rem,4vw,3.1rem)] font-extrabold leading-[1.05] tracking-[-0.045em]', textOnLightTitle]}>{homeNews.title}</h2>
       </div>
-      <a href={homeNews.cta.href} class="hidden min-h-6 items-center gap-2 text-xs font-extrabold text-[#171717] transition-colors hover:text-[#b07800] sm:inline-flex">
+      <a href={homeNews.cta.href} class:list={['hidden min-h-6 items-center gap-2 text-xs font-extrabold transition-colors hover:text-[#b07800] sm:inline-flex', textOnLightTitle]}>
         <span>{homeNews.cta.label}</span><span class="material-symbols-outlined text-lg leading-none" aria-hidden="true">arrow_forward</span>
       </a>
     </header>
@@ -38,8 +39,8 @@ const [largePosts, compactPosts] = [homeNews.items.slice(0, 2), homeNews.items.s
             </figure>
             <div class="flex flex-1 flex-col p-5 sm:p-6">
               <p class="text-[0.58rem] font-extrabold uppercase tracking-[0.04em] text-[#c18a00]">{post.category} <span class="px-1 text-[#c18a00]">·</span> <time class="normal-case tracking-normal font-semibold" datetime={post.publishedAt}>{formatBlogDate(post.publishedAt)}</time></p>
-              <h3 class="mt-3 max-w-[22ch] text-xl font-extrabold leading-[1.12] tracking-[-0.025em] sm:text-[1.35rem]">{post.title}</h3>
-              <p class="mt-3 line-clamp-3 text-xs leading-[1.55] text-[#6f6a60]">{post.excerpt}</p>
+              <h3 class:list={['mt-3 max-w-[22ch] text-xl font-extrabold leading-[1.12] tracking-[-0.025em] sm:text-[1.35rem]', textOnLightTitle]}>{post.title}</h3>
+              <p class:list={['mt-3 line-clamp-3 text-xs leading-[1.55]', textOnLightBodyMuted]}>{post.excerpt}</p>
               <span class="mt-auto pt-5 text-[0.65rem] font-extrabold">Đọc bài viết <span class="material-symbols-outlined ml-2 align-middle text-base leading-none" aria-hidden="true">arrow_forward</span></span>
             </div>
           </article>

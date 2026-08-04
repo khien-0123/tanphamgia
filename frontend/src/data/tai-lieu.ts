@@ -21,8 +21,12 @@ export interface DocumentItem {
   coverTitle?: string;
 }
 
-/** Số tài liệu mỗi trang. Ít hơn ngưỡng này thì thanh phân trang tự ẩn. */
-export const DOCUMENTS_PER_PAGE = 15;
+/** Mobile: 8 thẻ / trang (2 cột × 4 hàng) */
+export const DOCUMENTS_PER_PAGE_MOBILE = 8;
+/** Desktop (md+): 10 thẻ / trang */
+export const DOCUMENTS_PER_PAGE_DESKTOP = 10;
+/** Alias — dùng khi sinh route tĩnh (lấy ngưỡng nhỏ hơn để có đủ trang) */
+export const DOCUMENTS_PER_PAGE = DOCUMENTS_PER_PAGE_MOBILE;
 
 export interface DocumentCategoryDef {
   /** Dùng làm slug route — 'all' là trang gốc /tai-lieu */

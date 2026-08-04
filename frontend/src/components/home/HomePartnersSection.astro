@@ -4,6 +4,7 @@ import { homeClients } from '../../data/home';
 import { getClientLogoScale } from '../../lib/client-logo-scale';
 import { sectionEyebrow } from '../../lib/section-eyebrow';
 import { sectionPy } from '../../lib/section-rhythm';
+import { sectionTitleOnDark, textOnDarkLead, textOnDarkTitle } from '../../lib/section-typography';
 
 const midpoint = Math.ceil(homeClients.items.length / 2);
 const rows = [
@@ -20,22 +21,19 @@ function getMockupLogoScale(logo: string): number {
 }
 ---
 
-<section class="overflow-hidden bg-[#0d1b3a] text-white" aria-labelledby="mockup-clients-title">
+<section class:list={['overflow-hidden bg-[#0d1b3a]', textOnDarkTitle]} aria-labelledby="mockup-clients-title">
   <div class:list={['mx-auto w-full max-w-container-max-width px-6', sectionPy]}>
     <header data-reveal data-reveal-direction="up" class="max-w-[64rem]">
       <p class:list={['mb-5', sectionEyebrow]}>{homeClients.eyebrow}</p>
-      <h2
-        id="mockup-clients-title"
-        class="max-w-[34ch] text-balance text-[clamp(1.75rem,2.7vw,3rem)] font-extrabold leading-[1.1] tracking-[-0.03em] text-white"
-      >
+      <h2 id="mockup-clients-title" class:list={['max-w-[34ch]', sectionTitleOnDark]}>
         {homeClients.title}
       </h2>
-      <p class="mt-4 max-w-[51rem] text-sm leading-[1.55] text-white/78 sm:text-base">
+      <p class:list={['mt-4 max-w-[51rem] text-sm leading-[1.55] sm:text-base', textOnDarkLead]}>
         {homeClients.description}
       </p>
     </header>
 
-    <h3 class="mt-6 text-base font-extrabold uppercase tracking-[-0.015em] text-white sm:text-lg">
+    <h3 class:list={['mt-6 text-base font-extrabold uppercase tracking-[-0.015em] sm:text-lg', textOnDarkTitle]}>
       {homeClients.logosLabel}
     </h3>
 

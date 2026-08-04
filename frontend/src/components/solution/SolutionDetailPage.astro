@@ -6,7 +6,11 @@ import ClientCaseStudyGrid from '../clients/ClientCaseStudyGrid.astro';
 import SiteLayout from '../../layouts/SiteLayout.astro';
 import { RHYTHM_WHITE, SURFACE_PAPER, sectionPy } from '../../lib/section-rhythm';
 import { sectionEyebrow } from '../../lib/section-eyebrow';
-import { sectionTitle } from '../../lib/section-typography';
+import {
+  sectionTitle,
+  textOnLightLead,
+  textOnLightTitle,
+} from '../../lib/section-typography';
 import {
   cardMediaHover,
   focusRingOnDark,
@@ -94,7 +98,7 @@ const fabricImages = [
  * dịch vụ. Trước đây trang này có ba cỡ khác nhau: 3.25rem cho khối 01/02,
  * 4.75rem cho khối Chất liệu, 3rem cho khối cuối.
  */
-const h2Macro = `${sectionTitle} text-ink-dark`;
+const h2Macro = `${sectionTitle} ${textOnLightTitle}`;
 ---
 
 <SiteLayout
@@ -116,7 +120,7 @@ const h2Macro = `${sectionTitle} text-ink-dark`;
 
   {/* Nền chung là giấy ấm #FBF8F1 (DESIGN.md §2 luật 3). Trước đây để #FFFCF7 —
       màu đó chỉ dành cho mặt thẻ nổi, không phải nền section. */}
-  <main class:list={[SURFACE_PAPER, 'text-ink-dark']}>
+  <main class:list={[SURFACE_PAPER, textOnLightTitle]}>
     {/* ══ 01 · VẤN ĐỀ — hai cột đều, tiêu đề dính trái ══ */}
     <section class:list={[RHYTHM_WHITE, sectionPy]}>
       <div class="mx-auto max-w-container-max-width px-6 md:px-8">
@@ -188,10 +192,10 @@ const h2Macro = `${sectionTitle} text-ink-dark`;
                       check_circle
                     </span>
                     <div class="min-w-0">
-                      <h3 class="mb-1.5 text-lg font-bold text-ink-dark md:text-xl">
+                      <h3 class:list={['mb-1.5 text-lg font-bold md:text-xl', textOnLightTitle]}>
                         {plan.title}
                       </h3>
-                      <p class="text-sm leading-relaxed text-text-muted md:text-[0.9375rem]">
+                      <p class:list={['text-sm leading-relaxed md:text-[0.9375rem]', textOnLightLead]}>
                         {plan.desc}
                       </p>
                     </div>
@@ -222,7 +226,7 @@ const h2Macro = `${sectionTitle} text-ink-dark`;
           </div>
 
           <div data-reveal class="lg:pt-10">
-            <p class="max-w-[34rem] text-base leading-[1.65] text-[#4F4942] md:text-lg">
+            <p class:list={['max-w-[34rem] text-base leading-[1.65] md:text-lg', textOnLightLead]}>
               Nhìn cùng lúc thành phần, đặc tính và môi trường phù hợp để lựa chọn nhanh hơn.
             </p>
           </div>
@@ -256,7 +260,7 @@ const h2Macro = `${sectionTitle} text-ink-dark`;
                   </figure>
 
                   <div class="px-4 py-4 sm:px-5 sm:py-5">
-                    <h3 class="min-h-[2.75rem] text-[clamp(1.25rem,1.55vw,1.5rem)] font-extrabold leading-[1.08] tracking-[-0.03em] text-ink-dark">
+                    <h3 class:list={['min-h-[2.75rem] text-[clamp(1.25rem,1.55vw,1.5rem)] font-extrabold leading-[1.08] tracking-[-0.03em]', textOnLightTitle]}>
                       {row.material}
                     </h3>
 
@@ -359,9 +363,9 @@ const h2Macro = `${sectionTitle} text-ink-dark`;
                   aria-hidden="true"
                   class="absolute left-4 top-4 grid h-10 w-10 place-items-center rounded-[11px] border border-white/30 bg-white/15 backdrop-blur-[6px] sm:left-5 sm:top-5"
                 >
-                  <span class="material-symbols-outlined text-lg leading-none text-white">
-                    {item.icon}
-                  </span>
+                    <span class="material-symbols-outlined text-lg leading-none text-[#e1a900]">
+                      {item.icon}
+                    </span>
                 </span>
 
                 <h3 class="pr-14 text-balance text-lg font-extrabold leading-snug text-white sm:text-xl">

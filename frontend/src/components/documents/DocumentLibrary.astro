@@ -1,61 +1,111 @@
 ---
+/**
+ * Thư viện tài liệu — render đủ thẻ một lần, lọc danh mục + phân trang bằng JS (không reload).
+ */
 import DocumentCard from './DocumentCard.astro';
 import DocumentCategoryTiles from './DocumentCategoryTiles.astro';
-import DocumentPagination from './DocumentPagination.astro';
 import type { DocumentItem } from '../../data/tai-lieu';
-import { documentCategories } from '../../data/tai-lieu';
+import {
+  DOCUMENTS_PER_PAGE_DESKTOP,
+  DOCUMENTS_PER_PAGE_MOBILE,
+  documentCategories,
+} from '../../data/tai-lieu';
 import { RHYTHM_WHITE, sectionPy } from '../../lib/section-rhythm';
 
 interface Props {
-  /** Tài liệu của riêng trang này — đã cắt theo DOCUMENTS_PER_PAGE */
+  /** Toàn bộ thư viện — lọc phía client */
   documents: DocumentItem[];
-  /** Nhóm đang mở */
+  /** Nhóm đang mở khi SSR */
   category: string;
-  currentPage: number;
-  totalPages: number;
-  /** Tổng số tài liệu trong nhóm, không phải số trên trang này */
-  totalItems: number;
+  /** Trang đang mở (SSR / deep-link /trang/N) */
+  currentPage?: number;
   sectionBg?: string;
 }
 
 const {
   documents,
   category,
-  currentPage,
-  totalPages,
-  totalItems,
+  currentPage = 1,
   sectionBg = RHYTHM_WHITE,
 } = Astro.props;
 
 const activeGroup = documentCategories.find((c) => c.id === category);
 const groupLabel = activeGroup?.label ?? 'Tất cả tài liệu';
-/* Chỉ nhắc số trang khi thật sự có nhiều trang — một trang thì câu đó thừa */
-const countLine =
-  totalPages > 1
-    ? `${groupLabel} · ${totalItems} tài liệu · trang ${currentPage}/${totalPages}`
-    : `${groupLabel} · ${totalItems} tài liệu`;
+const matchedDocs =
+  category === 'all' ? documents : documents.filter((d) => d.category === category);
+const visibleCount = matchedDocs.length;
+const countLine = `${groupLabel} · ${visibleCount} tài liệu`;
+
+const labelMap = Object.fromEntries(documentCategories.map((c) => [c.id, c.label]));
+/** SSR: dự phòng theo ngưỡng lớn hơn (desktop) — client sẽ cắt lại theo breakpoint */
+const ssrPerPage = DOCUMENTS_PER_PAGE_DESKTOP;
+const maxPages = Math.max(1, Math.ceil(documents.length / DOCUMENTS_PER_PAGE_MOBILE));
+const categoryPages = Math.max(1, Math.ceil(visibleCount / ssrPerPage));
+const safePage = Math.min(Math.max(1, currentPage), categoryPages);
+const pageStart = (safePage - 1) * ssrPerPage;
+const pageIds = new Set(matchedDocs.slice(pageStart, pageStart + ssrPerPage).map((d) => d.id));
 ---
 
-<section class:list={[sectionPy, sectionBg]}>
+<section
+  class:list={[sectionPy, sectionBg, 'scroll-mt-24 md:scroll-mt-28']}
+  data-no-reveal
+  data-doc-library
+  data-doc-active={category}
+  data-doc-page={String(safePage)}
+  data-doc-per-page-mobile={String(DOCUMENTS_PER_PAGE_MOBILE)}
+  data-doc-per-page-desktop={String(DOCUMENTS_PER_PAGE_DESKTOP)}
+  data-doc-labels={JSON.stringify(labelMap)}
+  id="danh-muc"
+>
   <div class="mx-auto max-w-container-max-width px-6 md:px-8">
     <DocumentCategoryTiles active={category} />
 
     <header class="mb-6 mt-10 md:mt-12">
-      <h2 class="text-[clamp(1.35rem,2.3vw,1.85rem)] font-extrabold leading-[1.1] tracking-[-0.03em] text-ink-dark">
+      <h2 class="text-[clamp(1.35rem,2.3vw,1.85rem)] font-extrabold leading-[1.1] tracking-[-0.03em] text-[#1f1b17]">
         Thư viện tài liệu
       </h2>
-      <p class="mt-[0.35rem] text-sm text-[#625a50]">{countLine}</p>
+      <p class="mt-[0.35rem] text-sm text-[#625a50]" data-doc-count>{countLine}</p>
     </header>
 
-    {/* 5 thẻ một hàng ở desktop, đúng bản khách gửi.
-        Khung 1280 trừ padding còn ~1216px → mỗi thẻ ~227px, nên gap siết còn 1rem từ xl. */}
-    <div
-      class="grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 xl:gap-4"
-      data-reveal-stagger
-    >
-      {documents.map((doc, index) => <DocumentCard doc={doc} index={index} />)}
+    <div class="grid grid-cols-2 gap-3 sm:gap-5 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 xl:gap-4">
+      {
+        documents.map((doc, index) => (
+          <DocumentCard
+            doc={doc}
+            index={index}
+            hidden={!pageIds.has(doc.id)}
+          />
+        ))
+      }
     </div>
 
-    <DocumentPagination currentPage={currentPage} totalPages={totalPages} category={category} />
+    <nav
+      class="mt-10 flex justify-center gap-2 md:mt-12"
+      data-doc-pagination
+      aria-label="Phân trang tài liệu"
+    >
+      {
+        Array.from({ length: maxPages }, (_, i) => i + 1).map((page) => (
+          <button
+            type="button"
+            class:list={[
+              'flex h-10 w-10 items-center justify-center rounded-full text-sm font-bold tabular-nums transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1f1b17]',
+              page === safePage
+                ? 'bg-[#1f1b17] text-white'
+                : 'border border-[#e5dfd2] bg-[#fffcf7] text-[#1f1b17] hover:border-[#ffc933] hover:bg-[#fff0bd] hover:text-[#5c4500]',
+              page > categoryPages && 'hidden',
+            ]}
+            data-doc-page-btn
+            data-doc-page={String(page)}
+            aria-label={`Trang ${page}`}
+            aria-current={page === safePage ? 'page' : undefined}
+          >
+            {page}
+          </button>
+        ))
+      }
+    </nav>
   </div>
 </section>
+
+<script src="../../scripts/document-library-filter.ts"></script>

@@ -2,6 +2,7 @@
 /**
  * Listing case study — layout sole (ảnh | chữ xen kẽ)
  * Hàng lẻ (1, 3): nền navy · Hàng chẵn (2): nền sáng
+ * Mobile: carousel ngang peek + dots (không autoplay) để rút chiều cao section
  */
 import SiteImage from '../SiteImage.astro';
 import type { ClientCaseStudy } from '../../data/site';
@@ -13,6 +14,9 @@ import {
   sectionBody,
   sectionCardTitle,
   sectionTitleOnLight,
+  textOnDarkTitle,
+  textOnLightBodyMuted,
+  textOnLightTitle,
 } from '../../lib/section-typography';
 
 interface Props {
@@ -36,16 +40,26 @@ const imageClass =
   'h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03] max-md:static md:absolute md:inset-0 md:h-full md:w-full';
 ---
 
-<section class:list={[sectionPy, 'border-b border-[#e8dfcf]', sectionBg]} aria-labelledby="client-cs-title">
+<section
+  class:list={[sectionPy, 'border-b border-[#e8dfcf]', sectionBg]}
+  aria-labelledby="client-cs-title"
+  data-client-cs-carousel
+>
   <div class="mx-auto max-w-container-max-width px-6 md:px-8">
-    <header class="mb-12 md:mb-16">
+    <header class="mb-10 md:mb-16">
       <p class={sectionEyebrow}>{eyebrow}</p>
       <h2 id="client-cs-title" class:list={['mt-5 max-w-[18ch]', sectionTitleOnLight]}>
         {title}
       </h2>
     </header>
 
-    <div class="flex flex-col">
+    <div
+      class="client-cs-track flex snap-x snap-mandatory gap-0 overflow-x-auto overflow-y-hidden overscroll-x-contain pb-1 [-webkit-overflow-scrolling:touch] [scrollbar-width:none] md:snap-none md:flex-col md:overflow-visible md:pb-0 [&::-webkit-scrollbar]:hidden"
+      data-client-cs-track
+      role="region"
+      aria-roledescription="carousel"
+      aria-label={title}
+    >
       {
         items.map((item, index) => {
           const imageLeft = index % 2 === 0;
@@ -55,13 +69,19 @@ const imageClass =
           return (
             <article
               class:list={[
-                'group last:border-b-0',
-                isNavy ? 'border-b border-white/10 bg-[#0d1b3a]' : 'border-b border-[#e8dfcf] bg-transparent',
+                'group overflow-hidden last:border-b-0 md:min-w-0 md:rounded-none',
+                'max-md:box-border max-md:w-full max-md:min-w-full max-md:basis-full max-md:shrink-0 max-md:grow-0 max-md:snap-start max-md:rounded-[1.25rem]',
+                'md:w-full md:basis-auto md:shrink',
+                isNavy
+                  ? 'border-b border-white/10 bg-[#0d1b3a] max-md:border-b-0'
+                  : 'border-b border-[#e8dfcf] bg-transparent max-md:border max-md:border-[#e8dfcf]',
               ]}
+              data-client-cs-slide
+              aria-label={`${index + 1} / ${items.length}: ${item.client}`}
             >
-              <div class="grid grid-cols-1 md:grid-cols-2 md:items-stretch">
+              <div class="grid min-w-0 grid-cols-1 md:grid-cols-2 md:items-stretch">
                 {imageLeft && (
-                  <div class={imageFrameClass}>
+                  <div class:list={[imageFrameClass, 'max-md:order-1']}>
                     <SiteImage
                       src={item.image}
                       alt={item.alt}
@@ -71,21 +91,21 @@ const imageClass =
                       loading="lazy"
                       decoding="async"
                       variant="card"
-                      sizes="(min-width: 768px) 50vw, 100vw"
+                      sizes="(min-width: 768px) 50vw, 85vw"
                     />
                   </div>
                 )}
 
                 <div
                   class:list={[
-                    'flex flex-col py-6 max-md:px-0 md:p-6 lg:p-8',
+                    'flex min-w-0 flex-col px-5 py-6 sm:px-6 md:order-none md:p-6 lg:p-8 max-md:order-2',
                     isNavy ? 'bg-[#0d1b3a]' : 'bg-transparent',
                   ]}
                 >
-                  <div class="flex items-center justify-between gap-3">
-                    <div class="flex items-center">
+                  <div class="flex min-w-0 items-start justify-between gap-3">
+                    <div class="flex min-w-0 flex-1 items-center overflow-hidden">
                       {item.logo?.includes('/brand/') && isNavy ? (
-                        <div class="flex items-center gap-2.5" aria-label="Tân Phạm Gia">
+                        <div class="flex min-w-0 items-center gap-2.5" aria-label="Tân Phạm Gia">
                           <SiteImage
                             src={siteAssets.brand.mark}
                             alt=""
@@ -96,7 +116,7 @@ const imageClass =
                             decoding="async"
                             variant="logo"
                           />
-                          <span class="text-[0.7rem] font-extrabold uppercase leading-none tracking-[0.14em] text-white sm:text-xs">
+                          <span class="truncate text-[0.7rem] font-extrabold uppercase leading-none tracking-[0.14em] text-white sm:text-xs">
                             TAN PHAM GIA
                           </span>
                         </div>
@@ -106,7 +126,7 @@ const imageClass =
                           alt=""
                           width={180}
                           height={48}
-                          class="h-8 w-auto max-w-[9rem] object-contain object-left"
+                          class="h-8 w-auto max-w-[min(9rem,45vw)] object-contain object-left"
                           style={`transform: scale(${getClientLogoScale(item.logo)}); transform-origin: left center;`}
                           loading="lazy"
                           decoding="async"
@@ -127,8 +147,8 @@ const imageClass =
                       ) : (
                         <span
                           class:list={[
-                            'text-sm font-extrabold',
-                            isNavy ? 'text-white' : 'text-[#0d1b3a]',
+                            'truncate text-sm font-extrabold',
+                            isNavy ? textOnDarkTitle : textOnLightTitle,
                           ]}
                         >
                           {item.client}
@@ -137,7 +157,7 @@ const imageClass =
                     </div>
                     <span
                       class:list={[
-                        'rounded-full px-3 py-1 text-[0.65rem] font-extrabold',
+                        'shrink-0 rounded-full px-3 py-1 text-[0.65rem] font-extrabold',
                         isNavy ? 'bg-[#ffc72c] text-[#0d1b3a]' : 'bg-[#0d1b3a] text-white',
                       ]}
                     >
@@ -147,9 +167,9 @@ const imageClass =
 
                   <h3
                     class:list={[
-                      'mt-4',
+                      'mt-4 break-words',
                       sectionCardTitle,
-                      isNavy ? 'text-white' : 'text-[#0d1b3a]',
+                      isNavy ? textOnDarkTitle : textOnLightTitle,
                     ]}
                   >
                     {item.client}
@@ -157,21 +177,21 @@ const imageClass =
 
                   <div
                     class:list={[
-                      'mt-4 grid grid-cols-2 gap-4 border-b pb-4',
+                      'mt-4 grid grid-cols-2 gap-3 border-b pb-4 sm:gap-4',
                       isNavy ? 'border-white/15' : 'border-[#e8dfcf]',
                     ]}
                   >
                     {item.metrics.map((m) => (
-                      <div>
+                      <div class="min-w-0">
                         <p
                           class:list={[
-                            'text-xl font-extrabold leading-none tabular-nums md:text-2xl',
+                            'break-words text-lg font-extrabold leading-none tabular-nums sm:text-xl md:text-2xl',
                             isNavy ? 'text-[#ffc72c]' : 'text-[#c18a00]',
                           ]}
                         >
                           {m.value}
                         </p>
-                        <p class:list={['mt-1 text-xs', isNavy ? 'text-white/55' : 'text-[#6f675c]']}>
+                        <p class:list={['mt-1 break-words text-xs', isNavy ? 'text-white/55' : textOnLightBodyMuted]}>
                           {m.label}
                         </p>
                       </div>
@@ -180,9 +200,8 @@ const imageClass =
 
                   <p
                     class:list={[
-                      'mt-4',
-                      sectionBody,
-                      isNavy ? 'text-white/75' : 'text-[#4a453c]',
+                      'mt-4 text-sm leading-relaxed',
+                      isNavy ? textOnDarkTitle : sectionBody,
                     ]}
                   >
                     {item.intro}
@@ -198,9 +217,8 @@ const imageClass =
                       <p class={sectionEyebrow}>Thách thức</p>
                       <ol
                         class:list={[
-                          'mt-2 list-decimal space-y-1.5 pl-4',
-                          sectionBody,
-                          isNavy ? 'text-white/80' : 'text-[#2a251f]',
+                          'mt-2 list-decimal space-y-1.5 pl-4 text-sm leading-relaxed',
+                          isNavy ? textOnDarkTitle : textOnLightBodyMuted,
                         ]}
                       >
                         {item.challenges.map((c) => (
@@ -212,9 +230,8 @@ const imageClass =
                       <p class={sectionEyebrow}>Giải pháp</p>
                       <ol
                         class:list={[
-                          'mt-2 list-decimal space-y-1.5 pl-4',
-                          sectionBody,
-                          isNavy ? 'text-white/80' : 'text-[#2a251f]',
+                          'mt-2 list-decimal space-y-1.5 pl-4 text-sm leading-relaxed',
+                          isNavy ? textOnDarkTitle : textOnLightBodyMuted,
                         ]}
                       >
                         {item.solutions.map((s) => (
@@ -228,7 +245,7 @@ const imageClass =
                     href={href}
                     class:list={[
                       'case-cta mt-6 inline-flex items-center gap-2 text-sm font-extrabold no-underline',
-                      isNavy ? 'text-white' : 'text-[#0d1b3a]',
+                      isNavy ? textOnDarkTitle : textOnLightTitle,
                     ]}
                   >
                     <span class="case-cta__label">Tìm hiểu thêm về dự án</span>
@@ -239,7 +256,7 @@ const imageClass =
                 </div>
 
                 {!imageLeft && (
-                  <div class={imageFrameClass}>
+                  <div class:list={[imageFrameClass, 'max-md:order-1']}>
                     <SiteImage
                       src={item.image}
                       alt={item.alt}
@@ -249,7 +266,7 @@ const imageClass =
                       loading="lazy"
                       decoding="async"
                       variant="card"
-                      sizes="(min-width: 768px) 50vw, 100vw"
+                      sizes="(min-width: 768px) 50vw, 85vw"
                     />
                   </div>
                 )}
@@ -259,10 +276,43 @@ const imageClass =
         })
       }
     </div>
+
+    {
+      items.length > 1 && (
+        <div
+          class="mt-5 flex items-center justify-center gap-2 md:hidden"
+          role="tablist"
+          aria-label="Chọn case study"
+        >
+          {items.map((item, index) => (
+            <button
+              type="button"
+              class="client-cs-dot h-2 w-2 rounded-full bg-[#1f1b17]/25 transition-[width,background-color] duration-200 aria-selected:w-5 aria-selected:bg-[#1f1b17]"
+              data-client-cs-dot
+              role="tab"
+              aria-label={`Case study ${index + 1}: ${item.client}`}
+              aria-selected={index === 0 ? 'true' : 'false'}
+            />
+          ))}
+        </div>
+      )
+    }
   </div>
 </section>
 
+<script src="../../scripts/client-case-study-carousel.ts"></script>
+
 <style>
+  /* Mobile: mỗi slide = đúng bề ngang track (scrollport), không peek thẻ kế */
+  @media (max-width: 767px) {
+    .client-cs-track > [data-client-cs-slide] {
+      flex: 0 0 100%;
+      width: 100%;
+      min-width: 100%;
+      max-width: 100%;
+    }
+  }
+
   .case-cta__label {
     text-decoration-line: none;
     text-decoration-color: #ffc72c;

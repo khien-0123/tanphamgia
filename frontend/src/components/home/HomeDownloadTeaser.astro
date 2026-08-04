@@ -4,18 +4,19 @@ import { homeDocuments } from '../../data/home';
 import { industryOptions } from '../../data/tai-lieu';
 import { sectionEyebrowWarm } from '../../lib/section-eyebrow';
 import { sectionPy } from '../../lib/section-rhythm';
+import { textOnDarkLead, textOnDarkTitle } from '../../lib/section-typography';
 ---
 
-<section class="bg-[#0d1b3a] text-white" aria-labelledby="mockup-documents-title">
+<section class:list={['bg-[#0d1b3a]', textOnDarkTitle]} aria-labelledby="mockup-documents-title">
   <div class:list={['mx-auto grid w-full max-w-container-max-width items-stretch gap-10 px-6 md:px-8 lg:grid-cols-[0.96fr_1.04fr] lg:gap-16', sectionPy]}>
     <div class="lg:pl-1">
       <p class={sectionEyebrowWarm}>{homeDocuments.eyebrow}</p>
 
-      <h2 id="mockup-documents-title" class="mt-6 max-w-[14ch] text-balance text-[clamp(2rem,3.2vw,3rem)] font-extrabold leading-[1.08] tracking-[-0.04em]">
+      <h2 id="mockup-documents-title" class:list={['mt-6 max-w-[14ch] text-balance text-[clamp(2rem,3.2vw,3rem)] font-extrabold leading-[1.08] tracking-[-0.04em]', textOnDarkTitle]}>
         {homeDocuments.title}
       </h2>
 
-      <p class="mt-5 max-w-[37rem] text-sm leading-[1.65] text-white/78 sm:text-[0.95rem]">
+      <p class:list={['mt-5 max-w-[37rem] text-sm leading-[1.65] sm:text-[0.95rem]', textOnDarkLead]}>
         {homeDocuments.description}
       </p>
 
@@ -49,7 +50,7 @@ import { sectionPy } from '../../lib/section-rhythm';
           </select>
         </div>
 
-        <button class="mt-7 flex min-h-14 w-full items-center justify-center gap-2 rounded-full bg-[#ffc72c] px-6 py-3 text-sm font-extrabold text-[#17140a] transition-transform hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#ffc72c] disabled:cursor-not-allowed disabled:opacity-70" type="submit" data-mockup-documents-submit>
+        <button class="mt-7 flex min-h-14 w-full items-center justify-center gap-2 rounded-full bg-[#ffc72c] px-6 py-3 text-sm font-extrabold text-[#1f1b17] transition-transform hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#ffc72c] disabled:cursor-not-allowed disabled:opacity-70" type="submit" data-mockup-documents-submit>
           <span>{homeDocuments.submitLabel}</span>
           {/* Mũi tên trần — bỏ huy hiệu tròn #e9af16 */}
           <span class="material-symbols-outlined text-xl leading-none" aria-hidden="true">arrow_forward</span>

@@ -1,6 +1,8 @@
 ---
 import { siteContact } from '../../data/site';
 import { sectionEyebrow } from '../../lib/section-eyebrow';
+import { primaryPill, focusRingOnPaper } from '../../lib/button-classes';
+import { sectionLead, sectionTitleOnLight, textOnLightLead, textOnLightTitle } from '../../lib/section-typography';
 
 /**
  * Cột trái trang Liên hệ. Trước đây là danh sách chữ, số hotline nằm lẫn dưới dạng
@@ -31,16 +33,16 @@ const channels = [
 <div data-reveal>
   <p class={sectionEyebrow}>Liên hệ</p>
 
-  <h2 class="mt-6 text-[clamp(1.75rem,2.7vw,3rem)] font-extrabold leading-[1.1] tracking-[-0.03em] text-ink-dark">
+  <h2 class:list={['mt-6', sectionTitleOnLight]}>
     Nói cho chúng tôi biết doanh nghiệp bạn cần gì
   </h2>
 
-  <p class="mt-5 max-w-[46ch] text-sm leading-[1.7] text-[#625a50] sm:text-[0.95rem]">
+  <p class:list={['mt-5 max-w-[46ch]', sectionLead]}>
     {siteContact.responseCommitment}
   </p>
 
   <a
-    class="mt-7 inline-flex min-h-[3.4rem] items-center justify-center gap-2 rounded-full bg-[#ffc72c] px-7 text-[0.95rem] font-extrabold text-[#17140a] no-underline transition-transform duration-200 hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#ffc72c]"
+    class:list={[primaryPill, focusRingOnPaper, 'mt-7 no-underline']}
     href={siteContact.phoneHref}
   >
     <span class="material-symbols-outlined text-xl leading-none" aria-hidden="true">call</span>
@@ -57,18 +59,21 @@ const channels = [
             </span>
           </span>
           <span class="min-w-0">
-            <span class="block text-[0.65rem] font-extrabold uppercase tracking-[0.16em] text-[#625a50]">
+            <span class:list={['block text-[0.65rem] font-extrabold uppercase tracking-[0.16em]', textOnLightLead]}>
               {item.label}
             </span>
             {item.href ? (
               <a
-                class="mt-[0.3rem] block break-words text-[0.9375rem] font-bold leading-[1.45] text-ink-dark no-underline [overflow-wrap:anywhere] hover:underline"
+                class:list={[
+                  'mt-[0.3rem] block break-words text-[0.9375rem] font-bold leading-[1.45] no-underline [overflow-wrap:anywhere] hover:underline',
+                  textOnLightTitle,
+                ]}
                 href={item.href}
               >
                 {item.value}
               </a>
             ) : (
-              <span class="mt-[0.3rem] block break-words text-[0.9375rem] font-bold leading-[1.45] text-ink-dark [overflow-wrap:anywhere]">
+              <span class:list={['mt-[0.3rem] block break-words text-[0.9375rem] font-bold leading-[1.45] [overflow-wrap:anywhere]', textOnLightTitle]}>
                 {item.value}
               </span>
             )}

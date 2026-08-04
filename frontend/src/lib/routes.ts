@@ -33,8 +33,8 @@ export function blogPageHref(page: number): string {
 
 /**
  * Trang thư viện tài liệu. `category` là 'all' thì dùng route gốc /tai-lieu,
- * còn lại đi qua /tai-lieu/danh-muc/<slug> — nhờ vậy lọc nhóm và phân trang
- * không giẫm chân nhau khi thư viện vượt quá một trang.
+ * còn lại đi qua /tai-lieu/danh-muc/<slug>.
+ * Không gắn hash — lọc client-side, tránh scroll/nháy khi đổi danh mục.
  */
 export function docLibraryHref(category: string, page = 1): string {
   const base = category === 'all' ? routes.taiLieu : `${routes.taiLieu}/danh-muc/${category}`;
