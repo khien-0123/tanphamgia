@@ -4,16 +4,14 @@ import { teamDepartments } from '../../data/gioi-thieu';
 import { sectionEyebrow } from '../../lib/section-eyebrow';
 import { sectionPy } from '../../lib/section-rhythm';
 import { cardMediaHover } from '../../lib/button-classes';
+import { sectionTitleOnLight, textOnLightTitle } from '../../lib/section-typography';
 ---
 
-<section class="bg-[#fbf8f1] text-[#1f1b17]" aria-labelledby="about-team-title">
+<section class:list={['bg-[#fbf8f1]', textOnLightTitle]} aria-labelledby="about-team-title">
   <div class:list={['mx-auto w-full max-w-container-max-width px-6 md:px-8', sectionPy]}>
     <header class="max-w-[44rem]">
       <p class={sectionEyebrow}>Đội ngũ nhân sự</p>
-      <h2
-        id="about-team-title"
-        class="mt-6 text-balance text-[clamp(1.75rem,2.7vw,3rem)] font-extrabold leading-[1.1] tracking-[-0.03em]"
-      >
+      <h2 id="about-team-title" class:list={['mt-6', sectionTitleOnLight]}>
         Bốn bộ phận đồng hành cùng doanh nghiệp
       </h2>
     </header>

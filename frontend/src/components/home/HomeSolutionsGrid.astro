@@ -3,19 +3,21 @@ import SiteImage from '../SiteImage.astro';
 import { homeSolutions } from '../../data/home';
 import { sectionEyebrow } from '../../lib/section-eyebrow';
 import { sectionPy } from '../../lib/section-rhythm';
+import {
+  sectionTitleOnLight,
+  textOnLightLead,
+  textOnLightTitle,
+} from '../../lib/section-typography';
 ---
 
-<section class="overflow-hidden bg-[#fbf8f1] text-[#1f1b17]" aria-labelledby="mockup-solutions-title">
+<section class:list={['overflow-hidden bg-[#fbf8f1]', textOnLightTitle]} aria-labelledby="mockup-solutions-title">
   <div class:list={['mx-auto w-full max-w-container-max-width px-6', sectionPy]}>
     <header data-reveal data-reveal-direction="up" class="max-w-[64rem]">
       <p class:list={['mb-6', sectionEyebrow]}>{homeSolutions.eyebrow}</p>
-      <h2
-        id="mockup-solutions-title"
-        class="max-w-[34ch] text-balance text-[clamp(1.75rem,2.7vw,3rem)] font-extrabold leading-[1.1] tracking-[-0.03em] text-[#1f1b17]"
-      >
+      <h2 id="mockup-solutions-title" class:list={['max-w-[34ch]', sectionTitleOnLight]}>
         {homeSolutions.title}
       </h2>
-      <p class="mt-6 max-w-[62rem] text-sm leading-[1.55] text-[#625a50] sm:text-base">
+      <p class:list={['mt-6 max-w-[62rem] text-sm leading-[1.55] sm:text-base', textOnLightLead]}>
         {homeSolutions.description}
       </p>
     </header>
@@ -26,7 +28,10 @@ import { sectionPy } from '../../lib/section-rhythm';
           <a
             href={item.href}
             data-solutions-mosaic-link
-            class="group relative flex min-h-[19rem] flex-col justify-end overflow-hidden rounded-[1.25rem] border border-[#ded5c5] bg-[#e8e1d5] text-[#1f1b17] no-underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#b88900] sm:min-h-[24rem] sm:rounded-[1.75rem]"
+            class:list={[
+              'group relative flex min-h-[19rem] flex-col justify-end overflow-hidden rounded-[1.25rem] border border-[#ded5c5] bg-[#e8e1d5] no-underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#b88900] sm:min-h-[24rem] sm:rounded-[1.75rem]',
+              textOnLightTitle,
+            ]}
           >
             <SiteImage
               src={item.image}
@@ -43,10 +48,10 @@ import { sectionPy } from '../../lib/section-rhythm';
               <span class="inline-flex rounded-xl bg-[#ffe793] px-2.5 py-1.5 text-base font-extrabold leading-none tabular-nums text-[#574200] sm:rounded-2xl sm:px-3.5 sm:py-2 sm:text-xl">
                 {item.number}
               </span>
-              <h3 class="mt-2.5 line-clamp-2 min-h-[2.75em] text-xs min-[360px]:text-[0.8125rem] font-extrabold leading-snug tracking-[-0.02em] text-[#26211c] sm:mt-3.5 sm:text-lg sm:leading-snug lg:text-base lg:leading-snug xl:text-lg xl:leading-snug">
+              <h3 class:list={['mt-2.5 line-clamp-2 min-h-[2.75em] text-xs min-[360px]:text-[0.8125rem] font-extrabold leading-snug tracking-[-0.02em] sm:mt-3.5 sm:text-lg sm:leading-snug lg:text-base lg:leading-snug xl:text-lg xl:leading-snug', textOnLightTitle]}>
                 {item.title}
               </h3>
-              <span class="mt-3 inline-flex items-center gap-1.5 text-xs font-extrabold text-[#1f1b17] sm:mt-4 sm:gap-2 sm:text-[0.95rem]">
+              <span class:list={['mt-3 inline-flex items-center gap-1.5 text-xs font-extrabold sm:mt-4 sm:gap-2 sm:text-[0.95rem]', textOnLightTitle]}>
                 <span class="underline decoration-2 underline-offset-[5px]">Xem chi tiết</span>
                 <span class="material-symbols-outlined text-base leading-none sm:text-lg" aria-hidden="true">arrow_forward</span>
               </span>
@@ -57,12 +62,12 @@ import { sectionPy } from '../../lib/section-rhythm';
                 <span class="inline-flex shrink-0 rounded-2xl bg-[#ffe793] px-3 py-2 text-sm font-extrabold leading-none tabular-nums text-[#574200]">
                   {item.number}
                 </span>
-                <h3 class="line-clamp-2 text-sm font-extrabold leading-snug text-[#26211c] sm:line-clamp-none sm:text-[0.95rem]">{item.title}</h3>
+                <h3 class:list={['line-clamp-2 text-sm font-extrabold leading-snug sm:line-clamp-none sm:text-[0.95rem]', textOnLightTitle]}>{item.title}</h3>
               </div>
-              <ul class="mt-4 min-h-0 flex-1 space-y-2 overflow-hidden text-xs leading-[1.55] text-[#2b2722] sm:text-sm">
+              <ul class:list={['mt-4 min-h-0 flex-1 space-y-2 overflow-hidden text-xs leading-[1.55] sm:text-sm', textOnLightTitle]}>
                 {item.bullets.map((bullet) => <li class="line-clamp-1 min-[360px]:line-clamp-2 sm:line-clamp-none"><span aria-hidden="true">&gt;</span> {bullet}</li>)}
               </ul>
-              <span class="mt-auto inline-flex shrink-0 items-center gap-2 pt-4 text-sm font-extrabold">
+              <span class:list={['mt-auto inline-flex shrink-0 items-center gap-2 pt-4 text-sm font-extrabold', textOnLightTitle]}>
                 <span class="underline decoration-2 underline-offset-[5px]">Xem chi tiết</span>
                 <span class="material-symbols-outlined text-lg leading-none" aria-hidden="true">arrow_forward</span>
               </span>

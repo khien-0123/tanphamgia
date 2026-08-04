@@ -3,11 +3,12 @@ import { homeHero } from '../../data/home';
 import SiteImage from '../SiteImage.astro';
 import { sectionEyebrowWarm } from '../../lib/section-eyebrow';
 import { sectionPy } from '../../lib/section-rhythm';
+import { sectionTitleOnDark, textOnDarkLead, textOnDarkTitle } from '../../lib/section-typography';
 
 const { about } = homeHero;
 ---
 
-<section class="flex bg-[#0D1B3A] text-white lg:min-h-[max(42rem,100svh)]" aria-labelledby="mockup-about-title">
+<section class:list={['flex bg-[#0D1B3A] lg:min-h-[max(42rem,100svh)]', textOnDarkTitle]} aria-labelledby="mockup-about-title">
   <div class:list={['mx-auto grid w-full max-w-container-max-width items-center gap-10 px-6 lg:min-h-[max(42rem,100svh)] lg:grid-cols-[1.02fr_1fr] lg:gap-8 xl:gap-10', sectionPy]}>
     <figure data-reveal data-reveal-direction="up" class="m-0 overflow-hidden rounded-[1.75rem] bg-white/5 lg:self-stretch">
       <SiteImage
@@ -23,14 +24,11 @@ const { about } = homeHero;
     <div data-reveal data-reveal-direction="up" class="max-w-[43rem] lg:py-3">
       <p class:list={['mb-4', sectionEyebrowWarm]}>{about.eyebrow}</p>
 
-      <h2
-        id="mockup-about-title"
-        class="max-w-[21ch] text-balance text-[clamp(1.75rem,2.7vw,3rem)] font-extrabold leading-[1.1] tracking-[-0.03em] text-white"
-      >
+      <h2 id="mockup-about-title" class:list={['max-w-[21ch]', sectionTitleOnDark]}>
         {about.title}
       </h2>
 
-      <div class="mt-6 space-y-2 text-sm leading-[1.55] text-white/78 sm:text-base">
+      <div class:list={['mt-6 space-y-2 text-sm leading-[1.55] sm:text-base', textOnDarkLead]}>
         {about.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
       </div>
 

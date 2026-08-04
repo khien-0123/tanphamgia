@@ -5,7 +5,6 @@ import BlogListingSection from '../../../components/blog/BlogListingSection.astr
 import { pageSeo, blogPosts, BLOG_POSTS_PER_PAGE, pageHeroBg } from '../../../data/site';
 import { paginate } from '../../../utils/pagination';
 import { routes } from '../../../lib/routes';
-import { rhythmBg } from '../../../lib/section-rhythm';
 
 export function getStaticPaths() {
   const listingPosts = blogPosts.slice(1);
@@ -42,6 +41,6 @@ const seoTitle = `${pageSeo.tinTuc.title} — Trang ${currentPage}`;
     currentPage={currentPage}
     totalPages={totalPages}
     allPosts={blogPosts}
-    sectionBg={rhythmBg(0)}
+    sectionBg="bg-[#fbf8f1]"
   />
 </SiteLayout>

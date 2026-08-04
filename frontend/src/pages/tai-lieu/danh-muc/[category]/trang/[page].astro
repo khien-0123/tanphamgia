@@ -10,7 +10,6 @@ import {
   documentsByCategory,
   DOCUMENTS_PER_PAGE,
 } from '../../../../../data/tai-lieu';
-import { paginate } from '../../../../../utils/pagination';
 import { routes } from '../../../../../lib/routes';
 import { SURFACE_NAVY, SURFACE_PAPER } from '../../../../../lib/section-rhythm';
 
@@ -31,12 +30,8 @@ export function getStaticPaths() {
 
 const category = Astro.params.category as string;
 const group = documentCategories.find((c) => c.id === category);
-const docs = documentsByCategory(category as 'all');
-const { items, currentPage, totalPages, totalItems } = paginate(
-  docs,
-  Number(Astro.params.page),
-  DOCUMENTS_PER_PAGE,
-);
+const currentPage = Number(Astro.params.page);
+const totalPages = Math.ceil(documentsByCategory(category as 'all').length / DOCUMENTS_PER_PAGE);
 const label = group?.label ?? 'Tài liệu';
 ---
 
@@ -58,11 +53,9 @@ const label = group?.label ?? 'Tài liệu';
   />
 
   <DocumentLibrary
-    documents={items}
+    documents={allDocuments}
     category={category}
     currentPage={currentPage}
-    totalPages={totalPages}
-    totalItems={totalItems}
     sectionBg={SURFACE_PAPER}
   />
   <DocumentDownloadForm allDocuments={allDocuments} sectionBg={SURFACE_NAVY} />

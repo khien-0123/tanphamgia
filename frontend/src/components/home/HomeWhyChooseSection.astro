@@ -3,6 +3,11 @@ import { homeWhyChoose } from '../../data/home';
 import waveBgImage from '../../assets/images/about/dai-chi-tpg 1.png';
 import { sectionEyebrow } from '../../lib/section-eyebrow';
 import { sectionPy } from '../../lib/section-rhythm';
+import {
+  sectionTitleOnLight,
+  textOnLightLead,
+  textOnLightTitle,
+} from '../../lib/section-typography';
 
 const cardPositions = [
   'lg:mt-10',
@@ -12,14 +17,11 @@ const cardPositions = [
 ] as const;
 ---
 
-<section class="overflow-hidden bg-[#fbf8f1] text-[#1f1b17]" aria-labelledby="mockup-why-choose-title">
+<section class:list={['overflow-hidden bg-[#fbf8f1]', textOnLightTitle]} aria-labelledby="mockup-why-choose-title">
   <div class:list={['mx-auto w-full max-w-container-max-width px-6', sectionPy]}>
     <header class="w-full">
       <p class:list={['mb-6', sectionEyebrow]}>{homeWhyChoose.eyebrow}</p>
-      <h2
-        id="mockup-why-choose-title"
-        class="max-w-[63rem] text-wrap text-[clamp(1.75rem,2.7vw,3rem)] font-extrabold leading-[1.1] tracking-[-0.03em] text-[#1f1b17]"
-      >
+      <h2 id="mockup-why-choose-title" class:list={['max-w-[63rem] text-wrap', sectionTitleOnLight]}>
         {homeWhyChoose.title}
       </h2>
     </header>
@@ -38,13 +40,13 @@ const cardPositions = [
             <article class:list={['min-w-0', cardPositions[index]]}>
               <div class="inline-flex max-w-full items-center gap-3 rounded-full border border-[#e8dfcf] bg-[#faf5e9]/95 px-4 py-3 shadow-[0_8px_24px_rgba(65,48,13,0.05)] backdrop-blur-sm">
                 <span class="shrink-0 text-lg font-extrabold tabular-nums text-[#8a6700]">{item.number}</span>
-                <h3 class="text-sm font-extrabold leading-snug text-[#26211c] sm:text-[0.95rem]">
+                <h3 class:list={['text-sm font-extrabold leading-snug sm:text-[0.95rem]', textOnLightTitle]}>
                   {item.title}
                 </h3>
               </div>
 
               <div class="relative ml-7 pl-7 pt-6 before:absolute before:bottom-0 before:left-0 before:top-0 before:w-px before:bg-gradient-to-b before:from-[#efbd35]/65 before:via-[#efbd35]/35 before:to-transparent">
-                <p class="max-w-[19rem] text-sm leading-[1.75] text-[#655c51] lg:text-[0.94rem]">
+                <p class:list={['max-w-[19rem] text-sm leading-[1.75] lg:text-[0.94rem]', textOnLightLead]}>
                   {item.description}
                 </p>
               </div>

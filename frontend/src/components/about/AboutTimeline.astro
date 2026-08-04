@@ -3,6 +3,10 @@ import { timeline, timelineSection } from '../../data/gioi-thieu';
 import { timelineItemBaseClass } from '../../lib/about-layout';
 import { sectionEyebrowWarm } from '../../lib/section-eyebrow';
 import { RHYTHM_WHITE, sectionPy } from '../../lib/section-rhythm';
+import {
+  textOnLightLead,
+  textOnLightTitle,
+} from '../../lib/section-typography';
 
 interface Props {
   sectionBg?: string;
@@ -21,7 +25,7 @@ const { sectionBg = RHYTHM_WHITE } = Astro.props;
     </p>
     <h2
       data-reveal
-      class="text-[clamp(1.75rem,2.7vw,3rem)] font-extrabold text-ink-dark leading-[1.1] tracking-[-0.03em] max-w-3xl text-balance"
+      class:list={['text-[clamp(1.75rem,2.7vw,3rem)] font-extrabold leading-[1.1] tracking-[-0.03em] max-w-3xl text-balance', textOnLightTitle]}
     >
       {timelineSection.title}
     </h2>
@@ -80,20 +84,22 @@ const { sectionBg = RHYTHM_WHITE } = Astro.props;
               >
                 <span
                   class:list={[
-                    'block font-bold text-[0.8125rem] md:text-sm uppercase tracking-[0.06em] text-accent-teal tabular-nums mb-1.5',
+                    'block font-bold text-[0.8125rem] md:text-sm uppercase tracking-[0.06em] tabular-nums mb-1.5',
+                    textOnLightTitle,
                     side === 'left' && 'max-md:text-left',
                   ]}
                 >
                   {item.year}
                 </span>
                 <h3
-                  class="text-[1.0625rem] md:text-lg lg:text-xl font-extrabold tracking-[-0.02em] text-ink-dark leading-snug mb-2 md:mb-2.5"
+                  class:list={['text-[1.0625rem] md:text-lg lg:text-xl font-extrabold tracking-[-0.02em] leading-snug mb-2 md:mb-2.5', textOnLightTitle]}
                 >
                   {item.title}
                 </h3>
                 <p
                   class:list={[
-                    'text-text-muted text-sm md:text-[0.9375rem] leading-[1.7] max-w-[32rem] max-md:max-w-none',
+                    'text-sm md:text-[0.9375rem] leading-[1.7] max-w-[32rem] max-md:max-w-none',
+                    textOnLightLead,
                     side === 'left' && 'md:ml-auto',
                   ]}
                 >

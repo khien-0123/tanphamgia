@@ -4,7 +4,7 @@ import BlogPostGrid from './BlogPostGrid.astro';
 import BlogPagination from './BlogPagination.astro';
 import BlogCategoryFilter from './BlogCategoryFilter.astro';
 import type { BlogPost } from '../../data/site';
-import { RHYTHM_WHITE, sectionPy } from '../../lib/section-rhythm';
+import { sectionPy } from '../../lib/section-rhythm';
 
 interface Props {
   items: BlogPost[];
@@ -17,7 +17,8 @@ interface Props {
   allPosts?: BlogPost[];
 }
 
-const { items, currentPage, totalPages, featuredPost, sectionBg = RHYTHM_WHITE, allPosts } = Astro.props;
+/** Mặc định khớp section Dự án tiêu biểu (khách hàng): giấy #fbf8f1 */
+const { items, currentPage, totalPages, featuredPost, sectionBg = 'bg-[#fbf8f1]', allPosts } = Astro.props;
 
 const categorySource = allPosts ?? [...(featuredPost ? [featuredPost] : []), ...items];
 const categories = [...new Set(categorySource.map((p) => p.category).filter(Boolean))];

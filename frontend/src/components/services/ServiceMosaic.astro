@@ -76,16 +76,6 @@ const isMosaic = services.length === 5;
             )
           }
 
-          <span
-            class:list={[
-              'material-symbols-outlined absolute left-6 top-6 leading-none text-[#ffc72c]',
-              hero ? 'text-[1.9rem]' : 'text-[1.6rem]',
-            ]}
-            aria-hidden="true"
-          >
-            {service.icon}
-          </span>
-
           {/* Hàng đáy thẻ: chữ bên trái, mũi tên nép góc phải — đúng vị trí mẫu khách. */}
           <div class="flex items-end justify-between gap-4">
             <div class="min-w-0">

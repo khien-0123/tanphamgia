@@ -2,13 +2,19 @@
 import SiteImage from '../SiteImage.astro';
 import { homeRecentProjects } from '../../data/home';
 import { sectionPy } from '../../lib/section-rhythm';
+import {
+  sectionTitleOnLight,
+  textOnLightBodyMuted,
+  textOnLightLead,
+  textOnLightTitle,
+} from '../../lib/section-typography';
 
 const projects = homeRecentProjects.items;
 const loopProjects = [...projects, ...projects, ...projects];
 ---
 
 <section
-  class="relative overflow-hidden bg-[#fbf8f1] text-[#1f1b17]"
+  class:list={['relative overflow-hidden bg-[#fbf8f1]', textOnLightTitle]}
   aria-labelledby="mockup-recent-projects-title"
   data-mockup-projects-slider
 >
@@ -19,13 +25,10 @@ const loopProjects = [...projects, ...projects, ...projects];
 
   <div class:list={['relative mx-auto w-full max-w-container-max-width px-6', sectionPy]}>
     <header data-reveal data-reveal-direction="up" class="max-w-[64rem]">
-      <h2
-        id="mockup-recent-projects-title"
-        class="max-w-[34ch] text-balance text-[clamp(1.75rem,2.7vw,3rem)] font-extrabold leading-[1.1] tracking-[-0.03em] text-[#1f1b17]"
-      >
+      <h2 id="mockup-recent-projects-title" class:list={['max-w-[34ch]', sectionTitleOnLight]}>
         {homeRecentProjects.title}
       </h2>
-      <p class="mt-4 max-w-[54rem] text-sm leading-[1.55] text-[#625a50] sm:text-base">
+      <p class:list={['mt-4 max-w-[54rem] text-sm leading-[1.55] sm:text-base', textOnLightLead]}>
         {homeRecentProjects.description}
       </p>
       <a
@@ -87,16 +90,16 @@ const loopProjects = [...projects, ...projects, ...projects];
                       </button>
                     )}
                     {'youtubeVideoId' in item && item.youtubeVideoId && (
-                      <div class="absolute inset-0 hidden bg-[#101010]" data-video-player>
-                        <iframe class="h-full w-full" title={`Video ${item.title}`} allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
-                        <button type="button" data-video-close class="absolute right-3 top-3 rounded-full bg-black/70 px-3 py-1.5 text-xs font-bold text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-white" aria-label={`Đóng video ${item.title}`}>Đóng</button>
+                      <div class="absolute inset-0 hidden overflow-hidden bg-black" data-video-player>
+                        <iframe class="mockup-project-video-frame" title={`Video ${item.title}`} allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+                        <button type="button" data-video-close class="absolute right-3 top-3 z-10 rounded-full bg-black/70 px-3 py-1.5 text-xs font-bold text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-white" aria-label={`Đóng video ${item.title}`}>Đóng</button>
                       </div>
                     )}
                   </div>
 
                   <div class="mockup-project-content">
                     <div>
-                      <p class="text-sm leading-snug text-[#3d3832] sm:text-base">
+                      <p class:list={['text-sm leading-snug sm:text-base', textOnLightTitle]}>
                         {item.eyebrow}
                       </p>
                       <h3 class="mt-1.5 text-[clamp(1.2rem,1.8vw,1.75rem)] font-extrabold leading-[0.98] tracking-[-0.04em] text-[#d99500]">
@@ -104,7 +107,7 @@ const loopProjects = [...projects, ...projects, ...projects];
                       </h3>
                     </div>
 
-                    <p class="mt-4 text-sm leading-[1.5] text-[#71685d]">
+                    <p class:list={['mt-4 text-sm leading-[1.5]', textOnLightBodyMuted]}>
                       {item.caption}
                     </p>
                   </div>
@@ -186,6 +189,22 @@ const loopProjects = [...projects, ...projects, ...projects];
     min-height: 26rem;
     overflow: hidden;
     background: #161b22;
+  }
+
+  /* YouTube phủ kín khung (object-fit: cover) — cắt vệt đen letterbox/pillarbox */
+  .mockup-project-media [data-video-player] {
+    container-type: size;
+  }
+
+  .mockup-project-video-frame {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: max(100cqw, calc(100cqh * 16 / 9));
+    height: max(100cqh, calc(100cqw * 9 / 16));
+    max-width: none;
+    border: 0;
+    transform: translate(-50%, -50%);
   }
 
   .mockup-project-content {

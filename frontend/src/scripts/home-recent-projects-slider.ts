@@ -200,7 +200,7 @@ function initMockupProjectsSlider(root: HTMLElement) {
       const iframe = player?.querySelector<HTMLIFrameElement>('iframe');
       const videoId = button.dataset.videoId;
       if (!player || !iframe || !videoId) return;
-      iframe.src = `https://www.youtube-nocookie.com/embed/${encodeURIComponent(videoId)}?autoplay=1&rel=0`;
+      iframe.src = `https://www.youtube-nocookie.com/embed/${encodeURIComponent(videoId)}?autoplay=1&rel=0&modestbranding=1&playsinline=1`;
       player.classList.remove('hidden');
       button.classList.add('hidden');
       player.querySelector<HTMLButtonElement>('[data-video-close]')?.focus();

@@ -33,7 +33,7 @@ export const ghostCtaArrow = 'material-symbols-outlined text-lg leading-none';
  * `global.css` không có style focus mặc định nào.
  */
 export const primaryPill =
-  'inline-flex min-h-14 items-center justify-center gap-2 rounded-full bg-accent-gold px-9 py-4 text-center text-base font-extrabold leading-snug text-ink-dark shadow-[0_12px_30px_rgba(255,201,51,0.2)] transition-all hover:-translate-y-0.5 hover:shadow-[0_16px_34px_rgba(255,201,51,0.32)] sm:px-10 sm:text-lg';
+  'inline-flex min-h-14 items-center justify-center gap-2 rounded-full bg-accent-gold px-9 py-4 text-center text-base font-extrabold leading-snug text-[#1f1b17] shadow-[0_12px_30px_rgba(255,201,51,0.2)] transition-all hover:-translate-y-0.5 hover:shadow-[0_16px_34px_rgba(255,201,51,0.32)] sm:px-10 sm:text-lg';
 
 /**
  * Ảnh nền thẻ phóng nhẹ khi hover — đúng nhịp trang chủ: 500ms, ease-out,

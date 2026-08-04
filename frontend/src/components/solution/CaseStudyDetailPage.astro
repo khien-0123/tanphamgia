@@ -8,7 +8,12 @@ import { getOtherCaseStudies } from '../../lib/case-study-pool';
 import type { CaseStudyProject } from '../../lib/case-study-types';
 import { parseCaseStudyStats } from '../../lib/parse-case-study-stats';
 import { caseStudyHref, routes, solutionHref } from '../../lib/routes';
-import { heroPill, sectionEyebrow } from '../../lib/section-eyebrow';
+import { sectionEyebrow } from '../../lib/section-eyebrow';
+import {
+  textOnLightBodyMuted,
+  textOnLightLead,
+  textOnLightTitle,
+} from '../../lib/section-typography';
 
 interface Props {
   solutionId: 1 | 2 | 3 | 4;
@@ -66,21 +71,21 @@ const fieldLabel = project.field
   navOverDark={false}
   showCta={false}
 >
-  <article class="bg-white text-[#1c1915]">
+  <article class:list={['bg-white', textOnLightTitle]}>
     <header class="mx-auto max-w-[52rem] px-6 pb-8 pt-28 md:px-8 md:pb-10 md:pt-32">
-      <p class={heroPill}>{fieldLabel}</p>
+      <p class={sectionEyebrow}>{fieldLabel}</p>
 
-      <h1 class="mt-4 text-[clamp(1.85rem,4.2vw,2.65rem)] font-extrabold leading-[1.15] tracking-[-0.035em] text-[#0d1b3a]">
+      <h1 class:list={['mt-4 text-[clamp(1.85rem,4.2vw,2.65rem)] font-extrabold leading-[1.15] tracking-[-0.035em]', textOnLightTitle]}>
         {project.name}
       </h1>
 
-      <p class="mt-5 text-lg leading-relaxed text-[#5c564c] md:text-[1.2rem] md:leading-relaxed">
+      <p class:list={['mt-5 text-lg leading-relaxed md:text-[1.2rem] md:leading-relaxed', textOnLightLead]}>
         {project.intro}
       </p>
 
       {
         metaParts.length > 0 && (
-          <div class="mt-7 flex flex-wrap items-center gap-x-4 gap-y-2 border-y border-[#ebe4d6] py-4 text-[0.8125rem] text-[#6f675c]">
+          <div class:list={['mt-7 flex flex-wrap items-center gap-x-4 gap-y-2 border-y border-[#ebe4d6] py-4 text-[0.8125rem]', textOnLightBodyMuted]}>
             {metaParts.map((part, index) => (
               <>
                 {index > 0 && (
@@ -122,7 +127,7 @@ const fieldLabel = project.field
                 <a
                   href={`#${item.id}`}
                   data-cs-toc-link
-                  class="cs-toc-chip inline-flex whitespace-nowrap border border-[#ebe4d6] px-3 py-1.5 text-[0.8125rem] font-semibold text-[#4a453c] no-underline transition-colors hover:border-[#ffc72c] hover:text-[#0d1b3a]"
+                  class="cs-toc-chip inline-flex whitespace-nowrap border border-[#ebe4d6] px-3 py-1.5 text-[0.8125rem] font-semibold text-[#625a50] no-underline transition-colors hover:border-[#ffc72c] hover:text-[#1f1b17]"
                 >
                   {item.label}
                 </a>
@@ -323,7 +328,7 @@ const fieldLabel = project.field
         <footer class="border-t border-[#ebe4d6] bg-[#f7f4ee] py-12 md:py-14">
           <div class="mx-auto max-w-[68rem] px-6 md:px-8">
             <p class={sectionEyebrow}>Đọc tiếp</p>
-            <h2 class="mt-4 text-xl font-extrabold tracking-[-0.03em] text-[#0d1b3a] md:text-2xl">
+            <h2 class:list={['mt-4 text-xl font-extrabold tracking-[-0.03em] md:text-2xl', textOnLightTitle]}>
               Dự án liên quan
             </h2>
 
@@ -341,7 +346,7 @@ const fieldLabel = project.field
                     />
                   </figure>
                   <p class="mt-3 text-[0.65rem] font-extrabold uppercase tracking-[0.12em] text-[#a67c00]">{p.tag}</p>
-                  <h3 class="mt-1.5 text-[0.9375rem] font-bold leading-snug text-[#0d1b3a] transition-colors group-hover:text-[#8a6700]">
+                  <h3 class:list={['mt-1.5 text-[0.9375rem] font-bold leading-snug transition-colors group-hover:text-[#8a6700]', textOnLightTitle]}>
                     {p.name}
                   </h3>
                 </a>
@@ -373,35 +378,35 @@ const fieldLabel = project.field
   }
 
   .cs-toc-link:hover {
-    color: #0d1b3a;
+    color: #1f1b17;
   }
 
   .cs-toc-link.is-active {
-    color: #0d1b3a;
+    color: #1f1b17;
     border-left-color: #ffc72c;
   }
 
   .cs-toc-chip.is-active {
     border-color: #ffc72c;
-    color: #0d1b3a;
+    color: #1f1b17;
   }
 
   .cs-blog {
     font-size: 1.0625rem;
     line-height: 1.8;
-    color: #3d3830;
+    color: #625a50;
   }
 
   .cs-blog-lead {
     margin: 0 0 1.75rem;
     font-size: 1.125rem;
     line-height: 1.8;
-    color: #2a251f;
+    color: #625a50;
   }
 
   .cs-blog-lead strong {
     font-weight: 700;
-    color: #0d1b3a;
+    color: #1f1b17;
   }
 
   .cs-blog-stats {
@@ -426,7 +431,7 @@ const fieldLabel = project.field
     font-weight: 800;
     letter-spacing: -0.03em;
     line-height: 1;
-    color: #0d1b3a;
+    color: #1f1b17;
     font-variant-numeric: tabular-nums;
   }
 
@@ -446,7 +451,7 @@ const fieldLabel = project.field
     font-weight: 800;
     letter-spacing: -0.03em;
     line-height: 1.25;
-    color: #0d1b3a;
+    color: #1f1b17;
   }
 
   .cs-blog :global(h3) {
@@ -455,7 +460,7 @@ const fieldLabel = project.field
     font-size: 1.1rem;
     font-weight: 800;
     letter-spacing: -0.02em;
-    color: #0d1b3a;
+    color: #1f1b17;
   }
 
   .cs-blog :global(p) {
@@ -487,7 +492,7 @@ const fieldLabel = project.field
   }
 
   .cs-blog-reqs li strong {
-    color: #0d1b3a;
+    color: #1f1b17;
   }
 
   .cs-blog :global(blockquote) {
@@ -502,7 +507,7 @@ const fieldLabel = project.field
     font-weight: 650;
     line-height: 1.55;
     letter-spacing: -0.02em;
-    color: #0d1b3a;
+    color: #1f1b17;
   }
 
   .cs-blog-figure {
@@ -545,12 +550,12 @@ const fieldLabel = project.field
     font-size: 1.15rem !important;
     font-weight: 800;
     letter-spacing: -0.02em;
-    color: #0d1b3a !important;
+    color: #1f1b17 !important;
   }
 
   .cs-blog-cta-body {
     margin: 0 0 1.1rem !important;
-    color: #5c564c !important;
+    color: #625a50 !important;
   }
 
   .cs-blog-cta-link {
@@ -559,7 +564,7 @@ const fieldLabel = project.field
     gap: 0.35rem;
     font-size: 0.9375rem;
     font-weight: 800;
-    color: #0d1b3a;
+    color: #1f1b17;
     text-decoration: none;
     border-bottom: 2px solid #ffc72c;
     padding-bottom: 0.1rem;
@@ -576,11 +581,11 @@ const fieldLabel = project.field
   .cs-blog-back a {
     font-size: 0.875rem;
     font-weight: 700;
-    color: #6f675c;
+    color: #71685d;
     text-decoration: none;
   }
 
   .cs-blog-back a:hover {
-    color: #0d1b3a;
+    color: #1f1b17;
   }
 </style>

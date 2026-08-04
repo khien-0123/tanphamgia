@@ -1,6 +1,7 @@
 ---
 import { sectionPy } from '../../lib/section-rhythm';
 import { sectionEyebrow } from '../../lib/section-eyebrow';
+import { textOnLightLead, textOnLightTitle } from '../../lib/section-typography';
 
 interface Props {
   steps: string[];
@@ -52,10 +53,10 @@ const processDetails = [
 
       <header data-reveal class="relative z-10 mx-auto text-center">
         {eyebrow && <span class:list={[sectionEyebrow, 'mb-[1.15rem]']}>{eyebrow}</span>}
-        <h2 class="text-balance text-[clamp(1.75rem,2.7vw,3rem)] font-extrabold uppercase leading-[1.1] tracking-[-0.03em] text-[#0e1630]">
+        <h2 class:list={['text-balance text-[clamp(1.75rem,2.7vw,3rem)] font-extrabold uppercase leading-[1.1] tracking-[-0.03em]', textOnLightTitle]}>
           Quy trình <span class="process-gradient-text">làm việc</span>
         </h2>
-        <p class="mt-4 text-base font-medium leading-relaxed text-[#667085]">
+        <p class:list={['mt-4 text-base font-medium leading-relaxed', textOnLightLead]}>
           Quy trình làm việc - giảm rủi ro cho doanh nghiệp
         </p>
         <span class="process-heading-line mt-5 inline-block h-1 w-24 rounded-full"></span>
@@ -88,7 +89,7 @@ const processDetails = [
   .process-glow { position: absolute; width: 26rem; height: 26rem; top: 50%; transform: translateY(-50%); border-radius: 999px; background: radial-gradient(circle, rgb(255 190 39 / 0.55), rgb(255 235 183 / 0.1) 62%, transparent 72%); }
   .process-glow-left { left: -10rem; }
   .process-glow-right { right: -10rem; }
-  .process-gradient-text { color: #0D1B3A; }
+  .process-gradient-text { color: #1f1b17; }
   .process-heading-line { background: #FFC933; }
   .process-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem 0.75rem; }
   .process-step { position: relative; min-width: 0; padding-top: 2.5rem; }
@@ -96,9 +97,9 @@ const processDetails = [
   .process-node svg { width: 2rem; height: 2rem; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
   .process-card { display: flex; min-height: 15rem; height: 100%; padding: 4rem 1rem 1.5rem; flex-direction: column; border: 1px solid #ebeaf0; border-radius: 1.35rem; background: linear-gradient(155deg, #fff 48%, color-mix(in srgb, var(--from) 13%, white)); box-shadow: 0 14px 30px rgb(30 36 60 / 0.09); }
   .process-no { display: block; color: #e7e8ee; font-size: 2.65rem; font-weight: 800; line-height: 1; letter-spacing: -0.06em; }
-  .process-card h3 { min-height: 2.8em; margin-top: 1rem; color: #10172b; font-size: 0.875rem; font-weight: 800; line-height: 1.4; }
+  .process-card h3 { min-height: 2.8em; margin-top: 1rem; color: #1f1b17; font-size: 0.875rem; font-weight: 800; line-height: 1.4; }
   .process-accent { display: block; width: 2rem; height: 0.18rem; margin-top: 0.9rem; border-radius: 999px; background: linear-gradient(90deg, var(--from), var(--to)); }
-  .process-card p { margin-top: 1rem; color: #62697b; font-size: 0.75rem; line-height: 1.65; }
+  .process-card p { margin-top: 1rem; color: #625a50; font-size: 0.75rem; line-height: 1.65; }
   @media (min-width: 768px) { .process-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2.5rem 1rem; } }
   @media (min-width: 1280px) {
     .process-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 0; }

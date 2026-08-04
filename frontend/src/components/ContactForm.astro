@@ -1,6 +1,8 @@
 ---
 import { siteContact, formThankYou } from '../data/site';
 import { formInputClass, formLabelClass } from '../lib/form-classes';
+import { primaryPill, focusRingOnPaper } from '../lib/button-classes';
+import { textOnLightBodyMuted } from '../lib/section-typography';
 import SuccessNotice from './SuccessNotice.astro';
 
 const quantityOptions = [
@@ -93,7 +95,7 @@ const industryOptions = [
   </div>
 
   <button
-    class="mt-1 flex min-h-[3.4rem] w-full items-center justify-center gap-2 rounded-full bg-[#ffc72c] text-[0.9375rem] font-extrabold text-[#17140a] transition-transform duration-200 hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#ffc72c] disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:translate-y-0"
+    class:list={[primaryPill, focusRingOnPaper, 'mt-1 w-full disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:translate-y-0']}
     type="submit"
     data-contact-submit
   >
@@ -114,7 +116,7 @@ const industryOptions = [
     >.
   </p>
 
-  <p class="m-0 text-center text-xs text-[#625a50]">
+  <p class:list={['m-0 text-center text-xs', textOnLightBodyMuted]}>
     Hoặc gọi hotline
     <a class="font-bold text-[#5c4500] hover:underline" href={siteContact.phoneHref}>
       {siteContact.phoneDisplay}
@@ -187,7 +189,7 @@ const industryOptions = [
     appearance: none;
     -webkit-appearance: none;
     padding-right: 2.75rem;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230e2640' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231f1b17' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 1rem center;
     background-size: 1.05rem 1.05rem;

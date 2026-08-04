@@ -5,7 +5,6 @@ import BlogListingSection from '../components/blog/BlogListingSection.astro';
 import { pageSeo, blogPosts, BLOG_POSTS_PER_PAGE, pageHeroBg } from '../data/site';
 import { paginate } from '../utils/pagination';
 import { routes } from '../lib/routes';
-import { rhythmBg } from '../lib/section-rhythm';
 
 const featuredPost = blogPosts[0];
 const listingPosts = blogPosts.slice(1);
@@ -33,6 +32,6 @@ const { items, currentPage, totalPages } = paginate(listingPosts, 1, BLOG_POSTS_
     currentPage={currentPage}
     totalPages={totalPages}
     allPosts={blogPosts}
-    sectionBg={rhythmBg(0)}
+    sectionBg="bg-[#fbf8f1]"
   />
 </SiteLayout>

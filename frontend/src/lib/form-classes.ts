@@ -1,6 +1,6 @@
 /** Class Tailwind dùng chung cho form */
 export const formLabelClass =
-  'block text-xs font-bold tracking-[0.08em] uppercase text-ink-dark mb-1.5';
+  'block text-xs font-extrabold tracking-[0.08em] uppercase text-[#1f1b17] mb-1.5';
 /**
  * Viền dưới là thứ DUY NHẤT cho biết ô nhập nằm ở đâu (nền trong suốt, không viền quanh)
  * → nó là "visual information required to identify a UI component", cần ≥ 3:1 (WCAG 1.4.11).
@@ -12,4 +12,4 @@ export const formLabelClass =
  * Không amber sáng nào đạt 3:1 trên nền trắng — #FFC933 1.54 · #E1A900 2.13 · #C9A000 2.47.
  */
 export const formInputClass =
-  'block w-full rounded-[0.625rem] border border-border-field bg-white px-4 py-3 text-[0.9375rem] text-ink-dark outline-none transition-colors duration-200 focus:border-[#5c4500] focus:ring-2 focus:ring-[#5c4500]/20 placeholder:text-text-muted placeholder:text-sm';
+  'block w-full rounded-[0.625rem] border border-border-field bg-white px-4 py-3 text-[0.9375rem] text-[#1f1b17] outline-none transition-colors duration-200 focus:border-[#5c4500] focus:ring-2 focus:ring-[#5c4500]/20 placeholder:text-text-muted placeholder:text-sm';

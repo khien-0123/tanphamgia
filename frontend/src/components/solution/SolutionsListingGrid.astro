@@ -5,7 +5,6 @@ import { listingKeywords } from '../../data/giai-phap-listing';
 import { RHYTHM_WHITE, sectionPy } from '../../lib/section-rhythm';
 import { sectionEyebrow } from '../../lib/section-eyebrow';
 import { routes } from '../../lib/routes';
-import { sectionEyebrow } from '../../lib/section-eyebrow';
 import {
   cardMediaHover,
   focusRingOnDark,
@@ -13,6 +12,7 @@ import {
   ghostCtaArrow,
   ghostCtaLabel,
 } from '../../lib/button-classes';
+import { textOnLightLead, textOnLightTitle } from '../../lib/section-typography';
 
 interface Props {
   sectionBg?: string;
@@ -42,18 +42,18 @@ const keywordsFor = (item: SolutionLike): string[] =>
           Tuyển tập · 04 phân khúc
         </span>
         <h2
-          class="font-headline-md mt-6 text-[clamp(1.75rem,2.7vw,3rem)] font-extrabold leading-[1.1] tracking-[-0.03em] text-balance text-[#1f1b17]"
+          class:list={['font-headline-md mt-6 text-[clamp(1.75rem,2.7vw,3rem)] font-extrabold leading-[1.1] tracking-[-0.03em] text-balance', textOnLightTitle]}
         >
           Chọn ngành của bạn
         </h2>
-        <p class="mt-4 text-sm leading-[1.55] text-pretty text-[#625a50] sm:text-base">
+        <p class:list={['mt-4 text-sm leading-[1.55] text-pretty sm:text-base', textOnLightLead]}>
           Hiểu sâu đặc thù từng ngành để mang đến giải pháp phù hợp nhất — từ an toàn lao động ở nhà
           máy đến thẩm mỹ ở phòng khám.
         </p>
 
         <!-- Đường kẻ hổ phách tách CTA khỏi mô tả. Ở lg khối này bị đẩy xuống đáy cột. -->
         <div class="mt-6 border-t-2 border-accent-gold pt-4 lg:mt-auto">
-          <strong class="block text-sm font-extrabold text-[#1f1b17] sm:text-base">
+          <strong class:list={['block text-sm font-extrabold sm:text-base', textOnLightTitle]}>
             Không thấy ngành của bạn?
           </strong>
           <a href={routes.lienHe} class:list={[ghostCta, 'mt-2']}>
@@ -87,7 +87,7 @@ const keywordsFor = (item: SolutionLike): string[] =>
               aria-hidden="true"
               class="absolute left-4 top-4 grid h-10 w-10 place-items-center rounded-[11px] border border-white/30 bg-white/15 backdrop-blur-[6px] sm:left-5 sm:top-5"
             >
-              <span class="material-symbols-outlined text-lg leading-none text-white">
+              <span class="material-symbols-outlined text-lg leading-none text-[#e1a900]">
                 {item.icon}
               </span>
             </span>

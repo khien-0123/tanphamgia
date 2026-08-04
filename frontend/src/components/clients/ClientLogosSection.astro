@@ -6,7 +6,7 @@
 import SiteImage from '../SiteImage.astro';
 import { clientLogos } from '../../data/site';
 import { getClientLogoScale } from '../../lib/client-logo-scale';
-import { RHYTHM_WHITE, sectionPy } from '../../lib/section-rhythm';
+import { sectionPy } from '../../lib/section-rhythm';
 import { sectionEyebrow } from '../../lib/section-eyebrow';
 import { sectionLead, sectionTitleOnLight } from '../../lib/section-typography';
 
@@ -14,7 +14,8 @@ interface Props {
   sectionBg?: string;
 }
 
-const { sectionBg = RHYTHM_WHITE } = Astro.props;
+/** Mặc định trắng — fade mép track khớp nền trắng */
+const { sectionBg = 'bg-white' } = Astro.props;
 
 const mid = Math.ceil(clientLogos.length / 2);
 const row1 = clientLogos.slice(0, mid);
@@ -143,12 +144,12 @@ const marqueeRow2 = repeatLogos(row2);
 
   .client-logos-hero__fade--left {
     left: 0;
-    background: linear-gradient(to right, #fffcf7, transparent);
+    background: linear-gradient(to right, #ffffff, transparent);
   }
 
   .client-logos-hero__fade--right {
     right: 0;
-    background: linear-gradient(to left, #fffcf7, transparent);
+    background: linear-gradient(to left, #ffffff, transparent);
   }
 
   @media (prefers-reduced-motion: reduce) {
