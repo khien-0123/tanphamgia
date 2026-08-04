@@ -51,15 +51,23 @@ const processDetails = [
       <div class="process-glow process-glow-left" aria-hidden="true"></div>
       <div class="process-glow process-glow-right" aria-hidden="true"></div>
 
-      <header data-reveal class="relative z-10 mx-auto text-center">
-        {eyebrow && <span class:list={[sectionEyebrow, 'mb-[1.15rem]']}>{eyebrow}</span>}
-        <h2 class:list={['text-balance text-[clamp(1.75rem,2.7vw,3rem)] font-extrabold uppercase leading-[1.1] tracking-[-0.03em]', textOnLightTitle]}>
-          Quy trình <span class="process-gradient-text">làm việc</span>
-        </h2>
-        <p class:list={['mt-4 text-base font-medium leading-relaxed', textOnLightLead]}>
-          Quy trình làm việc - giảm rủi ro cho doanh nghiệp
-        </p>
-        <span class="process-heading-line mt-5 inline-block h-1 w-24 rounded-full"></span>
+      <header data-reveal class="relative z-10">
+        {
+          eyebrow && (
+            <div class="mb-[1.15rem] text-left">
+              <span class={sectionEyebrow}>{eyebrow}</span>
+            </div>
+          )
+        }
+        <div class="mx-auto text-center">
+          <h2 class:list={['text-balance text-[clamp(1.75rem,2.7vw,3rem)] font-extrabold uppercase leading-[1.1] tracking-[-0.03em]', textOnLightTitle]}>
+            Quy trình <span class="process-gradient-text">làm việc</span>
+          </h2>
+          <p class:list={['mt-4 text-base font-medium leading-relaxed', textOnLightLead]}>
+            Quy trình làm việc - giảm rủi ro cho doanh nghiệp
+          </p>
+          <span class="process-heading-line mt-5 inline-block h-1 w-24 rounded-full"></span>
+        </div>
       </header>
 
       <ol class="process-grid relative z-10 mt-12 list-none p-0 md:mt-16">
