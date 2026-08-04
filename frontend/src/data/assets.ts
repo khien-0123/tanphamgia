@@ -97,8 +97,6 @@ export const siteAssets = {
   },
   about: {
     brandStory: '/images/why-choose/nang-luc-san-xuat.png',
-    /** Chân dung Nhà sáng lập — nguồn dongphucvn.vn/ve-tan-pham-gia/ */
-    leadership: '/images/about/lanh-dao.webp',
     production1: '/images/about/production-1.jpg',
     production2: '/images/about/qc-5-tang.png',
     heThongSanXuat: '/images/about/he-thong-san-xuat.png',
