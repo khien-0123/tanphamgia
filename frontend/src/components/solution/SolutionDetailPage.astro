@@ -4,7 +4,7 @@ import PageHero from '../PageHero.astro';
 import SolutionProcessSection from './SolutionProcessSection.astro';
 import ClientCaseStudyGrid from '../clients/ClientCaseStudyGrid.astro';
 import SiteLayout from '../../layouts/SiteLayout.astro';
-import { RHYTHM_WHITE, SURFACE_PAPER, sectionPy } from '../../lib/section-rhythm';
+import { SURFACE_PAPER, sectionPy } from '../../lib/section-rhythm';
 import { sectionEyebrow } from '../../lib/section-eyebrow';
 import {
   sectionTitle,
@@ -32,6 +32,7 @@ interface Props {
 const { content } = Astro.props;
 
 const solution = solutions.find((item) => item.slug === content.slug);
+const solutionImage = solution?.image;
 const relatedSolutions = solutions.filter((item) => item.slug !== content.slug);
 
 type SolutionLike = { slug: string; bullets: string[]; homeBullets?: string[] };
@@ -122,7 +123,7 @@ const h2Macro = `${sectionTitle} ${textOnLightTitle}`;
       màu đó chỉ dành cho mặt thẻ nổi, không phải nền section. */}
   <main class:list={[SURFACE_PAPER, textOnLightTitle]}>
     {/* ══ 01 · VẤN ĐỀ — hai cột đều, tiêu đề dính trái ══ */}
-    <section class:list={[RHYTHM_WHITE, sectionPy]}>
+    <section class:list={[SURFACE_PAPER, sectionPy]}>
       <div class="mx-auto max-w-container-max-width px-6 md:px-8">
         <div class="grid items-start gap-x-[clamp(2rem,4vw,4.5rem)] gap-y-10 md:grid-cols-2">
           <div class="md:sticky md:top-28">
@@ -142,7 +143,7 @@ const h2Macro = `${sectionTitle} ${textOnLightTitle}`;
                   data-reveal
                   class:list={[
                     'grid grid-cols-[3.25rem_minmax(0,1fr)] items-start gap-4 border-t border-border-subtle py-4 first:border-t-0 md:grid-cols-[3.75rem_minmax(0,1fr)]',
-                    RHYTHM_WHITE,
+                    SURFACE_PAPER,
                   ]}
                 >
                   {/* Mép trên thẳng dòng chữ đầu; dịch nhẹ lên bù metrics số to */}
@@ -159,19 +160,23 @@ const h2Macro = `${sectionTitle} ${textOnLightTitle}`;
     </section>
 
     {/* ══ 02 · GIẢI PHÁP — ảnh sticky + cột hairline ══ */}
-    <section class:list={[RHYTHM_WHITE, sectionPy]}>
+    <section class:list={[SURFACE_PAPER, sectionPy]}>
       <div class="mx-auto max-w-container-max-width px-6 md:px-8">
         <div class="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
           <figure
             class:list={['m-0 self-start overflow-hidden lg:sticky lg:top-28', imageRadius]}
           >
-            <SiteImage
-              src={solution?.image}
-              alt={content.hero.imageAlt}
-              loading="lazy"
-              class="block aspect-[4/5] w-full object-cover object-top"
-              variant="card"
-            />
+            {
+              solutionImage && (
+                <SiteImage
+                  src={solutionImage}
+                  alt={content.hero.imageAlt}
+                  loading="lazy"
+                  class="block aspect-[4/5] w-full object-cover object-top"
+                  variant="card"
+                />
+              )
+            }
           </figure>
 
           <div>
@@ -185,7 +190,7 @@ const h2Macro = `${sectionTitle} ${textOnLightTitle}`;
                     data-reveal
                     class:list={[
                       'flex gap-3 border-t border-border-subtle py-4 first:border-t-0',
-                      RHYTHM_WHITE,
+                      SURFACE_PAPER,
                     ]}
                   >
                     <span class="material-symbols-outlined mt-0.5 shrink-0 text-xl text-accent-teal">
@@ -210,7 +215,7 @@ const h2Macro = `${sectionTitle} ${textOnLightTitle}`;
 
     {/* ══ 03 · CHẤT LIỆU — bảng mẫu vải so sánh, không sticky-scroll ══ */}
     <section
-      class:list={[RHYTHM_WHITE, sectionPy]}
+      class:list={[SURFACE_PAPER, sectionPy]}
       aria-labelledby="material-comparison-title"
     >
       <div class="mx-auto max-w-container-max-width px-6 md:px-8">
@@ -306,12 +311,12 @@ const h2Macro = `${sectionTitle} ${textOnLightTitle}`;
     {/* ══ 04 · QUY TRÌNH ══ */}
     <SolutionProcessSection
       steps={content.processSteps}
-      sectionBg={RHYTHM_WHITE}
+      sectionBg={SURFACE_PAPER}
       eyebrow="04 — Quy trình"
     />
 
     {/* ══ GIẢI PHÁP KHÁC — mosaic 1 lớn / 2 nhỏ ══ */}
-    <section class:list={[RHYTHM_WHITE, sectionPy]}>
+    <section class:list={[SURFACE_PAPER, sectionPy]}>
       <div class="mx-auto max-w-container-max-width px-6 md:px-8">
         <header class="mb-10 flex flex-col gap-6 md:mb-12 md:flex-row md:items-end md:justify-between">
           <div>

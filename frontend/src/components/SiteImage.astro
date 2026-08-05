@@ -41,6 +41,12 @@ const preset = SITE_IMAGE_PRESETS[variant];
 const resolved =
   (await resolveSiteImage(src)) ?? (fallback ? await resolveSiteImage(fallback) : undefined);
 
+/** HTMLAttributes cho phép null — Image của Astro chỉ nhận number / undefined */
+const imgWidth = width == null ? undefined : Number(width);
+const imgHeight = height == null ? undefined : Number(height);
+const safeWidth = imgWidth !== undefined && Number.isFinite(imgWidth) ? imgWidth : undefined;
+const safeHeight = imgHeight !== undefined && Number.isFinite(imgHeight) ? imgHeight : undefined;
+
 if (!resolved && import.meta.env.DEV) {
   console.warn(`[SiteImage] Không tìm thấy asset cho: ${src}`);
 }
@@ -57,8 +63,8 @@ if (!resolved && import.meta.env.DEV) {
       widths={widths ?? preset.widths}
       sizes={sizes ?? preset.sizes}
       quality={quality ?? preset.quality}
-      width={width}
-      height={height}
+      width={safeWidth}
+      height={safeHeight}
       draggable={draggable}
       style={style}
       {...rest}
@@ -70,8 +76,8 @@ if (!resolved && import.meta.env.DEV) {
       class={className}
       loading={loading}
       decoding={decoding}
-      width={width}
-      height={height}
+      width={safeWidth}
+      height={safeHeight}
       draggable={draggable}
       style={style}
       {...rest}

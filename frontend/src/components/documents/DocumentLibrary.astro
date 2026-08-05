@@ -10,7 +10,7 @@ import {
   DOCUMENTS_PER_PAGE_MOBILE,
   documentCategories,
 } from '../../data/tai-lieu';
-import { RHYTHM_WHITE, sectionPy } from '../../lib/section-rhythm';
+import { SURFACE_PAPER, sectionPy } from '../../lib/section-rhythm';
 
 interface Props {
   /** Toàn bộ thư viện — lọc phía client */
@@ -26,7 +26,7 @@ const {
   documents,
   category,
   currentPage = 1,
-  sectionBg = RHYTHM_WHITE,
+  sectionBg = SURFACE_PAPER,
 } = Astro.props;
 
 const activeGroup = documentCategories.find((c) => c.id === category);

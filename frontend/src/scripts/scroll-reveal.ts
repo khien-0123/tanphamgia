@@ -129,3 +129,5 @@ if (document.readyState === 'loading') {
 
 document.addEventListener('astro:page-load', initScrollReveal);
 document.addEventListener('astro:after-swap', initScrollReveal);
+
+export {};

@@ -1,5 +1,6 @@
 ---
 import SiteImage from '../SiteImage.astro';
+import BlogPostEngagement from './BlogPostEngagement.astro';
 import type { PostBlock } from '../../data/bai-viet';
 import { formatBlogDate } from '../../lib/format-blog-date';
 import { readingTimeLabel } from '../../lib/post-reading-time';
@@ -14,7 +15,6 @@ import {
   textOnLightLead,
   textOnLightTitle,
 } from '../../lib/section-typography';
-
 /** Thẻ ở lưới "đọc tiếp" cuối trang — blog và case study đổ cùng hình dạng. */
 export interface PostRelatedCard {
   href: string;
@@ -64,6 +64,11 @@ interface Props {
   /** Danh sách liên kết ở thẻ thứ ba trong cột phải đầu trang */
   sidebarLinksTitle: string;
   sidebarLinks: { href: string; title: string }[];
+  /**
+   * Chỉ truyền với bài tin tức — bật khối tác giả / rating
+   * dưới thân bài (localStorage theo slug). Case study để trống.
+   */
+  engagementSlug?: string;
 }
 
 const {
@@ -88,6 +93,7 @@ const {
   related,
   sidebarLinksTitle,
   sidebarLinks,
+  engagementSlug,
 } = Astro.props;
 
 const post = { title, excerpt, category, image, alt };
@@ -327,6 +333,8 @@ const relatedPosts = related;
           })
         }
       </article>
+
+      {engagementSlug && <BlogPostEngagement slug={engagementSlug} />}
 
       {/* Chân bài */}
       <div class="mt-14 flex flex-wrap items-center justify-between gap-5">

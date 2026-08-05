@@ -7,6 +7,7 @@ import {
   navCtaClasses,
   navEndClasses,
   navInnerClasses,
+  navMenuCtaClasses,
   navMenuLinkActiveClasses,
   navMenuLinkBaseClasses,
   navMenuLinkInactiveClasses,
@@ -24,6 +25,7 @@ interface NavItem {
   href: string;
   icon?: string;
   desc?: string;
+  cta?: boolean;
 }
 
 interface Props {
@@ -53,13 +55,24 @@ const {
     </div>
 
     <div class={navCenterClasses}>
-      <nav class:list={navMenuTrackClasses} aria-label="Menu chính">
+      <nav class:list={[navMenuTrackClasses, 'gap-1']} aria-label="Menu chính">
         {
           items.map((item) => {
             const isActive =
               item.href === routes.home
                 ? currentPath === routes.home
                 : currentPath === item.href || currentPath.startsWith(`${item.href}/`);
+            if (item.cta) {
+              return (
+                <a
+                  class:list={navMenuCtaClasses}
+                  href={item.href}
+                  aria-current={isActive ? 'page' : undefined}
+                >
+                  <span class={navMenuLabelClasses}>{item.label}</span>
+                </a>
+              );
+            }
             return (
               <a
                 class:list={[
@@ -140,22 +153,32 @@ const {
             class="opacity-0 translate-x-3 group-[.is-open]/mobile:animate-navItemIn"
             style={`animation-delay: calc(0.04s * ${index} + 0.08s)`}
           >
-            <a
-              class:list={[
-                'block w-full py-3 no-underline text-ink-dark transition-colors hover:bg-surface-alt',
-                isActive && 'bg-surface-alt font-bold',
-              ]}
-              href={item.href}
-            >
-              <span class="flex flex-col gap-0.5 min-w-0 px-4">
-                <span class="text-[0.9375rem] font-bold leading-snug">{item.label}</span>
-                {item.desc && (
-                  <span class="text-xs font-medium text-text-muted leading-snug max-h-[700px]:text-[0.6875rem]">
-                    {item.desc}
-                  </span>
-                )}
-              </span>
-            </a>
+            {item.cta ? (
+              <a
+                class="mx-4 flex items-center justify-center rounded-full bg-accent-gold px-4 py-3 text-sm font-bold text-[#1f1b17] no-underline shadow-soft"
+                href={item.href}
+                data-nav-close
+              >
+                {item.label}
+              </a>
+            ) : (
+              <a
+                class:list={[
+                  'block w-full py-3 no-underline text-ink-dark transition-colors hover:bg-surface-alt',
+                  isActive && 'bg-surface-alt font-bold',
+                ]}
+                href={item.href}
+              >
+                <span class="flex flex-col gap-0.5 min-w-0 px-4">
+                  <span class="text-[0.9375rem] font-bold leading-snug">{item.label}</span>
+                  {item.desc && (
+                    <span class="text-xs font-medium text-text-muted leading-snug max-h-[700px]:text-[0.6875rem]">
+                      {item.desc}
+                    </span>
+                  )}
+                </span>
+              </a>
+            )}
           </li>
           );
         })

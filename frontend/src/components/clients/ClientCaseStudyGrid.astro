@@ -69,9 +69,12 @@ const imageClass =
           return (
             <article
               class:list={[
-                'group overflow-hidden last:border-b-0 md:min-w-0 md:rounded-none',
+                'group overflow-hidden last:border-b-0 md:min-w-0',
                 'max-md:box-border max-md:w-full max-md:min-w-full max-md:basis-full max-md:shrink-0 max-md:grow-0 max-md:snap-start max-md:rounded-[1.25rem]',
                 'md:w-full md:basis-auto md:shrink',
+                /* Desktop: bo nhẹ mép ngoài khối đầu (trên) và khối cuối (dưới) */
+                index === 0 && 'md:rounded-t-[0.85rem]',
+                index === items.length - 1 && 'md:rounded-b-[0.85rem]',
                 isNavy
                   ? 'border-b border-white/10 bg-[#0d1b3a] max-md:border-b-0'
                   : 'border-b border-[#e8dfcf] bg-transparent max-md:border max-md:border-[#e8dfcf]',

@@ -2,7 +2,7 @@
 import SiteImage from './SiteImage.astro';
 import { sectionEyebrow } from '../lib/section-eyebrow';
 import { sectionTitleOnDark } from '../lib/section-typography';
-import { RHYTHM_WHITE, sectionPy } from '../lib/section-rhythm';
+import { SURFACE_PAPER, sectionPy } from '../lib/section-rhythm';
 import type { Testimonial } from '../data/site';
 import SliderArrow from './SliderArrow.astro';
 
@@ -34,7 +34,7 @@ const itemsPerSet = items.length;
 
 const sectionClass = isDark
   ? `${sectionPy} bg-[#0d1b3a] text-white`
-  : [sectionPy, sectionBg ?? RHYTHM_WHITE];
+  : [sectionPy, sectionBg ?? SURFACE_PAPER];
 ---
 
 <section class:list={sectionClass} aria-labelledby="testimonials-title">

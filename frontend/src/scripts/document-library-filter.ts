@@ -153,11 +153,7 @@ function initDocumentLibraryFilter() {
   const onBreakpoint = () => {
     applyView(root, readCategory(), readPage());
   };
-  if (typeof desktopMq.addEventListener === 'function') {
-    desktopMq.addEventListener('change', onBreakpoint);
-  } else {
-    desktopMq.addListener(onBreakpoint);
-  }
+  desktopMq.addEventListener('change', onBreakpoint);
 }
 
 if (document.readyState === 'loading') {

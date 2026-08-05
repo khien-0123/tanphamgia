@@ -8,9 +8,24 @@ import { duAnGiaiPhap2 } from '../../../../data/giai-phap-2-du-an';
 export function getStaticPaths() {
   return duAnGiaiPhap2.map((project) => ({
     params: { slug: project.slug },
+    props: { destination: caseStudyHref(project.slug) },
   }));
 }
 
-const { slug } = Astro.params;
-return Astro.redirect(caseStudyHref(slug!), 301);
+const { destination } = Astro.props as { destination: string };
+const canonical = new URL(destination, Astro.site).href;
 ---
+
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <title>Đang chuyển hướng…</title>
+    <meta http-equiv="refresh" content={`0;url=${destination}`} />
+    <meta name="robots" content="noindex" />
+    <link rel="canonical" href={canonical} />
+  </head>
+  <body>
+    <a href={destination}>Chuyển tới trang dự án</a>
+  </body>
+</html>

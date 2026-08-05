@@ -1,9 +1,9 @@
 /** Class Tailwind — thẻ dự án (ảnh full + gradient navy đáy + CTA) */
 
 import { imageRadius } from './image-frame';
-import { RHYTHM_WHITE, sectionPy } from './section-rhythm';
+import { SURFACE_PAPER, sectionPy } from './section-rhythm';
 
-export const projectCardSectionClasses = `${RHYTHM_WHITE} ${sectionPy}`;
+export const projectCardSectionClasses = `${SURFACE_PAPER} ${sectionPy}`;
 
 export const projectCardGrid3Classes =
   'grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 md:gap-6';
