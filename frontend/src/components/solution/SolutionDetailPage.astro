@@ -141,12 +141,12 @@ const h2Macro = `${sectionTitle} ${textOnLightTitle}`;
                 <li
                   data-reveal
                   class:list={[
-                    'grid grid-cols-[2.25rem_1fr] items-baseline gap-4 border-t border-border-subtle py-4 first:border-t-0',
+                    'grid grid-cols-[3.25rem_minmax(0,1fr)] items-start gap-4 border-t border-border-subtle py-4 first:border-t-0 md:grid-cols-[3.75rem_minmax(0,1fr)]',
                     RHYTHM_WHITE,
                   ]}
                 >
-                  {/* Số dẫn đầu — 1.5rem cố định mọi khổ màn, nên cột chỉ cần đủ ôm 2 chữ số */}
-                  <span class="text-[1.5rem] font-extrabold leading-none tabular-nums text-[#5c4500]">
+                  {/* Mép trên thẳng dòng chữ đầu; dịch nhẹ lên bù metrics số to */}
+                  <span class="w-full -translate-y-[0.2em] text-left text-[2rem] font-extrabold leading-none tabular-nums text-[#1f1b17] md:text-[2.25rem]">
                     {String(i + 1).padStart(2, '0')}
                   </span>
                   <p class="text-[1.0625rem] leading-relaxed text-ink-mid">{issue}</p>
@@ -214,22 +214,17 @@ const h2Macro = `${sectionTitle} ${textOnLightTitle}`;
       aria-labelledby="material-comparison-title"
     >
       <div class="mx-auto max-w-container-max-width px-6 md:px-8">
-        <header class="grid items-start gap-8 lg:grid-cols-[minmax(0,1.45fr)_minmax(18rem,0.75fr)] lg:gap-16">
-          <div data-reveal>
-            <span class={sectionEyebrow}>03 — Chất liệu</span>
-            <h2
-              id="material-comparison-title"
-              class:list={[h2Macro, 'mt-[1.15rem]']}
-            >
-              So sánh nhanh {content.fabricTable.length} nhóm chất liệu
-            </h2>
-          </div>
-
-          <div data-reveal class="lg:pt-10">
-            <p class:list={['max-w-[34rem] text-base leading-[1.65] md:text-lg', textOnLightLead]}>
-              Nhìn cùng lúc thành phần, đặc tính và môi trường phù hợp để lựa chọn nhanh hơn.
-            </p>
-          </div>
+        <header data-reveal class="max-w-[40rem]">
+          <span class={sectionEyebrow}>03 — Chất liệu</span>
+          <h2
+            id="material-comparison-title"
+            class:list={[h2Macro, 'mt-[1.15rem]']}
+          >
+            So sánh nhanh {content.fabricTable.length} nhóm chất liệu
+          </h2>
+          <p class:list={['mt-4 text-base leading-[1.65] md:text-lg', textOnLightLead]}>
+            Nhìn cùng lúc thành phần, đặc tính và môi trường phù hợp để lựa chọn nhanh hơn.
+          </p>
         </header>
 
         <div
@@ -269,7 +264,7 @@ const h2Macro = `${sectionTitle} ${textOnLightTitle}`;
                         <dt class="pt-0.5 text-[0.625rem] font-extrabold uppercase tracking-[0.09em] text-[#A46F00]">
                           Thành phần
                         </dt>
-                        <dd class="m-0 text-[0.8125rem] leading-[1.45] tabular-nums text-[#3D3832]">
+                        <dd class="m-0 text-[0.8125rem] leading-[1.45] tabular-nums text-[#1f1b17]">
                           {row.composition}
                         </dd>
                       </div>
@@ -277,7 +272,7 @@ const h2Macro = `${sectionTitle} ${textOnLightTitle}`;
                         <dt class="pt-0.5 text-[0.625rem] font-extrabold uppercase tracking-[0.09em] text-[#A46F00]">
                           Đặc tính
                         </dt>
-                        <dd class="m-0 text-[0.8125rem] leading-[1.45] text-[#3D3832]">
+                        <dd class="m-0 text-[0.8125rem] leading-[1.45] text-[#1f1b17]">
                           {row.features}
                         </dd>
                       </div>
@@ -285,7 +280,7 @@ const h2Macro = `${sectionTitle} ${textOnLightTitle}`;
                         <dt class="pt-0.5 text-[0.625rem] font-extrabold uppercase tracking-[0.09em] text-[#A46F00]">
                           Phù hợp
                         </dt>
-                        <dd class="m-0 text-[0.8125rem] leading-[1.45] text-[#3D3832]">
+                        <dd class="m-0 text-[0.8125rem] leading-[1.45] text-[#1f1b17]">
                           {row.environment}
                         </dd>
                       </div>
