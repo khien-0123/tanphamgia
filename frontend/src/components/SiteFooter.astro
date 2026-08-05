@@ -4,7 +4,7 @@ import { siteContact, siteFooter } from '../data/site';
 import SiteBrandLogo from './SiteBrandLogo.astro';
 
 const footerLink =
-  'inline-flex min-h-6 items-center text-sm text-white/65 no-underline transition-colors hover:text-accent-gold';
+  'block max-w-full min-w-0 text-sm leading-snug text-white/65 no-underline transition-colors hover:text-accent-gold break-words [overflow-wrap:anywhere]'
 const footerHeading =
   'm-0 mb-4 text-xs font-bold uppercase tracking-[0.12em] text-white';
 const socialBox =
@@ -155,24 +155,24 @@ const socialBox =
       </div>
     </div>
 
-    <!-- Liên hệ -->
-    <div>
+    <!-- Liên hệ — min-w-0 để text dài (email/địa chỉ) wrap trong cột 1/2 trên mobile -->
+    <div class="min-w-0">
       <h4 class={footerHeading}>Liên hệ</h4>
       <ul class="m-0 list-none space-y-4 p-0 text-sm text-white/70">
-        <li class="flex gap-3">
+        <li class="flex min-w-0 gap-3">
           <span class="material-symbols-outlined shrink-0 text-lg text-accent-gold" aria-hidden="true"
             >location_on</span
           >
-          <span class="leading-relaxed">{siteContact.address}</span>
+          <span class="min-w-0 leading-relaxed break-words [overflow-wrap:anywhere]">{siteContact.address}</span>
         </li>
-        <li class="flex gap-3 items-center">
+        <li class="flex min-w-0 items-center gap-3">
           <span class="material-symbols-outlined shrink-0 text-lg text-accent-gold" aria-hidden="true"
             >call</span
           >
           <a class={footerLink} href={siteContact.phoneHref}>{siteContact.phone}</a>
         </li>
-        <li class="flex gap-3 items-center">
-          <span class="material-symbols-outlined shrink-0 text-lg text-accent-gold" aria-hidden="true"
+        <li class="flex min-w-0 items-start gap-3">
+          <span class="material-symbols-outlined mt-0.5 shrink-0 text-lg text-accent-gold" aria-hidden="true"
             >mail</span
           >
           <a class={footerLink} href={siteContact.emailHref}>{siteContact.email}</a>

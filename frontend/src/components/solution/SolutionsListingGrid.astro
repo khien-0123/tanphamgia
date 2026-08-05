@@ -2,7 +2,7 @@
 import SiteImage from '../SiteImage.astro';
 import { solutions } from '../../data/site';
 import { listingKeywords } from '../../data/giai-phap-listing';
-import { RHYTHM_WHITE, sectionPy } from '../../lib/section-rhythm';
+import { SURFACE_PAPER, sectionPy } from '../../lib/section-rhythm';
 import { sectionEyebrow } from '../../lib/section-eyebrow';
 import { routes } from '../../lib/routes';
 import {
@@ -18,7 +18,7 @@ interface Props {
   sectionBg?: string;
 }
 
-const { sectionBg = RHYTHM_WHITE } = Astro.props;
+const { sectionBg = SURFACE_PAPER } = Astro.props;
 
 type SolutionLike = { slug: string; bullets: string[]; homeBullets?: string[] };
 

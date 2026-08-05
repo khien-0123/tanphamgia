@@ -51,7 +51,7 @@ function hrefFor(page: number): string {
 
 {
   hash && (
-    <script define:vars={{ hash }}>
+    <script is:inline define:vars={{ hash }}>
       // Sau khi đổi trang SSR, giữ tầm nhìn ở section (không kẹt đầu trang / hero)
       const id = String(hash);
       const scrollToSection = () => {

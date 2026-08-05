@@ -180,8 +180,14 @@ export const mainNavigation = [
   { label: 'Giải pháp', href: routes.giaiPhap, icon: 'category', desc: 'Nhóm giải pháp đồng phục' },
   { label: 'Khách hàng', href: routes.khachHang, icon: 'groups', desc: 'Thương hiệu đã đồng hành' },
   { label: 'Tin tức', href: routes.tinTuc, icon: 'newspaper', desc: 'Kiến thức ngành & dự án' },
-  { label: 'Tài liệu', href: routes.taiLieu, icon: 'folder_open', desc: 'Hồ sơ năng lực & catalog' },
-  { label: 'Liên hệ', href: routes.lienHe, icon: 'call', desc: 'Tư vấn & báo giá nhanh' },
+  {
+    label: 'Tài liệu',
+    href: routes.taiLieu,
+    icon: 'folder_open',
+    desc: 'Hồ sơ năng lực & catalog',
+    /** Nút vàng trên thanh menu */
+    cta: true,
+  },
 ];
 
 /** Media hero trang chủ — chỉ video, không dùng ảnh nền */

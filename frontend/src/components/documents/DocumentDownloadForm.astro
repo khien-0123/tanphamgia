@@ -141,7 +141,7 @@ const { allDocuments, sectionBg = SURFACE_NAVY } = Astro.props;
   </div>
 </section>
 
-<script define:vars={{ allDocuments }}>
+<script is:inline define:vars={{ allDocuments }}>
   const form = document.getElementById('doc-form');
   const selectedId = document.getElementById('doc-selected-id');
   const selectedLabel = document.getElementById('doc-selected-label');

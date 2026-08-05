@@ -109,3 +109,5 @@ if (document.readyState === 'loading') {
 
 document.addEventListener('astro:page-load', initHeroStatCounters);
 document.addEventListener('astro:after-swap', initHeroStatCounters);
+
+export {};
