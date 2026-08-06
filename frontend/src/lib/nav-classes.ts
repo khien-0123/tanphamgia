@@ -43,24 +43,26 @@ export const navMenuLinkActiveClasses = [
 export const navMenuLabelClasses =
   'inline-block leading-none tracking-normal text-center align-middle';
 
-/** Mục menu dạng nút vàng (vd. Tài liệu) — trong track menu desktop */
-export const navMenuCtaClasses = [
-  'inline-flex items-center justify-center px-3 py-1.5 lg:px-3.5 lg:py-2 xl:px-4 rounded-full box-border',
-  'border-0 bg-accent-gold text-sm font-bold leading-none text-[#1f1b17]',
-  'whitespace-nowrap no-underline shadow-soft',
-  'transition-[background,box-shadow,transform] hover:brightness-[0.98] active:scale-[0.98]',
-];
-
 export const navEndClasses =
-  'flex items-center min-h-10 shrink-0 justify-end gap-2';
+  'flex items-center min-h-10 shrink-0 justify-end gap-6';
 
 export const navControlClasses =
   'inline-flex items-center justify-center h-auto min-h-10 box-border leading-none m-0 py-0';
 
-export const navCtaClasses = [
-  'min-[400px]:gap-2.5 px-3 min-[400px]:pl-5 min-[400px]:pr-1.5 rounded-full border-0 font-bold leading-none',
+/** Nút vàng header — cùng chiều cao (min-h-10) với Nhận tư vấn */
+export const navCtaBaseClasses = [
+  'rounded-full border-0 font-bold leading-none',
   'tracking-normal text-[#1f1b17] bg-accent-gold shadow-soft no-underline whitespace-nowrap',
   'transition-shadow text-[0.6875rem] min-[400px]:text-xs sm:text-sm',
+];
+
+/** Tài liệu — padding đối xứng, cạnh Nhận tư vấn */
+export const navDocsCtaClasses = [...navCtaBaseClasses, 'px-5'];
+
+/** Nhận tư vấn — chừa chỗ icon mũi tên bên phải */
+export const navCtaClasses = [
+  ...navCtaBaseClasses,
+  'min-[400px]:gap-2.5 px-3 min-[400px]:pl-5 min-[400px]:pr-1.5',
 ];
 
 export const navToggleClasses = [

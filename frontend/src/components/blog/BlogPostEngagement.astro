@@ -18,33 +18,35 @@ const { slug, author = defaultBlogAuthor } = Astro.props;
   data-post-slug={slug}
 >
   {/* —— Tác giả —— */}
-  <article class="flex flex-col gap-5 sm:flex-row sm:gap-6">
-    <div class="shrink-0">
-      <SiteImage
-        src={author.avatar}
-        alt={author.avatarAlt}
-        class="h-20 w-20 rounded-full object-cover object-top sm:h-24 sm:w-24"
-        width={96}
-        height={96}
-        loading="lazy"
-        variant="thumb"
-      />
-    </div>
-    <div class="min-w-0 flex-1">
-      <p class="m-0 text-sm font-semibold text-[#625a50]">{author.role}</p>
-      <h3 class="mt-1 text-lg font-extrabold uppercase tracking-[-0.02em] text-[#1f1b17] sm:text-xl">
-        {author.name}
-      </h3>
-      <p class="mt-2 inline-flex items-center gap-1.5 text-sm font-semibold text-[#2f6b3a]">
-        <span
-          class="inline-flex h-4 w-4 items-center justify-center rounded-full bg-[#2f6b3a] text-white"
-          aria-hidden="true"
-        >
-          <span class="material-symbols-outlined text-[0.7rem] leading-none">check</span>
-        </span>
-        {author.verifiedLabel}
-      </p>
-      <p class="mt-3 text-[0.9375rem] leading-relaxed text-[#3d3832]">{author.bio}</p>
+  <article class="rounded-[0.85rem] border border-[#ded5c5] bg-white px-5 py-5 sm:px-6 sm:py-6">
+    <div class="flex flex-col gap-5 sm:flex-row sm:gap-6">
+      <div class="shrink-0">
+        <SiteImage
+          src={author.avatar}
+          alt={author.avatarAlt}
+          class="h-20 w-20 rounded-full object-cover object-top sm:h-24 sm:w-24"
+          width={96}
+          height={96}
+          loading="lazy"
+          variant="thumb"
+        />
+      </div>
+      <div class="min-w-0 flex-1">
+        <p class="m-0 text-sm font-semibold text-[#625a50]">{author.role}</p>
+        <h3 class="mt-1 text-lg font-extrabold uppercase tracking-[-0.02em] text-[#1f1b17] sm:text-xl">
+          {author.name}
+        </h3>
+        <p class="mt-2 inline-flex items-center gap-1.5 text-sm font-semibold text-[#2f6b3a]">
+          <span
+            class="inline-flex h-4 w-4 items-center justify-center rounded-full bg-[#2f6b3a] text-white"
+            aria-hidden="true"
+          >
+            <span class="material-symbols-outlined text-[0.7rem] leading-none">check</span>
+          </span>
+          {author.verifiedLabel}
+        </p>
+        <p class="mt-3 text-[0.9375rem] leading-relaxed text-[#3d3832]">{author.bio}</p>
+      </div>
     </div>
   </article>
 
@@ -55,7 +57,7 @@ const { slug, author = defaultBlogAuthor } = Astro.props;
         [1, 2, 3, 4, 5].map((n) => (
           <button
             type="button"
-            class="rating-star grid h-9 w-9 place-items-center rounded-full transition-colors hover:text-[#ffc72c] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1f1b17]"
+            class="rating-star grid h-9 w-9 place-items-center rounded-full transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1f1b17]"
             data-rating-star={n}
             aria-label={`Chấm ${n} sao`}
           >

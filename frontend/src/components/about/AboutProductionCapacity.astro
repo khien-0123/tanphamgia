@@ -90,7 +90,7 @@ import {
         {
           productionCapacity.qcSteps.map((step, index) => (
             <li class:list={['qc-process-card relative flex min-h-[22rem] flex-col rounded-[1rem] px-5 pb-7 pt-6 text-center shadow-[0_16px_28px_rgba(38,31,21,0.14)] sm:px-6', index % 2 === 0 ? 'bg-[#0d1b3a] text-white' : ['bg-[#ffc72c]', textOnLightTitle]]}>
-              <span class:list={['text-xs font-extrabold uppercase tracking-[0.14em]', index % 2 === 0 ? 'text-[#ffc72c]' : textOnLightTitle]}>
+              <span class:list={['text-xs font-extrabold uppercase tracking-[0.14em]', index % 2 === 0 ? 'text-accent-gold' : textOnLightTitle]}>
                 Bước {step.number}
               </span>
               <h3 class="mt-5 flex min-h-[3.5rem] items-center justify-center text-xl font-extrabold leading-[1.18] tracking-[-0.025em]">{step.title}</h3>
