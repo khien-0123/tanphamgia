@@ -3,19 +3,17 @@ import SiteImage from '../SiteImage.astro';
 import { defaultBlogAuthor, type BlogAuthor } from '../../data/blog-engagement';
 
 interface Props {
-  /** Slug bài — khóa localStorage cho rating */
+  /** Giữ prop để tương thích layout chi tiết bài */
   slug: string;
   author?: BlogAuthor;
 }
 
-const { slug, author = defaultBlogAuthor } = Astro.props;
+const { author = defaultBlogAuthor } = Astro.props;
 ---
 
 <section
   class="mt-14 border-t border-[#e5dfd2] pt-12"
   aria-label="Tác giả và đánh giá"
-  data-blog-engagement
-  data-post-slug={slug}
 >
   {/* —— Tác giả —— */}
   <article class="rounded-[0.85rem] border border-[#ded5c5] bg-white px-5 py-5 sm:px-6 sm:py-6">
@@ -50,43 +48,26 @@ const { slug, author = defaultBlogAuthor } = Astro.props;
     </div>
   </article>
 
-  {/* —— Rating —— */}
-  <div class="mt-8 flex flex-wrap items-center justify-end gap-3" data-rating-root>
-    <div class="flex items-center gap-0.5" role="group" aria-label="Đánh giá bài viết">
+  {/* —— Rating cố định 5 sao (không tương tác) —— */}
+  <div class="mt-8 flex flex-wrap items-center justify-end gap-3">
+    <div class="flex items-center gap-0.5" role="img" aria-label="Đánh giá 5 trên 5 sao">
       {
-        [1, 2, 3, 4, 5].map((n) => (
-          <button
-            type="button"
-            class="rating-star grid h-9 w-9 place-items-center rounded-full transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1f1b17]"
-            data-rating-star={n}
-            aria-label={`Chấm ${n} sao`}
-          >
-            <span class="material-symbols-outlined text-[1.35rem] leading-none" aria-hidden="true"
-              >star</span
-            >
-          </button>
+        [1, 2, 3, 4, 5].map(() => (
+          <span class="rating-star grid h-9 w-9 place-items-center" aria-hidden="true">
+            <span class="material-symbols-outlined text-[1.35rem] leading-none">star</span>
+          </span>
         ))
       }
     </div>
-    <p class="m-0 text-sm font-semibold text-[#1f1b17]" data-rating-label>
-      — /5 — (0 bình chọn)
-    </p>
+    <p class="m-0 text-sm font-semibold text-[#1f1b17]">5/5</p>
   </div>
 </section>
 
 <style>
   .rating-star {
-    color: #d9d0c0;
-  }
-  .rating-star.is-active {
     color: #ffc72c;
   }
   .rating-star .material-symbols-outlined {
-    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-  }
-  .rating-star.is-active .material-symbols-outlined {
     font-variation-settings: 'FILL' 1, 'wght' 500, 'GRAD' 0, 'opsz' 24;
   }
 </style>
-
-<script src="../../scripts/blog-post-engagement.ts"></script>
