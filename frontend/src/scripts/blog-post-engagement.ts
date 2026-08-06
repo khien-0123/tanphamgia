@@ -81,14 +81,6 @@ function initEngagement(root: HTMLElement) {
       paintStars(ratingRoot, next);
       updateRatingLabel(ratingLabel, agg, userVote);
     });
-
-    btn.addEventListener('mouseenter', () => {
-      paintStars(ratingRoot, Number(btn.dataset.ratingStar) || 0);
-    });
-  });
-
-  ratingRoot.addEventListener('mouseleave', () => {
-    paintStars(ratingRoot, userVote ?? 0);
   });
 }
 

@@ -5,9 +5,9 @@ import {
   navCenterClasses,
   navControlClasses,
   navCtaClasses,
+  navDocsCtaClasses,
   navEndClasses,
   navInnerClasses,
-  navMenuCtaClasses,
   navMenuLinkActiveClasses,
   navMenuLinkBaseClasses,
   navMenuLinkInactiveClasses,
@@ -42,6 +42,9 @@ const {
   ctaHref = routes.lienHe,
   navOverDark = true,
 } = Astro.props;
+
+const menuItems = items.filter((item) => !item.cta);
+const docsCtaItems = items.filter((item) => item.cta);
 ---
 
 <nav
@@ -57,22 +60,11 @@ const {
     <div class={navCenterClasses}>
       <nav class:list={[navMenuTrackClasses, 'gap-1']} aria-label="Menu chính">
         {
-          items.map((item) => {
+          menuItems.map((item) => {
             const isActive =
               item.href === routes.home
                 ? currentPath === routes.home
                 : currentPath === item.href || currentPath.startsWith(`${item.href}/`);
-            if (item.cta) {
-              return (
-                <a
-                  class:list={navMenuCtaClasses}
-                  href={item.href}
-                  aria-current={isActive ? 'page' : undefined}
-                >
-                  <span class={navMenuLabelClasses}>{item.label}</span>
-                </a>
-              );
-            }
             return (
               <a
                 class:list={[
@@ -90,6 +82,23 @@ const {
     </div>
 
     <div class={navEndClasses}>
+      {
+        docsCtaItems.map((item) => {
+          const isActive =
+            item.href === routes.home
+              ? currentPath === routes.home
+              : currentPath === item.href || currentPath.startsWith(`${item.href}/`);
+          return (
+            <a
+              href={item.href}
+              class:list={[navControlClasses, navDocsCtaClasses, 'hidden lg:flex']}
+              aria-current={isActive ? 'page' : undefined}
+            >
+              {item.label}
+            </a>
+          );
+        })
+      }
       <a href={ctaHref} class:list={[navControlClasses, navCtaClasses, 'hidden lg:flex']}>
         Nhận tư vấn
         <span

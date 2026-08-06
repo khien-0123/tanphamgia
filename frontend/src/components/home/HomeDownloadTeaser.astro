@@ -50,13 +50,13 @@ import { textOnDarkLead, textOnDarkTitle } from '../../lib/section-typography';
           </select>
         </div>
 
-        <button class="mt-7 flex min-h-14 w-full items-center justify-center gap-2 rounded-full bg-[#ffc72c] px-6 py-3 text-sm font-extrabold text-[#1f1b17] transition-transform hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#ffc72c] disabled:cursor-not-allowed disabled:opacity-70" type="submit" data-mockup-documents-submit>
+        <button class="mt-7 flex min-h-14 w-full items-center justify-center gap-2 rounded-full bg-accent-gold px-6 py-3 text-sm font-extrabold text-[#1f1b17] transition-transform hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-gold disabled:cursor-not-allowed disabled:opacity-70" type="submit" data-mockup-documents-submit>
           <span>{homeDocuments.submitLabel}</span>
           {/* Mũi tên trần — bỏ huy hiệu tròn #e9af16 */}
           <span class="material-symbols-outlined text-xl leading-none" aria-hidden="true">arrow_forward</span>
         </button>
 
-        <p class="mt-5 text-center text-xs text-[#ffc72c]" data-mockup-documents-status hidden role="status" aria-live="polite">
+        <p class="mt-5 text-center text-xs text-accent-gold" data-mockup-documents-status hidden role="status" aria-live="polite">
           Đã ghi nhận thông tin. Đây là biểu mẫu trình diễn trên trang mockup.
         </p>
         <p class="mt-5 text-xs text-white/66">{homeDocuments.footnote}</p>
@@ -102,8 +102,8 @@ import { textOnDarkLead, textOnDarkTitle } from '../../lib/section-typography';
   }
 
   .mockup-documents-input:focus {
-    border-color: #ffc72c;
-    box-shadow: 0 0 0 3px rgba(255, 199, 44, 0.16);
+    border-color: #ffc933;
+    box-shadow: 0 0 0 3px rgba(255, 201, 51, 0.16);
   }
 
   /* Mũi tên xổ mặc định dính sát mép phải — tắt đi, tự vẽ chevron neo cách mép 1.1rem */
