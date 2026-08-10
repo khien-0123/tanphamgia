@@ -53,6 +53,7 @@ export const brandDocuments: DocumentItem[] = [
     meta: 'PDF · 32 trang · 8.4MB',
     category: 'brand',
     coverType: 'Hồ sơ',
+    cover: siteAssets.about.heThongSanXuat,
   },
   {
     id: 'proposal-mau',
@@ -61,6 +62,7 @@ export const brandDocuments: DocumentItem[] = [
     category: 'brand',
     coverType: 'Proposal',
     coverTitle: 'Giải pháp đồng phục',
+    cover: siteAssets.solutions.giaiPhap2,
   },
   {
     id: 'company-profile',
@@ -69,6 +71,7 @@ export const brandDocuments: DocumentItem[] = [
     category: 'brand',
     coverType: 'Company Profile',
     coverTitle: 'Tân Phạm Gia',
+    cover: siteAssets.whyChoose.thoiTrangHoa,
   },
 ];
 
@@ -86,6 +89,7 @@ export const catalogueDocuments: DocumentItem[] = [
     meta: 'PDF',
     category: 'catalogue',
     coverTitle: 'Polo doanh nghiệp 2026',
+    cover: siteAssets.services.polo,
   },
   {
     id: 'cat-fnb',
@@ -93,6 +97,7 @@ export const catalogueDocuments: DocumentItem[] = [
     meta: 'PDF',
     category: 'catalogue',
     coverTitle: 'F&B & Dịch vụ 2026',
+    cover: siteAssets.cases.kingGroup,
   },
   {
     id: 'cat-cong-nghiep',
@@ -100,6 +105,7 @@ export const catalogueDocuments: DocumentItem[] = [
     meta: 'PDF',
     category: 'catalogue',
     coverTitle: 'Công nghiệp & Bảo hộ 2026',
+    cover: siteAssets.solutions.giaiPhap3,
   },
   {
     id: 'cat-y-te',
@@ -124,6 +130,7 @@ export const guideDocuments: DocumentItem[] = [
     meta: 'PDF',
     category: 'guide',
     coverTitle: 'Chọn chất liệu theo môi trường làm việc',
+    cover: siteAssets.materials.piquePolyester,
   },
   {
     id: 'guide-size',
@@ -131,6 +138,7 @@ export const guideDocuments: DocumentItem[] = [
     meta: 'PDF',
     category: 'guide',
     coverTitle: 'Đo size & phân bổ size đơn lớn',
+    cover: siteAssets.services.soMi,
   },
   {
     id: 'guide-checklist',
@@ -139,6 +147,7 @@ export const guideDocuments: DocumentItem[] = [
     category: 'guide',
     coverType: 'Checklist',
     coverTitle: 'Chuẩn bị trước khi đặt đồng phục',
+    cover: siteAssets.blog.poloQcWorkshop,
   },
   {
     id: 'guide-in-theu',
@@ -147,6 +156,7 @@ export const guideDocuments: DocumentItem[] = [
     category: 'guide',
     coverType: 'Kỹ thuật',
     coverTitle: 'Phương pháp in & thêu logo',
+    cover: siteAssets.services.theuViTinh,
   },
   {
     id: 'guide-san-xuat',
@@ -154,6 +164,7 @@ export const guideDocuments: DocumentItem[] = [
     meta: 'PDF',
     category: 'guide',
     coverTitle: 'Chất liệu cho môi trường sản xuất',
+    cover: siteAssets.about.production1,
   },
 ];
 
