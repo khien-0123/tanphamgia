@@ -103,6 +103,7 @@ const pullQuote = project.results[0] ?? project.intro;
           loading="eager"
           decoding="async"
           variant="hero"
+          sizes="(max-width: 1023px) calc(100vw - 3rem), 58rem"
         />
       </div>
       <figcaption class="mt-3 text-[0.8125rem] leading-snug text-[#8a8278]">
@@ -197,10 +198,11 @@ const pullQuote = project.results[0] ?? project.intro;
               <SiteImage
                 src={midFigure.src}
                 alt={midFigure.caption}
-                class="aspect-[16/10] w-full object-cover"
+                class="aspect-[16/10] w-full object-cover object-center"
                 loading="lazy"
                 decoding="async"
                 variant="card"
+                sizes="(max-width: 1023px) calc(100vw - 3rem), 42rem"
               />
             </div>
             <figcaption>{midFigure.caption}</figcaption>
@@ -232,10 +234,11 @@ const pullQuote = project.results[0] ?? project.intro;
                       <SiteImage
                         src={fig.src}
                         alt={fig.caption}
-                        class="aspect-[4/5] w-full object-cover"
+                        class="aspect-[4/5] w-full object-cover object-center"
                         loading="lazy"
                         decoding="async"
                         variant="card"
+                        sizes="(max-width: 639px) calc(100vw - 3rem), 21rem"
                       />
                     </div>
                     <figcaption>{fig.caption}</figcaption>
@@ -262,10 +265,11 @@ const pullQuote = project.results[0] ?? project.intro;
                   <SiteImage
                     src={resultFigure.src}
                     alt={resultFigure.caption}
-                    class="aspect-[16/10] w-full object-cover"
+                    class="aspect-[16/10] w-full object-cover object-center"
                     loading="lazy"
                     decoding="async"
                     variant="card"
+                    sizes="(max-width: 1023px) calc(100vw - 3rem), 42rem"
                   />
                 </div>
                 <figcaption>{resultFigure.caption}</figcaption>

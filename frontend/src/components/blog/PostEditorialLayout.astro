@@ -153,7 +153,7 @@ const relatedPosts = related;
       <SiteImage
         src={post.image}
         alt={post.alt}
-        class="absolute inset-0 block h-full w-full object-cover"
+        class="absolute inset-0 block h-full w-full object-cover object-[center_40%]"
         loading="eager"
         decoding="async"
         variant="hero"
@@ -344,12 +344,12 @@ const relatedPosts = related;
                   <SiteImage
                     src={block.src}
                     alt={block.alt}
-                    class:list={['block w-full object-cover', block.ratio === 'square' ? 'aspect-square' : 'aspect-[16/10]']}
+                    class:list={['block w-full object-cover object-center', block.ratio === 'square' ? 'aspect-square' : 'aspect-[16/10]']}
                     loading="lazy"
                     decoding="async"
                     variant="full"
                     widths={[640, 960, 1280, 1600]}
-                    sizes="(max-width: 1023px) calc(100vw - 3rem), 68vw"
+                    sizes="(max-width: 1023px) calc(100vw - 3rem), 55vw"
                   />
                   <figcaption>{block.caption}</figcaption>
                 </figure>
@@ -417,7 +417,7 @@ const relatedPosts = related;
               <SiteImage
                 src={item.image}
                 alt={item.alt}
-                class:list={['block aspect-[16/10] w-full object-cover', cardMediaHover]}
+                class:list={['block aspect-[16/10] w-full object-cover object-center', cardMediaHover]}
                 loading="lazy"
                 decoding="async"
                 variant="card"

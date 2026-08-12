@@ -110,6 +110,7 @@ const h2Macro = `${sectionTitle} ${textOnLightTitle}`;
   <PageHero
     title={content.hero.title}
     bgImage={solution?.image}
+    imageClass={solution?.homeImagePosition}
     description={content.hero.description}
     breadcrumb={[
       { label: 'Trang chủ', href: routes.home },
@@ -172,8 +173,12 @@ const h2Macro = `${sectionTitle} ${textOnLightTitle}`;
                   src={solutionImage}
                   alt={content.hero.imageAlt}
                   loading="lazy"
-                  class="block aspect-[4/5] w-full object-cover object-top"
+                  class:list={[
+                    'block aspect-[4/5] w-full object-cover',
+                    solution?.homeImagePosition ?? 'object-top',
+                  ]}
                   variant="card"
+                  sizes="(max-width: 1023px) 100vw, 40vw"
                 />
               )
             }
@@ -248,7 +253,7 @@ const h2Macro = `${sectionTitle} ${textOnLightTitle}`;
                       src={fabricImages[index % fabricImages.length]}
                       alt={`Cận cảnh bề mặt ${row.material}`}
                       loading="lazy"
-                      class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.025] motion-reduce:transition-none"
+                      class="h-full w-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.025] motion-reduce:transition-none"
                       variant="card"
                       widths={[320, 480, 640, 800]}
                       sizes="(max-width: 559px) 100vw, (max-width: 1023px) 50vw, 25vw"
@@ -356,6 +361,11 @@ const h2Macro = `${sectionTitle} ${textOnLightTitle}`;
                     item.homeImagePosition ?? 'object-top',
                   ]}
                   variant="card"
+                  sizes={
+                    index === 0
+                      ? '(max-width: 1023px) 100vw, 50vw'
+                      : '(max-width: 767px) 100vw, 50vw'
+                  }
                 />
                 <span aria-hidden="true" class="related-scrim absolute inset-0 -z-10"></span>
 

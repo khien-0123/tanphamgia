@@ -21,6 +21,15 @@ export function getStaticPaths() {
 const { service } = Astro.props;
 const others = getOtherServices(service.slug);
 const blocks = service.blocks ?? [];
+
+/** Điểm crop hero — 1 file, chỉ lệch object-position theo chủ thể */
+const heroImageClass: Record<string, string> = {
+  'tu-van-thiet-ke': 'object-[center_42%]',
+  'xuong-may-oem-odm': 'object-[center_45%]',
+  'fabric-collection': 'object-[center_32%]',
+  'in-an': 'object-[80%_center]',
+  'theu-vi-tinh': 'object-center',
+};
 ---
 
 <SiteLayout
@@ -31,6 +40,7 @@ const blocks = service.blocks ?? [];
   <PageHero
     title={service.title}
     bgImage={service.heroImage ?? service.image ?? siteAssets.hero.gioiThieu}
+    imageClass={heroImageClass[service.slug]}
     description={service.heroDescription ?? service.seo.description}
     vAlign="center"
     breadcrumb={[

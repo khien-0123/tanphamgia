@@ -71,9 +71,10 @@ const loopProjects = [...projects, ...projects, ...projects];
                     <SiteImage
                       src={item.image}
                       alt={item.alt}
-                      class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.02]"
+                      class="absolute inset-0 h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-[1.02]"
                       loading="lazy"
                       variant="card"
+                      sizes="(max-width: 639px) calc(100vw - 3rem), (max-width: 1023px) 42rem, 48rem"
                     />
                     <div class="absolute inset-0 bg-black/45" aria-hidden="true"></div>
                     {'youtubeVideoId' in item && item.youtubeVideoId && (

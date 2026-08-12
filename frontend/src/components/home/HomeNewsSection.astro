@@ -35,7 +35,7 @@ const [largePosts, compactPosts] = [homeNews.items.slice(0, 2), homeNews.items.s
           <article class="group relative flex h-full flex-col overflow-hidden rounded-[1rem] border border-[#e5dfd2] bg-white shadow-[0_8px_20px_rgba(45,35,20,0.06)] transition-transform duration-300 hover:-translate-y-1">
             <a href={post.href ?? '#'} class="absolute inset-0 z-10" aria-label={`Đọc thêm: ${post.title}`}><span class="sr-only">Đọc thêm</span></a>
             <figure class="overflow-hidden bg-[#f1f1f1]">
-              <SiteImage src={post.image} alt={post.alt} class="block aspect-[1.52/1] w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" loading="lazy" variant="card" />
+              <SiteImage src={post.image} alt={post.alt} class="block aspect-[1.52/1] w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" loading="lazy" variant="card" sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 40vw" />
             </figure>
             <div class="flex flex-1 flex-col p-5 sm:p-6">
               <p class="text-[0.58rem] font-extrabold uppercase tracking-[0.04em] text-[#c18a00]">{post.category} <span class="px-1 text-[#c18a00]">·</span> <time class="normal-case tracking-normal font-semibold" datetime={post.publishedAt}>{formatBlogDate(post.publishedAt)}</time></p>
@@ -52,7 +52,7 @@ const [largePosts, compactPosts] = [homeNews.items.slice(0, 2), homeNews.items.s
           <article class="group relative grid min-h-[7.2rem] grid-cols-[6.5rem_1fr] items-center gap-4 overflow-hidden rounded-[0.9rem] border border-[#e5dfd2] bg-white px-3 py-3 shadow-[0_8px_18px_rgba(45,35,20,0.05)] transition-transform duration-300 hover:-translate-y-1 sm:grid-cols-[7rem_1fr]">
             <a href={post.href ?? '#'} class="absolute inset-0 z-10" aria-label={`Đọc thêm: ${post.title}`}><span class="sr-only">Đọc thêm</span></a>
             <figure class="overflow-hidden rounded-[0.6rem] bg-[#f1f1f1]">
-              <SiteImage src={post.image} alt={post.alt} class="block aspect-square w-full object-cover transition-transform duration-500 group-hover:scale-[1.06]" loading="lazy" variant="card" />
+              <SiteImage src={post.image} alt={post.alt} class="block aspect-square w-full object-cover transition-transform duration-500 group-hover:scale-[1.06]" loading="lazy" variant="thumb" sizes="(max-width: 639px) 6.5rem, 7rem" />
             </figure>
             <div class="min-w-0 pr-2">
               <p class="text-[0.625rem] font-extrabold uppercase tracking-[0.04em] text-[#c18a00]">{post.category}</p>

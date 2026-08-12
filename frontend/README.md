@@ -1,39 +1,50 @@
-# Tan Phạm Gia — Astro Frontend
+# Tân Phạm Gia — Astro Frontend
 
-Trang chủ Tân Phạm Gia được xây dựng bằng **Astro** + **Tailwind CSS**.
+Frontend **Astro** + **Tailwind**. Nội dung sẵn sàng nối **Headless WordPress** (WPGraphQL + ACF).
 
 ## Chạy dự án
 
 ```bash
-cd web
+cd frontend
 npm install
 npm run dev
 ```
 
-Mở trình duyệt tại `http://localhost:4321`.
+Mở `http://localhost:4321`.
 
-## Build production
+## Headless WordPress
+
+Hướng dẫn đầy đủ: [`docs/HUONG-DAN-HEADLESS-WORDPRESS.md`](./docs/HUONG-DAN-HEADLESS-WORDPRESS.md)
+
+**Chưa có VPS:** để trống `WORDPRESS_GRAPHQL_URL` trong `.env` → dùng `src/data/*`.
+
+**Có VPS:** copy `.env.example` → `.env`, điền:
 
 ```bash
-npm run build
-npm run preview
+WORDPRESS_GRAPHQL_URL=https://cms.ten-mien.com/graphql
+WORDPRESS_IMAGE_HOSTNAME=cms.ten-mien.com
 ```
+
+Rồi rebuild. Tin tức lấy từ WP; module khác vẫn local cho đến khi bật stub → live.
+
+| Module | API | Trạng thái |
+|--------|-----|------------|
+| Tin tức | `getAllBlogPosts` / `getBlogPostBySlug` | live |
+| Tài liệu | `getAllDocuments` | stub → local |
+| Giải pháp | `getAllSolutions` | stub → local |
+| Case study | `getAllCaseStudies` | stub → local |
+
+Import từ `src/lib/cms`.
 
 ## Cấu trúc
 
 ```
-web/
+frontend/
+├── docs/HUONG-DAN-HEADLESS-WORDPRESS.md
 ├── src/
-│   ├── layouts/BaseLayout.astro   # Shell HTML, fonts, global CSS
-│   ├── pages/index.astro          # Trang chủ (13 sections)
-│   ├── scripts/site-nav.ts        # Nav scroll + smooth anchor
-│   └── styles/global.css          # Custom utilities (liquid-glass, hero, nav…)
-├── tailwind.config.mjs            # Theme tokens từ prototype HTML
+│   ├── lib/cms/          # Client GraphQL + getter + stub
+│   ├── data/             # Fallback khi chưa/mất CMS
+│   ├── pages/
+│   └── ...
 └── astro.config.mjs
 ```
-
-## Ghi chú kỹ thuật
-
-- **Zero-JS mặc định**: chỉ script nav scroll được bundle tối thiểu.
-- **Tailwind**: dùng `@astrojs/tailwind`, không còn CDN.
-- **Ảnh**: dùng `SiteImage` (Astro `<Image />`) — path logic qua `siteAssets`, file nguồn trong `src/assets/images/`.

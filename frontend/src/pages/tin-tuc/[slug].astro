@@ -1,24 +1,30 @@
 ---
 import SiteLayout from '../../layouts/SiteLayout.astro';
 import PostEditorialLayout from '../../components/blog/PostEditorialLayout.astro';
-import { blogPosts } from '../../data/site';
-import { getPostBody } from '../../data/bai-viet';
+import { getAllBlogPosts, getBlogPostBySlug } from '../../lib/cms';
 import { formatBlogDate } from '../../lib/format-blog-date';
 import { routes } from '../../lib/routes';
+import { allDocuments } from '../../data/tai-lieu';
 
-export function getStaticPaths() {
-  return blogPosts.map((post) => ({
+export async function getStaticPaths() {
+  const posts = await getAllBlogPosts();
+  return posts.map((post) => ({
     params: { slug: post.slug },
-    props: { post },
+    props: { slug: post.slug },
   }));
 }
 
-const { post } = Astro.props;
+const slug = Astro.props.slug as string;
+const detail = await getBlogPostBySlug(slug);
+if (!detail) {
+  return Astro.redirect(routes.tinTuc);
+}
+
+const { post, blocks, contentHtml } = detail;
+const allPosts = await getAllBlogPosts();
 const title = `${post.title} | Tân Phạm Gia`;
 
-/* Bài liên quan ưu tiên cùng danh mục, thiếu thì bù bằng bài khác để lưới
-   3 thẻ không bị hụt. */
-const others = blogPosts.filter((item) => item.slug !== post.slug);
+const others = allPosts.filter((item) => item.slug !== post.slug);
 const ranked = [
   ...others.filter((item) => item.category === post.category),
   ...others.filter((item) => item.category !== post.category),
@@ -33,11 +39,10 @@ const related = ranked.slice(0, 3).map((item) => ({
   meta: formatBlogDate(item.publishedAt),
 }));
 
-/* Danh sách chữ ở cột phải đầu trang — nhiều hơn lưới thẻ dưới chân vì
-   không tốn diện tích ảnh. */
-const sidebarLinks = ranked.slice(0, 6).map((item) => ({
-  href: item.href!,
-  title: item.title,
+/** Sidebar trỏ về tài liệu thật trên trang /tai-lieu — không dùng bài viết khác */
+const sidebarLinks = allDocuments.slice(0, 6).map((doc) => ({
+  href: `${routes.taiLieu}#${doc.id}`,
+  title: doc.title,
 }));
 ---
 
@@ -49,7 +54,8 @@ const sidebarLinks = ranked.slice(0, 6).map((item) => ({
     image={post.image}
     alt={post.alt}
     publishedAt={post.publishedAt}
-    blocks={getPostBody(post.slug)}
+    blocks={blocks}
+    contentHtml={contentHtml}
     breadcrumbLabel="Tin tức"
     breadcrumbHref={routes.tinTuc}
     backLabel="Quay lại Tin tức"

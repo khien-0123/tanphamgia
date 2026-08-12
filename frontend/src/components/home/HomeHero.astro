@@ -6,7 +6,15 @@ import { routes } from '../../lib/routes';
 <section class="relative overflow-visible bg-[#f5f0e7] p-0 sm:p-2 lg:p-0" aria-label="Hero trang chủ">
   <div class="relative flex flex-col overflow-visible bg-ink-dark pb-12 text-white lg:min-h-[100svh] lg:pb-0">
     <div class="absolute inset-0" aria-hidden="true">
-      <video class="h-full w-full object-cover object-center" autoplay loop muted playsinline preload="auto">
+      <video
+        class="h-full w-full object-cover object-center"
+        autoplay
+        loop
+        muted
+        playsinline
+        preload="auto"
+        poster={homeHero.poster}
+      >
         <source src={homeHero.media} type="video/mp4" />
         Trình duyệt của bạn không hỗ trợ video nền.
       </video>

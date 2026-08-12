@@ -5,10 +5,12 @@
 import SiteLayout from '../../../layouts/SiteLayout.astro';
 import PageHero from '../../../components/PageHero.astro';
 import BlogListingSection from '../../../components/blog/BlogListingSection.astro';
-import { pageSeo, blogPosts, BLOG_POSTS_PER_PAGE, pageHeroBg } from '../../../data/site';
+import { pageSeo, BLOG_POSTS_PER_PAGE, pageHeroBg } from '../../../data/site';
+import { getAllBlogPosts } from '../../../lib/cms';
 import { routes } from '../../../lib/routes';
 
-export function getStaticPaths() {
+export async function getStaticPaths() {
+  const blogPosts = await getAllBlogPosts();
   const featured = blogPosts[0];
   const listing = featured ? blogPosts.slice(1) : blogPosts;
   const totalPages = Math.max(1, Math.ceil(listing.length / BLOG_POSTS_PER_PAGE));
@@ -17,6 +19,7 @@ export function getStaticPaths() {
   }));
 }
 
+const blogPosts = await getAllBlogPosts();
 const pageNum = Number(Astro.params.page);
 const featuredPost = blogPosts[0];
 const seoTitle = `${pageSeo.tinTuc.title} — Trang ${pageNum}`;
@@ -30,6 +33,7 @@ const seoTitle = `${pageSeo.tinTuc.title} — Trang ${pageNum}`;
   <PageHero
     title="Tin tức & Kiến thức chuyên ngành"
     bgImage={pageHeroBg.tinTuc}
+    imageClass="object-[center_40%]"
     vAlign="center"
     description="Chia sẻ kinh nghiệm quản lý đồng phục, lựa chọn chất liệu và xu hướng mới trong ngành."
     breadcrumb={[
