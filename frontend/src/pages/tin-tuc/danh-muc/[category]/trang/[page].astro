@@ -5,10 +5,12 @@
 import SiteLayout from '../../../../../layouts/SiteLayout.astro';
 import PageHero from '../../../../../components/PageHero.astro';
 import BlogListingSection from '../../../../../components/blog/BlogListingSection.astro';
-import { pageSeo, blogPosts, BLOG_POSTS_PER_PAGE, pageHeroBg } from '../../../../../data/site';
+import { pageSeo, BLOG_POSTS_PER_PAGE, pageHeroBg } from '../../../../../data/site';
+import { getAllBlogPosts } from '../../../../../lib/cms';
 import { blogCategorySlug, routes } from '../../../../../lib/routes';
 
-export function getStaticPaths() {
+export async function getStaticPaths() {
+  const blogPosts = await getAllBlogPosts();
   const labels = [...new Set(blogPosts.map((p) => p.category).filter(Boolean))];
   return labels.flatMap((label) => {
     const matched = blogPosts.filter((p) => p.category === label);
@@ -21,6 +23,7 @@ export function getStaticPaths() {
 }
 
 const { categoryLabel } = Astro.props;
+const blogPosts = await getAllBlogPosts();
 const pageNum = Number(Astro.params.page);
 const featuredPost = blogPosts[0];
 ---
@@ -33,6 +36,7 @@ const featuredPost = blogPosts[0];
   <PageHero
     title="Tin tức & Kiến thức chuyên ngành"
     bgImage={pageHeroBg.tinTuc}
+    imageClass="object-[center_40%]"
     vAlign="center"
     description="Chia sẻ kinh nghiệm quản lý đồng phục, lựa chọn chất liệu và xu hướng mới trong ngành."
     breadcrumb={[

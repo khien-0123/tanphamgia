@@ -78,8 +78,13 @@ const keywordsFor = (item: SolutionLike): string[] =>
               src={item.image}
               alt={`Đồng phục cho ${item.title}`}
               loading="lazy"
-              class:list={['absolute inset-0 -z-20 h-full w-full object-cover object-top', cardMediaHover]}
+              class:list={[
+                'absolute inset-0 -z-20 h-full w-full object-cover',
+                cardMediaHover,
+                item.homeImagePosition ?? 'object-top',
+              ]}
               variant="card"
+              sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 32vw"
             />
             <span aria-hidden="true" class="ind-scrim absolute inset-0 -z-10" />
 

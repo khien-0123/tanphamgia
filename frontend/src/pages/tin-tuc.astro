@@ -2,9 +2,11 @@
 import SiteLayout from '../layouts/SiteLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import BlogListingSection from '../components/blog/BlogListingSection.astro';
-import { pageSeo, blogPosts, pageHeroBg } from '../data/site';
+import { pageSeo, pageHeroBg } from '../data/site';
+import { getAllBlogPosts } from '../lib/cms';
 import { routes } from '../lib/routes';
 
+const blogPosts = await getAllBlogPosts();
 const featuredPost = blogPosts[0];
 ---
 
@@ -16,6 +18,7 @@ const featuredPost = blogPosts[0];
   <PageHero
     title="Tin tức & Kiến thức chuyên ngành"
     bgImage={pageHeroBg.tinTuc}
+    imageClass="object-[center_40%]"
     vAlign="center"
     description="Chia sẻ kinh nghiệm quản lý đồng phục, lựa chọn chất liệu và xu hướng mới trong ngành."
     breadcrumb={[

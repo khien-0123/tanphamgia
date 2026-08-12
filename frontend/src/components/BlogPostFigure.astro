@@ -9,9 +9,10 @@ interface Props {
   class?: string;
   imgClass?: string;
   loading?: 'lazy' | 'eager';
+  sizes?: string;
 }
 
-const { src, alt, class: className = '', imgClass = '', loading = 'lazy' } = Astro.props;
+const { src, alt, class: className = '', imgClass = '', loading = 'lazy', sizes } = Astro.props;
 
 const figureClass = [blogThumbFrame, className].filter(Boolean).join(' ');
 
@@ -19,5 +20,12 @@ const imageClass = [blogThumbImg, imgClass].filter(Boolean).join(' ');
 ---
 
 <figure class={figureClass}>
-  <SiteImage src={src} alt={alt} class={imageClass} loading={loading} variant="thumb" />
+  <SiteImage
+    src={src}
+    alt={alt}
+    class={imageClass}
+    loading={loading}
+    variant="thumb"
+    sizes={sizes ?? '(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 33vw'}
+  />
 </figure>

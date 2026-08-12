@@ -35,8 +35,9 @@ const coverNavy = index % 2 === 0;
         <SiteImage
           src={doc.cover}
           alt={`Bìa tài liệu ${doc.title}`}
-          class="h-full w-full object-cover transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105"
+          class="h-full w-full object-cover object-center transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105"
           variant="card"
+          sizes="(max-width: 767px) 50vw, (max-width: 1023px) 33vw, (max-width: 1279px) 25vw, 20vw"
         />
       ) : (
         /* Chưa có ảnh bìa thật → dựng bìa chữ, không để ô ảnh trống */

@@ -48,6 +48,8 @@ interface Props {
    * `center` dùng cho trang chi tiết dịch vụ — `end` giữ chuẩn trang khác.
    */
   vAlign?: 'end' | 'center';
+  /** object-position khi chủ thể không nằm giữa khung hero */
+  imageClass?: string;
 }
 
 const {
@@ -60,13 +62,14 @@ const {
   bgImage = siteAssets.hero.fallback,
   aside,
   vAlign = 'end',
+  imageClass,
 } = Astro.props;
 
 const innerClass = vAlign === 'center' ? pageHeroInnerCenter : pageHeroInner;
 ---
 
 <header data-page-hero class:list={[pageHeroShell, 'text-white']}>
-  <SiteImage alt="" class={pageHeroImage} src={bgImage} loading="eager" decoding="async" variant="hero" />
+  <SiteImage alt="" class:list={[pageHeroImage, imageClass]} src={bgImage} loading="eager" decoding="async" variant="hero" />
   <div class={pageHeroScrim} aria-hidden="true"></div>
 
   <div class={innerClass}>

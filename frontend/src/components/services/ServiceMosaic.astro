@@ -55,13 +55,15 @@ const isMosaic = services.length === 5;
                   src={service.image}
                   alt=""
                   loading="lazy"
-                  class="absolute inset-0 -z-20 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+                  class="absolute inset-0 -z-20 h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.04] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
                   variant="card"
                   widths={[320, 480, 640, 900]}
                   sizes={
-                    hero
-                      ? '(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 40vw'
-                      : '(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 25vw'
+                    isMosaic
+                      ? hero
+                        ? '(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 40vw'
+                        : '(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 32vw'
+                      : '(max-width: 639px) 100vw, 50vw'
                   }
                 />
                 <span class="service-scrim absolute inset-0 -z-10" aria-hidden="true" />
